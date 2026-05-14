@@ -75,7 +75,7 @@ class AdService {
           ad.dispose();
           _bannerReady = false;
           // retry after 30 s
-          Timer(const Duration(seconds: 30), _loadBanner);
+          Timer(const Duration(seconds: 30), () => unawaited(_loadBanner()));
         },
       ),
     );
@@ -98,7 +98,7 @@ class AdService {
             onAdDismissedFullScreenContent: (ad) {
               ad.dispose();
               _interstitialAd = null;
-              _loadInterstitial(); // pre-load next
+              unawaited(_loadInterstitial()); // pre-load next
             },
             onAdFailedToShowFullScreenContent: (ad, _) {
               ad.dispose();
@@ -109,7 +109,7 @@ class AdService {
         },
         onAdFailedToLoad: (_) {
           _interstitialReady = false;
-          Timer(const Duration(seconds: 45), _loadInterstitial);
+          Timer(const Duration(seconds: 45), () => unawaited(_loadInterstitial()));
         },
       ),
     );
@@ -166,7 +166,7 @@ class AdService {
         },
         onAdFailedToLoad: (_) {
           _appOpenReady = false;
-          Timer(const Duration(minutes: 5), _loadAppOpen);
+          Timer(const Duration(minutes: 5), () => unawaited(_loadAppOpen()));
         },
       ),
     );

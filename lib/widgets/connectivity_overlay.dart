@@ -5,7 +5,7 @@ import '../theme/app_theme.dart';
 
 class ConnectivityOverlay extends StatefulWidget {
   final Widget child;
-  const ConnectivityOverlay({super.key, required this.child});
+  const ConnectivityOverlay({required this.child, super.key});
 
   @override
   State<ConnectivityOverlay> createState() => _ConnectivityOverlayState();
@@ -120,14 +120,14 @@ class _OverlaySheet extends StatelessWidget {
       width: 100,
       height: 100,
       decoration: BoxDecoration(
-        color: AppTheme.gold.withOpacity(0.1),
+        color: AppTheme.gold.withValues(alpha: 0.1),
         shape: BoxShape.circle,
-        border: Border.all(color: AppTheme.gold.withOpacity(0.3), width: 1.5),
+        border: Border.all(color: AppTheme.gold.withValues(alpha: 0.3), width: 1.5),
       ),
       child: Icon(icon, size: 48, color: AppTheme.gold),
     )
         .animate(onPlay: (c) => c.repeat())
-        .shimmer(duration: 2.seconds, color: AppTheme.gold.withOpacity(0.2));
+        .shimmer(duration: 2.seconds, color: AppTheme.gold.withValues(alpha: 0.2));
   }
 
   Widget _buildRetryButton(BuildContext context) {

@@ -53,13 +53,7 @@ class AppTheme {
         backgroundColor: lightBg,
         foregroundColor: lightText,
         elevation: 0,
-        scrolledUnderElevation: 0,
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarBrightness: Brightness.light,
-          statusBarIconBrightness: Brightness.dark,
-          systemNavigationBarColor: lightBg,
-          systemNavigationBarIconBrightness: Brightness.dark,
-        ),
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         titleTextStyle: TextStyle(
           color: lightText,
           fontSize: 20,
@@ -142,13 +136,7 @@ class AppTheme {
         backgroundColor: darkBg,
         foregroundColor: darkText,
         elevation: 0,
-        scrolledUnderElevation: 0,
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarBrightness: Brightness.dark,
-          statusBarIconBrightness: Brightness.light,
-          systemNavigationBarColor: darkBg,
-          systemNavigationBarIconBrightness: Brightness.light,
-        ),
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         titleTextStyle: TextStyle(
           color: darkText,
           fontSize: 20,

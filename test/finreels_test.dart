@@ -1,9 +1,8 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:finreels/models/video.dart';
-import 'package:finreels/models/channel.dart';
-import 'package:finreels/data/channel_data.dart';
 import 'package:finreels/config/app_config.dart';
+import 'package:finreels/data/channel_data.dart';
+import 'package:finreels/models/video.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   // ── Video Model ─────────────────────────────────────────────────────────────
@@ -23,13 +22,17 @@ void main() {
     });
 
     test('thumbnailHd is correct', () {
-      expect(video.thumbnailHd,
-          'https://img.youtube.com/vi/abc123/maxresdefault.jpg');
+      expect(
+        video.thumbnailHd,
+        'https://img.youtube.com/vi/abc123/maxresdefault.jpg',
+      );
     });
 
     test('thumbnailMq is correct', () {
-      expect(video.thumbnailMq,
-          'https://img.youtube.com/vi/abc123/mqdefault.jpg');
+      expect(
+        video.thumbnailMq,
+        'https://img.youtube.com/vi/abc123/mqdefault.jpg',
+      );
     });
 
     test('equality by id', () {
@@ -85,7 +88,7 @@ void main() {
 
     test('all accent colors are non-transparent', () {
       for (final ch in ChannelData.all) {
-        expect(ch.accentColor.alpha, greaterThan(0));
+        expect(ch.accentColor.a, greaterThan(0));
       }
     });
   });
@@ -124,22 +127,24 @@ void main() {
   // ── Theme Colours ────────────────────────────────────────────────────────────
   group('Theme colours', () {
     test('gold is correct hex', () {
-      // F59E0B → r=245 g=158 b=11
-      expect(const Color(0xFFF59E0B).red, 245);
-      expect(const Color(0xFFF59E0B).green, 158);
-      expect(const Color(0xFFF59E0B).blue, 11);
+      const gold = Color(0xFFF59E0B);
+      expect(gold.r, closeTo(245 / 255, 0.01));
+      expect(gold.g, closeTo(158 / 255, 0.01));
+      expect(gold.b, closeTo(11 / 255, 0.01));
     });
 
     test('dark background is pure black', () {
-      expect(const Color(0xFF000000).red, 0);
-      expect(const Color(0xFF000000).green, 0);
-      expect(const Color(0xFF000000).blue, 0);
+      const black = Color(0xFF000000);
+      expect(black.r, 0);
+      expect(black.g, 0);
+      expect(black.b, 0);
     });
 
     test('light background is pure white', () {
-      expect(const Color(0xFFFFFFFF).red, 255);
-      expect(const Color(0xFFFFFFFF).green, 255);
-      expect(const Color(0xFFFFFFFF).blue, 255);
+      const white = Color(0xFFFFFFFF);
+      expect(white.r, 1.0);
+      expect(white.g, 1.0);
+      expect(white.b, 1.0);
     });
   });
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -18,27 +20,23 @@ import 'widgets/connectivity_overlay.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // ── System UI ────────────────────────────────────────────────────────────────
-  SystemChrome.setPreferredOrientations([
+  await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
-  // ── Core Services (order matters) ────────────────────────────────────────────
   await ConnectivityService.instance.init();
   await BackgroundService.instance.init();
   await BackgroundService.instance.registerRssCheck();
   await NotificationService.instance.init();
   await AdService.instance.init();
   await IapService.instance.init();
-  AdBlockService.instance.init(); // non-blocking; checks async
+  unawaited(AdBlockService.instance.init());
 
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => FeedProvider()..init(),
-        ),
+        ChangeNotifierProvider(create: (_) => FeedProvider()..init()),
         ChangeNotifierProvider.value(value: IapService.instance),
       ],
       child: const FinReelsApp(),
@@ -53,8 +51,7 @@ class FinReelsApp extends StatefulWidget {
   State<FinReelsApp> createState() => _FinReelsAppState();
 }
 
-class _FinReelsAppState extends State<FinReelsApp>
-    with WidgetsBindingObserver {
+class _FinReelsAppState extends State<FinReelsApp> with WidgetsBindingObserver {
   bool _showSplash = true;
 
   @override
@@ -69,11 +66,10 @@ class _FinReelsAppState extends State<FinReelsApp>
     super.dispose();
   }
 
-  // Show App Open Ad when foregrounded
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      AdService.instance.showAppOpenAd();
+      unawaited(AdService.instance.showAppOpenAd());
     }
   }
 
@@ -82,18 +78,18 @@ class _FinReelsAppState extends State<FinReelsApp>
     return MaterialApp(
       title: 'FinReels',
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.system,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       home: _showSplash
-          ? SplashScreen(onComplete: () {
-              setState(() => _showSplash = false);
-              // Ask notification permission after splash
-              NotificationService.instance.requestPermission();
-            })
-          : ConnectivityOverlay(
+          ? SplashScreen(
+              onComplete: () {
+                setState(() => _showSplash = false);
+                unawaited(NotificationService.instance.requestPermission());
+              },
+            )
+          : const ConnectivityOverlay(
               child: AdBlockOverlay(
-                child: const MainShell(),
+                child: MainShell(),
               ),
             ),
     );

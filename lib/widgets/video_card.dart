@@ -16,10 +16,10 @@ class VideoCard extends StatelessWidget {
   final bool compact;
 
   const VideoCard({
-    super.key,
     required this.video,
     required this.channel,
     required this.onTap,
+    super.key,
     this.onSave,
     this.onShare,
     this.saved = false,
@@ -189,7 +189,7 @@ class VideoCard extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.55),
+              color: Colors.black.withValues(alpha: 0.55),
               shape: BoxShape.circle,
             ),
             child: const Icon(Icons.play_arrow_rounded,

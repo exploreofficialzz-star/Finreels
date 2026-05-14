@@ -25,7 +25,6 @@ class BackgroundService {
     WidgetsFlutterBinding.ensureInitialized();
     await Workmanager().initialize(
       workManagerCallbackDispatcher,
-      isInDebugMode: false,
     );
   }
 

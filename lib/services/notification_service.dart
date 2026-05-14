@@ -3,7 +3,6 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../config/app_config.dart';
 import '../data/channel_data.dart';
-import '../models/video.dart';
 import 'rss_service.dart';
 
 class NotificationService {
@@ -18,9 +17,6 @@ class NotificationService {
     const androidSettings =
         AndroidInitializationSettings('@mipmap/ic_launcher');
     const iosSettings = DarwinInitializationSettings(
-      requestAlertPermission: false, // ask explicitly later
-      requestBadgePermission: false,
-      requestSoundPermission: false,
     );
     const settings = InitializationSettings(
       android: androidSettings,
@@ -121,7 +117,7 @@ class NotificationService {
         // Update last-seen with current video IDs (keep latest 30)
         final currentIds = videos.take(30).map((v) => v.id).toList();
         await prefs.setStringList(lastSeenKey, currentIds);
-      } catch (_) {
+      } on Exception catch (_) {
         // Don't crash the background task on individual channel failures
       }
     }
@@ -173,7 +169,7 @@ class NotificationService {
           // Store pending deep link; picked up by main shell on next build
           pendingVideoId = videoId;
         }
-      } catch (_) {}
+      } on Exception catch (_) {}
     }
   }
 

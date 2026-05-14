@@ -48,11 +48,9 @@ class AdBlockService {
     if (_disposed) return;
     _emit(AdBlockStatus.checking);
 
-    int failCount = 0;
-    int totalChecked = 0;
+    var failCount = 0;
 
     final futures = AppConfig.adCheckEndpoints.map((url) async {
-      totalChecked++;
       try {
         final response = await http
             .get(Uri.parse(url), headers: {
@@ -67,7 +65,7 @@ class AdBlockService {
         if (response.statusCode < 200 || response.statusCode >= 400) {
           failCount++;
         }
-      } catch (_) {
+      } on Exception catch (_) {
         // Network-level block (DNS blocked, connection refused, timeout)
         failCount++;
       }

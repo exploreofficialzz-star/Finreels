@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../config/app_config.dart';
@@ -26,7 +25,7 @@ class FeedProvider extends ChangeNotifier {
 
   List<Channel> get channels => ChannelData.all;
 
-  Set<String> _savedVideoIds = {};
+  var _savedVideoIds = <String>{};
   Set<String> get savedVideoIds => _savedVideoIds;
 
   // ── Combined / filtered feed ────────────────────────────────────────────────
@@ -63,7 +62,7 @@ class FeedProvider extends ChangeNotifier {
             await RssService.instance.fetchVideos(ch.id, forceRefresh: force);
         _videosByChannel[ch.id] = videos;
         successCount++;
-      } catch (e) {
+      } on Exception catch (e) {
         // Keep stale data; don't fail entire feed
         debugPrint('[FeedProvider] Error fetching ${ch.name}: $e');
       }

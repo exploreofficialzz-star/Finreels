@@ -1,10 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../data/channel_data.dart';
 import '../models/channel.dart';
-import '../models/video.dart';
 import '../providers/feed_provider.dart';
 import '../services/ad_service.dart';
 import '../theme/app_theme.dart';
@@ -44,7 +45,7 @@ class ChannelsScreen extends StatelessWidget {
 
 class _ChannelTile extends StatelessWidget {
   final Channel channel;
-  const _ChannelTile({required this.channel});
+const _ChannelTile({required this.channel});
 
   @override
   Widget build(BuildContext context) {
@@ -69,10 +70,10 @@ class _ChannelTile extends StatelessWidget {
               width: 56,
               height: 56,
               decoration: BoxDecoration(
-                color: channel.accentColor.withOpacity(0.15),
+                color: channel.accentColor.withValues(alpha: 0.15),
                 shape: BoxShape.circle,
                 border: Border.all(
-                    color: channel.accentColor.withOpacity(0.4), width: 1.5),
+                    color: channel.accentColor.withValues(alpha: 0.4), width: 1.5),
               ),
               child: Center(
                 child: Text(channel.initials,
@@ -98,7 +99,7 @@ class _ChannelTile extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                     decoration: BoxDecoration(
-                      color: channel.accentColor.withOpacity(0.12),
+                      color: channel.accentColor.withValues(alpha: 0.12),
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Text(channel.category,
@@ -223,8 +224,8 @@ class _ChannelDetailScreenState extends State<ChannelDetailScreen> {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                ch.accentColor.withOpacity(0.8),
-                ch.accentColor.withOpacity(0.3),
+                ch.accentColor.withValues(alpha: 0.8),
+                ch.accentColor.withValues(alpha: 0.3),
                 AppTheme.bgColor(context),
               ],
             ),
@@ -242,7 +243,7 @@ class _ChannelDetailScreenState extends State<ChannelDetailScreen> {
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                            color: ch.accentColor.withOpacity(0.4),
+                            color: ch.accentColor.withValues(alpha: 0.4),
                             blurRadius: 20,
                             spreadRadius: 2)
                       ],
@@ -272,7 +273,7 @@ class _ChannelDetailScreenState extends State<ChannelDetailScreen> {
                                 ])),
                         Text(ch.handle,
                             style: TextStyle(
-                                color: Colors.white.withOpacity(0.8),
+                                color: Colors.white.withValues(alpha: 0.8),
                                 fontSize: 13)),
                       ],
                     ),
@@ -288,7 +289,7 @@ class _ChannelDetailScreenState extends State<ChannelDetailScreen> {
           icon: const Icon(Icons.open_in_new_rounded, color: Colors.white),
           onPressed: () async {
             final uri = Uri.parse(ch.youtubeHandle);
-            if (await canLaunchUrl(uri)) await launchUrl(uri);
+            if (await canLaunchUrl(uri)) unawaited(launchUrl(uri));
           },
           tooltip: 'Open on YouTube',
         ),
@@ -305,7 +306,7 @@ class _ChannelDetailScreenState extends State<ChannelDetailScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
             decoration: BoxDecoration(
-              color: ch.accentColor.withOpacity(0.12),
+              color: ch.accentColor.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(ch.focus,

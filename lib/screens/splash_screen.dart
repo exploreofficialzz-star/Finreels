@@ -4,7 +4,7 @@ import '../theme/app_theme.dart';
 
 class SplashScreen extends StatefulWidget {
   final VoidCallback onComplete;
-  const SplashScreen({super.key, required this.onComplete});
+  const SplashScreen({required this.onComplete, super.key});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -45,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 borderRadius: BorderRadius.circular(26),
                 boxShadow: [
                   BoxShadow(
-                    color: AppTheme.gold.withOpacity(0.45),
+                    color: AppTheme.gold.withValues(alpha: 0.45),
                     blurRadius: 30,
                     spreadRadius: 4,
                   ),

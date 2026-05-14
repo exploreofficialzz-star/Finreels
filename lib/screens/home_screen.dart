@@ -1,9 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../data/channel_data.dart';
-import '../models/channel.dart';
 import '../providers/feed_provider.dart';
 import '../services/ad_service.dart';
 import '../theme/app_theme.dart';
@@ -187,9 +188,9 @@ class _FeedBody extends StatelessWidget {
             channel: channel,
             saved: provider.isVideoSaved(video.id),
             onTap: () async {
-              AdService.instance.onVideoOpened();
+              unawaited(AdService.instance.onVideoOpened());
               final uri = Uri.parse(video.watchUrl);
-              if (await canLaunchUrl(uri)) await launchUrl(uri);
+              if (await canLaunchUrl(uri)) unawaited(launchUrl(uri));
             },
             onSave: () => provider.toggleSaved(video),
             onShare: () => Share.share(

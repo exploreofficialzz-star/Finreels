@@ -6,7 +6,7 @@ import '../theme/app_theme.dart';
 
 class AdBlockOverlay extends StatefulWidget {
   final Widget child;
-  const AdBlockOverlay({super.key, required this.child});
+  const AdBlockOverlay({required this.child, super.key});
 
   @override
   State<AdBlockOverlay> createState() => _AdBlockOverlayState();
@@ -83,10 +83,10 @@ class _AdBlockSheet extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: AppTheme.gold.withOpacity(0.08),
+                  color: AppTheme.gold.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
-                      color: AppTheme.gold.withOpacity(0.25), width: 1),
+                      color: AppTheme.gold.withValues(alpha: 0.25), width: 1),
                 ),
                 child: Column(
                   children: [
@@ -151,10 +151,10 @@ class _AdBlockSheet extends StatelessWidget {
       width: 100,
       height: 100,
       decoration: BoxDecoration(
-        color: AppTheme.error.withOpacity(0.1),
+        color: AppTheme.error.withValues(alpha: 0.1),
         shape: BoxShape.circle,
         border:
-            Border.all(color: AppTheme.error.withOpacity(0.3), width: 1.5),
+            Border.all(color: AppTheme.error.withValues(alpha: 0.3), width: 1.5),
       ),
       child: const Icon(Icons.block_rounded, size: 48, color: AppTheme.error),
     ).animate(onPlay: (c) => c.repeat(reverse: true)).scaleXY(

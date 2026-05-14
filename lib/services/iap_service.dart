@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'package:flutter/foundation.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 import '../config/app_config.dart';
 import 'ad_service.dart';
 
@@ -39,13 +37,6 @@ class IapService extends ChangeNotifier {
       _error = 'In-app purchases not available on this device.';
       notifyListeners();
       return;
-    }
-
-    // Enable pending purchases on Android
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      final androidPlugin =
-          _iap.getPlatformAddition<InAppPurchaseAndroidPlatformAddition>();
-      await androidPlugin.enablePendingPurchases();
     }
 
     // Listen for purchase updates
@@ -91,7 +82,7 @@ class IapService extends ChangeNotifier {
     try {
       // All our products are subscriptions
       await _iap.buyNonConsumable(purchaseParam: param);
-    } catch (e) {
+    } on Exception catch (e) {
       _purchasePending = false;
       _error = 'Purchase failed: $e';
       notifyListeners();

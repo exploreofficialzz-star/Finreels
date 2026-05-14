@@ -52,8 +52,7 @@ class ConnectivityService {
     if (_disposed) return;
 
     final result = await Connectivity().checkConnectivity();
-    final hasAdapter = result.any((r) =>
-        r != ConnectivityResult.none && r != ConnectivityResult.bluetooth);
+    final hasAdapter = result.any((r) => r != ConnectivityResult.none && r != ConnectivityResult.bluetooth);
 
     if (!hasAdapter) {
       _emit(NetworkStatus.noNetwork);
@@ -68,7 +67,7 @@ class ConnectivityService {
   /// Returns true if at least ONE endpoint is reachable.
   /// Uses multiple endpoints to avoid false positives from a single CDN being down.
   Future<bool> _verifyInternetAccess() async {
-    int successCount = 0;
+    var successCount = 0;
     final futures = AppConfig.connectivityEndpoints.map((url) async {
       try {
         final response = await http
@@ -78,7 +77,7 @@ class ConnectivityService {
         if (response.statusCode >= 200 && response.statusCode < 400) {
           successCount++;
         }
-      } catch (_) {
+      } on Exception catch (_) {
         // endpoint unreachable
       }
     });
