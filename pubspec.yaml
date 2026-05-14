@@ -1,0 +1,71 @@
+name: finreels
+description: FinReels - Financial Literacy Video Hub by Chas Tech Group
+publish_to: none
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+  flutter: ">=3.27.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # ── Networking & Feeds ─────────────────────────────────────────────────────
+  http: ^1.2.1
+  xml: ^6.5.0
+
+  # ── Connectivity ───────────────────────────────────────────────────────────
+  connectivity_plus: ^6.0.5
+
+  # ── Ads ────────────────────────────────────────────────────────────────────
+  google_mobile_ads: ^5.3.0
+
+  # ── In-App Purchases ───────────────────────────────────────────────────────
+  in_app_purchase: ^3.2.0
+  in_app_purchase_android: ^0.3.6
+  in_app_purchase_storekit: ^0.3.17
+
+  # ── Notifications & Background ─────────────────────────────────────────────
+  flutter_local_notifications: ^18.0.1
+  workmanager: ^0.5.2
+
+  # ── Storage ────────────────────────────────────────────────────────────────
+  shared_preferences: ^2.3.2
+
+  # ── Image & Media ──────────────────────────────────────────────────────────
+  cached_network_image: ^3.4.1
+  url_launcher: ^6.3.1
+
+  # ── State Management ───────────────────────────────────────────────────────
+  provider: ^6.1.2
+
+  # ── UI Helpers ─────────────────────────────────────────────────────────────
+  shimmer: ^3.0.0
+  timeago: ^3.6.1
+  share_plus: ^10.0.2
+  flutter_animate: ^4.5.0
+  package_info_plus: ^8.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.14.1
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/icons/
+    - assets/sounds/
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/app_icon.png"
+  adaptive_icon_background: "assets/icons/app_icon_bg.png"
+  adaptive_icon_foreground: "assets/icons/app_icon_fg.png"
+  min_sdk_android: 21
+  web:
+    generate: false
