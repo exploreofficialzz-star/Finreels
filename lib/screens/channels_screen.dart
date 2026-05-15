@@ -174,10 +174,10 @@ class _ChannelDetailScreenState extends State<ChannelDetailScreen> {
                         final video = videos[i];
                         // Insert ad every 4 videos
                         if (i > 0 && i % 4 == 0) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(
+                          return const Padding(
+                            padding: EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 8),
-                            child: const LabelledBannerAd(),
+                            child: LabelledBannerAd(),
                           );
                         }
                         return Padding(

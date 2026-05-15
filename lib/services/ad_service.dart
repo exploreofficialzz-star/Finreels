@@ -71,7 +71,7 @@ class AdService {
 
   // ── Banner ───────────────────────────────────────────────────────────────────
   Future<void> _loadBanner() async {
-    _bannerAd?.dispose();
+    if (_bannerAd != null) { unawaited(_bannerAd!.dispose()); }
     _bannerAd    = null;
     _bannerReady = false;
 
@@ -164,7 +164,7 @@ class AdService {
   Future<void> showRewardedAd({
     required void Function() onRewarded,
   }) async {
-    if (_adsRemoved || !_rewardedReady || _rewardedAd == null) return;
+    if (_adsRemoved || !_rewardedReady || _rewardedAd == null) { return; }
     await _rewardedAd!.show(
       onUserEarnedReward: (_, __) => onRewarded(),
     );
@@ -209,7 +209,7 @@ class AdService {
     required void Function() onRewarded,
   }) async {
     if (_adsRemoved || !_rewardedInterstitialReady ||
-        _rewardedInterstitialAd == null) return;
+        _rewardedInterstitialAd == null) { return; }
     await _rewardedInterstitialAd!.show(
       onUserEarnedReward: (_, __) => onRewarded(),
     );
@@ -251,7 +251,7 @@ class AdService {
   }
 
   Future<void> showAppOpenAd() async {
-    if (_adsRemoved || !_appOpenReady || _appOpenAd == null) return;
+    if (_adsRemoved || !_appOpenReady || _appOpenAd == null) { return; }
     if (_lastAppOpenShown != null) {
       final elapsed = DateTime.now().difference(_lastAppOpenShown!);
       if (elapsed < AppConfig.appOpenAdCooldown) return;
@@ -279,7 +279,7 @@ class AdService {
   }
 
   Future<void> showInterstitial() async {
-    if (_adsRemoved || _interstitialAd == null || !_interstitialReady) return;
+    if (_adsRemoved || _interstitialAd == null || !_interstitialReady) { return; }
     await _interstitialAd!.show();
     _interstitialReady = false;
   }
@@ -292,19 +292,19 @@ class AdService {
     await prefs.setInt(
         AppConfig.prefAdsRemovedUntil, until.millisecondsSinceEpoch);
     _adsRemoved = true;
-    _bannerAd?.dispose();
+    if (_bannerAd != null) { unawaited(_bannerAd!.dispose()); }
     _bannerAd              = null;
     _bannerReady           = false;
-    _interstitialAd?.dispose();
+    if (_interstitialAd != null) { unawaited(_interstitialAd!.dispose()); }
     _interstitialAd        = null;
     _interstitialReady     = false;
-    _appOpenAd?.dispose();
+    if (_appOpenAd != null) { unawaited(_appOpenAd!.dispose()); }
     _appOpenAd             = null;
     _appOpenReady          = false;
-    _rewardedAd?.dispose();
+    if (_rewardedAd != null) { unawaited(_rewardedAd!.dispose()); }
     _rewardedAd            = null;
     _rewardedReady         = false;
-    _rewardedInterstitialAd?.dispose();
+    if (_rewardedInterstitialAd != null) { unawaited(_rewardedInterstitialAd!.dispose()); }
     _rewardedInterstitialAd        = null;
     _rewardedInterstitialReady     = false;
   }

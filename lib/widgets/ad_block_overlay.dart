@@ -86,7 +86,7 @@ class _AdBlockSheet extends StatelessWidget {
                   color: AppTheme.gold.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
-                      color: AppTheme.gold.withValues(alpha: 0.25), width: 1),
+                      color: AppTheme.gold.withValues(alpha: 0.25)),
                 ),
                 child: Column(
                   children: [

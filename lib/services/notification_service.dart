@@ -133,7 +133,6 @@ class NotificationService {
       channelDescription: AppConfig.notifChannelDesc,
       importance: Importance.high,
       priority: Priority.high,
-      showWhen: true,
       icon: '@mipmap/ic_launcher',
       largeIcon: DrawableResourceAndroidBitmap('@mipmap/ic_launcher'),
       styleInformation: BigTextStyleInformation(''),
