@@ -34,9 +34,6 @@ class NotificationService {
       AppConfig.notifChannelName,
       description: AppConfig.notifChannelDesc,
       importance: Importance.high,
-      playSound: true,
-      enableVibration: true,
-      showBadge: true,
     );
     await _plugin
         .resolvePlatformSpecificImplementation<
@@ -85,7 +82,7 @@ class NotificationService {
         const InitializationSettings(
             android: androidSettings, iOS: iosSettings));
 
-    int notifId = AppConfig.notifIdBase;
+    var notifId = AppConfig.notifIdBase;
 
     for (final channel in ChannelData.all) {
       try {
@@ -142,9 +139,7 @@ class NotificationService {
       styleInformation: BigTextStyleInformation(''),
     );
     const iosDetails = DarwinNotificationDetails(
-      presentAlert: true,
-      presentBadge: true,
-      presentSound: true,
+
     );
     const details =
         NotificationDetails(android: androidDetails, iOS: iosDetails);

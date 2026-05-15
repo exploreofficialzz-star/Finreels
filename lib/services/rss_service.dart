@@ -36,7 +36,7 @@ class RssService {
       _cache[channelId] = videos;
       _cacheTime[channelId] = DateTime.now();
       return videos;
-    } on Exception catch (e) {
+    } on Exception catch (_) {
       // Serve stale cache rather than crashing
       if (_cache.containsKey(channelId)) return _cache[channelId]!;
       rethrow;

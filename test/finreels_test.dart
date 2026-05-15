@@ -13,7 +13,7 @@ void main() {
       description: 'A test description',
       channelId: 'ch1',
       channelName: 'Test Channel',
-      publishedAt: DateTime(2024, 6, 1),
+      publishedAt: DateTime(2024, 6, 15),
       thumbnailUrl: 'https://img.youtube.com/vi/abc123/mqdefault.jpg',
     );
 

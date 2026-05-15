@@ -1,5 +1,8 @@
 import 'dart:async';
+
+import 'package:flutter/foundation.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
+
 import '../config/app_config.dart';
 import 'ad_service.dart';
 
@@ -39,27 +42,24 @@ class IapService extends ChangeNotifier {
       return;
     }
 
-    // Listen for purchase updates
     _purchaseSub = _iap.purchaseStream.listen(
       _handlePurchaseUpdates,
-      onError: (e) {
+      onError: (Object e) {
         _error = 'Purchase stream error: $e';
         notifyListeners();
       },
     );
 
     await _loadProducts();
-    await _restorePurchases();
+    await _iap.restorePurchases();
   }
 
   // ── Load Products ───────────────────────────────────────────────────────────
   Future<void> _loadProducts() async {
-    final response =
-        await _iap.queryProductDetails(AppConfig.iapProductIds);
+    final response = await _iap.queryProductDetails(AppConfig.iapProductIds);
     if (response.error != null) {
       _error = 'Could not load products: ${response.error!.message}';
     }
-    // Sort: 1-day → weekly → monthly
     _products = response.productDetails
       ..sort((a, b) {
         const order = [
@@ -80,7 +80,6 @@ class IapService extends ChangeNotifier {
 
     final param = PurchaseParam(productDetails: product);
     try {
-      // All our products are subscriptions
       await _iap.buyNonConsumable(purchaseParam: param);
     } on Exception catch (e) {
       _purchasePending = false;
@@ -97,36 +96,22 @@ class IapService extends ChangeNotifier {
     await _iap.restorePurchases();
   }
 
-  Future<void> _restorePurchases() async {
-    await _iap.restorePurchases();
-  }
-
   // ── Handle Updates ──────────────────────────────────────────────────────────
-  Future<void> _handlePurchaseUpdates(
-      List<PurchaseDetails> purchases) async {
+  Future<void> _handlePurchaseUpdates(List<PurchaseDetails> purchases) async {
     for (final purchase in purchases) {
       switch (purchase.status) {
         case PurchaseStatus.pending:
           _purchasePending = true;
-          break;
-
         case PurchaseStatus.purchased:
         case PurchaseStatus.restored:
           _purchasePending = false;
           await _fulfil(purchase);
-          break;
-
         case PurchaseStatus.canceled:
           _purchasePending = false;
-          break;
-
         case PurchaseStatus.error:
           _purchasePending = false;
           _error = purchase.error?.message ?? 'Purchase error';
-          break;
       }
-
-      // Complete the purchase (required by both platforms)
       if (purchase.pendingCompletePurchase) {
         await _iap.completePurchase(purchase);
       }

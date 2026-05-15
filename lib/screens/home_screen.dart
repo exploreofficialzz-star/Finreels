@@ -166,10 +166,10 @@ class _FeedBody extends StatelessWidget {
         separatorBuilder: (_, i) {
           // Insert a banner ad every 5 videos
           if ((i + 1) % 5 == 0) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12),
+            return const Padding(
+              padding: EdgeInsets.symmetric(vertical: 12),
               child: Column(
-                children: const [
+                children: [
                   LabelledBannerAd(),
                   SizedBox(height: 12),
                 ],

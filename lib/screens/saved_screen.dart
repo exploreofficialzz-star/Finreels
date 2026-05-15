@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -54,7 +56,9 @@ class SavedScreen extends StatelessWidget {
                         onTap: () async {
                           unawaited(AdService.instance.onVideoOpened());
                           final uri = Uri.parse(video.watchUrl);
-                          if (await canLaunchUrl(uri)) await launchUrl(uri);
+                          if (await canLaunchUrl(uri)) {
+                            unawaited(launchUrl(uri));
+                          }
                         },
                         onSave: () => provider.toggleSaved(video),
                         onShare: () => Share.share(
@@ -74,7 +78,7 @@ class SavedScreen extends StatelessWidget {
     BuildContext context,
     FeedProvider provider,
   ) async {
-    final confirm = await showDialog<bool>(
+    final confirmed = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
         title: const Text('Clear all bookmarks?'),
@@ -96,7 +100,7 @@ class SavedScreen extends StatelessWidget {
         ],
       ),
     );
-    if (confirm == true) {
+    if (confirmed ?? false) {
       for (final v in provider.savedVideos.toList()) {
         await provider.toggleSaved(v);
       }

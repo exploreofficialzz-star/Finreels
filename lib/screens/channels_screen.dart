@@ -130,7 +130,7 @@ const _ChannelTile({required this.channel});
 // ═════════════════════════════════════════════════════════════════════════════
 class ChannelDetailScreen extends StatefulWidget {
   final Channel channel;
-  const ChannelDetailScreen({super.key, required this.channel});
+  const ChannelDetailScreen({required this.channel, super.key});
 
   @override
   State<ChannelDetailScreen> createState() => _ChannelDetailScreenState();
@@ -188,10 +188,10 @@ class _ChannelDetailScreenState extends State<ChannelDetailScreen> {
                             compact: true,
                             saved: provider.isVideoSaved(video.id),
                             onTap: () async {
-                              AdService.instance.onVideoOpened();
+                              unawaited(AdService.instance.onVideoOpened());
                               final uri = Uri.parse(video.watchUrl);
                               if (await canLaunchUrl(uri)) {
-                                await launchUrl(uri);
+                                unawaited(launchUrl(uri));
                               }
                             },
                             onSave: () => provider.toggleSaved(video),
@@ -218,7 +218,7 @@ class _ChannelDetailScreenState extends State<ChannelDetailScreen> {
       expandedHeight: 180,
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
-        background: Container(
+        background: DecoratedBox(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,

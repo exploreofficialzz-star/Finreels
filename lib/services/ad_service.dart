@@ -61,7 +61,7 @@ class AdService {
 
   // ── Banner ──────────────────────────────────────────────────────────────────
   Future<void> _loadBanner() async {
-    _bannerAd?.dispose();
+    unawaited(_bannerAd?.dispose() ?? Future<void>.value());
     _bannerAd = null;
     _bannerReady = false;
 

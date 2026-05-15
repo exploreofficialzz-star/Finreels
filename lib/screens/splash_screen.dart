@@ -79,7 +79,7 @@ class _SplashScreenState extends State<SplashScreen> {
             const SizedBox(height: 8),
 
             // ── Tagline ───────────────────────────────────────────────────────
-            Text(
+            const Text(
               'Financial Literacy · Unlocked',
               style: TextStyle(
                 color: AppTheme.gold,

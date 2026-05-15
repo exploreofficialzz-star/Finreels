@@ -53,7 +53,7 @@ class FeedProvider extends ChangeNotifier {
     _errorMessage = null;
     notifyListeners();
 
-    int successCount = 0;
+    var successCount = 0;
 
     // Fetch all channels concurrently
     final futures = ChannelData.all.map((ch) async {

@@ -177,7 +177,7 @@ class VideoCard extends StatelessWidget {
           errorWidget: (_, __, ___) => CachedNetworkImage(
             imageUrl: video.thumbnailMq,
             fit: BoxFit.cover,
-            errorWidget: (_, __, ___) => Container(
+            errorWidget: (_, __, ___) => ColoredBox(
               color: AppTheme.surfaceElevated(context),
               child: Icon(Icons.play_circle_outline_rounded,
                   color: AppTheme.textMuted(context), size: 36),
@@ -223,10 +223,10 @@ class VideoCard extends StatelessWidget {
             ),
           ),
         if (onShare != null)
-          PopupMenuItem(
+          const PopupMenuItem(
             value: 'share',
             child: Row(
-              children: const [
+              children: [
                 Icon(Icons.share_outlined, size: 18),
                 SizedBox(width: 10),
                 Text('Share'),
