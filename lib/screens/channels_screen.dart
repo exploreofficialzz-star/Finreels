@@ -3,19 +3,18 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 import '../data/channel_data.dart';
 import '../models/channel.dart';
+import '../models/video.dart';
 import '../providers/feed_provider.dart';
 import '../services/ad_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
 import '../widgets/shimmer_loader.dart';
 import '../widgets/video_card.dart';
+import 'video_player_screen.dart';
 
-// ═════════════════════════════════════════════════════════════════════════════
-// CHANNELS SCREEN
-// ═════════════════════════════════════════════════════════════════════════════
 class ChannelsScreen extends StatelessWidget {
   const ChannelsScreen({super.key});
 
@@ -27,16 +26,14 @@ class ChannelsScreen extends StatelessWidget {
         children: [
           Expanded(
             child: ListView.separated(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 120),
               itemCount: ChannelData.all.length,
               separatorBuilder: (_, __) => const SizedBox(height: 12),
-              itemBuilder: (context, i) {
-                final ch = ChannelData.all[i];
-                return _ChannelTile(channel: ch);
-              },
+              itemBuilder: (context, i) =>
+                  _ChannelTile(channel: ChannelData.all[i]),
             ),
           ),
-          const LabelledBannerAd(),
+          if (!AdService.instance.adsRemoved) const LabelledBannerAd(),
         ],
       ),
     );
@@ -45,7 +42,7 @@ class ChannelsScreen extends StatelessWidget {
 
 class _ChannelTile extends StatelessWidget {
   final Channel channel;
-const _ChannelTile({required this.channel});
+  const _ChannelTile({required this.channel});
 
   @override
   Widget build(BuildContext context) {
@@ -53,19 +50,19 @@ const _ChannelTile({required this.channel});
       onTap: () => Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (_) => ChannelDetailScreen(channel: channel)),
+          builder: (_) => ChannelDetailScreen(channel: channel),
+        ),
       ),
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: AppTheme.surfaceColor(context),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-              color: AppTheme.dividerColor(context), width: 0.5),
+          border:
+              Border.all(color: AppTheme.dividerColor(context), width: 0.5),
         ),
         child: Row(
           children: [
-            // Avatar
             Container(
               width: 56,
               height: 56,
@@ -73,18 +70,21 @@ const _ChannelTile({required this.channel});
                 color: channel.accentColor.withValues(alpha: 0.15),
                 shape: BoxShape.circle,
                 border: Border.all(
-                    color: channel.accentColor.withValues(alpha: 0.4), width: 1.5),
+                    color: channel.accentColor.withValues(alpha: 0.4),
+                    width: 1.5),
               ),
               child: Center(
-                child: Text(channel.initials,
-                    style: TextStyle(
-                        color: channel.accentColor,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 18)),
+                child: Text(
+                  channel.initials,
+                  style: TextStyle(
+                    color: channel.accentColor,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 18,
+                  ),
+                ),
               ),
             ),
             const SizedBox(width: 14),
-            // Info
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,13 +102,15 @@ const _ChannelTile({required this.channel});
                       color: channel.accentColor.withValues(alpha: 0.12),
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    child: Text(channel.category,
-                        style: TextStyle(
-                            color: channel.accentColor,
-                            fontSize: 11,
-                            fontWeight: FontWeight.w600)),
+                    child: Text(
+                      channel.category,
+                      style: TextStyle(
+                          color: channel.accentColor,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600),
+                    ),
                   ),
-                  const SizedBox(height: 6),
+                  const SizedBox(height: 4),
                   Text(channel.focus,
                       style: Theme.of(context).textTheme.bodySmall,
                       maxLines: 1,
@@ -125,9 +127,9 @@ const _ChannelTile({required this.channel});
   }
 }
 
-// ═════════════════════════════════════════════════════════════════════════════
-// CHANNEL DETAIL SCREEN
-// ═════════════════════════════════════════════════════════════════════════════
+// ─────────────────────────────────────────────────────────────────────────────
+// CHANNEL DETAIL — shows latest videos + shorts from that channel
+// ─────────────────────────────────────────────────────────────────────────────
 class ChannelDetailScreen extends StatefulWidget {
   final Channel channel;
   const ChannelDetailScreen({required this.channel, super.key});
@@ -136,86 +138,90 @@ class ChannelDetailScreen extends StatefulWidget {
   State<ChannelDetailScreen> createState() => _ChannelDetailScreenState();
 }
 
-class _ChannelDetailScreenState extends State<ChannelDetailScreen> {
+class _ChannelDetailScreenState extends State<ChannelDetailScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+  int _tapCount = 0;
+
   Channel get ch => widget.channel;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  void _openVideo(Video video) {
+    _tapCount++;
+    if (_tapCount % 2 == 0) {
+      unawaited(AdService.instance.showInterstitial());
+    }
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => VideoPlayerScreen(video: video, channel: ch),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<FeedProvider>();
-    final videos = provider.getVideosFor(ch.id);
+    final allVideos = provider.getVideosFor(ch.id);
+    final shorts =
+        allVideos.where((v) => v.title.length < 30).toList();
+    final videos =
+        allVideos.where((v) => v.title.length >= 30).toList();
 
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: CustomScrollView(
-              slivers: [
-                _buildSliverAppBar(context),
-                SliverToBoxAdapter(child: _buildAbout(context)),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-                    child: Text('Latest Videos',
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleLarge
-                            ?.copyWith(fontWeight: FontWeight.w700)),
-                  ),
-                ),
-                if (videos.isEmpty)
-                  const SliverToBoxAdapter(
-                      child: Padding(
-                          padding: EdgeInsets.all(16),
-                          child: ShimmerLoader(count: 3)))
-                else
-                  SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, i) {
-                        final video = videos[i];
-                        // Insert ad every 4 videos
-                        if (i > 0 && i % 4 == 0) {
-                          return const Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
-                            child: LabelledBannerAd(),
-                          );
-                        }
-                        return Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
-                          child: VideoCard(
-                            video: video,
-                            channel: ch,
-                            compact: true,
-                            saved: provider.isVideoSaved(video.id),
-                            onTap: () async {
-                              unawaited(AdService.instance.onVideoOpened());
-                              final uri = Uri.parse(video.watchUrl);
-                              if (await canLaunchUrl(uri)) {
-                                unawaited(launchUrl(uri));
-                              }
-                            },
-                            onSave: () => provider.toggleSaved(video),
-                            onShare: () => Share.share(
-                                '${video.title}\n${video.watchUrl}'),
-                          ),
-                        );
-                      },
-                      childCount: videos.length,
-                    ),
-                  ),
-                const SliverToBoxAdapter(child: SizedBox(height: 32)),
+      body: NestedScrollView(
+        headerSliverBuilder: (_, __) => [
+          _buildSliverAppBar(context),
+          SliverToBoxAdapter(
+            child: TabBar(
+              controller: _tabController,
+              indicatorColor: ch.accentColor,
+              labelColor: ch.accentColor,
+              unselectedLabelColor: AppTheme.textMuted(context),
+              labelStyle: const TextStyle(
+                  fontWeight: FontWeight.w700, fontSize: 13),
+              tabs: const [
+                Tab(text: 'Videos'),
+                Tab(text: 'Shorts'),
               ],
             ),
           ),
-          const LabelledBannerAd(),
         ],
+        body: TabBarView(
+          controller: _tabController,
+          children: [
+            _VideoList(
+                videos: videos,
+                channel: ch,
+                provider: provider,
+                onTap: _openVideo),
+            _ShortsList(
+                videos: shorts,
+                channel: ch,
+                provider: provider,
+                onTap: _openVideo),
+          ],
+        ),
       ),
+      bottomNavigationBar:
+          AdService.instance.adsRemoved ? null : const LabelledBannerAd(),
     );
   }
 
   SliverAppBar _buildSliverAppBar(BuildContext context) {
     return SliverAppBar(
-      expandedHeight: 180,
+      expandedHeight: 160,
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
         background: DecoratedBox(
@@ -225,27 +231,28 @@ class _ChannelDetailScreenState extends State<ChannelDetailScreen> {
               end: Alignment.bottomRight,
               colors: [
                 ch.accentColor.withValues(alpha: 0.8),
-                ch.accentColor.withValues(alpha: 0.3),
+                ch.accentColor.withValues(alpha: 0.25),
                 AppTheme.bgColor(context),
               ],
             ),
           ),
           child: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 60, 20, 20),
+              padding: const EdgeInsets.fromLTRB(20, 56, 20, 16),
               child: Row(
                 children: [
                   Container(
-                    width: 72,
-                    height: 72,
+                    width: 64,
+                    height: 64,
                     decoration: BoxDecoration(
                       color: ch.accentColor,
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                            color: ch.accentColor.withValues(alpha: 0.4),
-                            blurRadius: 20,
-                            spreadRadius: 2)
+                          color: ch.accentColor.withValues(alpha: 0.4),
+                          blurRadius: 20,
+                          spreadRadius: 2,
+                        ),
                       ],
                     ),
                     child: Center(
@@ -253,7 +260,7 @@ class _ChannelDetailScreenState extends State<ChannelDetailScreen> {
                           style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w800,
-                              fontSize: 26)),
+                              fontSize: 24)),
                     ),
                   ),
                   const SizedBox(width: 16),
@@ -266,11 +273,7 @@ class _ChannelDetailScreenState extends State<ChannelDetailScreen> {
                             style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w800,
-                                fontSize: 20,
-                                shadows: [
-                                  Shadow(
-                                      color: Colors.black26, blurRadius: 4)
-                                ])),
+                                fontSize: 18)),
                         Text(ch.handle,
                             style: TextStyle(
                                 color: Colors.white.withValues(alpha: 0.8),
@@ -284,44 +287,133 @@ class _ChannelDetailScreenState extends State<ChannelDetailScreen> {
           ),
         ),
       ),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.open_in_new_rounded, color: Colors.white),
-          onPressed: () async {
-            final uri = Uri.parse(ch.youtubeHandle);
-            if (await canLaunchUrl(uri)) unawaited(launchUrl(uri));
-          },
-          tooltip: 'Open on YouTube',
-        ),
-      ],
     );
   }
+}
 
-  Widget _buildAbout(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-            decoration: BoxDecoration(
-              color: ch.accentColor.withValues(alpha: 0.12),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Text(ch.focus,
-                style: TextStyle(
-                    color: ch.accentColor,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 12)),
-          ),
-          const SizedBox(height: 10),
-          Text(ch.description,
+class _VideoList extends StatelessWidget {
+  final List<Video> videos;
+  final Channel channel;
+  final FeedProvider provider;
+  final void Function(Video) onTap;
+
+  const _VideoList({
+    required this.videos,
+    required this.channel,
+    required this.provider,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (videos.isEmpty) {
+      return const Center(child: ShimmerLoader(count: 3));
+    }
+    return ListView.separated(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 120),
+      itemCount: videos.length,
+      separatorBuilder: (_, i) {
+        if ((i + 1) % 4 == 0) {
+          return const Padding(
+            padding: EdgeInsets.symmetric(vertical: 8),
+            child: LabelledBannerAd(),
+          );
+        }
+        return const SizedBox(height: 12);
+      },
+      itemBuilder: (context, i) {
+        final video = videos[i];
+        return VideoCard(
+          video: video,
+          channel: channel,
+          compact: true,
+          saved: provider.isVideoSaved(video.id),
+          onTap: () => onTap(video),
+          onSave: () => provider.toggleSaved(video),
+          onShare: () => Share.share('${video.title}\n${video.watchUrl}'),
+        );
+      },
+    );
+  }
+}
+
+class _ShortsList extends StatelessWidget {
+  final List<Video> videos;
+  final Channel channel;
+  final FeedProvider provider;
+  final void Function(Video) onTap;
+
+  const _ShortsList({
+    required this.videos,
+    required this.channel,
+    required this.provider,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (videos.isEmpty) {
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Text('No shorts from ${channel.name} yet.',
               style: Theme.of(context).textTheme.bodyMedium,
-              maxLines: 4,
-              overflow: TextOverflow.ellipsis),
-        ],
+              textAlign: TextAlign.center),
+        ),
+      );
+    }
+    return GridView.builder(
+      padding: const EdgeInsets.fromLTRB(12, 8, 12, 120),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 9 / 16,
+        crossAxisSpacing: 8,
+        mainAxisSpacing: 8,
       ),
+      itemCount: videos.length,
+      itemBuilder: (context, i) {
+        final video = videos[i];
+        return GestureDetector(
+          onTap: () => onTap(video),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                Image.network(video.thumbnailUrl,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, __, ___) =>
+                        ColoredBox(color: AppTheme.surfaceElevated(context))),
+                Container(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Colors.transparent, Colors.black87],
+                    ),
+                  ),
+                ),
+                const Center(
+                  child: Icon(Icons.play_circle_fill_rounded,
+                      color: Colors.white70, size: 42),
+                ),
+                Positioned(
+                  bottom: 8,
+                  left: 8,
+                  right: 8,
+                  child: Text(video.title,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600)),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

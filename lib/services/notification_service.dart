@@ -170,4 +170,14 @@ class NotificationService {
   static String? pendingVideoId;
 
   bool get isInitialized => _initialized;
+// ── Notification preference ───────────────────────────────────────────────
+  Future<bool> areNotificationsEnabled() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(AppConfig.prefNotificationsEnabled) ?? true;
+  }
+
+  Future<void> setNotificationsEnabled(bool enabled) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(AppConfig.prefNotificationsEnabled, enabled);
+  }
 }
