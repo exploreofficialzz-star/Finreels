@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.chastech.finreels">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- ── Permissions ──────────────────────────────────────────────────── -->
+    <!-- ── Permissions ──────────────────────────────────────────────────────── -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -10,12 +10,9 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <!-- Exact alarm for scheduled notifications (Android 12+) -->
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"
         android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
-
-    <!-- Billing -->
     <uses-permission android:name="com.android.vending.BILLING" />
 
     <application
@@ -30,17 +27,17 @@
         android:hardwareAccelerated="true"
         android:usesCleartextTraffic="false">
 
-        <!-- AdMob App ID — REPLACE with your real ID before release -->
+        <!-- AdMob App ID — REPLACE with real ID before release -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />
 
-        <!-- Delay AdMob initialisation to let UMP run first -->
+        <!-- Delay AdMob init to allow UMP consent first -->
         <meta-data
             android:name="com.google.android.gms.ads.DELAY_APP_MEASUREMENT_INIT"
             android:value="true" />
 
-        <!-- WorkManager: explicit job scheduler support -->
+        <!-- WorkManager startup provider -->
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
@@ -65,18 +62,18 @@
             </intent-filter>
         </activity>
 
-        <!-- Do not delete the meta-data below -->
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
 
     </application>
 
-    <!-- Required for WorkManager on Android 12+ -->
     <queries>
         <intent>
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="https" />
         </intent>
     </queries>
+
 </manifest>
+        
