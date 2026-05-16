@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../data/channel_data.dart';
 import '../providers/feed_provider.dart';
@@ -11,15 +10,40 @@ import '../services/ad_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
 import '../widgets/video_card.dart';
+import 'book_detail_screen.dart';
+import 'video_player_screen.dart';
 
-class SavedScreen extends StatelessWidget {
+class SavedScreen extends StatefulWidget {
   const SavedScreen({super.key});
+
+  @override
+  State<SavedScreen> createState() => _SavedScreenState();
+}
+
+class _SavedScreenState extends State<SavedScreen> {
+  int _tapCount = 0;
+
+  void _openVideo(video) {
+    _tapCount++;
+    if (_tapCount.isEven) unawaited(AdService.instance.showInterstitial());
+
+    if (video.channelId == 'books') {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (_) => BookDetailScreen(book: video)));
+      return;
+    }
+    final channel = ChannelData.byId[video.channelId] ?? ChannelData.fallback;
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (_) => VideoPlayerScreen(video: video, channel: channel)),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<FeedProvider>();
     final saved = provider.savedVideos;
-    final channels = {for (final ch in provider.channels) ch.id: ch};
 
     return Scaffold(
       appBar: AppBar(
@@ -28,10 +52,8 @@ class SavedScreen extends StatelessWidget {
           if (saved.isNotEmpty)
             TextButton(
               onPressed: () => _confirmClearAll(context, provider),
-              child: const Text(
-                'Clear all',
-                style: TextStyle(color: AppTheme.error),
-              ),
+              child: const Text('Clear all',
+                  style: TextStyle(color: AppTheme.error)),
             ),
         ],
       ),
@@ -41,50 +63,41 @@ class SavedScreen extends StatelessWidget {
             child: saved.isEmpty
                 ? const _EmptySaved()
                 : ListView.separated(
-                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 120),
                     itemCount: saved.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: 12),
+                    separatorBuilder: (_, __) =>
+                        const SizedBox(height: 12),
                     itemBuilder: (context, i) {
                       final video = saved[i];
-                      final channel =
-                          channels[video.channelId] ?? ChannelData.all.first;
+                      final channel = ChannelData.byId[video.channelId] ??
+                          ChannelData.fallback;
                       return VideoCard(
                         video: video,
                         channel: channel,
                         compact: true,
                         saved: true,
-                        onTap: () async {
-                          unawaited(AdService.instance.onVideoOpened());
-                          final uri = Uri.parse(video.watchUrl);
-                          if (await canLaunchUrl(uri)) {
-                            unawaited(launchUrl(uri));
-                          }
-                        },
+                        onTap: () => _openVideo(video),
                         onSave: () => provider.toggleSaved(video),
                         onShare: () => Share.share(
-                          '${video.title}\n${video.watchUrl}',
-                        ),
+                            '${video.title}\n${video.watchUrl}'),
                       );
                     },
                   ),
           ),
-          const LabelledBannerAd(),
+          if (!AdService.instance.adsRemoved) const LabelledBannerAd(),
         ],
       ),
     );
   }
 
   Future<void> _confirmClearAll(
-    BuildContext context,
-    FeedProvider provider,
-  ) async {
+      BuildContext context, FeedProvider provider) async {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
         title: const Text('Clear all bookmarks?'),
         content: const Text(
-          'This will remove all your saved videos permanently.',
-        ),
+            'This will remove all your saved videos permanently.'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
@@ -92,10 +105,8 @@ class SavedScreen extends StatelessWidget {
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text(
-              'Clear all',
-              style: TextStyle(color: AppTheme.error),
-            ),
+            child: const Text('Clear all',
+                style: TextStyle(color: AppTheme.error)),
           ),
         ],
       ),
@@ -119,16 +130,11 @@ class _EmptySaved extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              Icons.bookmark_add_outlined,
-              size: 64,
-              color: AppTheme.textMuted(context),
-            ),
+            Icon(Icons.bookmark_add_outlined,
+                size: 64, color: AppTheme.textMuted(context)),
             const SizedBox(height: 20),
-            Text(
-              'No bookmarks yet',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
+            Text('No bookmarks yet',
+                style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 8),
             Text(
               'Tap the ⋮ menu on any video to bookmark it.',

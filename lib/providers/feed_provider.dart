@@ -37,23 +37,20 @@ class FeedProvider extends ChangeNotifier {
 
     switch (_activeTab) {
       case FeedTab.all:
-        return all;
+        return all.where((v) => !_isBook(v)).toList();
       case FeedTab.videos:
-        // Regular videos — title length > 20 chars, not short
         return all
-            .where((v) => !_isShort(v) && !_isBlog(v))
+            .where((v) => !_isShort(v) && !_isBlog(v) && !_isBook(v))
             .toList();
       case FeedTab.shorts:
-        return all.where(_isShort).toList();
+        return all.where((v) => _isShort(v) && !_isBook(v)).toList();
       case FeedTab.blogs:
-        return all.where(_isBlog).toList();
+        return all.where((v) => _isBlog(v) && !_isBook(v)).toList();
       case FeedTab.books:
-        // Curated free finance books from Open Library RSS
         return _bookVideos;
     }
   }
 
-  // Heuristics for content type detection from RSS metadata
   bool _isShort(Video v) {
     final t = v.title.toLowerCase();
     final d = v.description.toLowerCase();
@@ -61,8 +58,8 @@ class FeedProvider extends ChangeNotifier {
         t.contains('shorts') ||
         d.contains('#shorts') ||
         t.contains('in 60') ||
-        t.contains('in 30') ||
-        t.length < 25;
+        t.contains('in 30 ') ||
+        v.title.length < 28;
   }
 
   bool _isBlog(Video v) {
@@ -79,71 +76,97 @@ class FeedProvider extends ChangeNotifier {
         t.contains('lesson');
   }
 
-  // Static curated free finance books (Open Library public domain)
+  bool _isBook(Video v) => v.channelId == 'books';
+
+  // ── Static curated free finance books ────────────────────────────────────────
+  static final _epoch = DateTime(2000);
+
   List<Video> get _bookVideos => [
     Video(
       id: 'book_richest_man',
       title: 'The Richest Man in Babylon — George S. Clason',
       description:
           'Classic personal finance book using parables set in ancient Babylon. '
-          'Timeless lessons on saving, investing, and building wealth.',
+          'Timeless lessons on saving, investing, and building wealth. '
+          'Required reading for anyone starting their financial journey.',
       channelId: 'books',
       channelName: 'Free Finance Library',
-      publishedAt: FeedProvider._epoch,
-      thumbnailUrl:
-          'https://covers.openlibrary.org/b/id/8739161-L.jpg',
+      publishedAt: _epoch,
+      thumbnailUrl: 'https://covers.openlibrary.org/b/id/8739161-L.jpg',
     ),
     Video(
       id: 'book_think_grow',
       title: 'Think and Grow Rich — Napoleon Hill',
       description:
           'One of the best-selling self-help books of all time. Hill studied '
-          'over 500 successful people to identify the secrets of wealth.',
+          'over 500 successful people to identify the 13 principles of wealth. '
+          'A masterclass in mindset and financial success.',
       channelId: 'books',
       channelName: 'Free Finance Library',
-      publishedAt: FeedProvider._epoch,
-      thumbnailUrl:
-          'https://covers.openlibrary.org/b/id/8739505-L.jpg',
+      publishedAt: _epoch,
+      thumbnailUrl: 'https://covers.openlibrary.org/b/id/8739505-L.jpg',
     ),
     Video(
       id: 'book_common_stocks',
       title: 'Common Stocks and Uncommon Profits — Philip Fisher',
       description:
-          'A classic investment guide on how to identify outstanding '
-          'companies and hold them for the long term.',
+          'A classic investment guide on how to identify outstanding companies '
+          'and hold them for the long term. Influenced Warren Buffett\'s '
+          'investment philosophy significantly.',
       channelId: 'books',
       channelName: 'Free Finance Library',
-      publishedAt: FeedProvider._epoch,
-      thumbnailUrl:
-          'https://covers.openlibrary.org/b/id/7222246-L.jpg',
+      publishedAt: _epoch,
+      thumbnailUrl: 'https://covers.openlibrary.org/b/id/7222246-L.jpg',
     ),
     Video(
       id: 'book_millionaire_next_door',
       title: 'The Millionaire Next Door — Thomas Stanley',
       description:
           'Reveals that most millionaires live below their means, work hard, '
-          'and avoid the trappings of a high-consumption lifestyle.',
+          'and avoid the trappings of a high-consumption lifestyle. '
+          'The real secrets of America\'s wealthy.',
       channelId: 'books',
       channelName: 'Free Finance Library',
-      publishedAt: FeedProvider._epoch,
-      thumbnailUrl:
-          'https://covers.openlibrary.org/b/id/8091016-L.jpg',
+      publishedAt: _epoch,
+      thumbnailUrl: 'https://covers.openlibrary.org/b/id/8091016-L.jpg',
     ),
     Video(
       id: 'book_intelligent_investor',
       title: 'The Intelligent Investor — Benjamin Graham',
       description:
           'Warren Buffett\'s favourite book. The definitive guide on value '
-          'investing, margin of safety, and long-term wealth building.',
+          'investing, margin of safety, and long-term wealth building. '
+          'The bible of intelligent investing.',
       channelId: 'books',
       channelName: 'Free Finance Library',
-      publishedAt: FeedProvider._epoch,
-      thumbnailUrl:
-          'https://covers.openlibrary.org/b/id/8739161-L.jpg',
+      publishedAt: _epoch,
+      thumbnailUrl: 'https://covers.openlibrary.org/b/id/8235963-L.jpg',
+    ),
+    Video(
+      id: 'book_rich_dad',
+      title: 'Rich Dad Poor Dad — Robert Kiyosaki',
+      description:
+          'What the rich teach their kids about money that the poor and middle '
+          'class do not. A transformative look at financial education, assets '
+          'vs liabilities, and building passive income.',
+      channelId: 'books',
+      channelName: 'Free Finance Library',
+      publishedAt: _epoch,
+      thumbnailUrl: 'https://covers.openlibrary.org/b/id/9253566-L.jpg',
+    ),
+    Video(
+      id: 'book_psychology_money',
+      title: 'The Psychology of Money — Morgan Housel',
+      description:
+          'Timeless lessons on wealth, greed, and happiness. 19 short stories '
+          'exploring the strange ways people think about money and how to '
+          'make better financial decisions.',
+      channelId: 'books',
+      channelName: 'Free Finance Library',
+      publishedAt: _epoch,
+      thumbnailUrl: 'https://covers.openlibrary.org/b/id/10521270-L.jpg',
     ),
   ];
-
-  static final _epoch = DateTime(2000);
 
   // ── Init ─────────────────────────────────────────────────────────────────────
   Future<void> init() async {
@@ -158,7 +181,7 @@ class FeedProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ── Fetch ────────────────────────────────────────────────────────────────────
+  // ── Fetch all channels concurrently ─────────────────────────────────────────
   Future<void> refresh({bool force = false}) async {
     _state = FeedState.loading;
     _errorMessage = null;
@@ -179,7 +202,7 @@ class FeedProvider extends ChangeNotifier {
 
     _state = successCount > 0 ? FeedState.loaded : FeedState.error;
     _errorMessage = successCount == 0
-        ? 'Could not load any content. Check your connection.'
+        ? 'Could not load content. Check your connection and try again.'
         : null;
     notifyListeners();
   }

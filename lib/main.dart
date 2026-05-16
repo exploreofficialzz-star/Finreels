@@ -44,16 +44,58 @@ void main() async {
   );
 }
 
-class FinReelsApp extends StatefulWidget {
+class FinReelsApp extends StatelessWidget {
   const FinReelsApp({super.key});
 
   @override
-  State<FinReelsApp> createState() => _FinReelsAppState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'FinReels',
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
+      home: const _SplashGate(),
+    );
+  }
 }
 
-class _FinReelsAppState extends State<FinReelsApp> with WidgetsBindingObserver {
+class _SplashGate extends StatefulWidget {
+  const _SplashGate();
+
+  @override
+  State<_SplashGate> createState() => _SplashGateState();
+}
+
+class _SplashGateState extends State<_SplashGate> {
   bool _showSplash = true;
 
+  @override
+  Widget build(BuildContext context) {
+    if (_showSplash) {
+      return SplashScreen(
+        onComplete: () {
+          setState(() => _showSplash = false);
+          unawaited(NotificationService.instance.requestPermission());
+        },
+      );
+    }
+    return const ConnectivityOverlay(
+      child: AdBlockOverlay(
+        child: _AppRoot(),
+      ),
+    );
+  }
+}
+
+/// Root widget that observes lifecycle for auto-refresh + app-open ads.
+class _AppRoot extends StatefulWidget {
+  const _AppRoot();
+
+  @override
+  State<_AppRoot> createState() => _AppRootState();
+}
+
+class _AppRootState extends State<_AppRoot> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
@@ -69,29 +111,13 @@ class _FinReelsAppState extends State<FinReelsApp> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
+      // Show App Open ad (respects 2-hour cooldown internally)
       unawaited(AdService.instance.showAppOpenAd());
+      // Auto-refresh feed silently — users always see latest content
+      unawaited(context.read<FeedProvider>().refresh());
     }
   }
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'FinReels',
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.light,
-      darkTheme: AppTheme.dark,
-      home: _showSplash
-          ? SplashScreen(
-              onComplete: () {
-                setState(() => _showSplash = false);
-                unawaited(NotificationService.instance.requestPermission());
-              },
-            )
-          : const ConnectivityOverlay(
-              child: AdBlockOverlay(
-                child: MainShell(),
-              ),
-            ),
-    );
-  }
+  Widget build(BuildContext context) => const MainShell();
 }

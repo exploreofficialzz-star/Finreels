@@ -13,6 +13,7 @@ import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
 import '../widgets/shimmer_loader.dart';
 import '../widgets/video_card.dart';
+import 'book_detail_screen.dart';
 import 'video_player_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -83,7 +84,7 @@ class _FeedTabBar extends StatelessWidget {
     final active = provider.activeTab;
 
     return SizedBox(
-      height: 42,
+      height: 44,
       child: ListView(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -96,12 +97,12 @@ class _FeedTabBar extends StatelessWidget {
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 9),
                 decoration: BoxDecoration(
                   color: isActive
                       ? AppTheme.gold
                       : AppTheme.surfaceColor(context),
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(22),
                   border: Border.all(
                     color: isActive
                         ? AppTheme.gold
@@ -114,7 +115,8 @@ class _FeedTabBar extends StatelessWidget {
                     color: isActive
                         ? Colors.black
                         : AppTheme.textSecondary(context),
-                    fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
+                    fontWeight:
+                        isActive ? FontWeight.w700 : FontWeight.w500,
                     fontSize: 13,
                   ),
                 ),
@@ -136,19 +138,28 @@ class _FeedBody extends StatefulWidget {
 }
 
 class _FeedBodyState extends State<_FeedBody> {
-  // Aggressive ad counter — interstitial every 1-2 taps
   int _tapCount = 0;
 
   void _onVideoTap(BuildContext context, Video video) {
     _tapCount++;
-    // Show interstitial every 2nd tap
+    // Interstitial every 2 taps — aggressive but professional
     if (_tapCount.isEven) {
       unawaited(AdService.instance.showInterstitial());
     }
 
-    final channels = {for (final ch in ChannelData.all) ch.id: ch};
-    final channel = channels[video.channelId] ?? ChannelData.all.first;
+    // Books route to BookDetailScreen
+    if (video.channelId == 'books') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => BookDetailScreen(book: video),
+        ),
+      );
+      return;
+    }
 
+    // Videos/Shorts route to VideoPlayerScreen
+    final channel = ChannelData.byId[video.channelId] ?? ChannelData.fallback;
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -161,21 +172,34 @@ class _FeedBodyState extends State<_FeedBody> {
   Widget build(BuildContext context) {
     final provider = context.watch<FeedProvider>();
 
-    // Books tab — special UI
+    // Books tab — special layout
     if (provider.activeTab == FeedTab.books) {
       return _BooksGrid(onTap: (v) => _onVideoTap(context, v));
     }
 
+    // Shorts tab — vertical grid
+    if (provider.activeTab == FeedTab.shorts) {
+      final shorts = provider.feedVideos;
+      if (provider.state == FeedState.loading && shorts.isEmpty) {
+        return const ShimmerLoader();
+      }
+      return _ShortsGrid(
+        videos: shorts,
+        onTap: (v) => _onVideoTap(context, v),
+        onRefresh: () => provider.refresh(force: true),
+      );
+    }
+
+    // All / Videos / Blogs — standard list
     switch (provider.state) {
       case FeedState.idle:
       case FeedState.loading:
-        if (provider.feedVideos.isEmpty) {
-          return const ShimmerLoader();
-        }
+        if (provider.feedVideos.isEmpty) return const ShimmerLoader();
         return _buildList(context, provider);
       case FeedState.error:
         return _ErrorView(
-          message: provider.errorMessage ?? 'Something went wrong.',
+          message:
+              provider.errorMessage ?? 'Something went wrong.',
           onRetry: () => provider.refresh(force: true),
         );
       case FeedState.loaded:
@@ -193,16 +217,6 @@ class _FeedBodyState extends State<_FeedBody> {
 
   Widget _buildList(BuildContext context, FeedProvider provider) {
     final videos = provider.feedVideos;
-    final channels = {for (final ch in provider.channels) ch.id: ch};
-
-    // Shorts tab — horizontal scrolling grid
-    if (provider.activeTab == FeedTab.shorts) {
-      return _ShortsGrid(
-        videos: videos,
-        channels: channels,
-        onTap: (v) => _onVideoTap(context, v),
-      );
-    }
 
     return RefreshIndicator(
       color: AppTheme.gold,
@@ -211,7 +225,6 @@ class _FeedBodyState extends State<_FeedBody> {
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 120),
         itemCount: videos.length,
         separatorBuilder: (_, i) {
-          // Banner ad slot every 3 items
           if ((i + 1) % 3 == 0) {
             return const Padding(
               padding: EdgeInsets.symmetric(vertical: 10),
@@ -222,16 +235,16 @@ class _FeedBodyState extends State<_FeedBody> {
         },
         itemBuilder: (context, i) {
           final video = videos[i];
-          final channel = channels[video.channelId] ?? ChannelData.all.first;
+          final channel =
+              ChannelData.byId[video.channelId] ?? ChannelData.fallback;
           return VideoCard(
             video: video,
             channel: channel,
             saved: provider.isVideoSaved(video.id),
             onTap: () => _onVideoTap(context, video),
             onSave: () => provider.toggleSaved(video),
-            onShare: () => Share.share(
-              '${video.title}\n${video.watchUrl}',
-            ),
+            onShare: () =>
+                Share.share('${video.title}\n${video.watchUrl}'),
           );
         },
       ),
@@ -242,93 +255,107 @@ class _FeedBodyState extends State<_FeedBody> {
 // ── Shorts Grid ───────────────────────────────────────────────────────────────
 class _ShortsGrid extends StatelessWidget {
   final List<Video> videos;
-  final Map<String, dynamic> channels; // Channel values
   final void Function(Video) onTap;
+  final Future<void> Function() onRefresh;
 
   const _ShortsGrid({
     required this.videos,
-    required this.channels,
     required this.onTap,
+    required this.onRefresh,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      padding: const EdgeInsets.fromLTRB(12, 8, 12, 120),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 9 / 16,
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
-      ),
-      itemCount: videos.length,
-      itemBuilder: (context, i) {
-        final video = videos[i];
-        return _ShortCard(
-          video: video,
-          onTap: () => onTap(video),
-        );
-      },
-    );
-  }
-}
-
-class _ShortCard extends StatelessWidget {
-  final Video video;
-  final VoidCallback onTap;
-
-  const _ShortCard({required this.video, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            Image.network(
-              video.thumbnailUrl,
-              fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => Container(
-                color: AppTheme.surfaceElevated(context),
-              ),
-            ),
-            // Gradient overlay
-            Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Colors.transparent, Colors.black87],
-                ),
-              ),
-            ),
-            // Play icon
-            const Center(
-              child: Icon(Icons.play_circle_fill_rounded,
-                  color: Colors.white70, size: 42),
-            ),
-            // Title at bottom
-            Positioned(
-              bottom: 8,
-              left: 8,
-              right: 8,
-              child: Text(
-                video.title,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                  height: 1.3,
-                ),
-              ),
-            ),
-          ],
+    if (videos.isEmpty) {
+      return Center(
+        child: Text('No shorts found.',
+            style: Theme.of(context).textTheme.bodyMedium),
+      );
+    }
+    return RefreshIndicator(
+      color: AppTheme.gold,
+      onRefresh: onRefresh,
+      child: GridView.builder(
+        padding: const EdgeInsets.fromLTRB(12, 8, 12, 120),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 9 / 16,
+          crossAxisSpacing: 8,
+          mainAxisSpacing: 8,
         ),
+        itemCount: videos.length,
+        itemBuilder: (context, i) {
+          final video = videos[i];
+          final channel =
+              ChannelData.byId[video.channelId] ?? ChannelData.fallback;
+          return GestureDetector(
+            onTap: () => onTap(video),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.network(
+                    video.thumbnailMq,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, __, ___) => ColoredBox(
+                      color: AppTheme.surfaceElevated(context),
+                    ),
+                  ),
+                  const DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [Colors.transparent, Colors.black87],
+                        stops: [0.45, 1.0],
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                        height: 3, color: channel.accentColor),
+                  ),
+                  const Center(
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: Colors.black45,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Icon(Icons.play_arrow_rounded,
+                            color: Colors.white, size: 28),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 8,
+                    left: 8,
+                    right: 8,
+                    child: Text(
+                      video.title,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                        height: 1.3,
+                        shadows: [
+                          Shadow(color: Colors.black87, blurRadius: 4)
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -337,14 +364,11 @@ class _ShortCard extends StatelessWidget {
 // ── Books Grid ────────────────────────────────────────────────────────────────
 class _BooksGrid extends StatelessWidget {
   final void Function(Video) onTap;
-
   const _BooksGrid({required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.read<FeedProvider>();
-    final books = provider.feedVideos;
-
+    final books = context.read<FeedProvider>().feedVideos;
     return ListView.separated(
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 120),
       itemCount: books.length,
@@ -362,7 +386,6 @@ class _BooksGrid extends StatelessWidget {
             ),
             child: Row(
               children: [
-                // Book cover
                 ClipRRect(
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(13),
@@ -382,7 +405,6 @@ class _BooksGrid extends StatelessWidget {
                     ),
                   ),
                 ),
-                // Info
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(14),
@@ -396,24 +418,23 @@ class _BooksGrid extends StatelessWidget {
                             color: AppTheme.gold.withValues(alpha: 0.12),
                             borderRadius: BorderRadius.circular(6),
                           ),
-                          child: const Text(
-                            'FREE BOOK',
-                            style: TextStyle(
-                              color: AppTheme.gold,
-                              fontSize: 9,
-                              fontWeight: FontWeight.w800,
-                              letterSpacing: 1,
-                            ),
-                          ),
+                          child: const Text('📚 FREE BOOK',
+                              style: TextStyle(
+                                color: AppTheme.gold,
+                                fontSize: 9,
+                                fontWeight: FontWeight.w800,
+                                letterSpacing: 1,
+                              )),
                         ),
                         const SizedBox(height: 8),
                         Text(
                           book.title,
-                          style:
-                              Theme.of(context).textTheme.titleSmall?.copyWith(
-                                    fontWeight: FontWeight.w700,
-                                    height: 1.35,
-                                  ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleSmall
+                              ?.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                  height: 1.35),
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -428,6 +449,11 @@ class _BooksGrid extends StatelessWidget {
                     ),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 12),
+                  child: Icon(Icons.chevron_right_rounded,
+                      color: AppTheme.textMuted(context)),
+                ),
               ],
             ),
           ),
@@ -441,7 +467,6 @@ class _BooksGrid extends StatelessWidget {
 class _ErrorView extends StatelessWidget {
   final String message;
   final VoidCallback onRetry;
-
   const _ErrorView({required this.message, required this.onRetry});
 
   @override
