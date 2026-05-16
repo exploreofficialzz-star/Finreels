@@ -353,7 +353,7 @@ class _BooksGrid extends StatelessWidget {
         final book = books[i];
         return GestureDetector(
           onTap: () => onTap(book),
-          child: Container(
+          child: DecoratedBox(
             decoration: BoxDecoration(
               color: AppTheme.surfaceColor(context),
               borderRadius: BorderRadius.circular(14),

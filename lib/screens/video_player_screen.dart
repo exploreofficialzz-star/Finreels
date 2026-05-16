@@ -157,9 +157,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               children: [
                 WebViewWidget(controller: _controller),
                 if (_isLoading)
-                  Container(
+                  const ColoredBox(
                     color: Colors.black,
-                    child: const Center(
+                    child: Center(
                       child: CircularProgressIndicator(color: AppTheme.gold),
                     ),
                   ),
