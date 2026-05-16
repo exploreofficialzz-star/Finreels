@@ -107,8 +107,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     }
                   },
                 ),
-                const _SectionHeader('About'),
-                const _InfoTile(
+                _SectionHeader('About'),
+                _InfoTile(
                   icon: Icons.play_circle_rounded,
                   iconColor: AppTheme.gold,
                   title: 'FinReels',
