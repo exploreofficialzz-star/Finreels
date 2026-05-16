@@ -52,9 +52,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: ListView(
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 120),
               children: [
-                _SectionHeader('Remove Ads'),
-                _RemoveAdsSection(),
-                _SectionHeader('Notifications'),
+                const _SectionHeader('Remove Ads'),
+                const _RemoveAdsSection(),
+                const _SectionHeader('Notifications'),
                 _NotificationTile(
                   enabled: _notificationsEnabled,
                   onChanged: (v) async {
@@ -63,7 +63,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     setState(() => _notificationsEnabled = v);
                   },
                 ),
-                _SectionHeader('Support'),
+                const _SectionHeader('Support'),
                 _ActionTile(
                   icon: Icons.star_rounded,
                   iconColor: AppTheme.gold,
@@ -107,14 +107,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     }
                   },
                 ),
-                _SectionHeader('About'),
-                _InfoTile(
+                const _SectionHeader('About'),
+                const _InfoTile(
                   icon: Icons.play_circle_rounded,
                   iconColor: AppTheme.gold,
                   title: 'FinReels',
                   subtitle: 'Financial literacy video hub · $_version',
                 ),
-                _InfoTile(
+                const _InfoTile(
                   icon: Icons.business_rounded,
                   iconColor: AppTheme.gold,
                   title: 'by chAs',
@@ -236,7 +236,7 @@ class _IapTile extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-      child: Container(
+      child: DecoratedBox(
         decoration: BoxDecoration(
           color: AppTheme.surfaceColor(context),
           borderRadius: BorderRadius.circular(14),
@@ -300,7 +300,7 @@ class _NotificationTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-      child: Container(
+      child: DecoratedBox(
         decoration: BoxDecoration(
           color: AppTheme.surfaceColor(context),
           borderRadius: BorderRadius.circular(14),

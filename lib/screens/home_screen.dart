@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../data/channel_data.dart';
-import '../models/channel.dart';
 import '../models/feed_tab.dart';
 import '../models/video.dart';
 import '../providers/feed_provider.dart';
@@ -143,7 +142,7 @@ class _FeedBodyState extends State<_FeedBody> {
   void _onVideoTap(BuildContext context, Video video) {
     _tapCount++;
     // Show interstitial every 2nd tap
-    if (_tapCount % 2 == 0) {
+    if (_tapCount.isEven) {
       unawaited(AdService.instance.showInterstitial());
     }
 

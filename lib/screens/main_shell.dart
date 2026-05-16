@@ -82,7 +82,6 @@ class _FloatingNavBar extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withValues(alpha: isDark ? 0.5 : 0.15),
             blurRadius: 24,
-            spreadRadius: 0,
             offset: const Offset(0, 6),
           ),
         ],

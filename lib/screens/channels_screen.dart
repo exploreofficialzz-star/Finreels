@@ -159,7 +159,7 @@ class _ChannelDetailScreenState extends State<ChannelDetailScreen>
 
   void _openVideo(Video video) {
     _tapCount++;
-    if (_tapCount % 2 == 0) {
+    if (_tapCount.isEven) {
       unawaited(AdService.instance.showInterstitial());
     }
     Navigator.push(

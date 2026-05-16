@@ -5,8 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import '../models/video.dart';
 import '../models/channel.dart';
+import '../models/video.dart';
 import '../services/ad_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
