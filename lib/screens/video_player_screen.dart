@@ -86,7 +86,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   // JS bridge detects Error 150/153 and notifies Flutter.
   String _buildHtml() {
     final id = widget.video.id;
-    return '''<!DOCTYPE html>
+    return '''
+<!DOCTYPE html>
 <html>
 <head>
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
@@ -248,7 +249,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   }
 
   Widget _buildEmbedFallback() {
-    return Container(
+    return ColoredBox(
       color: Colors.black,
       child: Center(
         child: Padding(

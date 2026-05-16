@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:share_plus/share_plus.dart';
 
 import '../data/channel_data.dart';
 import '../models/video.dart';
@@ -47,7 +46,7 @@ class _ChannelsScreenState extends State<ChannelsScreen> {
         .toList()
       ..sort((a, b) => b.publishedAt.compareTo(a.publishedAt));
 
-    final shorts = allVideos.where((v) => _isShort(v)).toList();
+    final shorts = allVideos.where(_isShort).toList();
 
     return Scaffold(
       appBar: AppBar(

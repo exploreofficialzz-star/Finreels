@@ -62,7 +62,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               padding: const EdgeInsets.fromLTRB(0, 0, 0, 120),
               children: [
                 // ── Remove Ads ────────────────────────────────────────────────
-                _SectionHeader('Remove Ads'),
+                const _SectionHeader('Remove Ads'),
                 if (adsGone)
                   const _InfoTile(
                     icon: Icons.check_circle_rounded,
@@ -75,7 +75,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   _RemoveAdsSection(iap: iap),
 
                 // ── Notifications ─────────────────────────────────────────────
-                _SectionHeader('Notifications'),
+                const _SectionHeader('Notifications'),
                 _NotificationTile(
                   enabled: _notificationsEnabled,
                   onChanged: (v) async {
@@ -86,7 +86,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
 
                 // ── Support ───────────────────────────────────────────────────
-                _SectionHeader('Support'),
+                const _SectionHeader('Support'),
                 _ActionTile(
                   icon: Icons.star_rounded,
                   iconColor: AppTheme.gold,
@@ -326,7 +326,7 @@ class _IapTile extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-      child: Container(
+      child: DecoratedBox(
         decoration: BoxDecoration(
           color: AppTheme.surfaceColor(context),
           borderRadius: BorderRadius.circular(14),

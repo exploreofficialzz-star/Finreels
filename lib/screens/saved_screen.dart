@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../data/channel_data.dart';
+import '../models/video.dart';
 import '../providers/feed_provider.dart';
 import '../services/ad_service.dart';
 import '../theme/app_theme.dart';
@@ -23,7 +24,7 @@ class SavedScreen extends StatefulWidget {
 class _SavedScreenState extends State<SavedScreen> {
   int _tapCount = 0;
 
-  void _openVideo(video) {
+  void _openVideo(Video video) {
     _tapCount++;
     if (_tapCount.isEven) unawaited(AdService.instance.showInterstitial());
 
