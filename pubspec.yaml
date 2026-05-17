@@ -36,8 +36,6 @@ dependencies:
   youtube_player_flutter: ^9.1.1
   # Inline feed auto-play: fires when card is >50% visible
   visibility_detector: ^0.4.0+2
-  # Blog RSS parsing (Atom + RSS 2.0)
-  webfeed: ^0.7.0
   # Blog / article inline web renderer with navigation interception
   flutter_inappwebview: ^6.1.5
   # EPUB in-app reader (Epub.js engine); URL/file/assets, CFI, scrolled flow

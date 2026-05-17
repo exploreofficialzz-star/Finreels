@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-import 'package:webfeed/webfeed.dart';
+import 'package:xml/xml.dart';
 
 /// A single parsed blog article from an RSS/Atom feed.
 class BlogArticle {
@@ -21,12 +21,13 @@ class BlogArticle {
   });
 }
 
-/// RSS feed sources for the Blogs tab.
-/// All URLs support HTTP so cleartext traffic must be enabled in the manifest.
+/// Finance RSS/Atom sources for the Blogs tab.
+/// Uses the xml package (already in the project) — no extra dependency.
 const List<Map<String, String>> kBlogFeeds = [
   {
     'name': 'Investopedia',
-    'url': 'https://www.investopedia.com/feedbuilder/feed/getfeed?feedName=rss_headline',
+    'url':
+        'https://www.investopedia.com/feedbuilder/feed/getfeed?feedName=rss_headline',
   },
   {
     'name': 'MarketWatch',
@@ -42,7 +43,6 @@ class BlogRssService {
   BlogRssService._();
   static final BlogRssService instance = BlogRssService._();
 
-  // 10-minute in-memory cache
   List<BlogArticle>? _cache;
   DateTime? _cacheTime;
   static const _cacheTtl = Duration(minutes: 10);
@@ -55,18 +55,15 @@ class BlogRssService {
   Future<List<BlogArticle>> fetchAll({bool forceRefresh = false}) async {
     if (!forceRefresh && _isCacheFresh) return _cache!;
 
-    // Run all feed fetches in parallel
-    final futures = kBlogFeeds.map((feed) => _fetchFeed(
-          url: feed['url']!,
-          sourceName: feed['name']!,
-        ));
+    final futures = kBlogFeeds.map(
+      (feed) => _fetchFeed(url: feed['url']!, sourceName: feed['name']!),
+    );
 
     final results = await Future.wait(futures, eagerError: false);
-    final articles = results.expand((list) => list).toList();
+    final articles = results.expand((l) => l).toList();
 
-    // Sort newest first — offload to compute so UI thread is free
+    // Sort on background isolate
     final sorted = await compute(_sortArticles, articles);
-
     _cache = sorted;
     _cacheTime = DateTime.now();
     return sorted;
@@ -77,76 +74,82 @@ class BlogRssService {
     required String sourceName,
   }) async {
     try {
-      final response = await http
-          .get(Uri.parse(url), headers: {
-            'User-Agent': 'FinReels/1.0 (+com.chastech.finreels)',
-            'Accept': 'application/rss+xml, application/xml, text/xml',
-          })
-          .timeout(const Duration(seconds: 12));
+      final response = await http.get(Uri.parse(url), headers: {
+        'User-Agent': 'FinReels/1.0 (+com.chastech.finreels)',
+        'Accept': 'application/rss+xml, application/xml, text/xml',
+      }).timeout(const Duration(seconds: 12));
 
       if (response.statusCode != 200) return [];
 
-      // Parse on background thread to avoid jank
       final body = response.body;
       return await compute(
-        (args) => _parseBody(args[0] as String, args[1] as String),
+        (args) => _parse(args[0] as String, args[1] as String),
         [body, sourceName],
       );
     } catch (e) {
-      debugPrint('[BlogRssService] Failed to fetch $sourceName: $e');
+      debugPrint('[BlogRssService] $sourceName failed: $e');
       return [];
     }
   }
 
-  static List<BlogArticle> _parseBody(String body, String sourceName) {
+  /// Pure XML parsing via the existing xml ^6.x package — no webfeed needed.
+  static List<BlogArticle> _parse(String body, String sourceName) {
     try {
-      // Try RSS first, fall back to Atom
-      RssFeed? rss;
-      AtomFeed? atom;
-      try {
-        rss = RssFeed.parse(body);
-      } catch (_) {
-        atom = AtomFeed.parse(body);
-      }
+      final doc = XmlDocument.parse(body);
 
-      if (rss != null) {
-        return (rss.items ?? []).map((item) {
-          final url = item.link ?? '';
-          if (url.isEmpty) return null;
+      // ── RSS 2.0 ────────────────────────────────────────────────────────────
+      final rssItems = doc.findAllElements('item');
+      if (rssItems.isNotEmpty) {
+        return rssItems.map((item) {
+          final link = _text(item, 'link') ?? _text(item, 'guid') ?? '';
+          if (link.isEmpty) return null;
 
-          // Extract first image from enclosure or media content
-          String? thumb = item.enclosure?.url;
+          // Thumbnail: <enclosure url="..."> or <media:content url="...">
+          String? thumb = item
+              .findElements('enclosure')
+              .firstOrNull
+              ?.getAttribute('url');
           if (thumb == null || thumb.isEmpty) {
-            // Try media:content
-            final media = item.media?.contents;
-            if (media != null && media.isNotEmpty) {
-              thumb = media.first.url;
-            }
+            thumb = item
+                .findElements('media:content')
+                .firstOrNull
+                ?.getAttribute('url');
           }
 
+          final pubStr = _text(item, 'pubDate') ?? '';
+          final published = _parseDate(pubStr) ?? DateTime.now();
+
           return BlogArticle(
-            title: _clean(item.title ?? 'Untitled'),
-            url: url,
+            title: _clean(_text(item, 'title') ?? 'Untitled'),
+            url: link,
             sourceName: sourceName,
             thumbnailUrl: thumb,
-            publishedAt: item.pubDate ?? DateTime.now(),
-            excerpt: _clean(item.description ?? ''),
+            publishedAt: published,
+            excerpt: _clean(_text(item, 'description') ?? ''),
           );
         }).whereType<BlogArticle>().toList();
       }
 
-      if (atom != null) {
-        return (atom.items ?? []).map((item) {
-          final url = item.links?.firstOrNull?.href ?? '';
-          if (url.isEmpty) return null;
+      // ── Atom ───────────────────────────────────────────────────────────────
+      final atomEntries = doc.findAllElements('entry');
+      if (atomEntries.isNotEmpty) {
+        return atomEntries.map((entry) {
+          final link = entry
+              .findElements('link')
+              .firstOrNull
+              ?.getAttribute('href') ?? '';
+          if (link.isEmpty) return null;
+
+          final updStr = _text(entry, 'updated') ?? _text(entry, 'published') ?? '';
+          final published = DateTime.tryParse(updStr) ?? DateTime.now();
 
           return BlogArticle(
-            title: _clean(item.title ?? 'Untitled'),
-            url: url,
+            title: _clean(_text(entry, 'title') ?? 'Untitled'),
+            url: link,
             sourceName: sourceName,
             thumbnailUrl: null,
-            publishedAt: item.updated ?? DateTime.now(),
-            excerpt: _clean(item.summary ?? ''),
+            publishedAt: published,
+            excerpt: _clean(_text(entry, 'summary') ?? ''),
           );
         }).whereType<BlogArticle>().toList();
       }
@@ -156,18 +159,29 @@ class BlogRssService {
     return [];
   }
 
-  /// Strip HTML tags and trim whitespace from feed text.
-  static String _clean(String raw) {
-    return raw
-        .replaceAll(RegExp(r'<[^>]*>'), '')
-        .replaceAll(RegExp(r'\s+'), ' ')
-        .trim();
+  // ── Helpers ────────────────────────────────────────────────────────────────
+
+  static String? _text(XmlElement el, String tag) =>
+      el.findElements(tag).firstOrNull?.innerText.trim();
+
+  static String _clean(String raw) => raw
+      .replaceAll(RegExp(r'<[^>]*>'), '')
+      .replaceAll(RegExp(r'\s+'), ' ')
+      .trim();
+
+  /// Parses RFC 822 dates used in RSS 2.0 (e.g. "Wed, 15 May 2024 10:00:00 GMT").
+  static DateTime? _parseDate(String s) {
+    if (s.isEmpty) return null;
+    // Try ISO first
+    final iso = DateTime.tryParse(s);
+    if (iso != null) return iso;
+    // Strip day-of-week prefix and attempt parse
+    final trimmed = s.replaceFirst(RegExp(r'^[A-Za-z]+,\s*'), '');
+    return DateTime.tryParse(trimmed);
   }
 
-  static List<BlogArticle> _sortArticles(List<BlogArticle> articles) {
-    articles.sort((a, b) => b.publishedAt.compareTo(a.publishedAt));
-    return articles;
-  }
+  static List<BlogArticle> _sortArticles(List<BlogArticle> articles) =>
+      articles..sort((a, b) => b.publishedAt.compareTo(a.publishedAt));
 
   void clearCache() {
     _cache = null;
