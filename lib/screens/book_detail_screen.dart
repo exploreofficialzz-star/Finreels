@@ -23,17 +23,6 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   bool _isLoading = true;
   bool _showReader = false;
 
-  // Open Library work IDs that are freely readable online
-  static const Map<String, String> _olWorkIds = {
-    'book_richest_man':      'OL19300W',     // The Richest Man in Babylon
-    'book_think_grow':       'OL1738V',      // Think and Grow Rich
-    'book_common_stocks':    'OL3965598W',   // Common Stocks and Uncommon Profits
-    'book_millionaire_next_door': 'OL24296W', // The Millionaire Next Door
-    'book_intelligent_investor': 'OL98136W', // The Intelligent Investor
-    'book_rich_dad':         'OL82565W',     // Rich Dad Poor Dad
-    'book_psychology_money': 'OL21998941W',  // The Psychology of Money
-  };
-
   // Direct readable URLs via Open Library's read-online viewer
   static const Map<String, String> _readUrls = {
     'book_richest_man':

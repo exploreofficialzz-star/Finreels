@@ -132,7 +132,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
 
                 // ── About ─────────────────────────────────────────────────────
-                _SectionHeader('About'),
+                const _SectionHeader('About'),
                 _InfoTile(
                   icon: Icons.play_circle_rounded,
                   iconColor: AppTheme.gold,

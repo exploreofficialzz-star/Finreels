@@ -44,7 +44,7 @@ class FeedProvider extends ChangeNotifier {
         return _shuffleByChannel(all.where((v) => !_isBook(v)).toList());
       case FeedTab.videos:
         return _shuffleByChannel(
-            all.where((v) => !_isShort(v) && !_isBlog(v) && !_isBook(v)).toList());
+            all.where((v) => !_isShort(v) && !_isBlogStrict(v) && !_isBook(v)).toList());
       case FeedTab.shorts:
         return _shuffleByChannel(
             all.where((v) => _isShort(v) && !_isBook(v)).toList());
@@ -62,7 +62,7 @@ class FeedProvider extends ChangeNotifier {
     if (videos.isEmpty) return videos;
 
     // Group by channelId
-    final Map<String, List<Video>> grouped = {};
+    final grouped = <String, List<Video>>{};
     for (final v in videos) {
       (grouped[v.channelId] ??= []).add(v);
     }
@@ -75,7 +75,7 @@ class FeedProvider extends ChangeNotifier {
     // Round-robin interleave — pick one from each channel in turn
     final result = <Video>[];
     final keys = grouped.keys.toList()..shuffle(_random);
-    var maxLen = grouped.values.map((l) => l.length).fold(0, max);
+    final maxLen = grouped.values.map((l) => l.length).fold(0, max);
 
     for (var i = 0; i < maxLen; i++) {
       for (final key in keys) {
@@ -103,7 +103,7 @@ class FeedProvider extends ChangeNotifier {
     final t = v.title.toLowerCase();
     // Must match specific blog patterns AND NOT be a short
     if (_isShort(v)) return false;
-    return (t.startsWith('how to') ||
+    return t.startsWith('how to') ||
         t.startsWith('why ') ||
         t.startsWith('what ') ||
         RegExp(r'^\d+ (ways|tips|things|rules|reasons|lessons|steps|mistakes)').hasMatch(t) ||
@@ -112,7 +112,7 @@ class FeedProvider extends ChangeNotifier {
         t.contains(' rules') ||
         t.contains(' lessons') ||
         t.contains(' mistakes') ||
-        t.contains(' steps to'));
+        t.contains(' steps to');
   }
 
   bool _isBook(Video v) => v.channelId == 'books';
