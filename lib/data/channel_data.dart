@@ -60,7 +60,7 @@ class ChannelData {
       name: 'Alex Hormozi',
       handle: '@AlexHormozi',
       description:
-          'Built \$100M+ businesses. Teaches sales, marketing, and business '
+          r'Built $100M+ businesses. Teaches sales, marketing, and business '
           'scaling with brutally honest and actionable advice.',
       accentColor: Color(0xFFEF4444),
       category: 'Sales & Business',

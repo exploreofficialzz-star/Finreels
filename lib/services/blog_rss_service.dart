@@ -22,7 +22,7 @@ class BlogArticle {
 }
 
 /// Finance RSS/Atom sources for the Blogs tab.
-/// Uses the xml package (already in the project) — no extra dependency.
+/// Uses the xml package (already in project) — no extra dependency.
 const List<Map<String, String>> kBlogFeeds = [
   {
     'name': 'Investopedia',
@@ -61,8 +61,6 @@ class BlogRssService {
 
     final results = await Future.wait(futures, eagerError: false);
     final articles = results.expand((l) => l).toList();
-
-    // Sort on background isolate
     final sorted = await compute(_sortArticles, articles);
     _cache = sorted;
     _cacheTime = DateTime.now();
@@ -82,42 +80,36 @@ class BlogRssService {
       if (response.statusCode != 200) return [];
 
       final body = response.body;
-      return await compute(
-        (args) => _parse(args[0] as String, args[1] as String),
+      // Typed list avoids unnecessary_cast warnings in compute callback
+      return await compute<List<String>, List<BlogArticle>>(
+        (args) => _parse(args[0], args[1]),
         [body, sourceName],
       );
-    } catch (e) {
+    } on Exception catch (e) {
       debugPrint('[BlogRssService] $sourceName failed: $e');
       return [];
     }
   }
 
-  /// Pure XML parsing via the existing xml ^6.x package — no webfeed needed.
+  /// Parses RSS 2.0 and Atom using the existing xml ^6.x package.
   static List<BlogArticle> _parse(String body, String sourceName) {
     try {
       final doc = XmlDocument.parse(body);
 
-      // ── RSS 2.0 ────────────────────────────────────────────────────────────
+      // ── RSS 2.0 ──────────────────────────────────────────────────────────
       final rssItems = doc.findAllElements('item');
       if (rssItems.isNotEmpty) {
         return rssItems.map((item) {
           final link = _text(item, 'link') ?? _text(item, 'guid') ?? '';
           if (link.isEmpty) return null;
 
-          // Thumbnail: <enclosure url="..."> or <media:content url="...">
-          String? thumb = item
-              .findElements('enclosure')
-              .firstOrNull
-              ?.getAttribute('url');
+          String? thumb = item.findElements('enclosure').firstOrNull?.getAttribute('url');
           if (thumb == null || thumb.isEmpty) {
-            thumb = item
-                .findElements('media:content')
-                .firstOrNull
-                ?.getAttribute('url');
+            thumb = item.findElements('media:content').firstOrNull?.getAttribute('url');
           }
 
           final pubStr = _text(item, 'pubDate') ?? '';
-          final published = _parseDate(pubStr) ?? DateTime.now();
+          final published = _parseRssDate(pubStr) ?? DateTime.now();
 
           return BlogArticle(
             title: _clean(_text(item, 'title') ?? 'Untitled'),
@@ -130,52 +122,47 @@ class BlogRssService {
         }).whereType<BlogArticle>().toList();
       }
 
-      // ── Atom ───────────────────────────────────────────────────────────────
+      // ── Atom ─────────────────────────────────────────────────────────────
       final atomEntries = doc.findAllElements('entry');
       if (atomEntries.isNotEmpty) {
         return atomEntries.map((entry) {
-          final link = entry
-              .findElements('link')
-              .firstOrNull
-              ?.getAttribute('href') ?? '';
+          final link =
+              entry.findElements('link').firstOrNull?.getAttribute('href') ?? '';
           if (link.isEmpty) return null;
 
-          final updStr = _text(entry, 'updated') ?? _text(entry, 'published') ?? '';
+          final updStr =
+              _text(entry, 'updated') ?? _text(entry, 'published') ?? '';
           final published = DateTime.tryParse(updStr) ?? DateTime.now();
 
           return BlogArticle(
             title: _clean(_text(entry, 'title') ?? 'Untitled'),
             url: link,
             sourceName: sourceName,
-            thumbnailUrl: null,
             publishedAt: published,
             excerpt: _clean(_text(entry, 'summary') ?? ''),
           );
         }).whereType<BlogArticle>().toList();
       }
-    } catch (e) {
+    } on Exception catch (e) {
       debugPrint('[BlogRssService] Parse error for $sourceName: $e');
     }
     return [];
   }
 
-  // ── Helpers ────────────────────────────────────────────────────────────────
-
   static String? _text(XmlElement el, String tag) =>
       el.findElements(tag).firstOrNull?.innerText.trim();
 
   static String _clean(String raw) => raw
-      .replaceAll(RegExp(r'<[^>]*>'), '')
+      .replaceAll(RegExp('<[^>]*>'), '')
       .replaceAll(RegExp(r'\s+'), ' ')
       .trim();
 
-  /// Parses RFC 822 dates used in RSS 2.0 (e.g. "Wed, 15 May 2024 10:00:00 GMT").
-  static DateTime? _parseDate(String s) {
+  /// Handles RFC 822 (RSS) and ISO 8601 (Atom) date strings.
+  static DateTime? _parseRssDate(String s) {
     if (s.isEmpty) return null;
-    // Try ISO first
     final iso = DateTime.tryParse(s);
     if (iso != null) return iso;
-    // Strip day-of-week prefix and attempt parse
+    // Strip "Wed, " prefix from RFC 822 and retry
     final trimmed = s.replaceFirst(RegExp(r'^[A-Za-z]+,\s*'), '');
     return DateTime.tryParse(trimmed);
   }

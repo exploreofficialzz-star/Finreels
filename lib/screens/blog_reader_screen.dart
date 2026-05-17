@@ -55,11 +55,8 @@ class _BlogReaderScreenState extends State<BlogReaderScreen> {
       body: InAppWebView(
         initialUrlRequest: URLRequest(url: WebUri(widget.url)),
         initialSettings: InAppWebViewSettings(
-          javaScriptEnabled: true,
           useShouldOverrideUrlLoading: true,
-          mediaPlaybackRequiresUserGesture: true,
           allowsInlineMediaPlayback: true,
-          transparentBackground: false,
         ),
         onLoadStart: (_, __) {
           if (mounted) setState(() => _loading = true);

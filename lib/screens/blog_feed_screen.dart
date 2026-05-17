@@ -36,7 +36,7 @@ class _BlogFeedScreenState extends State<BlogFeedScreen> {
       final articles =
           await BlogRssService.instance.fetchAll(forceRefresh: force);
       if (mounted) setState(() => _articles = articles);
-    } catch (e) {
+    } on Exception catch (_) {
       if (mounted) setState(() => _error = 'Could not load articles.');
     } finally {
       if (mounted) setState(() => _loading = false);

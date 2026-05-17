@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -62,11 +61,8 @@ class _InlineVideoCardState extends State<InlineVideoCard> {
       initialVideoId: widget.video.id,
       flags: YoutubePlayerFlags(
         autoPlay: _isActive,
-        mute: false,
         enableCaption: false,
         hideControls: false,
-        controlsVisibleAtStart: true,
-        forceHD: false,
       ),
     )..addListener(_onUpdate);
     setState(() => _expanded = true);

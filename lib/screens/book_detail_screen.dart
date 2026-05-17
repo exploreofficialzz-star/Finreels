@@ -78,7 +78,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   // EPUB state
   final EpubController _epubController = EpubController();
   String? _lastCfi;
-  double _readingPercent = 0;
+
 
   // Hive box for persisting reading position
   Box<String>? _progressBox;
@@ -279,19 +279,6 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
             _loadProgress = 0;
           }),
         ),
-        // Reading progress shown in app bar for EPUB
-        bottom: source.type == _SourceType.epub && _readingPercent > 0
-            ? PreferredSize(
-                preferredSize: const Size.fromHeight(3),
-                child: LinearProgressIndicator(
-                  value: _readingPercent,
-                  color: AppTheme.gold,
-                  backgroundColor:
-                      AppTheme.gold.withValues(alpha: 0.15),
-                  minHeight: 3,
-                ),
-              )
-            : null,
       ),
       body: source.type == _SourceType.epub
           ? _buildEpubReader(source.url)
@@ -312,28 +299,24 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
             snap: false,
             allowScriptedContent: true,
           ),
-          // Restore last position if available
-          startCfi: _lastCfi,
           onEpubLoaded: () async {
             if (mounted) setState(() => _isLoading = false);
+            // Restore last saved position after load
+            if (_lastCfi != null && _lastCfi!.isNotEmpty) {
+              _epubController.display(cfi: _lastCfi!);
+            }
           },
           onChaptersLoaded: (_) {
-            if (mounted) setState(() => _isLoading = false);
+            if (mounted) {
+              setState(() => _isLoading = false);
+            }
           },
           onRelocated: (location) {
             if (!mounted) return;
             final cfi = location.startCfi;
-            if (cfi != null && cfi.isNotEmpty) {
+            if (cfi.isNotEmpty) {
               _lastCfi = cfi;
               _progressBox?.put(_progressKey, cfi);
-            }
-            // Calculate approximate reading progress from chapter index
-            final chaps = _epubController.tableOfContents.length;
-            if (chaps > 0) {
-              final currentChap = location.tocItem?.playOrder ?? 1;
-              setState(() {
-                _readingPercent = (currentChap / chaps).clamp(0.0, 1.0);
-              });
             }
           },
           onTextSelected: (_) {},
@@ -354,9 +337,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
         InAppWebView(
           initialUrlRequest: URLRequest(url: WebUri(url)),
           initialSettings: InAppWebViewSettings(
-            javaScriptEnabled: true,
             useShouldOverrideUrlLoading: true,
-            mediaPlaybackRequiresUserGesture: true,
             allowsInlineMediaPlayback: true,
           ),
           onLoadStart: (_, __) {

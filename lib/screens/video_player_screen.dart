@@ -39,11 +39,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       initialVideoId: widget.video.id,
       flags: const YoutubePlayerFlags(
         autoPlay: true,
-        mute: false,
         enableCaption: true,
-        forceHD: false,
-        hideControls: false,
-        controlsVisibleAtStart: true,
       ),
     )..addListener(_onControllerUpdate);
   }

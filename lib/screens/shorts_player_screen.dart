@@ -102,11 +102,9 @@ class _ShortPageState extends State<_ShortPage> {
       initialVideoId: widget.video.id,
       flags: YoutubePlayerFlags(
         autoPlay: widget.isActive,
-        mute: false,
         loop: true,
         hideControls: false,
         controlsVisibleAtStart: false,
-        forceHD: false,
         enableCaption: false,
       ),
     )..addListener(_onUpdate);
@@ -209,11 +207,11 @@ class _ShortPageState extends State<_ShortPage> {
           ),
 
           // Swipe hint arrow at bottom
-          Positioned(
+          const Positioned(
             bottom: 12,
             left: 0,
             right: 0,
-            child: const Center(
+            child: Center(
               child: Icon(Icons.keyboard_arrow_up_rounded,
                   color: Colors.white54, size: 22),
             ),
