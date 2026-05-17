@@ -39,8 +39,9 @@ dependencies:
   # EPUB reader (Epub.js + flutter_inappwebview); supports URL/file/assets,
   # chapter nav, CFI progress, highlight & search
   flutter_epub_viewer: ^1.0.4
-  # PDF viewer with lazy loading for large files
-  pdfx: ^2.6.0
+  # pdfx — add back when PDF books are introduced; pin to a version
+  # compatible with your Flutter SDK at that time (2.9.x has a Kotlin
+  # SurfaceProducer.Callback API break against current Flutter/Android SDK).
 
 dev_dependencies:
   flutter_test:
