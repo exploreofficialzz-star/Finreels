@@ -64,7 +64,7 @@ class _FloatingNavBar extends StatelessWidget {
 
   static const _items = [
     (Icons.home_outlined,    Icons.home_rounded,              'Feed'),
-    (Icons.play_circle_outline_rounded, Icons.play_circle_rounded, 'Channels'),
+    (Icons.play_circle_outline_rounded, Icons.play_circle_rounded, 'Shorts'),
     (Icons.bookmark_outline_rounded,    Icons.bookmark_rounded,    'Saved'),
     (Icons.settings_outlined,           Icons.settings_rounded,    'Settings'),
   ];

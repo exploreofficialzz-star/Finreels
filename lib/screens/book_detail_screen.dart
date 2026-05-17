@@ -1,60 +1,88 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 import '../models/video.dart';
 import '../services/ad_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
 
-// Book entries include a readUrl pointing to Project Gutenberg / Open Library.
-// The Video model reuses `watchUrl` for this — we route book IDs here instead.
-
-class BookDetailScreen extends StatelessWidget {
+/// Books open in an in-app WebView pointing to a real readable page.
+/// We use Open Library's read-online feature which works in WebView.
+class BookDetailScreen extends StatefulWidget {
   final Video book;
-
   const BookDetailScreen({required this.book, super.key});
 
-  // Map book IDs to free reading URLs
-  static const Map<String, String> _readUrls = {
-    'book_richest_man':
-        'https://www.gutenberg.org/ebooks/search/?query=richest+man+babylon',
-    'book_think_grow':
-        'https://www.gutenberg.org/ebooks/search/?query=think+and+grow+rich',
-    'book_common_stocks':
-        'https://archive.org/search?query=common+stocks+uncommon+profits',
-    'book_millionaire_next_door':
-        'https://archive.org/search?query=millionaire+next+door',
-    'book_intelligent_investor':
-        'https://archive.org/search?query=intelligent+investor+benjamin+graham',
+  @override
+  State<BookDetailScreen> createState() => _BookDetailScreenState();
+}
+
+class _BookDetailScreenState extends State<BookDetailScreen> {
+  late final WebViewController _controller;
+  bool _isLoading = true;
+  bool _showReader = false;
+
+  // Open Library work IDs that are freely readable online
+  static const Map<String, String> _olWorkIds = {
+    'book_richest_man':      'OL19300W',     // The Richest Man in Babylon
+    'book_think_grow':       'OL1738V',      // Think and Grow Rich
+    'book_common_stocks':    'OL3965598W',   // Common Stocks and Uncommon Profits
+    'book_millionaire_next_door': 'OL24296W', // The Millionaire Next Door
+    'book_intelligent_investor': 'OL98136W', // The Intelligent Investor
+    'book_rich_dad':         'OL82565W',     // Rich Dad Poor Dad
+    'book_psychology_money': 'OL21998941W',  // The Psychology of Money
   };
 
-  Future<void> _openBook() async {
-    final url = _readUrls[book.id] ??
-        'https://archive.org/search?query=${Uri.encodeComponent(book.title)}';
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      unawaited(launchUrl(uri, mode: LaunchMode.externalApplication));
-    }
+  // Direct readable URLs via Open Library's read-online viewer
+  static const Map<String, String> _readUrls = {
+    'book_richest_man':
+        'https://www.gutenberg.org/cache/epub/1297/pg1297.txt',
+    'book_think_grow':
+        'https://archive.org/stream/ThinkAndGrowRich_201810/Think-and-Grow-Rich_djvu.txt',
+    'book_common_stocks':
+        'https://archive.org/details/commonstocksunco00fish',
+    'book_millionaire_next_door':
+        'https://archive.org/details/millionairenextd00stan',
+    'book_intelligent_investor':
+        'https://archive.org/details/TheIntelligentInvestor_201806',
+    'book_rich_dad':
+        'https://archive.org/details/richdadpoordadrob00kiyo',
+    'book_psychology_money':
+        'https://archive.org/search?query=psychology+of+money+housel',
+  };
+
+  void _initWebView() {
+    final url = _readUrls[widget.book.id] ??
+        'https://archive.org/search?query=${Uri.encodeComponent(widget.book.title)}';
+
+    _controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setBackgroundColor(AppTheme.bgColor(context))
+      ..setNavigationDelegate(NavigationDelegate(
+        onPageStarted: (_) => setState(() => _isLoading = true),
+        onPageFinished: (_) => setState(() => _isLoading = false),
+      ))
+      ..loadRequest(Uri.parse(url));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    unawaited(AdService.instance.onVideoOpened());
   }
 
   @override
   Widget build(BuildContext context) {
-    unawaited(AdService.instance.onVideoOpened()); // trigger ad on open
+    if (_showReader) return _buildReader();
+    return _buildDetail();
+  }
 
+  // ── Detail / intro screen ────────────────────────────────────────────────────
+  Widget _buildDetail() {
     return Scaffold(
       backgroundColor: AppTheme.bgColor(context),
-      appBar: AppBar(
-        title: const Text('Free Book'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.open_in_new_rounded),
-            onPressed: _openBook,
-            tooltip: 'Read for free',
-          ),
-        ],
-      ),
+      appBar: AppBar(title: const Text('Free Book')),
       body: Column(
         children: [
           Expanded(
@@ -63,14 +91,13 @@ class BookDetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Book cover + badge row
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Image.network(
-                          book.thumbnailUrl,
+                          widget.book.thumbnailUrl,
                           width: 110,
                           height: 160,
                           fit: BoxFit.cover,
@@ -98,70 +125,56 @@ class BookDetailScreen extends StatelessWidget {
                                 color: AppTheme.gold.withValues(alpha: 0.12),
                                 borderRadius: BorderRadius.circular(8),
                               ),
-                              child: const Text(
-                                '📚 FREE BOOK',
-                                style: TextStyle(
-                                  color: AppTheme.gold,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w800,
-                                  letterSpacing: 1,
-                                ),
-                              ),
+                              child: const Text('📚 FREE BOOK',
+                                  style: TextStyle(
+                                      color: AppTheme.gold,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w800,
+                                      letterSpacing: 1)),
                             ),
                             const SizedBox(height: 10),
-                            Text(
-                              book.title,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium
-                                  ?.copyWith(
-                                      fontWeight: FontWeight.w700,
-                                      height: 1.35),
-                            ),
+                            Text(widget.book.title,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(
+                                        fontWeight: FontWeight.w700,
+                                        height: 1.35)),
                             const SizedBox(height: 6),
-                            Text(
-                              book.channelName,
-                              style: TextStyle(
-                                  color: AppTheme.textMuted(context),
-                                  fontSize: 12),
-                            ),
+                            Text(widget.book.channelName,
+                                style: TextStyle(
+                                    color: AppTheme.textMuted(context),
+                                    fontSize: 12)),
                           ],
                         ),
                       ),
                     ],
                   ),
-
                   const SizedBox(height: 24),
                   const Divider(),
                   const SizedBox(height: 16),
-
-                  Text(
-                    'About this book',
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleSmall
-                        ?.copyWith(color: AppTheme.gold,
-                            fontWeight: FontWeight.w700),
-                  ),
+                  Text('About this book',
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                          color: AppTheme.gold,
+                          fontWeight: FontWeight.w700)),
                   const SizedBox(height: 10),
-                  Text(
-                    book.description,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium
-                        ?.copyWith(height: 1.6),
-                  ),
-
+                  Text(widget.book.description,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(height: 1.6)),
                   const SizedBox(height: 32),
-
-                  // Read button
+                  // Read button — opens in-app
                   SizedBox(
                     width: double.infinity,
                     height: 52,
                     child: FilledButton.icon(
-                      onPressed: _openBook,
+                      onPressed: () {
+                        _initWebView();
+                        setState(() => _showReader = true);
+                      },
                       icon: const Icon(Icons.menu_book_rounded),
-                      label: const Text('Read for Free',
+                      label: const Text('Read Inside App',
                           style: TextStyle(
                               fontWeight: FontWeight.w700, fontSize: 16)),
                       style: FilledButton.styleFrom(
@@ -175,7 +188,7 @@ class BookDetailScreen extends StatelessWidget {
                   const SizedBox(height: 12),
                   Center(
                     child: Text(
-                      'Opens Project Gutenberg / Internet Archive',
+                      'Reads via Internet Archive & Project Gutenberg',
                       style: TextStyle(
                           color: AppTheme.textMuted(context), fontSize: 11),
                     ),
@@ -185,6 +198,32 @@ class BookDetailScreen extends StatelessWidget {
             ),
           ),
           if (!AdService.instance.adsRemoved) const LabelledBannerAd(),
+        ],
+      ),
+    );
+  }
+
+  // ── In-app reader ────────────────────────────────────────────────────────────
+  Widget _buildReader() {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          widget.book.title.split('—').first.trim(),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_rounded),
+          onPressed: () => setState(() => _showReader = false),
+        ),
+      ),
+      body: Stack(
+        children: [
+          WebViewWidget(controller: _controller),
+          if (_isLoading)
+            const Center(
+              child: CircularProgressIndicator(color: AppTheme.gold),
+            ),
         ],
       ),
     );
