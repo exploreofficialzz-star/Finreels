@@ -2,10 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:timeago/timeago.dart' as timeago;
+
 import '../models/channel.dart';
 import '../models/video.dart';
 import '../theme/app_theme.dart';
 
+/// Compact read-only card used in the Saved screen.
+/// All Image.network calls replaced with CachedNetworkImage (Fix 5).
 class VideoCard extends StatelessWidget {
   final Video video;
   final Channel channel;
@@ -28,22 +31,23 @@ class VideoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          color: AppTheme.surfaceColor(context),
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-              color: AppTheme.dividerColor(context), width: 0.5),
-        ),
-        clipBehavior: Clip.hardEdge,
-        child: compact ? _buildCompact(context) : _buildFull(context),
-      ).animate().fadeIn(duration: 200.ms).slideY(begin: 0.03, end: 0),
+    return RepaintBoundary(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          decoration: BoxDecoration(
+            color: AppTheme.surfaceColor(context),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+                color: AppTheme.dividerColor(context), width: 0.5),
+          ),
+          clipBehavior: Clip.hardEdge,
+          child: compact ? _buildCompact(context) : _buildFull(context),
+        ).animate().fadeIn(duration: 200.ms).slideY(begin: 0.03, end: 0),
+      ),
     );
   }
 
-  // ── Full Card ──────────────────────────────────────────────────────────────
   Widget _buildFull(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,8 +61,10 @@ class VideoCard extends StatelessWidget {
               Text(video.title,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      height: 1.35, fontWeight: FontWeight.w600)),
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleMedium
+                      ?.copyWith(height: 1.35, fontWeight: FontWeight.w600)),
               const SizedBox(height: 10),
               Row(
                 children: [
@@ -91,7 +97,6 @@ class VideoCard extends StatelessWidget {
     );
   }
 
-  // ── Compact Row Card ───────────────────────────────────────────────────────
   Widget _buildCompact(BuildContext context) {
     return SizedBox(
       height: 90,
@@ -121,7 +126,8 @@ class VideoCard extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .bodyMedium
-                          ?.copyWith(fontWeight: FontWeight.w600, height: 1.3)),
+                          ?.copyWith(
+                              fontWeight: FontWeight.w600, height: 1.3)),
                   Row(
                     children: [
                       _ChannelDot(color: channel.accentColor),
@@ -144,7 +150,6 @@ class VideoCard extends StatelessWidget {
     );
   }
 
-  // ── Thumbnail ──────────────────────────────────────────────────────────────
   Widget _buildThumbnail(BuildContext context,
       {required double aspectRatio}) {
     return AspectRatio(
@@ -157,10 +162,7 @@ class VideoCard extends StatelessWidget {
             bottom: 0,
             left: 0,
             right: 0,
-            child: Container(
-              height: 3,
-              color: channel.accentColor,
-            ),
+            child: Container(height: 3, color: channel.accentColor),
           ),
         ],
       ),
@@ -200,7 +202,6 @@ class VideoCard extends StatelessWidget {
     );
   }
 
-  // ── Actions Menu ────────────────────────────────────────────────────────────
   Widget _actionMenu(BuildContext context) {
     return PopupMenuButton<String>(
       icon: Icon(Icons.more_vert_rounded,
@@ -214,7 +215,9 @@ class VideoCard extends StatelessWidget {
             child: Row(
               children: [
                 Icon(
-                    saved ? Icons.bookmark_rounded : Icons.bookmark_add_outlined,
+                    saved
+                        ? Icons.bookmark_rounded
+                        : Icons.bookmark_add_outlined,
                     size: 18,
                     color: AppTheme.gold),
                 const SizedBox(width: 10),

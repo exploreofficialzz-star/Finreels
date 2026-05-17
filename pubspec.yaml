@@ -31,17 +31,20 @@ dependencies:
   webview_flutter_android: ^4.3.0
   webview_flutter_wkwebview: ^3.18.0
   in_app_review: ^2.0.9
-  # ── Content Overhaul packages ─────────────────────────────────────────────
-  # YouTube in-app playback (iFrame Player API, no API key required)
+  # ── Content & Performance Overhaul ───────────────────────────────────────────
+  # YouTube in-app playback — iFrame Player API, no API key, Android + iOS
   youtube_player_flutter: ^9.1.1
-  # Blog / web content rendered inline; intercepts external navigation
+  # Inline feed auto-play: fires when card is >50% visible
+  visibility_detector: ^0.4.0+2
+  # Blog RSS parsing (Atom + RSS 2.0)
+  webfeed: ^0.7.0
+  # Blog / article inline web renderer with navigation interception
   flutter_inappwebview: ^6.1.5
-  # EPUB reader (Epub.js + flutter_inappwebview); supports URL/file/assets,
-  # chapter nav, CFI progress, highlight & search
+  # EPUB in-app reader (Epub.js engine); URL/file/assets, CFI, scrolled flow
   flutter_epub_viewer: ^1.0.4
-  # pdfx — add back when PDF books are introduced; pin to a version
-  # compatible with your Flutter SDK at that time (2.9.x has a Kotlin
-  # SurfaceProducer.Callback API break against current Flutter/Android SDK).
+  # Reading progress persistence (CFI for EPUB)
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
 
 dev_dependencies:
   flutter_test:

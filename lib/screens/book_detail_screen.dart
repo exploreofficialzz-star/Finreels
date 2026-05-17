@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_epub_viewer/flutter_epub_viewer.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:hive/hive.dart';
 
 import '../models/video.dart';
 import '../services/ad_service.dart';
@@ -11,22 +12,13 @@ import '../widgets/banner_ad_widget.dart';
 
 // ── Book source types ─────────────────────────────────────────────────────────
 
-enum _SourceType {
-  /// Direct EPUB file — rendered by flutter_epub_viewer (Epub.js engine).
-  epub,
-
-  /// Web page — rendered inline by flutter_inappwebview.
-  /// Used for books whose only free version is a library web page.
-  web,
-}
+enum _SourceType { epub, web }
 
 class _BookSource {
   final _SourceType type;
   final String url;
   const _BookSource(this.type, this.url);
 }
-
-// ── Hosts allowed through the in-app web nav interceptor ─────────────────────
 
 const _allowedHosts = {
   'archive.org',
@@ -37,19 +29,11 @@ const _allowedHosts = {
   'www.openlibrary.org',
 };
 
-// ── Book source map ───────────────────────────────────────────────────────────
-//
-// Public-domain books with a direct EPUB URL → epub type (flutter_epub_viewer).
-// Copyrighted books on Internet Archive → web type (flutter_inappwebview).
-
 const Map<String, _BookSource> _sources = {
-  // Public domain — full EPUB from Project Gutenberg
   'book_richest_man': _BookSource(
     _SourceType.epub,
     'https://www.gutenberg.org/cache/epub/1297/pg1297-images.epub',
   ),
-
-  // Archive.org web reader pages (requires no login for limited preview)
   'book_think_grow': _BookSource(
     _SourceType.web,
     'https://archive.org/stream/ThinkAndGrowRich_201810/Think-and-Grow-Rich_djvu.txt',
@@ -78,13 +62,6 @@ const Map<String, _BookSource> _sources = {
 
 // ── Screen ────────────────────────────────────────────────────────────────────
 
-/// Books open in an in-app reader — never in the system browser.
-///
-/// Public-domain books with a direct EPUB URL use [EpubViewer] from
-/// flutter_epub_viewer (Epub.js engine). All other books render the
-/// corresponding Internet Archive page via [InAppWebView] from
-/// flutter_inappwebview, with outbound navigation intercepted so the
-/// user stays inside the app.
 class BookDetailScreen extends StatefulWidget {
   final Video book;
   const BookDetailScreen({required this.book, super.key});
@@ -98,8 +75,13 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   bool _isLoading = true;
   double _loadProgress = 0;
 
-  // EPUB controller — only used when source type is epub.
+  // EPUB state
   final EpubController _epubController = EpubController();
+  String? _lastCfi;
+  double _readingPercent = 0;
+
+  // Hive box for persisting reading position
+  Box<String>? _progressBox;
 
   _BookSource get _source =>
       _sources[widget.book.id] ??
@@ -108,10 +90,19 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
         'https://archive.org/search?query=${Uri.encodeComponent(widget.book.title)}',
       );
 
+  String get _progressKey => 'epub_cfi_${widget.book.id}';
+
   @override
   void initState() {
     super.initState();
     unawaited(AdService.instance.onVideoOpened());
+    _progressBox = Hive.box<String>('reading_progress');
+    _lastCfi = _progressBox?.get(_progressKey);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -120,7 +111,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
     return _buildDetail();
   }
 
-  // ── Detail / intro screen ────────────────────────────────────────────────────
+  // ── Detail screen ─────────────────────────────────────────────────────────
 
   Widget _buildDetail() {
     return Scaffold(
@@ -188,6 +179,24 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                                 style: TextStyle(
                                     color: AppTheme.textMuted(context),
                                     fontSize: 12)),
+                            // Restore progress badge
+                            if (_lastCfi != null) ...[
+                              const SizedBox(height: 8),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 3),
+                                decoration: BoxDecoration(
+                                  color: AppTheme.success
+                                      .withValues(alpha: 0.12),
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: const Text('Continue reading',
+                                    style: TextStyle(
+                                        color: AppTheme.success,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w700)),
+                              ),
+                            ],
                           ],
                         ),
                       ),
@@ -197,9 +206,12 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                   const Divider(),
                   const SizedBox(height: 16),
                   Text('About this book',
-                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: AppTheme.gold,
-                          fontWeight: FontWeight.w700)),
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleSmall
+                          ?.copyWith(
+                              color: AppTheme.gold,
+                              fontWeight: FontWeight.w700)),
                   const SizedBox(height: 10),
                   Text(widget.book.description,
                       style: Theme.of(context)
@@ -207,7 +219,6 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                           .bodyMedium
                           ?.copyWith(height: 1.6)),
                   const SizedBox(height: 32),
-                  // Read button — opens in-app reader
                   SizedBox(
                     width: double.infinity,
                     height: 52,
@@ -218,9 +229,11 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                         _loadProgress = 0;
                       }),
                       icon: const Icon(Icons.menu_book_rounded),
-                      label: const Text('Read Inside App',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 16)),
+                      label: Text(
+                        _lastCfi != null ? 'Continue Reading' : 'Read Inside App',
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w700, fontSize: 16),
+                      ),
                       style: FilledButton.styleFrom(
                         backgroundColor: AppTheme.gold,
                         foregroundColor: Colors.black,
@@ -247,7 +260,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
     );
   }
 
-  // ── In-app reader ────────────────────────────────────────────────────────────
+  // ── Reader ────────────────────────────────────────────────────────────────
 
   Widget _buildReader() {
     final source = _source;
@@ -266,6 +279,19 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
             _loadProgress = 0;
           }),
         ),
+        // Reading progress shown in app bar for EPUB
+        bottom: source.type == _SourceType.epub && _readingPercent > 0
+            ? PreferredSize(
+                preferredSize: const Size.fromHeight(3),
+                child: LinearProgressIndicator(
+                  value: _readingPercent,
+                  color: AppTheme.gold,
+                  backgroundColor:
+                      AppTheme.gold.withValues(alpha: 0.15),
+                  minHeight: 3,
+                ),
+              )
+            : null,
       ),
       body: source.type == _SourceType.epub
           ? _buildEpubReader(source.url)
@@ -273,7 +299,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
     );
   }
 
-  // ── EPUB reader (flutter_epub_viewer) ────────────────────────────────────────
+  // ── EPUB reader (flutter_epub_viewer) — EpubFlow.scrolled ────────────────
 
   Widget _buildEpubReader(String url) {
     return Stack(
@@ -282,17 +308,34 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
           epubSource: EpubSource.fromUrl(url),
           epubController: _epubController,
           displaySettings: EpubDisplaySettings(
-            flow: EpubFlow.paginated,
-            snap: true,
+            flow: EpubFlow.scrolled, // continuous vertical scroll
+            snap: false,
             allowScriptedContent: true,
           ),
+          // Restore last position if available
+          startCfi: _lastCfi,
           onEpubLoaded: () async {
             if (mounted) setState(() => _isLoading = false);
           },
           onChaptersLoaded: (_) {
             if (mounted) setState(() => _isLoading = false);
           },
-          onRelocated: (_) {},
+          onRelocated: (location) {
+            if (!mounted) return;
+            final cfi = location.startCfi;
+            if (cfi != null && cfi.isNotEmpty) {
+              _lastCfi = cfi;
+              _progressBox?.put(_progressKey, cfi);
+            }
+            // Calculate approximate reading progress from chapter index
+            final chaps = _epubController.tableOfContents.length;
+            if (chaps > 0) {
+              final currentChap = location.tocItem?.playOrder ?? 1;
+              setState(() {
+                _readingPercent = (currentChap / chaps).clamp(0.0, 1.0);
+              });
+            }
+          },
           onTextSelected: (_) {},
         ),
         if (_isLoading)
@@ -303,7 +346,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
     );
   }
 
-  // ── Web reader (flutter_inappwebview) ────────────────────────────────────────
+  // ── Web reader (flutter_inappwebview) ────────────────────────────────────
 
   Widget _buildWebReader(String url) {
     return Stack(
@@ -333,8 +376,6 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
               });
             }
           },
-          // Intercept navigation — only allow whitelisted hosts.
-          // Prevents the user from accidentally leaving the app.
           shouldOverrideUrlLoading: (_, navigationAction) async {
             final uri = navigationAction.request.url;
             if (uri != null && _allowedHosts.contains(uri.host)) {
@@ -343,8 +384,6 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
             return NavigationActionPolicy.CANCEL;
           },
         ),
-
-        // Linear progress indicator while page is loading
         if (_isLoading && _loadProgress > 0 && _loadProgress < 1)
           Positioned(
             top: 0,
@@ -357,8 +396,6 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
               minHeight: 3,
             ),
           ),
-
-        // Full-screen spinner before the first byte arrives
         if (_isLoading && _loadProgress == 0)
           const Center(
             child: CircularProgressIndicator(color: AppTheme.gold),

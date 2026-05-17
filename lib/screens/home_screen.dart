@@ -11,10 +11,12 @@ import '../providers/feed_provider.dart';
 import '../services/ad_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
+import '../widgets/inline_video_card.dart';
 import '../widgets/shimmer_loader.dart';
 import '../widgets/video_card.dart';
+import 'blog_feed_screen.dart';
 import 'book_detail_screen.dart';
-import 'video_player_screen.dart';
+import 'shorts_player_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -139,45 +141,54 @@ class _FeedBody extends StatefulWidget {
 
 class _FeedBodyState extends State<_FeedBody> {
   int _tapCount = 0;
+  // Active video for single-playback enforcement in feed
+  String? _activeVideoId;
 
   void _onVideoTap(BuildContext context, Video video) {
     _tapCount++;
-    // Interstitial every 2 taps — aggressive but professional
     if (_tapCount.isEven) {
       unawaited(AdService.instance.showInterstitial());
     }
 
-    // Books route to BookDetailScreen
     if (video.channelId == 'books') {
       Navigator.push(
         context,
-        MaterialPageRoute(
-          builder: (_) => BookDetailScreen(book: video),
-        ),
+        MaterialPageRoute(builder: (_) => BookDetailScreen(book: video)),
       );
       return;
     }
-
-    // Videos/Shorts route to VideoPlayerScreen
-    final channel = ChannelData.byId[video.channelId] ?? ChannelData.fallback;
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => VideoPlayerScreen(video: video, channel: channel),
-      ),
-    );
+    // Shorts from the feed grid navigate to full-screen shorts player
+    final provider = context.read<FeedProvider>();
+    if (provider.activeTab == FeedTab.shorts) {
+      final shorts = provider.feedVideos;
+      final idx = shorts.indexOf(video);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => ShortsPlayerScreen(
+            shorts: shorts,
+            initialIndex: idx < 0 ? 0 : idx,
+          ),
+        ),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<FeedProvider>();
 
-    // Books tab — special layout
+    // Blogs tab — real RSS feed
+    if (provider.activeTab == FeedTab.blogs) {
+      return const BlogFeedScreen();
+    }
+
+    // Books tab
     if (provider.activeTab == FeedTab.books) {
       return _BooksGrid(onTap: (v) => _onVideoTap(context, v));
     }
 
-    // Shorts tab — vertical grid
+    // Shorts tab — vertical grid, tapping opens full-screen player
     if (provider.activeTab == FeedTab.shorts) {
       final shorts = provider.feedVideos;
       if (provider.state == FeedState.loading && shorts.isEmpty) {
@@ -190,16 +201,15 @@ class _FeedBodyState extends State<_FeedBody> {
       );
     }
 
-    // All / Videos / Blogs — standard list
+    // All / Videos — inline playback feed
     switch (provider.state) {
       case FeedState.idle:
       case FeedState.loading:
         if (provider.feedVideos.isEmpty) return const ShimmerLoader();
-        return _buildList(context, provider);
+        return _buildInlineFeed(context, provider);
       case FeedState.error:
         return _ErrorView(
-          message:
-              provider.errorMessage ?? 'Something went wrong.',
+          message: provider.errorMessage ?? 'Something went wrong.',
           onRetry: () => provider.refresh(force: true),
         );
       case FeedState.loaded:
@@ -211,11 +221,12 @@ class _FeedBodyState extends State<_FeedBody> {
             ),
           );
         }
-        return _buildList(context, provider);
+        return _buildInlineFeed(context, provider);
     }
   }
 
-  Widget _buildList(BuildContext context, FeedProvider provider) {
+  /// Inline feed — videos play inside cards, one at a time.
+  Widget _buildInlineFeed(BuildContext context, FeedProvider provider) {
     final videos = provider.feedVideos;
 
     return RefreshIndicator(
@@ -237,11 +248,17 @@ class _FeedBodyState extends State<_FeedBody> {
           final video = videos[i];
           final channel =
               ChannelData.byId[video.channelId] ?? ChannelData.fallback;
-          return VideoCard(
+          return InlineVideoCard(
+            key: ValueKey(video.id),
             video: video,
             channel: channel,
             saved: provider.isVideoSaved(video.id),
-            onTap: () => _onVideoTap(context, video),
+            activeVideoId: _activeVideoId,
+            onBecomeVisible: (id) {
+              if (_activeVideoId != id) {
+                setState(() => _activeVideoId = id);
+              }
+            },
             onSave: () => provider.toggleSaved(video),
             onShare: () =>
                 Share.share('${video.title}\n${video.watchUrl}'),
@@ -288,70 +305,71 @@ class _ShortsGrid extends StatelessWidget {
           final video = videos[i];
           final channel =
               ChannelData.byId[video.channelId] ?? ChannelData.fallback;
-          return GestureDetector(
-            onTap: () => onTap(video),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  Image.network(
-                    video.thumbnailMq,
-                    fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => ColoredBox(
-                      color: AppTheme.surfaceElevated(context),
-                    ),
-                  ),
-                  const DecoratedBox(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [Colors.transparent, Colors.black87],
-                        stops: [0.45, 1.0],
+          return RepaintBoundary(
+            child: GestureDetector(
+              onTap: () => onTap(video),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    Image.network(
+                      video.thumbnailMq,
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) => ColoredBox(
+                        color: AppTheme.surfaceElevated(context),
                       ),
                     ),
-                  ),
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    child: Container(
-                        height: 3, color: channel.accentColor),
-                  ),
-                  const Center(
-                    child: DecoratedBox(
+                    const DecoratedBox(
                       decoration: BoxDecoration(
-                        color: Colors.black45,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(8),
-                        child: Icon(Icons.play_arrow_rounded,
-                            color: Colors.white, size: 28),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 8,
-                    left: 8,
-                    right: 8,
-                    child: Text(
-                      video.title,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
-                        height: 1.3,
-                        shadows: [
-                          Shadow(color: Colors.black87, blurRadius: 4)
-                        ],
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [Colors.transparent, Colors.black87],
+                          stops: [0.45, 1.0],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      child: Container(height: 3, color: channel.accentColor),
+                    ),
+                    const Center(
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: Colors.black45,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(8),
+                          child: Icon(Icons.play_arrow_rounded,
+                              color: Colors.white, size: 28),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 8,
+                      left: 8,
+                      right: 8,
+                      child: Text(
+                        video.title,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600,
+                          height: 1.3,
+                          shadows: [
+                            Shadow(color: Colors.black87, blurRadius: 4)
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           );
@@ -375,86 +393,88 @@ class _BooksGrid extends StatelessWidget {
       separatorBuilder: (_, __) => const SizedBox(height: 12),
       itemBuilder: (context, i) {
         final book = books[i];
-        return GestureDetector(
-          onTap: () => onTap(book),
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: AppTheme.surfaceColor(context),
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(
-                  color: AppTheme.dividerColor(context), width: 0.5),
-            ),
-            child: Row(
-              children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(13),
-                    bottomLeft: Radius.circular(13),
-                  ),
-                  child: Image.network(
-                    book.thumbnailUrl,
-                    width: 90,
-                    height: 120,
-                    fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => Container(
+        return RepaintBoundary(
+          child: GestureDetector(
+            onTap: () => onTap(book),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: AppTheme.surfaceColor(context),
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(
+                    color: AppTheme.dividerColor(context), width: 0.5),
+              ),
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(13),
+                      bottomLeft: Radius.circular(13),
+                    ),
+                    child: Image.network(
+                      book.thumbnailUrl,
                       width: 90,
                       height: 120,
-                      color: AppTheme.gold.withValues(alpha: 0.15),
-                      child: const Icon(Icons.menu_book_rounded,
-                          color: AppTheme.gold, size: 36),
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) => Container(
+                        width: 90,
+                        height: 120,
+                        color: AppTheme.gold.withValues(alpha: 0.15),
+                        child: const Icon(Icons.menu_book_rounded,
+                            color: AppTheme.gold, size: 36),
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(14),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 3),
-                          decoration: BoxDecoration(
-                            color: AppTheme.gold.withValues(alpha: 0.12),
-                            borderRadius: BorderRadius.circular(6),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(14),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 3),
+                            decoration: BoxDecoration(
+                              color: AppTheme.gold.withValues(alpha: 0.12),
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: const Text('📚 FREE BOOK',
+                                style: TextStyle(
+                                  color: AppTheme.gold,
+                                  fontSize: 9,
+                                  fontWeight: FontWeight.w800,
+                                  letterSpacing: 1,
+                                )),
                           ),
-                          child: const Text('📚 FREE BOOK',
-                              style: TextStyle(
-                                color: AppTheme.gold,
-                                fontSize: 9,
-                                fontWeight: FontWeight.w800,
-                                letterSpacing: 1,
-                              )),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          book.title,
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleSmall
-                              ?.copyWith(
-                                  fontWeight: FontWeight.w700,
-                                  height: 1.35),
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          book.description,
-                          style: Theme.of(context).textTheme.bodySmall,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
+                          const SizedBox(height: 8),
+                          Text(
+                            book.title,
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall
+                                ?.copyWith(
+                                    fontWeight: FontWeight.w700,
+                                    height: 1.35),
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            book.description,
+                            style: Theme.of(context).textTheme.bodySmall,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 12),
-                  child: Icon(Icons.chevron_right_rounded,
-                      color: AppTheme.textMuted(context)),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.only(right: 12),
+                    child: Icon(Icons.chevron_right_rounded,
+                        color: AppTheme.textMuted(context)),
+                  ),
+                ],
+              ),
             ),
           ),
         );

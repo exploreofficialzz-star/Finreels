@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/feed_provider.dart';
@@ -18,7 +19,12 @@ import 'widgets/ad_block_overlay.dart';
 import 'widgets/connectivity_overlay.dart';
 
 void main() async {
+  // Must be first — required before any plugin or binding usage
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Hive — used for reading progress persistence (EPUB CFI)
+  await Hive.initFlutter();
+  await Hive.openBox<String>('reading_progress');
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -87,7 +93,6 @@ class _SplashGateState extends State<_SplashGate> {
   }
 }
 
-/// Root widget that observes lifecycle for auto-refresh + app-open ads.
 class _AppRoot extends StatefulWidget {
   const _AppRoot();
 
@@ -111,9 +116,7 @@ class _AppRootState extends State<_AppRoot> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      // Show App Open ad (respects 2-hour cooldown internally)
       unawaited(AdService.instance.showAppOpenAd());
-      // Auto-refresh feed silently — users always see latest content
       unawaited(context.read<FeedProvider>().refresh());
     }
   }

@@ -25,9 +25,9 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/LaunchTheme"
         android:hardwareAccelerated="true"
-        android:usesCleartextTraffic="false">
+        android:usesCleartextTraffic="true">
 
-        <!-- AdMob App ID — REPLACE with real ID before release -->
+        <!-- AdMob App ID -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-2492078126313994~7729948254" />
@@ -35,6 +35,11 @@
         <!-- Delay AdMob init to allow UMP consent first -->
         <meta-data
             android:name="com.google.android.gms.ads.DELAY_APP_MEASUREMENT_INIT"
+            android:value="true" />
+
+        <!-- Enable Flutter Impeller renderer for GPU jank elimination -->
+        <meta-data
+            android:name="io.flutter.embedding.android.EnableImpeller"
             android:value="true" />
 
         <!-- WorkManager startup provider -->
@@ -72,6 +77,10 @@
         <intent>
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="https" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="http" />
         </intent>
     </queries>
 

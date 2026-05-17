@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,9 +11,9 @@ import '../services/ad_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
 import '../widgets/shimmer_loader.dart';
-import 'video_player_screen.dart';
+import 'shorts_player_screen.dart';
 
-/// Channels tab now shows YouTube Shorts from ALL channels in a grid.
+/// Shorts tab — full-screen vertical PageView player on tap.
 class ChannelsScreen extends StatefulWidget {
   const ChannelsScreen({super.key});
 
@@ -23,30 +24,41 @@ class ChannelsScreen extends StatefulWidget {
 class _ChannelsScreenState extends State<ChannelsScreen> {
   int _tapCount = 0;
 
-  void _openVideo(Video video) {
+  void _openShorts(List<Video> shorts, int index) {
     _tapCount++;
     if (_tapCount.isEven) unawaited(AdService.instance.showInterstitial());
 
-    final channel = ChannelData.byId[video.channelId] ?? ChannelData.fallback;
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => VideoPlayerScreen(video: video, channel: channel),
+        builder: (_) => ShortsPlayerScreen(
+          shorts: shorts,
+          initialIndex: index,
+        ),
       ),
     );
+  }
+
+  bool _isShort(Video v) {
+    final t = v.title.toLowerCase();
+    final d = v.description.toLowerCase();
+    return t.contains('#short') ||
+        t.contains('shorts') ||
+        d.contains('#shorts') ||
+        t.contains('in 60') ||
+        t.contains('in 30 ') ||
+        v.title.length < 28;
   }
 
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<FeedProvider>();
 
-    // Gather ALL videos and filter to shorts
-    final allVideos = provider.channels
+    final shorts = provider.channels
         .expand((ch) => provider.getVideosFor(ch.id))
+        .where(_isShort)
         .toList()
       ..sort((a, b) => b.publishedAt.compareTo(a.publishedAt));
-
-    final shorts = allVideos.where(_isShort).toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -60,59 +72,41 @@ class _ChannelsScreenState extends State<ChannelsScreen> {
       ),
       body: Column(
         children: [
-          Expanded(
-            child: _buildShortsGrid(context, shorts, provider.state),
-          ),
+          Expanded(child: _buildGrid(context, shorts, provider.state)),
           if (!AdService.instance.adsRemoved) const LabelledBannerAd(),
         ],
       ),
     );
   }
 
-  bool _isShort(Video v) {
-    final t = v.title.toLowerCase();
-    final d = v.description.toLowerCase();
-    return t.contains('#short') ||
-        t.contains('shorts') ||
-        d.contains('#shorts') ||
-        t.contains('in 60') ||
-        t.contains('in 30 ') ||
-        // Videos with short titles tend to be Shorts
-        v.title.length < 28;
-  }
-
-  Widget _buildShortsGrid(BuildContext context, List<Video> shorts, FeedState state) {
+  Widget _buildGrid(
+      BuildContext context, List<Video> shorts, FeedState state) {
     if (state == FeedState.loading && shorts.isEmpty) {
       return const ShimmerLoader(count: 6);
     }
     if (shorts.isEmpty) {
       return Center(
-        child: Padding(
-          padding: const EdgeInsets.all(32),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(Icons.video_library_outlined,
-                  size: 56, color: AppTheme.textMuted(context)),
-              const SizedBox(height: 16),
-              Text('No shorts yet — pull to refresh',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  textAlign: TextAlign.center),
-            ],
-          ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.video_library_outlined,
+                size: 56, color: AppTheme.textMuted(context)),
+            const SizedBox(height: 16),
+            Text('No shorts yet — pull to refresh',
+                style: Theme.of(context).textTheme.bodyMedium,
+                textAlign: TextAlign.center),
+          ],
         ),
       );
     }
 
     return RefreshIndicator(
       color: AppTheme.gold,
-      onRefresh: () =>
-          context.read<FeedProvider>().refresh(force: true),
+      onRefresh: () => context.read<FeedProvider>().refresh(force: true),
       child: GridView.builder(
         padding: const EdgeInsets.fromLTRB(10, 10, 10, 110),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          // 9:16 ratio for vertical shorts
           childAspectRatio: 9 / 16,
           crossAxisSpacing: 8,
           mainAxisSpacing: 8,
@@ -122,11 +116,12 @@ class _ChannelsScreenState extends State<ChannelsScreen> {
           final video = shorts[i];
           final channel =
               ChannelData.byId[video.channelId] ?? ChannelData.fallback;
-
-          return _ShortCard(
-            video: video,
-            channelColor: channel.accentColor,
-            onTap: () => _openVideo(video),
+          return RepaintBoundary(
+            child: _ShortCard(
+              video: video,
+              channelColor: channel.accentColor,
+              onTap: () => _openShorts(shorts, i),
+            ),
           );
         },
       ),
@@ -154,11 +149,10 @@ class _ShortCard extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            // Thumbnail — use mqdefault for 9:16 short thumbnails
-            Image.network(
-              video.thumbnailMq,
+            CachedNetworkImage(
+              imageUrl: video.thumbnailMq,
               fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => ColoredBox(
+              errorWidget: (_, __, ___) => ColoredBox(
                 color: AppTheme.surfaceElevated(context),
                 child: Center(
                   child: Icon(Icons.play_circle_outline_rounded,
@@ -166,7 +160,6 @@ class _ShortCard extends StatelessWidget {
                 ),
               ),
             ),
-            // Dark gradient
             const DecoratedBox(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -177,14 +170,12 @@ class _ShortCard extends StatelessWidget {
                 ),
               ),
             ),
-            // Channel accent line at top
             Positioned(
               top: 0,
               left: 0,
               right: 0,
               child: Container(height: 3, color: channelColor),
             ),
-            // Play button
             const Center(
               child: DecoratedBox(
                 decoration: BoxDecoration(
@@ -198,7 +189,6 @@ class _ShortCard extends StatelessWidget {
                 ),
               ),
             ),
-            // Title
             Positioned(
               bottom: 8,
               left: 8,

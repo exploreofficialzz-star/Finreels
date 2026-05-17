@@ -10,10 +10,8 @@ import '../services/ad_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
 
-/// Plays YouTube videos inline using the official iFrame Player API.
-/// No API key required. Supports Android (minSdk 17+) and iOS.
-/// Buffering state is surfaced via a gold CircularProgressIndicator.
-/// autoPlay is enabled — user explicitly tapped to open this screen.
+/// Dedicated full-screen player — navigated to from Saved screen
+/// and any context that doesn't use the inline feed card.
 class VideoPlayerScreen extends StatefulWidget {
   final Video video;
   final Channel channel;
@@ -105,13 +103,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           ),
           body: Column(
             children: [
-              // ── In-app iFrame player ─────────────────────────────────────
               player,
-
-              // Channel accent strip
               Container(height: 3, color: widget.channel.accentColor),
-
-              // ── Video info ───────────────────────────────────────────────
               Expanded(
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
@@ -127,8 +120,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                                 fontWeight: FontWeight.w700, height: 1.3),
                       ),
                       const SizedBox(height: 14),
-
-                      // Channel row
                       Row(
                         children: [
                           Container(
@@ -164,9 +155,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                                         ?.copyWith(
                                             fontWeight: FontWeight.w700)),
                                 Text(widget.channel.focus,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall,
+                                    style:
+                                        Theme.of(context).textTheme.bodySmall,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis),
                               ],
@@ -174,7 +164,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                           ),
                         ],
                       ),
-
                       if (widget.video.description.isNotEmpty) ...[
                         const SizedBox(height: 20),
                         const Divider(),
@@ -199,7 +188,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                   ),
                 ),
               ),
-
               if (!AdService.instance.adsRemoved) const LabelledBannerAd(),
             ],
           ),
