@@ -1,15 +1,90 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_epub_viewer/flutter_epub_viewer.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 import '../models/video.dart';
 import '../services/ad_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
 
-/// Books open in an in-app WebView pointing to a real readable page.
-/// We use Open Library's read-online feature which works in WebView.
+// ── Book source types ─────────────────────────────────────────────────────────
+
+enum _SourceType {
+  /// Direct EPUB file — rendered by flutter_epub_viewer (Epub.js engine).
+  epub,
+
+  /// Web page — rendered inline by flutter_inappwebview.
+  /// Used for books whose only free version is a library web page.
+  web,
+}
+
+class _BookSource {
+  final _SourceType type;
+  final String url;
+  const _BookSource(this.type, this.url);
+}
+
+// ── Hosts allowed through the in-app web nav interceptor ─────────────────────
+
+const _allowedHosts = {
+  'archive.org',
+  'www.archive.org',
+  'gutenberg.org',
+  'www.gutenberg.org',
+  'openlibrary.org',
+  'www.openlibrary.org',
+};
+
+// ── Book source map ───────────────────────────────────────────────────────────
+//
+// Public-domain books with a direct EPUB URL → epub type (flutter_epub_viewer).
+// Copyrighted books on Internet Archive → web type (flutter_inappwebview).
+
+const Map<String, _BookSource> _sources = {
+  // Public domain — full EPUB from Project Gutenberg
+  'book_richest_man': _BookSource(
+    _SourceType.epub,
+    'https://www.gutenberg.org/cache/epub/1297/pg1297-images.epub',
+  ),
+
+  // Archive.org web reader pages (requires no login for limited preview)
+  'book_think_grow': _BookSource(
+    _SourceType.web,
+    'https://archive.org/stream/ThinkAndGrowRich_201810/Think-and-Grow-Rich_djvu.txt',
+  ),
+  'book_rich_dad': _BookSource(
+    _SourceType.web,
+    'https://archive.org/details/richdadpoordadrob00kiyo',
+  ),
+  'book_millionaire_next_door': _BookSource(
+    _SourceType.web,
+    'https://archive.org/details/millionairenextd00stan',
+  ),
+  'book_intelligent_investor': _BookSource(
+    _SourceType.web,
+    'https://archive.org/details/TheIntelligentInvestor_201806',
+  ),
+  'book_psychology_money': _BookSource(
+    _SourceType.web,
+    'https://archive.org/search?query=psychology+of+money+housel',
+  ),
+  'book_zero_to_one': _BookSource(
+    _SourceType.web,
+    'https://archive.org/details/zerotoonenotesonst00thie',
+  ),
+};
+
+// ── Screen ────────────────────────────────────────────────────────────────────
+
+/// Books open in an in-app reader — never in the system browser.
+///
+/// Public-domain books with a direct EPUB URL use [EpubViewer] from
+/// flutter_epub_viewer (Epub.js engine). All other books render the
+/// corresponding Internet Archive page via [InAppWebView] from
+/// flutter_inappwebview, with outbound navigation intercepted so the
+/// user stays inside the app.
 class BookDetailScreen extends StatefulWidget {
   final Video book;
   const BookDetailScreen({required this.book, super.key});
@@ -19,41 +94,19 @@ class BookDetailScreen extends StatefulWidget {
 }
 
 class _BookDetailScreenState extends State<BookDetailScreen> {
-  late final WebViewController _controller;
-  bool _isLoading = true;
   bool _showReader = false;
+  bool _isLoading = true;
+  double _loadProgress = 0;
 
-  // Direct readable URLs via Open Library's read-online viewer
-  static const Map<String, String> _readUrls = {
-    'book_richest_man':
-        'https://www.gutenberg.org/cache/epub/1297/pg1297.txt',
-    'book_think_grow':
-        'https://archive.org/stream/ThinkAndGrowRich_201810/Think-and-Grow-Rich_djvu.txt',
-    'book_common_stocks':
-        'https://archive.org/details/commonstocksunco00fish',
-    'book_millionaire_next_door':
-        'https://archive.org/details/millionairenextd00stan',
-    'book_intelligent_investor':
-        'https://archive.org/details/TheIntelligentInvestor_201806',
-    'book_rich_dad':
-        'https://archive.org/details/richdadpoordadrob00kiyo',
-    'book_psychology_money':
-        'https://archive.org/search?query=psychology+of+money+housel',
-  };
+  // EPUB controller — only used when source type is epub.
+  final EpubController _epubController = EpubController();
 
-  void _initWebView() {
-    final url = _readUrls[widget.book.id] ??
-        'https://archive.org/search?query=${Uri.encodeComponent(widget.book.title)}';
-
-    _controller = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..setBackgroundColor(AppTheme.bgColor(context))
-      ..setNavigationDelegate(NavigationDelegate(
-        onPageStarted: (_) => setState(() => _isLoading = true),
-        onPageFinished: (_) => setState(() => _isLoading = false),
-      ))
-      ..loadRequest(Uri.parse(url));
-  }
+  _BookSource get _source =>
+      _sources[widget.book.id] ??
+      _BookSource(
+        _SourceType.web,
+        'https://archive.org/search?query=${Uri.encodeComponent(widget.book.title)}',
+      );
 
   @override
   void initState() {
@@ -68,6 +121,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   }
 
   // ── Detail / intro screen ────────────────────────────────────────────────────
+
   Widget _buildDetail() {
     return Scaffold(
       backgroundColor: AppTheme.bgColor(context),
@@ -153,15 +207,16 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                           .bodyMedium
                           ?.copyWith(height: 1.6)),
                   const SizedBox(height: 32),
-                  // Read button — opens in-app
+                  // Read button — opens in-app reader
                   SizedBox(
                     width: double.infinity,
                     height: 52,
                     child: FilledButton.icon(
-                      onPressed: () {
-                        _initWebView();
-                        setState(() => _showReader = true);
-                      },
+                      onPressed: () => setState(() {
+                        _showReader = true;
+                        _isLoading = true;
+                        _loadProgress = 0;
+                      }),
                       icon: const Icon(Icons.menu_book_rounded),
                       label: const Text('Read Inside App',
                           style: TextStyle(
@@ -193,7 +248,9 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   }
 
   // ── In-app reader ────────────────────────────────────────────────────────────
+
   Widget _buildReader() {
+    final source = _source;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -203,18 +260,110 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded),
-          onPressed: () => setState(() => _showReader = false),
+          onPressed: () => setState(() {
+            _showReader = false;
+            _isLoading = true;
+            _loadProgress = 0;
+          }),
         ),
       ),
-      body: Stack(
-        children: [
-          WebViewWidget(controller: _controller),
-          if (_isLoading)
-            const Center(
-              child: CircularProgressIndicator(color: AppTheme.gold),
+      body: source.type == _SourceType.epub
+          ? _buildEpubReader(source.url)
+          : _buildWebReader(source.url),
+    );
+  }
+
+  // ── EPUB reader (flutter_epub_viewer) ────────────────────────────────────────
+
+  Widget _buildEpubReader(String url) {
+    return Stack(
+      children: [
+        EpubViewer(
+          epubSource: EpubSource.fromUrl(url),
+          epubController: _epubController,
+          displaySettings: EpubDisplaySettings(
+            flow: EpubFlow.paginated,
+            snap: true,
+            allowScriptedContent: true,
+          ),
+          onEpubLoaded: () async {
+            if (mounted) setState(() => _isLoading = false);
+          },
+          onChaptersLoaded: (_) {
+            if (mounted) setState(() => _isLoading = false);
+          },
+          onRelocated: (_) {},
+          onTextSelected: (_) {},
+        ),
+        if (_isLoading)
+          const Center(
+            child: CircularProgressIndicator(color: AppTheme.gold),
+          ),
+      ],
+    );
+  }
+
+  // ── Web reader (flutter_inappwebview) ────────────────────────────────────────
+
+  Widget _buildWebReader(String url) {
+    return Stack(
+      children: [
+        InAppWebView(
+          initialUrlRequest: URLRequest(url: WebUri(url)),
+          initialSettings: InAppWebViewSettings(
+            javaScriptEnabled: true,
+            useShouldOverrideUrlLoading: true,
+            mediaPlaybackRequiresUserGesture: true,
+            allowsInlineMediaPlayback: true,
+          ),
+          onLoadStart: (_, __) {
+            if (mounted) setState(() => _isLoading = true);
+          },
+          onLoadStop: (_, __) {
+            if (mounted) setState(() {
+              _isLoading = false;
+              _loadProgress = 1;
+            });
+          },
+          onProgressChanged: (_, progress) {
+            if (mounted) {
+              setState(() {
+                _loadProgress = progress / 100.0;
+                if (progress >= 100) _isLoading = false;
+              });
+            }
+          },
+          // Intercept navigation — only allow whitelisted hosts.
+          // Prevents the user from accidentally leaving the app.
+          shouldOverrideUrlLoading: (_, navigationAction) async {
+            final uri = navigationAction.request.url;
+            if (uri != null && _allowedHosts.contains(uri.host)) {
+              return NavigationActionPolicy.ALLOW;
+            }
+            return NavigationActionPolicy.CANCEL;
+          },
+        ),
+
+        // Linear progress indicator while page is loading
+        if (_isLoading && _loadProgress > 0 && _loadProgress < 1)
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: LinearProgressIndicator(
+              value: _loadProgress,
+              color: AppTheme.gold,
+              backgroundColor: Colors.transparent,
+              minHeight: 3,
             ),
-        ],
-      ),
+          ),
+
+        // Full-screen spinner before the first byte arrives
+        if (_isLoading && _loadProgress == 0)
+          const Center(
+            child: CircularProgressIndicator(color: AppTheme.gold),
+          ),
+      ],
     );
   }
 }

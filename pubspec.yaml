@@ -31,6 +31,16 @@ dependencies:
   webview_flutter_android: ^4.3.0
   webview_flutter_wkwebview: ^3.18.0
   in_app_review: ^2.0.9
+  # ── Content Overhaul packages ─────────────────────────────────────────────
+  # YouTube in-app playback (iFrame Player API, no API key required)
+  youtube_player_flutter: ^9.1.1
+  # Blog / web content rendered inline; intercepts external navigation
+  flutter_inappwebview: ^6.1.5
+  # EPUB reader (Epub.js + flutter_inappwebview); supports URL/file/assets,
+  # chapter nav, CFI progress, highlight & search
+  flutter_epub_viewer: ^1.0.4
+  # PDF viewer with lazy loading for large files
+  pdfx: ^2.6.0
 
 dev_dependencies:
   flutter_test:
