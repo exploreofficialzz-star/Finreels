@@ -148,9 +148,9 @@ class _BlogShimmerCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Cover image — 16:9
-        AspectRatio(
+        const AspectRatio(
           aspectRatio: 16 / 9,
-          child: const DecoratedBox(
+          child: DecoratedBox(
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius:

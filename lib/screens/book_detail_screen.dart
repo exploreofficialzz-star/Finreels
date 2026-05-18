@@ -344,10 +344,12 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
             if (mounted) { setState(() => _isLoading = true); }
           },
           onLoadStop: (_, __) {
-            if (mounted) setState(() {
-              _isLoading = false;
-              _loadProgress = 1;
-            });
+            if (mounted) {
+              setState(() {
+                _isLoading = false;
+                _loadProgress = 1;
+              });
+            }
           },
           onProgressChanged: (_, progress) {
             if (mounted) {

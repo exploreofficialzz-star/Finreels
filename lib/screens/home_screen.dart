@@ -218,7 +218,7 @@ class _FeedBodyState extends State<_FeedBody> {
   Widget _buildUnifiedFeed(BuildContext context, FeedProvider provider) {
     final items = provider.activeTab == FeedTab.videos
         ? provider.feedVideos
-            .map<FeedItem>(VideoFeedItem)
+            .map((v) => VideoFeedItem(v) as FeedItem)
             .toList()
         : provider.unifiedFeedItems;
 
