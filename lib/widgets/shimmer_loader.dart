@@ -150,11 +150,11 @@ class _BlogShimmerCard extends StatelessWidget {
         // Cover image — 16:9
         AspectRatio(
           aspectRatio: 16 / 9,
-          child: Container(
+          child: const DecoratedBox(
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(16)),
+                  BorderRadius.vertical(top: Radius.circular(16)),
             ),
           ),
         ),

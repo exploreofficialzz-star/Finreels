@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../models/video.dart';
 import '../data/channel_data.dart';
-import '../theme/app_theme.dart';
+import '../models/video.dart';
 import '../screens/shorts_player_screen.dart';
+import '../theme/app_theme.dart';
 
 /// Fix 5 — Shorts Shelf
 /// A horizontally scrolling carousel of 9:16 short-form cards.

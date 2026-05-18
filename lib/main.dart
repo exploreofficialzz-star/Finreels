@@ -90,7 +90,8 @@ class _SplashGateState extends State<_SplashGate> {
     unawaited(AdBlockService.instance.init());
 
     // Build the feed provider here so it can start fetching immediately.
-    final provider = FeedProvider()..init();
+    final provider = FeedProvider();
+    unawaited(provider.init());
 
     if (!mounted) return;
     setState(() {

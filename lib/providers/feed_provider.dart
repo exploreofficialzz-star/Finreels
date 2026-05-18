@@ -60,7 +60,7 @@ class FeedProvider extends ChangeNotifier {
       FeedTab.all => _interleave(all.where((v) => !_isBook(v)).toList()),
       FeedTab.videos =>
         _interleave(all.where((v) => !_isShort(v) && !_isBlog(v) && !_isBook(v)).toList()),
-      FeedTab.shorts => _interleave(all.where((v) => _isShort(v)).toList()),
+      FeedTab.shorts => _interleave(all.where(_isShort).toList()),
       FeedTab.blogs => _interleave(all.where((v) => _isBlog(v) && !_isBook(v)).toList()),
       FeedTab.books => _bookVideos,
     };

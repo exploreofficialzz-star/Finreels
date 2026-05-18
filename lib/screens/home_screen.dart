@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../data/channel_data.dart';
-import '../models/feed_item.dart';
 import '../models/feed_tab.dart';
 import '../models/video.dart';
 import '../providers/feed_provider.dart';
@@ -219,7 +218,7 @@ class _FeedBodyState extends State<_FeedBody> {
   Widget _buildUnifiedFeed(BuildContext context, FeedProvider provider) {
     final items = provider.activeTab == FeedTab.videos
         ? provider.feedVideos
-            .map<FeedItem>((v) => VideoFeedItem(v))
+            .map<FeedItem>(VideoFeedItem)
             .toList()
         : provider.unifiedFeedItems;
 
@@ -277,7 +276,7 @@ class _FeedBodyState extends State<_FeedBody> {
                 padding: const EdgeInsets.only(bottom: 8),
                 child: ShortsShelfWidget(shorts: shorts),
               ),
-            BookFeedItem(:final book) => const SizedBox.shrink(),
+            BookFeedItem() => const SizedBox.shrink(),
           };
         },
       ),

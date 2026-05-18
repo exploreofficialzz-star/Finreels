@@ -88,7 +88,6 @@ class _InlineVideoCardState extends State<InlineVideoCard>
       flags: YoutubePlayerFlags(
         autoPlay: _isActive,
         enableCaption: false,
-        hideControls: false,
       ),
     )..addListener(_onControllerUpdate);
 

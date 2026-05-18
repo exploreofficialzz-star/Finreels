@@ -103,7 +103,6 @@ class _ShortPageState extends State<_ShortPage> {
       flags: YoutubePlayerFlags(
         autoPlay: widget.isActive,
         loop: true,
-        hideControls: false,
         controlsVisibleAtStart: false,
         enableCaption: false,
       ),

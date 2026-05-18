@@ -133,7 +133,7 @@ class _BlogFeedScreenState extends State<BlogFeedScreen> {
 class _BlogShimmerSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return DecoratedBox(
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
@@ -290,7 +290,7 @@ class _BlogCard extends StatelessWidget {
 
   /// Branded gradient placeholder — shown when no cover image is available.
   Widget _gradientPlaceholder(BuildContext context) {
-    return Container(
+    return DecoratedBox(
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,

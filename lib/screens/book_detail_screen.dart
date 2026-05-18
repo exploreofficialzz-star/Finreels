@@ -341,7 +341,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
             allowsInlineMediaPlayback: true,
           ),
           onLoadStart: (_, __) {
-            if (mounted) setState(() => _isLoading = true);
+            if (mounted) { setState(() => _isLoading = true); }
           },
           onLoadStop: (_, __) {
             if (mounted) setState(() {

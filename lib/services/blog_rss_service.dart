@@ -59,7 +59,7 @@ class BlogRssService {
       (feed) => _fetchFeed(url: feed['url']!, sourceName: feed['name']!),
     );
 
-    final results = await Future.wait(futures, eagerError: false);
+    final results = await Future.wait(futures);
     final articles = results.expand((l) => l).toList();
     final sorted = await compute(_sortArticles, articles);
     _cache = sorted;
@@ -103,7 +103,7 @@ class BlogRssService {
           final link = _text(item, 'link') ?? _text(item, 'guid') ?? '';
           if (link.isEmpty) return null;
 
-          String? thumb = item.findElements('enclosure').firstOrNull?.getAttribute('url');
+          var thumb = item.findElements('enclosure').firstOrNull?.getAttribute('url');
           if (thumb == null || thumb.isEmpty) {
             thumb = item.findElements('media:content').firstOrNull?.getAttribute('url');
           }
