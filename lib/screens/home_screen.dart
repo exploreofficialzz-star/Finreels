@@ -1,10 +1,12 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../data/channel_data.dart';
+import '../models/feed_item.dart';
 import '../models/feed_tab.dart';
 import '../models/video.dart';
 import '../providers/feed_provider.dart';
@@ -13,6 +15,7 @@ import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
 import '../widgets/inline_video_card.dart';
 import '../widgets/shimmer_loader.dart';
+import '../widgets/shorts_shelf_widget.dart';
 import 'blog_feed_screen.dart';
 import 'book_detail_screen.dart';
 import 'shorts_player_screen.dart';
@@ -140,23 +143,27 @@ class _FeedBody extends StatefulWidget {
 
 class _FeedBodyState extends State<_FeedBody> {
   int _tapCount = 0;
-  // Active video for single-playback enforcement in feed
-  String? _activeVideoId;
 
-  void _onVideoTap(BuildContext context, Video video) {
+  /// Fix 3 — ValueNotifier shared across all inline cards.
+  /// Cards listen to it directly; this widget never calls setState() for
+  /// play/pause changes, so scroll position is completely unaffected.
+  final _activeVideoNotifier = ValueNotifier<String?>(null);
+
+  @override
+  void dispose() {
+    _activeVideoNotifier.dispose();
+    super.dispose();
+  }
+
+  void _onTap(BuildContext context, Video video) {
     _tapCount++;
-    if (_tapCount.isEven) {
-      unawaited(AdService.instance.showInterstitial());
-    }
+    if (_tapCount.isEven) unawaited(AdService.instance.showInterstitial());
 
     if (video.channelId == 'books') {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => BookDetailScreen(book: video)),
-      );
+      Navigator.push(context,
+          MaterialPageRoute(builder: (_) => BookDetailScreen(book: video)));
       return;
     }
-    // Shorts from the feed grid navigate to full-screen shorts player
     final provider = context.read<FeedProvider>();
     if (provider.activeTab == FeedTab.shorts) {
       final shorts = provider.feedVideos;
@@ -177,121 +184,133 @@ class _FeedBodyState extends State<_FeedBody> {
   Widget build(BuildContext context) {
     final provider = context.watch<FeedProvider>();
 
-    // Blogs tab — real RSS feed
+    // Blogs — dedicated RSS screen.
     if (provider.activeTab == FeedTab.blogs) {
       return const BlogFeedScreen();
     }
 
-    // Books tab
+    // Books tab.
     if (provider.activeTab == FeedTab.books) {
-      return _BooksGrid(onTap: (v) => _onVideoTap(context, v));
+      return _BooksTab(onTap: (v) => _onTap(context, v));
     }
 
-    // Shorts tab — vertical grid, tapping opens full-screen player
+    // Shorts tab — 2-column grid, tap opens full-screen player.
     if (provider.activeTab == FeedTab.shorts) {
-      final shorts = provider.feedVideos;
-      if (provider.state == FeedState.loading && shorts.isEmpty) {
-        return const ShimmerLoader();
-      }
-      return _ShortsGrid(
-        videos: shorts,
-        onTap: (v) => _onVideoTap(context, v),
-        onRefresh: () => provider.refresh(force: true),
+      return _ShortsTab(
+        provider: provider,
+        onTap: (v) => _onTap(context, v),
       );
     }
 
-    // All / Videos — inline playback feed
-    switch (provider.state) {
-      case FeedState.idle:
-      case FeedState.loading:
-        if (provider.feedVideos.isEmpty) return const ShimmerLoader();
-        return _buildInlineFeed(context, provider);
-      case FeedState.error:
-        return _ErrorView(
+    // All / Videos — unified inline feed.
+    return switch (provider.state) {
+      FeedState.idle || FeedState.loading when provider.feedVideos.isEmpty =>
+        const ShimmerLoader(),
+      FeedState.error => _ErrorView(
           message: provider.errorMessage ?? 'Something went wrong.',
           onRetry: () => provider.refresh(force: true),
-        );
-      case FeedState.loaded:
-        if (provider.feedVideos.isEmpty) {
-          return Center(
-            child: Text(
-              'No ${provider.activeTab.label.toLowerCase()} found.',
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          );
-        }
-        return _buildInlineFeed(context, provider);
-    }
+        ),
+      _ => _buildUnifiedFeed(context, provider),
+    };
   }
 
-  /// Inline feed — videos play inside cards, one at a time.
-  Widget _buildInlineFeed(BuildContext context, FeedProvider provider) {
-    final videos = provider.feedVideos;
+  // ── Fix 5 — Unified feed: videos + inline shorts shelves ─────────────────
+
+  Widget _buildUnifiedFeed(BuildContext context, FeedProvider provider) {
+    final items = provider.activeTab == FeedTab.videos
+        ? provider.feedVideos
+            .map<FeedItem>((v) => VideoFeedItem(v))
+            .toList()
+        : provider.unifiedFeedItems;
+
+    if (items.isEmpty) {
+      return Center(
+        child: Text(
+          'No ${provider.activeTab.label.toLowerCase()} found.',
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
+      );
+    }
 
     return RefreshIndicator(
       color: AppTheme.gold,
       onRefresh: () => provider.refresh(force: true),
-      child: ListView.separated(
+      child: ListView.builder(
+        // Fix 3 — ClampingScrollPhysics: no bounce, no position reset.
+        physics: const ClampingScrollPhysics(),
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 120),
-        itemCount: videos.length,
-        separatorBuilder: (_, i) {
-          if ((i + 1) % 3 == 0) {
-            return const Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: LabelledBannerAd(),
-            );
-          }
-          return const SizedBox(height: 14);
-        },
+        itemCount: items.length,
         itemBuilder: (context, i) {
-          final video = videos[i];
-          final channel =
-              ChannelData.byId[video.channelId] ?? ChannelData.fallback;
-          return InlineVideoCard(
-            key: ValueKey(video.id),
-            video: video,
-            channel: channel,
-            saved: provider.isVideoSaved(video.id),
-            activeVideoId: _activeVideoId,
-            onBecomeVisible: (id) {
-              if (_activeVideoId != id) {
-                setState(() => _activeVideoId = id);
-              }
-            },
-            onSave: () => provider.toggleSaved(video),
-            onShare: () =>
-                Share.share('${video.title}\n${video.watchUrl}'),
-          );
+          final item = items[i];
+
+          // Fix 2: Insert banner ad every 4 video items.
+          final isAdSlot = i > 0 && i % 4 == 0;
+
+          return switch (item) {
+            VideoFeedItem(:final video) => Column(
+                key: ValueKey('video_${video.id}'),
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (isAdSlot)
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      child: LabelledBannerAd(),
+                    ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 14),
+                    child: InlineVideoCard(
+                      key: ValueKey(video.id),
+                      video: video,
+                      channel: ChannelData.byId[video.channelId] ??
+                          ChannelData.fallback,
+                      saved: provider.isVideoSaved(video.id),
+                      activeVideoNotifier: _activeVideoNotifier,
+                      onSave: () => provider.toggleSaved(video),
+                      onShare: () =>
+                          Share.share('${video.title}\n${video.watchUrl}'),
+                    ),
+                  ),
+                ],
+              ),
+            ShortsShelfFeedItem(:final shorts) => Padding(
+                key: ValueKey('shelf_$i'),
+                padding: const EdgeInsets.only(bottom: 8),
+                child: ShortsShelfWidget(shorts: shorts),
+              ),
+            BookFeedItem(:final book) => const SizedBox.shrink(),
+          };
         },
       ),
     );
   }
 }
 
-// ── Shorts Grid ───────────────────────────────────────────────────────────────
-class _ShortsGrid extends StatelessWidget {
-  final List<Video> videos;
+// ── Shorts Tab — Fix 6: ListView.builder, const constructors, ValueKey ───────
+class _ShortsTab extends StatelessWidget {
+  final FeedProvider provider;
   final void Function(Video) onTap;
-  final Future<void> Function() onRefresh;
 
-  const _ShortsGrid({
-    required this.videos,
-    required this.onTap,
-    required this.onRefresh,
-  });
+  const _ShortsTab({required this.provider, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    if (videos.isEmpty) {
-      return Center(
-        child: Text('No shorts found.',
-            style: Theme.of(context).textTheme.bodyMedium),
-      );
+    if (provider.state == FeedState.loading &&
+        provider.feedVideos.isEmpty) {
+      return const ShimmerLoader(variant: ShimmerVariant.grid, count: 6);
     }
+
+    final shorts = provider.feedVideos;
+    if (shorts.isEmpty) {
+      return Center(
+          child: Text('No shorts found.',
+              style: Theme.of(context).textTheme.bodyMedium));
+    }
+
     return RefreshIndicator(
       color: AppTheme.gold,
-      onRefresh: onRefresh,
+      onRefresh: () => provider.refresh(force: true),
       child: GridView.builder(
+        physics: const ClampingScrollPhysics(),
         padding: const EdgeInsets.fromLTRB(12, 8, 12, 120),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
@@ -299,12 +318,13 @@ class _ShortsGrid extends StatelessWidget {
           crossAxisSpacing: 8,
           mainAxisSpacing: 8,
         ),
-        itemCount: videos.length,
+        itemCount: shorts.length,
         itemBuilder: (context, i) {
-          final video = videos[i];
+          final video = shorts[i];
           final channel =
               ChannelData.byId[video.channelId] ?? ChannelData.fallback;
           return RepaintBoundary(
+            key: ValueKey(video.id),
             child: GestureDetector(
               onTap: () => onTap(video),
               child: ClipRRect(
@@ -312,12 +332,11 @@ class _ShortsGrid extends StatelessWidget {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    Image.network(
-                      video.thumbnailMq,
+                    CachedNetworkImage(
+                      imageUrl: video.thumbnailMq,
                       fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => ColoredBox(
-                        color: AppTheme.surfaceElevated(context),
-                      ),
+                      errorWidget: (_, __, ___) =>
+                          ColoredBox(color: AppTheme.surfaceElevated(context)),
                     ),
                     const DecoratedBox(
                       decoration: BoxDecoration(
@@ -378,21 +397,29 @@ class _ShortsGrid extends StatelessWidget {
   }
 }
 
-// ── Books Grid ────────────────────────────────────────────────────────────────
-class _BooksGrid extends StatelessWidget {
+// ── Books Tab — Fix 6: ListView.builder, ValueKey, CachedNetworkImage ────────
+class _BooksTab extends StatelessWidget {
   final void Function(Video) onTap;
-  const _BooksGrid({required this.onTap});
+  const _BooksTab({required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     final books = context.read<FeedProvider>().feedVideos;
+    if (books.isEmpty) {
+      return Center(
+          child: Text('No books found.',
+              style: Theme.of(context).textTheme.bodyMedium));
+    }
+
     return ListView.separated(
+      physics: const ClampingScrollPhysics(),
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 120),
       itemCount: books.length,
       separatorBuilder: (_, __) => const SizedBox(height: 12),
       itemBuilder: (context, i) {
         final book = books[i];
         return RepaintBoundary(
+          key: ValueKey(book.id),
           child: GestureDetector(
             onTap: () => onTap(book),
             child: DecoratedBox(
@@ -409,12 +436,12 @@ class _BooksGrid extends StatelessWidget {
                       topLeft: Radius.circular(13),
                       bottomLeft: Radius.circular(13),
                     ),
-                    child: Image.network(
-                      book.thumbnailUrl,
+                    child: CachedNetworkImage(
+                      imageUrl: book.thumbnailUrl,
                       width: 90,
                       height: 120,
                       fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => Container(
+                      errorWidget: (_, __, ___) => Container(
                         width: 90,
                         height: 120,
                         color: AppTheme.gold.withValues(alpha: 0.15),
@@ -445,24 +472,20 @@ class _BooksGrid extends StatelessWidget {
                                 )),
                           ),
                           const SizedBox(height: 8),
-                          Text(
-                            book.title,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleSmall
-                                ?.copyWith(
-                                    fontWeight: FontWeight.w700,
-                                    height: 1.35),
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                          Text(book.title,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall
+                                  ?.copyWith(
+                                      fontWeight: FontWeight.w700,
+                                      height: 1.35),
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis),
                           const SizedBox(height: 6),
-                          Text(
-                            book.description,
-                            style: Theme.of(context).textTheme.bodySmall,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                          Text(book.description,
+                              style: Theme.of(context).textTheme.bodySmall,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis),
                         ],
                       ),
                     ),

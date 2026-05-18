@@ -6,12 +6,23 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../config/app_config.dart';
 import '../data/channel_data.dart';
 import '../models/channel.dart';
+import '../models/feed_item.dart';
 import '../models/feed_tab.dart';
 import '../models/video.dart';
 import '../services/rss_service.dart';
 
+export '../models/feed_item.dart';
+
 enum FeedState { idle, loading, loaded, error }
 
+/// Fix 2 — Race Conditions & Content Shuffling
+/// Key changes:
+/// 1. refresh() collects ALL channel data first, then does a single atomic
+///    setState (notifyListeners) — never mutates live data mid-render.
+/// 2. feedVideos and unifiedFeedItems are cached snapshots computed once per
+///    refresh, not re-shuffled on every getter access (which was the root cause
+///    of cards jumping positions on every build).
+/// 3. ValueKeys are assigned by the caller using video.id — stable across frames.
 class FeedProvider extends ChangeNotifier {
   FeedState _state = FeedState.idle;
   FeedState get state => _state;
@@ -19,8 +30,12 @@ class FeedProvider extends ChangeNotifier {
   String? _errorMessage;
   String? get errorMessage => _errorMessage;
 
-  final Map<String, List<Video>> _videosByChannel = {};
-  final Random _random = Random();
+  // Immutable snapshot set atomically after each successful refresh.
+  Map<String, List<Video>> _videosByChannel = {};
+
+  // Per-tab stable caches — only invalidated on refresh.
+  final Map<FeedTab, List<Video>> _tabCache = {};
+  List<FeedItem>? _unifiedCache;
 
   FeedTab _activeTab = FeedTab.all;
   FeedTab get activeTab => _activeTab;
@@ -33,49 +48,74 @@ class FeedProvider extends ChangeNotifier {
   List<Video> getVideosFor(String channelId) =>
       _videosByChannel[channelId] ?? [];
 
-  // ── Filtered + randomised feed ───────────────────────────────────────────────
-  List<Video> get feedVideos {
-    // Merge all channel videos
-    final all = _videosByChannel.values.expand((v) => v).toList();
+  // ── Stable per-tab feed ──────────────────────────────────────────────────────
 
-    switch (_activeTab) {
-      case FeedTab.all:
-        // Randomise order so all channels get exposure equally
-        return _shuffleByChannel(all.where((v) => !_isBook(v)).toList());
-      case FeedTab.videos:
-        return _shuffleByChannel(
-            all.where((v) => !_isShort(v) && !_isBlogStrict(v) && !_isBook(v)).toList());
-      case FeedTab.shorts:
-        return _shuffleByChannel(
-            all.where((v) => _isShort(v) && !_isBook(v)).toList());
-      case FeedTab.blogs:
-        // ONLY real blog/advice content — strict filter
-        return _shuffleByChannel(
-            all.where((v) => _isBlogStrict(v) && !_isBook(v)).toList());
-      case FeedTab.books:
-        return _bookVideos;
-    }
+  /// Returns a stable, cached list for the active tab.
+  /// Computed once per refresh — never reshuffled on rebuild.
+  List<Video> get feedVideos => _tabCache[_activeTab] ??= _compute(_activeTab);
+
+  List<Video> _compute(FeedTab tab) {
+    final all = _videosByChannel.values.expand((v) => v).toList();
+    return switch (tab) {
+      FeedTab.all => _interleave(all.where((v) => !_isBook(v)).toList()),
+      FeedTab.videos =>
+        _interleave(all.where((v) => !_isShort(v) && !_isBlog(v) && !_isBook(v)).toList()),
+      FeedTab.shorts => _interleave(all.where((v) => _isShort(v)).toList()),
+      FeedTab.blogs => _interleave(all.where((v) => _isBlog(v) && !_isBook(v)).toList()),
+      FeedTab.books => _bookVideos,
+    };
   }
 
-  /// Interleaves videos from different channels so no channel dominates.
-  List<Video> _shuffleByChannel(List<Video> videos) {
-    if (videos.isEmpty) return videos;
+  // ── Fix 5 — Unified feed items (All tab) ─────────────────────────────────────
 
-    // Group by channelId
+  /// Returns the unified feed for the All tab: regular videos interleaved
+  /// with a horizontal shorts shelf every 4 video items.
+  List<FeedItem> get unifiedFeedItems {
+    if (_unifiedCache != null) return _unifiedCache!;
+
+    final all = _videosByChannel.values.expand((v) => v).toList();
+    final videos = _interleave(
+        all.where((v) => !_isShort(v) && !_isBook(v)).toList());
+    final shorts = _interleave(all.where(_isShort).toList());
+
+    final items = <FeedItem>[];
+    var shortsOffset = 0;
+    const shelfSize = 8;
+    const videosBetweenShelves = 4;
+
+    for (var i = 0; i < videos.length; i++) {
+      items.add(VideoFeedItem(videos[i]));
+      // Insert a shorts shelf every N videos if shorts remain.
+      if ((i + 1) % videosBetweenShelves == 0 && shortsOffset < shorts.length) {
+        final end = (shortsOffset + shelfSize).clamp(0, shorts.length);
+        items.add(ShortsShelfFeedItem(shorts.sublist(shortsOffset, end)));
+        shortsOffset = end;
+      }
+    }
+
+    _unifiedCache = List.unmodifiable(items);
+    return _unifiedCache!;
+  }
+
+  // ── Interleave (stable — no random shuffle on every access) ──────────────────
+
+  /// Groups videos by channel, sorts each group newest-first, then
+  /// round-robin interleaves them. The channel order is sorted by ID
+  /// so the result is deterministic for the same data.
+  List<Video> _interleave(List<Video> videos) {
+    if (videos.isEmpty) return const [];
+
     final grouped = <String, List<Video>>{};
     for (final v in videos) {
       (grouped[v.channelId] ??= []).add(v);
     }
-
-    // Sort each group by date (newest first)
     for (final list in grouped.values) {
       list.sort((a, b) => b.publishedAt.compareTo(a.publishedAt));
     }
 
-    // Round-robin interleave — pick one from each channel in turn
-    final result = <Video>[];
-    final keys = grouped.keys.toList()..shuffle(_random);
+    final keys = grouped.keys.toList()..sort(); // stable order
     final maxLen = grouped.values.map((l) => l.length).fold(0, max);
+    final result = <Video>[];
 
     for (var i = 0; i < maxLen; i++) {
       for (final key in keys) {
@@ -83,10 +123,11 @@ class FeedProvider extends ChangeNotifier {
         if (i < list.length) result.add(list[i]);
       }
     }
-    return result;
+    return List.unmodifiable(result);
   }
 
   // ── Content type detection ────────────────────────────────────────────────────
+
   bool _isShort(Video v) {
     final t = v.title.toLowerCase();
     final d = v.description.toLowerCase();
@@ -98,15 +139,14 @@ class FeedProvider extends ChangeNotifier {
         t.length < 25;
   }
 
-  /// Strict blog filter — only listicles and how-to content
-  bool _isBlogStrict(Video v) {
-    final t = v.title.toLowerCase();
-    // Must match specific blog patterns AND NOT be a short
+  bool _isBlog(Video v) {
     if (_isShort(v)) return false;
+    final t = v.title.toLowerCase();
     return t.startsWith('how to') ||
         t.startsWith('why ') ||
         t.startsWith('what ') ||
-        RegExp(r'^\d+ (ways|tips|things|rules|reasons|lessons|steps|mistakes)').hasMatch(t) ||
+        RegExp(r'^\d+ (ways|tips|things|rules|reasons|lessons|steps|mistakes)')
+            .hasMatch(t) ||
         t.contains(' tips ') ||
         t.contains(' guide') ||
         t.contains(' rules') ||
@@ -117,7 +157,8 @@ class FeedProvider extends ChangeNotifier {
 
   bool _isBook(Video v) => v.channelId == 'books';
 
-  // ── Free books library ────────────────────────────────────────────────────────
+  // ── Free books ────────────────────────────────────────────────────────────────
+
   static final _epoch = DateTime(2000);
 
   List<Video> get _bookVideos => [
@@ -161,7 +202,7 @@ class FeedProvider extends ChangeNotifier {
           id: 'book_millionaire_next_door',
           title: 'The Millionaire Next Door — Thomas Stanley',
           description:
-              'The surprising truth about America\'s wealthy. Most millionaires '
+              "The surprising truth about America's wealthy. Most millionaires "
               'live below their means and build wealth quietly. Real research, '
               'real data — how ordinary people build extraordinary wealth.',
           channelId: 'books',
@@ -173,7 +214,7 @@ class FeedProvider extends ChangeNotifier {
           id: 'book_intelligent_investor',
           title: 'The Intelligent Investor — Benjamin Graham',
           description:
-              'Warren Buffett\'s favourite book and the bible of value investing. '
+              "Warren Buffett's favourite book and the bible of value investing. "
               'The definitive guide on margin of safety and long-term wealth. '
               'Every serious investor must read this.',
           channelId: 'books',
@@ -208,45 +249,57 @@ class FeedProvider extends ChangeNotifier {
       ];
 
   // ── Init ─────────────────────────────────────────────────────────────────────
+
   Future<void> init() async {
     await _loadSaved();
     await refresh();
   }
 
   // ── Tab ──────────────────────────────────────────────────────────────────────
+
   void setTab(FeedTab tab) {
     if (_activeTab == tab) return;
     _activeTab = tab;
     notifyListeners();
   }
 
-  // ── Fetch ────────────────────────────────────────────────────────────────────
+  // ── Fetch — Fix 2: single atomic update ──────────────────────────────────────
+
   Future<void> refresh({bool force = false}) async {
     _state = FeedState.loading;
     _errorMessage = null;
     notifyListeners();
 
+    // Collect ALL channel data into a local map first.
+    // Never mutate _videosByChannel while the UI is reading it.
+    final snapshot = <String, List<Video>>{};
     var successCount = 0;
-    final futures = ChannelData.all.map((ch) async {
+
+    await Future.wait(ChannelData.all.map((ch) async {
       try {
-        final videos = await RssService.instance
-            .fetchVideos(ch.id, forceRefresh: force);
-        _videosByChannel[ch.id] = videos;
+        final videos =
+            await RssService.instance.fetchVideos(ch.id, forceRefresh: force);
+        snapshot[ch.id] = videos;
         successCount++;
       } on Exception catch (e) {
         debugPrint('[FeedProvider] Error fetching ${ch.name}: $e');
       }
-    });
-    await Future.wait(futures);
+    }));
+
+    // Single atomic assignment + cache invalidation — no partial renders.
+    _videosByChannel = Map.unmodifiable(snapshot);
+    _tabCache.clear();
+    _unifiedCache = null;
 
     _state = successCount > 0 ? FeedState.loaded : FeedState.error;
     _errorMessage = successCount == 0
         ? 'Could not load content. Check your connection.'
         : null;
-    notifyListeners();
+    notifyListeners(); // Single notify — UI rebuilds once with complete data.
   }
 
   // ── Saved ────────────────────────────────────────────────────────────────────
+
   bool isVideoSaved(String id) => _savedVideoIds.contains(id);
 
   Future<void> toggleSaved(Video video) async {

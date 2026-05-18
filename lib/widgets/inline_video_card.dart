@@ -8,50 +8,76 @@ import '../models/channel.dart';
 import '../models/video.dart';
 import '../theme/app_theme.dart';
 
-/// Callback so the feed can enforce single-video playback.
-typedef OnBecomeVisible = void Function(String videoId);
-
-/// Feed card that plays YouTube video inline when >50% visible.
-/// Only one card plays at a time — managed by [activeVideoId] from parent.
+/// Fix 3 — Scroll Position Jumping
+///
+/// Key changes:
+/// 1. Uses [AutomaticKeepAliveClientMixin] so the player widget is preserved
+///    across scroll — no remount, no re-initialisation jank.
+/// 2. Play/pause control uses a [ValueNotifier<String?>] instead of a prop
+///    String — the notifier change does NOT call setState() on the parent
+///    feed list, so scroll position is completely unaffected.
+/// 3. The internal _onUpdate listener only calls play/pause on the controller,
+///    never setState, so player state changes are fully isolated.
 class InlineVideoCard extends StatefulWidget {
   final Video video;
   final Channel channel;
   final bool saved;
   final VoidCallback? onSave;
   final VoidCallback? onShare;
-  final String? activeVideoId;
-  final OnBecomeVisible onBecomeVisible;
+
+  /// Shared across all cards in the feed.
+  /// When a card becomes visible it sets notifier.value = video.id.
+  /// All other cards listen and pause — no parent setState needed.
+  final ValueNotifier<String?> activeVideoNotifier;
 
   const InlineVideoCard({
     required this.video,
     required this.channel,
-    required this.onBecomeVisible,
+    required this.activeVideoNotifier,
     super.key,
     this.saved = false,
     this.onSave,
     this.onShare,
-    this.activeVideoId,
   });
 
   @override
   State<InlineVideoCard> createState() => _InlineVideoCardState();
 }
 
-class _InlineVideoCardState extends State<InlineVideoCard> {
+class _InlineVideoCardState extends State<InlineVideoCard>
+    with AutomaticKeepAliveClientMixin {
   YoutubePlayerController? _controller;
   bool _playerReady = false;
-  bool _expanded = false; // true once user or auto-play opens the player
+  bool _expanded = false;
 
-  bool get _isActive => widget.activeVideoId == widget.video.id;
+  bool get _isActive =>
+      widget.activeVideoNotifier.value == widget.video.id;
 
   @override
-  void didUpdateWidget(InlineVideoCard old) {
-    super.didUpdateWidget(old);
-    // Pause when another card becomes active
-    if (!_isActive && _controller != null) {
-      _controller!.pause();
-    } else if (_isActive && _controller != null && _playerReady) {
+  bool get wantKeepAlive => _expanded; // keep alive while player is open
+
+  @override
+  void initState() {
+    super.initState();
+    widget.activeVideoNotifier.addListener(_onActiveChanged);
+  }
+
+  @override
+  void dispose() {
+    widget.activeVideoNotifier.removeListener(_onActiveChanged);
+    _controller?.removeListener(_onControllerUpdate);
+    _controller?.dispose();
+    super.dispose();
+  }
+
+  /// Fires when another card becomes the active one (or active clears).
+  /// Only touches the controller — zero setState, zero parent rebuild.
+  void _onActiveChanged() {
+    if (!mounted || _controller == null) return;
+    if (_isActive && _playerReady) {
       _controller!.play();
+    } else if (!_isActive) {
+      _controller!.pause();
     }
   }
 
@@ -64,38 +90,36 @@ class _InlineVideoCardState extends State<InlineVideoCard> {
         enableCaption: false,
         hideControls: false,
       ),
-    )..addListener(_onUpdate);
-    setState(() => _expanded = true);
+    )..addListener(_onControllerUpdate);
+
+    // Trigger rebuild only for the expand — never for play/pause.
+    if (mounted) setState(() => _expanded = true);
+    updateKeepAlive();
   }
 
-  void _onUpdate() {
+  void _onControllerUpdate() {
     if (!mounted) return;
     final ready = _controller?.value.isReady ?? false;
     if (ready != _playerReady) {
+      // Only setState for the ready flag — this only rebuilds THIS card.
       setState(() => _playerReady = ready);
       if (ready && _isActive) _controller?.play();
     }
   }
 
   @override
-  void dispose() {
-    _controller?.removeListener(_onUpdate);
-    _controller?.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    super.build(context); // Required by AutomaticKeepAliveClientMixin.
     return VisibilityDetector(
       key: Key('inline_${widget.video.id}'),
       onVisibilityChanged: (info) {
         if (!mounted) return;
         if (info.visibleFraction >= 0.5) {
-          // Auto-expand and signal parent to make this the active video
           _initController();
-          widget.onBecomeVisible(widget.video.id);
+          // Setting notifier.value notifies other cards via listener —
+          // the parent feed list is never involved.
+          widget.activeVideoNotifier.value = widget.video.id;
         } else {
-          // Scrolled away — pause
           _controller?.pause();
         }
       },
@@ -111,7 +135,7 @@ class _InlineVideoCardState extends State<InlineVideoCard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // ── Player or Thumbnail ────────────────────────────────────
+              // ── Player or Thumbnail ──────────────────────────────────
               _expanded && _controller != null
                   ? _buildPlayer()
                   : _buildThumbnail(context),
@@ -119,7 +143,7 @@ class _InlineVideoCardState extends State<InlineVideoCard> {
               // Channel accent strip
               Container(height: 3, color: widget.channel.accentColor),
 
-              // ── Info row ───────────────────────────────────────────────
+              // ── Info ─────────────────────────────────────────────────
               Padding(
                 padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
                 child: Column(
@@ -129,10 +153,8 @@ class _InlineVideoCardState extends State<InlineVideoCard> {
                       widget.video.title,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(height: 1.35, fontWeight: FontWeight.w600),
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          height: 1.35, fontWeight: FontWeight.w600),
                     ),
                     const SizedBox(height: 10),
                     Row(
@@ -194,9 +216,7 @@ class _InlineVideoCardState extends State<InlineVideoCard> {
           height: 200,
           child: Center(
             child: CircularProgressIndicator(
-              color: AppTheme.gold,
-              strokeWidth: 2.5,
-            ),
+                color: AppTheme.gold, strokeWidth: 2.5),
           ),
         ),
       ),
@@ -210,7 +230,7 @@ class _InlineVideoCardState extends State<InlineVideoCard> {
       child: GestureDetector(
         onTap: () {
           _initController();
-          widget.onBecomeVisible(widget.video.id);
+          widget.activeVideoNotifier.value = widget.video.id;
         },
         child: Stack(
           fit: StackFit.expand,

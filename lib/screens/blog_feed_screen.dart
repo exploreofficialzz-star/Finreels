@@ -1,14 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../services/blog_rss_service.dart';
 import '../theme/app_theme.dart';
-import '../widgets/shimmer_loader.dart';
 import 'blog_reader_screen.dart';
 
-/// Blogs tab — fetches RSS from 3 finance sources and displays articles
-/// as cards. Tapping opens the article inline via BlogReaderScreen.
+/// Fix 4 — Blogs Tab Design
+/// Each article is rendered as a full-width card matching the video feed:
+/// 16:9 cover image at top (with branded gradient fallback when no image),
+/// then source badge + date, then headline, then excerpt.
+/// No ListTile, no raw text rows, no horizontal thumbnail layout.
 class BlogFeedScreen extends StatefulWidget {
   const BlogFeedScreen({super.key});
 
@@ -17,7 +20,8 @@ class BlogFeedScreen extends StatefulWidget {
 }
 
 class _BlogFeedScreenState extends State<BlogFeedScreen> {
-  List<BlogArticle> _articles = [];
+  // Immutable snapshot — never appended to mid-render (Fix 2).
+  List<BlogArticle> _articles = const [];
   bool _loading = true;
   String? _error;
 
@@ -35,7 +39,11 @@ class _BlogFeedScreenState extends State<BlogFeedScreen> {
     try {
       final articles =
           await BlogRssService.instance.fetchAll(forceRefresh: force);
-      if (mounted) setState(() => _articles = articles);
+      if (mounted) {
+        setState(() {
+          _articles = List.unmodifiable(articles); // atomic replace
+        });
+      }
     } on Exception catch (_) {
       if (mounted) setState(() => _error = 'Could not load articles.');
     } finally {
@@ -45,7 +53,7 @@ class _BlogFeedScreenState extends State<BlogFeedScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (_loading && _articles.isEmpty) return const ShimmerLoader();
+    if (_loading && _articles.isEmpty) return _buildShimmer(context);
 
     if (_error != null && _articles.isEmpty) {
       return Center(
@@ -71,12 +79,16 @@ class _BlogFeedScreenState extends State<BlogFeedScreen> {
       color: AppTheme.gold,
       onRefresh: () => _load(force: true),
       child: ListView.separated(
+        // Fix 3: ClampingScrollPhysics prevents bounce-induced scroll jumps.
+        physics: const ClampingScrollPhysics(),
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 120),
         itemCount: _articles.length,
-        separatorBuilder: (_, __) => const SizedBox(height: 12),
+        separatorBuilder: (_, __) => const SizedBox(height: 14),
         itemBuilder: (context, i) {
           final article = _articles[i];
           return RepaintBoundary(
+            // Fix 2: stable ValueKey prevents widget recycling mismatches.
+            key: ValueKey(article.url),
             child: _BlogCard(
               article: article,
               onTap: () => Navigator.push(
@@ -94,7 +106,89 @@ class _BlogFeedScreenState extends State<BlogFeedScreen> {
       ),
     );
   }
+
+  // Shimmer that matches the 16:9 blog card shape exactly.
+  Widget _buildShimmer(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final base = isDark ? const Color(0xFF1A1A1A) : const Color(0xFFE8E8E8);
+    final highlight =
+        isDark ? const Color(0xFF2A2A2A) : const Color(0xFFF5F5F5);
+
+    return Shimmer.fromColors(
+      baseColor: base,
+      highlightColor: highlight,
+      child: ListView.separated(
+        physics: const NeverScrollableScrollPhysics(),
+        padding: const EdgeInsets.fromLTRB(16, 12, 16, 120),
+        itemCount: 5,
+        separatorBuilder: (_, __) => const SizedBox(height: 14),
+        itemBuilder: (_, __) => _BlogShimmerSkeleton(),
+      ),
+    );
+  }
 }
+
+// ── Skeleton ─────────────────────────────────────────────────────────────────
+
+class _BlogShimmerSkeleton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AspectRatio(
+            aspectRatio: 16 / 9,
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius:
+                    BorderRadius.vertical(top: Radius.circular(16)),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(14, 12, 14, 14),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 12,
+                  width: 80,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(6)),
+                ),
+                const SizedBox(height: 8),
+                Container(
+                  height: 16,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8)),
+                ),
+                const SizedBox(height: 6),
+                Container(
+                  height: 16,
+                  width: MediaQuery.of(context).size.width * 0.6,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8)),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ── Blog Card — 16:9 cover + text body ───────────────────────────────────────
 
 class _BlogCard extends StatelessWidget {
   final BlogArticle article;
@@ -110,88 +204,82 @@ class _BlogCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppTheme.surfaceColor(context),
           borderRadius: BorderRadius.circular(16),
-          border:
-              Border.all(color: AppTheme.dividerColor(context), width: 0.5),
+          border: Border.all(
+              color: AppTheme.dividerColor(context), width: 0.5),
         ),
         clipBehavior: Clip.hardEdge,
-        child: Row(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Thumbnail
-            if (article.thumbnailUrl != null)
-              ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  bottomLeft: Radius.circular(15),
-                ),
-                child: CachedNetworkImage(
-                  imageUrl: article.thumbnailUrl!,
-                  width: 100,
-                  height: 100,
-                  fit: BoxFit.cover,
-                  errorWidget: (_, __, ___) => _PlaceholderThumb(context),
-                ),
-              )
-            else
-              _PlaceholderThumb(context),
+            // ── 16:9 Cover Image ─────────────────────────────────────────
+            AspectRatio(
+              aspectRatio: 16 / 9,
+              child: article.thumbnailUrl != null
+                  ? CachedNetworkImage(
+                      imageUrl: article.thumbnailUrl!,
+                      fit: BoxFit.cover,
+                      placeholder: (_, __) => _gradientPlaceholder(context),
+                      errorWidget: (_, __, ___) =>
+                          _gradientPlaceholder(context),
+                    )
+                  : _gradientPlaceholder(context),
+            ),
 
-            // Text content
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Source + date row
-                    Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 7, vertical: 2),
-                          decoration: BoxDecoration(
-                            color: AppTheme.gold.withValues(alpha: 0.12),
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: Text(
-                            article.sourceName.toUpperCase(),
-                            style: const TextStyle(
-                              color: AppTheme.gold,
-                              fontSize: 9,
-                              fontWeight: FontWeight.w800,
-                              letterSpacing: 0.5,
-                            ),
+            // Source badge + gold accent strip
+            Container(height: 3, color: AppTheme.gold),
+
+            // ── Text Body ─────────────────────────────────────────────────
+            Padding(
+              padding: const EdgeInsets.fromLTRB(14, 12, 14, 14),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Source + date
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 7, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: AppTheme.gold.withValues(alpha: 0.12),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Text(
+                          article.sourceName.toUpperCase(),
+                          style: const TextStyle(
+                            color: AppTheme.gold,
+                            fontSize: 9,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: 0.5,
                           ),
                         ),
-                        const SizedBox(width: 6),
-                        Text(
-                          timeago.format(article.publishedAt),
-                          style: Theme.of(context).textTheme.labelSmall,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 6),
-                    // Headline
-                    Text(
-                      article.title,
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(
-                              fontWeight: FontWeight.w600, height: 1.35),
-                    ),
-                    if (article.excerpt.isNotEmpty) ...[
-                      const SizedBox(height: 4),
+                      ),
+                      const SizedBox(width: 8),
                       Text(
-                        article.excerpt,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.bodySmall,
+                        timeago.format(article.publishedAt),
+                        style: Theme.of(context).textTheme.labelSmall,
                       ),
                     ],
+                  ),
+                  const SizedBox(height: 8),
+                  // Headline
+                  Text(
+                    article.title,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.w700, height: 1.35),
+                  ),
+                  if (article.excerpt.isNotEmpty) ...[
+                    const SizedBox(height: 6),
+                    Text(
+                      article.excerpt,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
                   ],
-                ),
+                ],
               ),
             ),
           ],
@@ -199,26 +287,38 @@ class _BlogCard extends StatelessWidget {
       ),
     );
   }
-}
 
-class _PlaceholderThumb extends StatelessWidget {
-  final BuildContext ctx;
-  const _PlaceholderThumb(this.ctx);
-
-  @override
-  Widget build(BuildContext context) {
+  /// Branded gradient placeholder — shown when no cover image is available.
+  Widget _gradientPlaceholder(BuildContext context) {
     return Container(
-      width: 100,
-      height: 100,
       decoration: BoxDecoration(
-        color: AppTheme.surfaceElevated(ctx),
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(15),
-          bottomLeft: Radius.circular(15),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            AppTheme.gold.withValues(alpha: 0.25),
+            AppTheme.gold.withValues(alpha: 0.08),
+          ],
         ),
       ),
-      child: Icon(Icons.article_outlined,
-          color: AppTheme.textMuted(ctx), size: 32),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.article_rounded,
+                color: AppTheme.gold.withValues(alpha: 0.5), size: 40),
+            const SizedBox(height: 8),
+            Text(
+              article.sourceName,
+              style: TextStyle(
+                color: AppTheme.gold.withValues(alpha: 0.6),
+                fontSize: 11,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
