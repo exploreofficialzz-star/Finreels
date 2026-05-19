@@ -218,7 +218,7 @@ class _BlogCard extends StatelessWidget {
                   ? CachedNetworkImage(
                       imageUrl: article.thumbnailUrl!,
                       fit: BoxFit.cover,
-                      placeholder: (_, __) => _gradientPlaceholder(context),
+                      placeholder: (_, __) => _shimmerPlaceholder(),
                       errorWidget: (_, __, ___) =>
                           _gradientPlaceholder(context),
                     )

@@ -336,7 +336,6 @@ class FeedProvider extends ChangeNotifier {
     // Collect ALL channel data into a local map first.
     // Never mutate _videosByChannel while the UI is reading it.
     final snapshot = <String, List<Video>>{};
-    var successCount = 0;
 
     await Future.wait(ChannelData.all.map((ch) async {
       // fetchVideos never throws — it returns [] on any error.
@@ -345,7 +344,6 @@ class FeedProvider extends ChangeNotifier {
       final videos =
           await RssService.instance.fetchVideos(ch.id, forceRefresh: force);
       snapshot[ch.id] = videos;
-      if (videos.isNotEmpty) successCount++;
     }));
 
     // Single atomic assignment + cache invalidation — no partial renders.

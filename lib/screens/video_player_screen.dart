@@ -37,7 +37,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
     _controller = YoutubePlayerController(
       initialVideoId: widget.video.id,
-      flags: const YoutubePlayerFlags(),
     )..addListener(_onControllerUpdate);
   }
 
