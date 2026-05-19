@@ -162,13 +162,14 @@ class FeedProvider extends ChangeNotifier {
   static final _epoch = DateTime(2000);
 
   List<Video> get _bookVideos => [
+        // ── Wealth Building ────────────────────────────────────────────────────
         Video(
           id: 'book_richest_man',
           title: 'The Richest Man in Babylon — George S. Clason',
           description:
-              'Classic personal finance book using parables set in ancient '
-              'Babylon. Timeless lessons on saving, investing, and building '
-              'wealth. The oldest wealth-building advice still relevant today.',
+              'Classic personal finance parables set in ancient Babylon. '
+              'Timeless laws of money: pay yourself first, make money work '
+              'for you, protect your wealth. The oldest wealth advice that still works.',
           channelId: 'books',
           channelName: 'Free Finance Library',
           publishedAt: _epoch,
@@ -178,9 +179,9 @@ class FeedProvider extends ChangeNotifier {
           id: 'book_think_grow',
           title: 'Think and Grow Rich — Napoleon Hill',
           description:
-              'One of the best-selling self-help books of all time. Hill '
-              'studied 500+ successful people to extract 13 wealth principles. '
-              'A masterclass in success mindset.',
+              'Napoleon Hill studied 500+ of the most successful people in history '
+              'and distilled 13 principles of wealth. The definitive success mindset '
+              'book. A must-read for every entrepreneur.',
           channelId: 'books',
           channelName: 'Free Finance Library',
           publishedAt: _epoch,
@@ -191,20 +192,32 @@ class FeedProvider extends ChangeNotifier {
           title: 'Rich Dad Poor Dad — Robert Kiyosaki',
           description:
               'What the rich teach their kids about money that the poor and '
-              'middle class do not. The most-read personal finance book of all '
-              'time. Changes how you think about money forever.',
+              'middle class do not. The most-read personal finance book ever. '
+              'Teaches assets vs liabilities and the mindset shift needed to build wealth.',
           channelId: 'books',
           channelName: 'Free Finance Library',
           publishedAt: _epoch,
           thumbnailUrl: 'https://covers.openlibrary.org/b/id/9253566-L.jpg',
         ),
         Video(
+          id: 'book_psychology_money',
+          title: 'The Psychology of Money — Morgan Housel',
+          description:
+              '19 short stories on how people think about money. Timeless lessons '
+              'on wealth, greed and happiness. Shows why behaviour matters more '
+              'than knowledge when building long-term wealth.',
+          channelId: 'books',
+          channelName: 'Free Finance Library',
+          publishedAt: _epoch,
+          thumbnailUrl: 'https://covers.openlibrary.org/b/id/10521270-L.jpg',
+        ),
+        Video(
           id: 'book_millionaire_next_door',
           title: 'The Millionaire Next Door — Thomas Stanley',
           description:
               "The surprising truth about America's wealthy. Most millionaires "
-              'live below their means and build wealth quietly. Real research, '
-              'real data — how ordinary people build extraordinary wealth.',
+              'live below their means and build quietly. Real research on how '
+              'ordinary people build extraordinary net worth over time.',
           channelId: 'books',
           channelName: 'Free Finance Library',
           publishedAt: _epoch,
@@ -215,36 +228,86 @@ class FeedProvider extends ChangeNotifier {
           title: 'The Intelligent Investor — Benjamin Graham',
           description:
               "Warren Buffett's favourite book and the bible of value investing. "
-              'The definitive guide on margin of safety and long-term wealth. '
-              'Every serious investor must read this.',
+              'Teaches margin of safety and long-term thinking. '
+              'Every serious investor must read this classic.',
           channelId: 'books',
           channelName: 'Free Finance Library',
           publishedAt: _epoch,
           thumbnailUrl: 'https://covers.openlibrary.org/b/id/8235963-L.jpg',
         ),
-        Video(
-          id: 'book_psychology_money',
-          title: 'The Psychology of Money — Morgan Housel',
-          description:
-              '19 short stories about how people think about money and how to '
-              'make better financial decisions. Timeless lessons on wealth, '
-              'greed and happiness from a modern perspective.',
-          channelId: 'books',
-          channelName: 'Free Finance Library',
-          publishedAt: _epoch,
-          thumbnailUrl: 'https://covers.openlibrary.org/b/id/10521270-L.jpg',
-        ),
+        // ── Entrepreneurship & Business ────────────────────────────────────────
         Video(
           id: 'book_zero_to_one',
           title: 'Zero to One — Peter Thiel',
           description:
-              'Notes on startups and how to build the future. Peter Thiel '
-              'reveals the contrarian truths about innovation and how the '
-              'most valuable companies create something entirely new.',
+              'Peter Thiel reveals contrarian truths about building the future. '
+              'The secret to a successful startup is creating something new — '
+              'going from 0 to 1, not copying what already exists.',
           channelId: 'books',
           channelName: 'Free Finance Library',
           publishedAt: _epoch,
           thumbnailUrl: 'https://covers.openlibrary.org/b/id/8471611-L.jpg',
+        ),
+        Video(
+          id: 'book_100m_offers',
+          title: r'$100M Offers — Alex Hormozi',
+          description:
+              'How to make offers so good people feel stupid saying no. '
+              'Alex Hormozi breaks down the exact framework he used to build '
+              r'a $100M+ portfolio. The best sales and offer book written.',
+          channelId: 'books',
+          channelName: 'Free Finance Library',
+          publishedAt: _epoch,
+          thumbnailUrl: 'https://covers.openlibrary.org/b/id/13166048-L.jpg',
+        ),
+        Video(
+          id: 'book_e_myth',
+          title: 'The E-Myth Revisited — Michael Gerber',
+          description:
+              'Why most small businesses fail and what to do about it. '
+              'The myth: entrepreneurs start businesses. The reality: they get '
+              'trapped working IN them. Learn to work ON your business instead.',
+          channelId: 'books',
+          channelName: 'Free Finance Library',
+          publishedAt: _epoch,
+          thumbnailUrl: 'https://covers.openlibrary.org/b/id/7888438-L.jpg',
+        ),
+        Video(
+          id: 'book_10x_rule',
+          title: 'The 10X Rule — Grant Cardone',
+          description:
+              'Success is your duty, obligation and responsibility. Grant Cardone '
+              'reveals why you must set targets 10x higher than you think you need '
+              'and take 10x the action. The formula for massive success.',
+          channelId: 'books',
+          channelName: 'Free Finance Library',
+          publishedAt: _epoch,
+          thumbnailUrl: 'https://covers.openlibrary.org/b/id/8739700-L.jpg',
+        ),
+        // ── Personal Growth & Mindset ──────────────────────────────────────────
+        Video(
+          id: 'book_atomic_habits',
+          title: 'Atomic Habits — James Clear',
+          description:
+              'Tiny changes, remarkable results. The most practical book ever '
+              'written on building good habits and breaking bad ones. '
+              'The 1% better every day framework that compounds into life-changing results.',
+          channelId: 'books',
+          channelName: 'Free Finance Library',
+          publishedAt: _epoch,
+          thumbnailUrl: 'https://covers.openlibrary.org/b/id/10348396-L.jpg',
+        ),
+        Video(
+          id: 'book_compound_effect',
+          title: 'The Compound Effect — Darren Hardy',
+          description:
+              'Small, consistent actions compounding over time produce extraordinary '
+              'results. Darren Hardy, SUCCESS magazine publisher, reveals the '
+              'strategy responsible for every top performer's success.',
+          channelId: 'books',
+          channelName: 'Free Finance Library',
+          publishedAt: _epoch,
+          thumbnailUrl: 'https://covers.openlibrary.org/b/id/8692432-L.jpg',
         ),
       ];
 

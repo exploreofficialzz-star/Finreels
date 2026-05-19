@@ -95,7 +95,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   @override
   void initState() {
     super.initState();
-    unawaited(AdService.instance.onVideoOpened());
+    unawaited(AdService.instance.onContentTapped());
     _progressBox = Hive.box<String>('reading_progress');
     _lastCfi = _progressBox?.get(_progressKey);
   }

@@ -1,23 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:visibility_detector/visibility_detector.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../models/channel.dart';
 import '../models/video.dart';
 import '../theme/app_theme.dart';
 
-/// Fix 3 — Scroll Position Jumping
+/// Feed card — NO auto-play.
+/// The player only initialises and plays when the user explicitly taps
+/// the thumbnail. VisibilityDetector is removed entirely.
 ///
-/// Key changes:
-/// 1. Uses [AutomaticKeepAliveClientMixin] so the player widget is preserved
-///    across scroll — no remount, no re-initialisation jank.
-/// 2. Play/pause control uses a [ValueNotifier<String?>] instead of a prop
-///    String — the notifier change does NOT call setState() on the parent
-///    feed list, so scroll position is completely unaffected.
-/// 3. The internal _onUpdate listener only calls play/pause on the controller,
-///    never setState, so player state changes are fully isolated.
+/// Play/pause between cards is coordinated via [activeVideoNotifier]:
+/// when this card becomes active, other cards pause — without triggering
+/// a parent setState (no scroll interference).
 class InlineVideoCard extends StatefulWidget {
   final Video video;
   final Channel channel;
@@ -25,9 +21,8 @@ class InlineVideoCard extends StatefulWidget {
   final VoidCallback? onSave;
   final VoidCallback? onShare;
 
-  /// Shared across all cards in the feed.
-  /// When a card becomes visible it sets notifier.value = video.id.
-  /// All other cards listen and pause — no parent setState needed.
+  /// Shared ValueNotifier across all feed cards.
+  /// Setting it to this card's ID pauses all others.
   final ValueNotifier<String?> activeVideoNotifier;
 
   const InlineVideoCard({
@@ -48,13 +43,13 @@ class _InlineVideoCardState extends State<InlineVideoCard>
     with AutomaticKeepAliveClientMixin {
   YoutubePlayerController? _controller;
   bool _playerReady = false;
-  bool _expanded = false;
+  bool _expanded = false; // true once user taps play
 
   bool get _isActive =>
       widget.activeVideoNotifier.value == widget.video.id;
 
   @override
-  bool get wantKeepAlive => _expanded; // keep alive while player is open
+  bool get wantKeepAlive => _expanded;
 
   @override
   void initState() {
@@ -70,8 +65,7 @@ class _InlineVideoCardState extends State<InlineVideoCard>
     super.dispose();
   }
 
-  /// Fires when another card becomes the active one (or active clears).
-  /// Only touches the controller — zero setState, zero parent rebuild.
+  /// Fires when another card becomes active — pause without setState on parent.
   void _onActiveChanged() {
     if (!mounted || _controller == null) return;
     if (_isActive && _playerReady) {
@@ -81,26 +75,29 @@ class _InlineVideoCardState extends State<InlineVideoCard>
     }
   }
 
-  void _initController() {
-    if (_controller != null) return;
-    _controller = YoutubePlayerController(
-      initialVideoId: widget.video.id,
-      flags: YoutubePlayerFlags(
-        autoPlay: _isActive,
-        enableCaption: false,
-      ),
-    )..addListener(_onControllerUpdate);
-
-    // Trigger rebuild only for the expand — never for play/pause.
-    if (mounted) setState(() => _expanded = true);
-    updateKeepAlive();
+  /// Called only when user explicitly taps the thumbnail.
+  void _onUserTap() {
+    if (_controller == null) {
+      // First tap: create controller. autoPlay = false; user already tapped.
+      _controller = YoutubePlayerController(
+        initialVideoId: widget.video.id,
+        flags: const YoutubePlayerFlags(
+          autoPlay: true, // play immediately after user's deliberate tap
+          enableCaption: false,
+          hideControls: false,
+        ),
+      )..addListener(_onControllerUpdate);
+      setState(() => _expanded = true);
+      updateKeepAlive();
+    }
+    // Signal all other cards to pause — no parent rebuild.
+    widget.activeVideoNotifier.value = widget.video.id;
   }
 
   void _onControllerUpdate() {
     if (!mounted) return;
     final ready = _controller?.value.isReady ?? false;
     if (ready != _playerReady) {
-      // Only setState for the ready flag — this only rebuilds THIS card.
       setState(() => _playerReady = ready);
       if (ready && _isActive) _controller?.play();
     }
@@ -108,90 +105,76 @@ class _InlineVideoCardState extends State<InlineVideoCard>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context); // Required by AutomaticKeepAliveClientMixin.
-    return VisibilityDetector(
-      key: Key('inline_${widget.video.id}'),
-      onVisibilityChanged: (info) {
-        if (!mounted) return;
-        if (info.visibleFraction >= 0.5) {
-          _initController();
-          // Setting notifier.value notifies other cards via listener —
-          // the parent feed list is never involved.
-          widget.activeVideoNotifier.value = widget.video.id;
-        } else {
-          _controller?.pause();
-        }
-      },
-      child: RepaintBoundary(
-        child: Container(
-          decoration: BoxDecoration(
-            color: AppTheme.surfaceColor(context),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-                color: AppTheme.dividerColor(context), width: 0.5),
-          ),
-          clipBehavior: Clip.hardEdge,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // ── Player or Thumbnail ──────────────────────────────────
-              _expanded && _controller != null
-                  ? _buildPlayer()
-                  : _buildThumbnail(context),
+    super.build(context);
+    return RepaintBoundary(
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppTheme.surfaceColor(context),
+          borderRadius: BorderRadius.circular(16),
+          border:
+              Border.all(color: AppTheme.dividerColor(context), width: 0.5),
+        ),
+        clipBehavior: Clip.hardEdge,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // ── Player or Thumbnail ──────────────────────────────────────
+            _expanded && _controller != null
+                ? _buildPlayer()
+                : _buildThumbnail(context),
 
-              // Channel accent strip
-              Container(height: 3, color: widget.channel.accentColor),
+            // Channel accent strip
+            Container(height: 3, color: widget.channel.accentColor),
 
-              // ── Info ─────────────────────────────────────────────────
-              Padding(
-                padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.video.title,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          height: 1.35, fontWeight: FontWeight.w600),
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Container(
-                          width: 7,
-                          height: 7,
-                          decoration: BoxDecoration(
-                            color: widget.channel.accentColor,
-                            shape: BoxShape.circle,
-                          ),
+            // ── Info ─────────────────────────────────────────────────────
+            Padding(
+              padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.video.title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        height: 1.35, fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Container(
+                        width: 7,
+                        height: 7,
+                        decoration: BoxDecoration(
+                          color: widget.channel.accentColor,
+                          shape: BoxShape.circle,
                         ),
-                        const SizedBox(width: 6),
-                        Expanded(
-                          child: Text(
-                            widget.channel.name,
-                            overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall
-                                ?.copyWith(fontWeight: FontWeight.w500),
-                          ),
+                      ),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          widget.channel.name,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall
+                              ?.copyWith(fontWeight: FontWeight.w500),
                         ),
-                        Text(
-                          '· ${timeago.format(widget.video.publishedAt)}',
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                        if (widget.onSave != null || widget.onShare != null) ...[
-                          const SizedBox(width: 4),
-                          _actionMenu(context),
-                        ],
+                      ),
+                      Text(
+                        '· ${timeago.format(widget.video.publishedAt)}',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                      if (widget.onSave != null || widget.onShare != null) ...[
+                        const SizedBox(width: 4),
+                        _actionMenu(context),
                       ],
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -227,10 +210,7 @@ class _InlineVideoCardState extends State<InlineVideoCard>
     return AspectRatio(
       aspectRatio: 16 / 9,
       child: GestureDetector(
-        onTap: () {
-          _initController();
-          widget.activeVideoNotifier.value = widget.video.id;
-        },
+        onTap: _onUserTap, // user must tap — no auto-play
         child: Stack(
           fit: StackFit.expand,
           children: [
@@ -247,16 +227,17 @@ class _InlineVideoCardState extends State<InlineVideoCard>
                 ),
               ),
             ),
+            // Play button overlay — clear affordance that tap is required
             Center(
               child: Container(
-                width: 48,
-                height: 48,
+                width: 56,
+                height: 56,
                 decoration: BoxDecoration(
-                  color: Colors.black.withValues(alpha: 0.6),
+                  color: Colors.black.withValues(alpha: 0.65),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(Icons.play_arrow_rounded,
-                    color: Colors.white, size: 30),
+                    color: Colors.white, size: 34),
               ),
             ),
           ],

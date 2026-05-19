@@ -156,7 +156,7 @@ class _FeedBodyState extends State<_FeedBody> {
 
   void _onTap(BuildContext context, Video video) {
     _tapCount++;
-    if (_tapCount.isEven) unawaited(AdService.instance.showInterstitial());
+    if (_tapCount.isEven) unawaited(AdService.instance.onContentTapped());
 
     if (video.channelId == 'books') {
       Navigator.push(context,

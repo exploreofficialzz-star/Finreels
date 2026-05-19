@@ -21,21 +21,28 @@ class BlogArticle {
   });
 }
 
-/// Finance RSS/Atom sources for the Blogs tab.
-/// Uses the xml package (already in project) — no extra dependency.
+/// Business, wealth and personal-growth RSS sources.
+/// Replaces the previous news-heavy lineup (MarketWatch, Reuters).
 const List<Map<String, String>> kBlogFeeds = [
   {
-    'name': 'Investopedia',
-    'url':
-        'https://www.investopedia.com/feedbuilder/feed/getfeed?feedName=rss_headline',
+    'name': 'Entrepreneur',
+    'url': 'https://www.entrepreneur.com/latest.rss',
   },
   {
-    'name': 'MarketWatch',
-    'url': 'https://feeds.content.dowjones.io/public/rss/mw_realtimeheadlines',
+    'name': 'Inc. Magazine',
+    'url': 'https://www.inc.com/rss/',
   },
   {
-    'name': 'Reuters Business',
-    'url': 'https://feeds.reuters.com/reuters/businessNews',
+    'name': 'Forbes Entrepreneurs',
+    'url': 'https://www.forbes.com/entrepreneurs/feed/',
+  },
+  {
+    'name': 'Harvard Business Review',
+    'url': 'https://feeds.hbr.org/harvardbusiness',
+  },
+  {
+    'name': 'Seth Godin',
+    'url': 'https://seths.blog/feed/',
   },
 ];
 
@@ -80,7 +87,6 @@ class BlogRssService {
       if (response.statusCode != 200) return [];
 
       final body = response.body;
-      // Typed list avoids unnecessary_cast warnings in compute callback
       return await compute<List<String>, List<BlogArticle>>(
         (args) => _parse(args[0], args[1]),
         [body, sourceName],
@@ -91,7 +97,6 @@ class BlogRssService {
     }
   }
 
-  /// Parses RSS 2.0 and Atom using the existing xml ^6.x package.
   static List<BlogArticle> _parse(String body, String sourceName) {
     try {
       final doc = XmlDocument.parse(body);
@@ -103,9 +108,16 @@ class BlogRssService {
           final link = _text(item, 'link') ?? _text(item, 'guid') ?? '';
           if (link.isEmpty) return null;
 
-          var thumb = item.findElements('enclosure').firstOrNull?.getAttribute('url');
+          var thumb = item.findElements('enclosure').firstOrNull
+              ?.getAttribute('url');
           if (thumb == null || thumb.isEmpty) {
-            thumb = item.findElements('media:content').firstOrNull?.getAttribute('url');
+            thumb = item.findElements('media:content').firstOrNull
+                ?.getAttribute('url');
+          }
+          // Try og:image or media:thumbnail
+          if (thumb == null || thumb.isEmpty) {
+            thumb = item.findElements('media:thumbnail').firstOrNull
+                ?.getAttribute('url');
           }
 
           final pubStr = _text(item, 'pubDate') ?? '';
@@ -126,8 +138,8 @@ class BlogRssService {
       final atomEntries = doc.findAllElements('entry');
       if (atomEntries.isNotEmpty) {
         return atomEntries.map((entry) {
-          final link =
-              entry.findElements('link').firstOrNull?.getAttribute('href') ?? '';
+          final link = entry.findElements('link').firstOrNull
+              ?.getAttribute('href') ?? '';
           if (link.isEmpty) return null;
 
           final updStr =
@@ -157,12 +169,10 @@ class BlogRssService {
       .replaceAll(RegExp(r'\s+'), ' ')
       .trim();
 
-  /// Handles RFC 822 (RSS) and ISO 8601 (Atom) date strings.
   static DateTime? _parseRssDate(String s) {
     if (s.isEmpty) return null;
     final iso = DateTime.tryParse(s);
     if (iso != null) return iso;
-    // Strip "Wed, " prefix from RFC 822 and retry
     final trimmed = s.replaceFirst(RegExp(r'^[A-Za-z]+,\s*'), '');
     return DateTime.tryParse(trimmed);
   }
