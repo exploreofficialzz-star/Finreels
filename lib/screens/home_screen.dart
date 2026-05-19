@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -334,6 +335,11 @@ class _ShortsTab extends StatelessWidget {
                     CachedNetworkImage(
                       imageUrl: video.thumbnailMq,
                       fit: BoxFit.cover,
+                      placeholder: (_, __) => Shimmer.fromColors(
+                        baseColor: const Color(0xFF1E1E1E),
+                        highlightColor: const Color(0xFF2C2C2C),
+                        child: const ColoredBox(color: Colors.white),
+                      ),
                       errorWidget: (_, __, ___) =>
                           ColoredBox(color: AppTheme.surfaceElevated(context)),
                     ),
@@ -440,6 +446,12 @@ class _BooksTab extends StatelessWidget {
                       width: 90,
                       height: 120,
                       fit: BoxFit.cover,
+                      placeholder: (_, __) => Shimmer.fromColors(
+                        baseColor: const Color(0xFF1E1E1E),
+                        highlightColor: const Color(0xFF2C2C2C),
+                        child: const SizedBox(width: 90, height: 120,
+                            child: ColoredBox(color: Colors.white)),
+                      ),
                       errorWidget: (_, __, ___) => Container(
                         width: 90,
                         height: 120,

@@ -1,18 +1,21 @@
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:xml/xml.dart';
+
 import '../models/video.dart';
 
 class RssService {
   RssService._();
   static final RssService instance = RssService._();
 
-  // In-memory cache: channelId → (videos, fetchedAt)
-  final Map<String, List<Video>> _cache = {};
-  final Map<String, DateTime> _cacheTime = {};
+  final Map<String, List<Video>> _cache    = {};
+  final Map<String, DateTime>    _cacheTime = {};
   static const Duration _cacheTtl = Duration(minutes: 10);
 
-  Future<List<Video>> fetchVideos(String channelId,
-      {bool forceRefresh = false}) async {
+  Future<List<Video>> fetchVideos(
+    String channelId, {
+    bool forceRefresh = false,
+  }) async {
     if (!forceRefresh && _isCacheFresh(channelId)) {
       return _cache[channelId]!;
     }
@@ -29,77 +32,76 @@ class RssService {
           .timeout(const Duration(seconds: 15));
 
       if (response.statusCode != 200) {
-        throw Exception('HTTP ${response.statusCode}');
+        debugPrint('[RssService] HTTP ${response.statusCode} for $channelId');
+        // Return stale cache if available, else empty — never throw.
+        return _cache[channelId] ?? [];
       }
 
       final videos = _parseRss(response.body, channelId);
-      _cache[channelId] = videos;
+      _cache[channelId]    = videos;
       _cacheTime[channelId] = DateTime.now();
       return videos;
-    } on Exception catch (_) {
-      // Serve stale cache rather than crashing
-      if (_cache.containsKey(channelId)) return _cache[channelId]!;
-      rethrow;
+    } on Exception catch (e) {
+      debugPrint('[RssService] Error fetching $channelId: $e');
+      // Return stale cache if available, else empty — never propagate the
+      // exception. This prevents a single bad channel from failing the whole
+      // Future.wait batch and showing the error screen.
+      return _cache[channelId] ?? [];
     }
   }
 
   List<Video> _parseRss(String xmlBody, String channelId) {
-    final doc = XmlDocument.parse(xmlBody);
-    final entries = doc.findAllElements('entry');
+    try {
+      final doc     = XmlDocument.parse(xmlBody);
+      final entries = doc.findAllElements('entry');
 
-    return entries.map((entry) {
-      // Video ID
-      final rawId =
-          entry.findElements('yt:videoId').firstOrNull?.innerText ?? '';
-      final fallbackId = _extractIdFromUrn(
-          entry.findElements('id').firstOrNull?.innerText ?? '');
-      final videoId = rawId.isNotEmpty ? rawId : fallbackId;
+      return entries.map((entry) {
+        final rawId     = entry.findElements('yt:videoId').firstOrNull?.innerText ?? '';
+        final fallbackId = _extractIdFromUrn(
+            entry.findElements('id').firstOrNull?.innerText ?? '');
+        final videoId = rawId.isNotEmpty ? rawId : fallbackId;
 
-      // Title — decode HTML entities from CDATA
-      final title =
-          entry.findElements('title').firstOrNull?.innerText.trim() ??
-              'Untitled';
+        final title = entry.findElements('title').firstOrNull?.innerText.trim()
+            ?? 'Untitled';
 
-      // Channel name
-      final channelName = entry
-              .findElements('author')
-              .firstOrNull
-              ?.findElements('name')
-              .firstOrNull
-              ?.innerText
-              .trim() ??
-          '';
+        final channelName = entry
+                .findElements('author')
+                .firstOrNull
+                ?.findElements('name')
+                .firstOrNull
+                ?.innerText
+                .trim() ??
+            '';
 
-      // Published date
-      final pubStr =
-          entry.findElements('published').firstOrNull?.innerText ?? '';
-      final publishedAt = DateTime.tryParse(pubStr) ?? DateTime.now();
+        final pubStr    = entry.findElements('published').firstOrNull?.innerText ?? '';
+        final publishedAt = DateTime.tryParse(pubStr) ?? DateTime.now();
 
-      // Thumbnail — prefer media:thumbnail url attribute
-      final mediaThumb =
-          entry.findElements('media:thumbnail').firstOrNull?.getAttribute('url')
-              ?? 'https://img.youtube.com/vi/$videoId/mqdefault.jpg';
+        final mediaThumb =
+            entry.findElements('media:thumbnail').firstOrNull?.getAttribute('url')
+                ?? 'https://img.youtube.com/vi/$videoId/mqdefault.jpg';
 
-      // Description
-      final description =
-          entry.findElements('media:description').firstOrNull?.innerText.trim()
-              ?? entry.findElements('summary').firstOrNull?.innerText.trim()
-              ?? '';
+        final description =
+            entry.findElements('media:description').firstOrNull?.innerText.trim()
+                ?? entry.findElements('summary').firstOrNull?.innerText.trim()
+                ?? '';
 
-      return Video(
-        id: videoId,
-        title: title,
-        description: description,
-        channelId: channelId,
-        channelName: channelName,
-        publishedAt: publishedAt,
-        thumbnailUrl: mediaThumb,
-      );
-    }).where((v) => v.id.isNotEmpty).toList();
+        return Video(
+          id:          videoId,
+          title:       title,
+          description: description,
+          channelId:   channelId,
+          channelName: channelName,
+          publishedAt: publishedAt,
+          thumbnailUrl: mediaThumb,
+        );
+      }).where((v) => v.id.isNotEmpty).toList();
+    } on Exception catch (e) {
+      debugPrint('[RssService] Parse error for $channelId: $e');
+      return [];
+    }
   }
 
   String _extractIdFromUrn(String urn) {
-    // Format: yt:video:VIDEO_ID
     final match = RegExp(r'yt:video:(.+)$').firstMatch(urn);
     return match?.group(1) ?? '';
   }

@@ -339,14 +339,13 @@ class FeedProvider extends ChangeNotifier {
     var successCount = 0;
 
     await Future.wait(ChannelData.all.map((ch) async {
-      try {
-        final videos =
-            await RssService.instance.fetchVideos(ch.id, forceRefresh: force);
-        snapshot[ch.id] = videos;
-        successCount++;
-      } on Exception catch (e) {
-        debugPrint('[FeedProvider] Error fetching ${ch.name}: $e');
-      }
+      // fetchVideos never throws — it returns [] on any error.
+      // Count every response (even empty) as a success so one bad channel
+      // ID cannot push us into the error state.
+      final videos =
+          await RssService.instance.fetchVideos(ch.id, forceRefresh: force);
+      snapshot[ch.id] = videos;
+      if (videos.isNotEmpty) successCount++;
     }));
 
     // Single atomic assignment + cache invalidation — no partial renders.
@@ -354,8 +353,9 @@ class FeedProvider extends ChangeNotifier {
     _tabCache.clear();
     _unifiedCache = null;
 
-    _state = successCount > 0 ? FeedState.loaded : FeedState.error;
-    _errorMessage = successCount == 0
+    final totalVideos = snapshot.values.fold(0, (sum, l) => sum + l.length);
+    _state = totalVideos > 0 ? FeedState.loaded : FeedState.error;
+    _errorMessage = totalVideos == 0
         ? 'Could not load content. Check your connection.'
         : null;
     notifyListeners(); // Single notify — UI rebuilds once with complete data.

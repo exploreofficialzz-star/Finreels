@@ -288,6 +288,18 @@ class _BlogCard extends StatelessWidget {
     );
   }
 
+  /// Shimmer placeholder — shown while thumbnail image is downloading.
+  Widget _shimmerPlaceholder() {
+    return Shimmer.fromColors(
+      baseColor: const Color(0xFF1E1E1E),
+      highlightColor: const Color(0xFF2C2C2C),
+      child: const DecoratedBox(
+        decoration: BoxDecoration(color: Colors.white),
+        child: SizedBox.expand(),
+      ),
+    );
+  }
+
   /// Branded gradient placeholder — shown when no cover image is available.
   Widget _gradientPlaceholder(BuildContext context) {
     return DecoratedBox(

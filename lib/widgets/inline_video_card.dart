@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -215,9 +216,19 @@ class _InlineVideoCardState extends State<InlineVideoCard>
             CachedNetworkImage(
               imageUrl: widget.video.thumbnailHd,
               fit: BoxFit.cover,
+              placeholder: (_, __) => Shimmer.fromColors(
+                baseColor: const Color(0xFF1E1E1E),
+                highlightColor: const Color(0xFF2C2C2C),
+                child: const ColoredBox(color: Colors.white),
+              ),
               errorWidget: (_, __, ___) => CachedNetworkImage(
                 imageUrl: widget.video.thumbnailMq,
                 fit: BoxFit.cover,
+                placeholder: (_, __) => Shimmer.fromColors(
+                  baseColor: const Color(0xFF1E1E1E),
+                  highlightColor: const Color(0xFF2C2C2C),
+                  child: const ColoredBox(color: Colors.white),
+                ),
                 errorWidget: (_, __, ___) => ColoredBox(
                   color: AppTheme.surfaceElevated(context),
                   child: Icon(Icons.play_circle_outline_rounded,

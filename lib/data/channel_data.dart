@@ -39,7 +39,7 @@ class ChannelData {
       initials: 'GS',
     ),
     Channel(
-      id: 'UC85cBflrQHPH22gLU2N1Hxw',
+      id: 'UC_lnCXWVOXZMgPlkaCNF7pA',
       name: 'Ryan Pineda',
       handle: '@RyanPineda',
       description:
@@ -89,7 +89,7 @@ class ChannelData {
       initials: 'GV',
     ),
     Channel(
-      id: 'UCQgY17G57xBMb3NNFbVTFsA',
+      id: 'UCpx-MG7wbF67nEiWuV9nO_g',
       name: 'Iman Gadzhi',
       handle: '@imangadzhi',
       description:
@@ -115,7 +115,7 @@ class ChannelData {
       initials: 'AH',
     ),
     Channel(
-      id: 'UCkBT18duRE3V7kPq7AlYMqg',
+      id: 'UCDq_Rd7lWZfWRTEPFXsxuoA',
       name: 'Grant Cardone',
       handle: '@GrantCardone',
       description:
@@ -127,7 +127,7 @@ class ChannelData {
       initials: 'GC',
     ),
     Channel(
-      id: 'UCkBiUMBGsNAr-Y49y2fLsmA',
+      id: 'UCs_6DLTDKH6cFCzgm_C0Fog',
       name: 'Dan Lok',
       handle: '@DanLok',
       description:
@@ -165,7 +165,7 @@ class ChannelData {
       initials: 'LH',
     ),
     Channel(
-      id: 'UCY_LMaDAoa6hwHKG5c4Y29w',
+      id: 'UCkc9HJ_eStBbL2djJ-MqxrQ',
       name: 'Tai Lopez',
       handle: '@TaiLopez',
       description:
