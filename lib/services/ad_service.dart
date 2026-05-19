@@ -216,7 +216,7 @@ class AdService {
     required void Function() onRewarded,
   }) async {
     if (_adsRemoved || !_rewardedInterstitialReady ||
-        _rewardedInterstitialAd == null) return;
+        _rewardedInterstitialAd == null) { return; }
     await _rewardedInterstitialAd!.show(
         onUserEarnedReward: (_, __) => onRewarded());
     _rewardedInterstitialReady = false;
@@ -317,19 +317,19 @@ class AdService {
     await prefs.setInt(
         AppConfig.prefAdsRemovedUntil, until.millisecondsSinceEpoch);
     _adsRemoved = true;
-    _bannerAd?.dispose();
+    unawaited(_bannerAd?.dispose() ?? Future.value());
     _bannerAd              = null;
     _bannerReady           = false;
-    _interstitialAd?.dispose();
+    unawaited(_interstitialAd?.dispose() ?? Future.value());
     _interstitialAd        = null;
     _interstitialReady     = false;
-    _appOpenAd?.dispose();
+    unawaited(_appOpenAd?.dispose() ?? Future.value());
     _appOpenAd             = null;
     _appOpenReady          = false;
-    _rewardedAd?.dispose();
+    unawaited(_rewardedAd?.dispose() ?? Future.value());
     _rewardedAd            = null;
     _rewardedReady         = false;
-    _rewardedInterstitialAd?.dispose();
+    unawaited(_rewardedInterstitialAd?.dispose() ?? Future.value());
     _rewardedInterstitialAd        = null;
     _rewardedInterstitialReady     = false;
   }

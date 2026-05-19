@@ -303,7 +303,7 @@ class FeedProvider extends ChangeNotifier {
           description:
               'Small, consistent actions compounding over time produce extraordinary '
               'results. Darren Hardy, SUCCESS magazine publisher, reveals the '
-              'strategy responsible for every top performer's success.',
+              'strategy responsible for every top performer\'s success.',
           channelId: 'books',
           channelName: 'Free Finance Library',
           publishedAt: _epoch,

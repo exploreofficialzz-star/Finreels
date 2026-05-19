@@ -82,9 +82,7 @@ class _InlineVideoCardState extends State<InlineVideoCard>
       _controller = YoutubePlayerController(
         initialVideoId: widget.video.id,
         flags: const YoutubePlayerFlags(
-          autoPlay: true, // play immediately after user's deliberate tap
           enableCaption: false,
-          hideControls: false,
         ),
       )..addListener(_onControllerUpdate);
       setState(() => _expanded = true);

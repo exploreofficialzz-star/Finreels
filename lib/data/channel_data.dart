@@ -5,7 +5,7 @@ import '../models/channel.dart';
 /// wealth building, entrepreneurship, sales & marketing, personal growth,
 /// and stories of how people became rich.
 ///
-/// Removed: The Financial Diet (personal finance/news), School of Hard Knocks.
+/// Removed: The Financial Diet (personal finance/news).
 /// Added: Grant Cardone, Tom Bilyeu, Lewis Howes, Evan Carmichael,
 ///        Iman Gadzhi, Dan Lok, Tai Lopez, Ryan Pineda.
 class ChannelData {
@@ -213,6 +213,34 @@ class ChannelData {
       category: 'Entrepreneurship',
       focus: 'Deals, business & wealth mindset',
       initials: 'KO',
+    ),
+
+    // ── How They Got Rich — Interview Shows ──────────────────────────────────
+    Channel(
+      id: 'UCmtBqvOp6xHlecDO0Un9O4w',
+      name: 'School of Hard Knocks',
+      handle: '@theschoolofhardknocks',
+      description:
+          'Raw, unfiltered interviews with self-made millionaires and '
+          'billionaires sharing exactly how they built their wealth — '
+          'the struggles, the turning points, and the strategies that worked.',
+      accentColor: Color(0xFFD97706),
+      category: 'How They Got Rich',
+      focus: 'Millionaire & billionaire interviews',
+      initials: 'SK',
+    ),
+    Channel(
+      id: 'UCJjSDX-jUChzOEyok9XYRJQ',
+      name: 'Valuetainment Short Clips',
+      handle: '@ValuetainmentShortClips',
+      description:
+          "The best short-form clips from Patrick Bet-David's interviews "
+          "with the world's most successful entrepreneurs — raw stories of "
+          "how ordinary people built extraordinary wealth and businesses.",
+      accentColor: Color(0xFF2563EB),
+      category: 'How They Got Rich',
+      focus: 'Entrepreneur origin stories & wealth journeys',
+      initials: 'VS',
     ),
   ];
 
