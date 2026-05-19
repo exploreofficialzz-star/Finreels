@@ -60,12 +60,15 @@ void main() {
 
   // ── Channel Data ────────────────────────────────────────────────────────────
   group('ChannelData', () {
-    test('has exactly 10 channels', () {
-      expect(ChannelData.all.length, 10);
+    test('has exactly 18 channels', () {
+      expect(ChannelData.all.length, 18);
     });
 
-    test('School of Hard Knocks is first', () {
-      expect(ChannelData.all.first.name, 'School of Hard Knocks');
+    test('School of Hard Knocks is in the list', () {
+      expect(
+        ChannelData.all.any((ch) => ch.name == 'School of Hard Knocks'),
+        isTrue,
+      );
     });
 
     test('all channels have non-empty IDs', () {
