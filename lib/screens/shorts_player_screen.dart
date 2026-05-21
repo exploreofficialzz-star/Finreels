@@ -8,15 +8,15 @@ import '../models/video.dart';
 import '../services/ad_service.dart';
 import '../theme/app_theme.dart';
 
-/// Full-screen vertical Shorts player.
+/// Full-screen 9:16 Shorts player — TikTok/Reels style.
 ///
-/// Key behaviours:
-/// • NO auto-play on entry — user must tap the play button on the first short.
-/// • Natural video ratio — AspectRatio is driven by the player itself via
-///   YoutubePlayerBuilder; we never force 16:9. The video fills its natural
-///   aspect ratio and is centred on a black background.
-/// • Ad every 4 pages scrolled via [AdService.onShortScrolled].
-/// • PageView.builder — each page owns its controller, disposed on eviction.
+/// Architecture decisions:
+/// • Uses [YoutubePlayer] directly (NOT [YoutubePlayerBuilder]) — avoids the
+///   internal orientation lock that YoutubePlayerBuilder triggers.
+/// • App is hard-locked to portrait via AndroidManifest screenOrientation.
+/// • Player fills the full screen in 9:16 via FittedBox + AspectRatio.
+/// • YouTube's native controls are hidden; we draw our own play/pause overlay.
+/// • Progress bar is drawn at the bottom of the screen.
 class ShortsPlayerScreen extends StatefulWidget {
   final List<Video> shorts;
   final int initialIndex;
@@ -40,11 +40,14 @@ class _ShortsPlayerScreenState extends State<ShortsPlayerScreen> {
     super.initState();
     _currentIndex = widget.initialIndex;
     _pageController = PageController(initialPage: widget.initialIndex);
+    // Ensure portrait — belt and braces alongside the manifest lock
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
 
   @override
   void dispose() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     _pageController.dispose();
     super.dispose();
   }
@@ -61,24 +64,26 @@ class _ShortsPlayerScreenState extends State<ShortsPlayerScreen> {
             itemCount: widget.shorts.length,
             onPageChanged: (index) {
               setState(() => _currentIndex = index);
-              // Trigger ad every 4 shorts scrolled
               unawaited(AdService.instance.onShortScrolled());
             },
             itemBuilder: (context, index) => _ShortPage(
+              key: ValueKey(widget.shorts[index].id),
               video: widget.shorts[index],
               isActive: index == _currentIndex,
-              // First page: user must tap. Subsequent pages: auto-play on swipe.
               autoPlayOnActivate: index != widget.initialIndex,
             ),
           ),
 
-          // Back button
+          // Back button — always on top, always visible
           Positioned(
             top: MediaQuery.of(context).padding.top + 8,
             left: 8,
-            child: IconButton(
-              icon: const Icon(Icons.arrow_back_rounded, color: Colors.white),
-              onPressed: () => Navigator.pop(context),
+            child: SafeArea(
+              child: IconButton(
+                icon: const Icon(Icons.arrow_back_rounded,
+                    color: Colors.white, size: 26),
+                onPressed: () => Navigator.pop(context),
+              ),
             ),
           ),
         ],
@@ -88,11 +93,6 @@ class _ShortsPlayerScreenState extends State<ShortsPlayerScreen> {
 }
 
 /// One page in the Shorts PageView.
-/// Owns its [YoutubePlayerController], disposed in [dispose].
-///
-/// When [autoPlayOnActivate] is true (every page after the first),
-/// the video plays automatically when it becomes the active page.
-/// The first page requires an explicit tap.
 class _ShortPage extends StatefulWidget {
   final Video video;
   final bool isActive;
@@ -102,6 +102,7 @@ class _ShortPage extends StatefulWidget {
     required this.video,
     required this.isActive,
     required this.autoPlayOnActivate,
+    super.key,
   });
 
   @override
@@ -111,19 +112,25 @@ class _ShortPage extends StatefulWidget {
 class _ShortPageState extends State<_ShortPage> {
   late YoutubePlayerController _controller;
   bool _ready = false;
-  bool _userStarted = false; // tracks whether user has tapped play
+  bool _playing = false;
+  bool _userStarted = false;
+  double _progress = 0;
 
   @override
   void initState() {
     super.initState();
-    // autoPlay only if this is NOT the entry page — entry page waits for tap.
     final shouldAutoPlay = widget.autoPlayOnActivate && widget.isActive;
     _controller = YoutubePlayerController(
       initialVideoId: widget.video.id,
       flags: YoutubePlayerFlags(
         autoPlay: shouldAutoPlay,
         loop: true,
+        // Hide YouTube's own controls — we draw our own overlay
+        hideControls: true,
+        disableDragSeek: false,
         enableCaption: false,
+        // Use hybrid composition on Android to prevent orientation override
+        useHybridComposition: true,
       ),
     )..addListener(_onUpdate);
     if (shouldAutoPlay) _userStarted = true;
@@ -131,18 +138,30 @@ class _ShortPageState extends State<_ShortPage> {
 
   void _onUpdate() {
     if (!mounted) return;
-    if (_controller.value.isReady != _ready) {
-      setState(() => _ready = _controller.value.isReady);
+    final v = _controller.value;
+    final ready = v.isReady;
+    final playing = v.playerState == PlayerState.playing;
+    final pos = v.position.inMilliseconds.toDouble();
+    final dur = v.metaData.duration.inMilliseconds.toDouble();
+    final progress = (dur > 0) ? (pos / dur).clamp(0.0, 1.0) : 0.0;
+
+    if (ready != _ready || playing != _playing || (progress - _progress).abs() > 0.005) {
+      setState(() {
+        _ready = ready;
+        _playing = playing;
+        _progress = progress;
+      });
     }
   }
 
   @override
   void didUpdateWidget(_ShortPage old) {
     super.didUpdateWidget(old);
-    if (widget.isActive && _ready && (widget.autoPlayOnActivate || _userStarted)) {
-      _controller.play();
-    } else if (!widget.isActive) {
+    if (!widget.isActive) {
       _controller.pause();
+      if (mounted) setState(() => _playing = false);
+    } else if (_ready && (widget.autoPlayOnActivate || _userStarted)) {
+      _controller.play();
     }
   }
 
@@ -154,9 +173,11 @@ class _ShortPageState extends State<_ShortPage> {
     super.dispose();
   }
 
-  void _onTapPlay() {
+  void _togglePlay() {
     _userStarted = true;
-    if (_ready) {
+    if (_playing) {
+      _controller.pause();
+    } else {
       _controller.play();
     }
   }
@@ -171,60 +192,77 @@ class _ShortPageState extends State<_ShortPage> {
       child: Stack(
         fit: StackFit.expand,
         children: [
+          // ── Black background ──────────────────────────────────────────────
           const ColoredBox(color: Colors.black),
 
-          // ── Video in natural aspect ratio, centred ───────────────────────
-          Center(
-            child: YoutubePlayerBuilder(
-              player: YoutubePlayer(
-                controller: _controller,
-                showVideoProgressIndicator: true,
-                progressIndicatorColor: AppTheme.gold,
-                progressColors: const ProgressBarColors(
-                  playedColor: AppTheme.gold,
-                  handleColor: AppTheme.gold,
-                ),
-                onReady: () {
-                  if (mounted) {
-                    setState(() => _ready = true);
-                    if (widget.isActive &&
-                        (widget.autoPlayOnActivate || _userStarted)) {
-                      _controller.play();
+          // ── Player sized to fill screen in 9:16 ──────────────────────────
+          // FittedBox + AspectRatio crops/scales the iFrame to fill the screen
+          // while preserving 9:16. ClipRect prevents overflow.
+          ClipRect(
+            child: FittedBox(
+              fit: BoxFit.cover,
+              child: SizedBox(
+                width: size.width,
+                height: size.width * (16 / 9),
+                child: YoutubePlayer(
+                  controller: _controller,
+                  showVideoProgressIndicator: false,
+                  onReady: () {
+                    if (mounted) {
+                      setState(() => _ready = true);
+                      if (widget.isActive &&
+                          (widget.autoPlayOnActivate || _userStarted)) {
+                        _controller.play();
+                      }
                     }
-                  }
-                },
-                bufferIndicator: const Center(
-                  child: CircularProgressIndicator(
-                    color: AppTheme.gold,
-                    strokeWidth: 2.5,
-                  ),
+                  },
+                  bufferIndicator: const SizedBox.shrink(),
                 ),
               ),
-              // Natural ratio: let the player size itself, don't force 16:9
-              builder: (_, player) => player,
             ),
           ),
 
-          // ── Tap-to-play overlay (shown until user starts playback) ────────
-          if (!_userStarted)
-            GestureDetector(
-              onTap: _onTapPlay,
-              behavior: HitTestBehavior.opaque,
-              child: Center(
-                child: Container(
-                  width: 64,
-                  height: 64,
-                  decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.65),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(Icons.play_arrow_rounded,
-                      color: Colors.white, size: 40),
+          // ── Tap to play/pause (covers full screen) ────────────────────────
+          GestureDetector(
+            onTap: _togglePlay,
+            behavior: HitTestBehavior.opaque,
+            child: const SizedBox.expand(),
+          ),
+
+          // ── Buffering spinner ─────────────────────────────────────────────
+          if (!_ready || (!_playing && !_userStarted))
+            Center(
+              child: _userStarted && !_ready
+                  ? const CircularProgressIndicator(
+                      color: AppTheme.gold, strokeWidth: 2.5)
+                  : Container(
+                      width: 64,
+                      height: 64,
+                      decoration: BoxDecoration(
+                        color: Colors.black.withValues(alpha: 0.55),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(Icons.play_arrow_rounded,
+                          color: Colors.white, size: 38),
+                    ),
+            ),
+
+          // ── Pause icon flash (briefly shown on pause tap) ─────────────────
+          if (_userStarted && !_playing && _ready)
+            Center(
+              child: Container(
+                width: 64,
+                height: 64,
+                decoration: BoxDecoration(
+                  color: Colors.black.withValues(alpha: 0.55),
+                  shape: BoxShape.circle,
                 ),
+                child: const Icon(Icons.pause_rounded,
+                    color: Colors.white, size: 38),
               ),
             ),
 
-          // ── Title + gradient overlay ──────────────────────────────────────
+          // ── Bottom gradient + title + progress bar ────────────────────────
           Positioned(
             bottom: 0,
             left: 0,
@@ -239,31 +277,52 @@ class _ShortPageState extends State<_ShortPage> {
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 60, 16, 40),
-                child: Text(
-                  widget.video.title,
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    height: 1.4,
-                    shadows: [Shadow(color: Colors.black54, blurRadius: 6)],
-                  ),
+                padding: const EdgeInsets.fromLTRB(16, 40, 16, 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      widget.video.title,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        height: 1.35,
+                        shadows: [
+                          Shadow(color: Colors.black54, blurRadius: 4)
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    // Custom progress bar — replaces YouTube's hidden bar
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(2),
+                      child: LinearProgressIndicator(
+                        value: _progress,
+                        backgroundColor: Colors.white24,
+                        valueColor:
+                            const AlwaysStoppedAnimation(AppTheme.gold),
+                        minHeight: 3,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                  ],
                 ),
               ),
             ),
           ),
 
-          // Swipe hint
+          // Swipe-up hint
           const Positioned(
-            bottom: 12,
+            bottom: 6,
             left: 0,
             right: 0,
             child: Center(
               child: Icon(Icons.keyboard_arrow_up_rounded,
-                  color: Colors.white54, size: 22),
+                  color: Colors.white38, size: 20),
             ),
           ),
         ],
