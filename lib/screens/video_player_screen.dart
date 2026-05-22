@@ -13,16 +13,11 @@ import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
 import 'channel_videos_screen.dart';
 
-/// In-app video player for long-form YouTube content.
-///
-/// Design decisions:
-/// • App is hard-locked portrait via AndroidManifest — no rotation ever.
-/// • Player sized to 16:9 via AspectRatio. YouTube's own controls are hidden;
-///   we draw a clean custom control bar on top.
-/// • Full-screen = same screen, player expands to fill the full display height
-///   using an AnimatedContainer. No rotation, no new route, no Transform.
-/// • When video ends: pause + show thumbnail with gold replay button.
-/// • Channel name row is tappable — leads to channel page.
+/// In-app video player.
+/// • 16:9 forced ratio, YouTube controls hidden — custom controls drawn on top.
+/// • Fullscreen = in-place AnimatedContainer expand. No rotation, no new route.
+/// • Video end = thumbnail + replay button.
+/// • Channel name row is tappable → channel page.
 class VideoPlayerScreen extends StatefulWidget {
   final Video video;
   final Channel channel;
@@ -39,11 +34,11 @@ class VideoPlayerScreen extends StatefulWidget {
 
 class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   late YoutubePlayerController _controller;
-  bool _ended   = false;
-  bool _playing = false;
-  bool _ready   = false;
+  bool _ended      = false;
+  bool _playing    = false;
+  bool _ready      = false;
   bool _fullscreen = false;
-  double _progress = 0;
+  double   _progress = 0;
   Duration _position = Duration.zero;
   Duration _duration = Duration.zero;
 
@@ -52,16 +47,11 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     super.initState();
     unawaited(AdService.instance.onContentTapped());
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-
     _controller = YoutubePlayerController(
       initialVideoId: widget.video.id,
       flags: const YoutubePlayerFlags(
         autoPlay: true,
-        // Hide YouTube's own controls — we draw clean custom ones
         hideControls: true,
-        disableDragSeek: false,
-        enableCaption: false,
-        loop: false,
         useHybridComposition: true,
       ),
     )..addListener(_onUpdate);
@@ -69,16 +59,15 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   void _onUpdate() {
     if (!mounted) return;
-    final v = _controller.value;
-    final ended  = v.playerState == PlayerState.ended;
+    final v       = _controller.value;
+    final ended   = v.playerState == PlayerState.ended;
     final playing = v.playerState == PlayerState.playing;
-    final ready  = v.isReady;
-    final pos    = v.position;
-    final dur    = v.metaData.duration;
-    final prog   = (dur.inMilliseconds > 0)
+    final ready   = v.isReady;
+    final pos     = v.position;
+    final dur     = v.metaData.duration;
+    final prog    = dur.inMilliseconds > 0
         ? (pos.inMilliseconds / dur.inMilliseconds).clamp(0.0, 1.0)
         : 0.0;
-
     if (ended != _ended || playing != _playing || ready != _ready ||
         (prog - _progress).abs() > 0.005) {
       setState(() {
@@ -101,11 +90,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   }
 
   void _togglePlay() {
-    if (_playing) {
-      _controller.pause();
-    } else {
-      _controller.play();
-    }
+    _playing ? _controller.pause() : _controller.play();
   }
 
   void _replay() {
@@ -116,24 +101,15 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   void _seekTo(double fraction) {
     if (_duration.inMilliseconds > 0) {
-      _controller.seekTo(
-          Duration(milliseconds: (fraction * _duration.inMilliseconds).round()));
+      _controller.seekTo(Duration(
+          milliseconds: (fraction * _duration.inMilliseconds).round()));
     }
   }
 
   void _toggleFullscreen() {
     setState(() => _fullscreen = !_fullscreen);
-    if (_fullscreen) {
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    } else {
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    }
-  }
-
-  void _openChannel() {
-    Navigator.push(context,
-        MaterialPageRoute(
-            builder: (_) => ChannelVideosScreen(channel: widget.channel)));
+    SystemChrome.setEnabledSystemUIMode(
+        _fullscreen ? SystemUiMode.immersiveSticky : SystemUiMode.edgeToEdge);
   }
 
   String _fmt(Duration d) {
@@ -144,10 +120,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final screenH = MediaQuery.of(context).size.height;
-    final playerH = _fullscreen
-        ? screenH
-        : MediaQuery.of(context).size.width * (9 / 16);
+    final sw      = MediaQuery.of(context).size.width;
+    final sh      = MediaQuery.of(context).size.height;
+    final playerH = _fullscreen ? sh : sw * (9 / 16);
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -156,7 +131,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         bottom: false,
         child: Column(
           children: [
-            // ── AppBar (hidden in fullscreen) ───────────────────────────────
             if (!_fullscreen)
               AppBar(
                 backgroundColor: AppTheme.bgColor(context),
@@ -171,7 +145,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 ],
               ),
 
-            // ── Player container ────────────────────────────────────────────
+            // ── Player ──────────────────────────────────────────────────────
             AnimatedContainer(
               duration: const Duration(milliseconds: 250),
               width: double.infinity,
@@ -180,15 +154,13 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  // iFrame player — 16:9 scaled via FittedBox
                   FittedBox(
                     fit: BoxFit.cover,
                     child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.width * (9 / 16),
+                      width: sw,
+                      height: sw * (9 / 16),
                       child: YoutubePlayer(
                         controller: _controller,
-                        showVideoProgressIndicator: false,
                         onReady: () {
                           if (mounted) setState(() => _ready = true);
                         },
@@ -199,26 +171,18 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       ),
                     ),
                   ),
-
-                  // ── End state overlay ─────────────────────────────────────
-                  if (_ended) _buildEndOverlay(),
-
-                  // ── Buffering spinner ─────────────────────────────────────
+                  if (_ended)  _buildEndOverlay(),
                   if (!_ready && !_ended)
                     const Center(child: CircularProgressIndicator(
                         color: AppTheme.gold, strokeWidth: 3)),
-
-                  // ── Custom controls (tap-to-play/pause + progress) ────────
                   if (!_ended) _buildControls(context),
                 ],
               ),
             ),
 
-            // Channel accent strip
             if (!_fullscreen)
               Container(height: 3, color: widget.channel.accentColor),
 
-            // ── Info section (hidden in fullscreen) ─────────────────────────
             if (!_fullscreen)
               Expanded(
                 child: SingleChildScrollView(
@@ -234,10 +198,14 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                               ?.copyWith(
                                   fontWeight: FontWeight.w700, height: 1.3)),
                       const SizedBox(height: 14),
-
-                      // Tappable channel row
                       GestureDetector(
-                        onTap: _openChannel,
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) =>
+                                ChannelVideosScreen(channel: widget.channel),
+                          ),
+                        ),
                         child: Row(
                           children: [
                             Container(
@@ -285,7 +253,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                           ],
                         ),
                       ),
-
                       if (widget.video.description.isNotEmpty) ...[
                         const SizedBox(height: 20),
                         const Divider(),
@@ -317,20 +284,15 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     );
   }
 
-  // ── Custom controls overlay ─────────────────────────────────────────────────
-
   Widget _buildControls(BuildContext context) {
     return Stack(
       fit: StackFit.expand,
       children: [
-        // Tap anywhere to toggle play/pause
         GestureDetector(
           onTap: _togglePlay,
           behavior: HitTestBehavior.opaque,
           child: const SizedBox.expand(),
         ),
-
-        // Centre play/pause icon (shows briefly)
         if (!_playing && _ready)
           Center(
             child: IgnorePointer(
@@ -346,8 +308,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               ),
             ),
           ),
-
-        // Bottom control bar: time + seek bar + fullscreen toggle
         Positioned(
           bottom: 0,
           left: 0,
@@ -365,7 +325,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Seek bar
                   SizedBox(
                     height: 20,
                     child: SliderTheme(
@@ -378,8 +337,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                         activeTrackColor: AppTheme.gold,
                         inactiveTrackColor: Colors.white30,
                         thumbColor: AppTheme.gold,
-                        overlayColor:
-                            AppTheme.gold.withValues(alpha: 0.2),
+                        overlayColor: AppTheme.gold.withValues(alpha: 0.2),
                       ),
                       child: Slider(
                         value: _progress.clamp(0.0, 1.0),
@@ -387,14 +345,11 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       ),
                     ),
                   ),
-                  // Time row + fullscreen button
                   Row(
                     children: [
-                      Text(
-                        '${_fmt(_position)} / ${_fmt(_duration)}',
-                        style: const TextStyle(
-                            color: Colors.white70, fontSize: 10),
-                      ),
+                      Text('${_fmt(_position)} / ${_fmt(_duration)}',
+                          style: const TextStyle(
+                              color: Colors.white70, fontSize: 10)),
                       const Spacer(),
                       GestureDetector(
                         onTap: _toggleFullscreen,
@@ -413,8 +368,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
             ),
           ),
         ),
-
-        // Back button in fullscreen mode
         if (_fullscreen)
           Positioned(
             top: MediaQuery.of(context).padding.top + 8,
@@ -430,8 +383,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       ],
     );
   }
-
-  // ── End state overlay ───────────────────────────────────────────────────────
 
   Widget _buildEndOverlay() {
     return Stack(

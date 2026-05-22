@@ -8,15 +8,10 @@ import '../models/video.dart';
 import '../services/ad_service.dart';
 import '../theme/app_theme.dart';
 
-/// Full-screen 9:16 Shorts player — TikTok/Reels style.
-///
-/// Architecture decisions:
-/// • Uses [YoutubePlayer] directly (NOT [YoutubePlayerBuilder]) — avoids the
-///   internal orientation lock that YoutubePlayerBuilder triggers.
-/// • App is hard-locked to portrait via AndroidManifest screenOrientation.
-/// • Player fills the full screen in 9:16 via FittedBox + AspectRatio.
-/// • YouTube's native controls are hidden; we draw our own play/pause overlay.
-/// • Progress bar is drawn at the bottom of the screen.
+/// Full-screen 9:16 Shorts player.
+/// • App stays portrait (AndroidManifest screenOrientation="portrait").
+/// • FittedBox fills screen in 9:16, YouTube controls hidden.
+/// • Custom progress bar + tap-to-play/pause.
 class ShortsPlayerScreen extends StatefulWidget {
   final List<Video> shorts;
   final int initialIndex;
@@ -40,7 +35,6 @@ class _ShortsPlayerScreenState extends State<ShortsPlayerScreen> {
     super.initState();
     _currentIndex = widget.initialIndex;
     _pageController = PageController(initialPage: widget.initialIndex);
-    // Ensure portrait — belt and braces alongside the manifest lock
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
@@ -73,8 +67,6 @@ class _ShortsPlayerScreenState extends State<ShortsPlayerScreen> {
               autoPlayOnActivate: index != widget.initialIndex,
             ),
           ),
-
-          // Back button — always on top, always visible
           Positioned(
             top: MediaQuery.of(context).padding.top + 8,
             left: 8,
@@ -92,7 +84,6 @@ class _ShortsPlayerScreenState extends State<ShortsPlayerScreen> {
   }
 }
 
-/// One page in the Shorts PageView.
 class _ShortPage extends StatefulWidget {
   final Video video;
   final bool isActive;
@@ -111,45 +102,40 @@ class _ShortPage extends StatefulWidget {
 
 class _ShortPageState extends State<_ShortPage> {
   late YoutubePlayerController _controller;
-  bool _ready = false;
-  bool _playing = false;
-  bool _userStarted = false;
-  double _progress = 0;
+  bool   _ready       = false;
+  bool   _playing     = false;
+  bool   _userStarted = false;
+  double _progress    = 0;
 
   @override
   void initState() {
     super.initState();
-    final shouldAutoPlay = widget.autoPlayOnActivate && widget.isActive;
+    final autoPlay = widget.autoPlayOnActivate && widget.isActive;
     _controller = YoutubePlayerController(
       initialVideoId: widget.video.id,
       flags: YoutubePlayerFlags(
-        autoPlay: shouldAutoPlay,
+        autoPlay: autoPlay,
         loop: true,
-        // Hide YouTube's own controls — we draw our own overlay
         hideControls: true,
-        disableDragSeek: false,
-        enableCaption: false,
-        // Use hybrid composition on Android to prevent orientation override
         useHybridComposition: true,
       ),
     )..addListener(_onUpdate);
-    if (shouldAutoPlay) _userStarted = true;
+    if (autoPlay) _userStarted = true;
   }
 
   void _onUpdate() {
     if (!mounted) return;
-    final v = _controller.value;
-    final ready = v.isReady;
+    final v       = _controller.value;
+    final ready   = v.isReady;
     final playing = v.playerState == PlayerState.playing;
-    final pos = v.position.inMilliseconds.toDouble();
-    final dur = v.metaData.duration.inMilliseconds.toDouble();
-    final progress = (dur > 0) ? (pos / dur).clamp(0.0, 1.0) : 0.0;
-
-    if (ready != _ready || playing != _playing || (progress - _progress).abs() > 0.005) {
+    final pos     = v.position.inMilliseconds.toDouble();
+    final dur     = v.metaData.duration.inMilliseconds.toDouble();
+    final prog    = dur > 0 ? (pos / dur).clamp(0.0, 1.0) : 0.0;
+    if (ready != _ready || playing != _playing || (prog - _progress).abs() > 0.005) {
       setState(() {
-        _ready = ready;
-        _playing = playing;
-        _progress = progress;
+        _ready    = ready;
+        _playing  = playing;
+        _progress = prog;
       });
     }
   }
@@ -175,29 +161,21 @@ class _ShortPageState extends State<_ShortPage> {
 
   void _togglePlay() {
     _userStarted = true;
-    if (_playing) {
-      _controller.pause();
-    } else {
-      _controller.play();
-    }
+    _playing ? _controller.pause() : _controller.play();
   }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
     return SizedBox(
       width: size.width,
       height: size.height,
       child: Stack(
         fit: StackFit.expand,
         children: [
-          // ── Black background ──────────────────────────────────────────────
           const ColoredBox(color: Colors.black),
 
-          // ── Player sized to fill screen in 9:16 ──────────────────────────
-          // FittedBox + AspectRatio crops/scales the iFrame to fill the screen
-          // while preserving 9:16. ClipRect prevents overflow.
+          // Player fills screen in 9:16 via FittedBox
           ClipRect(
             child: FittedBox(
               fit: BoxFit.cover,
@@ -206,7 +184,6 @@ class _ShortPageState extends State<_ShortPage> {
                 height: size.width * (16 / 9),
                 child: YoutubePlayer(
                   controller: _controller,
-                  showVideoProgressIndicator: false,
                   onReady: () {
                     if (mounted) {
                       setState(() => _ready = true);
@@ -222,14 +199,14 @@ class _ShortPageState extends State<_ShortPage> {
             ),
           ),
 
-          // ── Tap to play/pause (covers full screen) ────────────────────────
+          // Tap to play/pause
           GestureDetector(
             onTap: _togglePlay,
             behavior: HitTestBehavior.opaque,
             child: const SizedBox.expand(),
           ),
 
-          // ── Buffering spinner ─────────────────────────────────────────────
+          // Loading / play button
           if (!_ready || (!_playing && !_userStarted))
             Center(
               child: _userStarted && !_ready
@@ -247,7 +224,7 @@ class _ShortPageState extends State<_ShortPage> {
                     ),
             ),
 
-          // ── Pause icon flash (briefly shown on pause tap) ─────────────────
+          // Pause icon
           if (_userStarted && !_playing && _ready)
             Center(
               child: Container(
@@ -262,7 +239,7 @@ class _ShortPageState extends State<_ShortPage> {
               ),
             ),
 
-          // ── Bottom gradient + title + progress bar ────────────────────────
+          // Bottom gradient + title + progress
           Positioned(
             bottom: 0,
             left: 0,
@@ -273,7 +250,6 @@ class _ShortPageState extends State<_ShortPage> {
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
                   colors: [Colors.black87, Colors.transparent],
-                  stops: [0.0, 1.0],
                 ),
               ),
               child: Padding(
@@ -282,22 +258,19 @@ class _ShortPageState extends State<_ShortPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
-                      widget.video.title,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        height: 1.35,
-                        shadows: [
-                          Shadow(color: Colors.black54, blurRadius: 4)
-                        ],
-                      ),
-                    ),
+                    Text(widget.video.title,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          height: 1.35,
+                          shadows: [
+                            Shadow(color: Colors.black54, blurRadius: 4)
+                          ],
+                        )),
                     const SizedBox(height: 10),
-                    // Custom progress bar — replaces YouTube's hidden bar
                     ClipRRect(
                       borderRadius: BorderRadius.circular(2),
                       child: LinearProgressIndicator(
@@ -315,7 +288,6 @@ class _ShortPageState extends State<_ShortPage> {
             ),
           ),
 
-          // Swipe-up hint
           const Positioned(
             bottom: 6,
             left: 0,
