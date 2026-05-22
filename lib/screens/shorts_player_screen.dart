@@ -117,7 +117,6 @@ class _ShortPageState extends State<_ShortPage> {
         autoPlay: autoPlay,
         loop: true,
         hideControls: true,
-        useHybridComposition: true,
       ),
     )..addListener(_onUpdate);
     if (autoPlay) _userStarted = true;

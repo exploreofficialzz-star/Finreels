@@ -50,7 +50,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     _controller = YoutubePlayerController(
       initialVideoId: widget.video.id,
       flags: const YoutubePlayerFlags(
-        autoPlay: true,
         hideControls: true,
         useHybridComposition: true,
       ),
@@ -330,10 +329,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                     child: SliderTheme(
                       data: SliderTheme.of(context).copyWith(
                         trackHeight: 2,
-                        thumbShape: const RoundSliderThumbShape(
-                            enabledThumbRadius: 6),
-                        overlayShape: const RoundSliderOverlayShape(
-                            overlayRadius: 12),
+                        thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6),
+                        overlayShape: const RoundSliderOverlayShape(overlayRadius: 12),
                         activeTrackColor: AppTheme.gold,
                         inactiveTrackColor: Colors.white30,
                         thumbColor: AppTheme.gold,
