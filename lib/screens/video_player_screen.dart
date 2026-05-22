@@ -51,7 +51,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       initialVideoId: widget.video.id,
       flags: const YoutubePlayerFlags(
         hideControls: true,
-        useHybridComposition: true,
       ),
     )..addListener(_onUpdate);
   }
@@ -405,7 +404,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 Container(
                   width: 64,
                   height: 64,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: AppTheme.gold, shape: BoxShape.circle),
                   child: const Icon(Icons.replay_rounded,
                       color: Colors.black, size: 34),
