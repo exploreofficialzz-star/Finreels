@@ -13,9 +13,9 @@ import '../providers/feed_provider.dart';
 import '../services/ad_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
+import '../widgets/banner_ad_widget.dart';
 import '../widgets/inline_video_card.dart';
 import '../widgets/shimmer_loader.dart';
-import '../widgets/shorts_shelf_widget.dart';
 import 'blog_feed_screen.dart';
 import 'book_detail_screen.dart';
 import 'shorts_player_screen.dart';
@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-// ── App Header ────────────────────────────────────────────────────────────────
+// ── Header ─────────────────────────────────────────────────────────────────────
 class _AppHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -50,29 +50,20 @@ class _AppHeader extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: 34,
-            height: 34,
+            width: 34, height: 34,
             decoration: BoxDecoration(
-              color: AppTheme.gold,
-              borderRadius: BorderRadius.circular(9),
-            ),
+                color: AppTheme.gold, borderRadius: BorderRadius.circular(9)),
             child: const Icon(Icons.play_arrow_rounded,
                 color: Colors.black, size: 22),
           ),
           const SizedBox(width: 10),
-          Text(
-            'FinReels',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: -0.5,
-                ),
-          ),
+          Text('FinReels',
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.w800, letterSpacing: -0.5)),
           const Spacer(),
           IconButton(
-            icon: Icon(Icons.refresh_rounded,
-                color: AppTheme.textMuted(context)),
-            onPressed: () =>
-                context.read<FeedProvider>().refresh(force: true),
+            icon: Icon(Icons.refresh_rounded, color: AppTheme.textMuted(context)),
+            onPressed: () => context.read<FeedProvider>().refresh(force: true),
           ),
         ],
       ),
@@ -80,48 +71,40 @@ class _AppHeader extends StatelessWidget {
   }
 }
 
-// ── Feed Tab Bar ──────────────────────────────────────────────────────────────
+// ── Tab bar ────────────────────────────────────────────────────────────────────
 class _FeedTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<FeedProvider>();
-    final active = provider.activeTab;
-
-    return SizedBox(
-      height: 44,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 12),
+    final active   = provider.activeTab;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 6, 12, 6),
+      child: Row(
         children: FeedTab.values.map((tab) {
           final isActive = tab == active;
-          return Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: GestureDetector(
-              onTap: () => provider.setTab(tab),
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 9),
-                decoration: BoxDecoration(
-                  color: isActive
-                      ? AppTheme.gold
-                      : AppTheme.surfaceColor(context),
-                  borderRadius: BorderRadius.circular(22),
-                  border: Border.all(
-                    color: isActive
-                        ? AppTheme.gold
-                        : AppTheme.dividerColor(context),
+          return Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: GestureDetector(
+                onTap: () => provider.setTab(tab),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  height: 36,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: isActive ? AppTheme.gold : AppTheme.surfaceColor(context),
+                    borderRadius: BorderRadius.circular(22),
+                    border: Border.all(
+                      color: isActive ? AppTheme.gold : AppTheme.dividerColor(context),
+                    ),
                   ),
-                ),
-                child: Text(
-                  tab.label,
-                  style: TextStyle(
-                    color: isActive
-                        ? Colors.black
-                        : AppTheme.textSecondary(context),
-                    fontWeight:
-                        isActive ? FontWeight.w700 : FontWeight.w500,
-                    fontSize: 13,
+                  child: Text(
+                    tab.label,
+                    style: TextStyle(
+                      color: isActive ? Colors.black : AppTheme.textSecondary(context),
+                      fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
+                      fontSize: 13,
+                    ),
                   ),
                 ),
               ),
@@ -133,20 +116,15 @@ class _FeedTabBar extends StatelessWidget {
   }
 }
 
-// ── Feed Body ─────────────────────────────────────────────────────────────────
+// ── Feed body ──────────────────────────────────────────────────────────────────
 class _FeedBody extends StatefulWidget {
   const _FeedBody();
-
   @override
   State<_FeedBody> createState() => _FeedBodyState();
 }
 
 class _FeedBodyState extends State<_FeedBody> {
-  int _tapCount = 0;
-
-  /// Fix 3 — ValueNotifier shared across all inline cards.
-  /// Cards listen to it directly; this widget never calls setState() for
-  /// play/pause changes, so scroll position is completely unaffected.
+  // Shared notifier — cards listen directly; no parent setState for play/pause
   final _activeVideoNotifier = ValueNotifier<String?>(null);
 
   @override
@@ -155,28 +133,12 @@ class _FeedBodyState extends State<_FeedBody> {
     super.dispose();
   }
 
-  void _onTap(BuildContext context, Video video) {
-    _tapCount++;
-    if (_tapCount.isEven) unawaited(AdService.instance.onContentTapped());
-
+  void _onTap(Video video) {
+    unawaited(AdService.instance.onContentTapped());
     if (video.channelId == 'books') {
       Navigator.push(context,
           MaterialPageRoute(builder: (_) => BookDetailScreen(book: video)));
       return;
-    }
-    final provider = context.read<FeedProvider>();
-    if (provider.activeTab == FeedTab.shorts) {
-      final shorts = provider.feedVideos;
-      final idx = shorts.indexOf(video);
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (_) => ShortsPlayerScreen(
-            shorts: shorts,
-            initialIndex: idx < 0 ? 0 : idx,
-          ),
-        ),
-      );
     }
   }
 
@@ -184,200 +146,160 @@ class _FeedBodyState extends State<_FeedBody> {
   Widget build(BuildContext context) {
     final provider = context.watch<FeedProvider>();
 
-    // Blogs — dedicated RSS screen.
     if (provider.activeTab == FeedTab.blogs) {
       return const BlogFeedScreen();
     }
-
-    // Books tab.
     if (provider.activeTab == FeedTab.books) {
-      return _BooksTab(onTap: (v) => _onTap(context, v));
+      return _BooksTab(onTap: _onTap);
     }
-
-    // Shorts tab — 2-column grid, tap opens full-screen player.
     if (provider.activeTab == FeedTab.shorts) {
-      return _ShortsTab(
-        provider: provider,
-        onTap: (v) => _onTap(context, v),
-      );
+      return _ShortsTab(provider: provider);
     }
 
-    // All / Videos — unified inline feed.
+    // Videos tab
     return switch (provider.state) {
       FeedState.idle || FeedState.loading when provider.feedVideos.isEmpty =>
         const ShimmerLoader(),
       FeedState.error => _ErrorView(
           message: provider.errorMessage ?? 'Something went wrong.',
-          onRetry: () => provider.refresh(force: true),
-        ),
-      _ => _buildUnifiedFeed(context, provider),
+          onRetry: () => provider.refresh(force: true)),
+      _ => _buildVideoFeed(context, provider),
     };
   }
 
-  // ── Fix 5 — Unified feed: videos + inline shorts shelves ─────────────────
-
-  Widget _buildUnifiedFeed(BuildContext context, FeedProvider provider) {
-    final items = provider.activeTab == FeedTab.videos
-        ? provider.feedVideos
-            .map((v) => VideoFeedItem(v) as FeedItem)
-            .toList()
-        : provider.unifiedFeedItems;
-
-    if (items.isEmpty) {
+  Widget _buildVideoFeed(BuildContext context, FeedProvider provider) {
+    final videos = provider.feedVideos;
+    if (videos.isEmpty) {
       return Center(
-        child: Text(
-          'No ${provider.activeTab.label.toLowerCase()} found.',
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-      );
+          child: Text('No videos found.',
+              style: Theme.of(context).textTheme.bodyMedium));
     }
-
     return RefreshIndicator(
       color: AppTheme.gold,
       onRefresh: () => provider.refresh(force: true),
       child: ListView.builder(
-        // Fix 3 — ClampingScrollPhysics: no bounce, no position reset.
         physics: const ClampingScrollPhysics(),
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 120),
-        itemCount: items.length,
+        itemCount: videos.length,
         itemBuilder: (context, i) {
-          final item = items[i];
-
-          // Fix 2: Insert banner ad every 4 video items.
+          final video    = videos[i];
+          final channel  = ChannelData.byId[video.channelId] ?? ChannelData.fallback;
           final isAdSlot = i > 0 && i % 4 == 0;
-
-          return switch (item) {
-            VideoFeedItem(:final video) => Column(
-                key: ValueKey('video_${video.id}'),
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (isAdSlot)
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      child: LabelledBannerAd(),
-                    ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 14),
-                    child: InlineVideoCard(
-                      key: ValueKey(video.id),
-                      video: video,
-                      channel: ChannelData.byId[video.channelId] ??
-                          ChannelData.fallback,
-                      saved: provider.isVideoSaved(video.id),
-                      activeVideoNotifier: _activeVideoNotifier,
-                      onSave: () => provider.toggleSaved(video),
-                      onShare: () =>
-                          Share.share('${video.title}\n${video.watchUrl}'),
-                    ),
-                  ),
-                ],
+          return Column(
+            key: ValueKey('v_${video.id}'),
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (isAdSlot)
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  child: LabelledBannerAd(),
+                ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 14),
+                child: InlineVideoCard(
+                  key: ValueKey(video.id),
+                  video: video,
+                  channel: channel,
+                  saved: provider.isVideoSaved(video.id),
+                  activeVideoNotifier: _activeVideoNotifier,
+                  onSave: () => provider.toggleSaved(video),
+                  onShare: () =>
+                      Share.share('${video.title}\n${video.watchUrl}'),
+                ),
               ),
-            ShortsShelfFeedItem(:final shorts) => Padding(
-                key: ValueKey('shelf_$i'),
-                padding: const EdgeInsets.only(bottom: 8),
-                child: ShortsShelfWidget(shorts: shorts),
-              ),
-            BookFeedItem() => const SizedBox.shrink(),
-          };
+            ],
+          );
         },
       ),
     );
   }
 }
 
-// ── Shorts Tab — Fix 6: ListView.builder, const constructors, ValueKey ───────
+// ── Shorts tab ─────────────────────────────────────────────────────────────────
 class _ShortsTab extends StatelessWidget {
   final FeedProvider provider;
-  final void Function(Video) onTap;
-
-  const _ShortsTab({required this.provider, required this.onTap});
+  const _ShortsTab({required this.provider});
 
   @override
   Widget build(BuildContext context) {
-    if (provider.state == FeedState.loading &&
-        provider.feedVideos.isEmpty) {
+    if (provider.state == FeedState.loading && provider.feedVideos.isEmpty) {
       return const ShimmerLoader(variant: ShimmerVariant.grid, count: 6);
     }
-
     final shorts = provider.feedVideos;
     if (shorts.isEmpty) {
       return Center(
           child: Text('No shorts found.',
               style: Theme.of(context).textTheme.bodyMedium));
     }
-
     return RefreshIndicator(
       color: AppTheme.gold,
       onRefresh: () => provider.refresh(force: true),
       child: GridView.builder(
         physics: const ClampingScrollPhysics(),
-        padding: const EdgeInsets.fromLTRB(12, 8, 12, 120),
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 120),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 9 / 16,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 8,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
         ),
         itemCount: shorts.length,
         itemBuilder: (context, i) {
-          final video = shorts[i];
-          final channel =
-              ChannelData.byId[video.channelId] ?? ChannelData.fallback;
+          final video   = shorts[i];
+          final channel = ChannelData.byId[video.channelId] ?? ChannelData.fallback;
           return RepaintBoundary(
             key: ValueKey(video.id),
             child: GestureDetector(
-              onTap: () => onTap(video),
+              onTap: () {
+                unawaited(AdService.instance.onContentTapped());
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ShortsPlayerScreen(
+                        shorts: shorts, initialIndex: i),
+                  ),
+                );
+              },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    CachedNetworkImage(
-                      imageUrl: video.thumbnailMq,
-                      fit: BoxFit.cover,
-                      placeholder: (_, __) => Shimmer.fromColors(
-                        baseColor: const Color(0xFF1E1E1E),
-                        highlightColor: const Color(0xFF2C2C2C),
-                        child: const ColoredBox(color: Colors.white),
-                      ),
-                      errorWidget: (_, __, ___) =>
-                          ColoredBox(color: AppTheme.surfaceElevated(context)),
+                child: Stack(fit: StackFit.expand, children: [
+                  CachedNetworkImage(
+                    imageUrl: video.thumbnailMq,
+                    fit: BoxFit.cover,
+                    placeholder: (_, __) => Shimmer.fromColors(
+                      baseColor: const Color(0xFF1E1E1E),
+                      highlightColor: const Color(0xFF2C2C2C),
+                      child: const ColoredBox(color: Colors.white),
                     ),
-                    const DecoratedBox(
+                    errorWidget: (_, __, ___) =>
+                        const ColoredBox(color: Color(0xFF1E1E1E)),
+                  ),
+                  const DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [Colors.transparent, Colors.black87],
+                        stops: [0.45, 1.0],
+                      ),
+                    ),
+                  ),
+                  Positioned(top: 0, left: 0, right: 0,
+                      child: Container(height: 3, color: channel.accentColor)),
+                  const Center(
+                    child: DecoratedBox(
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [Colors.transparent, Colors.black87],
-                          stops: [0.45, 1.0],
-                        ),
+                          color: Colors.black45, shape: BoxShape.circle),
+                      child: Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Icon(Icons.play_arrow_rounded,
+                            color: Colors.white, size: 28),
                       ),
                     ),
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      child: Container(height: 3, color: channel.accentColor),
-                    ),
-                    const Center(
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          color: Colors.black45,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(8),
-                          child: Icon(Icons.play_arrow_rounded,
-                              color: Colors.white, size: 28),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 8,
-                      left: 8,
-                      right: 8,
-                      child: Text(
-                        video.title,
+                  ),
+                  Positioned(
+                    bottom: 8, left: 8, right: 8,
+                    child: Text(video.title,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
@@ -385,14 +307,10 @@ class _ShortsTab extends StatelessWidget {
                           fontSize: 11,
                           fontWeight: FontWeight.w600,
                           height: 1.3,
-                          shadows: [
-                            Shadow(color: Colors.black87, blurRadius: 4)
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                          shadows: [Shadow(color: Colors.black87, blurRadius: 4)],
+                        )),
+                  ),
+                ]),
               ),
             ),
           );
@@ -402,7 +320,7 @@ class _ShortsTab extends StatelessWidget {
   }
 }
 
-// ── Books Tab — Fix 6: ListView.builder, ValueKey, CachedNetworkImage ────────
+// ── Books tab ──────────────────────────────────────────────────────────────────
 class _BooksTab extends StatelessWidget {
   final void Function(Video) onTap;
   const _BooksTab({required this.onTap});
@@ -415,7 +333,6 @@ class _BooksTab extends StatelessWidget {
           child: Text('No books found.',
               style: Theme.of(context).textTheme.bodyMedium));
     }
-
     return ListView.separated(
       physics: const ClampingScrollPhysics(),
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 120),
@@ -453,8 +370,7 @@ class _BooksTab extends StatelessWidget {
                             child: ColoredBox(color: Colors.white)),
                       ),
                       errorWidget: (_, __, ___) => Container(
-                        width: 90,
-                        height: 120,
+                        width: 90, height: 120,
                         color: AppTheme.gold.withValues(alpha: 0.15),
                         child: const Icon(Icons.menu_book_rounded,
                             color: AppTheme.gold, size: 36),
@@ -501,6 +417,12 @@ class _BooksTab extends StatelessWidget {
                       ),
                     ),
                   ),
+                  // Banner ad every 3rd video card (items 3, 6, 9 …)
+                  if (i > 0 && (i + 1) % 3 == 0)
+                    const Padding(
+                      padding: EdgeInsets.only(bottom: 14),
+                      child: LabelledBannerAd(),
+                    ),
                   Padding(
                     padding: const EdgeInsets.only(right: 12),
                     child: Icon(Icons.chevron_right_rounded,
@@ -516,7 +438,7 @@ class _BooksTab extends StatelessWidget {
   }
 }
 
-// ── Error View ────────────────────────────────────────────────────────────────
+// ── Error view ─────────────────────────────────────────────────────────────────
 class _ErrorView extends StatelessWidget {
   final String message;
   final VoidCallback onRetry;

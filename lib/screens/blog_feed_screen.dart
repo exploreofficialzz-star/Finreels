@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+import '../services/ad_service.dart';
+import '../widgets/banner_ad_widget.dart';
 import '../services/blog_rss_service.dart';
 import '../theme/app_theme.dart';
 import 'blog_reader_screen.dart';
@@ -86,21 +88,35 @@ class _BlogFeedScreenState extends State<BlogFeedScreen> {
         separatorBuilder: (_, __) => const SizedBox(height: 14),
         itemBuilder: (context, i) {
           final article = _articles[i];
-          return RepaintBoundary(
-            // Fix 2: stable ValueKey prevents widget recycling mismatches.
+          return Column(
             key: ValueKey(article.url),
-            child: _BlogCard(
-              article: article,
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => BlogReaderScreen(
-                    url: article.url,
-                    title: article.title,
-                  ),
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Banner after every 3rd article (items 3, 6, 9 …)
+              if (i > 0 && i % 3 == 0)
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 14),
+                  child: LabelledBannerAd(),
+                ),
+              RepaintBoundary(
+                child: _BlogCard(
+                  article: article,
+                  onTap: () {
+                    // Feed tap ad trigger (shared counter with videos/books)
+                    AdService.instance.onContentTapped();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => BlogReaderScreen(
+                          url:   article.url,
+                          title: article.title,
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
-            ),
+            ],
           );
         },
       ),

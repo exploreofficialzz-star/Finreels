@@ -5,20 +5,32 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../config/app_config.dart';
 
-/// Ad trigger pattern for content taps (videos, blogs, books):
-///   Tap 1 → show ad
-///   Tap 2 → live (no ad)
-///   Tap 3 → live (no ad)
-///   Tap 4 → show ad
-///   Tap 5 → live, 6 → live, 7 → live, 8 → show ad ... repeat every 4
+/// AdService — interstitial patterns:
 ///
-/// In other words: show ad on tap 1, then every 4th tap after that.
-/// Shorts pattern: show ad every 4 pages scrolled (independent counter).
+/// FEED TAPS (videos, blogs, books):
+///   Show ad on every 4th tap: taps 4, 8, 12, 16 …
+///   i.e. user browses 1-2-3 freely, ad on 4th, free 5-6-7, ad on 8th, etc.
+///
+/// VIDEO PAUSE:
+///   Show ad on every 4th pause: pauses 4, 8, 12 …
+///   Independent counter per session — resets when app restarts.
+///
+/// BLOGS / BOOKS:
+///   Same counter as feed taps (shared _contentTapCount).
+///   Tapping any blog article or book triggers the same every-4th pattern.
+///
+/// BANNER:
+///   Placed after every 3rd item in the video feed list and blog list.
+///   Also pinned at the bottom of all content screens.
+///   A single BannerAd instance is reused across all placements via
+///   AdWidget — the SDK handles correct rendering.
+///
+/// SHORTS: untouched — scroll-based counter unchanged.
 class AdService {
   AdService._();
   static final AdService instance = AdService._();
 
-  // ── Ad objects ────────────────────────────────────────────────────────────────
+  // ── Ad objects ────────────────────────────────────────────────────────────
   BannerAd?               _bannerAd;
   InterstitialAd?         _interstitialAd;
   AppOpenAd?              _appOpenAd;
@@ -31,13 +43,17 @@ class AdService {
   bool _rewardedReady             = false;
   bool _rewardedInterstitialReady = false;
 
-  // ── Tap counters ──────────────────────────────────────────────────────────────
-  /// Global content-tap counter (videos + blogs + books).
-  /// Pattern: ad on tap 1, then every 4th tap (1, 4, 8, 12, …).
+  // ── Counters ──────────────────────────────────────────────────────────────
+
+  /// Shared counter for feed taps (videos + blogs + books).
+  /// Interstitial fires every 4th tap: 4, 8, 12, 16 …
   int _contentTapCount = 0;
 
-  /// Independent shorts-scroll counter.
-  /// Ad every [AppConfig.interstitialEveryNShorts] pages scrolled.
+  /// Video pause counter — independent from feed taps.
+  /// Interstitial fires every 4th pause: 4, 8, 12 …
+  int _videoPauseCount = 0;
+
+  /// Shorts scroll counter — unchanged, every 4 scrolls.
   int _shortScrollCount = 0;
 
   int _channelSwitchCount = 0;
@@ -49,7 +65,7 @@ class AdService {
   bool get adsRemoved => _adsRemoved;
   BannerAd? get bannerAd => (_bannerReady && !_adsRemoved) ? _bannerAd : null;
 
-  // ── Init ──────────────────────────────────────────────────────────────────────
+  // ── Init ──────────────────────────────────────────────────────────────────
   Future<void> init() async {
     await _loadAdsRemovedStatus();
     if (_adsRemoved) return;
@@ -66,9 +82,9 @@ class AdService {
     ]);
   }
 
-  // ── Ads-removed status ────────────────────────────────────────────────────────
+  // ── Ads-removed status ────────────────────────────────────────────────────
   Future<void> _loadAdsRemovedStatus() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs   = await SharedPreferences.getInstance();
     final removed = prefs.getBool(AppConfig.prefAdsRemoved) ?? false;
     if (removed) {
       final until = prefs.getInt(AppConfig.prefAdsRemovedUntil);
@@ -85,7 +101,7 @@ class AdService {
     }
   }
 
-  // ── Banner ────────────────────────────────────────────────────────────────────
+  // ── Banner ────────────────────────────────────────────────────────────────
   Future<void> _loadBanner() async {
     if (_bannerAd != null) { unawaited(_bannerAd!.dispose()); }
     _bannerAd    = null;
@@ -107,7 +123,7 @@ class AdService {
     await _bannerAd!.load();
   }
 
-  // ── Interstitial ──────────────────────────────────────────────────────────────
+  // ── Interstitial ──────────────────────────────────────────────────────────
   Future<void> _loadInterstitial() async {
     _interstitialReady = false;
     await InterstitialAd.load(
@@ -134,13 +150,14 @@ class AdService {
         },
         onAdFailedToLoad: (_) {
           _interstitialReady = false;
-          Timer(const Duration(seconds: 45), () => unawaited(_loadInterstitial()));
+          Timer(const Duration(seconds: 45),
+              () => unawaited(_loadInterstitial()));
         },
       ),
     );
   }
 
-  // ── Rewarded ──────────────────────────────────────────────────────────────────
+  // ── Rewarded ──────────────────────────────────────────────────────────────
   Future<void> _loadRewarded() async {
     _rewardedReady = false;
     await RewardedAd.load(
@@ -179,7 +196,7 @@ class AdService {
     _rewardedReady = false;
   }
 
-  // ── Rewarded Interstitial ─────────────────────────────────────────────────────
+  // ── Rewarded Interstitial ─────────────────────────────────────────────────
   Future<void> _loadRewardedInterstitial() async {
     _rewardedInterstitialReady = false;
     await RewardedInterstitialAd.load(
@@ -206,7 +223,8 @@ class AdService {
         },
         onAdFailedToLoad: (_) {
           _rewardedInterstitialReady = false;
-          Timer(const Duration(minutes: 2), () => unawaited(_loadRewardedInterstitial()));
+          Timer(const Duration(minutes: 2),
+              () => unawaited(_loadRewardedInterstitial()));
         },
       ),
     );
@@ -216,13 +234,13 @@ class AdService {
     required void Function() onRewarded,
   }) async {
     if (_adsRemoved || !_rewardedInterstitialReady ||
-        _rewardedInterstitialAd == null) { return; }
+        _rewardedInterstitialAd == null) return;
     await _rewardedInterstitialAd!.show(
         onUserEarnedReward: (_, __) => onRewarded());
     _rewardedInterstitialReady = false;
   }
 
-  // ── App Open ──────────────────────────────────────────────────────────────────
+  // ── App Open ──────────────────────────────────────────────────────────────
   Future<void> _loadAppOpen() async {
     _appOpenReady = false;
     await AppOpenAd.load(
@@ -258,34 +276,40 @@ class AdService {
   Future<void> showAppOpenAd() async {
     if (_adsRemoved || !_appOpenReady || _appOpenAd == null) return;
     if (_lastAppOpenShown != null) {
-      final elapsed = DateTime.now().difference(_lastAppOpenShown!);
-      if (elapsed < AppConfig.appOpenAdCooldown) return;
+      if (DateTime.now().difference(_lastAppOpenShown!) <
+          AppConfig.appOpenAdCooldown) return;
     }
     _lastAppOpenShown = DateTime.now();
     await _appOpenAd!.show();
     _appOpenReady = false;
   }
 
-  // ── Content tap trigger — feeds, blogs, books ─────────────────────────────────
-  /// Call this every time the user taps to open any content item.
-  /// Ad pattern: show on tap 1, skip 2 & 3, show on 4, skip 5 & 6 & 7,
-  /// show on 8 … i.e. tap 1 and every 4th tap thereafter.
+  // ── FEED TAP TRIGGER (videos + blogs + books) ─────────────────────────────
+  /// Call every time user taps a video card, blog article, or book.
+  /// Pattern: interstitial fires on tap 4, 8, 12, 16 … (every 4th tap).
+  /// Taps 1, 2, 3 are free. Then 4 fires, 5-6-7 free, 8 fires, etc.
   Future<void> onContentTapped() async {
     if (_adsRemoved || !_initialized) return;
     _contentTapCount++;
-    // Show on tap 1 (first ever tap), then every 4th tap: 1, 4, 8, 12 …
-    final shouldShow = _contentTapCount == 1 ||
-        (_contentTapCount > 1 &&
-            (_contentTapCount - 1) % AppConfig.interstitialCycleLength == 0);
-    if (shouldShow) await showInterstitial();
+    if (_contentTapCount % AppConfig.interstitialCycleLength == 0) {
+      await showInterstitial();
+    }
   }
 
-  /// Legacy — kept for backward-compat with any callers still using it.
-  Future<void> onVideoOpened() => onContentTapped();
+  // ── VIDEO PAUSE TRIGGER ───────────────────────────────────────────────────
+  /// Call every time the user taps pause inside the inline video player.
+  /// Pattern: interstitial fires on pause 4, 8, 12 … (every 4th pause).
+  /// Pauses 1, 2, 3 are free. Pause 4 fires, 5-6-7 free, pause 8 fires, etc.
+  Future<void> onVideoPaused() async {
+    if (_adsRemoved || !_initialized) return;
+    _videoPauseCount++;
+    if (_videoPauseCount % AppConfig.interstitialCycleLength == 0) {
+      await showInterstitial();
+    }
+  }
 
-  // ── Shorts scroll trigger ─────────────────────────────────────────────────────
-  /// Call on every page change in the Shorts player.
-  /// Shows an interstitial every [AppConfig.interstitialEveryNShorts] scrolls.
+  // ── SHORTS SCROLL TRIGGER ─────────────────────────────────────────────────
+  /// Unchanged — fires every 4 shorts scrolled.
   Future<void> onShortScrolled() async {
     if (_adsRemoved || !_initialized) return;
     _shortScrollCount++;
@@ -294,7 +318,7 @@ class AdService {
     }
   }
 
-  // ── Channel switch trigger ────────────────────────────────────────────────────
+  // ── Channel switch ────────────────────────────────────────────────────────
   Future<void> onChannelSwitched() async {
     if (_adsRemoved || !_initialized) return;
     _channelSwitchCount++;
@@ -309,7 +333,10 @@ class AdService {
     _interstitialReady = false;
   }
 
-  // ── IAP: grant / revoke ad-free ───────────────────────────────────────────────
+  // ── Legacy compat ─────────────────────────────────────────────────────────
+  Future<void> onVideoOpened() => onContentTapped();
+
+  // ── IAP: grant / revoke ad-free ───────────────────────────────────────────
   Future<void> grantAdFree(Duration duration) async {
     final prefs = await SharedPreferences.getInstance();
     final until = DateTime.now().add(duration);
@@ -317,21 +344,16 @@ class AdService {
     await prefs.setInt(
         AppConfig.prefAdsRemovedUntil, until.millisecondsSinceEpoch);
     _adsRemoved = true;
-    unawaited(_bannerAd?.dispose() ?? Future.value());
-    _bannerAd              = null;
-    _bannerReady           = false;
-    unawaited(_interstitialAd?.dispose() ?? Future.value());
-    _interstitialAd        = null;
-    _interstitialReady     = false;
-    unawaited(_appOpenAd?.dispose() ?? Future.value());
-    _appOpenAd             = null;
-    _appOpenReady          = false;
-    unawaited(_rewardedAd?.dispose() ?? Future.value());
-    _rewardedAd            = null;
-    _rewardedReady         = false;
+    unawaited(_bannerAd?.dispose()              ?? Future.value());
+    _bannerAd              = null; _bannerReady           = false;
+    unawaited(_interstitialAd?.dispose()        ?? Future.value());
+    _interstitialAd        = null; _interstitialReady     = false;
+    unawaited(_appOpenAd?.dispose()             ?? Future.value());
+    _appOpenAd             = null; _appOpenReady          = false;
+    unawaited(_rewardedAd?.dispose()            ?? Future.value());
+    _rewardedAd            = null; _rewardedReady         = false;
     unawaited(_rewardedInterstitialAd?.dispose() ?? Future.value());
-    _rewardedInterstitialAd        = null;
-    _rewardedInterstitialReady     = false;
+    _rewardedInterstitialAd = null; _rewardedInterstitialReady = false;
   }
 
   Future<void> revokeAdFree() async {
@@ -341,11 +363,8 @@ class AdService {
     _adsRemoved = false;
     if (_initialized) {
       await Future.wait([
-        _loadBanner(),
-        _loadInterstitial(),
-        _loadAppOpen(),
-        _loadRewarded(),
-        _loadRewardedInterstitial(),
+        _loadBanner(), _loadInterstitial(), _loadAppOpen(),
+        _loadRewarded(), _loadRewardedInterstitial(),
       ]);
     }
   }

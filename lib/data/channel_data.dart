@@ -2,18 +2,27 @@ import 'package:flutter/material.dart';
 
 import '../models/channel.dart';
 
-/// FinReels — 10 channels: the 9 specified + School of Hard Knocks.
-/// Channel IDs verified against YouTube RSS feed endpoint.
+/// FinReels — 10 channels, all IDs verified directly from YouTube channel pages.
+///
+/// Root cause of "only 2 channels showing":
+///   8 out of 10 channel IDs in the original file were WRONG — they did not
+///   correspond to the actual YouTube channels. Wrong IDs return an empty XML
+///   feed (the channel exists but has no videos under that ID), or a 404.
+///   Only Diary of A CEO and School of Hard Knocks had correct IDs.
+///
+/// All IDs below were confirmed by fetching the channel page directly and
+/// reading the Channel ID from the page source / RSS link.
 class ChannelData {
   ChannelData._();
 
   static const List<Channel> all = [
     Channel(
+      // Verified: youtube.com/channel/UCGq-a57w-aPwyi3pW7XLiHw ✓
       id: 'UCGq-a57w-aPwyi3pW7XLiHw',
       name: 'The Diary Of A CEO',
       handle: '@thediaryofaceo',
       description:
-          'Steven Bartlett interviews the world\'s most successful people — '
+          "Steven Bartlett interviews the world's most successful people — "
           'CEOs, founders and thought leaders on how they built empires.',
       accentColor: Color(0xFF0F172A),
       category: 'Entrepreneurship',
@@ -21,9 +30,11 @@ class ChannelData {
       initials: 'DC',
     ),
     Channel(
-      id: 'UCeR0n8d_-y249rnQQye9_Sg',
+      // Corrected: was UCeR0n8d_-y249rnQQye9_Sg (wrong)
+      // Verified: youtube.com/channel/UCUyDOdBWhC1MCxEjC46d-zw ✓
+      id: 'UCUyDOdBWhC1MCxEjC46d-zw',
       name: 'Alex Hormozi',
-      handle: '@alexhormozi',
+      handle: '@AlexHormozi',
       description:
           r'Built $100M+ businesses. Brutally honest advice on sales, '
           'offers and scaling. The best business content on YouTube.',
@@ -33,9 +44,11 @@ class ChannelData {
       initials: 'AH',
     ),
     Channel(
-      id: 'UCpx-MG7wbF67nEiWuV9nO_g',
+      // Corrected: was UCpx-MG7wbF67nEiWuV9nO_g (wrong)
+      // Verified: youtube.com/channel/UCQ4FNww3XoNgqIlkBqEAVCg ✓
+      id: 'UCQ4FNww3XoNgqIlkBqEAVCg',
       name: 'Iman Gadzhi',
-      handle: '@imangadzhi',
+      handle: '@ImanGadzhi',
       description:
           'Built a multi-million agency by 18. Online business, '
           'agency building and steps to financial freedom.',
@@ -45,11 +58,13 @@ class ChannelData {
       initials: 'IG',
     ),
     Channel(
-      id: 'UCZ2QJQzEKf2PUaS7RUQUTLQ',
+      // Corrected: was UCZ2QJQzEKf2PUaS7RUQUTLQ (wrong)
+      // Verified: youtube.com/c/MagnatesMedia → UCE4Gn00XZbpWvGUfIslT-tA ✓
+      id: 'UCE4Gn00XZbpWvGUfIslT-tA',
       name: 'Magnates Media',
-      handle: '@magnatesmedia',
+      handle: '@MagnatesMedia',
       description:
-          'Documentary-style deep dives on how the world\'s biggest '
+          "Documentary-style deep dives on how the world's biggest "
           'companies and entrepreneurs built their empires.',
       accentColor: Color(0xFF7C3AED),
       category: 'How They Got Rich',
@@ -57,9 +72,11 @@ class ChannelData {
       initials: 'MM',
     ),
     Channel(
-      id: 'UCWpR4wMIlkE7JZnANqUMaQg',
+      // Corrected: was UCWpR4wMIlkE7JZnANqUMaQg (wrong)
+      // Verified: youtube.com/@MyFirstMillionPod → UCyaN6mg5u8Cjy2ZI4ikWaug ✓
+      id: 'UCyaN6mg5u8Cjy2ZI4ikWaug',
       name: 'My First Million',
-      handle: '@myfirstmillionpod',
+      handle: '@MyFirstMillionPod',
       description:
           'Sam Parr and Shaan Puri break down how people made their first '
           'million — business ideas, case studies and wealth strategies.',
@@ -69,9 +86,11 @@ class ChannelData {
       initials: 'MF',
     ),
     Channel(
-      id: 'UCGHbFkzNANwLy7GOdXs17Jg',
+      // Corrected: was UCGHbFkzNANwLy7GOdXs17Jg (wrong)
+      // Verified: youtube.com/channel/UCVeuau7DLrg7zlAjxxDbdww ✓
+      id: 'UCVeuau7DLrg7zlAjxxDbdww',
       name: 'HubSpot Marketing',
-      handle: '@hubspotmarketing',
+      handle: '@HubSpotMarketing',
       description:
           'Actionable marketing strategies and growth tactics from '
           "HubSpot — the world's leading CRM platform.",
@@ -81,7 +100,9 @@ class ChannelData {
       initials: 'HM',
     ),
     Channel(
-      id: 'UCVOeFxCnmHE2pqJ5XEPQ-pg',
+      // Corrected: was UCVOeFxCnmHE2pqJ5XEPQ-pg (wrong)
+      // Verified: youtube.com/c/NeilPatel → UCl-Zrl0QhF66lu1aGXaTbfw ✓
+      id: 'UCl-Zrl0QhF66lu1aGXaTbfw',
       name: 'Neil Patel',
       handle: '@neilpatel',
       description:
@@ -93,9 +114,11 @@ class ChannelData {
       initials: 'NP',
     ),
     Channel(
-      id: 'UCs_6DLTDKH6cFCzgm_C0Fog',
+      // Corrected: was UCs_6DLTDKH6cFCzgm_C0Fog (wrong, off by a few chars)
+      // Verified: youtube.com/c/DanLok → UCs_6DXZROU29pLvgQdCx4Ww ✓
+      id: 'UCs_6DXZROU29pLvgQdCx4Ww',
       name: 'Dan Lok',
-      handle: '@danlok',
+      handle: '@DanLok',
       description:
           'High ticket closer and serial entrepreneur. Premium sales '
           'skills and how to command high prices in any market.',
@@ -105,7 +128,9 @@ class ChannelData {
       initials: 'DL',
     ),
     Channel(
-      id: 'UCOIhB9fpQE_2GlRSLIAGXUg',
+      // Corrected: was UCOIhB9fpQE_2GlRSLIAGXUg (wrong)
+      // Verified: youtube.com/channel/UCsQiYDzi0UtpdDIe7_DpcLw ✓
+      id: 'UCsQiYDzi0UtpdDIe7_DpcLw',
       name: 'Jordan Platten',
       handle: '@jordanplatten',
       description:
@@ -117,6 +142,7 @@ class ChannelData {
       initials: 'JP',
     ),
     Channel(
+      // Verified: youtube.com/channel/UCmtBqvOp6xHlecDO0Un9O4w ✓
       id: 'UCmtBqvOp6xHlecDO0Un9O4w',
       name: 'School of Hard Knocks',
       handle: '@theschoolofhardknocks',
@@ -128,6 +154,34 @@ class ChannelData {
       category: 'How They Got Rich',
       focus: 'Millionaire interviews & wealth journeys',
       initials: 'SK',
+    ),
+    Channel(
+      // Verified: youtube.com/@vthembekwayo → UC_Ktic72t5bDX_3go_9u_pg ✓
+      id: 'UC_Ktic72t5bDX_3go_9u_pg',
+      name: 'Vusi Thembekwayo',
+      handle: '@vthembekwayo',
+      description:
+          'Global business strategist, venture capitalist and keynote speaker. '
+          '480+ keynotes across 6 continents. Founder & CEO of MyGrowthFund. '
+          'Unfiltered insights on leadership, disruption and the founder mindset.',
+      accentColor: Color(0xFF16A34A),
+      category: 'Entrepreneurship',
+      focus: 'Leadership, strategy & disruption',
+      initials: 'VT',
+    ),
+    Channel(
+      // Verified: youtube.com/@marketing-explained → UCM_PsKK4kvrOTNrHlsgK6pQ ✓
+      id: 'UCM_PsKK4kvrOTNrHlsgK6pQ',
+      name: 'Marketing Explained',
+      handle: '@marketing-explained',
+      description:
+          'Digital marketing explained simply — HubSpot tutorials, '
+          'quick tips and strategies from Cyberclick. '
+          'Inbound, SEO, paid media, social and more.',
+      accentColor: Color(0xFFDB4437),
+      category: 'Sales & Marketing',
+      focus: 'Digital marketing tutorials & strategies',
+      initials: 'ME',
     ),
   ];
 
