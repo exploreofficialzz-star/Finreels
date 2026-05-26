@@ -4,9 +4,9 @@ import 'package:shimmer/shimmer.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../services/ad_service.dart';
-import '../widgets/banner_ad_widget.dart';
 import '../services/blog_rss_service.dart';
 import '../theme/app_theme.dart';
+import '../widgets/banner_ad_widget.dart';
 import 'blog_reader_screen.dart';
 
 /// Fix 4 — Blogs Tab Design

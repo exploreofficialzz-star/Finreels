@@ -234,7 +234,7 @@ class AdService {
     required void Function() onRewarded,
   }) async {
     if (_adsRemoved || !_rewardedInterstitialReady ||
-        _rewardedInterstitialAd == null) return;
+        _rewardedInterstitialAd == null) { return; }
     await _rewardedInterstitialAd!.show(
         onUserEarnedReward: (_, __) => onRewarded());
     _rewardedInterstitialReady = false;
@@ -277,7 +277,7 @@ class AdService {
     if (_adsRemoved || !_appOpenReady || _appOpenAd == null) return;
     if (_lastAppOpenShown != null) {
       if (DateTime.now().difference(_lastAppOpenShown!) <
-          AppConfig.appOpenAdCooldown) return;
+          AppConfig.appOpenAdCooldown) { return; }
     }
     _lastAppOpenShown = DateTime.now();
     await _appOpenAd!.show();

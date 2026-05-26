@@ -13,7 +13,6 @@ import '../providers/feed_provider.dart';
 import '../services/ad_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
-import '../widgets/banner_ad_widget.dart';
 import '../widgets/inline_video_card.dart';
 import '../widgets/shimmer_loader.dart';
 import 'blog_feed_screen.dart';

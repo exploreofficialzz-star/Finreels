@@ -127,7 +127,6 @@ class _InlineVideoCardState extends State<InlineVideoCard>
       _controller = YoutubePlayerController(
         initialVideoId: widget.video.id,
         flags: const YoutubePlayerFlags(
-          autoPlay:      true,
           enableCaption: false,
           // hideControls = false (default) → all native controls visible.
         ),
