@@ -60,8 +60,8 @@ void main() {
 
   // ── Channel Data ────────────────────────────────────────────────────────────
   group('ChannelData', () {
-    test('has exactly 18 channels', () {
-      expect(ChannelData.all.length, 18);
+    test('has exactly 12 channels', () {
+      expect(ChannelData.all.length, 12);
     });
 
     test('School of Hard Knocks is in the list', () {
