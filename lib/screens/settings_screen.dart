@@ -7,6 +7,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../config/app_config.dart';
 import '../services/ad_service.dart';
 import '../services/iap_service.dart';
 import '../services/notification_service.dart';
@@ -21,7 +22,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  String _versionName = '';
+  String _version = '';
   bool _notificationsEnabled = true;
 
   @override
@@ -35,9 +36,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final info = await PackageInfo.fromPlatform();
     if (mounted) {
       setState(() {
-        // Strip -debug suffix for production display
-        final v = info.version.replaceAll('-debug', '');
-        _versionName = 'v$v';
+        _version = 'v${info.version.replaceAll('-debug', '')}';
       });
     }
   }
@@ -48,223 +47,321 @@ class _SettingsScreenState extends State<SettingsScreen> {
     if (mounted) setState(() => _notificationsEnabled = enabled);
   }
 
+  Future<void> _launch(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      unawaited(launchUrl(uri, mode: LaunchMode.externalApplication));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final iap = context.watch<IapService>();
+    final iap     = context.watch<IapService>();
     final adsGone = AdService.instance.adsRemoved;
+    final isDark  = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Settings')),
+      backgroundColor: AppTheme.bgColor(context),
       body: Column(
         children: [
           Expanded(
-            child: ListView(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 120),
-              children: [
-                // ── Remove Ads ────────────────────────────────────────────────
-                const _SectionHeader('Remove Ads'),
-                if (adsGone)
-                  const _InfoTile(
-                    icon: Icons.check_circle_rounded,
-                    iconColor: AppTheme.success,
-                    title: 'Ads Removed ✓',
-                    subtitle:
-                        "You're enjoying an ad-free experience. Thank you!",
-                  )
-                else
-                  _RemoveAdsSection(iap: iap),
-
-                // ── Notifications ─────────────────────────────────────────────
-                const _SectionHeader('Notifications'),
-                _NotificationTile(
-                  enabled: _notificationsEnabled,
-                  onChanged: (v) async {
-                    await NotificationService.instance
-                        .setNotificationsEnabled(v);
-                    setState(() => _notificationsEnabled = v);
-                  },
+            child: CustomScrollView(
+              slivers: [
+                // ── Premium App Bar ─────────────────────────────────────────
+                SliverAppBar(
+                  pinned: true,
+                  expandedHeight: 110,
+                  backgroundColor: AppTheme.bgColor(context),
+                  surfaceTintColor: Colors.transparent,
+                  flexibleSpace: FlexibleSpaceBar(
+                    titlePadding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
+                    title: Text(
+                      'Settings',
+                      style: TextStyle(
+                        color: isDark
+                            ? AppTheme.darkText
+                            : AppTheme.lightText,
+                        fontSize: 28,
+                        fontWeight: FontWeight.w800,
+                        letterSpacing: -0.5,
+                      ),
+                    ),
+                    expandedTitleScale: 1.0,
+                  ),
                 ),
 
-                // ── Support ───────────────────────────────────────────────────
-                const _SectionHeader('Support'),
-                _ActionTile(
-                  icon: Icons.star_rounded,
-                  iconColor: AppTheme.gold,
-                  title: 'Rate FinReels',
-                  subtitle: 'Enjoying the app? Leave us a review!',
-                  onTap: () async {
-                    final review = InAppReview.instance;
-                    if (await review.isAvailable()) {
-                      unawaited(review.requestReview());
-                    } else {
-                      unawaited(review.openStoreListing(
-                          appStoreId: 'com.chastech.finreels'));
-                    }
-                  },
-                ),
-                _ActionTile(
-                  icon: Icons.privacy_tip_outlined,
-                  iconColor: AppTheme.gold,
-                  title: 'Privacy Policy',
-                  subtitle: 'How we handle your data',
-                  onTap: () async {
-                    final uri = Uri.parse(
-                        'https://sites.google.com/view/finreels-privacy');
-                    if (await canLaunchUrl(uri)) {
-                      unawaited(launchUrl(uri,
-                          mode: LaunchMode.externalApplication));
-                    }
-                  },
-                ),
-                _ActionTile(
-                  icon: Icons.description_outlined,
-                  iconColor: AppTheme.gold,
-                  title: 'Terms of Service',
-                  subtitle: 'App usage terms and conditions',
-                  onTap: () async {
-                    final uri = Uri.parse(
-                        'https://sites.google.com/view/finreels-terms');
-                    if (await canLaunchUrl(uri)) {
-                      unawaited(launchUrl(uri,
-                          mode: LaunchMode.externalApplication));
-                    }
-                  },
-                ),
+                SliverToBoxAdapter(
+                  child: Column(
+                    children: [
 
-                // ── About ─────────────────────────────────────────────────────
-                const _SectionHeader('About'),
-                _InfoTile(
-                  icon: Icons.play_circle_rounded,
-                  iconColor: AppTheme.gold,
-                  title: 'FinReels',
-                  subtitle: 'Financial literacy video hub · $_versionName',
-                ),
-                const _InfoTile(
-                  icon: Icons.business_rounded,
-                  iconColor: AppTheme.gold,
-                  title: 'by chAs',
-                  subtitle: 'chAs Tech Group · com.chastech.finreels',
+                      // ── Remove Ads ──────────────────────────────────────
+                      if (!adsGone) ...[
+                        const _SectionHeader('✦  Go Ad-Free'),
+                        _RemoveAdsSection(iap: iap),
+                      ] else ...[
+                        const _SectionHeader('Subscription'),
+                        _AdsRemovedCard(),
+                      ],
+
+                      // ── Notifications ───────────────────────────────────
+                      const _SectionHeader('Notifications'),
+                      _ToggleTile(
+                        icon: Icons.notifications_rounded,
+                        title: 'New Content Alerts',
+                        subtitle:
+                            'Get notified when channels post new videos',
+                        value: _notificationsEnabled,
+                        onChanged: (v) async {
+                          await NotificationService.instance
+                              .setNotificationsEnabled(v);
+                          setState(() => _notificationsEnabled = v);
+                        },
+                      ),
+
+                      // ── Support ─────────────────────────────────────────
+                      const _SectionHeader('Support'),
+                      _SettingsTile(
+                        icon: Icons.star_rounded,
+                        iconColor: const Color(0xFFFBBF24),
+                        title: 'Rate FinReels',
+                        subtitle: 'Enjoying the app? Leave us a review!',
+                        trailing: const Icon(Icons.chevron_right_rounded,
+                            size: 20),
+                        onTap: () async {
+                          final review = InAppReview.instance;
+                          if (await review.isAvailable()) {
+                            unawaited(review.requestReview());
+                          } else {
+                            unawaited(review.openStoreListing(
+                                appStoreId: AppConfig.packageName));
+                          }
+                        },
+                      ),
+                      _SettingsTile(
+                        icon: Icons.headset_mic_rounded,
+                        iconColor: const Color(0xFF60A5FA),
+                        title: 'Contact Support',
+                        subtitle: 'Get help or report an issue',
+                        trailing: const Icon(Icons.chevron_right_rounded,
+                            size: 20),
+                        onTap: () => _launch(
+                            'mailto:support@chastech.group'
+                            '?subject=FinReels%20Support'),
+                      ),
+                      _SettingsTile(
+                        icon: Icons.share_rounded,
+                        iconColor: const Color(0xFF34D399),
+                        title: 'Share FinReels',
+                        subtitle: 'Tell a friend about the app',
+                        trailing: const Icon(Icons.chevron_right_rounded,
+                            size: 20),
+                        onTap: () => _launch(
+                            'https://play.google.com/store/apps/details'
+                            '?id=${AppConfig.packageName}'),
+                      ),
+
+                      // ── Legal ───────────────────────────────────────────
+                      const _SectionHeader('Legal'),
+                      _SettingsTile(
+                        icon: Icons.privacy_tip_rounded,
+                        iconColor: AppTheme.gold,
+                        title: 'Privacy Policy',
+                        subtitle: 'How we collect and use your data',
+                        trailing: const Icon(Icons.chevron_right_rounded,
+                            size: 20),
+                        onTap: () => _launch(
+                            'https://sites.google.com/view/finreels-privacy'),
+                      ),
+                      _SettingsTile(
+                        icon: Icons.description_rounded,
+                        iconColor: AppTheme.gold,
+                        title: 'Terms of Service',
+                        subtitle: 'App usage terms and conditions',
+                        trailing: const Icon(Icons.chevron_right_rounded,
+                            size: 20),
+                        onTap: () => _launch(
+                            'https://sites.google.com/view/finreels-terms'),
+                      ),
+                      _SettingsTile(
+                        icon: Icons.gavel_rounded,
+                        iconColor: AppTheme.gold,
+                        title: 'Content Disclaimer',
+                        subtitle: 'Videos are for educational purposes only',
+                        trailing: const Icon(Icons.chevron_right_rounded,
+                            size: 20),
+                        onTap: () => _launch(
+                            'https://sites.google.com/view/finreels-disclaimer'),
+                      ),
+
+                      // ── About ───────────────────────────────────────────
+                      const _SectionHeader('About'),
+                      _AppInfoCard(version: _version),
+
+                      const SizedBox(height: 40),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
-          if (!adsGone) const LabelledBannerAd(),
+
+          // Sticky banner at bottom for non-subscribers.
+          if (!adsGone) const StickyBannerBar(),
         ],
       ),
     );
   }
 }
 
-// ── Remove Ads Section ────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// Remove Ads Section
+// ─────────────────────────────────────────────────────────────────────────────
+
 class _RemoveAdsSection extends StatelessWidget {
   final IapService iap;
   const _RemoveAdsSection({required this.iap});
 
   @override
   Widget build(BuildContext context) {
+    // IAP not available on this device.
     if (!iap.available) {
-      return const _InfoTile(
-        icon: Icons.block_rounded,
-        iconColor: AppTheme.error,
-        title: 'Purchases Unavailable',
-        subtitle: 'In-app purchases are not available on this device.',
+      return Padding(
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+        child: _infoCard(
+          context,
+          icon: Icons.block_rounded,
+          iconColor: AppTheme.error,
+          title: 'Purchases Unavailable',
+          body: 'In-app purchases are not supported on this device.',
+        ),
       );
     }
 
+    // Products still loading.
     if (iap.products.isEmpty && !iap.purchasePending) {
       return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        child: Column(
-          children: [
-            const Center(
-              child: CircularProgressIndicator(color: AppTheme.gold),
-            ),
-            const SizedBox(height: 8),
-            Text('Loading purchase options…',
-                style: Theme.of(context).textTheme.bodySmall,
-                textAlign: TextAlign.center),
-          ],
+        padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: AppTheme.surfaceColor(context),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+                color: AppTheme.dividerColor(context), width: 0.5),
+          ),
+          child: Column(
+            children: [
+              const SizedBox(height: 4),
+              const CircularProgressIndicator(
+                  color: AppTheme.gold, strokeWidth: 2.5),
+              const SizedBox(height: 14),
+              Text('Loading purchase options…',
+                  style: Theme.of(context).textTheme.bodySmall,
+                  textAlign: TextAlign.center),
+              const SizedBox(height: 4),
+            ],
+          ),
         ),
       );
     }
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // Hero promo card.
+        _PromoCard(),
+
+        const SizedBox(height: 12),
+
+        // Pricing options.
         Padding(
-          padding: const EdgeInsets.fromLTRB(16, 4, 16, 12),
-          child: Text(
-            'Remove all ads and watch without interruptions.',
-            style: Theme.of(context).textTheme.bodyMedium,
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: iap.products.isNotEmpty
+                ? iap.products
+                    .map((p) => _PricingTile(product: p, iap: iap))
+                    .toList()
+                : [
+                    _PricingTile.placeholder(
+                      title: '24 Hours Ad-Free',
+                      price: r'$0.99',
+                      icon: Icons.timer_outlined,
+                      iap: iap,
+                      productId: AppConfig.iapNoAds1Day,
+                    ),
+                    _PricingTile.placeholder(
+                      title: '1 Week Ad-Free',
+                      price: r'$2.99',
+                      icon: Icons.calendar_view_week_rounded,
+                      iap: iap,
+                      productId: AppConfig.iapNoAdsWeekly,
+                    ),
+                    _PricingTile.placeholder(
+                      title: '1 Month Ad-Free',
+                      price: r'$7.99',
+                      icon: Icons.calendar_month_rounded,
+                      iap: iap,
+                      productId: AppConfig.iapNoAdsMonthly,
+                      highlight: true,
+                    ),
+                  ],
           ),
         ),
 
-        // ── Pricing cards ──────────────────────────────────────────────────
-        if (iap.products.isEmpty)
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: _PriceCard(
-              icon: Icons.timer_outlined,
-              title: '24 Hours Ad-Free',
-              price: r'$0.99',
-              productId: kIapNoAds1Day,
-              iap: iap,
-            ),
-          )
-        else
-          ...iap.products.map((p) => _IapTile(product: p, iap: iap)),
-
-        // Restore
+        // Restore button.
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+          padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
           child: SizedBox(
             width: double.infinity,
             child: TextButton(
               onPressed:
                   iap.purchasePending ? null : iap.restorePurchases,
-              child: const Text('Restore Previous Purchase'),
+              child: Text(
+                'Restore Previous Purchase',
+                style: TextStyle(
+                    color: AppTheme.textMuted(context), fontSize: 13),
+              ),
             ),
           ),
         ),
 
+        // Error message.
         if (iap.error != null)
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
             child: Text(
               iap.error!,
-              style: const TextStyle(color: AppTheme.error, fontSize: 12),
+              style:
+                  const TextStyle(color: AppTheme.error, fontSize: 12),
               textAlign: TextAlign.center,
             ),
           ),
+
+        // Legal micro-copy required by Google Play.
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
+          child: Text(
+            'Payment will be charged to your Google Play account. '
+            'Your subscription will be applied for the selected period. '
+            'Subscriptions are non-refundable.',
+            style: Theme.of(context)
+                .textTheme
+                .bodySmall
+                ?.copyWith(fontSize: 10),
+            textAlign: TextAlign.center,
+          ),
+        ),
       ],
     );
   }
-}
 
-// Fallback when products haven't loaded but we want to show the UI
-// ignore: non_constant_identifier_names
-// IAP product ID constants
-const String kIapNoAds1Day = 'finreels_no_ads_1day';
-
-class _PriceCard extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final String price;
-  final String productId;
-  final IapService iap;
-
-  const _PriceCard({
-    required this.icon,
-    required this.title,
-    required this.price,
-    required this.productId,
-    required this.iap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _infoCard(
+    BuildContext context, {
+    required IconData icon,
+    required Color iconColor,
+    required String title,
+    required String body,
+  }) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: AppTheme.surfaceColor(context),
@@ -275,33 +372,24 @@ class _PriceCard extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: 40,
-            height: 40,
+            width: 40, height: 40,
             decoration: BoxDecoration(
-              color: AppTheme.gold.withValues(alpha: 0.12),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(icon, color: AppTheme.gold, size: 20),
+                color: iconColor.withValues(alpha: 0.12),
+                shape: BoxShape.circle),
+            child: Icon(icon, color: iconColor, size: 20),
           ),
           const SizedBox(width: 14),
           Expanded(
-            child: Text(title,
-                style: const TextStyle(
-                    fontWeight: FontWeight.w700, fontSize: 14)),
-          ),
-          FilledButton(
-            onPressed: iap.purchasePending ? null : () {},
-            style: FilledButton.styleFrom(
-              backgroundColor: AppTheme.gold,
-              foregroundColor: Colors.black,
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
+            child: Column(
+              children: [
+                Text(title,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w700, fontSize: 14)),
+                const SizedBox(height: 2),
+                Text(body,
+                    style: Theme.of(context).textTheme.bodySmall),
+              ],
             ),
-            child: Text(price,
-                style: const TextStyle(
-                    fontWeight: FontWeight.w800, fontSize: 13)),
           ),
         ],
       ),
@@ -309,141 +397,420 @@ class _PriceCard extends StatelessWidget {
   }
 }
 
-class _IapTile extends StatelessWidget {
-  final ProductDetails product;
-  final IapService iap;
-  const _IapTile({required this.product, required this.iap});
+// ── Promo hero card ───────────────────────────────────────────────────────────
 
-  @override
-  Widget build(BuildContext context) {
-    final info = <String, (String, IconData)>{
-      'finreels_no_ads_1day': ('24 Hours Ad-Free', Icons.timer_outlined),
-      'finreels_no_ads_weekly':
-          ('1 Week Ad-Free', Icons.calendar_view_week_rounded),
-      'finreels_no_ads_monthly':
-          ('1 Month Ad-Free', Icons.calendar_month_rounded),
-    }[product.id];
-
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: AppTheme.surfaceColor(context),
-          borderRadius: BorderRadius.circular(14),
-          border:
-              Border.all(color: AppTheme.dividerColor(context), width: 0.5),
-        ),
-        child: ListTile(
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
-          leading: Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: AppTheme.gold.withValues(alpha: 0.12),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              info?.$2 ?? Icons.shopping_bag_outlined,
-              color: AppTheme.gold,
-              size: 20,
-            ),
-          ),
-          title: Text(
-            info?.$1 ?? product.title,
-            style: const TextStyle(
-                fontWeight: FontWeight.w700, fontSize: 14),
-          ),
-          subtitle: Text(
-            'Removes all ads',
-            style: TextStyle(
-                fontSize: 12, color: AppTheme.textMuted(context)),
-          ),
-          trailing: FilledButton(
-            onPressed: iap.purchasePending
-                ? null
-                : () => unawaited(iap.purchase(product)),
-            style: FilledButton.styleFrom(
-              backgroundColor: AppTheme.gold,
-              foregroundColor: Colors.black,
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 14, vertical: 10),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-            ),
-            child: Text(
-              product.price,
-              style: const TextStyle(
-                  fontWeight: FontWeight.w800, fontSize: 13),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// ── Notification Toggle ───────────────────────────────────────────────────────
-class _NotificationTile extends StatelessWidget {
-  final bool enabled;
-  final ValueChanged<bool> onChanged;
-  const _NotificationTile(
-      {required this.enabled, required this.onChanged});
-
+class _PromoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-      child: DecoratedBox(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.fromLTRB(20, 20, 20, 18),
         decoration: BoxDecoration(
-          color: AppTheme.surfaceColor(context),
-          borderRadius: BorderRadius.circular(14),
-          border:
-              Border.all(color: AppTheme.dividerColor(context), width: 0.5),
-        ),
-        child: SwitchListTile(
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
-          secondary: Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: AppTheme.gold.withValues(alpha: 0.12),
-              shape: BoxShape.circle,
-            ),
-            child: const Icon(Icons.notifications_rounded,
-                color: AppTheme.gold, size: 20),
+          gradient: const LinearGradient(
+            colors: [Color(0xFF1A1208), Color(0xFF2C1F06)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
-          title: const Text('New Content Alerts',
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(
+              color: AppTheme.gold.withValues(alpha: 0.35), width: 1),
+        ),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: AppTheme.gold.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Icon(Icons.block_rounded,
+                      color: AppTheme.gold, size: 20),
+                ),
+                const SizedBox(width: 12),
+                const Text(
+                  'Go Ad-Free',
+                  style: TextStyle(
+                    color: AppTheme.gold,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 18,
+                    letterSpacing: -0.3,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            const Text(
+              'Watch all 12 channels without a single interruption. '
+              'No banners, no pop-ups — just pure financial content.',
               style: TextStyle(
-                  fontWeight: FontWeight.w700, fontSize: 14)),
-          subtitle: Text(
-            'Get notified when channels post new videos',
-            style: TextStyle(
-                fontSize: 12, color: AppTheme.textMuted(context)),
-          ),
-          value: enabled,
-          activeColor: AppTheme.gold,
-          onChanged: onChanged,
+                color: Color(0xFFD4A84B),
+                fontSize: 13,
+                height: 1.5,
+              ),
+            ),
+            const SizedBox(height: 14),
+            const Row(
+              children: [
+                _PromoFeature('No banner ads'),
+                SizedBox(width: 16),
+                _PromoFeature('No interstitials'),
+                SizedBox(width: 16),
+                _PromoFeature('Cancel anytime'),
+              ],
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-// ── Action Tile ───────────────────────────────────────────────────────────────
-class _ActionTile extends StatelessWidget {
+class _PromoFeature extends StatelessWidget {
+  final String label;
+  const _PromoFeature(this.label);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Icon(Icons.check_circle_rounded,
+            color: AppTheme.gold, size: 14),
+        const SizedBox(width: 4),
+        Text(label,
+            style: const TextStyle(
+                color: Color(0xFFD4A84B),
+                fontSize: 11,
+                fontWeight: FontWeight.w600)),
+      ],
+    );
+  }
+}
+
+// ── Pricing tile ──────────────────────────────────────────────────────────────
+
+class _PricingTile extends StatelessWidget {
+  final ProductDetails? product;
+  final IapService iap;
+  final String? _title;
+  final String? _price;
+  final IconData? _icon;
+  final String? _productId;
+  final bool highlight;
+
+  const _PricingTile({
+    required this.product,
+    required this.iap,
+  })  : _title = null,
+        _price = null,
+        _icon = null,
+        _productId = null,
+        highlight = false;
+
+  const _PricingTile.placeholder({
+    required String title,
+    required String price,
+    required IconData icon,
+    required this.iap,
+    required String productId,
+    this.highlight = false,
+  })  : product = null,
+        _title = title,
+        _price = price,
+        _icon = icon,
+        _productId = productId;
+
+  static const _meta = <String, (String, IconData)>{
+    AppConfig.iapNoAds1Day:
+        ('24 Hours Ad-Free', Icons.timer_outlined),
+    AppConfig.iapNoAdsWeekly:
+        ('1 Week Ad-Free', Icons.calendar_view_week_rounded),
+    AppConfig.iapNoAdsMonthly:
+        ('1 Month Ad-Free', Icons.calendar_month_rounded),
+  };
+
+  @override
+  Widget build(BuildContext context) {
+    final id    = product?.id ?? _productId ?? '';
+    final meta  = _meta[id];
+    final title = meta?.$1 ?? _title ?? product?.title ?? id;
+    final icon  = meta?.$2 ?? _icon  ?? Icons.shopping_bag_outlined;
+    final price = product?.price ?? _price ?? '—';
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      decoration: BoxDecoration(
+        color: highlight
+            ? AppTheme.gold.withValues(alpha: 0.07)
+            : AppTheme.surfaceColor(context),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(
+          color: highlight
+              ? AppTheme.gold.withValues(alpha: 0.5)
+              : AppTheme.dividerColor(context),
+          width: highlight ? 1.5 : 0.5,
+        ),
+      ),
+      child: ListTile(
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+        leading: Container(
+          width: 40, height: 40,
+          decoration: BoxDecoration(
+            color: AppTheme.gold.withValues(alpha: 0.12),
+            shape: BoxShape.circle,
+          ),
+          child: Icon(icon, color: AppTheme.gold, size: 20),
+        ),
+        title: Row(
+          children: [
+            Text(title,
+                style: const TextStyle(
+                    fontWeight: FontWeight.w700, fontSize: 14)),
+            if (highlight) ...[
+              const SizedBox(width: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 7, vertical: 2),
+                decoration: BoxDecoration(
+                  color: AppTheme.gold,
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: const Text('BEST VALUE',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 8,
+                        fontWeight: FontWeight.w800,
+                        letterSpacing: 0.5)),
+              ),
+            ],
+          ],
+        ),
+        subtitle: Text(
+          'Removes all ads for the full period',
+          style: TextStyle(
+              fontSize: 11, color: AppTheme.textMuted(context)),
+        ),
+        trailing: iap.purchasePending
+            ? const SizedBox(
+                width: 24, height: 24,
+                child: CircularProgressIndicator(
+                    color: AppTheme.gold, strokeWidth: 2))
+            : FilledButton(
+                onPressed: product != null
+                    ? () => unawaited(iap.purchase(product!))
+                    : null,
+                style: FilledButton.styleFrom(
+                  backgroundColor: AppTheme.gold,
+                  foregroundColor: Colors.black,
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 14, vertical: 10),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                ),
+                child: Text(price,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w800, fontSize: 13)),
+              ),
+      ),
+    );
+  }
+}
+
+// ── Ads removed card ──────────────────────────────────────────────────────────
+
+class _AdsRemovedCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+      child: Container(
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [Color(0xFF052E16), Color(0xFF064E3B)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+              color: AppTheme.success.withValues(alpha: 0.4), width: 1),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 44, height: 44,
+              decoration: BoxDecoration(
+                color: AppTheme.success.withValues(alpha: 0.2),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(Icons.check_circle_rounded,
+                  color: AppTheme.success, size: 24),
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                children: [
+                  const Text('Ad-Free Active ✓',
+                      style: TextStyle(
+                          color: AppTheme.success,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 15)),
+                  const SizedBox(height: 3),
+                  Text("You're enjoying uninterrupted financial content.",
+                      style: TextStyle(
+                          color: AppTheme.success.withValues(alpha: 0.8),
+                          fontSize: 12,
+                          height: 1.4)),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ── App info card ─────────────────────────────────────────────────────────────
+
+class _AppInfoCard extends StatelessWidget {
+  final String version;
+  const _AppInfoCard({required this.version});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+      child: Container(
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(
+          color: AppTheme.surfaceColor(context),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+              color: AppTheme.dividerColor(context), width: 0.5),
+        ),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                // App icon — gradient rounded square, WHITE arrow.
+                Container(
+                  width: 48, height: 48,
+                  decoration: BoxDecoration(
+                    gradient: const RadialGradient(
+                      colors: [
+                        AppTheme.goldLight,
+                        AppTheme.gold,
+                        AppTheme.goldDark,
+                      ],
+                      center: Alignment.topLeft,
+                      radius: 1.5,
+                    ),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const Icon(Icons.play_arrow_rounded,
+                      color: Colors.white, size: 28),
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    children: [
+                      const Text('FinReels',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w800, fontSize: 16)),
+                      Text(
+                        'Financial Literacy · Unlocked · $version',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall
+                            ?.copyWith(fontSize: 12),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 14),
+              child: Divider(height: 1),
+            ),
+            Row(
+              children: [
+                Container(
+                  width: 40, height: 40,
+                  decoration: BoxDecoration(
+                    color: AppTheme.gold.withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Icon(Icons.grid_view_rounded,
+                      color: AppTheme.gold, size: 20),
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    children: [
+                      const Text('by chAs',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 14)),
+                      Text('chAs Tech Group · ${AppConfig.packageName}',
+                          style: Theme.of(context).textTheme.bodySmall),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Shared building blocks
+// ─────────────────────────────────────────────────────────────────────────────
+
+class _SectionHeader extends StatelessWidget {
+  final String title;
+  const _SectionHeader(this.title);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 28, 20, 10),
+      child: Text(
+        title.toUpperCase(),
+        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+              color: AppTheme.gold,
+              letterSpacing: 1.4,
+              fontWeight: FontWeight.w800,
+              fontSize: 11,
+            ),
+      ),
+    );
+  }
+}
+
+class _SettingsTile extends StatelessWidget {
   final IconData icon;
   final Color iconColor;
   final String title;
   final String subtitle;
-  final VoidCallback onTap;
-  const _ActionTile({
+  final Widget? trailing;
+  final VoidCallback? onTap;
+
+  const _SettingsTile({
     required this.icon,
     required this.iconColor,
     required this.title,
     required this.subtitle,
-    required this.onTap,
+    this.trailing,
+    this.onTap,
   });
 
   @override
@@ -452,6 +819,7 @@ class _ActionTile extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
       child: GestureDetector(
         onTap: onTap,
+        behavior: HitTestBehavior.opaque,
         child: Container(
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
@@ -463,8 +831,7 @@ class _ActionTile extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                width: 40,
-                height: 40,
+                width: 40, height: 40,
                 decoration: BoxDecoration(
                   color: iconColor.withValues(alpha: 0.12),
                   shape: BoxShape.circle,
@@ -474,20 +841,26 @@ class _ActionTile extends StatelessWidget {
               const SizedBox(width: 14),
               Expanded(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(title,
                         style: Theme.of(context)
                             .textTheme
                             .titleSmall
                             ?.copyWith(fontWeight: FontWeight.w700)),
+                    const SizedBox(height: 2),
                     Text(subtitle,
                         style: Theme.of(context).textTheme.bodySmall),
                   ],
                 ),
               ),
-              Icon(Icons.chevron_right_rounded,
-                  color: AppTheme.textMuted(context), size: 20),
+              if (trailing != null) ...[
+                const SizedBox(width: 8),
+                IconTheme(
+                  data: IconThemeData(
+                      color: AppTheme.textMuted(context), size: 20),
+                  child: trailing!,
+                ),
+              ],
             ],
           ),
         ),
@@ -496,80 +869,57 @@ class _ActionTile extends StatelessWidget {
   }
 }
 
-// ── Info Tile ─────────────────────────────────────────────────────────────────
-class _InfoTile extends StatelessWidget {
+class _ToggleTile extends StatelessWidget {
   final IconData icon;
-  final Color iconColor;
   final String title;
   final String subtitle;
-  const _InfoTile({
+  final bool value;
+  final ValueChanged<bool> onChanged;
+
+  const _ToggleTile({
     required this.icon,
-    required this.iconColor,
     required this.title,
     required this.subtitle,
+    required this.value,
+    required this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-      child: Container(
-        padding: const EdgeInsets.all(14),
+      child: DecoratedBox(
         decoration: BoxDecoration(
           color: AppTheme.surfaceColor(context),
           borderRadius: BorderRadius.circular(14),
-          border:
-              Border.all(color: AppTheme.dividerColor(context), width: 0.5),
+          border: Border.all(
+              color: AppTheme.dividerColor(context), width: 0.5),
         ),
-        child: Row(
-          children: [
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: iconColor.withValues(alpha: 0.12),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(icon, color: iconColor, size: 20),
+        child: SwitchListTile(
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+          secondary: Container(
+            width: 40, height: 40,
+            decoration: BoxDecoration(
+              color: AppTheme.gold.withValues(alpha: 0.12),
+              shape: BoxShape.circle,
             ),
-            const SizedBox(width: 14),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(title,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleSmall
-                          ?.copyWith(fontWeight: FontWeight.w700)),
-                  Text(subtitle,
-                      style: Theme.of(context).textTheme.bodySmall),
-                ],
-              ),
-            ),
-          ],
+            child: Icon(icon, color: AppTheme.gold, size: 20),
+          ),
+          title: Text(title,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleSmall
+                  ?.copyWith(fontWeight: FontWeight.w700)),
+          subtitle: Text(subtitle,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall
+                  ?.copyWith(fontSize: 12)),
+          value: value,
+          activeColor: AppTheme.gold,
+          onChanged: onChanged,
         ),
-      ),
-    );
-  }
-}
-
-// ── Section Header ─────────────────────────────────────────────────────────────
-class _SectionHeader extends StatelessWidget {
-  final String title;
-  const _SectionHeader(this.title);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
-      child: Text(
-        title.toUpperCase(),
-        style: Theme.of(context).textTheme.labelSmall?.copyWith(
-              color: AppTheme.gold,
-              letterSpacing: 1.2,
-              fontWeight: FontWeight.w700,
-            ),
       ),
     );
   }
