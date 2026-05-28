@@ -415,7 +415,7 @@ class _PromoCard extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(18),
           border: Border.all(
-              color: AppTheme.gold.withValues(alpha: 0.35), width: 1),
+              color: AppTheme.gold.withValues(alpha: 0.35)),
         ),
         child: Column(
           children: [
@@ -638,7 +638,7 @@ class _AdsRemovedCard extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-              color: AppTheme.success.withValues(alpha: 0.4), width: 1),
+              color: AppTheme.success.withValues(alpha: 0.4)),
         ),
         child: Row(
           children: [
