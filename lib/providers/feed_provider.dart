@@ -38,8 +38,6 @@ class FeedProvider extends ChangeNotifier {
   List<Video> _compute(FeedTab tab) {
     final all = _videosByChannel.values.expand((v) => v).toList();
     return switch (tab) {
-      FeedTab.all    =>
-        _roundRobin(all.where((v) => !_isBook(v)).toList()),
       FeedTab.videos =>
         _roundRobin(all.where((v) => !v.isShort && !_isBook(v)).toList()),
       FeedTab.shorts =>

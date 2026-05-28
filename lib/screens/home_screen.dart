@@ -53,7 +53,7 @@ class _AppHeader extends StatelessWidget {
             decoration: BoxDecoration(
                 color: AppTheme.gold, borderRadius: BorderRadius.circular(9)),
             child: const Icon(Icons.play_arrow_rounded,
-                color: Colors.black, size: 22),
+                color: Colors.white, size: 22),
           ),
           const SizedBox(width: 10),
           Text('FinReels',

@@ -52,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 ],
               ),
               child: const Icon(Icons.play_arrow_rounded,
-                  color: Colors.black, size: 54),
+                  color: Colors.white, size: 54),
             )
                 .animate()
                 .scale(begin: const Offset(0.6, 0.6), duration: 600.ms,
@@ -94,29 +94,14 @@ class _SplashScreenState extends State<SplashScreen> {
             const Spacer(flex: 3),
 
             // ── By Chas ───────────────────────────────────────────────────────
-            Column(
-              children: [
-                Text(
-                  'by chAs',
-                  style: TextStyle(
-                    color: textColor,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 0.3,
-                  ),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  'Chas Tech Group',
-                  style: TextStyle(
-                    color: isDark
-                        ? AppTheme.darkTextMuted
-                        : AppTheme.lightTextMuted,
-                    fontSize: 11,
-                    letterSpacing: 0.2,
-                  ),
-                ),
-              ],
+            Text(
+              'by chAs',
+              style: TextStyle(
+                color: textColor,
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 0.3,
+              ),
             )
                 .animate(delay: 800.ms)
                 .fadeIn(duration: 600.ms),

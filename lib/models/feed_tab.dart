@@ -1,5 +1,4 @@
 enum FeedTab {
-  all,
   videos,
   shorts,
   blogs,
@@ -9,7 +8,6 @@ enum FeedTab {
 extension FeedTabLabel on FeedTab {
   String get label {
     switch (this) {
-      case FeedTab.all:    return 'All';
       case FeedTab.videos: return 'Videos';
       case FeedTab.shorts: return 'Shorts';
       case FeedTab.blogs:  return 'Blogs';
