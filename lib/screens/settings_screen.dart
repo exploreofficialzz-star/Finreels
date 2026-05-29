@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../config/app_config.dart';
+import '../screens/privacy_policy_screen.dart';
 import '../services/ad_service.dart';
 import '../services/iap_service.dart';
 import '../services/notification_service.dart';
@@ -141,23 +142,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         icon: Icons.headset_mic_rounded,
                         iconColor: const Color(0xFF60A5FA),
                         title: 'Contact Support',
-                        subtitle: 'Get help or report an issue',
+                        subtitle: 'Need help, support, questions or issues',
                         trailing: const Icon(Icons.chevron_right_rounded,
                             size: 20),
                         onTap: () => _launch(
-                            'mailto:support@chastech.group'
-                            '?subject=FinReels%20Support'),
-                      ),
-                      _SettingsTile(
-                        icon: Icons.share_rounded,
-                        iconColor: const Color(0xFF34D399),
-                        title: 'Share FinReels',
-                        subtitle: 'Tell a friend about the app',
-                        trailing: const Icon(Icons.chevron_right_rounded,
-                            size: 20),
-                        onTap: () => _launch(
-                            'https://play.google.com/store/apps/details'
-                            '?id=${AppConfig.packageName}'),
+                            'mailto:chastechnologiesllc@gmail.com'
+                            '?subject=FinReels%20Support'
+                            '&body=Hi%2C%20I%20need%20help%20with%3A%20'),
                       ),
 
                       // ── Legal ───────────────────────────────────────────
@@ -169,8 +160,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         subtitle: 'How we collect and use your data',
                         trailing: const Icon(Icons.chevron_right_rounded,
                             size: 20),
-                        onTap: () => _launch(
-                            'https://sites.google.com/view/finreels-privacy'),
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => const PrivacyPolicyScreen(),
+                          ),
+                        ),
                       ),
                       _SettingsTile(
                         icon: Icons.description_rounded,
@@ -179,8 +173,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         subtitle: 'App usage terms and conditions',
                         trailing: const Icon(Icons.chevron_right_rounded,
                             size: 20),
-                        onTap: () => _launch(
-                            'https://sites.google.com/view/finreels-terms'),
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => const TermsOfServiceScreen(),
+                          ),
+                        ),
                       ),
                       _SettingsTile(
                         icon: Icons.gavel_rounded,
@@ -189,8 +186,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         subtitle: 'Videos are for educational purposes only',
                         trailing: const Icon(Icons.chevron_right_rounded,
                             size: 20),
-                        onTap: () => _launch(
-                            'https://sites.google.com/view/finreels-disclaimer'),
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => const ContentDisclaimerScreen(),
+                          ),
+                        ),
                       ),
 
                       // ── About ───────────────────────────────────────────
@@ -224,46 +224,24 @@ class _RemoveAdsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // IAP not available on this device.
-    if (!iap.available) {
-      return Padding(
-        padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-        child: _infoCard(
-          context,
-          icon: Icons.block_rounded,
-          iconColor: AppTheme.error,
-          title: 'Purchases Unavailable',
-          body: 'In-app purchases are not supported on this device.',
+    // Helper: show "not available" snackbar.
+    void showUnavailable() {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text(
+            'This offer is not currently available. Please try again later.',
+          ),
+          backgroundColor: AppTheme.surfaceColor(context),
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12)),
+          duration: const Duration(seconds: 3),
         ),
       );
     }
 
-    // Products still loading.
-    if (iap.products.isEmpty && !iap.purchasePending) {
-      return Padding(
-        padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-        child: Container(
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            color: AppTheme.surfaceColor(context),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-                color: AppTheme.dividerColor(context), width: 0.5),
-          ),
-          child: Column(
-            children: [
-              const SizedBox(height: 4),
-              const CircularProgressIndicator(
-                  color: AppTheme.gold, strokeWidth: 2.5),
-              const SizedBox(height: 14),
-              Text('Loading purchase options…',
-                  style: Theme.of(context).textTheme.bodySmall,
-                  textAlign: TextAlign.center),
-              const SizedBox(height: 4),
-            ],
-          ),
-        ),
-      );
-    }
+    // Determine which real products (if any) are loaded.
+    final hasRealProducts = iap.available && iap.products.isNotEmpty;
 
     return Column(
       children: [
@@ -272,11 +250,11 @@ class _RemoveAdsSection extends StatelessWidget {
 
         const SizedBox(height: 12),
 
-        // Pricing options.
+        // Pricing options — always visible, never a spinner.
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
-            children: iap.products.isNotEmpty
+            children: hasRealProducts
                 ? iap.products
                     .map((p) => _PricingTile(product: p, iap: iap))
                     .toList()
@@ -287,6 +265,7 @@ class _RemoveAdsSection extends StatelessWidget {
                       icon: Icons.timer_outlined,
                       iap: iap,
                       productId: AppConfig.iapNoAds1Day,
+                      onUnavailable: showUnavailable,
                     ),
                     _PricingTile.placeholder(
                       title: '1 Week Ad-Free',
@@ -294,6 +273,7 @@ class _RemoveAdsSection extends StatelessWidget {
                       icon: Icons.calendar_view_week_rounded,
                       iap: iap,
                       productId: AppConfig.iapNoAdsWeekly,
+                      onUnavailable: showUnavailable,
                     ),
                     _PricingTile.placeholder(
                       title: '1 Month Ad-Free',
@@ -302,6 +282,7 @@ class _RemoveAdsSection extends StatelessWidget {
                       iap: iap,
                       productId: AppConfig.iapNoAdsMonthly,
                       highlight: true,
+                      onUnavailable: showUnavailable,
                     ),
                   ],
           ),
@@ -354,47 +335,6 @@ class _RemoveAdsSection extends StatelessWidget {
     );
   }
 
-  Widget _infoCard(
-    BuildContext context, {
-    required IconData icon,
-    required Color iconColor,
-    required String title,
-    required String body,
-  }) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppTheme.surfaceColor(context),
-        borderRadius: BorderRadius.circular(14),
-        border:
-            Border.all(color: AppTheme.dividerColor(context), width: 0.5),
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 40, height: 40,
-            decoration: BoxDecoration(
-                color: iconColor.withValues(alpha: 0.12),
-                shape: BoxShape.circle),
-            child: Icon(icon, color: iconColor, size: 20),
-          ),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Column(
-              children: [
-                Text(title,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w700, fontSize: 14)),
-                const SizedBox(height: 2),
-                Text(body,
-                    style: Theme.of(context).textTheme.bodySmall),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
 
 // ── Promo hero card ───────────────────────────────────────────────────────────
@@ -501,6 +441,7 @@ class _PricingTile extends StatelessWidget {
   final IconData? _icon;
   final String? _productId;
   final bool highlight;
+  final VoidCallback? _onUnavailable;
 
   const _PricingTile({
     required this.product,
@@ -509,7 +450,8 @@ class _PricingTile extends StatelessWidget {
         _price = null,
         _icon = null,
         _productId = null,
-        highlight = false;
+        highlight = false,
+        _onUnavailable = null;
 
   const _PricingTile.placeholder({
     required String title,
@@ -518,11 +460,13 @@ class _PricingTile extends StatelessWidget {
     required this.iap,
     required String productId,
     this.highlight = false,
+    VoidCallback? onUnavailable,
   })  : product = null,
         _title = title,
         _price = price,
         _icon = icon,
-        _productId = productId;
+        _productId = productId,
+        _onUnavailable = onUnavailable;
 
   static const _meta = <String, (String, IconData)>{
     AppConfig.iapNoAds1Day:
@@ -603,7 +547,7 @@ class _PricingTile extends StatelessWidget {
             : FilledButton(
                 onPressed: product != null
                     ? () => unawaited(iap.purchase(product!))
-                    : null,
+                    : _onUnavailable,
                 style: FilledButton.styleFrom(
                   backgroundColor: AppTheme.gold,
                   foregroundColor: Colors.black,
@@ -730,35 +674,6 @@ class _AppInfoCard extends StatelessWidget {
                             .bodySmall
                             ?.copyWith(fontSize: 12),
                       ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 14),
-              child: Divider(height: 1),
-            ),
-            Row(
-              children: [
-                Container(
-                  width: 40, height: 40,
-                  decoration: BoxDecoration(
-                    color: AppTheme.gold.withValues(alpha: 0.12),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Icon(Icons.grid_view_rounded,
-                      color: AppTheme.gold, size: 20),
-                ),
-                const SizedBox(width: 14),
-                Expanded(
-                  child: Column(
-                    children: [
-                      const Text('by chAs',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 14)),
-                      Text('chAs Tech Group · ${AppConfig.packageName}',
-                          style: Theme.of(context).textTheme.bodySmall),
                     ],
                   ),
                 ),
