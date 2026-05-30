@@ -45,12 +45,18 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   @override
   void initState() {
     super.initState();
-    unawaited(AdService.instance.onContentTapped());
+    // Fire ad AFTER the push-navigation animation completes so it never
+    // causes a black flash during the hero transition.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      unawaited(AdService.instance.onContentTapped());
+    });
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     _controller = YoutubePlayerController(
       initialVideoId: widget.video.id,
       flags: const YoutubePlayerFlags(
         hideControls: true,
+        autoPlay: true,          // start immediately once iframe is ready
+        mute: false,
       ),
     )..addListener(_onUpdate);
   }
@@ -152,6 +158,26 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
+                  // ── Thumbnail — always visible until player is playing ──
+                  // This eliminates the black flash: the user sees the
+                  // thumbnail the instant the screen opens, while the
+                  // YouTube iframe warms up in the background.
+                  AnimatedOpacity(
+                    opacity: (_ready && _playing) ? 0.0 : 1.0,
+                    duration: const Duration(milliseconds: 300),
+                    child: CachedNetworkImage(
+                      imageUrl: widget.video.thumbnailHd,
+                      fit: BoxFit.cover,
+                      errorWidget: (_, __, ___) => CachedNetworkImage(
+                        imageUrl: widget.video.thumbnailMq,
+                        fit: BoxFit.cover,
+                        errorWidget: (_, __, ___) =>
+                            const ColoredBox(color: Colors.black),
+                      ),
+                    ),
+                  ),
+
+                  // ── YouTube iframe (behind overlay until ready) ──────────
                   FittedBox(
                     fit: BoxFit.cover,
                     child: SizedBox(
@@ -169,10 +195,15 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       ),
                     ),
                   ),
+
+                  // ── Buffering spinner (only after ready, while buffering) ─
+                  if (_ready && !_playing && !_ended)
+                    const Center(
+                      child: CircularProgressIndicator(
+                          color: AppTheme.gold, strokeWidth: 3),
+                    ),
+
                   if (_ended)  _buildEndOverlay(),
-                  if (!_ready && !_ended)
-                    const Center(child: CircularProgressIndicator(
-                        color: AppTheme.gold, strokeWidth: 3)),
                   if (!_ended) _buildControls(context),
                 ],
               ),

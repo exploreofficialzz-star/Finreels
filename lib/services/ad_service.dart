@@ -63,6 +63,8 @@ class AdService {
   bool _initialized = false;
 
   bool get adsRemoved => _adsRemoved;
+  /// Legacy getter — StickyBannerBar and LabelledBannerAd each own their
+  /// own BannerAd instances now. Kept for any external callers.
   BannerAd? get bannerAd => (_bannerReady && !_adsRemoved) ? _bannerAd : null;
 
   // ── Init ──────────────────────────────────────────────────────────────────
@@ -124,6 +126,9 @@ class AdService {
   }
 
   // ── Interstitial ──────────────────────────────────────────────────────────
+  int _interstitialRetry = 0;
+  static const int _maxInterstitialRetries = 5;
+
   Future<void> _loadInterstitial() async {
     _interstitialReady = false;
     await InterstitialAd.load(
@@ -133,6 +138,7 @@ class AdService {
         onAdLoaded: (ad) {
           _interstitialAd    = ad;
           _interstitialReady = true;
+          _interstitialRetry = 0;
           ad.fullScreenContentCallback = FullScreenContentCallback(
             onAdDismissedFullScreenContent: (ad) {
               ad.dispose();
@@ -150,8 +156,15 @@ class AdService {
         },
         onAdFailedToLoad: (_) {
           _interstitialReady = false;
-          Timer(const Duration(seconds: 45),
-              () => unawaited(_loadInterstitial()));
+          if (_interstitialRetry < _maxInterstitialRetries) {
+            _interstitialRetry++;
+            final delay = Duration(seconds: 15 * _interstitialRetry);
+            Timer(delay, () => unawaited(_loadInterstitial()));
+          } else {
+            // Cap at 5-minute retry after max back-off.
+            Timer(const Duration(minutes: 5),
+                () => unawaited(_loadInterstitial()));
+          }
         },
       ),
     );

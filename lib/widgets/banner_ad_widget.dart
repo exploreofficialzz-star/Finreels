@@ -32,6 +32,8 @@ class LabelledBannerAd extends StatefulWidget {
 class _LabelledBannerAdState extends State<LabelledBannerAd> {
   BannerAd? _ad;
   bool _loaded = false;
+  int  _retryCount = 0;
+  static const int _maxRetries = 3;
 
   @override
   void initState() {
@@ -40,6 +42,7 @@ class _LabelledBannerAdState extends State<LabelledBannerAd> {
   }
 
   void _load() {
+    _ad?.dispose();
     _ad = BannerAd(
       adUnitId: AppConfig.bannerAdUnitId,
       size:     AdSize.banner,
@@ -47,10 +50,18 @@ class _LabelledBannerAdState extends State<LabelledBannerAd> {
       listener: BannerAdListener(
         onAdLoaded: (_) {
           if (mounted) setState(() => _loaded = true);
+          _retryCount = 0;
         },
-        onAdFailedToLoad: (ad, _) {
+        onAdFailedToLoad: (ad, error) {
           ad.dispose();
           if (mounted) setState(() => _loaded = false);
+          if (_retryCount < _maxRetries) {
+            _retryCount++;
+            final delay = Duration(seconds: 15 * _retryCount);
+            Future.delayed(delay, () {
+              if (mounted) _load();
+            });
+          }
         },
       ),
     )..load();
@@ -90,23 +101,75 @@ class _LabelledBannerAdState extends State<LabelledBannerAd> {
   }
 }
 
-/// Sticky bottom banner — uses the global AdService instance (one per screen).
-/// Place this ONCE per screen at the very bottom.
-class StickyBannerBar extends StatelessWidget {
+/// Sticky bottom banner — owns its own [BannerAd] instance.
+/// Safe to place once per screen. Rebuilds itself when the ad loads.
+class StickyBannerBar extends StatefulWidget {
   const StickyBannerBar({super.key});
 
   @override
+  State<StickyBannerBar> createState() => _StickyBannerBarState();
+}
+
+class _StickyBannerBarState extends State<StickyBannerBar> {
+  BannerAd? _ad;
+  bool _loaded = false;
+  int  _retryCount = 0;
+  static const int _maxRetries = 3;
+
+  @override
+  void initState() {
+    super.initState();
+    if (!AdService.instance.adsRemoved) _load();
+  }
+
+  void _load() {
+    _ad?.dispose();
+    _ad     = null;
+    _loaded = false;
+
+    _ad = BannerAd(
+      adUnitId: AppConfig.bannerAdUnitId,
+      size:     AdSize.banner,
+      request:  const AdRequest(),
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          if (mounted) setState(() => _loaded = true);
+          _retryCount = 0;
+        },
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+          if (mounted) setState(() => _loaded = false);
+          if (_retryCount < _maxRetries) {
+            _retryCount++;
+            final delay = Duration(seconds: 15 * _retryCount);
+            Future.delayed(delay, () {
+              if (mounted) _load();
+            });
+          }
+        },
+      ),
+    )..load();
+  }
+
+  @override
+  void dispose() {
+    _ad?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final ad = AdService.instance.bannerAd;
-    if (ad == null) return const SizedBox.shrink();
+    if (!_loaded || _ad == null || AdService.instance.adsRemoved) {
+      return const SizedBox.shrink();
+    }
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         const Divider(height: 1),
         SizedBox(
-          width:  ad.size.width.toDouble(),
-          height: ad.size.height.toDouble(),
-          child:  AdWidget(ad: ad),
+          width:  _ad!.size.width.toDouble(),
+          height: _ad!.size.height.toDouble(),
+          child:  AdWidget(ad: _ad!),
         ),
       ],
     );
