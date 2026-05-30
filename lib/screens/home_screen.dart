@@ -332,14 +332,37 @@ class _BooksTab extends StatelessWidget {
           child: Text('No books found.',
               style: Theme.of(context).textTheme.bodyMedium));
     }
-    return ListView.separated(
+    // Build a flat list: book card rows + ad rows (every 3 books).
+    // Ads live as independent rows — never inside a card widget.
+    final items = <({Video? book, bool isAd})>[];
+    for (var i = 0; i < books.length; i++) {
+      items.add((book: books[i], isAd: false));
+      if (i > 0 && (i + 1) % 3 == 0 && !AdService.instance.adsRemoved) {
+        items.add((book: null, isAd: true));
+      }
+    }
+
+    return ListView.builder(
       physics: const ClampingScrollPhysics(),
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 120),
-      itemCount: books.length,
-      separatorBuilder: (_, __) => const SizedBox(height: 12),
-      itemBuilder: (context, i) {
-        final book = books[i];
-        return RepaintBoundary(
+      itemCount: items.length,
+      itemBuilder: (context, idx) {
+        final item = items[idx];
+
+        // ── Ad row — full width, own space ──────────────────────────────
+        if (item.isAd) {
+          return const Padding(
+            padding: EdgeInsets.only(bottom: 12),
+            child: LabelledBannerAd(),
+          );
+        }
+
+        // ── Book card ────────────────────────────────────────────────────
+        final i = idx; // preserve original variable name below
+        final book = item.book!;
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 12),
+          child: RepaintBoundary(
           key: ValueKey(book.id),
           child: GestureDetector(
             onTap: () => onTap(book),
@@ -416,12 +439,7 @@ class _BooksTab extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // Banner ad every 3rd video card (items 3, 6, 9 …)
-                  if (i > 0 && (i + 1) % 3 == 0)
-                    const Padding(
-                      padding: EdgeInsets.only(bottom: 14),
-                      child: LabelledBannerAd(),
-                    ),
+                  // chevron only — ad is injected as its own row below
                   Padding(
                     padding: const EdgeInsets.only(right: 12),
                     child: Icon(Icons.chevron_right_rounded,
@@ -431,7 +449,7 @@ class _BooksTab extends StatelessWidget {
               ),
             ),
           ),
-        );
+        ); // end Padding + return
       },
     );
   }
