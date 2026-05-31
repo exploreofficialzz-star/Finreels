@@ -55,8 +55,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       initialVideoId: widget.video.id,
       flags: const YoutubePlayerFlags(
         hideControls: true,
-        autoPlay: true,          // start immediately once iframe is ready
-        mute: false,
+        autoPlay: true,
       ),
     )..addListener(_onUpdate);
   }

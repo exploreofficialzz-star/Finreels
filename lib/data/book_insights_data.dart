@@ -91,8 +91,8 @@ const List<BookInsightData> kBookInsights = [
       BookChapter(
         title: '4. Auto-Suggestion — The Medium of Influence',
         body:
-            'Your subconscious mind absorbs every thought you feed it. Auto-'
-            'suggestion is the process of deliberately programming it. Combine '
+            'Your subconscious mind absorbs every thought you feed it. '
+            'Auto-suggestion is deliberately programming it. Combine '
             'your written statement with emotion and repetition. Neutral '
             'statements do nothing — the subconscious responds only to thoughts '
             'charged with feeling.',
@@ -359,7 +359,7 @@ const List<BookInsightData> kBookInsights = [
       BookChapter(
         title: '3. Never Enough',
         body:
-            'Rajat Gupta had everything — $100 million net worth, Goldman '
+            r'Rajat Gupta had everything — $100 million net worth, Goldman '
             'Sachs board member — and went to prison for insider trading to '
             'get more. The hardest financial skill is getting the goalposts '
             'to stop moving. Enough is realising that the desire for more '
@@ -373,8 +373,8 @@ const List<BookInsightData> kBookInsights = [
       BookChapter(
         title: '4. Compounding',
         body:
-            'Warren Buffett\'s net worth at 65 was $60 billion. His net worth '
-            'today is $80+ billion. Most of his wealth came AFTER he qualified '
+            "Warren Buffett's net worth at 65 was \$60 billion. His net worth "
+            r'today is $80+ billion. Most of his wealth came AFTER he qualified '
             'for Social Security. Compounding is counter-intuitive: the curve '
             'starts shallow for so long that most people give up. The secret '
             'isn\'t returns — it\'s time in the market.',
@@ -672,8 +672,8 @@ const List<BookInsightData> kBookInsights = [
     author: 'Alex Hormozi',
     tagline: 'How to make offers so good people feel stupid saying no.',
     intro:
-        'Alex Hormozi built four companies to over \$1 million in revenue '
-        'by age 32 and currently oversees a portfolio doing over \$200 million '
+        r'Alex Hormozi built four companies to over $1 million in revenue '
+        r'by age 32 and currently oversees a portfolio doing over $200 million '
         'annually. This book distils the exact offer-creation system he used '
         'to go from broke to wealthy. The core insight: most businesses fail '
         'not because they lack skill or work ethic, but because they are '
@@ -745,8 +745,8 @@ const List<BookInsightData> kBookInsights = [
             'Charge as much as you possibly can while keeping the customer '
             'feeling it is a bargain. Higher prices create higher perceived '
             'value, attract better clients, fund better delivery, and allow '
-            'a bigger marketing budget. Hormozi went from charging \$600 '
-            'to \$42,000 per client — and customer results improved because '
+            r'a bigger marketing budget. Hormozi went from charging $600 '
+            r'to $42,000 per client — and customer results improved because '
             'clients took it more seriously when they paid more.',
         keyPoints: [
           'Higher prices attract higher-quality clients who get better results',
@@ -890,7 +890,7 @@ const List<BookInsightData> kBookInsights = [
         'After 20 years of research into the wealthy, Stanley and Danko '
         'discovered that real millionaires look nothing like they do on TV. '
         'Most are first-generation wealthy, live in ordinary neighbourhoods, '
-        'drive used cars, and have never spent more than \$400 on a suit. '
+        r'drive used cars, and have never spent more than $400 on a suit. '
         'Their wealth comes not from high income but from systematic '
         'saving, frugal living, and disciplined investing.',
     chapters: [
@@ -916,9 +916,9 @@ const List<BookInsightData> kBookInsights = [
             'to income (the Wealth Accumulation Index). PAWs (Prodigious '
             'Accumulators of Wealth) live on less than half their income. '
             'UAWs (Under Accumulators of Wealth) spend everything they earn '
-            'and more. High income is not wealth. A surgeon earning \$500k '
-            'who spends \$480k is poorer than a plumber earning \$80k '
-            'who saves and invests \$40k.',
+            r'and more. High income is not wealth. A surgeon earning $500k '
+            r'who spends $480k is poorer than a plumber earning $80k '
+            r'who saves and invests $40k.',
         keyPoints: [
           'Your wealth index = net worth ÷ (age × income ÷ 10)',
           'High income ≠ wealth; high savings rate = wealth',
@@ -978,7 +978,7 @@ const List<BookInsightData> kBookInsights = [
 BookInsightData? findInsight(String bookId) {
   try {
     return kBookInsights.firstWhere((b) => b.id == bookId);
-  } catch (_) {
+  } on StateError {
     return null;
   }
 }

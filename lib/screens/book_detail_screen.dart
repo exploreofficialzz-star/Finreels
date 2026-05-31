@@ -374,7 +374,7 @@ class _InsightsReaderScreen extends StatefulWidget {
 }
 
 class _InsightsReaderScreenState extends State<_InsightsReaderScreen> {
-  int _adEveryN = 4; // show banner ad placeholder after every N chapters
+  final int _adEveryN = 4;
 
   Future<void> _openPurchaseLink() async {
     final uri = Uri.parse(widget.insight.purchaseUrl);
@@ -398,7 +398,7 @@ class _InsightsReaderScreenState extends State<_InsightsReaderScreen> {
           onPressed: widget.onBack,
         ),
         title: Text(
-          insight.title.split('—').first.replaceAll(r'$', '\$').trim(),
+          insight.title.split('—').first.replaceAll(r'$', r'\$').trim(),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
@@ -608,7 +608,7 @@ class _ChapterCardState extends State<_ChapterCard> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
                 child: Text('Key Takeaways',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: AppTheme.gold,
                       fontWeight: FontWeight.w700,
                       fontSize: 12,

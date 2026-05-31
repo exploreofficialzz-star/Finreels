@@ -6,7 +6,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _LegalScreen(
+    return const _LegalScreen(
       title: 'Privacy Policy',
       lastUpdated: 'May 2025',
       sections: const [
@@ -125,7 +125,7 @@ class TermsOfServiceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _LegalScreen(
+    return const _LegalScreen(
       title: 'Terms of Service',
       lastUpdated: 'May 2025',
       sections: const [
@@ -230,7 +230,7 @@ class ContentDisclaimerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _LegalScreen(
+    return const _LegalScreen(
       title: 'Content Disclaimer',
       lastUpdated: 'May 2025',
       sections: const [

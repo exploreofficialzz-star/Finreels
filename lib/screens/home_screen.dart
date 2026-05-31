@@ -358,13 +358,12 @@ class _BooksTab extends StatelessWidget {
         }
 
         // ── Book card ────────────────────────────────────────────────────
-        final i = idx; // preserve original variable name below
         final book = item.book!;
         return Padding(
           padding: const EdgeInsets.only(bottom: 12),
           child: RepaintBoundary(
-          key: ValueKey(book.id),
-          child: GestureDetector(
+            key: ValueKey(book.id),
+            child: GestureDetector(
             onTap: () => onTap(book),
             child: DecoratedBox(
               decoration: BoxDecoration(
