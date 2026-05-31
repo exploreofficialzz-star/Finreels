@@ -364,14 +364,14 @@ class _BooksTab extends StatelessWidget {
           child: RepaintBoundary(
             key: ValueKey(book.id),
             child: GestureDetector(
-            onTap: () => onTap(book),
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                color: AppTheme.surfaceColor(context),
-                borderRadius: BorderRadius.circular(14),
-                border: Border.all(
-                    color: AppTheme.dividerColor(context), width: 0.5),
-              ),
+              onTap: () => onTap(book),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: AppTheme.surfaceColor(context),
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(
+                      color: AppTheme.dividerColor(context), width: 0.5),
+                ),
               child: Row(
                 children: [
                   ClipRRect(
@@ -448,7 +448,7 @@ class _BooksTab extends StatelessWidget {
               ),
             ),
           ),
-        ); // end Padding + return
+        );
       },
     );
   }

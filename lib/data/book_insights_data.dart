@@ -373,7 +373,7 @@ const List<BookInsightData> kBookInsights = [
       BookChapter(
         title: '4. Compounding',
         body:
-            "Warren Buffett's net worth at 65 was \$60 billion. His net worth "
+            r"Warren Buffett's net worth at 65 was $60 billion. His net worth "
             r'today is $80+ billion. Most of his wealth came AFTER he qualified '
             'for Social Security. Compounding is counter-intuitive: the curve '
             'starts shallow for so long that most people give up. The secret '

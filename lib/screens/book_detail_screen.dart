@@ -605,10 +605,10 @@ class _ChapterCardState extends State<_ChapterCard> {
               ),
             ),
             if (widget.chapter.keyPoints.isNotEmpty) ...[
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(16, 12, 16, 0),
                 child: Text('Key Takeaways',
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: AppTheme.gold,
                       fontWeight: FontWeight.w700,
                       fontSize: 12,
