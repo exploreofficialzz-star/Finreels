@@ -98,7 +98,6 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   // ── Detail / landing page ──────────────────────────────────────────────────
 
   Widget _buildDetail() {
-    final isInsights = false; // all books now have full free EPUB
     return Scaffold(
       backgroundColor: AppTheme.bgColor(context),
       appBar: AppBar(title: const Text('Free Book')),
@@ -145,9 +144,9 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                                 color: AppTheme.gold.withValues(alpha: 0.12),
                                 borderRadius: BorderRadius.circular(8),
                               ),
-                              child: Text(
+                              child: const Text(
                                 '📚 FREE BOOK',
-                                style: const TextStyle(
+                                style: TextStyle(
                                     color: AppTheme.gold,
                                     fontSize: 10,
                                     fontWeight: FontWeight.w800,
@@ -174,8 +173,8 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 8, vertical: 3),
                                 decoration: BoxDecoration(
-                                  color:
-                                      AppTheme.success.withValues(alpha: 0.12),
+                                  color: AppTheme.success
+                                      .withValues(alpha: 0.12),
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                                 child: const Text('Continue reading',
@@ -204,9 +203,6 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                           .textTheme
                           .bodyMedium
                           ?.copyWith(height: 1.6)),
-                      ),
-                    ),
-                  ],
 
                   const SizedBox(height: 32),
 

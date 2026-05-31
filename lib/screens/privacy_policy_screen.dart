@@ -9,7 +9,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
     return const _LegalScreen(
       title: 'Privacy Policy',
       lastUpdated: 'May 2025',
-      sections: const [
+      sections: [
         _LegalSection(
           heading: 'Introduction',
           body:
@@ -128,7 +128,7 @@ class TermsOfServiceScreen extends StatelessWidget {
     return const _LegalScreen(
       title: 'Terms of Service',
       lastUpdated: 'May 2025',
-      sections: const [
+      sections: [
         _LegalSection(
           heading: 'Introduction',
           body:
@@ -233,7 +233,7 @@ class ContentDisclaimerScreen extends StatelessWidget {
     return const _LegalScreen(
       title: 'Content Disclaimer',
       lastUpdated: 'May 2025',
-      sections: const [
+      sections: [
         _LegalSection(
           heading: 'Important Notice',
           body:
