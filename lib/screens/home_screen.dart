@@ -372,79 +372,83 @@ class _BooksTab extends StatelessWidget {
                   border: Border.all(
                       color: AppTheme.dividerColor(context), width: 0.5),
                 ),
-              child: Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(13),
-                      bottomLeft: Radius.circular(13),
-                    ),
-                    child: CachedNetworkImage(
-                      imageUrl: book.thumbnailUrl,
-                      width: 90,
-                      height: 120,
-                      fit: BoxFit.cover,
-                      placeholder: (_, __) => Shimmer.fromColors(
-                        baseColor: const Color(0xFF1E1E1E),
-                        highlightColor: const Color(0xFF2C2C2C),
-                        child: const SizedBox(width: 90, height: 120,
-                            child: ColoredBox(color: Colors.white)),
+                child: Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(13),
+                        bottomLeft: Radius.circular(13),
                       ),
-                      errorWidget: (_, __, ___) => Container(
-                        width: 90, height: 120,
-                        color: AppTheme.gold.withValues(alpha: 0.15),
-                        child: const Icon(Icons.menu_book_rounded,
-                            color: AppTheme.gold, size: 36),
+                      child: CachedNetworkImage(
+                        imageUrl: book.thumbnailUrl,
+                        width: 90,
+                        height: 120,
+                        fit: BoxFit.cover,
+                        placeholder: (_, __) => Shimmer.fromColors(
+                          baseColor: const Color(0xFF1E1E1E),
+                          highlightColor: const Color(0xFF2C2C2C),
+                          child: const SizedBox(
+                              width: 90,
+                              height: 120,
+                              child: ColoredBox(color: Colors.white)),
+                        ),
+                        errorWidget: (_, __, ___) => Container(
+                          width: 90,
+                          height: 120,
+                          color: AppTheme.gold.withValues(alpha: 0.15),
+                          child: const Icon(Icons.menu_book_rounded,
+                              color: AppTheme.gold, size: 36),
+                        ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(14),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 3),
-                            decoration: BoxDecoration(
-                              color: AppTheme.gold.withValues(alpha: 0.12),
-                              borderRadius: BorderRadius.circular(6),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(14),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 3),
+                              decoration: BoxDecoration(
+                                color: AppTheme.gold.withValues(alpha: 0.12),
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: const Text('📚 FREE BOOK',
+                                  style: TextStyle(
+                                    color: AppTheme.gold,
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.w800,
+                                    letterSpacing: 1,
+                                  )),
                             ),
-                            child: const Text('📚 FREE BOOK',
-                                style: TextStyle(
-                                  color: AppTheme.gold,
-                                  fontSize: 9,
-                                  fontWeight: FontWeight.w800,
-                                  letterSpacing: 1,
-                                )),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(book.title,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall
-                                  ?.copyWith(
-                                      fontWeight: FontWeight.w700,
-                                      height: 1.35),
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis),
-                          const SizedBox(height: 6),
-                          Text(book.description,
-                              style: Theme.of(context).textTheme.bodySmall,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis),
-                        ],
+                            const SizedBox(height: 8),
+                            Text(book.title,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall
+                                    ?.copyWith(
+                                        fontWeight: FontWeight.w700,
+                                        height: 1.35),
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis),
+                            const SizedBox(height: 6),
+                            Text(book.description,
+                                style: Theme.of(context).textTheme.bodySmall,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  // chevron only — ad is injected as its own row below
-                  Padding(
-                    padding: const EdgeInsets.only(right: 12),
-                    child: Icon(Icons.chevron_right_rounded,
-                        color: AppTheme.textMuted(context)),
-                  ),
-                ],
+                    // chevron — ad is injected as its own separate row
+                    Padding(
+                      padding: const EdgeInsets.only(right: 12),
+                      child: Icon(Icons.chevron_right_rounded,
+                          color: AppTheme.textMuted(context)),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
