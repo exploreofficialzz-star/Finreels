@@ -25,10 +25,32 @@ class _BookSource {
 }
 
 const Map<String, _BookSource> _sources = {
+  // ── Project Gutenberg — public domain, no login ──────────────────────────
   'book_richest_man': _BookSource.epub(
     'https://www.gutenberg.org/cache/epub/1297/pg1297-images.epub',
   ),
-  // All other books → in-app insights reader
+  'book_as_man_thinketh': _BookSource.epub(
+    'https://www.gutenberg.org/cache/epub/4507/pg4507-images.epub',
+  ),
+  'book_science_rich': _BookSource.epub(
+    'https://www.gutenberg.org/cache/epub/59844/pg59844-images.epub',
+  ),
+  'book_popular_delusions': _BookSource.epub(
+    'https://www.gutenberg.org/cache/epub/636/pg636-images.epub',
+  ),
+  // ── Global Grey — public domain, direct EPUB, no login ──────────────────
+  'book_think_grow': _BookSource.epub(
+    'https://www.globalgreyebooks.com/ebooks/napoleon-hill_think-and-grow-rich.epub',
+  ),
+  'book_art_money': _BookSource.epub(
+    'https://www.globalgreyebooks.com/ebooks/p-t-barnum_art-of-money-getting.epub',
+  ),
+  'book_eight_pillars': _BookSource.epub(
+    'https://www.globalgreyebooks.com/ebooks/james-allen_eight-pillars-of-prosperity.epub',
+  ),
+  'book_master_key': _BookSource.epub(
+    'https://www.globalgreyebooks.com/ebooks/charles-f-haanel_master-key-system.epub',
+  ),
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -76,7 +98,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   // ── Detail / landing page ──────────────────────────────────────────────────
 
   Widget _buildDetail() {
-    final isInsights = _source.type == _SourceType.insights;
+    final isInsights = false; // all books now have full free EPUB
     return Scaffold(
       backgroundColor: AppTheme.bgColor(context),
       appBar: AppBar(title: const Text('Free Book')),
@@ -124,7 +146,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Text(
-                                isInsights ? '📚 KEY INSIGHTS' : '📚 FREE BOOK',
+                                '📚 FREE BOOK',
                                 style: const TextStyle(
                                     color: AppTheme.gold,
                                     fontSize: 10,
@@ -182,34 +204,6 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                           .textTheme
                           .bodyMedium
                           ?.copyWith(height: 1.6)),
-
-                  if (isInsights) ...[
-                    const SizedBox(height: 16),
-                    Container(
-                      padding: const EdgeInsets.all(14),
-                      decoration: BoxDecoration(
-                        color: AppTheme.gold.withValues(alpha: 0.08),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                            color: AppTheme.gold.withValues(alpha: 0.2),
-                            width: 0.5),
-                      ),
-                      child: Row(
-                        children: [
-                          const Icon(Icons.lightbulb_rounded,
-                              color: AppTheme.gold, size: 20),
-                          const SizedBox(width: 10),
-                          Expanded(
-                            child: Text(
-                              'Includes chapter-by-chapter insights, key principles, '
-                              'and a direct link to get the full book.',
-                              style: TextStyle(
-                                  color: AppTheme.textSecondary(context),
-                                  fontSize: 13,
-                                  height: 1.5),
-                            ),
-                          ),
-                        ],
                       ),
                     ),
                   ],
@@ -225,15 +219,11 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                         _showReader = true;
                         _isLoading  = true;
                       }),
-                      icon: Icon(isInsights
-                          ? Icons.lightbulb_rounded
-                          : Icons.menu_book_rounded),
+                      icon: const Icon(Icons.menu_book_rounded),
                       label: Text(
-                        isInsights
-                            ? 'Read Key Insights'
-                            : (_lastCfi != null
-                                ? 'Continue Reading'
-                                : 'Read Inside App'),
+                        _lastCfi != null
+                            ? 'Continue Reading'
+                            : 'Read Full Book Free',
                         style: const TextStyle(
                             fontWeight: FontWeight.w700, fontSize: 16),
                       ),
@@ -249,9 +239,12 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                   const SizedBox(height: 12),
                   Center(
                     child: Text(
-                      isInsights
-                          ? 'Curated insights from the book'
-                          : 'Reads via Project Gutenberg (public domain)',
+                      widget.book.id.startsWith('book_richest') ||
+                              widget.book.id.startsWith('book_as_man') ||
+                              widget.book.id.startsWith('book_science') ||
+                              widget.book.id.startsWith('book_popular')
+                          ? 'Reads free via Project Gutenberg (public domain)'
+                          : 'Reads free via Global Grey ebooks (public domain)',
                       style: TextStyle(
                           color: AppTheme.textMuted(context), fontSize: 11),
                     ),
