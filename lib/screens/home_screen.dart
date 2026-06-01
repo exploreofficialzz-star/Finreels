@@ -258,8 +258,7 @@ class _ShortsTab extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (_) => ShortsPlayerScreen(
                         shorts: shorts,
-                        initialIndex: i,
-                        autoPlayFirst: true),
+                        initialIndex: i),
                   ),
                 );
               },

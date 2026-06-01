@@ -66,9 +66,7 @@ class _ShortsPlayerScreenState extends State<ShortsPlayerScreen> {
               key: ValueKey(widget.shorts[index].id),
               video: widget.shorts[index],
               isActive: index == _currentIndex,
-              autoPlayOnActivate: index != widget.initialIndex
-                  ? true
-                  : widget.autoPlayFirst,
+              autoPlayOnActivate: index != widget.initialIndex || widget.autoPlayFirst,
             ),
           ),
           Positioned(
