@@ -133,12 +133,13 @@ class _FeedBodyState extends State<_FeedBody> {
   }
 
   void _onTap(Video video) {
-    unawaited(AdService.instance.onContentTapped());
     if (video.channelId == 'books') {
       Navigator.push(context,
           MaterialPageRoute(builder: (_) => BookDetailScreen(book: video)));
       return;
     }
+    // Interstitial fires on tap 4, 8, 12 … for videos
+    unawaited(AdService.instance.onVideoTapped());
   }
 
   @override
@@ -183,7 +184,7 @@ class _FeedBodyState extends State<_FeedBody> {
         itemBuilder: (context, i) {
           final video    = videos[i];
           final channel  = ChannelData.byId[video.channelId] ?? ChannelData.fallback;
-          final isAdSlot = i > 0 && i % 4 == 0;
+          final isAdSlot = i > 0 && (i + 1) % 3 == 0;
           return Column(
             key: ValueKey('v_${video.id}'),
             mainAxisSize: MainAxisSize.min,
@@ -250,12 +251,15 @@ class _ShortsTab extends StatelessWidget {
             key: ValueKey(video.id),
             child: GestureDetector(
               onTap: () {
-                unawaited(AdService.instance.onContentTapped());
+                // Interstitial on tap 4, 8, 12 …
+                unawaited(AdService.instance.onShortTapped());
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (_) => ShortsPlayerScreen(
-                        shorts: shorts, initialIndex: i),
+                        shorts: shorts,
+                        initialIndex: i,
+                        autoPlayFirst: true),
                   ),
                 );
               },

@@ -15,10 +15,12 @@ import '../theme/app_theme.dart';
 class ShortsPlayerScreen extends StatefulWidget {
   final List<Video> shorts;
   final int initialIndex;
+  final bool autoPlayFirst;
 
   const ShortsPlayerScreen({
     required this.shorts,
     required this.initialIndex,
+    this.autoPlayFirst = true,
     super.key,
   });
 
@@ -64,7 +66,9 @@ class _ShortsPlayerScreenState extends State<ShortsPlayerScreen> {
               key: ValueKey(widget.shorts[index].id),
               video: widget.shorts[index],
               isActive: index == _currentIndex,
-              autoPlayOnActivate: index != widget.initialIndex,
+              autoPlayOnActivate: index != widget.initialIndex
+                  ? true
+                  : widget.autoPlayFirst,
             ),
           ),
           Positioned(

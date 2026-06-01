@@ -45,15 +45,16 @@ class AdService {
 
   // ── Counters ──────────────────────────────────────────────────────────────
 
-  /// Shared counter for feed taps (videos + blogs + books).
-  /// Interstitial fires every 4th tap: 4, 8, 12, 16 …
-  int _contentTapCount = 0;
+  /// Video tap counter — fires interstitial on tap 4, 8, 12 …
+  int _videoTapCount = 0;
 
-  /// Video pause counter — independent from feed taps.
-  /// Interstitial fires every 4th pause: 4, 8, 12 …
-  int _videoPauseCount = 0;
+  /// Blog tap counter — fires interstitial on tap 4, 8, 12 …
+  int _blogTapCount = 0;
 
-  /// Shorts scroll counter — unchanged, every 4 scrolls.
+  /// Shorts thumbnail-tap counter — fires interstitial on tap 4, 8, 12 …
+  int _shortTapCount = 0;
+
+  /// Shorts scroll counter — fires interstitial on scroll 4, 8, 12 …
   int _shortScrollCount = 0;
 
   int _channelSwitchCount = 0;
@@ -297,32 +298,38 @@ class AdService {
     _appOpenReady = false;
   }
 
-  // ── FEED TAP TRIGGER (videos + blogs + books) ─────────────────────────────
-  /// Call every time user taps a video card, blog article, or book.
-  /// Pattern: interstitial fires on tap 4, 8, 12, 16 … (every 4th tap).
-  /// Taps 1, 2, 3 are free. Then 4 fires, 5-6-7 free, 8 fires, etc.
-  Future<void> onContentTapped() async {
+  // ── VIDEO TAP TRIGGER ─────────────────────────────────────────────────────
+  /// Fires on tap 4, 8, 12 … in the Videos tab.
+  Future<void> onVideoTapped() async {
     if (_adsRemoved || !_initialized) return;
-    _contentTapCount++;
-    if (_contentTapCount % AppConfig.interstitialCycleLength == 0) {
+    _videoTapCount++;
+    if (_videoTapCount % AppConfig.interstitialCycleLength == 0) {
       await showInterstitial();
     }
   }
 
-  // ── VIDEO PAUSE TRIGGER ───────────────────────────────────────────────────
-  /// Call every time the user taps pause inside the inline video player.
-  /// Pattern: interstitial fires on pause 4, 8, 12 … (every 4th pause).
-  /// Pauses 1, 2, 3 are free. Pause 4 fires, 5-6-7 free, pause 8 fires, etc.
-  Future<void> onVideoPaused() async {
+  // ── BLOG TAP TRIGGER ──────────────────────────────────────────────────────
+  /// Fires on tap 4, 8, 12 … in the Blogs tab.
+  Future<void> onBlogTapped() async {
     if (_adsRemoved || !_initialized) return;
-    _videoPauseCount++;
-    if (_videoPauseCount % AppConfig.interstitialCycleLength == 0) {
+    _blogTapCount++;
+    if (_blogTapCount % AppConfig.interstitialCycleLength == 0) {
+      await showInterstitial();
+    }
+  }
+
+  // ── SHORT THUMBNAIL TAP TRIGGER ───────────────────────────────────────────
+  /// Fires on tap 4, 8, 12 … when user opens a short from the grid.
+  Future<void> onShortTapped() async {
+    if (_adsRemoved || !_initialized) return;
+    _shortTapCount++;
+    if (_shortTapCount % AppConfig.interstitialCycleLength == 0) {
       await showInterstitial();
     }
   }
 
   // ── SHORTS SCROLL TRIGGER ─────────────────────────────────────────────────
-  /// Unchanged — fires every 4 shorts scrolled.
+  /// Fires on scroll 4, 8, 12 … inside the Shorts player.
   Future<void> onShortScrolled() async {
     if (_adsRemoved || !_initialized) return;
     _shortScrollCount++;
@@ -331,7 +338,7 @@ class AdService {
     }
   }
 
-  // ── Channel switch ────────────────────────────────────────────────────────
+  // ── CHANNEL SWITCH ────────────────────────────────────────────────────────
   Future<void> onChannelSwitched() async {
     if (_adsRemoved || !_initialized) return;
     _channelSwitchCount++;
@@ -347,7 +354,8 @@ class AdService {
   }
 
   // ── Legacy compat ─────────────────────────────────────────────────────────
-  Future<void> onVideoOpened() => onContentTapped();
+  Future<void> onContentTapped() => onVideoTapped();
+  Future<void> onVideoOpened()   => onVideoTapped();
 
   // ── IAP: grant / revoke ad-free ───────────────────────────────────────────
   Future<void> grantAdFree(Duration duration) async {

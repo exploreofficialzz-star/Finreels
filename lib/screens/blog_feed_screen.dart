@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
@@ -102,8 +104,8 @@ class _BlogFeedScreenState extends State<BlogFeedScreen> {
                 child: _BlogCard(
                   article: article,
                   onTap: () {
-                    // Feed tap ad trigger (shared counter with videos/books)
-                    AdService.instance.onContentTapped();
+                    // Interstitial on tap 4, 8, 12 … (blog-specific counter)
+                    unawaited(AdService.instance.onBlogTapped());
                     Navigator.push(
                       context,
                       MaterialPageRoute(
