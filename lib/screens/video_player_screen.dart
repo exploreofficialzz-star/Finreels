@@ -34,10 +34,11 @@ class VideoPlayerScreen extends StatefulWidget {
 
 class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   late YoutubePlayerController _controller;
-  bool _ended      = false;
-  bool _playing    = false;
-  bool _ready      = false;
-  bool _fullscreen = false;
+  bool _ended           = false;
+  bool _playing         = false;
+  bool _ready           = false;
+  bool _fullscreen      = false;
+  bool _hasStartedPlaying = false;  // latches true on first play — never resets
   double   _progress = 0;
   Duration _position = Duration.zero;
   Duration _duration = Duration.zero;
@@ -79,6 +80,10 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         _progress = prog;
         _position = pos;
         _duration = dur;
+        // Once playback starts for the first time, this flag never resets.
+        // This prevents the thumbnail from reappearing during mid-video
+        // buffering pauses.
+        if (playing) _hasStartedPlaying = true;
       });
     }
   }
@@ -96,7 +101,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   }
 
   void _replay() {
-    setState(() { _ended = false; _progress = 0; });
+    setState(() { _ended = false; _progress = 0; _hasStartedPlaying = false; });
     _controller.seekTo(Duration.zero);
     _controller.play();
   }
@@ -156,13 +161,41 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  // ── Thumbnail — always visible until player is playing ──
-                  // This eliminates the black flash: the user sees the
-                  // thumbnail the instant the screen opens, while the
-                  // YouTube iframe warms up in the background.
+                  // ── [1] YouTube iframe — at the BOTTOM of the stack ─────
+                  // Kept beneath the thumbnail so the WebView's black
+                  // initialisation frame is never visible to the user.
+                  FittedBox(
+                    fit: BoxFit.cover,
+                    child: SizedBox(
+                      width: sw,
+                      height: sw * (9 / 16),
+                      child: YoutubePlayer(
+                        controller: _controller,
+                        onReady: () {
+                          if (!mounted) return;
+                          setState(() => _ready = true);
+                          // Explicitly start playback the moment the
+                          // iframe signals ready — belt-and-suspenders
+                          // alongside the autoPlay flag default.
+                          _controller.play();
+                        },
+                        onEnded: (_) {
+                          if (mounted) setState(() => _ended = true);
+                        },
+                        bufferIndicator: const SizedBox.shrink(),
+                      ),
+                    ),
+                  ),
+
+                  // ── [2] Thumbnail — ABOVE the iframe ────────────────────
+                  // Visible from the instant the screen opens, hiding the
+                  // black WebView init. Fades out once _hasStartedPlaying
+                  // latches true (i.e. the first video frame is actually
+                  // rendering). The latch means it never reappears during
+                  // mid-video buffering pauses.
                   AnimatedOpacity(
-                    opacity: (_ready && _playing) ? 0.0 : 1.0,
-                    duration: const Duration(milliseconds: 300),
+                    opacity: _hasStartedPlaying ? 0.0 : 1.0,
+                    duration: const Duration(milliseconds: 250),
                     child: CachedNetworkImage(
                       imageUrl: widget.video.thumbnailHd,
                       fit: BoxFit.cover,
@@ -175,27 +208,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                     ),
                   ),
 
-                  // ── YouTube iframe (behind overlay until ready) ──────────
-                  FittedBox(
-                    fit: BoxFit.cover,
-                    child: SizedBox(
-                      width: sw,
-                      height: sw * (9 / 16),
-                      child: YoutubePlayer(
-                        controller: _controller,
-                        onReady: () {
-                          if (mounted) setState(() => _ready = true);
-                        },
-                        onEnded: (_) {
-                          if (mounted) setState(() => _ended = true);
-                        },
-                        bufferIndicator: const SizedBox.shrink(),
-                      ),
-                    ),
-                  ),
-
-                  // ── Buffering spinner (only after ready, while buffering) ─
-                  if (_ready && !_playing && !_ended)
+                  // ── [3] Buffering spinner — shown while ready but not yet playing
+                  if (_ready && !_playing && !_ended && !_hasStartedPlaying)
                     const Center(
                       child: CircularProgressIndicator(
                           color: AppTheme.gold, strokeWidth: 3),
