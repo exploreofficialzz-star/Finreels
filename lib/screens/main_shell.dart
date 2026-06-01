@@ -1,5 +1,12 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../models/video.dart';
+import '../providers/feed_provider.dart';
+import '../screens/video_player_screen.dart';
+import '../services/notification_service.dart';
 import '../theme/app_theme.dart';
 import 'channels_screen.dart';
 import 'home_screen.dart';
@@ -24,7 +31,47 @@ class _MainShellState extends State<MainShell> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    // Check once on launch (app opened from a notification while cold)
+    WidgetsBinding.instance.addPostFrameCallback((_) => _handlePendingDeepLink());
+  }
+
+  /// Reads the pending videoId stored by NotificationService._onTap,
+  /// finds the matching Video in the feed, and pushes VideoPlayerScreen.
+  void _handlePendingDeepLink() {
+    final videoId = NotificationService.pendingVideoId;
+    if (videoId == null || !mounted) return;
+    NotificationService.pendingVideoId = null; // consume it
+
+    final provider = context.read<FeedProvider>();
+    Video? video;
+    // Search across all cached tab videos
+    for (final tab in provider.allVideos) {
+      try {
+        video = tab.firstWhere((v) => v.id == videoId);
+        break;
+      } on StateError {
+        continue;
+      }
+    }
+
+    if (video == null) return;
+
+    // Switch to Videos tab (index 0) then push the player
+    setState(() => _index = 0);
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => VideoPlayerScreen(video: video!)),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
+    // Also handle warm-launch deep links (app already running when notif tapped)
+    if (NotificationService.pendingVideoId != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _handlePendingDeepLink());
+    }
+
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(

@@ -102,8 +102,9 @@ class AppConfig {
   // ── Ad Frequency ─────────────────────────────────────────────────────────────
   // Pattern for regular content: show ad on tap 1, skip 2 & 3, show on 4, repeat.
   // (Every 1st and 4th tap in a 4-tap cycle.)
-  // interstitialCycleLength = 4 → show when (count % 4 == 1) || (count % 4 == 0)
-  static const int interstitialCycleLength = 4;
+  // interstitialCycleLength = 2 → interstitial fires on tap 2, 4, 6, 8 …
+  // (more aggressive for Videos tab; blogs and shorts use same value)
+  static const int interstitialCycleLength = 2;
 
   // Shorts: show ad every N pages scrolled.
   static const int interstitialEveryNShorts = 4;

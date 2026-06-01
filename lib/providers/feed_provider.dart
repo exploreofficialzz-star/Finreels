@@ -25,6 +25,11 @@ class FeedProvider extends ChangeNotifier {
   FeedTab _activeTab = FeedTab.videos;
   FeedTab get activeTab => _activeTab;
 
+  /// All cached video lists across every tab — used for deep-link lookup.
+  List<List<Video>> get allVideos => FeedTab.values
+      .map((t) => _tabCache[t] ?? _compute(t))
+      .toList();
+
   final _random = Random();
   var _savedVideoIds = <String>{};
 

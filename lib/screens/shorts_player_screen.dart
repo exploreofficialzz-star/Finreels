@@ -57,6 +57,8 @@ class _ShortsPlayerScreenState extends State<ShortsPlayerScreen> {
           PageView.builder(
             controller: _pageController,
             scrollDirection: Axis.vertical,
+            // Easier swipe — low velocity threshold, snappy spring
+            physics: const _EasySnapPhysics(),
             itemCount: widget.shorts.length,
             onPageChanged: (index) {
               setState(() => _currentIndex = index);
@@ -84,6 +86,25 @@ class _ShortsPlayerScreenState extends State<ShortsPlayerScreen> {
       ),
     );
   }
+}
+
+// ── Snap physics: very sensitive drag, fast spring snap ──────────────────────
+class _EasySnapPhysics extends PageScrollPhysics {
+  const _EasySnapPhysics({super.parent});
+
+  @override
+  _EasySnapPhysics applyTo(ScrollPhysics? ancestor) =>
+      _EasySnapPhysics(parent: buildParent(ancestor));
+
+  @override
+  SpringDescription get spring => const SpringDescription(
+        mass: 50,
+        stiffness: 120,
+        damping: 1.1,
+      );
+
+  @override
+  double get dragStartDistanceMotionThreshold => 3.0;
 }
 
 class _ShortPage extends StatefulWidget {
@@ -147,8 +168,14 @@ class _ShortPageState extends State<_ShortPage> {
     if (!widget.isActive) {
       _controller.pause();
       if (mounted) setState(() => _playing = false);
-    } else if (_ready && (widget.autoPlayOnActivate || _userStarted)) {
-      _controller.play();
+    } else if (widget.autoPlayOnActivate) {
+      // Start immediately — don't wait for _ready since the controller
+      // may already be warm from a prior activation on this same page.
+      _userStarted = true;
+      if (_ready) {
+        _controller.play();
+      }
+      // If not ready yet, onReady() will call play() when the iframe fires.
     }
   }
 
