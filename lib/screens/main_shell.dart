@@ -1,8 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../data/channel_data.dart';
 import '../models/video.dart';
 import '../providers/feed_provider.dart';
 import '../screens/video_player_screen.dart';
@@ -58,10 +57,14 @@ class _MainShellState extends State<MainShell> {
 
     if (video == null) return;
 
+    final channel = ChannelData.byId[video.channelId] ?? ChannelData.fallback;
+
     // Switch to Videos tab (index 0) then push the player
     setState(() => _index = 0);
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => VideoPlayerScreen(video: video!)),
+      MaterialPageRoute(
+        builder: (_) => VideoPlayerScreen(video: video!, channel: channel),
+      ),
     );
   }
 
