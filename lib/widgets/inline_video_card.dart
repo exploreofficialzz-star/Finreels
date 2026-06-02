@@ -100,8 +100,16 @@ class _InlineVideoCardState extends State<InlineVideoCard>
     }
   }
 
+  int _lastCardUpdateMs = 0;
+
   void _onControllerUpdate() {
     if (!mounted) return;
+
+    // Rate-limit to 15 calls/sec — the listener fires on every WebView tick,
+    // which is far more than needed for ready/pause detection.
+    final nowMs = DateTime.now().millisecondsSinceEpoch;
+    if (nowMs - _lastCardUpdateMs < 66) return;
+    _lastCardUpdateMs = nowMs;
     final v     = _controller!.value;
     final ready = v.isReady;
 

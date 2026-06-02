@@ -1,4 +1,4 @@
-import 'dart:math';
+
 
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,7 +30,6 @@ class FeedProvider extends ChangeNotifier {
       .map((t) => _tabCache[t] ?? _compute(t))
       .toList();
 
-  final _random = Random();
   var _savedVideoIds = <String>{};
 
   List<Channel> get channels => ChannelData.all;
@@ -49,7 +48,7 @@ class FeedProvider extends ChangeNotifier {
         _roundRobin(all.where((v) => v.isShort && !_isBook(v)).toList()),
       FeedTab.blogs  =>
         _roundRobin(all.where((v) => _isBlog(v) && !_isBook(v)).toList()),
-      FeedTab.books  => _bookVideos,
+      FeedTab.books  => List.unmodifiable(_bookVideos),
     };
   }
 
@@ -58,8 +57,9 @@ class FeedProvider extends ChangeNotifier {
     final grouped = <String, List<Video>>{};
     for (final v in videos) { (grouped[v.channelId] ??= []).add(v); }
     for (final l in grouped.values) { l.sort((a, b) => b.publishedAt.compareTo(a.publishedAt)); }
-    final keys   = grouped.keys.toList()..shuffle(_random);
-    final maxLen = grouped.values.map((l) => l.length).fold(0, max);
+    // Stable sort by channelId — prevents channels reordering on every refresh
+    final keys   = grouped.keys.toList()..sort();
+    final maxLen = grouped.values.map((l) => l.length).fold(0, (a, b) => a > b ? a : b);
     final result = <Video>[];
     for (var i = 0; i < maxLen; i++) {
       for (final k in keys) {
@@ -87,48 +87,49 @@ class FeedProvider extends ChangeNotifier {
 
   static final _epoch = DateTime(2000);
 
-  List<Video> get _bookVideos => [
-    // ── Public domain books — all fully readable for free via EPUB ────────
+  // ── Books — static so cover URLs and objects are created exactly once ────────
+  static final List<Video> _bookVideos = [
     Video(id:'book_richest_man',
       title:'The Richest Man in Babylon — George S. Clason',
       description:'Timeless laws of money: pay yourself first, make money work for you.',
-      channelId:'books',channelName:'Free Finance Library',publishedAt:_epoch,
-      thumbnailUrl:'https://www.globalgreyebooks.com/content/book-covers/george-s-clason_richest-man-in-babylon.jpg'),
+      channelId:'books', channelName:'Free Finance Library', publishedAt:_epoch,
+      // Open Library ISBN cover — very reliable for this famous 1926 classic
+      thumbnailUrl:'https://covers.openlibrary.org/b/isbn/9780451205360-L.jpg'),
     Video(id:'book_think_grow',
       title:'Think and Grow Rich — Napoleon Hill',
-      description:'13 principles of wealth distilled from 500+ of history\'s most successful people.',
-      channelId:'books',channelName:'Free Finance Library',publishedAt:_epoch,
-      thumbnailUrl:'https://www.globalgreyebooks.com/content/book-covers/napoleon-hill_think-and-grow-rich.jpg'),
+      description:"13 principles of wealth distilled from 500+ of history's most successful people.",
+      channelId:'books', channelName:'Free Finance Library', publishedAt:_epoch,
+      thumbnailUrl:'https://covers.openlibrary.org/b/isbn/9781585424337-L.jpg'),
     Video(id:'book_science_rich',
       title:'The Science of Getting Rich — Wallace D. Wattles',
       description:'The original 1910 law-of-attraction wealth blueprint that inspired The Secret.',
-      channelId:'books',channelName:'Free Finance Library',publishedAt:_epoch,
-      thumbnailUrl:'https://www.globalgreyebooks.com/content/book-covers/wallace-d-wattles_science-of-getting-rich.jpg'),
+      channelId:'books', channelName:'Free Finance Library', publishedAt:_epoch,
+      thumbnailUrl:'https://covers.openlibrary.org/b/isbn/9781440451966-L.jpg'),
     Video(id:'book_art_money',
       title:'The Art of Money Getting — P. T. Barnum',
-      description:'20 golden rules for making money from America\'s greatest showman (1880).',
-      channelId:'books',channelName:'Free Finance Library',publishedAt:_epoch,
-      thumbnailUrl:'https://www.globalgreyebooks.com/content/book-covers/p-t-barnum_art-of-money-getting.jpg'),
+      description:"20 golden rules for making money from America's greatest showman (1880).",
+      channelId:'books', channelName:'Free Finance Library', publishedAt:_epoch,
+      thumbnailUrl:'https://covers.openlibrary.org/b/isbn/9781619491229-L.jpg'),
     Video(id:'book_as_man_thinketh',
       title:'As a Man Thinketh — James Allen',
       description:'How your thoughts shape your wealth, health, and circumstances (1903).',
-      channelId:'books',channelName:'Free Finance Library',publishedAt:_epoch,
-      thumbnailUrl:'https://www.globalgreyebooks.com/content/book-covers/james-allen_as-a-man-thinketh.jpg'),
+      channelId:'books', channelName:'Free Finance Library', publishedAt:_epoch,
+      thumbnailUrl:'https://covers.openlibrary.org/b/isbn/9780486466392-L.jpg'),
     Video(id:'book_eight_pillars',
       title:'Eight Pillars of Prosperity — James Allen',
       description:'Energy, economy, integrity, and five more virtues that build lasting wealth (1911).',
-      channelId:'books',channelName:'Free Finance Library',publishedAt:_epoch,
-      thumbnailUrl:'https://www.globalgreyebooks.com/content/book-covers/james-allen_eight-pillars-of-prosperity.jpg'),
+      channelId:'books', channelName:'Free Finance Library', publishedAt:_epoch,
+      thumbnailUrl:'https://covers.openlibrary.org/b/isbn/9781420926415-L.jpg'),
     Video(id:'book_master_key',
       title:'The Master Key System — Charles F. Haanel',
       description:'A 24-week course on mastering the mind to attract wealth and success (1912).',
-      channelId:'books',channelName:'Free Finance Library',publishedAt:_epoch,
-      thumbnailUrl:'https://www.globalgreyebooks.com/content/book-covers/charles-f-haanel_master-key-system.jpg'),
+      channelId:'books', channelName:'Free Finance Library', publishedAt:_epoch,
+      thumbnailUrl:'https://covers.openlibrary.org/b/isbn/9780306813122-L.jpg'),
     Video(id:'book_popular_delusions',
       title:'Extraordinary Popular Delusions — Charles Mackay',
       description:'The tulip mania, South Sea bubble and how crowds go financially mad (1841).',
-      channelId:'books',channelName:'Free Finance Library',publishedAt:_epoch,
-      thumbnailUrl:'https://covers.openlibrary.org/b/id/8100251-L.jpg'),
+      channelId:'books', channelName:'Free Finance Library', publishedAt:_epoch,
+      thumbnailUrl:'https://covers.openlibrary.org/b/isbn/9780517880401-L.jpg'),
   ];
 
   // ── Init ──────────────────────────────────────────────────────────────────────

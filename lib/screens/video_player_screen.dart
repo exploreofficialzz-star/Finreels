@@ -60,8 +60,15 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     )..addListener(_onUpdate);
   }
 
+  int _lastUpdateMs = 0;  // rate-limit _onUpdate to ≤30 calls/sec
+
   void _onUpdate() {
     if (!mounted) return;
+
+    // Hard cap: ignore updates fired faster than every 33 ms (~30 fps).
+    final nowMs = DateTime.now().millisecondsSinceEpoch;
+    if (nowMs - _lastUpdateMs < 33) return;
+    _lastUpdateMs = nowMs;
     final v       = _controller.value;
     final ended   = v.playerState == PlayerState.ended;
     final playing = v.playerState == PlayerState.playing;
@@ -72,7 +79,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         ? (pos.inMilliseconds / dur.inMilliseconds).clamp(0.0, 1.0)
         : 0.0;
     if (ended != _ended || playing != _playing || ready != _ready ||
-        (prog - _progress).abs() > 0.005) {
+        (prog - _progress).abs() > 0.01) {
       setState(() {
         _ended    = ended;
         _playing  = playing;
