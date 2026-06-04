@@ -1,5 +1,4 @@
 
-
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -93,43 +92,50 @@ class FeedProvider extends ChangeNotifier {
       title:'The Richest Man in Babylon — George S. Clason',
       description:'Timeless laws of money: pay yourself first, make money work for you.',
       channelId:'books', channelName:'Free Finance Library', publishedAt:_epoch,
-      // Open Library ISBN cover — very reliable for this famous 1926 classic
+      // ISBN cover — confirmed working in previous build
       thumbnailUrl:'https://covers.openlibrary.org/b/isbn/9780451205360-L.jpg'),
     Video(id:'book_think_grow',
       title:'Think and Grow Rich — Napoleon Hill',
       description:"13 principles of wealth distilled from 500+ of history's most successful people.",
       channelId:'books', channelName:'Free Finance Library', publishedAt:_epoch,
+      // ISBN cover — confirmed working in previous build
       thumbnailUrl:'https://covers.openlibrary.org/b/isbn/9781585424337-L.jpg'),
     Video(id:'book_science_rich',
       title:'The Science of Getting Rich — Wallace D. Wattles',
       description:'The original 1910 law-of-attraction wealth blueprint that inspired The Secret.',
       channelId:'books', channelName:'Free Finance Library', publishedAt:_epoch,
-      thumbnailUrl:'https://covers.openlibrary.org/b/isbn/9781440451966-L.jpg'),
+      // Work OLID confirmed via archive.org metadata: OL14936067W
+      thumbnailUrl:'https://covers.openlibrary.org/b/olid/OL14936067W-L.jpg'),
     Video(id:'book_art_money',
       title:'The Art of Money Getting — P. T. Barnum',
       description:"20 golden rules for making money from America's greatest showman (1880).",
       channelId:'books', channelName:'Free Finance Library', publishedAt:_epoch,
-      thumbnailUrl:'https://covers.openlibrary.org/b/isbn/9781619491229-L.jpg'),
+      // GlobalGrey cover confirmed working in original build
+      thumbnailUrl:'https://www.globalgreyebooks.com/content/book-covers/p-t-barnum_art-of-money-getting.jpg'),
     Video(id:'book_as_man_thinketh',
       title:'As a Man Thinketh — James Allen',
       description:'How your thoughts shape your wealth, health, and circumstances (1903).',
       channelId:'books', channelName:'Free Finance Library', publishedAt:_epoch,
-      thumbnailUrl:'https://covers.openlibrary.org/b/isbn/9780486466392-L.jpg'),
+      // Cover ID 14828006 confirmed from Open Library og:image
+      thumbnailUrl:'https://covers.openlibrary.org/b/id/14828006-L.jpg'),
     Video(id:'book_eight_pillars',
       title:'Eight Pillars of Prosperity — James Allen',
       description:'Energy, economy, integrity, and five more virtues that build lasting wealth (1911).',
       channelId:'books', channelName:'Free Finance Library', publishedAt:_epoch,
-      thumbnailUrl:'https://covers.openlibrary.org/b/isbn/9781420926415-L.jpg'),
+      // G&D Media edition ISBN — correct book, verified ISBN from MIT Press bookstore
+      thumbnailUrl:'https://covers.openlibrary.org/b/isbn/9781722502515-L.jpg'),
     Video(id:'book_master_key',
       title:'The Master Key System — Charles F. Haanel',
       description:'A 24-week course on mastering the mind to attract wealth and success (1912).',
       channelId:'books', channelName:'Free Finance Library', publishedAt:_epoch,
-      thumbnailUrl:'https://covers.openlibrary.org/b/isbn/9780306813122-L.jpg'),
+      // Edition OLID confirmed from Open Library search: OL25601790M
+      thumbnailUrl:'https://covers.openlibrary.org/b/olid/OL25601790M-L.jpg'),
     Video(id:'book_popular_delusions',
       title:'Extraordinary Popular Delusions — Charles Mackay',
       description:'The tulip mania, South Sea bubble and how crowds go financially mad (1841).',
       channelId:'books', channelName:'Free Finance Library', publishedAt:_epoch,
-      thumbnailUrl:'https://covers.openlibrary.org/b/isbn/9780517880401-L.jpg'),
+      // Cover ID 8100251 — confirmed working in the original version of this app
+      thumbnailUrl:'https://covers.openlibrary.org/b/id/8100251-L.jpg'),
   ];
 
   // ── Init ──────────────────────────────────────────────────────────────────────
