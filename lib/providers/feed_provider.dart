@@ -104,8 +104,8 @@ class FeedProvider extends ChangeNotifier {
       title:'The Science of Getting Rich — Wallace D. Wattles',
       description:'The original 1910 law-of-attraction wealth blueprint that inspired The Secret.',
       channelId:'books', channelName:'Free Finance Library', publishedAt:_epoch,
-      // Work OLID confirmed via archive.org metadata: OL14936067W
-      thumbnailUrl:'https://covers.openlibrary.org/b/olid/OL14936067W-L.jpg'),
+      // Cover ID 1992072 confirmed from Open Library og:image (OL8879112M)
+      thumbnailUrl:'https://covers.openlibrary.org/b/id/1992072-L.jpg'),
     Video(id:'book_art_money',
       title:'The Art of Money Getting — P. T. Barnum',
       description:"20 golden rules for making money from America's greatest showman (1880).",
@@ -122,8 +122,8 @@ class FeedProvider extends ChangeNotifier {
       title:'Eight Pillars of Prosperity — James Allen',
       description:'Energy, economy, integrity, and five more virtues that build lasting wealth (1911).',
       channelId:'books', channelName:'Free Finance Library', publishedAt:_epoch,
-      // G&D Media edition ISBN — correct book, verified ISBN from MIT Press bookstore
-      thumbnailUrl:'https://covers.openlibrary.org/b/isbn/9781722502515-L.jpg'),
+      // Archive.org scanned book cover — reliable public domain thumbnail
+      thumbnailUrl:'https://archive.org/services/img/eightpillarsofpr0000alle'),
     Video(id:'book_master_key',
       title:'The Master Key System — Charles F. Haanel',
       description:'A 24-week course on mastering the mind to attract wealth and success (1912).',
