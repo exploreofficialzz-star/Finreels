@@ -308,7 +308,13 @@ class AdService {
     }
   }
 
-  // ── BLOG TAP TRIGGER ──────────────────────────────────────────────────────
+  // ── BOOK READ TRIGGER ─────────────────────────────────────────────────────
+  /// Fires an interstitial every time the user opens a book to read.
+  /// No counter — every tap shows an ad (if one is loaded and ready).
+  Future<void> onBookRead() async {
+    if (_adsRemoved || !_initialized) return;
+    await showInterstitial();
+  }
   /// Fires on tap 4, 8, 12 … in the Blogs tab.
   Future<void> onBlogTapped() async {
     if (_adsRemoved || !_initialized) return;

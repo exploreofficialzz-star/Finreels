@@ -211,10 +211,14 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                     width: double.infinity,
                     height: 52,
                     child: FilledButton.icon(
-                      onPressed: () => setState(() {
-                        _showReader = true;
-                        _isLoading  = true;
-                      }),
+                      onPressed: () {
+                        // Fire interstitial on every book read tap
+                        unawaited(AdService.instance.onBookRead());
+                        setState(() {
+                          _showReader = true;
+                          _isLoading  = true;
+                        });
+                      },
                       icon: const Icon(Icons.menu_book_rounded),
                       label: Text(
                         _lastCfi != null
