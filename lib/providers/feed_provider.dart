@@ -1,4 +1,5 @@
 
+
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -104,8 +105,8 @@ class FeedProvider extends ChangeNotifier {
       title:'The Science of Getting Rich — Wallace D. Wattles',
       description:'The original 1910 law-of-attraction wealth blueprint that inspired The Secret.',
       channelId:'books', channelName:'Free Finance Library', publishedAt:_epoch,
-      // Cover ID 1992072 confirmed from Open Library og:image (OL8879112M)
-      thumbnailUrl:'https://covers.openlibrary.org/b/id/1992072-L.jpg'),
+      // LibriVox archive.org identifier confirmed: science_gettingrich_1005_librivox
+      thumbnailUrl:'https://archive.org/services/img/science_gettingrich_1005_librivox'),
     Video(id:'book_art_money',
       title:'The Art of Money Getting — P. T. Barnum',
       description:"20 golden rules for making money from America's greatest showman (1880).",
@@ -122,8 +123,8 @@ class FeedProvider extends ChangeNotifier {
       title:'Eight Pillars of Prosperity — James Allen',
       description:'Energy, economy, integrity, and five more virtues that build lasting wealth (1911).',
       channelId:'books', channelName:'Free Finance Library', publishedAt:_epoch,
-      // Archive.org scanned book cover — reliable public domain thumbnail
-      thumbnailUrl:'https://archive.org/services/img/eightpillarsofpr0000alle'),
+      // LibriVox archive.org identifier confirmed: eightpillarsofprosperity_1411_librivox
+      thumbnailUrl:'https://archive.org/services/img/eightpillarsofprosperity_1411_librivox'),
     Video(id:'book_master_key',
       title:'The Master Key System — Charles F. Haanel',
       description:'A 24-week course on mastering the mind to attract wealth and success (1912).',

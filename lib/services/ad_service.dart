@@ -309,11 +309,24 @@ class AdService {
   }
 
   // ── BOOK READ TRIGGER ─────────────────────────────────────────────────────
-  /// Fires an interstitial every time the user opens a book to read.
-  /// No counter — every tap shows an ad (if one is loaded and ready).
+  /// Shows an interstitial every time the user opens a book to read.
+  /// Called with [unawaited] so the reader opens immediately. This method
+  /// polls in the background for up to 2 s in case the interstitial is still
+  /// loading (e.g. the previous one just dismissed and a reload is in progress).
   Future<void> onBookRead() async {
-    if (_adsRemoved || !_initialized) return;
-    await showInterstitial();
+    if (_adsRemoved) return;
+    const maxWaitMs  = 2000;
+    const pollMs     = 150;
+    var   waited     = 0;
+    while (waited < maxWaitMs) {
+      if (_interstitialReady && _interstitialAd != null) {
+        await showInterstitial();
+        return;
+      }
+      await Future<void>.delayed(const Duration(milliseconds: pollMs));
+      waited += pollMs;
+    }
+    // Interstitial not available after 2 s — proceed silently.
   }
   /// Fires on tap 4, 8, 12 … in the Blogs tab.
   Future<void> onBlogTapped() async {
