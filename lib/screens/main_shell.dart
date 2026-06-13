@@ -32,20 +32,37 @@ class _MainShellState extends State<MainShell> {
   @override
   void initState() {
     super.initState();
-    // Check once on launch (app opened from a notification while cold)
+    // Handles cold-launch deep link (app was not running when notif was tapped).
     WidgetsBinding.instance.addPostFrameCallback((_) => _handlePendingDeepLink());
   }
 
-  /// Reads the pending videoId stored by NotificationService._onTap,
-  /// finds the matching Video in the feed, and pushes VideoPlayerScreen.
-  void _handlePendingDeepLink() {
+  /// Full deep-link handler. Works for both cold and warm launches.
+  ///
+  /// Three guarantees:
+  /// 1. Waits for the feed to be populated before searching (cold-launch safe).
+  /// 2. Looks up the [Channel] for the video before pushing (avoids compile crash).
+  /// 3. Consumes [pendingVideoId] immediately so it never fires twice.
+  Future<void> _handlePendingDeepLink() async {
     final videoId = NotificationService.pendingVideoId;
     if (videoId == null || !mounted) return;
-    NotificationService.pendingVideoId = null; // consume it
+    NotificationService.pendingVideoId = null; // consume immediately
 
     final provider = context.read<FeedProvider>();
+
+    // ── Wait for feed data ─────────────────────────────────────────────────
+    // On a cold launch the provider may not have data yet (disk cache + network
+    // fetch are still in progress). Poll every 200 ms for up to 8 seconds.
+    const maxWaitMs  = 8000;
+    const pollMs     = 200;
+    var   waited     = 0;
+    while (provider.allVideos.every((tab) => tab.isEmpty) && waited < maxWaitMs) {
+      await Future<void>.delayed(const Duration(milliseconds: pollMs));
+      waited += pollMs;
+      if (!mounted) return;
+    }
+
+    // ── Search every tab for the video ────────────────────────────────────
     Video? video;
-    // Search across all cached tab videos
     for (final tab in provider.allVideos) {
       try {
         video = tab.firstWhere((v) => v.id == videoId);
@@ -55,11 +72,12 @@ class _MainShellState extends State<MainShell> {
       }
     }
 
-    if (video == null) return;
+    if (video == null || !mounted) return;
 
+    // ── Look up the channel (required by VideoPlayerScreen) ───────────────
     final channel = ChannelData.byId[video.channelId] ?? ChannelData.fallback;
 
-    // Switch to Videos tab (index 0) then push the player
+    // Switch to Feed tab then push the video player
     setState(() => _index = 0);
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -70,9 +88,10 @@ class _MainShellState extends State<MainShell> {
 
   @override
   Widget build(BuildContext context) {
-    // Also handle warm-launch deep links (app already running when notif tapped)
+    // Warm-launch: app was already running when notification was tapped.
     if (NotificationService.pendingVideoId != null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) => _handlePendingDeepLink());
+      WidgetsBinding.instance
+          .addPostFrameCallback((_) => _handlePendingDeepLink());
     }
 
     final isDark = Theme.of(context).brightness == Brightness.dark;
