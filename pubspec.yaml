@@ -43,6 +43,8 @@ dependencies:
   # Reading progress persistence (CFI for EPUB)
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  # Bundled local PDF books (Five Buckets masterclass playbooks)
+  flutter_pdfview: ^1.4.0+1
 
 dev_dependencies:
   flutter_test:
@@ -55,6 +57,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/sounds/
+    - assets/books/
 
 flutter_icons:
   android: true

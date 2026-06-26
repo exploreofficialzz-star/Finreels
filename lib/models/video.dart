@@ -38,8 +38,18 @@ class Video {
   String get watchUrl =>
       isShort ? 'https://www.youtube.com/shorts/$id'
                : 'https://www.youtube.com/watch?v=$id';
-  String get thumbnailHd => 'https://img.youtube.com/vi/$id/maxresdefault.jpg';
-  String get thumbnailMq => 'https://img.youtube.com/vi/$id/mqdefault.jpg';
+
+  /// Books (channelId == 'books') are not real YouTube videos — their `id`
+  /// is a synthetic key like 'book_richest_man', so constructing a
+  /// img.youtube.com URL from it would always 404. Books must use their
+  /// own [thumbnailUrl] (which may be a network cover or a bundled asset
+  /// path) everywhere a thumbnail is requested.
+  String get thumbnailHd =>
+      channelId == 'books' ? thumbnailUrl
+                            : 'https://img.youtube.com/vi/$id/maxresdefault.jpg';
+  String get thumbnailMq =>
+      channelId == 'books' ? thumbnailUrl
+                            : 'https://img.youtube.com/vi/$id/mqdefault.jpg';
 
   Map<String, dynamic> toJson() => {
         'id': id,

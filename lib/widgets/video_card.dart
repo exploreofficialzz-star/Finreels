@@ -7,6 +7,7 @@ import 'package:timeago/timeago.dart' as timeago;
 import '../models/channel.dart';
 import '../models/video.dart';
 import '../theme/app_theme.dart';
+import 'book_cover_image.dart';
 
 /// Compact read-only card used in the Saved screen.
 /// All Image.network calls replaced with CachedNetworkImage (Fix 5).
@@ -171,44 +172,56 @@ class VideoCard extends StatelessWidget {
   }
 
   Widget _buildThumbnailContent(BuildContext context) {
+    final isBook = video.channelId == 'books';
+
     return Stack(
       fit: StackFit.expand,
       children: [
-        CachedNetworkImage(
-          imageUrl: video.thumbnailHd,
-          fit: BoxFit.cover,
-          placeholder: (_, __) => Shimmer.fromColors(
-            baseColor: const Color(0xFF1E1E1E),
-            highlightColor: const Color(0xFF2C2C2C),
-            child: const ColoredBox(color: Colors.white),
-          ),
-          errorWidget: (_, __, ___) => CachedNetworkImage(
-            imageUrl: video.thumbnailMq,
+        if (isBook)
+          // Books: use the asset/network-aware cover widget. No fake
+          // YouTube thumbnail URL — video.thumbnailHd already resolves
+          // to the book's real cover via the Video model fix.
+          BookCoverImage(url: video.thumbnailHd, fit: BoxFit.cover)
+        else
+          CachedNetworkImage(
+            imageUrl: video.thumbnailHd,
             fit: BoxFit.cover,
             placeholder: (_, __) => Shimmer.fromColors(
               baseColor: const Color(0xFF1E1E1E),
               highlightColor: const Color(0xFF2C2C2C),
               child: const ColoredBox(color: Colors.white),
             ),
-            errorWidget: (_, __, ___) => ColoredBox(
-              color: AppTheme.surfaceElevated(context),
-              child: Icon(Icons.play_circle_outline_rounded,
-                  color: AppTheme.textMuted(context), size: 36),
+            errorWidget: (_, __, ___) => CachedNetworkImage(
+              imageUrl: video.thumbnailMq,
+              fit: BoxFit.cover,
+              placeholder: (_, __) => Shimmer.fromColors(
+                baseColor: const Color(0xFF1E1E1E),
+                highlightColor: const Color(0xFF2C2C2C),
+                child: const ColoredBox(color: Colors.white),
+              ),
+              errorWidget: (_, __, ___) => ColoredBox(
+                color: AppTheme.surfaceElevated(context),
+                child: Icon(Icons.play_circle_outline_rounded,
+                    color: AppTheme.textMuted(context), size: 36),
+              ),
             ),
           ),
-        ),
-        Center(
-          child: Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: Colors.black.withValues(alpha: 0.55),
-              shape: BoxShape.circle,
+        // Play button overlay — videos only. A play icon over a book
+        // cover would be misleading since tapping opens a reader, not a
+        // video player.
+        if (!isBook)
+          Center(
+            child: Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: Colors.black.withValues(alpha: 0.55),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(Icons.play_arrow_rounded,
+                  color: Colors.white, size: 24),
             ),
-            child: const Icon(Icons.play_arrow_rounded,
-                color: Colors.white, size: 24),
           ),
-        ),
       ],
     );
   }

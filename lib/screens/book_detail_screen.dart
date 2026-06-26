@@ -1,7 +1,10 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_epub_viewer/flutter_epub_viewer.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:hive/hive.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -10,18 +13,25 @@ import '../models/video.dart';
 import '../services/ad_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
+import '../widgets/book_cover_image.dart';
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Source routing — only Richest Man uses EPUB; all others use in-app insights
+// Source routing — Richest Man + 3 others use EPUB; copyrighted books use
+// in-app insights; the two Five Buckets playbooks are bundled PDF assets.
 // ─────────────────────────────────────────────────────────────────────────────
 
-enum _SourceType { epub, insights }
+enum _SourceType { epub, insights, pdfAsset }
 
 class _BookSource {
   final _SourceType type;
   final String? epubUrl;
-  const _BookSource.epub(this.epubUrl) : type = _SourceType.epub;
-  const _BookSource.insights() : type = _SourceType.insights, epubUrl = null;
+  final String? assetPath;
+  const _BookSource.epub(this.epubUrl)
+      : type = _SourceType.epub, assetPath = null;
+  const _BookSource.insights()
+      : type = _SourceType.insights, epubUrl = null, assetPath = null;
+  const _BookSource.pdfAsset(this.assetPath)
+      : type = _SourceType.pdfAsset, epubUrl = null;
 }
 
 const Map<String, _BookSource> _sources = {
@@ -51,6 +61,13 @@ const Map<String, _BookSource> _sources = {
   'book_master_key': _BookSource.epub(
     'https://www.globalgreyebooks.com/ebooks/charles-f-haanel_master-key-system.epub',
   ),
+  // ── Bundled PDF assets — ship inside the app, always available offline ──
+  'book_five_buckets_playbook': _BookSource.pdfAsset(
+    'assets/books/five_buckets_playbook.pdf',
+  ),
+  'book_five_buckets_complete': _BookSource.pdfAsset(
+    'assets/books/five_buckets_complete.pdf',
+  ),
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -74,10 +91,20 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   String? _lastCfi;
   Box<String>? _progressBox;
 
+  // PDF (bundled asset books)
+  int? _lastPdfPage;
+
   _BookSource get _source =>
       _sources[widget.book.id] ?? const _BookSource.insights();
 
-  String get _progressKey => 'epub_cfi_${widget.book.id}';
+  String get _progressKey    => 'epub_cfi_${widget.book.id}';
+  String get _pdfProgressKey => 'pdf_page_${widget.book.id}';
+
+  /// True if the user has made any reading progress on this book,
+  /// regardless of which reader type it uses.
+  bool get _hasProgress =>
+      (_lastCfi != null && _lastCfi!.isNotEmpty) ||
+      (_lastPdfPage != null && _lastPdfPage! > 0);
 
   @override
   void initState() {
@@ -85,8 +112,9 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       unawaited(AdService.instance.onContentTapped());
     });
-    _progressBox = Hive.box<String>('reading_progress');
-    _lastCfi = _progressBox?.get(_progressKey);
+    _progressBox  = Hive.box<String>('reading_progress');
+    _lastCfi      = _progressBox?.get(_progressKey);
+    _lastPdfPage  = int.tryParse(_progressBox?.get(_pdfProgressKey) ?? '');
   }
 
   @override
@@ -113,24 +141,11 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ClipRRect(
+                      BookCoverImage(
+                        url: widget.book.thumbnailUrl,
+                        width: 110,
+                        height: 160,
                         borderRadius: BorderRadius.circular(10),
-                        child: Image.network(
-                          widget.book.thumbnailUrl,
-                          width: 110,
-                          height: 160,
-                          fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) => Container(
-                            width: 110,
-                            height: 160,
-                            decoration: BoxDecoration(
-                              color: AppTheme.gold.withValues(alpha: 0.15),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: const Icon(Icons.menu_book_rounded,
-                                color: AppTheme.gold, size: 48),
-                          ),
-                        ),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
@@ -166,8 +181,8 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                                 style: TextStyle(
                                     color: AppTheme.textMuted(context),
                                     fontSize: 12)),
-                            if (_lastCfi != null &&
-                                _source.type == _SourceType.epub) ...[
+                            if (_hasProgress &&
+                                _source.type != _SourceType.insights) ...[
                               const SizedBox(height: 8),
                               Container(
                                 padding: const EdgeInsets.symmetric(
@@ -221,7 +236,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                       },
                       icon: const Icon(Icons.menu_book_rounded),
                       label: Text(
-                        _lastCfi != null
+                        _hasProgress
                             ? 'Continue Reading'
                             : 'Read Full Book Free',
                         style: const TextStyle(
@@ -239,12 +254,14 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                   const SizedBox(height: 12),
                   Center(
                     child: Text(
-                      widget.book.id.startsWith('book_richest') ||
-                              widget.book.id.startsWith('book_as_man') ||
-                              widget.book.id.startsWith('book_science') ||
-                              widget.book.id.startsWith('book_popular')
-                          ? 'Reads free via Project Gutenberg (public domain)'
-                          : 'Reads free via Global Grey ebooks (public domain)',
+                      _source.type == _SourceType.pdfAsset
+                          ? 'Included free with FinReels — no internet required'
+                          : (widget.book.id.startsWith('book_richest') ||
+                                  widget.book.id.startsWith('book_as_man') ||
+                                  widget.book.id.startsWith('book_science') ||
+                                  widget.book.id.startsWith('book_popular'))
+                              ? 'Reads free via Project Gutenberg (public domain)'
+                              : 'Reads free via Global Grey ebooks (public domain)',
                       style: TextStyle(
                           color: AppTheme.textMuted(context), fontSize: 11),
                     ),
@@ -264,6 +281,9 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   Widget _buildReader() {
     if (_source.type == _SourceType.epub) {
       return _buildEpubReader(_source.epubUrl!);
+    }
+    if (_source.type == _SourceType.pdfAsset) {
+      return _buildPdfReader(_source.assetPath!);
     }
     return _buildInsightsReader();
   }
@@ -328,7 +348,73 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
     );
   }
 
-  // ── In-app insights reader ─────────────────────────────────────────────────
+  // ── PDF reader (bundled asset books) ────────────────────────────────────────
+
+  Widget _buildPdfReader(String assetPath) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.book.title.split(':').first.trim(),
+            maxLines: 1, overflow: TextOverflow.ellipsis),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_rounded),
+          onPressed: () => setState(() {
+            _showReader = false;
+            _isLoading  = true;
+          }),
+        ),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: FutureBuilder<Uint8List>(
+              // Load the bundled PDF bytes once. Bundled assets are
+              // instant to read (no network), but we still show a spinner
+              // for the brief decode time on lower-end devices.
+              future: rootBundle.load(assetPath).then((d) => d.buffer
+                  .asUint8List(d.offsetInBytes, d.lengthInBytes)),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const Center(
+                    child: CircularProgressIndicator(color: AppTheme.gold),
+                  );
+                }
+                return Stack(
+                  children: [
+                    PDFView(
+                      pdfData: snapshot.data,
+                      defaultPage: _lastPdfPage ?? 0,
+                      autoSpacing: true,
+                      pageFling: true,
+                      pageSnap: true,
+                      fitPolicy: FitPolicy.WIDTH,
+                      nightMode:
+                          Theme.of(context).brightness == Brightness.dark,
+                      onRender: (_) {
+                        if (mounted) setState(() => _isLoading = false);
+                      },
+                      onPageChanged: (page, total) {
+                        if (page == null) return;
+                        _lastPdfPage = page;
+                        _progressBox?.put(_pdfProgressKey, page.toString());
+                      },
+                      onError: (error) {
+                        if (mounted) setState(() => _isLoading = false);
+                      },
+                    ),
+                    if (_isLoading)
+                      const Center(
+                        child: CircularProgressIndicator(color: AppTheme.gold),
+                      ),
+                  ],
+                );
+              },
+            ),
+          ),
+          if (!AdService.instance.adsRemoved) const StickyBannerBar(),
+        ],
+      ),
+    );
+  }
 
   Widget _buildInsightsReader() {
     final insight = findInsight(widget.book.id);

@@ -13,6 +13,7 @@ import '../providers/feed_provider.dart';
 import '../services/ad_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
+import '../widgets/book_cover_image.dart';
 import '../widgets/inline_video_card.dart';
 import '../widgets/shimmer_loader.dart';
 import 'blog_feed_screen.dart';
@@ -258,7 +259,8 @@ class _ShortsTab extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (_) => ShortsPlayerScreen(
                         shorts: shorts,
-                        initialIndex: i),
+                        initialIndex: i,
+                        autoPlayFirst: true),
                   ),
                 );
               },
@@ -377,31 +379,13 @@ class _BooksTab extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    ClipRRect(
+                    BookCoverImage(
+                      url: book.thumbnailUrl,
+                      width: 90,
+                      height: 120,
                       borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(13),
                         bottomLeft: Radius.circular(13),
-                      ),
-                      child: CachedNetworkImage(
-                        imageUrl: book.thumbnailUrl,
-                        width: 90,
-                        height: 120,
-                        fit: BoxFit.cover,
-                        placeholder: (_, __) => Shimmer.fromColors(
-                          baseColor: const Color(0xFF1E1E1E),
-                          highlightColor: const Color(0xFF2C2C2C),
-                          child: const SizedBox(
-                              width: 90,
-                              height: 120,
-                              child: ColoredBox(color: Colors.white)),
-                        ),
-                        errorWidget: (_, __, ___) => Container(
-                          width: 90,
-                          height: 120,
-                          color: AppTheme.gold.withValues(alpha: 0.15),
-                          child: const Icon(Icons.menu_book_rounded,
-                              color: AppTheme.gold, size: 36),
-                        ),
                       ),
                     ),
                     Expanded(

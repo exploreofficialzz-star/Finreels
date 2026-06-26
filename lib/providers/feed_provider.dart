@@ -53,7 +53,7 @@ class FeedProvider extends ChangeNotifier {
         _roundRobin(all.where((v) => v.isShort && !_isBook(v)).toList()),
       FeedTab.blogs  =>
         _roundRobin(all.where((v) => _isBlog(v) && !_isBook(v)).toList()),
-      FeedTab.books  => _bookVideos,
+      FeedTab.books  => List.unmodifiable(_bookVideos),
     };
   }
 
@@ -94,48 +94,61 @@ class FeedProvider extends ChangeNotifier {
 
   static final _epoch = DateTime(2000);
 
-  List<Video> get _bookVideos => [
-    // ── Public domain books — all fully readable for free via EPUB ────────
+  // static final → created exactly once, not on every access.
+  static final List<Video> _bookVideos = [
+    // ── Public domain classics — read in full via EPUB, free, no login ──────
     Video(id:'book_richest_man',
       title:'The Richest Man in Babylon — George S. Clason',
       description:'Timeless laws of money: pay yourself first, make money work for you.',
       channelId:'books',channelName:'Free Finance Library',publishedAt:_epoch,
-      thumbnailUrl:'https://www.globalgreyebooks.com/content/book-covers/george-s-clason_richest-man-in-babylon.jpg'),
+      thumbnailUrl:'https://covers.openlibrary.org/b/isbn/9780451205360-L.jpg'),
     Video(id:'book_think_grow',
       title:'Think and Grow Rich — Napoleon Hill',
-      description:'13 principles of wealth distilled from 500+ of history\'s most successful people.',
+      description:"13 principles of wealth distilled from 500+ of history's most successful people.",
       channelId:'books',channelName:'Free Finance Library',publishedAt:_epoch,
-      thumbnailUrl:'https://www.globalgreyebooks.com/content/book-covers/napoleon-hill_think-and-grow-rich.jpg'),
+      thumbnailUrl:'https://covers.openlibrary.org/b/isbn/9781585424337-L.jpg'),
     Video(id:'book_science_rich',
       title:'The Science of Getting Rich — Wallace D. Wattles',
       description:'The original 1910 law-of-attraction wealth blueprint that inspired The Secret.',
       channelId:'books',channelName:'Free Finance Library',publishedAt:_epoch,
-      thumbnailUrl:'https://www.globalgreyebooks.com/content/book-covers/wallace-d-wattles_science-of-getting-rich.jpg'),
+      thumbnailUrl:'https://archive.org/services/img/science_gettingrich_1005_librivox'),
     Video(id:'book_art_money',
       title:'The Art of Money Getting — P. T. Barnum',
-      description:'20 golden rules for making money from America\'s greatest showman (1880).',
+      description:"20 golden rules for making money from America's greatest showman (1880).",
       channelId:'books',channelName:'Free Finance Library',publishedAt:_epoch,
       thumbnailUrl:'https://www.globalgreyebooks.com/content/book-covers/p-t-barnum_art-of-money-getting.jpg'),
     Video(id:'book_as_man_thinketh',
       title:'As a Man Thinketh — James Allen',
       description:'How your thoughts shape your wealth, health, and circumstances (1903).',
       channelId:'books',channelName:'Free Finance Library',publishedAt:_epoch,
-      thumbnailUrl:'https://www.globalgreyebooks.com/content/book-covers/james-allen_as-a-man-thinketh.jpg'),
+      thumbnailUrl:'https://covers.openlibrary.org/b/id/14828006-L.jpg'),
     Video(id:'book_eight_pillars',
       title:'Eight Pillars of Prosperity — James Allen',
       description:'Energy, economy, integrity, and five more virtues that build lasting wealth (1911).',
       channelId:'books',channelName:'Free Finance Library',publishedAt:_epoch,
-      thumbnailUrl:'https://www.globalgreyebooks.com/content/book-covers/james-allen_eight-pillars-of-prosperity.jpg'),
+      thumbnailUrl:'https://archive.org/services/img/eightpillarsofprosperity_1411_librivox'),
     Video(id:'book_master_key',
       title:'The Master Key System — Charles F. Haanel',
       description:'A 24-week course on mastering the mind to attract wealth and success (1912).',
       channelId:'books',channelName:'Free Finance Library',publishedAt:_epoch,
-      thumbnailUrl:'https://www.globalgreyebooks.com/content/book-covers/charles-f-haanel_master-key-system.jpg'),
+      thumbnailUrl:'https://covers.openlibrary.org/b/olid/OL25601790M-L.jpg'),
     Video(id:'book_popular_delusions',
       title:'Extraordinary Popular Delusions — Charles Mackay',
       description:'The tulip mania, South Sea bubble and how crowds go financially mad (1841).',
       channelId:'books',channelName:'Free Finance Library',publishedAt:_epoch,
       thumbnailUrl:'https://covers.openlibrary.org/b/id/8100251-L.jpg'),
+
+    // ── Bundled masterclass playbooks — ship inside the app, fully offline ──
+    Video(id:'book_five_buckets_playbook',
+      title:'The Five Buckets: Build What They Can Never Take From You',
+      description:'An encyclopedic masterclass on Knowledge, Skills, Network, Resources & Reputation — inspired by Steven Bartlett\'s 5-Bucket framework.',
+      channelId:'books',channelName:'Masterclass Playbooks',publishedAt:_epoch,
+      thumbnailUrl:'assets/books/five_buckets_playbook_cover.jpg'),
+    Video(id:'book_five_buckets_complete',
+      title:'The Five Buckets: A Field Manual for Unstoppable Success',
+      description:'How to build unshakeable knowledge, master high-value skills, engineer powerful networks, command strategic resources, and forge a reputation that opens doors before you knock.',
+      channelId:'books',channelName:'Masterclass Playbooks',publishedAt:_epoch,
+      thumbnailUrl:'assets/books/five_buckets_complete_cover.jpg'),
   ];
 
   // ── Init ──────────────────────────────────────────────────────────────────────
