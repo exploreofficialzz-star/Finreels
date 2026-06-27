@@ -34,6 +34,26 @@ class AppTheme {
   static const Color darkTextMuted = Color(0xFF525252);
 
   // ── Light Theme ─────────────────────────────────────────────────────────────
+
+  /// Status/navigation bar style for a given brightness. Used both inside
+  /// the AppBarTheme definitions below AND globally (wrapping every screen,
+  /// including ones with no AppBar at all — e.g. MainShell) so the status
+  /// bar always renders transparent with correctly-contrasted icons,
+  /// letting the Scaffold's own background paint fully through instead of
+  /// leaving a visibly different strip behind the time/signal/battery area.
+  static SystemUiOverlayStyle overlayStyleFor(Brightness brightness) {
+    final isDark = brightness == Brightness.dark;
+    return SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
+      statusBarBrightness:     isDark ? Brightness.dark  : Brightness.light,
+      systemNavigationBarColor: isDark ? darkBg : lightBg,
+      systemNavigationBarIconBrightness:
+          isDark ? Brightness.light : Brightness.dark,
+      systemNavigationBarDividerColor: Colors.transparent,
+    );
+  }
+
   static ThemeData get light {
     return ThemeData(
       useMaterial3: true,
@@ -51,7 +71,17 @@ class AppTheme {
         backgroundColor: lightBg,
         foregroundColor: lightText,
         elevation: 0,
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        // statusBarColor: transparent → the Scaffold's own white background
+        // paints fully through the status bar area instead of leaving a
+        // visible grey/unstyled strip behind the time/signal/battery icons.
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.light,
+          systemNavigationBarColor: lightBg,
+          systemNavigationBarIconBrightness: Brightness.dark,
+          systemNavigationBarDividerColor: Colors.transparent,
+        ),
         titleTextStyle: TextStyle(
           color: lightText,
           fontSize: 20,
@@ -132,7 +162,14 @@ class AppTheme {
         backgroundColor: darkBg,
         foregroundColor: darkText,
         elevation: 0,
-        systemOverlayStyle: SystemUiOverlayStyle.light,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.light,
+          statusBarBrightness: Brightness.dark,
+          systemNavigationBarColor: darkBg,
+          systemNavigationBarIconBrightness: Brightness.light,
+          systemNavigationBarDividerColor: Colors.transparent,
+        ),
         titleTextStyle: TextStyle(
           color: darkText,
           fontSize: 20,

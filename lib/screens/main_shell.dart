@@ -38,11 +38,31 @@ class _MainShellState extends State<MainShell> {
 
   /// Full deep-link handler. Works for both cold and warm launches.
   ///
-  /// Three guarantees:
-  /// 1. Waits for the feed to be populated before searching (cold-launch safe).
-  /// 2. Looks up the [Channel] for the video before pushing (avoids compile crash).
-  /// 3. Consumes [pendingVideoId] immediately so it never fires twice.
+  /// Four guarantees:
+  /// 1. Waits for [NotificationService.pendingVideoId] to be set, since
+  ///    NotificationService.init() now runs in the background (fire-and-
+  ///    forget, for fast startup) and may not have resolved the cold-start
+  ///    launch details the instant this widget first builds.
+  /// 2. Waits for the feed to be populated before searching (cold-launch safe).
+  /// 3. Looks up the [Channel] for the video before pushing (avoids compile crash).
+  /// 4. Consumes [pendingVideoId] immediately so it never fires twice.
   Future<void> _handlePendingDeepLink() async {
+    if (!mounted) return;
+
+    // ── Wait for the deep link itself ───────────────────────────────────────
+    // NotificationService.init() (which performs the cold-start launch-
+    // detail lookup) is fire-and-forget from app startup for speed — it may
+    // genuinely still be running when MainShell first builds. Poll briefly
+    // rather than checking once and giving up.
+    const dlMaxWaitMs = 5000;
+    const dlPollMs    = 100;
+    var   dlWaited    = 0;
+    while (NotificationService.pendingVideoId == null && dlWaited < dlMaxWaitMs) {
+      await Future<void>.delayed(const Duration(milliseconds: dlPollMs));
+      dlWaited += dlPollMs;
+      if (!mounted) return;
+    }
+
     final videoId = NotificationService.pendingVideoId;
     if (videoId == null || !mounted) return;
     NotificationService.pendingVideoId = null; // consume immediately

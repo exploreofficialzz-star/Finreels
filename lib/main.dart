@@ -32,6 +32,15 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
 
+  // Edge-to-edge: the app draws fully behind the status bar and navigation
+  // bar/gesture area, with MediaQuery padding correctly reporting those
+  // insets so SafeArea/Scaffold still lay content out correctly. Combined
+  // with the transparent statusBarColor set below, this is what lets the
+  // Scaffold's own background colour paint all the way to the physical top
+  // of the screen instead of leaving a visibly different strip behind the
+  // time/signal/battery icons.
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+
   // runApp immediately — splash is shown on the very first frame.
   runApp(const FinReelsApp());
 }
@@ -47,6 +56,19 @@ class FinReelsApp extends StatelessWidget {
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       home: const _SplashGate(),
+      // Wraps EVERY screen in the navigation stack — including ones with no
+      // AppBar at all, like MainShell — so the status bar is always
+      // transparent with correctly-contrasted icons, regardless of which
+      // screen is currently showing. Screens WITH an AppBar additionally
+      // get the same treatment from AppBarTheme.systemOverlayStyle; this
+      // wrapper is what makes screens WITHOUT one consistent too.
+      builder: (context, child) {
+        final brightness = MediaQuery.platformBrightnessOf(context);
+        return AnnotatedRegion<SystemUiOverlayStyle>(
+          value: AppTheme.overlayStyleFor(brightness),
+          child: child ?? const SizedBox.shrink(),
+        );
+      },
     );
   }
 }
@@ -75,18 +97,50 @@ class _SplashGateState extends State<_SplashGate> {
   }
 
   Future<void> _initialize() async {
-    // Open Hive box for EPUB reading-progress persistence.
-    await Hive.initFlutter();
-    await Hive.openBox<String>('reading_progress');
+    // Open Hive box for EPUB reading-progress persistence. Kept blocking —
+    // it's a local-disk operation and typically resolves in single-digit ms.
+    // Wrapped defensively: if Hive somehow fails (corrupted box, disk issue),
+    // reading progress just won't persist — that must never be allowed to
+    // strand the user on the splash screen forever.
+    try {
+      await Hive.initFlutter();
+      await Hive.openBox<String>('reading_progress');
+    } on Object catch (e) {
+      debugPrint('[startup] Hive init failed (non-fatal): $e');
+    }
 
-    // Boot services in dependency order — all heavyweight work is here,
-    // NOT in main(), so the splash is already visible before any of this runs.
-    await ConnectivityService.instance.init();
-    await BackgroundService.instance.init();
-    await BackgroundService.instance.registerRssCheck();
-    await NotificationService.instance.init();
-    await AdService.instance.init();
-    await IapService.instance.init();
+    // ── Run every independent service init CONCURRENTLY ─────────────────────
+    // Previously these 6 calls ran one after another — total wait time was
+    // the SUM of each (often 2-5+ seconds combined, which is exactly why the
+    // splash used to "stay long"). None of these actually depend on each
+    // other (BackgroundService.init() and registerRssCheck() are the only
+    // pair with a real ordering requirement, so that pair is wrapped
+    // together below). Running them in parallel means the wait time becomes
+    // the MAX of the group instead of the sum — typically under a second.
+    //
+    // Each one is also wrapped in _safeInit so that if a single service
+    // throws (e.g. AdMob/IAP failing on a device with no Play Services, or
+    // a network hiccup during notification-channel setup), it can NEVER
+    // hang the splash screen forever or crash the app — it just logs and
+    // moves on, and the app opens normally without that one feature until
+    // it can be retried later.
+    //
+    // A hard 6-second ceiling on the WHOLE group is the final safety net:
+    // even if every individual safeguard above somehow failed to return
+    // (e.g. a service awaiting a Completer that's never resolved), the
+    // splash will still release after 6 s rather than hanging indefinitely.
+    try {
+      await Future.wait([
+        _safeInit('Connectivity',   () => ConnectivityService.instance.init()),
+        _safeInit('Background',     _initBackgroundServices),
+        _safeInit('Notifications',  () => NotificationService.instance.init()),
+        _safeInit('Ads',            () => AdService.instance.init()),
+        _safeInit('IAP',            () => IapService.instance.init()),
+      ]).timeout(const Duration(seconds: 6));
+    } on TimeoutException {
+      debugPrint('[startup] Service init group exceeded 6s ceiling — '
+          'continuing without waiting further.');
+    }
     unawaited(AdBlockService.instance.init());
 
     // Build the feed provider here so it can start fetching immediately.
@@ -99,6 +153,27 @@ class _SplashGateState extends State<_SplashGate> {
       _initDone = true;
     });
     _maybeTransition();
+  }
+
+  /// BackgroundService.registerRssCheck() depends on init() having already
+  /// run, so this pair must stay sequential relative to each other — but
+  /// the pair as a whole runs in parallel with everything else above.
+  Future<void> _initBackgroundServices() async {
+    await BackgroundService.instance.init();
+    await BackgroundService.instance.registerRssCheck();
+  }
+
+  /// Runs [fn] and swallows any error. A single misbehaving service (no
+  /// Play Services, a flaky network call during setup, a misconfigured SDK
+  /// key, etc.) must never be able to hang the splash screen forever or
+  /// crash app startup — it should just be skipped, logged, and the app
+  /// should continue without that feature until it can recover later.
+  Future<void> _safeInit(String name, Future<void> Function() fn) async {
+    try {
+      await fn();
+    } on Object catch (e, st) {
+      debugPrint('[startup] $name init failed (non-fatal): $e\n$st');
+    }
   }
 
   void _onSplashComplete() {
@@ -158,7 +233,11 @@ class _AppRootState extends State<_AppRoot> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
       unawaited(AdService.instance.showAppOpenAd());
-      unawaited(context.read<FeedProvider>().refresh());
+      // Forces a true network refresh (replacing each channel's cached 15
+      // with whatever is genuinely latest on YouTube right now) — but only
+      // if it's been a few minutes since the last one, to avoid hammering
+      // the RSS endpoint on rapid app-switching.
+      unawaited(context.read<FeedProvider>().refreshOnResume());
     }
   }
 

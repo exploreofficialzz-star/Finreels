@@ -28,6 +28,29 @@ class NotificationService {
       onDidReceiveNotificationResponse: _onTap,
     );
 
+    // ── Cold-start deep link ────────────────────────────────────────────────
+    // onDidReceiveNotificationResponse (above) only reliably fires while the
+    // app process is alive — foreground, or backgrounded but not killed.
+    // When the app was FULLY TERMINATED and the user taps a notification to
+    // launch it fresh, that tap is instead surfaced via
+    // getNotificationAppLaunchDetails(), a completely separate API. Without
+    // this check, a cold-start notification tap would open the app normally
+    // but never navigate to the video — this was the root cause of
+    // notifications "sometimes" not going straight to the video.
+    try {
+      final launchDetails = await _plugin.getNotificationAppLaunchDetails();
+      if (launchDetails?.didNotificationLaunchApp ?? false) {
+        final payload = launchDetails!.notificationResponse?.payload;
+        if (payload != null) {
+          final data = json.decode(payload) as Map<String, dynamic>;
+          final videoId = data['videoId'] as String?;
+          if (videoId != null) pendingVideoId = videoId;
+        }
+      }
+    } on Exception catch (_) {
+      // Malformed payload or platform quirk — fail silently, app still opens.
+    }
+
     // Create Android notification channel
     const channel = AndroidNotificationChannel(
       AppConfig.notifChannelId,
@@ -86,8 +109,12 @@ class NotificationService {
 
     for (final channel in ChannelData.all) {
       try {
+        // forceRefresh: true — this background task's entire purpose is to
+        // detect NEW uploads. Serving a cached (possibly 30-min-old) list
+        // here could miss a video that just went live, since the in-memory/
+        // disk cache wouldn't know about it yet.
         final videos =
-            await RssService.instance.fetchVideos(channel.id);
+            await RssService.instance.fetchVideos(channel.id, forceRefresh: true);
         if (videos.isEmpty) continue;
 
         final lastSeenKey = '${AppConfig.prefLastSeenVideos}${channel.id}';

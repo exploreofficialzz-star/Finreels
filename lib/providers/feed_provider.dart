@@ -156,12 +156,18 @@ class FeedProvider extends ChangeNotifier {
   Future<void> init() async {
     await _loadSaved();
 
-    // 1. Load disk cache → instant first render.
+    // 1. Load disk cache → instant first render (whatever we last had).
     await _loadDiskCache();
     final hasCached = _videosByChannel.isNotEmpty;
 
-    // 2. Network refresh — silent (no spinner) if data already on screen.
-    await refresh(silent: hasCached);
+    // 2. ALWAYS force a true network refresh on app open. YouTube's RSS
+    // feed always returns exactly the latest 15 videos per channel — this
+    // forced refresh is what guarantees that "latest 15" window is
+    // genuinely up to date every time the user opens the app, rather than
+    // potentially serving a stale cached 15 from up to 30 minutes ago.
+    // silent: true when we already have something on screen, so this
+    // happens quietly in the background with no spinner flash.
+    await refresh(force: true, silent: hasCached);
   }
 
   Future<void> _loadDiskCache() async {
@@ -187,6 +193,8 @@ class FeedProvider extends ChangeNotifier {
   }
 
   // ── Refresh ───────────────────────────────────────────────────────────────────
+
+  DateTime? _lastForcedRefreshAt;
 
   /// [silent] = true → skip loading spinner, update quietly in background.
   /// Used on app resume and on init when cache is already visible.
@@ -216,12 +224,31 @@ class FeedProvider extends ChangeNotifier {
 
     final total = snap.values.fold(0, (s, l) => s + l.length);
 
+    // snap COMPLETELY REPLACES _videosByChannel (not merged/appended) — this
+    // is what ensures each channel's video list is always exactly its
+    // current latest 15 from YouTube's RSS feed, never a stale mix of old
+    // and new entries.
     _videosByChannel = Map.unmodifiable(snap);
     _tabCache.clear();
     _state = total > 0 ? FeedState.loaded : FeedState.error;
     _errorMessage = total == 0 ? 'Could not load content. Check your connection.' : null;
 
+    if (force) _lastForcedRefreshAt = DateTime.now();
+
     notifyListeners();
+  }
+
+  /// Called when the app resumes from the background. Forces a true
+  /// network refresh — but only if it's been a while since the last one,
+  /// so rapid app-switching (checking a notification and coming straight
+  /// back, for example) doesn't hammer YouTube's RSS endpoint with repeat
+  /// requests every few seconds.
+  Future<void> refreshOnResume() async {
+    final last = _lastForcedRefreshAt;
+    final dueForRefresh = last == null ||
+        DateTime.now().difference(last) > const Duration(minutes: 3);
+    if (!dueForRefresh) return;
+    await refresh(force: true, silent: true);
   }
 
   // ── Saved ─────────────────────────────────────────────────────────────────────

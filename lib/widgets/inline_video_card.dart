@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,15 +17,28 @@ import '../theme/app_theme.dart';
 // ─────────────────────────────────────────────────────────────────────────────
 // Fixes in this file:
 //
-// 1. NO BLACK FLASH
-//    Thumbnail always visible under the player. Player is opacity-0 until
-//    onReady fires, then fades in over 300 ms. User sees thumbnail → spinner
-//    → player — never a black screen.
+// 1. NO BLACK FLASH (real fix — root cause was widget subtree replacement)
+//    Previously, tapping the thumbnail swapped TWO ENTIRELY SEPARATE widget
+//    subtrees (_buildThumbnail() ↔ _buildPlayerArea()) via a ternary in
+//    build(). Flutter had to unmount the thumbnail's Image widget and mount
+//    a brand new one inside the player area in the same frame — combined
+//    with the YouTube WebView's native platform-view surface ALSO
+//    initialising in that same frame (which itself renders black for its
+//    first few frames at the OS compositing level, regardless of Flutter
+//    widget opacity), this produced the "goes black, then comes back, then
+//    plays" flash.
+//
+//    Fix: ONE media area is built and stays mounted for the lifetime of the
+//    card. The thumbnail Image widget is never torn down — the player is
+//    simply inserted as an ADDITIONAL Stack layer above it once the user
+//    taps, hidden behind a deliberate reveal-delay (not just onReady) so any
+//    native platform-view black frame happens while the thumbnail is still
+//    the only visible thing.
 //
 // 2. VIDEO PAUSE AD TRIGGER
 //    Every time the user taps pause (the play/pause button or a tap on the
-//    player area while playing), AdService.onVideoPaused() is called.
-//    Ad fires every 4th pause: pauses 4, 8, 12 …
+//    player area while playing), AdService.onVideoTapped() is called.
+//    Ad fires every 2nd pause (interstitialCycleLength).
 //    This is tracked inside YoutubePlayer via a controller listener that
 //    watches for PlayerState transitions from playing → paused.
 //
@@ -62,9 +77,11 @@ class InlineVideoCard extends StatefulWidget {
 class _InlineVideoCardState extends State<InlineVideoCard>
     with AutomaticKeepAliveClientMixin {
   YoutubePlayerController? _controller;
-  bool _playerReady = false;
-  bool _expanded    = false;
-  bool _ended       = false;
+  bool _playerReady  = false; // YouTube IFrame API onReady fired
+  bool _revealPlayer = false; // true only after onReady + grace delay
+  bool _expanded     = false; // true once the user has tapped
+  bool _ended        = false;
+  Timer? _revealTimer;
 
   /// Tracks the previous PlayerState so we can detect playing → paused.
   PlayerState _prevState = PlayerState.unknown;
@@ -84,6 +101,7 @@ class _InlineVideoCardState extends State<InlineVideoCard>
   @override
   void dispose() {
     widget.activeVideoNotifier.removeListener(_onActiveChanged);
+    _revealTimer?.cancel();
     _controller?.removeListener(_onControllerUpdate);
     _controller?.dispose();
     super.dispose();
@@ -100,6 +118,27 @@ class _InlineVideoCardState extends State<InlineVideoCard>
     }
   }
 
+  /// Called the moment the YouTube IFrame API reports ready (via either the
+  /// onReady callback OR the controller listener — both funnel through here
+  /// so there is exactly one reveal mechanism, not two competing ones).
+  void _markReady() {
+    if (!mounted || _playerReady) return;
+    setState(() => _playerReady = true);
+    if (_isActive) _controller?.play();
+
+    // Grace delay before revealing the player layer. The YouTube IFrame
+    // API's "ready" event does NOT guarantee the underlying native
+    // platform-view (WebView) surface has finished its own initialisation —
+    // that surface can still render a black frame for a short period
+    // afterwards at the OS compositing level, which Flutter-side opacity
+    // alone cannot mask. Waiting a beat here ensures any such black frame
+    // happens while the thumbnail is still the only thing visible.
+    _revealTimer?.cancel();
+    _revealTimer = Timer(const Duration(milliseconds: 450), () {
+      if (mounted) setState(() => _revealPlayer = true);
+    });
+  }
+
   int _lastCardUpdateMs = 0;
 
   void _onControllerUpdate() {
@@ -114,10 +153,7 @@ class _InlineVideoCardState extends State<InlineVideoCard>
     final ready = v.isReady;
 
     // Detect ready state change.
-    if (ready != _playerReady) {
-      setState(() => _playerReady = ready);
-      if (ready && _isActive) _controller?.play();
-    }
+    if (ready != _playerReady) _markReady();
 
     // Detect playing → paused transition to trigger ad.
     final currentState = v.playerState;
@@ -135,6 +171,7 @@ class _InlineVideoCardState extends State<InlineVideoCard>
       _controller = YoutubePlayerController(
         initialVideoId: widget.video.id,
         flags: const YoutubePlayerFlags(
+          autoPlay: true,
           enableCaption: false,
           // hideControls = false (default) → all native controls visible.
         ),
@@ -142,6 +179,8 @@ class _InlineVideoCardState extends State<InlineVideoCard>
       if (mounted) setState(() { _expanded = true; _ended = false; });
       updateKeepAlive();
     }
+    // Already expanded — tapping again should not recreate the controller
+    // or reset reveal state; just (re)claim "active" status in the feed.
     widget.activeVideoNotifier.value = widget.video.id;
   }
 
@@ -195,9 +234,7 @@ class _InlineVideoCardState extends State<InlineVideoCard>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _expanded && _controller != null
-                ? _buildPlayerArea()
-                : _buildThumbnail(context),
+            _buildMediaArea(context),
             Container(height: 3, color: widget.channel.accentColor),
             Padding(
               padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
@@ -263,75 +300,116 @@ class _InlineVideoCardState extends State<InlineVideoCard>
     );
   }
 
-  // ── Player area ───────────────────────────────────────────────────────────
+  // ── Media area — ALWAYS mounted, never torn down ───────────────────────────
+  //
+  // This single widget handles every state (thumbnail-only, loading,
+  // playing, ended). The Stack and its thumbnail Image layer persist for the
+  // entire lifetime of this card — only the player layer is conditionally
+  // inserted on top once the user taps. This is the structural fix for the
+  // black-flash issue: no subtree is ever unmounted+remounted on tap.
 
-  Widget _buildPlayerArea() {
+  Widget _buildMediaArea(BuildContext context) {
+    final media = AspectRatio(
+      aspectRatio: 16 / 9,
+      child: GestureDetector(
+        onTap: _onTap,
+        behavior: HitTestBehavior.opaque,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            // Layer 0: thumbnail — always mounted, never rebuilt on tap.
+            CachedNetworkImage(
+              imageUrl: widget.video.thumbnailHd,
+              fit: BoxFit.cover,
+              placeholder: (_, __) => Shimmer.fromColors(
+                baseColor:      const Color(0xFF1E1E1E),
+                highlightColor: const Color(0xFF2C2C2C),
+                child: const ColoredBox(color: Colors.white),
+              ),
+              errorWidget: (_, __, ___) => CachedNetworkImage(
+                imageUrl: widget.video.thumbnailMq,
+                fit: BoxFit.cover,
+                placeholder: (_, __) => Shimmer.fromColors(
+                  baseColor:      const Color(0xFF1E1E1E),
+                  highlightColor: const Color(0xFF2C2C2C),
+                  child: const ColoredBox(color: Colors.white),
+                ),
+                errorWidget: (_, __, ___) =>
+                    ColoredBox(color: AppTheme.surfaceElevated(context)),
+              ),
+            ),
+
+            // Layer 1: player — only inserted once the controller exists,
+            // hidden until _revealPlayer latches true (grace-delayed past
+            // onReady — see _markReady).
+            if (_controller != null)
+              AnimatedOpacity(
+                opacity:  _revealPlayer ? 1.0 : 0.0,
+                duration: const Duration(milliseconds: 280),
+                child: YoutubePlayerBuilder(
+                  onEnterFullScreen: _onEnterFullScreen,
+                  onExitFullScreen:  _onExitFullScreen,
+                  player: YoutubePlayer(
+                    controller: _controller!,
+                    showVideoProgressIndicator: true,
+                    progressIndicatorColor: AppTheme.gold,
+                    progressColors: const ProgressBarColors(
+                      playedColor: AppTheme.gold,
+                      handleColor: AppTheme.gold,
+                    ),
+                    onReady: _markReady,
+                    onEnded: (_) {
+                      if (mounted) setState(() => _ended = true);
+                    },
+                    bufferIndicator: const SizedBox.shrink(),
+                  ),
+                  builder: (context, player) => player,
+                ),
+              ),
+
+            // Layer 2: spinner while the WebView warms up.
+            if (_controller != null && !_revealPlayer && !_ended)
+              const Center(
+                child: CircularProgressIndicator(
+                    color: AppTheme.gold, strokeWidth: 2.5),
+              ),
+
+            // Layer 3: play button — only before the first tap.
+            if (_controller == null)
+              Center(
+                child: Container(
+                  width: 54, height: 54,
+                  decoration: BoxDecoration(
+                    color: Colors.black.withValues(alpha: 0.6),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(Icons.play_arrow_rounded,
+                      color: Colors.white, size: 32),
+                ),
+              ),
+
+            // Layer 4: black bar hides YouTube watermark — once the player
+            // has been tapped (regardless of reveal state) and not ended.
+            if (_controller != null && !_ended)
+              const Positioned(
+                bottom: 0, left: 0, right: 0,
+                child: SizedBox(
+                    height: 36, child: ColoredBox(color: Colors.black)),
+              ),
+
+            // Layer 5: our end screen hides YouTube's recommendation cards.
+            if (_ended) _buildEndOverlay(),
+          ],
+        ),
+      ),
+    );
+
+    // VisibilityDetector only matters once a player exists — wrapping it
+    // unconditionally is harmless and keeps the key stable across rebuilds.
     return VisibilityDetector(
       key: Key('player_${widget.video.id}'),
       onVisibilityChanged: _onVisibilityChanged,
-      child: YoutubePlayerBuilder(
-        onEnterFullScreen: _onEnterFullScreen,
-        onExitFullScreen:  _onExitFullScreen,
-        player: YoutubePlayer(
-          controller: _controller!,
-          showVideoProgressIndicator: true,
-          progressIndicatorColor: AppTheme.gold,
-          progressColors: const ProgressBarColors(
-            playedColor: AppTheme.gold,
-            handleColor: AppTheme.gold,
-          ),
-          onReady: () {
-            if (mounted) setState(() => _playerReady = true);
-            if (_isActive) _controller?.play();
-          },
-          onEnded: (_) {
-            if (mounted) setState(() => _ended = true);
-          },
-          bufferIndicator: const SizedBox.shrink(),
-        ),
-        builder: (context, player) {
-          return AspectRatio(
-            aspectRatio: 16 / 9,
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                // Layer 1: thumbnail always underneath (no black flash).
-                CachedNetworkImage(
-                  imageUrl: widget.video.thumbnailHd,
-                  fit: BoxFit.cover,
-                  errorWidget: (_, __, ___) => CachedNetworkImage(
-                    imageUrl: widget.video.thumbnailMq,
-                    fit: BoxFit.cover,
-                    errorWidget: (_, __, ___) =>
-                        ColoredBox(color: AppTheme.surfaceElevated(context)),
-                  ),
-                ),
-                // Layer 2: player fades in when ready.
-                AnimatedOpacity(
-                  opacity:  _playerReady ? 1.0 : 0.0,
-                  duration: const Duration(milliseconds: 300),
-                  child: player,
-                ),
-                // Layer 3: spinner while WebView initialises.
-                if (!_playerReady && !_ended)
-                  const Center(
-                    child: CircularProgressIndicator(
-                        color: AppTheme.gold, strokeWidth: 2.5),
-                  ),
-                // Layer 4: black bar hides YouTube watermark.
-                if (!_ended)
-                  const Positioned(
-                    bottom: 0, left: 0, right: 0,
-                    child: SizedBox(
-                        height: 36, child: ColoredBox(color: Colors.black)),
-                  ),
-                // Layer 5: our end screen hides YouTube's recommendation cards.
-                if (_ended) _buildEndOverlay(),
-              ],
-            ),
-          );
-        },
-      ),
+      child: media,
     );
   }
 
@@ -368,48 +446,6 @@ class _InlineVideoCardState extends State<InlineVideoCard>
         ),
       ),
     ]);
-  }
-
-  Widget _buildThumbnail(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 16 / 9,
-      child: GestureDetector(
-        onTap: _onTap,
-        child: Stack(fit: StackFit.expand, children: [
-          CachedNetworkImage(
-            imageUrl: widget.video.thumbnailHd,
-            fit: BoxFit.cover,
-            placeholder: (_, __) => Shimmer.fromColors(
-              baseColor:      const Color(0xFF1E1E1E),
-              highlightColor: const Color(0xFF2C2C2C),
-              child: const ColoredBox(color: Colors.white),
-            ),
-            errorWidget: (_, __, ___) => CachedNetworkImage(
-              imageUrl: widget.video.thumbnailMq,
-              fit: BoxFit.cover,
-              placeholder: (_, __) => Shimmer.fromColors(
-                baseColor:      const Color(0xFF1E1E1E),
-                highlightColor: const Color(0xFF2C2C2C),
-                child: const ColoredBox(color: Colors.white),
-              ),
-              errorWidget: (_, __, ___) =>
-                  ColoredBox(color: AppTheme.surfaceElevated(context)),
-            ),
-          ),
-          Center(
-            child: Container(
-              width: 54, height: 54,
-              decoration: BoxDecoration(
-                color: Colors.black.withValues(alpha: 0.6),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(Icons.play_arrow_rounded,
-                  color: Colors.white, size: 32),
-            ),
-          ),
-        ]),
-      ),
-    );
   }
 
   Widget _actionMenu(BuildContext context) {
