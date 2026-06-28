@@ -42,7 +42,8 @@ class PrivacyPolicyScreen extends StatelessWidget {
           body:
               'The information we collect is used solely to:\n\n'
               '• Deliver and improve the FinReels content feed.\n'
-              '• Serve relevant advertisements via Google AdMob (free tier only).\n'
+              '• Serve relevant advertisements via Google AdMob and its '
+              'mediation partners, including Unity Ads (free tier only).\n'
               '• Process and verify in-app subscription purchases.\n'
               '• Diagnose crashes and performance issues.\n'
               '• Respond to support requests you send us.',
@@ -50,13 +51,19 @@ class PrivacyPolicyScreen extends StatelessWidget {
         _LegalSection(
           heading: '3. Advertising & Third-Party SDKs',
           body:
-              'Free users see ads delivered by Google AdMob. AdMob may collect '
-              'and process certain device identifiers to serve personalised ads '
-              'in accordance with Google\'s privacy policies. You can opt out of '
-              'personalised advertising through your device\'s ad settings.\n\n'
+              'Free users see ads delivered by Google AdMob. To maximise '
+              'how often a relevant ad is available, AdMob also uses '
+              'mediation — it may route some ad requests to a second '
+              'advertising network, Unity Ads, when that network can offer '
+              'a better-performing ad. Both AdMob and Unity Ads may collect '
+              'and process certain device identifiers to serve personalised '
+              'ads in accordance with their own respective privacy '
+              'policies. You can opt out of personalised advertising '
+              'through your device\'s ad settings.\n\n'
               'We also use the following third-party services, each governed by '
               'their own privacy policies:\n\n'
-              '• Google AdMob — advertising\n'
+              '• Google AdMob — advertising and ad mediation\n'
+              '• Unity Ads — advertising (served via AdMob mediation)\n'
               '• Google Play In-App Purchases — subscription billing\n'
               '• YouTube Data API — fetching publicly available video metadata\n'
               '• Firebase Crashlytics (if enabled) — crash reporting',

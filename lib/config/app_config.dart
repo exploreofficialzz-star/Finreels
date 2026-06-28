@@ -10,7 +10,11 @@ class AppConfig {
   static const String packageName = 'com.chastech.finreels';
 
   // ── AdMob — PRODUCTION IDs (Android) ────────────────────────────────────────
-  static const bool kDebugAds = true;
+  // Real ads are now live: AdMob direct + Unity Ads mediation (configured
+  // via the AdMob mediation dashboard — see android/app/build.gradle for
+  // the native Unity Ads SDK + adapter dependencies that make Unity Ads
+  // actually able to serve impressions through that mediation group).
+  static const bool kDebugAds = false;
 
   static String get admobAppId => Platform.isAndroid
       ? 'ca-app-pub-2492078126313994~7729948254'
@@ -56,13 +60,19 @@ class AppConfig {
           ? 'ca-app-pub-3940256099942544/3986624511'
           : 'ca-app-pub-2492078126313994/1332060862');
 
+  // ⚠️ No App Open ad unit has been created in AdMob yet (the dashboard's
+  // Ad units list currently only has Banner, Interstitial, Native advanced,
+  // Rewarded, and Rewarded interstitial). Until a real App Open unit is
+  // created and its ID is swapped in below, this ALWAYS uses Google's test
+  // ID — even with kDebugAds = false — so App Open ads still function
+  // (showing test creatives) rather than silently failing with no-fill
+  // against a non-existent production unit ID.
+  // To finish: AdMob → Ad units → Add ad unit → App Open → paste the new
+  // ID into both Android branches below, then remove this whole comment
+  // block and the forced-test-id behaviour.
   static String get appOpenAdUnitId => Platform.isAndroid
-      ? (kDebugAds
-          ? 'ca-app-pub-3940256099942544/9257395921'
-          : 'ca-app-pub-2492078126313994/4197807683')
-      : (kDebugAds
-          ? 'ca-app-pub-3940256099942544/5575463023'
-          : 'ca-app-pub-2492078126313994/4197807683');
+      ? 'ca-app-pub-3940256099942544/9257395921'
+      : 'ca-app-pub-3940256099942544/5575463023';
 
   // ── In-App Purchase Product IDs ──────────────────────────────────────────────
   static const String iapNoAds1Day    = 'finreels_no_ads_1day';

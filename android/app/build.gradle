@@ -82,4 +82,14 @@ dependencies {
     // Core library desugaring — required by flutter_local_notifications
     coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.4"
     implementation "androidx.multidex:multidex:2.0.1"
+
+    // ── Unity Ads mediation (served through AdMob) ──────────────────────
+    // google_mobile_ads (the Flutter plugin) already brings in
+    // com.google.android.gms:play-services-ads transitively. Gradle's
+    // standard dependency resolution always picks the HIGHEST declared
+    // version for a given artifact across the whole project, so this
+    // adapter's own play-services-ads:25.4.0 requirement is satisfied
+    // automatically — no need to declare/pin that artifact here ourselves.
+    implementation "com.unity3d.ads:unity-ads:4.18.1"
+    implementation "com.google.ads.mediation:unity:4.18.1.0"
 }
