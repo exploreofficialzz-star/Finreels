@@ -17,23 +17,27 @@ import '../theme/app_theme.dart';
 // ─────────────────────────────────────────────────────────────────────────────
 // Fixes in this file:
 //
-// 1. NO BLACK FLASH (real fix — root cause was widget subtree replacement)
-//    Previously, tapping the thumbnail swapped TWO ENTIRELY SEPARATE widget
-//    subtrees (_buildThumbnail() ↔ _buildPlayerArea()) via a ternary in
-//    build(). Flutter had to unmount the thumbnail's Image widget and mount
-//    a brand new one inside the player area in the same frame — combined
-//    with the YouTube WebView's native platform-view surface ALSO
-//    initialising in that same frame (which itself renders black for its
-//    first few frames at the OS compositing level, regardless of Flutter
-//    widget opacity), this produced the "goes black, then comes back, then
-//    plays" flash.
+// 1. NO BLACK FLASH (real fix — pre-warm the WebView before the tap)
+//    The previous fix (keeping the thumbnail subtree always mounted, with
+//    an opacity + grace-delay reveal) reduced the flash but did not fully
+//    eliminate it, because the YouTube WebView's native platform-view
+//    surface can render black for its first few frames at the OS
+//    compositing level — something Flutter-side Opacity cannot always
+//    fully mask, regardless of widget-tree structure.
 //
-//    Fix: ONE media area is built and stays mounted for the lifetime of the
-//    card. The thumbnail Image widget is never torn down — the player is
-//    simply inserted as an ADDITIONAL Stack layer above it once the user
-//    taps, hidden behind a deliberate reveal-delay (not just onReady) so any
-//    native platform-view black frame happens while the thumbnail is still
-//    the only visible thing.
+//    The actual fix: the YoutubePlayerController is now created the moment
+//    the card scrolls meaningfully into view (>30% visible), NOT at the
+//    moment of tap — see _onVisibilityChanged. It's created with
+//    autoPlay:false so nothing is audible/visible yet; this just lets the
+//    native surface finish its own initialisation silently, hidden behind
+//    the thumbnail, while the user is still scrolling or reading the
+//    title. By the time they actually tap (_onTap), that surface has
+//    almost always already finished warming up, so the reveal is instant.
+//    A grace-delay+opacity reveal (_markReady/_revealPlayer) is kept as a
+//    fallback for the rare case of a near-instant tap with no pre-warm
+//    lead time. Pre-warmed-but-never-tapped controllers are disposed once
+//    a card scrolls far enough off screen (<5% visible) to keep the
+//    number of simultaneously-alive WebViews bounded in a long feed.
 //
 // 2. VIDEO PAUSE AD TRIGGER
 //    Every time the user taps pause (the play/pause button or a tap on the
@@ -110,7 +114,7 @@ class _InlineVideoCardState extends State<InlineVideoCard>
   // ── Play / pause coordination ─────────────────────────────────────────────
 
   void _onActiveChanged() {
-    if (!mounted || _controller == null) return;
+    if (!mounted || _controller == null || !_expanded) return;
     if (_isActive && _playerReady) {
       _controller!.play();
     } else if (!_isActive) {
@@ -124,7 +128,12 @@ class _InlineVideoCardState extends State<InlineVideoCard>
   void _markReady() {
     if (!mounted || _playerReady) return;
     setState(() => _playerReady = true);
-    if (_isActive) _controller?.play();
+    // Only auto-play if the user has actually tapped this card — during
+    // silent pre-warm (before any tap), _isActive should already be false
+    // since the notifier won't point at this video yet, but the explicit
+    // _expanded check makes that guarantee unmistakable rather than
+    // incidental.
+    if (_expanded && _isActive) _controller?.play();
 
     // Grace delay before revealing the player layer. The YouTube IFrame
     // API's "ready" event does NOT guarantee the underlying native
@@ -164,23 +173,57 @@ class _InlineVideoCardState extends State<InlineVideoCard>
     _prevState = currentState;
   }
 
-  // ── Tap thumbnail → create player ─────────────────────────────────────────
+  // ── Controller lifecycle ─────────────────────────────────────────────────
+
+  /// Creates the YouTube controller. [autoPlay] is false during silent
+  /// pre-warming (see _onVisibilityChanged) and true for a direct tap with
+  /// no pre-warm in progress yet.
+  void _createController({required bool autoPlay}) {
+    if (_controller != null) return;
+    _controller = YoutubePlayerController(
+      initialVideoId: widget.video.id,
+      flags: YoutubePlayerFlags(
+        autoPlay: autoPlay,
+        enableCaption: false,
+        // hideControls = false (default) → all native controls visible.
+      ),
+    )..addListener(_onControllerUpdate);
+    if (mounted) setState(() {});
+  }
+
+  /// Tears down a controller that was pre-warmed but never actually
+  /// engaged with (user scrolled past without tapping). Keeps the number
+  /// of simultaneously-alive WebViews bounded to roughly "however many
+  /// cards are within about one screen height of the viewport" rather
+  /// than accumulating one per card ever scrolled past in a long feed.
+  void _disposeController() {
+    _revealTimer?.cancel();
+    _controller?.removeListener(_onControllerUpdate);
+    _controller?.dispose();
+    _controller     = null;
+    _playerReady    = false;
+    _revealPlayer   = false;
+    _prevState      = PlayerState.unknown;
+    if (mounted) setState(() {});
+  }
+
+  // ── Tap thumbnail → reveal player ───────────────────────────────────────
 
   void _onTap() {
     if (_controller == null) {
-      _controller = YoutubePlayerController(
-        initialVideoId: widget.video.id,
-        flags: const YoutubePlayerFlags(
-          autoPlay: true,
-          enableCaption: false,
-          // hideControls = false (default) → all native controls visible.
-        ),
-      )..addListener(_onControllerUpdate);
-      if (mounted) setState(() { _expanded = true; _ended = false; });
-      updateKeepAlive();
+      // No pre-warm happened yet (e.g. user tapped within the first
+      // instant the card appeared, faster than the visibility callback
+      // could fire) — fall back to creating on-demand. The reveal-delay
+      // in _markReady still protects against any flash in this case.
+      _createController(autoPlay: true);
+    } else if (!_expanded) {
+      // Pre-warmed already — the WebView has likely already finished its
+      // own initialisation while the user was still scrolling/browsing,
+      // so this should reveal close to instantly.
+      _controller!.play();
     }
-    // Already expanded — tapping again should not recreate the controller
-    // or reset reveal state; just (re)claim "active" status in the feed.
+    if (mounted) setState(() { _expanded = true; _ended = false; });
+    updateKeepAlive();
     widget.activeVideoNotifier.value = widget.video.id;
   }
 
@@ -192,13 +235,42 @@ class _InlineVideoCardState extends State<InlineVideoCard>
       ..play();
   }
 
-  // ── Visibility: pause when scrolled off screen ────────────────────────────
+  // ── Visibility: pre-warm ahead of tap, pause off-screen, clean up ──────────
+  //
+  // This is the REAL fix for the black-flash issue. Creating the YouTube
+  // WebView only at the moment of tap meant the native platform-view
+  // surface's own initialisation (which can render black for its first few
+  // frames at the OS compositing level — something Flutter-side opacity
+  // cannot fully mask) happened RIGHT WHEN the user expected to see video.
+  // By instead creating the controller (silently, muted-by-default-via-
+  // autoPlay:false) the moment the card scrolls meaningfully into view —
+  // well before the user has decided to tap — that initialisation happens
+  // hidden behind the thumbnail while the user is still scrolling/reading.
+  // By the time they actually tap, the surface has almost always already
+  // finished warming up, so the transition is instant.
 
   void _onVisibilityChanged(VisibilityInfo info) {
-    if (!mounted || _controller == null || !_expanded) return;
-    if (info.visibleFraction < 0.2) {
+    if (!mounted) return;
+    final frac = info.visibleFraction;
+
+    // Pre-warm: silently create the controller once the card is
+    // significantly visible, even before any tap.
+    if (_controller == null && frac > 0.3) {
+      _createController(autoPlay: false);
+    }
+
+    // Free resources for cards that were pre-warmed but never tapped, once
+    // they've scrolled well off screen — keeps WebView count bounded
+    // regardless of how long the feed is.
+    if (_controller != null && !_expanded && frac < 0.05) {
+      _disposeController();
+      return;
+    }
+
+    if (_controller == null || !_expanded) return;
+    if (frac < 0.2) {
       _controller!.pause();
-    } else if (info.visibleFraction >= 0.5 && _isActive && _playerReady) {
+    } else if (frac >= 0.5 && _isActive && _playerReady) {
       _controller!.play();
     }
   }
@@ -339,12 +411,14 @@ class _InlineVideoCardState extends State<InlineVideoCard>
               ),
             ),
 
-            // Layer 1: player — only inserted once the controller exists,
-            // hidden until _revealPlayer latches true (grace-delayed past
-            // onReady — see _markReady).
+            // Layer 1: player — only inserted once the controller exists.
+            // Stays at opacity 0 during silent pre-warm (before any tap) —
+            // _expanded is what gates actual visual reveal, never just
+            // _revealPlayer on its own, so pre-warming is invisible to the
+            // user until they tap.
             if (_controller != null)
               AnimatedOpacity(
-                opacity:  _revealPlayer ? 1.0 : 0.0,
+                opacity:  (_expanded && _revealPlayer) ? 1.0 : 0.0,
                 duration: const Duration(milliseconds: 280),
                 child: YoutubePlayerBuilder(
                   onEnterFullScreen: _onEnterFullScreen,
@@ -367,15 +441,19 @@ class _InlineVideoCardState extends State<InlineVideoCard>
                 ),
               ),
 
-            // Layer 2: spinner while the WebView warms up.
-            if (_controller != null && !_revealPlayer && !_ended)
+            // Layer 2: spinner — only while the user is actively waiting
+            // for the reveal (after tap, before _revealPlayer latches).
+            // Never shown during silent pre-warm.
+            if (_expanded && _controller != null && !_revealPlayer && !_ended)
               const Center(
                 child: CircularProgressIndicator(
                     color: AppTheme.gold, strokeWidth: 2.5),
               ),
 
-            // Layer 3: play button — only before the first tap.
-            if (_controller == null)
+            // Layer 3: play button — shown whenever the user hasn't tapped
+            // yet, REGARDLESS of whether a controller has been silently
+            // pre-warmed in the background (pre-warm must stay invisible).
+            if (!_expanded)
               Center(
                 child: Container(
                   width: 54, height: 54,
@@ -388,9 +466,9 @@ class _InlineVideoCardState extends State<InlineVideoCard>
                 ),
               ),
 
-            // Layer 4: black bar hides YouTube watermark — once the player
-            // has been tapped (regardless of reveal state) and not ended.
-            if (_controller != null && !_ended)
+            // Layer 4: black bar hides YouTube watermark — once the user
+            // has tapped and the video hasn't ended.
+            if (_expanded && _controller != null && !_ended)
               const Positioned(
                 bottom: 0, left: 0, right: 0,
                 child: SizedBox(

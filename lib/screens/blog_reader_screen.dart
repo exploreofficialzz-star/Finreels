@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
+import '../services/ad_service.dart';
 import '../theme/app_theme.dart';
+import '../widgets/banner_ad_widget.dart';
 
 /// Opens a blog article URL inside the app using flutter_inappwebview.
 /// Navigation is intercepted — only the article's own domain is allowed through.
@@ -52,39 +54,48 @@ class _BlogReaderScreenState extends State<BlogReaderScreen> {
               )
             : null,
       ),
-      body: InAppWebView(
-        initialUrlRequest: URLRequest(url: WebUri(widget.url)),
-        initialSettings: InAppWebViewSettings(
-          useShouldOverrideUrlLoading: true,
-          allowsInlineMediaPlayback: true,
-        ),
-        onLoadStart: (_, __) {
-          if (mounted) setState(() => _loading = true);
-        },
-        onLoadStop: (_, __) {
-          if (mounted) setState(() => _loading = false);
-        },
-        onProgressChanged: (_, progress) {
-          if (mounted) {
-            setState(() {
-              _progress = progress / 100.0;
-              if (progress >= 100) _loading = false;
-            });
-          }
-        },
-        // Block navigation away from the article's origin domain
-        shouldOverrideUrlLoading: (_, action) async {
-          final uri = action.request.url;
-          if (uri == null) return NavigationActionPolicy.CANCEL;
-          final host = uri.host;
-          // Allow same domain and common CDN subdomains
-          if (host == _allowedHost ||
-              host.endsWith('.$_allowedHost') ||
-              _allowedHost.isEmpty) {
-            return NavigationActionPolicy.ALLOW;
-          }
-          return NavigationActionPolicy.CANCEL;
-        },
+      body: Column(
+        children: [
+          Expanded(
+            child: InAppWebView(
+              initialUrlRequest: URLRequest(url: WebUri(widget.url)),
+              initialSettings: InAppWebViewSettings(
+                useShouldOverrideUrlLoading: true,
+                allowsInlineMediaPlayback: true,
+              ),
+              onLoadStart: (_, __) {
+                if (mounted) setState(() => _loading = true);
+              },
+              onLoadStop: (_, __) {
+                if (mounted) setState(() => _loading = false);
+              },
+              onProgressChanged: (_, progress) {
+                if (mounted) {
+                  setState(() {
+                    _progress = progress / 100.0;
+                    if (progress >= 100) _loading = false;
+                  });
+                }
+              },
+              // Block navigation away from the article's origin domain
+              shouldOverrideUrlLoading: (_, action) async {
+                final uri = action.request.url;
+                if (uri == null) return NavigationActionPolicy.CANCEL;
+                final host = uri.host;
+                // Allow same domain and common CDN subdomains
+                if (host == _allowedHost ||
+                    host.endsWith('.$_allowedHost') ||
+                    _allowedHost.isEmpty) {
+                  return NavigationActionPolicy.ALLOW;
+                }
+                return NavigationActionPolicy.CANCEL;
+              },
+            ),
+          ),
+          // Sticky banner ad — visible for the entire time the user is
+          // reading the article, pinned to the bottom of the screen.
+          if (!AdService.instance.adsRemoved) const StickyBannerBar(),
+        ],
       ),
     );
   }
