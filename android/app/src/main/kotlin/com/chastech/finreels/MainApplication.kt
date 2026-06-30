@@ -1,5 +1,7 @@
 package com.chastech.finreels
 
-import io.flutter.app.FlutterApplication
+import android.app.Application
 
-class MainApplication : FlutterApplication()
+// FlutterApplication is deprecated since Flutter 2.0 — extending the standard
+// Android Application class is the correct approach.
+class MainApplication : Application()

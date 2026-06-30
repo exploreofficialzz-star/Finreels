@@ -39,24 +39,17 @@ class _ChannelsScreenState extends State<ChannelsScreen> {
     );
   }
 
-  bool _isShort(Video v) {
-    final t = v.title.toLowerCase();
-    final d = v.description.toLowerCase();
-    return t.contains('#short') ||
-        t.contains('shorts') ||
-        d.contains('#shorts') ||
-        t.contains('in 60') ||
-        t.contains('in 30 ') ||
-        v.title.length < 28;
-  }
-
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<FeedProvider>();
 
+    // Use the canonical Video.isShort getter (checks /shorts/ URL path and
+    // #shorts hashtag) — the same logic used by FeedProvider's shorts tab and
+    // channel_videos_screen. Previously this screen had its own heuristic
+    // (title.length < 28 + keyword matching) which produced a different set.
     final shorts = provider.channels
         .expand((ch) => provider.getVideosFor(ch.id))
-        .where(_isShort)
+        .where((v) => v.isShort)
         .toList()
       ..sort((a, b) => b.publishedAt.compareTo(a.publishedAt));
 

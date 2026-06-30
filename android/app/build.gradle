@@ -78,6 +78,19 @@ flutter {
     source "../.."
 }
 
+// ── Dependency conflict resolution ────────────────────────────────────────────
+// work-runtime ≥2.8.0 merged the Kotlin extension classes (OneTimeWorkRequestKt,
+// PeriodicWorkRequestKt) that previously lived in work-runtime-ktx. When
+// flutter_local_notifications pulls work-runtime:2.8.1 and workmanager pulls
+// work-runtime-ktx:2.7.0, Gradle sees both sets of those class files and throws
+// "Duplicate class". Forcing both to the same version removes the conflict.
+configurations.all {
+    resolutionStrategy {
+        force 'androidx.work:work-runtime:2.8.1'
+        force 'androidx.work:work-runtime-ktx:2.8.1'
+    }
+}
+
 dependencies {
     // Core library desugaring — required by flutter_local_notifications
     coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.4"
