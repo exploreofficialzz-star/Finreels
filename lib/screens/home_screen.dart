@@ -332,6 +332,7 @@ class _BooksTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final books = context.read<FeedProvider>().feedVideos;
+    final adsRemoved = context.watch<AdService>().adsRemoved;
     if (books.isEmpty) {
       return Center(
           child: Text('No books found.',
@@ -342,7 +343,7 @@ class _BooksTab extends StatelessWidget {
     final items = <({Video? book, bool isAd})>[];
     for (var i = 0; i < books.length; i++) {
       items.add((book: books[i], isAd: false));
-      if (i > 0 && (i + 1) % 3 == 0 && !AdService.instance.adsRemoved) {
+      if (i > 0 && (i + 1) % 3 == 0 && !adsRemoved) {
         items.add((book: null, isAd: true));
       }
     }

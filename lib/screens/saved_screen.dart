@@ -85,7 +85,12 @@ class _SavedScreenState extends State<SavedScreen> {
                     },
                   ),
           ),
-          if (!AdService.instance.adsRemoved) const LabelledBannerAd(),
+          ListenableBuilder(
+            listenable: AdService.instance,
+            builder: (_, __) => AdService.instance.adsRemoved
+                ? const SizedBox.shrink()
+                : const LabelledBannerAd(),
+          ),
         ],
       ),
     );

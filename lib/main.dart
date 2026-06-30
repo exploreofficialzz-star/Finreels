@@ -197,6 +197,7 @@ class _SplashGateState extends State<_SplashGate> {
         providers: [
           ChangeNotifierProvider.value(value: _feedProvider!),
           ChangeNotifierProvider.value(value: IapService.instance),
+          ChangeNotifierProvider.value(value: AdService.instance),
         ],
         child: const ConnectivityOverlay(
           child: AdBlockOverlay(child: _AppRoot()),
@@ -232,6 +233,11 @@ class _AppRootState extends State<_AppRoot> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
+      // A purchased ad-free window can lapse while the app sits in the
+      // background — recheck against the wall clock on every resume so
+      // ads correctly resume the moment it expires, not only on a full
+      // app restart.
+      unawaited(AdService.instance.refreshStatus());
       unawaited(AdService.instance.showAppOpenAd());
       // Forces a true network refresh (replacing each channel's cached 15
       // with whatever is genuinely latest on YouTube right now) — but only

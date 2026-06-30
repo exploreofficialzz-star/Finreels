@@ -168,7 +168,7 @@ class _InlineVideoCardState extends State<InlineVideoCard>
     final currentState = v.playerState;
     if (_prevState == PlayerState.playing &&
         currentState == PlayerState.paused) {
-      AdService.instance.onVideoTapped();
+      unawaited(AdService.instance.onVideoTapped());
     }
     _prevState = currentState;
   }

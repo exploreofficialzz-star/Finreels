@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -26,7 +27,13 @@ import '../config/app_config.dart';
 ///   AdWidget — the SDK handles correct rendering.
 ///
 /// SHORTS: untouched — scroll-based counter unchanged.
-class AdService {
+///
+/// Extends ChangeNotifier purely so screens can react instantly the moment
+/// ads are removed/restored (notifyListeners() fires from grantAdFree(),
+/// revokeAdFree(), and refreshStatus()) — every `AdService.instance.xxx()`
+/// call site elsewhere in the app is untouched and keeps working exactly
+/// as a plain singleton.
+class AdService extends ChangeNotifier {
   AdService._();
   static final AdService instance = AdService._();
 
@@ -89,6 +96,7 @@ class AdService {
   Future<void> _loadAdsRemovedStatus() async {
     final prefs   = await SharedPreferences.getInstance();
     final removed = prefs.getBool(AppConfig.prefAdsRemoved) ?? false;
+    final wasRemoved = _adsRemoved;
     if (removed) {
       final until = prefs.getInt(AppConfig.prefAdsRemovedUntil);
       if (until != null) {
@@ -101,7 +109,10 @@ class AdService {
       } else {
         _adsRemoved = true;
       }
+    } else {
+      _adsRemoved = false;
     }
+    if (_adsRemoved != wasRemoved) notifyListeners();
   }
 
   // ── Banner ────────────────────────────────────────────────────────────────
@@ -206,7 +217,15 @@ class AdService {
 
   Future<void> showRewardedAd({required void Function() onRewarded}) async {
     if (_adsRemoved || !_rewardedReady || _rewardedAd == null) return;
-    await _rewardedAd!.show(onUserEarnedReward: (_, __) => onRewarded());
+    try {
+      await _rewardedAd!.show(onUserEarnedReward: (_, __) => onRewarded());
+    } on Object catch (e) {
+      debugPrint('[ads] Rewarded show() failed, reloading: $e');
+      unawaited(_rewardedAd?.dispose() ?? Future.value());
+      _rewardedAd = null;
+      unawaited(_loadRewarded());
+      return;
+    }
     _rewardedReady = false;
   }
 
@@ -249,16 +268,32 @@ class AdService {
   }) async {
     if (_adsRemoved || !_rewardedInterstitialReady ||
         _rewardedInterstitialAd == null) { return; }
-    await _rewardedInterstitialAd!.show(
-        onUserEarnedReward: (_, __) => onRewarded());
+    try {
+      await _rewardedInterstitialAd!.show(
+          onUserEarnedReward: (_, __) => onRewarded());
+    } on Object catch (e) {
+      debugPrint('[ads] Rewarded interstitial show() failed, reloading: $e');
+      unawaited(_rewardedInterstitialAd?.dispose() ?? Future.value());
+      _rewardedInterstitialAd = null;
+      unawaited(_loadRewardedInterstitial());
+      return;
+    }
     _rewardedInterstitialReady = false;
   }
 
   // ── App Open ──────────────────────────────────────────────────────────────
   Future<void> _loadAppOpen() async {
+    final unitId = AppConfig.appOpenAdUnitId;
+    if (unitId == null) {
+      // No production App Open unit configured (and not in kDebugAds mode)
+      // — intentionally a no-op rather than ever loading Google's test
+      // creative for a real user. See AppConfig.appOpenAdUnitId.
+      _appOpenReady = false;
+      return;
+    }
     _appOpenReady = false;
     await AppOpenAd.load(
-      adUnitId: AppConfig.appOpenAdUnitId,
+      adUnitId: unitId,
       request:  const AdRequest(),
       adLoadCallback: AppOpenAdLoadCallback(
         onAdLoaded: (ad) {
@@ -294,7 +329,15 @@ class AdService {
           AppConfig.appOpenAdCooldown) { return; }
     }
     _lastAppOpenShown = DateTime.now();
-    await _appOpenAd!.show();
+    try {
+      await _appOpenAd!.show();
+    } on Object catch (e) {
+      debugPrint('[ads] App Open show() failed, reloading: $e');
+      unawaited(_appOpenAd?.dispose() ?? Future.value());
+      _appOpenAd = null;
+      unawaited(_loadAppOpen());
+      return;
+    }
     _appOpenReady = false;
   }
 
@@ -319,6 +362,7 @@ class AdService {
     const pollMs     = 150;
     var   waited     = 0;
     while (waited < maxWaitMs) {
+      if (_adsRemoved) return; // purchase may have completed mid-poll
       if (_interstitialReady && _interstitialAd != null) {
         await showInterstitial();
         return;
@@ -368,7 +412,15 @@ class AdService {
 
   Future<void> showInterstitial() async {
     if (_adsRemoved || _interstitialAd == null || !_interstitialReady) return;
-    await _interstitialAd!.show();
+    try {
+      await _interstitialAd!.show();
+    } on Object catch (e) {
+      debugPrint('[ads] Interstitial show() failed, reloading: $e');
+      unawaited(_interstitialAd?.dispose() ?? Future.value());
+      _interstitialAd = null;
+      unawaited(_loadInterstitial());
+      return;
+    }
     _interstitialReady = false;
   }
 
@@ -394,6 +446,10 @@ class AdService {
     _rewardedAd            = null; _rewardedReady         = false;
     unawaited(_rewardedInterstitialAd?.dispose() ?? Future.value());
     _rewardedInterstitialAd = null; _rewardedInterstitialReady = false;
+    // Tells every LabelledBannerAd / StickyBannerBar / gated screen to
+    // rebuild and drop its ad RIGHT NOW, instead of waiting for whatever
+    // screen happens to rebuild next for an unrelated reason.
+    notifyListeners();
   }
 
   Future<void> revokeAdFree() async {
@@ -407,15 +463,21 @@ class AdService {
         _loadRewarded(), _loadRewardedInterstitial(),
       ]);
     }
+    notifyListeners();
   }
 
+  /// Re-checks expiry against the wall clock (a purchased ad-free window
+  /// can lapse mid-session) and notifies listeners if the status actually
+  /// changed. Called on every app resume — see main.dart.
   Future<void> refreshStatus() => _loadAdsRemovedStatus();
 
+  @override
   void dispose() {
     _bannerAd?.dispose();
     _interstitialAd?.dispose();
     _appOpenAd?.dispose();
     _rewardedAd?.dispose();
     _rewardedInterstitialAd?.dispose();
+    super.dispose();
   }
 }

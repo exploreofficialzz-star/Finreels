@@ -270,7 +270,12 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
               ),
             ),
           ),
-          if (!AdService.instance.adsRemoved) const LabelledBannerAd(),
+          ListenableBuilder(
+            listenable: AdService.instance,
+            builder: (_, __) => AdService.instance.adsRemoved
+                ? const SizedBox.shrink()
+                : const LabelledBannerAd(),
+          ),
         ],
       ),
     );
@@ -342,7 +347,12 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
             ),
           ),
           // Banner ad inside reader
-          if (!AdService.instance.adsRemoved) const StickyBannerBar(),
+          ListenableBuilder(
+            listenable: AdService.instance,
+            builder: (_, __) => AdService.instance.adsRemoved
+                ? const SizedBox.shrink()
+                : const StickyBannerBar(),
+          ),
         ],
       ),
     );
@@ -410,7 +420,12 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
               },
             ),
           ),
-          if (!AdService.instance.adsRemoved) const StickyBannerBar(),
+          ListenableBuilder(
+            listenable: AdService.instance,
+            builder: (_, __) => AdService.instance.adsRemoved
+                ? const SizedBox.shrink()
+                : const StickyBannerBar(),
+          ),
         ],
       ),
     );
@@ -515,8 +530,15 @@ class _InsightsReaderScreenState extends State<_InsightsReaderScreen> {
                   if (!AdService.instance.adsRemoved &&
                       (i + 1) % _adEveryN == 0 &&
                       i != insight.chapters.length - 1) {
-                    widgets.add(const StickyBannerBar());
-                    widgets.add(const SizedBox(height: 16));
+                    widgets.add(ListenableBuilder(
+                      listenable: AdService.instance,
+                      builder: (_, __) => AdService.instance.adsRemoved
+                          ? const SizedBox.shrink()
+                          : const Column(mainAxisSize: MainAxisSize.min, children: [
+                              StickyBannerBar(),
+                              SizedBox(height: 16),
+                            ]),
+                    ));
                   }
                   return Column(
                     mainAxisSize: MainAxisSize.min,
@@ -534,7 +556,12 @@ class _InsightsReaderScreenState extends State<_InsightsReaderScreen> {
           ),
 
           // Sticky banner at bottom of reader
-          if (!AdService.instance.adsRemoved) const StickyBannerBar(),
+          ListenableBuilder(
+            listenable: AdService.instance,
+            builder: (_, __) => AdService.instance.adsRemoved
+                ? const SizedBox.shrink()
+                : const StickyBannerBar(),
+          ),
         ],
       ),
     );

@@ -60,19 +60,20 @@ class AppConfig {
           ? 'ca-app-pub-3940256099942544/3986624511'
           : 'ca-app-pub-2492078126313994/1332060862');
 
-  // ⚠️ No App Open ad unit has been created in AdMob yet (the dashboard's
-  // Ad units list currently only has Banner, Interstitial, Native advanced,
-  // Rewarded, and Rewarded interstitial). Until a real App Open unit is
-  // created and its ID is swapped in below, this ALWAYS uses Google's test
-  // ID — even with kDebugAds = false — so App Open ads still function
-  // (showing test creatives) rather than silently failing with no-fill
-  // against a non-existent production unit ID.
-  // To finish: AdMob → Ad units → Add ad unit → App Open → paste the new
-  // ID into both Android branches below, then remove this whole comment
-  // block and the forced-test-id behaviour.
-  static String get appOpenAdUnitId => Platform.isAndroid
-      ? 'ca-app-pub-3940256099942544/9257395921'
-      : 'ca-app-pub-3940256099942544/5575463023';
+  // App Open ad unit — production unit now created in AdMob.
+  // Android unit ID: ca-app-pub-2492078126313994/7947671149
+  // iOS: create a separate App Open unit in AdMob for iOS and paste its ID
+  // into the iOS branch below (currently mirrors Android as a placeholder).
+  static String? get appOpenAdUnitId {
+    if (kDebugAds) {
+      return Platform.isAndroid
+          ? 'ca-app-pub-3940256099942544/9257395921'
+          : 'ca-app-pub-3940256099942544/5575463023';
+    }
+    return Platform.isAndroid
+        ? 'ca-app-pub-2492078126313994/7947671149'
+        : null; // TODO: create iOS App Open unit and paste its ID here
+  }
 
   // ── In-App Purchase Product IDs ──────────────────────────────────────────────
   static const String iapNoAds1Day    = 'finreels_no_ads_1day';
@@ -84,6 +85,44 @@ class AppConfig {
     iapNoAdsWeekly,
     iapNoAdsMonthly,
   };
+
+  // ── Paystack — fallback IAP for installs NOT from the Play Store ────────────
+  // Google Play Billing only works reliably for apps installed through the
+  // Play Store. For sideloaded APKs or installs from chastechgroup.com, the
+  // app detects that at startup (see InstallSourceService) and uses this
+  // Paystack flow instead — same products, same durations, different rail.
+  //
+  // This is the PUBLIC/publishable key — safe to ship inside the app, by
+  // design (identical trust model to Stripe's `pk_*` keys). The Paystack
+  // SECRET key must NEVER appear anywhere in this app's source; it belongs
+  // only on a backend. A ready-to-deploy example backend for the optional
+  // server-side verification step below lives in /server in this repo.
+  static const String paystackPublicKey =
+      'pk_live_d145dd30b0e40a54e3d2533dfc544e41ea63fe94';
+
+  // Must match the currency your Paystack account actually settles in
+  // (Paystack Dashboard → Settings → Preferences) or the popup will error.
+  // Common values: NGN, GHS, ZAR, KES, USD.
+  static const String paystackCurrency = 'NGN';
+
+  // Amounts in the SMALLEST currency unit (kobo for NGN, pesewas for GHS,
+  // cents for ZAR/KES/USD) — Paystack always expects subunits, never major
+  // units. These intentionally do NOT auto-convert from the USD Play Store
+  // prices above (a hardcoded FX rate would just go stale) — edit them
+  // directly to your desired local pricing.
+  static const Map<String, int> paystackAmounts = {
+    iapNoAds1Day: 150000, // e.g. ₦1,500
+    iapNoAdsWeekly: 450000, // e.g. ₦4,500
+    iapNoAdsMonthly: 1200000, // e.g. ₦12,000
+  };
+
+  // Optional backend endpoint for server-side verification of a completed
+  // Paystack reference: the app calls `GET {endpoint}/{reference}` and
+  // expects back `{"verified": true|false}`. Leave empty to use interim
+  // client-trust mode (the app grants ad-free directly off Paystack's own
+  // success redirect, with no second server-side check). See CHECKLIST.md
+  // → "Paystack Fallback" before shipping long-term with this left empty.
+  static const String paystackVerifyEndpoint = '';
 
   // ── SharedPreferences Keys ───────────────────────────────────────────────────
   static const String prefAdsRemoved           = 'ads_removed';

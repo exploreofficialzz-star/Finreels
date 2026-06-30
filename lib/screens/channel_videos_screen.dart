@@ -105,7 +105,12 @@ class _ChannelVideosScreenState extends State<ChannelVideosScreen>
               ),
       ),
       bottomNavigationBar:
-          AdService.instance.adsRemoved ? null : const LabelledBannerAd(),
+          ListenableBuilder(
+            listenable: AdService.instance,
+            builder: (_, __) => AdService.instance.adsRemoved
+                ? const SizedBox.shrink()
+                : const LabelledBannerAd(),
+          ),
     );
   }
 

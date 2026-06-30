@@ -324,8 +324,13 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 ),
               ),
 
-            if (!_fullscreen && !AdService.instance.adsRemoved)
-              const LabelledBannerAd(),
+            if (!_fullscreen)
+              ListenableBuilder(
+                listenable: AdService.instance,
+                builder: (_, __) => AdService.instance.adsRemoved
+                    ? const SizedBox.shrink()
+                    : const LabelledBannerAd(),
+              ),
           ],
         ),
       ),

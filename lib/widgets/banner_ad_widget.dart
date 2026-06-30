@@ -38,7 +38,19 @@ class _LabelledBannerAdState extends State<LabelledBannerAd> {
   @override
   void initState() {
     super.initState();
+    AdService.instance.addListener(_onAdsServiceChanged);
     if (!AdService.instance.adsRemoved) _load();
+  }
+
+  /// Fires the instant a purchase completes (or status is otherwise
+  /// re-checked) — disposes the now-unwanted ad immediately instead of
+  /// leaving it loaded in memory until some unrelated rebuild hides it.
+  void _onAdsServiceChanged() {
+    if (!mounted) return;
+    if (AdService.instance.adsRemoved && _ad != null) {
+      _ad!.dispose();
+      setState(() { _ad = null; _loaded = false; });
+    }
   }
 
   void _load() {
@@ -69,6 +81,7 @@ class _LabelledBannerAdState extends State<LabelledBannerAd> {
 
   @override
   void dispose() {
+    AdService.instance.removeListener(_onAdsServiceChanged);
     _ad?.dispose();
     super.dispose();
   }
@@ -119,7 +132,16 @@ class _StickyBannerBarState extends State<StickyBannerBar> {
   @override
   void initState() {
     super.initState();
+    AdService.instance.addListener(_onAdsServiceChanged);
     if (!AdService.instance.adsRemoved) _load();
+  }
+
+  void _onAdsServiceChanged() {
+    if (!mounted) return;
+    if (AdService.instance.adsRemoved && _ad != null) {
+      _ad!.dispose();
+      setState(() { _ad = null; _loaded = false; });
+    }
   }
 
   void _load() {
@@ -153,6 +175,7 @@ class _StickyBannerBarState extends State<StickyBannerBar> {
 
   @override
   void dispose() {
+    AdService.instance.removeListener(_onAdsServiceChanged);
     _ad?.dispose();
     super.dispose();
   }

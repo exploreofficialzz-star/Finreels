@@ -94,7 +94,12 @@ class _BlogReaderScreenState extends State<BlogReaderScreen> {
           ),
           // Sticky banner ad — visible for the entire time the user is
           // reading the article, pinned to the bottom of the screen.
-          if (!AdService.instance.adsRemoved) const StickyBannerBar(),
+          ListenableBuilder(
+            listenable: AdService.instance,
+            builder: (_, __) => AdService.instance.adsRemoved
+                ? const SizedBox.shrink()
+                : const StickyBannerBar(),
+          ),
         ],
       ),
     );

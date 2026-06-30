@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -8,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../config/app_config.dart';
+import '../screens/paystack_checkout_screen.dart';
 import '../screens/privacy_policy_screen.dart';
 import '../services/ad_service.dart';
 import '../services/iap_service.dart';
@@ -58,7 +60,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final iap     = context.watch<IapService>();
-    final adsGone = AdService.instance.adsRemoved;
+    final adsGone = context.watch<AdService>().adsRemoved;
     final isDark  = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
@@ -221,16 +223,161 @@ class _RemoveAdsSection extends StatelessWidget {
   final IapService iap;
   const _RemoveAdsSection({required this.iap});
 
+  // ── Paystack helpers ─────────────────────────────────────────────────────
+
+  /// Generates a unique reference for each payment attempt:
+  /// `finreels_<productId-suffix>_<timestamp>_<4-random-hex-chars>`.
+  static String _makeRef(String productId) {
+    final suffix = productId.split('_').last; // "1day", "weekly", "monthly"
+    final ts = DateTime.now().millisecondsSinceEpoch;
+    final rand = Random.secure().nextInt(0xFFFF).toRadixString(16).padLeft(4, '0');
+    return 'finreels_${suffix}_${ts}_$rand';
+  }
+
+  Future<void> _launchPaystack(
+    BuildContext ctx,
+    String productId,
+    String title,
+  ) async {
+    final amount = AppConfig.paystackAmounts[productId];
+    if (amount == null) return;
+
+    // Ask for email — required by Paystack Inline to pre-fill the checkout
+    // form and to appear in the Paystack dashboard transaction log.
+    final email = await _askEmail(ctx);
+    if (email == null || !ctx.mounted) return;
+
+    final ref = _makeRef(productId);
+
+    final result = await Navigator.of(ctx).push<String>(
+      MaterialPageRoute(
+        fullscreenDialog: true,
+        builder: (_) => PaystackCheckoutScreen(
+          email: email,
+          amountSubunits: amount,
+          reference: ref,
+          productId: productId,
+          title: title,
+        ),
+      ),
+    );
+
+    if (!ctx.mounted) return;
+
+    if (result != null) {
+      final granted = await IapService.instance.completePaystackPurchase(
+        productId: productId,
+        reference: result,
+      );
+      if (ctx.mounted) {
+        ScaffoldMessenger.of(ctx).showSnackBar(
+          SnackBar(
+            content: Text(
+              granted
+                  ? '✓ Ad-free access activated!'
+                  : 'Payment received — could not activate yet. '
+                      'Contact support if this persists.',
+            ),
+            backgroundColor: granted
+                ? const Color(0xFF166534)
+                : AppTheme.error,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12)),
+          ),
+        );
+      }
+    }
+  }
+
+  Future<String?> _askEmail(BuildContext ctx) async {
+    final ctrl = TextEditingController();
+    return showDialog<String>(
+      context: ctx,
+      builder: (dCtx) => AlertDialog(
+        backgroundColor: AppTheme.surfaceColor(ctx),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16)),
+        title: const Text('Enter your email',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+        content: TextField(
+          controller: ctrl,
+          autofocus: true,
+          keyboardType: TextInputType.emailAddress,
+          textInputAction: TextInputAction.done,
+          onSubmitted: (v) => Navigator.of(dCtx).pop(v.trim()),
+          decoration: InputDecoration(
+            hintText: 'you@example.com',
+            hintStyle:
+                TextStyle(color: AppTheme.textMuted(ctx), fontSize: 13),
+            filled: true,
+            fillColor: AppTheme.bgColor(ctx),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide.none,
+            ),
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dCtx).pop(null),
+            child: const Text('Cancel',
+                style: TextStyle(color: AppTheme.gold)),
+          ),
+          FilledButton(
+            style: FilledButton.styleFrom(
+              backgroundColor: AppTheme.gold,
+              foregroundColor: Colors.black,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8)),
+            ),
+            onPressed: () => Navigator.of(dCtx).pop(ctrl.text.trim()),
+            child: const Text('Continue',
+                style: TextStyle(fontWeight: FontWeight.w800)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // ── Build ────────────────────────────────────────────────────────────────
+
   @override
   Widget build(BuildContext context) {
-    // IAP not available on this device.
-    // Helper: show "not available" snackbar.
+    // While the install-source check is still in-flight (completes in a few
+    // ms at startup) show a compact loader so the pricing section never
+    // flickers between Play / Paystack states mid-render.
+    if (!iap.sourceChecked) {
+      return const Padding(
+        padding: EdgeInsets.symmetric(vertical: 32),
+        child: Center(
+          child: CircularProgressIndicator(
+              color: AppTheme.gold, strokeWidth: 2),
+        ),
+      );
+    }
+
+    if (iap.usePlayBilling) {
+      return _PlayBillingSection(iap: iap);
+    } else {
+      return _PaystackSection(iap: iap, launcher: this);
+    }
+  }
+}
+
+// ── Play Billing sub-section ──────────────────────────────────────────────────
+
+class _PlayBillingSection extends StatelessWidget {
+  final IapService iap;
+  const _PlayBillingSection({required this.iap});
+
+  @override
+  Widget build(BuildContext context) {
     void showUnavailable() {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text(
-            'This offer is not currently available. Please try again later.',
-          ),
+              'This offer is not currently available. Please try again later.'),
           backgroundColor: AppTheme.surfaceColor(context),
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
@@ -240,17 +387,12 @@ class _RemoveAdsSection extends StatelessWidget {
       );
     }
 
-    // Determine which real products (if any) are loaded.
     final hasRealProducts = iap.available && iap.products.isNotEmpty;
 
     return Column(
       children: [
-        // Hero promo card.
         _PromoCard(),
-
         const SizedBox(height: 12),
-
-        // Pricing options — always visible, never a spinner.
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
@@ -287,8 +429,7 @@ class _RemoveAdsSection extends StatelessWidget {
                   ],
           ),
         ),
-
-        // Restore button.
+        // Restore button — only meaningful for Play Billing.
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
           child: SizedBox(
@@ -304,26 +445,23 @@ class _RemoveAdsSection extends StatelessWidget {
             ),
           ),
         ),
-
-        // Error message.
         if (iap.error != null)
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
             child: Text(
               iap.error!,
-              style:
-                  const TextStyle(color: AppTheme.error, fontSize: 12),
+              style: const TextStyle(
+                  color: AppTheme.error, fontSize: 12),
               textAlign: TextAlign.center,
             ),
           ),
-
-        // Legal micro-copy required by Google Play.
+        // Legal micro-copy required by Google Play for one-time purchases.
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
           child: Text(
             'Payment will be charged to your Google Play account. '
-            'Your subscription will be applied for the selected period. '
-            'Subscriptions are non-refundable.',
+            'Access is granted for the selected period. '
+            'Purchases are one-time payments and are non-refundable.',
             style: Theme.of(context)
                 .textTheme
                 .bodySmall
@@ -334,8 +472,191 @@ class _RemoveAdsSection extends StatelessWidget {
       ],
     );
   }
-
 }
+
+// ── Paystack sub-section ──────────────────────────────────────────────────────
+
+class _PaystackSection extends StatelessWidget {
+  final IapService iap;
+  final _RemoveAdsSection launcher;
+  const _PaystackSection(
+      {required this.iap, required this.launcher});
+
+  static const _tiles = [
+    (
+      id: AppConfig.iapNoAds1Day,
+      title: '24 Hours Ad-Free',
+      icon: Icons.timer_outlined,
+      highlight: false,
+    ),
+    (
+      id: AppConfig.iapNoAdsWeekly,
+      title: '1 Week Ad-Free',
+      icon: Icons.calendar_view_week_rounded,
+      highlight: false,
+    ),
+    (
+      id: AppConfig.iapNoAdsMonthly,
+      title: '1 Month Ad-Free',
+      icon: Icons.calendar_month_rounded,
+      highlight: true,
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        _PromoCard(),
+        const SizedBox(height: 12),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: _tiles.map((t) {
+              final amount = AppConfig.paystackAmounts[t.id] ?? 0;
+              // Display amount as major currency units (divide by 100).
+              final display =
+                  '${AppConfig.paystackCurrency} ${(amount / 100).toStringAsFixed(0)}';
+
+              return _PaystackTile(
+                title: t.title,
+                price: display,
+                icon: t.icon,
+                highlight: t.highlight,
+                loading: iap.purchasePending,
+                onTap: () =>
+                    launcher._launchPaystack(context, t.id, t.title),
+              );
+            }).toList(),
+          ),
+        ),
+        if (iap.error != null)
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            child: Text(
+              iap.error!,
+              style: const TextStyle(
+                  color: AppTheme.error, fontSize: 12),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
+          child: Text(
+            'Secure payment powered by Paystack. '
+            'Access is granted for the selected period. '
+            'Payments are one-time and non-refundable.',
+            style: Theme.of(context)
+                .textTheme
+                .bodySmall
+                ?.copyWith(fontSize: 10),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _PaystackTile extends StatelessWidget {
+  final String title;
+  final String price;
+  final IconData icon;
+  final bool highlight;
+  final bool loading;
+  final VoidCallback onTap;
+
+  const _PaystackTile({
+    required this.title,
+    required this.price,
+    required this.icon,
+    required this.highlight,
+    required this.loading,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      decoration: BoxDecoration(
+        color: highlight
+            ? AppTheme.gold.withValues(alpha: 0.07)
+            : AppTheme.surfaceColor(context),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(
+          color: highlight
+              ? AppTheme.gold.withValues(alpha: 0.5)
+              : AppTheme.dividerColor(context),
+          width: highlight ? 1.5 : 0.5,
+        ),
+      ),
+      child: ListTile(
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+        leading: Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            color: AppTheme.gold.withValues(alpha: 0.12),
+            shape: BoxShape.circle,
+          ),
+          child: Icon(icon, color: AppTheme.gold, size: 20),
+        ),
+        title: Row(
+          children: [
+            Text(title,
+                style: const TextStyle(
+                    fontWeight: FontWeight.w700, fontSize: 14)),
+            if (highlight) ...[
+              const SizedBox(width: 8),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                decoration: BoxDecoration(
+                  color: AppTheme.gold,
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: const Text('BEST VALUE',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 8,
+                        fontWeight: FontWeight.w800,
+                        letterSpacing: 0.5)),
+              ),
+            ],
+          ],
+        ),
+        subtitle: Text(
+          'Removes all ads for the full period',
+          style: TextStyle(
+              fontSize: 11, color: AppTheme.textMuted(context)),
+        ),
+        trailing: loading
+            ? const SizedBox(
+                width: 24,
+                height: 24,
+                child: CircularProgressIndicator(
+                    color: AppTheme.gold, strokeWidth: 2))
+            : FilledButton(
+                onPressed: onTap,
+                style: FilledButton.styleFrom(
+                  backgroundColor: AppTheme.gold,
+                  foregroundColor: Colors.black,
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 14, vertical: 10),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                ),
+                child: Text(price,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w800, fontSize: 13)),
+              ),
+      ),
+    );
+  }
+}
+
 
 // ── Promo hero card ───────────────────────────────────────────────────────────
 
