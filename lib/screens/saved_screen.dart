@@ -10,6 +10,7 @@ import '../providers/feed_provider.dart';
 import '../services/ad_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
+import '../widgets/no_flash_page_route.dart';
 import '../widgets/video_card.dart';
 import 'book_detail_screen.dart';
 import 'video_player_screen.dart';
@@ -36,7 +37,7 @@ class _SavedScreenState extends State<SavedScreen> {
     final channel = ChannelData.byId[video.channelId] ?? ChannelData.fallback;
     Navigator.push(
       context,
-      MaterialPageRoute(
+      NoFlashPageRoute(
           builder: (_) => VideoPlayerScreen(video: video, channel: channel)),
     );
   }

@@ -7,6 +7,7 @@ import '../providers/feed_provider.dart';
 import '../screens/video_player_screen.dart';
 import '../services/notification_service.dart';
 import '../theme/app_theme.dart';
+import '../widgets/no_flash_page_route.dart';
 import 'channels_screen.dart';
 import 'home_screen.dart';
 import 'saved_screen.dart';
@@ -100,7 +101,7 @@ class _MainShellState extends State<MainShell> {
     // Switch to Feed tab then push the video player
     setState(() => _index = 0);
     Navigator.of(context).push(
-      MaterialPageRoute(
+      NoFlashPageRoute(
         builder: (_) => VideoPlayerScreen(video: video!, channel: channel),
       ),
     );

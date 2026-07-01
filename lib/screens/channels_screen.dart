@@ -10,6 +10,7 @@ import '../providers/feed_provider.dart';
 import '../services/ad_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
+import '../widgets/no_flash_page_route.dart';
 import '../widgets/shimmer_loader.dart';
 import 'shorts_player_screen.dart';
 
@@ -30,7 +31,7 @@ class _ChannelsScreenState extends State<ChannelsScreen> {
 
     Navigator.push(
       context,
-      MaterialPageRoute(
+      NoFlashPageRoute(
         builder: (_) => ShortsPlayerScreen(
           shorts: shorts,
           initialIndex: index,

@@ -11,6 +11,7 @@ import '../services/ad_service.dart';
 import '../services/rss_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
+import '../widgets/no_flash_page_route.dart';
 import 'shorts_player_screen.dart';
 import 'video_player_screen.dart';
 
@@ -54,14 +55,14 @@ class _ChannelVideosScreenState extends State<ChannelVideosScreen>
 
   void _openVideo(Video video) {
     unawaited(AdService.instance.onContentTapped());
-    Navigator.push(context, MaterialPageRoute(
+    Navigator.push(context, NoFlashPageRoute(
       builder: (_) => VideoPlayerScreen(video: video, channel: widget.channel),
     ));
   }
 
   void _openShort(int index) {
     unawaited(AdService.instance.onContentTapped());
-    Navigator.push(context, MaterialPageRoute(
+    Navigator.push(context, NoFlashPageRoute(
       builder: (_) => ShortsPlayerScreen(shorts: _shorts, initialIndex: index),
     ));
   }

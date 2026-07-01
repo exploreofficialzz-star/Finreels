@@ -15,6 +15,7 @@ import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
 import '../widgets/book_cover_image.dart';
 import '../widgets/inline_video_card.dart';
+import '../widgets/no_flash_page_route.dart';
 import '../widgets/shimmer_loader.dart';
 import 'blog_feed_screen.dart';
 import 'book_detail_screen.dart';
@@ -256,7 +257,7 @@ class _ShortsTab extends StatelessWidget {
                 unawaited(AdService.instance.onShortTapped());
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
+                  NoFlashPageRoute(
                     builder: (_) => ShortsPlayerScreen(
                         shorts: shorts,
                         initialIndex: i,
