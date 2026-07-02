@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -15,13 +17,23 @@ import '../services/ad_service.dart';
 // Fix: each _InlineBannerAd creates and owns its own BannerAd instance.
 // The global AdService banner is kept for the sticky bottom bar only.
 //
+// SIZING: both widgets now request a full-width ADAPTIVE anchored banner
+// (AdSize.getAnchoredAdaptiveBannerAdSize) sized to the ACTUAL width
+// available to the widget (measured via LayoutBuilder, so it automatically
+// matches whatever horizontal padding/margins the surrounding screen
+// applies — video cards, book grid rows, etc.) instead of the old fixed
+// 320×50 AdSize.banner, which rendered as a narrow strip that looked out
+// of place next to full-width content. Falls back to AdSize.banner only
+// if the adaptive API can't resolve a size for the given width.
+//
 // Two widgets exported:
 //   LabelledBannerAd  — inline list placement (creates its own BannerAd)
 //   StickyBannerBar   — bottom of screen (uses AdService's shared instance)
 // ─────────────────────────────────────────────────────────────────────────────
 
 /// Inline banner — safe to place multiple times in a ListView/GridView.
-/// Each instance creates and owns its own [BannerAd].
+/// Each instance creates and owns its own [BannerAd], sized adaptively to
+/// the width available to it.
 class LabelledBannerAd extends StatefulWidget {
   const LabelledBannerAd({super.key});
 
@@ -32,6 +44,7 @@ class LabelledBannerAd extends StatefulWidget {
 class _LabelledBannerAdState extends State<LabelledBannerAd> {
   BannerAd? _ad;
   bool _loaded = false;
+  bool _sizeRequested = false;
   int  _retryCount = 0;
   static const int _maxRetries = 3;
 
@@ -39,7 +52,6 @@ class _LabelledBannerAdState extends State<LabelledBannerAd> {
   void initState() {
     super.initState();
     AdService.instance.addListener(_onAdsServiceChanged);
-    if (!AdService.instance.adsRemoved) _load();
   }
 
   /// Fires the instant a purchase completes (or status is otherwise
@@ -49,15 +61,23 @@ class _LabelledBannerAdState extends State<LabelledBannerAd> {
     if (!mounted) return;
     if (AdService.instance.adsRemoved && _ad != null) {
       _ad!.dispose();
-      setState(() { _ad = null; _loaded = false; });
+      setState(() { _ad = null; _loaded = false; _sizeRequested = false; });
     }
   }
 
-  void _load() {
+  Future<void> _load(double width) async {
+    if (!mounted) return;
+    final adaptiveSize = await AdSize.getAnchoredAdaptiveBannerAdSize(
+      Orientation.portrait,
+      width.truncate(),
+    );
+    if (!mounted) return;
+    final size = adaptiveSize ?? AdSize.banner; // graceful fallback
+
     _ad?.dispose();
     _ad = BannerAd(
       adUnitId: AppConfig.bannerAdUnitId,
-      size:     AdSize.banner,
+      size:     size,
       request:  const AdRequest(),
       listener: BannerAdListener(
         onAdLoaded: (_) {
@@ -71,7 +91,7 @@ class _LabelledBannerAdState extends State<LabelledBannerAd> {
             _retryCount++;
             final delay = Duration(seconds: 15 * _retryCount);
             Future.delayed(delay, () {
-              if (mounted) _load();
+              if (mounted) unawaited(_load(width));
             });
           }
         },
@@ -88,34 +108,51 @@ class _LabelledBannerAdState extends State<LabelledBannerAd> {
 
   @override
   Widget build(BuildContext context) {
-    if (!_loaded || _ad == null || AdService.instance.adsRemoved) {
-      return const SizedBox.shrink();
-    }
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const Divider(height: 1),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 2),
-          child: Text(
-            'Advertisement',
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                fontSize: 9, letterSpacing: 0.5),
-          ),
-        ),
-        SizedBox(
-          width:  _ad!.size.width.toDouble(),
-          height: _ad!.size.height.toDouble(),
-          child:  AdWidget(ad: _ad!),
-        ),
-        const SizedBox(height: 4),
-      ],
+    if (AdService.instance.adsRemoved) return const SizedBox.shrink();
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth;
+        // Request the adaptive size exactly once, after this frame commits
+        // (never as a synchronous side effect of build()) — the moment the
+        // real available width is known.
+        if (!_sizeRequested && width.isFinite && width > 0) {
+          _sizeRequested = true;
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (mounted) unawaited(_load(width));
+          });
+        }
+
+        if (!_loaded || _ad == null) return const SizedBox.shrink();
+
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Divider(height: 1),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 2),
+              child: Text(
+                'Advertisement',
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    fontSize: 9, letterSpacing: 0.5),
+              ),
+            ),
+            SizedBox(
+              width:  _ad!.size.width.toDouble(),
+              height: _ad!.size.height.toDouble(),
+              child:  AdWidget(ad: _ad!),
+            ),
+            const SizedBox(height: 4),
+          ],
+        );
+      },
     );
   }
 }
 
-/// Sticky bottom banner — owns its own [BannerAd] instance.
-/// Safe to place once per screen. Rebuilds itself when the ad loads.
+/// Sticky bottom banner — owns its own [BannerAd] instance, sized
+/// adaptively to fill the full screen width. Safe to place once per
+/// screen. Rebuilds itself when the ad loads.
 class StickyBannerBar extends StatefulWidget {
   const StickyBannerBar({super.key});
 
@@ -126,6 +163,7 @@ class StickyBannerBar extends StatefulWidget {
 class _StickyBannerBarState extends State<StickyBannerBar> {
   BannerAd? _ad;
   bool _loaded = false;
+  bool _sizeRequested = false;
   int  _retryCount = 0;
   static const int _maxRetries = 3;
 
@@ -133,25 +171,32 @@ class _StickyBannerBarState extends State<StickyBannerBar> {
   void initState() {
     super.initState();
     AdService.instance.addListener(_onAdsServiceChanged);
-    if (!AdService.instance.adsRemoved) _load();
   }
 
   void _onAdsServiceChanged() {
     if (!mounted) return;
     if (AdService.instance.adsRemoved && _ad != null) {
       _ad!.dispose();
-      setState(() { _ad = null; _loaded = false; });
+      setState(() { _ad = null; _loaded = false; _sizeRequested = false; });
     }
   }
 
-  void _load() {
+  Future<void> _load(double width) async {
+    if (!mounted) return;
+    final adaptiveSize = await AdSize.getAnchoredAdaptiveBannerAdSize(
+      Orientation.portrait,
+      width.truncate(),
+    );
+    if (!mounted) return;
+    final size = adaptiveSize ?? AdSize.banner;
+
     _ad?.dispose();
     _ad     = null;
     _loaded = false;
 
     _ad = BannerAd(
       adUnitId: AppConfig.bannerAdUnitId,
-      size:     AdSize.banner,
+      size:     size,
       request:  const AdRequest(),
       listener: BannerAdListener(
         onAdLoaded: (_) {
@@ -165,7 +210,7 @@ class _StickyBannerBarState extends State<StickyBannerBar> {
             _retryCount++;
             final delay = Duration(seconds: 15 * _retryCount);
             Future.delayed(delay, () {
-              if (mounted) _load();
+              if (mounted) unawaited(_load(width));
             });
           }
         },
@@ -182,19 +227,32 @@ class _StickyBannerBarState extends State<StickyBannerBar> {
 
   @override
   Widget build(BuildContext context) {
-    if (!_loaded || _ad == null || AdService.instance.adsRemoved) {
-      return const SizedBox.shrink();
-    }
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const Divider(height: 1),
-        SizedBox(
-          width:  _ad!.size.width.toDouble(),
-          height: _ad!.size.height.toDouble(),
-          child:  AdWidget(ad: _ad!),
-        ),
-      ],
+    if (AdService.instance.adsRemoved) return const SizedBox.shrink();
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth;
+        if (!_sizeRequested && width.isFinite && width > 0) {
+          _sizeRequested = true;
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (mounted) unawaited(_load(width));
+          });
+        }
+
+        if (!_loaded || _ad == null) return const SizedBox.shrink();
+
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Divider(height: 1),
+            SizedBox(
+              width:  _ad!.size.width.toDouble(),
+              height: _ad!.size.height.toDouble(),
+              child:  AdWidget(ad: _ad!),
+            ),
+          ],
+        );
+      },
     );
   }
 }

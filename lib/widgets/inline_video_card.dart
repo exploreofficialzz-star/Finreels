@@ -393,6 +393,8 @@ class _InlineVideoCardState extends State<InlineVideoCard>
             CachedNetworkImage(
               imageUrl: widget.video.thumbnailHd,
               fit: BoxFit.cover,
+              memCacheWidth: 720,
+              memCacheHeight: 405,
               placeholder: (_, __) => Shimmer.fromColors(
                 baseColor:      const Color(0xFF1E1E1E),
                 highlightColor: const Color(0xFF2C2C2C),
@@ -401,6 +403,8 @@ class _InlineVideoCardState extends State<InlineVideoCard>
               errorWidget: (_, __, ___) => CachedNetworkImage(
                 imageUrl: widget.video.thumbnailMq,
                 fit: BoxFit.cover,
+                memCacheWidth: 720,
+                memCacheHeight: 405,
                 placeholder: (_, __) => Shimmer.fromColors(
                   baseColor:      const Color(0xFF1E1E1E),
                   highlightColor: const Color(0xFF2C2C2C),
@@ -496,9 +500,13 @@ class _InlineVideoCardState extends State<InlineVideoCard>
       CachedNetworkImage(
         imageUrl: widget.video.thumbnailHd,
         fit: BoxFit.cover,
+        memCacheWidth: 720,
+        memCacheHeight: 405,
         errorWidget: (_, __, ___) => CachedNetworkImage(
           imageUrl: widget.video.thumbnailMq,
           fit: BoxFit.cover,
+          memCacheWidth: 720,
+          memCacheHeight: 405,
           errorWidget: (_, __, ___) => const ColoredBox(color: Colors.black),
         ),
       ),

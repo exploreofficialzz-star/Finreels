@@ -196,24 +196,28 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
                   // ── [2] Thumbnail — ABOVE the iframe ────────────────────
                   // Visible from the instant the screen opens, hiding the
-                  // black WebView init. Fades out once _hasStartedPlaying
-                  // latches true (i.e. the first video frame is actually
-                  // rendering). The latch means it never reappears during
-                  // mid-video buffering pauses.
-                  AnimatedOpacity(
-                    opacity: _hasStartedPlaying ? 0.0 : 1.0,
-                    duration: const Duration(milliseconds: 250),
-                    child: CachedNetworkImage(
+                  // black WebView init. Removed INSTANTLY (no fade, no
+                  // duration) the exact frame _hasStartedPlaying latches
+                  // true (i.e. the first video frame is actually
+                  // rendering) — a hard cut straight to the playing video,
+                  // never a lingering overlay on top of it. The latch
+                  // means it never reappears during mid-video buffering
+                  // pauses.
+                  if (!_hasStartedPlaying)
+                    CachedNetworkImage(
                       imageUrl: widget.video.thumbnailHd,
                       fit: BoxFit.cover,
+                      memCacheWidth: 800,
+                      memCacheHeight: 450,
                       errorWidget: (_, __, ___) => CachedNetworkImage(
                         imageUrl: widget.video.thumbnailMq,
                         fit: BoxFit.cover,
+                        memCacheWidth: 800,
+                        memCacheHeight: 450,
                         errorWidget: (_, __, ___) =>
                             const ColoredBox(color: Colors.black),
                       ),
                     ),
-                  ),
 
                   // ── [3] Buffering spinner — shown while ready but not yet playing
                   if (_ready && !_playing && !_ended && !_hasStartedPlaying)
@@ -442,9 +446,13 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         CachedNetworkImage(
           imageUrl: widget.video.thumbnailHd,
           fit: BoxFit.cover,
+          memCacheWidth: 800,
+          memCacheHeight: 450,
           errorWidget: (_, __, ___) => CachedNetworkImage(
             imageUrl: widget.video.thumbnailMq,
             fit: BoxFit.cover,
+            memCacheWidth: 800,
+            memCacheHeight: 450,
             errorWidget: (_, __, ___) =>
                 const ColoredBox(color: Colors.black),
           ),

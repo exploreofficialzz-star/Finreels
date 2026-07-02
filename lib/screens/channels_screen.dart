@@ -151,6 +151,8 @@ class _ShortCard extends StatelessWidget {
             CachedNetworkImage(
               imageUrl: video.thumbnailMq,
               fit: BoxFit.cover,
+              memCacheWidth: 360,
+              memCacheHeight: 640,
               errorWidget: (_, __, ___) => ColoredBox(
                 color: AppTheme.surfaceElevated(context),
                 child: Center(

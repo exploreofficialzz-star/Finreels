@@ -271,6 +271,8 @@ class _ShortsTab extends StatelessWidget {
                   CachedNetworkImage(
                     imageUrl: video.thumbnailMq,
                     fit: BoxFit.cover,
+                    memCacheWidth: 360,
+                    memCacheHeight: 640,
                     placeholder: (_, __) => Shimmer.fromColors(
                       baseColor: const Color(0xFF1E1E1E),
                       highlightColor: const Color(0xFF2C2C2C),

@@ -186,6 +186,8 @@ class VideoCard extends StatelessWidget {
           CachedNetworkImage(
             imageUrl: video.thumbnailHd,
             fit: BoxFit.cover,
+            memCacheWidth: 720,
+            memCacheHeight: 405,
             placeholder: (_, __) => Shimmer.fromColors(
               baseColor: const Color(0xFF1E1E1E),
               highlightColor: const Color(0xFF2C2C2C),
@@ -194,6 +196,8 @@ class VideoCard extends StatelessWidget {
             errorWidget: (_, __, ___) => CachedNetworkImage(
               imageUrl: video.thumbnailMq,
               fit: BoxFit.cover,
+              memCacheWidth: 720,
+              memCacheHeight: 405,
               placeholder: (_, __) => Shimmer.fromColors(
                 baseColor: const Color(0xFF1E1E1E),
                 highlightColor: const Color(0xFF2C2C2C),

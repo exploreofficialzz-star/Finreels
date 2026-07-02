@@ -47,6 +47,24 @@ android {
         versionCode flutter.versionCode
         versionName flutter.versionName
         multiDexEnabled true
+
+        // ── Size: restrict native libs to real phone/tablet architectures ──
+        // google_mobile_ads, unity-ads, and flutter_inappwebview each ship
+        // native .so files for 4 ABIs (arm64-v8a, armeabi-v7a, x86, x86_64).
+        // x86/x86_64 only matter for emulators — essentially zero real
+        // phones/tablets run them. Combined with --split-per-abi in CI,
+        // this keeps each release APK to only the slice a real device
+        // needs. (If Chromebook/x86 support is ever needed, add "x86_64"
+        // back here — Play App Signing will then also serve that slice.)
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a"
+        }
+
+        // ── Size: only bundle English resource strings ──────────────────────
+        // AndroidX/Play Services libraries ship 60+ locale variants of
+        // their internal strings by default. This app's UI is English-only
+        // (no intl/ARB setup), so every other locale is dead weight.
+        resConfigs "en"
     }
 
     signingConfigs {

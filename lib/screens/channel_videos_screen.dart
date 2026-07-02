@@ -237,6 +237,8 @@ class _VideosList extends StatelessWidget {
                       child: Stack(fit: StackFit.expand, children: [
                         CachedNetworkImage(imageUrl: v.thumbnailHd,
                             fit: BoxFit.cover,
+                            memCacheWidth: 720,
+                            memCacheHeight: 405,
                             placeholder: (_, __) => Shimmer.fromColors(
                               baseColor: const Color(0xFF1E1E1E),
                               highlightColor: const Color(0xFF2C2C2C),
@@ -244,6 +246,8 @@ class _VideosList extends StatelessWidget {
                             ),
                             errorWidget: (_, __, ___) => CachedNetworkImage(
                                 imageUrl: v.thumbnailMq, fit: BoxFit.cover,
+                                memCacheWidth: 720,
+                                memCacheHeight: 405,
                                 errorWidget: (_, __, ___) =>
                                     const ColoredBox(color: Color(0xFF1E1E1E)))),
                         Center(child: Container(width: 48, height: 48,
@@ -316,6 +320,8 @@ class _ShortsGrid extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 child: Stack(fit: StackFit.expand, children: [
                   CachedNetworkImage(imageUrl: v.thumbnailMq, fit: BoxFit.cover,
+                      memCacheWidth: 360,
+                      memCacheHeight: 640,
                       placeholder: (_, __) => Shimmer.fromColors(
                         baseColor: const Color(0xFF1E1E1E),
                         highlightColor: const Color(0xFF2C2C2C),

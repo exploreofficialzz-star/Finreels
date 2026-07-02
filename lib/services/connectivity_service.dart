@@ -21,6 +21,8 @@ class ConnectivityService {
   NetworkStatus get current => _current;
 
   Timer? _pollTimer;
+  Timer? _slowPollTimer;
+  StreamSubscription<List<ConnectivityResult>>? _connectivitySub;
   bool _disposed = false;
 
   /// Call once from main() / app init.
@@ -29,7 +31,7 @@ class ConnectivityService {
     await _runCheck();
 
     // Listen to OS-level connectivity changes
-    Connectivity().onConnectivityChanged.listen((_) async {
+    _connectivitySub = Connectivity().onConnectivityChanged.listen((_) async {
       await _runCheck();
     });
 
@@ -41,7 +43,7 @@ class ConnectivityService {
     });
 
     // Slower background check when we think we're online
-    Timer.periodic(const Duration(seconds: 30), (_) async {
+    _slowPollTimer = Timer.periodic(const Duration(seconds: 30), (_) async {
       if (_current == NetworkStatus.online) {
         await _runCheck();
       }
@@ -100,6 +102,8 @@ class ConnectivityService {
   void dispose() {
     _disposed = true;
     _pollTimer?.cancel();
+    _slowPollTimer?.cancel();
+    unawaited(_connectivitySub?.cancel());
     _statusController.close();
   }
 }

@@ -7,6 +7,70 @@ import 'package:xml/xml.dart';
 
 import '../models/video.dart';
 
+/// Top-level function (required by compute()) — runs XML parsing on a
+/// background isolate instead of the UI isolate. With 12 channels fetched
+/// concurrently at app launch/refresh, parsing every feed's XML inline on
+/// the main isolate is enough synchronous work to visibly jank the UI
+/// thread, especially on lower-end devices. Moving it here removes that
+/// entirely from the frame budget — the UI isolate is only ever handed the
+/// already-parsed List<Video> result.
+List<Video> _parseXmlIsolate(({String xml, String channelId}) args) {
+  try {
+    final entries = XmlDocument.parse(args.xml).findAllElements('entry');
+    final videos  = <Video>[];
+
+    for (final e in entries) {
+      final rawId   = e.findElements('yt:videoId').firstOrNull?.innerText ?? '';
+      final urnId   = _idFromUrnTopLevel(e.findElements('id').firstOrNull?.innerText ?? '');
+      final videoId = rawId.isNotEmpty ? rawId : urnId;
+      if (videoId.isEmpty) continue;
+
+      final title = (e.findElements('title').firstOrNull?.innerText ?? '').trim();
+      if (title.isEmpty || title == 'Private video' || title == 'Deleted video') continue;
+
+      final channelName =
+          e.findElements('author').firstOrNull
+           ?.findElements('name').firstOrNull
+           ?.innerText.trim() ?? '';
+
+      final pubStr = e.findElements('published').firstOrNull?.innerText ?? '';
+      final publishedAt = DateTime.tryParse(pubStr) ?? DateTime.now();
+
+      final description =
+          e.findElements('media:description').firstOrNull?.innerText.trim() ??
+          e.findElements('summary').firstOrNull?.innerText.trim() ?? '';
+
+      final thumbUrl =
+          e.findElements('media:thumbnail').firstOrNull?.getAttribute('url') ??
+          'https://img.youtube.com/vi/$videoId/mqdefault.jpg';
+
+      // Shorts carry /shorts/ in the RSS link — most reliable signal.
+      final originalLink = e
+          .findElements('link')
+          .where((n) => n.getAttribute('rel') == 'alternate')
+          .firstOrNull
+          ?.getAttribute('href');
+
+      videos.add(Video(
+        id:           videoId,
+        title:        title,
+        description:  description,
+        channelId:    args.channelId,
+        channelName:  channelName,
+        publishedAt:  publishedAt,
+        thumbnailUrl: thumbUrl,
+        originalLink: originalLink,
+      ));
+    }
+    return videos;
+  } on Exception {
+    return [];
+  }
+}
+
+String _idFromUrnTopLevel(String urn) =>
+    RegExp(r'yt:video:(.+)$').firstMatch(urn)?.group(1) ?? '';
+
 /// YouTube RSS service — all 10 channels, no paid API.
 ///
 /// Primary fix: channel IDs in channel_data.dart were wrong for 8 channels.
@@ -122,7 +186,7 @@ class RssService {
           continue;
         }
 
-        return _parse(body, channelId); // may be [] for private/empty channel
+        return compute(_parseXmlIsolate, (xml: body, channelId: channelId));
       } on Exception catch (e) {
         debugPrint('[RssService] exception for $channelId: $e');
       }
@@ -134,66 +198,6 @@ class RssService {
       body.startsWith('<?xml') ||
       body.startsWith('<feed') ||
       body.startsWith('<rss');
-
-  // ── RSS / Atom parser ─────────────────────────────────────────────────────────
-
-  List<Video> _parse(String xml, String channelId) {
-    try {
-      final entries = XmlDocument.parse(xml).findAllElements('entry');
-      final videos  = <Video>[];
-
-      for (final e in entries) {
-        final rawId   = e.findElements('yt:videoId').firstOrNull?.innerText ?? '';
-        final urnId   = _idFromUrn(e.findElements('id').firstOrNull?.innerText ?? '');
-        final videoId = rawId.isNotEmpty ? rawId : urnId;
-        if (videoId.isEmpty) continue;
-
-        final title = (e.findElements('title').firstOrNull?.innerText ?? '').trim();
-        if (title.isEmpty || title == 'Private video' || title == 'Deleted video') continue;
-
-        final channelName =
-            e.findElements('author').firstOrNull
-             ?.findElements('name').firstOrNull
-             ?.innerText.trim() ?? '';
-
-        final pubStr = e.findElements('published').firstOrNull?.innerText ?? '';
-        final publishedAt = DateTime.tryParse(pubStr) ?? DateTime.now();
-
-        final description =
-            e.findElements('media:description').firstOrNull?.innerText.trim() ??
-            e.findElements('summary').firstOrNull?.innerText.trim() ?? '';
-
-        final thumbUrl =
-            e.findElements('media:thumbnail').firstOrNull?.getAttribute('url') ??
-            'https://img.youtube.com/vi/$videoId/mqdefault.jpg';
-
-        // Shorts carry /shorts/ in the RSS link — most reliable signal.
-        final originalLink = e
-            .findElements('link')
-            .where((n) => n.getAttribute('rel') == 'alternate')
-            .firstOrNull
-            ?.getAttribute('href');
-
-        videos.add(Video(
-          id:           videoId,
-          title:        title,
-          description:  description,
-          channelId:    channelId,
-          channelName:  channelName,
-          publishedAt:  publishedAt,
-          thumbnailUrl: thumbUrl,
-          originalLink: originalLink,
-        ));
-      }
-      return videos;
-    } on Exception catch (e) {
-      debugPrint('[RssService] parse error for $channelId: $e');
-      return [];
-    }
-  }
-
-  String _idFromUrn(String urn) =>
-      RegExp(r'yt:video:(.+)$').firstMatch(urn)?.group(1) ?? '';
 
   // ── Memory cache ──────────────────────────────────────────────────────────────
 

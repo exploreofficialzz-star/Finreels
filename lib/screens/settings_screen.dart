@@ -482,22 +482,31 @@ class _PaystackSection extends StatelessWidget {
   const _PaystackSection(
       {required this.iap, required this.launcher});
 
+  // Displayed price is intentionally USD — same figures shown to Play
+  // Store users — so pricing reads consistently across both rails no
+  // matter which one a given install happens to route through. The
+  // ACTUAL charge still runs in Naira (AppConfig.paystackAmounts), since
+  // that's what Paystack's checkout is configured to settle in — the USD
+  // figure here is a display label only, not sent anywhere.
   static const _tiles = [
     (
       id: AppConfig.iapNoAds1Day,
       title: '24 Hours Ad-Free',
+      usdPrice: r'$0.99',
       icon: Icons.timer_outlined,
       highlight: false,
     ),
     (
       id: AppConfig.iapNoAdsWeekly,
       title: '1 Week Ad-Free',
+      usdPrice: r'$2.99',
       icon: Icons.calendar_view_week_rounded,
       highlight: false,
     ),
     (
       id: AppConfig.iapNoAdsMonthly,
       title: '1 Month Ad-Free',
+      usdPrice: r'$7.99',
       icon: Icons.calendar_month_rounded,
       highlight: true,
     ),
@@ -513,14 +522,9 @@ class _PaystackSection extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             children: _tiles.map((t) {
-              final amount = AppConfig.paystackAmounts[t.id] ?? 0;
-              // Display amount as major currency units (divide by 100).
-              final display =
-                  '${AppConfig.paystackCurrency} ${(amount / 100).toStringAsFixed(0)}';
-
               return _PaystackTile(
                 title: t.title,
-                price: display,
+                price: t.usdPrice,
                 icon: t.icon,
                 highlight: t.highlight,
                 loading: iap.purchasePending,

@@ -48,11 +48,26 @@ class BookCoverImage extends StatelessWidget {
   }
 
   Widget _buildNetwork(BuildContext context) {
+    // Book cover URLs come from varied external sources (Open Library,
+    // Global Grey, archive.org) whose actual resolution is unpredictable —
+    // some scans run well beyond 1000px wide. Deriving the decode target
+    // from this widget's own requested size (scaled for device pixel
+    // ratio) keeps every cover's memory footprint proportional to how
+    // large it's actually rendered, rather than whatever the source
+    // happens to be. Falls back to a generous fixed size only for the one
+    // caller (video_card.dart, book cards in a Stack.expand) that doesn't
+    // pass explicit width/height.
+    final dpr = MediaQuery.devicePixelRatioOf(context);
+    final cacheWidth  = width  != null ? (width! * dpr).round()  : 480;
+    final cacheHeight = height != null ? (height! * dpr).round() : 640;
+
     return CachedNetworkImage(
       imageUrl: url,
       width: width,
       height: height,
       fit: fit,
+      memCacheWidth: cacheWidth,
+      memCacheHeight: cacheHeight,
       placeholder: (_, __) => Shimmer.fromColors(
         baseColor: const Color(0xFF1E1E1E),
         highlightColor: const Color(0xFF2C2C2C),
