@@ -43,13 +43,6 @@ class _SplashScreenState extends State<SplashScreen> {
                   radius: 1.5,
                 ),
                 borderRadius: BorderRadius.circular(26),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppTheme.gold.withValues(alpha: 0.45),
-                    blurRadius: 30,
-                    spreadRadius: 4,
-                  ),
-                ],
               ),
               child: const Icon(Icons.play_arrow_rounded,
                   color: Colors.white, size: 54),
