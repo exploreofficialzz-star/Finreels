@@ -12,6 +12,7 @@ import '../config/app_config.dart';
 import '../screens/paystack_checkout_screen.dart';
 import '../screens/privacy_policy_screen.dart';
 import '../services/ad_service.dart';
+import '../services/consent_service.dart';
 import '../services/iap_service.dart';
 import '../services/notification_service.dart';
 import '../theme/app_theme.dart';
@@ -27,12 +28,14 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   String _version = '';
   bool _notificationsEnabled = true;
+  bool _privacyOptionsRequired = false;
 
   @override
   void initState() {
     super.initState();
     _loadVersion();
     _loadNotifPref();
+    _loadPrivacyOptionsRequirement();
   }
 
   Future<void> _loadVersion() async {
@@ -48,6 +51,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final enabled =
         await NotificationService.instance.areNotificationsEnabled();
     if (mounted) setState(() => _notificationsEnabled = enabled);
+  }
+
+  /// Google UMP policy requires this entry point be shown ONLY for users
+  /// where a privacy-options choice is actually applicable (EEA/UK/
+  /// Switzerland, roughly) — everyone else should see nothing at all, per
+  /// Google's own guidance. Checked once per screen visit; cheap local
+  /// SDK call, no network round-trip.
+  Future<void> _loadPrivacyOptionsRequirement() async {
+    final required = await ConsentService.instance.isPrivacyOptionsRequired();
+    if (mounted) setState(() => _privacyOptionsRequired = required);
   }
 
   Future<void> _launch(String url) async {
@@ -168,6 +181,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                         ),
                       ),
+                      // Only shown when Google's UMP SDK reports it's
+                      // actually applicable for this user (EEA/UK/
+                      // Switzerland) — required so those users can revisit
+                      // their ad-consent choice at any time, not just once.
+                      if (_privacyOptionsRequired)
+                        _SettingsTile(
+                          icon: Icons.shield_outlined,
+                          iconColor: AppTheme.gold,
+                          title: 'Privacy Options',
+                          subtitle: 'Manage your ad consent choices',
+                          trailing: const Icon(Icons.chevron_right_rounded,
+                              size: 20),
+                          onTap: () =>
+                              ConsentService.instance.showPrivacyOptionsForm(),
+                        ),
                       _SettingsTile(
                         icon: Icons.description_rounded,
                         iconColor: AppTheme.gold,

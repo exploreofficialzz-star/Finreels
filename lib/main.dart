@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,27 +23,54 @@ import 'widgets/connectivity_overlay.dart';
 /// main() now does the absolute minimum so runApp() fires on the first frame.
 /// Heavy init (Hive, SDKs, providers) runs in parallel with the splash animation
 /// inside _SplashGate. The app is never blocked before the first paint.
-void main() async {
-  // Must be the very first line — no await before this.
-  WidgetsFlutterBinding.ensureInitialized();
+void main() {
+  // runZonedGuarded + the two handlers below are the last line of defence
+  // against a genuinely uncaught exception taking the whole app process
+  // down with zero visibility into why. Framework-level errors (thrown
+  // during build/layout/paint) go through FlutterError.onError; anything
+  // else — a stray exception in an async callback, a Timer, a stream
+  // listener outside a try/catch — is caught by the zone or by
+  // PlatformDispatcher.onError. Every individual service already guards
+  // itself defensively (see _safeInit below), so this is specifically the
+  // net for whatever that couldn't anticipate.
+  //
+  // This does NOT send crash reports anywhere by itself — it only
+  // prevents a hard crash and logs via debugPrint. Wire in Crashlytics,
+  // Sentry, or similar here (both callbacks below) if/when you want
+  // production crash analytics.
+  runZonedGuarded(() async {
+    // Must be the very first line — no await before this.
+    WidgetsFlutterBinding.ensureInitialized();
 
-  // Only orientation lock here — a fast synchronous call.
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
+    FlutterError.onError = (FlutterErrorDetails details) {
+      FlutterError.presentError(details);
+      debugPrint('[crash] Flutter error: ${details.exceptionAsString()}');
+    };
+    PlatformDispatcher.instance.onError = (Object error, StackTrace stack) {
+      debugPrint('[crash] Uncaught platform error: $error\n$stack');
+      return true; // handled — do not let it crash the process
+    };
 
-  // Edge-to-edge: the app draws fully behind the status bar and navigation
-  // bar/gesture area, with MediaQuery padding correctly reporting those
-  // insets so SafeArea/Scaffold still lay content out correctly. Combined
-  // with the transparent statusBarColor set below, this is what lets the
-  // Scaffold's own background colour paint all the way to the physical top
-  // of the screen instead of leaving a visibly different strip behind the
-  // time/signal/battery icons.
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    // Only orientation lock here — a fast synchronous call.
+    await SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
 
-  // runApp immediately — splash is shown on the very first frame.
-  runApp(const FinReelsApp());
+    // Edge-to-edge: the app draws fully behind the status bar and
+    // navigation bar/gesture area, with MediaQuery padding correctly
+    // reporting those insets so SafeArea/Scaffold still lay content out
+    // correctly. Combined with the transparent statusBarColor set below,
+    // this is what lets the Scaffold's own background colour paint all
+    // the way to the physical top of the screen instead of leaving a
+    // visibly different strip behind the time/signal/battery icons.
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+
+    // runApp immediately — splash is shown on the very first frame.
+    runApp(const FinReelsApp());
+  }, (Object error, StackTrace stack) {
+    debugPrint('[crash] Uncaught zone error: $error\n$stack');
+  });
 }
 
 class FinReelsApp extends StatelessWidget {

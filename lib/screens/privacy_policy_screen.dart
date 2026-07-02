@@ -8,7 +8,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const _LegalScreen(
       title: 'Privacy Policy',
-      lastUpdated: 'May 2025',
+      lastUpdated: 'July 2026',
       sections: [
         _LegalSection(
           heading: 'Introduction',
@@ -30,12 +30,16 @@ class PrivacyPolicyScreen extends StatelessWidget {
               'cannot be used to identify you personally.\n\n'
               '• Notification Preferences — Whether you have enabled or disabled '
               'push notifications. This preference is stored locally on your device.\n\n'
-              '• Purchase Records — If you subscribe to the Ad-Free plan, '
-              'Google Play processes the transaction. We only receive a '
-              'confirmation token; we do not store your payment details.\n\n'
+              '• Purchase Records — If you purchase an ad-free period, the '
+              'payment is processed by Google Play (or, for the app when '
+              'installed outside the Play Store, by Paystack). We only '
+              'receive a confirmation of the purchase; we do not store your '
+              'payment card details.\n\n'
               'We do not require account registration. We do not collect your '
               'name, email address, or any other personally identifiable '
-              'information unless you contact us directly.',
+              'information unless you contact us directly, or unless you '
+              'choose to pay via Paystack (which requires an email address '
+              'to process the transaction — see Section 3 below).',
         ),
         _LegalSection(
           heading: '2. How We Use Your Information',
@@ -44,7 +48,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
               '• Deliver and improve the FinReels content feed.\n'
               '• Serve relevant advertisements via Google AdMob and its '
               'mediation partners, including Unity Ads (free tier only).\n'
-              '• Process and verify in-app subscription purchases.\n'
+              '• Process and verify in-app purchases.\n'
               '• Diagnose crashes and performance issues.\n'
               '• Respond to support requests you send us.',
         ),
@@ -58,24 +62,38 @@ class PrivacyPolicyScreen extends StatelessWidget {
               'a better-performing ad. Both AdMob and Unity Ads may collect '
               'and process certain device identifiers to serve personalised '
               'ads in accordance with their own respective privacy '
-              'policies. You can opt out of personalised advertising '
+              'policies. Where required by applicable law (for example in '
+              'the EEA, UK, and Switzerland), we ask for your consent to '
+              'this via a consent form shown on first launch, and you can '
+              'change your choice at any time from Settings → Privacy '
+              'Options. You can also opt out of personalised advertising '
               'through your device\'s ad settings.\n\n'
               'We also use the following third-party services, each governed by '
               'their own privacy policies:\n\n'
               '• Google AdMob — advertising and ad mediation\n'
               '• Unity Ads — advertising (served via AdMob mediation)\n'
-              '• Google Play In-App Purchases — subscription billing\n'
-              '• YouTube Data API — fetching publicly available video metadata\n'
-              '• Firebase Crashlytics (if enabled) — crash reporting',
+              '• Google Play In-App Purchases — payment processing for '
+              'purchases made when FinReels is installed from the Play '
+              'Store\n'
+              '• Paystack — payment processing for purchases made when '
+              'FinReels is installed outside the Play Store (for example, '
+              'directly from our website). Paystack receives the email '
+              'address and payment details you provide it directly; we do '
+              'not see or store your card details\n'
+              '• YouTube — FinReels displays publicly available video '
+              'information (titles, thumbnails, descriptions) from '
+              'YouTube channels\' public RSS feeds, and links out to the '
+              'YouTube app or website to actually play videos',
         ),
         _LegalSection(
           heading: '4. Data Retention',
           body:
               'Analytics data is retained in aggregated form for up to 12 months. '
-              'Subscription records are retained for as long as your subscription '
-              'is active and for up to 12 months afterwards for accounting '
-              'purposes. Locally stored preferences (e.g. notification settings, '
-              'saved videos) remain on your device until the app is uninstalled.',
+              'Purchase records are retained for as long as your purchased '
+              'ad-free period is active and for up to 12 months afterwards '
+              'for accounting purposes. Locally stored preferences (e.g. '
+              'notification settings, saved videos) remain on your device '
+              'until the app is uninstalled.',
         ),
         _LegalSection(
           heading: '5. Children\'s Privacy',
@@ -134,7 +152,7 @@ class TermsOfServiceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const _LegalScreen(
       title: 'Terms of Service',
-      lastUpdated: 'May 2025',
+      lastUpdated: 'July 2026',
       sections: [
         _LegalSection(
           heading: 'Introduction',
@@ -151,7 +169,7 @@ class TermsOfServiceScreen extends StatelessWidget {
               '• Reproduce, distribute, or sell any content from FinReels.\n'
               '• Attempt to reverse-engineer, decompile, or tamper with the app.\n'
               '• Use the app for any unlawful or fraudulent purpose.\n'
-              '• Circumvent or disable any advertising or subscription system.',
+              '• Circumvent or disable any advertising or purchase system.',
         ),
         _LegalSection(
           heading: '2. Content',
@@ -161,22 +179,31 @@ class TermsOfServiceScreen extends StatelessWidget {
               'channel names are the intellectual property of their respective '
               'creators and are subject to their own terms and licences.\n\n'
               'We do not host, upload, or claim ownership of any video content '
-              'displayed in the app. FinReels accesses content via public APIs '
-              'in compliance with the respective platform\'s terms of service.',
+              'displayed in the app. FinReels accesses content via publicly '
+              'available RSS feeds in compliance with the respective platform\'s '
+              'terms of service.',
         ),
         _LegalSection(
-          heading: '3. Subscriptions & Payments',
+          heading: '3. Purchases & Payments',
           body:
-              'FinReels offers optional paid subscriptions (Ad-Free plans) '
-              'processed through Google Play. By subscribing, you agree to '
-              'Google Play\'s billing terms.\n\n'
-              '• Subscriptions are valid for the selected period (1 day, 7 days, '
-              'or 31 days) from the date of purchase.\n'
-              '• Subscriptions are non-renewing — they do not auto-renew.\n'
-              '• All sales are final. Refunds are subject to Google Play\'s '
-              'refund policy.\n'
-              '• Use "Restore Previous Purchase" in Settings to reactivate an '
-              'unexpired subscription after reinstalling the app.',
+              'FinReels offers optional one-time purchases (Ad-Free periods). '
+              'If FinReels is installed from the Google Play Store, purchases '
+              'are processed through Google Play and are subject to Google '
+              'Play\'s billing terms. If FinReels is installed outside the '
+              'Play Store (for example, directly from our website), purchases '
+              'are instead processed through Paystack.\n\n'
+              '• Each purchase grants ad-free access for the selected period '
+              '(1 day, 7 days, or 31 days) from the date of purchase.\n'
+              '• These are one-time payments, not subscriptions — they do '
+              'not renew or recur automatically.\n'
+              '• All sales are final. Refunds for Google Play purchases are '
+              'subject to Google Play\'s refund policy; refunds for Paystack '
+              'purchases are subject to Paystack\'s and our own refund '
+              'practices — contact us using the details in Section 9 of our '
+              'Privacy Policy.\n'
+              '• "Restore Previous Purchase" in Settings applies to Google '
+              'Play purchases only, and reactivates an unexpired ad-free '
+              'period after reinstalling the app on the same Google account.',
         ),
         _LegalSection(
           heading: '4. Intellectual Property',

@@ -5,6 +5,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../config/app_config.dart';
+import 'consent_service.dart';
 
 /// AdService — interstitial patterns:
 ///
@@ -79,6 +80,12 @@ class AdService extends ChangeNotifier {
   Future<void> init() async {
     await _loadAdsRemovedStatus();
     if (_adsRemoved) return;
+
+    // GDPR/UK/Swiss consent MUST be gathered before the Mobile Ads SDK
+    // initializes — see ConsentService and the manifest's
+    // DELAY_APP_MEASUREMENT_INIT flag, which exists for exactly this
+    // ordering requirement. Time-boxed internally; never blocks startup.
+    await ConsentService.instance.requestAndLoadConsent();
 
     await MobileAds.instance.initialize();
     _initialized = true;
