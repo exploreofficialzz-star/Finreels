@@ -47,9 +47,24 @@ jobs:
       - name: Run tests
         run: flutter test
 
-      # ── Keystore (release tags only) ──────────────────────────────────────────
+      # ── PR compile check ─────────────────────────────────────────────────────
+      # Pull requests (especially from forks) don't have access to the signing
+      # secrets below, so they can't produce a production build. This runs an
+      # unsigned debug compile — NOT uploaded anywhere, purely a CI gate — so a
+      # PR that breaks the actual Android/Gradle build (not just analyze/test)
+      # still fails visibly before merge, instead of that only being discovered
+      # on the next real production build.
+      - name: Build APK (PR compile check only — not uploaded)
+        if: github.event_name == 'pull_request'
+        run: flutter build apk --debug
+
+      # ── Keystore ──────────────────────────────────────────────────────────────
+      # Runs for every trigger EXCEPT pull_request — PRs (esp. from forks) don't
+      # have access to repo secrets, and shouldn't need a full signed build just
+      # to validate a change. Every push to main/master, every version tag, and
+      # manual workflow_dispatch runs all get a real signed production build.
       - name: Decode keystore
-        if: startsWith(github.ref, 'refs/tags/')
+        if: github.event_name != 'pull_request'
         run: |
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/finreels.jks
           cat > android/key.properties <<EOF
@@ -59,54 +74,59 @@ jobs:
           keyPassword=${{ secrets.KEYSTORE_KEY_PASSWORD }}
           EOF
 
-      # ── Build APK ─────────────────────────────────────────────────────────────
-      - name: Build APK
-        run: |
-          if [[ "${{ startsWith(github.ref, 'refs/tags/') }}" == "true" ]]; then
-            flutter build apk --release --split-per-abi
-          else
-            flutter build apk --debug
-          fi
+      # ── Build production APK ───────────────────────────────────────────────────
+      # Deliberately NOT --split-per-abi. The AAB below already handles Play
+      # Store distribution (Play does its own per-device delivery from a
+      # single AAB — split APKs serve no purpose there). This app is ALSO
+      # distributed directly (see InstallSourceService / the Paystack
+      # fallback for non-Play-Store installs) — for that path, a random user
+      # clicking a download link needs exactly ONE file that installs on
+      # their phone, not two files where picking the wrong one fails outright.
+      # A universal APK bundles both armeabi-v7a and arm64-v8a native libs
+      # together (still excluding x86/x86_64 — real phones don't use them),
+      # so it's larger than either split slice individually, but works on
+      # any real Android phone with no picking required.
+      # --build-number ties versionCode to the GitHub Actions run number,
+      # which only ever increases, so every Play Console upload gets a
+      # strictly-increasing versionCode automatically.
+      - name: Build production APK (universal — all phones, one file)
+        if: github.event_name != 'pull_request'
+        run: flutter build apk --release --build-number=${{ github.run_number }}
 
-      # ── Build AAB (release tags only) ─────────────────────────────────────────
-      - name: Build AAB
-        if: startsWith(github.ref, 'refs/tags/')
-        run: flutter build appbundle --release
+      # ── Build production AAB ────────────────────────────────────────────────────
+      - name: Build production AAB
+        if: github.event_name != 'pull_request'
+        run: flutter build appbundle --release --build-number=${{ github.run_number }}
 
-      # ── Upload debug APK ──────────────────────────────────────────────────────
-      - name: Upload APK (debug)
-        if: "!startsWith(github.ref, 'refs/tags/')"
+      # ── Upload production APK ──────────────────────────────────────────────────
+      - name: Upload APK (production, universal)
+        if: github.event_name != 'pull_request'
         uses: actions/upload-artifact@v4
         with:
-          name: finreels-debug-apk
-          path: build/app/outputs/flutter-apk/app-debug.apk
-          retention-days: 14
-
-      # ── Upload release APKs ───────────────────────────────────────────────────
-      - name: Upload APKs (release)
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: actions/upload-artifact@v4
-        with:
-          name: finreels-release-apks
-          path: build/app/outputs/flutter-apk/app-*-release.apk
+          name: finreels-production-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
           retention-days: 90
 
-      # ── Upload AAB ────────────────────────────────────────────────────────────
-      - name: Upload AAB (release)
-        if: startsWith(github.ref, 'refs/tags/')
+      # ── Upload production AAB ───────────────────────────────────────────────────
+      - name: Upload AAB (production)
+        if: github.event_name != 'pull_request'
         uses: actions/upload-artifact@v4
         with:
-          name: finreels-release-aab
+          name: finreels-production-aab
           path: build/app/outputs/bundle/release/app-release.aab
           retention-days: 90
 
       # ── GitHub Release ────────────────────────────────────────────────────────
+      # Stays tag-only — a formal GitHub Release is a published, versioned
+      # milestone. Creating one on every push to main (rather than only on
+      # deliberate version tags) would spam the Releases page with an entry per
+      # commit, which isn't what "release" should mean here.
       - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            build/app/outputs/flutter-apk/app-*-release.apk
+            build/app/outputs/flutter-apk/app-release.apk
             build/app/outputs/bundle/release/app-release.aab
           generate_release_notes: true
         env:
