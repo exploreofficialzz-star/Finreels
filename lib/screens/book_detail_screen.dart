@@ -9,8 +9,10 @@ import 'package:hive/hive.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../data/book_insights_data.dart';
+import '../data/category_playbook_data.dart';
 import '../models/video.dart';
 import '../services/ad_service.dart';
+import '../services/engagement_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
 import '../widgets/book_cover_image.dart';
@@ -112,6 +114,10 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       unawaited(AdService.instance.onContentTapped());
     });
+    if (CategoryPlaybookData.isPlaybookId(widget.book.id)) {
+      final categoryId = widget.book.id.replaceFirst('playbook_', '');
+      unawaited(EngagementService.instance.recordCategoryInterest(categoryId));
+    }
     _progressBox  = Hive.box<String>('reading_progress');
     _lastCfi      = _progressBox?.get(_progressKey);
     _lastPdfPage  = int.tryParse(_progressBox?.get(_pdfProgressKey) ?? '');
@@ -432,7 +438,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   }
 
   Widget _buildInsightsReader() {
-    final insight = findInsight(widget.book.id);
+    final insight = CategoryPlaybookData.findAnyInsight(widget.book.id);
 
     if (insight == null) {
       return Scaffold(
@@ -501,11 +507,12 @@ class _InsightsReaderScreenState extends State<_InsightsReaderScreen> {
               fontSize: 17),
         ),
         actions: [
-          IconButton(
-            tooltip: 'Get full book',
-            icon: const Icon(Icons.shopping_bag_outlined, color: AppTheme.gold),
-            onPressed: _openPurchaseLink,
-          ),
+          if (insight.purchaseUrl.isNotEmpty)
+            IconButton(
+              tooltip: 'Get full book',
+              icon: const Icon(Icons.shopping_bag_outlined, color: AppTheme.gold),
+              onPressed: _openPurchaseLink,
+            ),
         ],
       ),
       body: Column(
@@ -546,11 +553,12 @@ class _InsightsReaderScreenState extends State<_InsightsReaderScreen> {
                   );
                 }),
 
-                // ── Buy the full book CTA ────────────────────────────────
-                _BuyFullBookCard(
-                  insight: insight,
-                  onTap: _openPurchaseLink,
-                ),
+                // ── Buy the full book CTA (only when there's a real book) ─
+                if (insight.purchaseUrl.isNotEmpty)
+                  _BuyFullBookCard(
+                    insight: insight,
+                    onTap: _openPurchaseLink,
+                  ),
               ],
             ),
           ),

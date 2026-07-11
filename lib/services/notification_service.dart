@@ -3,7 +3,9 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../config/app_config.dart';
 import '../data/channel_data.dart';
+import '../data/resource_category_data.dart';
 import 'rss_service.dart';
+import 'user_profile_service.dart';
 
 class NotificationService {
   NotificationService._();
@@ -107,7 +109,19 @@ class NotificationService {
 
     var notifId = AppConfig.notifIdBase;
 
-    for (final channel in ChannelData.all) {
+    // This runs in WorkManager's own separate isolate (see
+    // background_service.dart) — a completely fresh Dart heap, so these
+    // singletons start unloaded here even though they're already loaded in
+    // the main app isolate. Both reads are cheap (local JSON/SharedPreferences),
+    // and eagerFor() below is what keeps this background check from
+    // fetching every verified channel across all 60 categories instead of
+    // just the general set + whatever this person actually selected.
+    await ResourceCategoryData.load();
+    await UserProfileService.instance.init();
+    final channelsToCheck =
+        ChannelData.eagerFor(UserProfileService.instance.selectedCategoryIds);
+
+    for (final channel in channelsToCheck) {
       try {
         // forceRefresh: true — this background task's entire purpose is to
         // detect NEW uploads. Serving a cached (possibly 30-min-old) list

@@ -6,6 +6,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../models/video.dart';
 import '../services/ad_service.dart';
+import '../services/engagement_service.dart';
 import '../theme/app_theme.dart';
 
 /// Full-screen 9:16 Shorts player.
@@ -142,7 +143,10 @@ class _ShortPageState extends State<_ShortPage> {
         hideControls: true,
       ),
     )..addListener(_onUpdate);
-    if (autoPlay) _userStarted = true;
+    if (autoPlay) {
+      _userStarted = true;
+      unawaited(EngagementService.instance.recordView(widget.video));
+    }
   }
 
   void _onUpdate() {
@@ -172,6 +176,7 @@ class _ShortPageState extends State<_ShortPage> {
       // Start immediately — don't wait for _ready since the controller
       // may already be warm from a prior activation on this same page.
       _userStarted = true;
+      unawaited(EngagementService.instance.recordView(widget.video));
       if (_ready) {
         _controller.play();
       }

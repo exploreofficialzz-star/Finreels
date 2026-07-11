@@ -58,6 +58,7 @@ flutter:
     - assets/icons/
     - assets/sounds/
     - assets/books/
+    - assets/data/
 
 flutter_icons:
   android: true

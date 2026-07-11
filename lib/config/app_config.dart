@@ -131,6 +131,11 @@ class AppConfig {
   static const String prefNotificationsEnabled = 'notifications_enabled';
   static const String prefSavedVideos          = 'saved_videos';
   static const String prefAdBlockChecked       = 'adblock_last_check_ms';
+  static const String prefSelectedCategoryIds  = 'selected_resource_category_ids';
+  static const String prefOnboardingComplete   = 'onboarding_complete';
+  static const String prefChannelEngagement    = 'channel_engagement_scores';
+  static const String prefCategoryEngagement   = 'category_engagement_scores';
+  static const String prefEngagementDecayAt    = 'engagement_last_decay_ms';
 
   // ── Connectivity ─────────────────────────────────────────────────────────────
   static const List<String> connectivityEndpoints = [

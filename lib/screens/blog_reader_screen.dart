@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 import '../services/ad_service.dart';
+import '../services/engagement_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
 
@@ -12,9 +15,15 @@ class BlogReaderScreen extends StatefulWidget {
   final String url;
   final String title;
 
+  /// Set when this article came from a category-tagged feed (see
+  /// BlogArticle.categoryId) — lets the reader feed that back into
+  /// EngagementService the same way opening a category playbook does.
+  final String? categoryId;
+
   const BlogReaderScreen({
     required this.url,
     required this.title,
+    this.categoryId,
     super.key,
   });
 
@@ -31,6 +40,9 @@ class _BlogReaderScreenState extends State<BlogReaderScreen> {
   void initState() {
     super.initState();
     _allowedHost = Uri.tryParse(widget.url)?.host ?? '';
+    if (widget.categoryId != null) {
+      unawaited(EngagementService.instance.recordCategoryInterest(widget.categoryId!));
+    }
   }
 
   @override

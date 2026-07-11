@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:xml/xml.dart';
 
+import '../data/resource_category_data.dart';
+
 /// A single parsed blog article from an RSS/Atom feed.
 class BlogArticle {
   final String title;
@@ -11,6 +13,10 @@ class BlogArticle {
   final DateTime publishedAt;
   final String excerpt;
 
+  /// Which of the 60 categories this feed is tagged to, if any — see
+  /// verified_resources.json. Null for the 5 general-purpose feeds.
+  final String? categoryId;
+
   const BlogArticle({
     required this.title,
     required this.url,
@@ -18,6 +24,7 @@ class BlogArticle {
     required this.publishedAt,
     this.thumbnailUrl,
     this.excerpt = '',
+    this.categoryId,
   });
 }
 
@@ -46,6 +53,14 @@ const List<Map<String, String>> kBlogFeeds = [
   },
 ];
 
+/// [kBlogFeeds] above are the 5 general-purpose feeds. This adds every
+/// category-tagged blog verified so far (see
+/// assets/data/verified_resources.json). BlogRssService.fetchAll() reads
+/// this combined list, not the bare constant, so newly-verified blogs
+/// show up automatically.
+List<Map<String, String>> get combinedBlogFeeds =>
+    [...kBlogFeeds, ...ResourceCategoryData.verifiedBlogs];
+
 class BlogRssService {
   BlogRssService._();
   static final BlogRssService instance = BlogRssService._();
@@ -62,8 +77,12 @@ class BlogRssService {
   Future<List<BlogArticle>> fetchAll({bool forceRefresh = false}) async {
     if (!forceRefresh && _isCacheFresh) return _cache!;
 
-    final futures = kBlogFeeds.map(
-      (feed) => _fetchFeed(url: feed['url']!, sourceName: feed['name']!),
+    final futures = combinedBlogFeeds.map(
+      (feed) => _fetchFeed(
+        url: feed['url']!,
+        sourceName: feed['name']!,
+        categoryId: feed['categoryId'],
+      ),
     );
 
     final results = await Future.wait(futures);
@@ -77,6 +96,7 @@ class BlogRssService {
   Future<List<BlogArticle>> _fetchFeed({
     required String url,
     required String sourceName,
+    String? categoryId,
   }) async {
     try {
       final response = await http.get(Uri.parse(url), headers: {
@@ -88,8 +108,8 @@ class BlogRssService {
 
       final body = response.body;
       return await compute<List<String>, List<BlogArticle>>(
-        (args) => _parse(args[0], args[1]),
-        [body, sourceName],
+        (args) => _parse(args[0], args[1], args[2].isEmpty ? null : args[2]),
+        [body, sourceName, categoryId ?? ''],
       );
     } on Exception catch (e) {
       debugPrint('[BlogRssService] $sourceName failed: $e');
@@ -97,7 +117,7 @@ class BlogRssService {
     }
   }
 
-  static List<BlogArticle> _parse(String body, String sourceName) {
+  static List<BlogArticle> _parse(String body, String sourceName, [String? categoryId]) {
     try {
       final doc = XmlDocument.parse(body);
 
@@ -130,6 +150,7 @@ class BlogRssService {
             thumbnailUrl: thumb,
             publishedAt: published,
             excerpt: _clean(_text(item, 'description') ?? ''),
+            categoryId: categoryId,
           );
         }).whereType<BlogArticle>().toList();
       }
@@ -152,6 +173,7 @@ class BlogRssService {
             sourceName: sourceName,
             publishedAt: published,
             excerpt: _clean(_text(entry, 'summary') ?? ''),
+            categoryId: categoryId,
           );
         }).whereType<BlogArticle>().toList();
       }

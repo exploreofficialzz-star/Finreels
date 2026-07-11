@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/channel.dart';
+import 'resource_category_data.dart';
 
 /// FinReels — 10 channels, all IDs verified directly from YouTube channel pages.
 ///
@@ -184,6 +185,28 @@ class ChannelData {
       initials: 'ME',
     ),
   ];
+
+  /// The 12 general-purpose channels above, PLUS every category-tagged
+  /// channel that's been verified so far (see
+  /// assets/data/verified_resources.json, loaded by ResourceCategoryData).
+  /// This is what FeedProvider and everything else should actually read —
+  /// [all] alone only has the original const 12.
+  static List<Channel> get combined => [...all, ...ResourceCategoryData.verifiedChannels];
+
+  /// The subset of [combined] that should actually be fetched over the
+  /// network for a person who has [selectedCategoryIds] selected as their
+  /// "My Business": every general channel (resourceCategoryId == null),
+  /// plus only the category-tagged channels they actually asked for.
+  ///
+  /// This is the one rule that lets ChannelData keep growing toward all 60
+  /// categories without every launch — or every background notification
+  /// check — getting slower and burning more data as it grows. Used by
+  /// both FeedProvider.refresh() and the background new-upload checker in
+  /// notification_service.dart, so they can't drift out of sync.
+  static List<Channel> eagerFor(Set<String> selectedCategoryIds) => combined
+      .where((c) =>
+          c.resourceCategoryId == null || selectedCategoryIds.contains(c.resourceCategoryId))
+      .toList();
 
   static final Map<String, Channel> byId = {
     for (final ch in all) ch.id: ch,

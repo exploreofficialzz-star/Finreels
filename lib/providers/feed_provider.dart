@@ -1,16 +1,45 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../config/app_config.dart';
+import '../data/category_playbook_data.dart';
 import '../data/channel_data.dart';
 import '../models/channel.dart';
 import '../models/feed_tab.dart';
 import '../models/video.dart';
+import '../services/engagement_service.dart';
 import '../services/rss_service.dart';
+import '../services/user_profile_service.dart';
 
 enum FeedState { idle, loading, loaded, error }
 
 class FeedProvider extends ChangeNotifier {
+  FeedProvider() {
+    // Books re-sort is cheap (no network) so it's safe to do live: clear
+    // just that tab's cache and let it recompute next access. Channel
+    // order (Videos/Shorts) intentionally stays "next launch only" — see
+    // _buildSessionChannelOrder — since re-sorting those live would mean
+    // touching the round-robin/session-order logic mid-scroll.
+    UserProfileService.instance.addListener(_onProfileChanged);
+  }
+
+  void _onProfileChanged() {
+    _tabCache.remove(FeedTab.books);
+    notifyListeners();
+    // Pulls in the newly-selected category's channels right away instead
+    // of making the person wait for next app open. Silent = no loading
+    // spinner flash; _eagerChannels() picks up the new selection itself.
+    unawaited(refresh(force: true, silent: true));
+  }
+
+  @override
+  void dispose() {
+    UserProfileService.instance.removeListener(_onProfileChanged);
+    super.dispose();
+  }
+
   FeedState _state = FeedState.idle;
   FeedState get state => _state;
 
@@ -32,12 +61,35 @@ class FeedProvider extends ChangeNotifier {
   // Shuffled once at FeedProvider construction (= once per app launch).
   // Stable within the session so refreshing doesn't reorder the feed.
   // Different every launch → fresh channel at the top each time the user opens.
-  final List<String> _sessionChannelOrder =
-      (ChannelData.all.map((c) => c.id).toList()..shuffle());
+  // Three layers, in priority order:
+  //   1. Explicit "My Business" selection (UserProfileService) — strongest signal, the person said so directly.
+  //   2. Learned engagement (EngagementService) — channels this person actually watches/saves rank higher.
+  //   3. Shuffle — anything with no signal yet gets a fair, random shot at the top so discovery still happens.
+  final List<String> _sessionChannelOrder = _buildSessionChannelOrder();
+
+  // ── Eager-fetch scope ─────────────────────────────────────────────────
+  // See ChannelData.eagerFor — general channels always fetched, category-
+  // tagged channels only fetched if the user selected that category.
+  static List<Channel> _eagerChannels() =>
+      ChannelData.eagerFor(UserProfileService.instance.selectedCategoryIds);
+
+  static List<String> _buildSessionChannelOrder() {
+    final shuffled = _eagerChannels().map((c) => c.id).toList()..shuffle();
+    final ranked = EngagementService.instance.sortByEngagement(shuffled);
+    final selected = UserProfileService.instance.selectedCategoryIds;
+    if (selected.isEmpty) return ranked;
+    final boosted = ChannelData.combined
+        .where((c) => selected.contains(c.resourceCategoryId))
+        .map((c) => c.id)
+        .toList();
+    if (boosted.isEmpty) return ranked;
+    ranked.removeWhere(boosted.contains);
+    return [...boosted, ...ranked];
+  }
 
   var _savedVideoIds = <String>{};
 
-  List<Channel> get channels => ChannelData.all;
+  List<Channel> get channels => ChannelData.combined;
   List<Video> getVideosFor(String channelId) => _videosByChannel[channelId] ?? [];
 
   // ── Per-tab cached list ───────────────────────────────────────────────────────
@@ -53,8 +105,28 @@ class FeedProvider extends ChangeNotifier {
         _roundRobin(all.where((v) => v.isShort && !_isBook(v)).toList()),
       FeedTab.blogs  =>
         _roundRobin(all.where((v) => _isBlog(v) && !_isBook(v)).toList()),
-      FeedTab.books  => List.unmodifiable(_bookVideos),
+      FeedTab.books  => List.unmodifiable(_allBookVideos),
     };
+  }
+
+  /// The original 10 hand-picked books plus the 60 generated "Business of
+  /// Your Skill/Business/Profession" playbooks (see CategoryPlaybookData).
+  /// If the person has selected one or more categories (UserProfileService),
+  /// their playbook(s) come first — everyone else sees the original 10
+  /// first, unchanged, followed by the playbooks in category order.
+  List<Video> get _allBookVideos {
+    final playbooks = CategoryPlaybookData.videos;
+    final selected = UserProfileService.instance.selectedCategoryIds;
+    if (selected.isEmpty) {
+      return [..._bookVideos, ...playbooks];
+    }
+    final mine = <Video>[];
+    final rest = <Video>[];
+    for (final v in playbooks) {
+      final categoryId = v.id.replaceFirst('playbook_', '');
+      (selected.contains(categoryId) ? mine : rest).add(v);
+    }
+    return [...mine, ..._bookVideos, ...rest];
   }
 
   List<Video> _roundRobin(List<Video> videos) {
@@ -172,7 +244,7 @@ class FeedProvider extends ChangeNotifier {
 
   Future<void> _loadDiskCache() async {
     final snap = <String, List<Video>>{};
-    for (final ch in ChannelData.all) {
+    for (final ch in ChannelData.combined) {
       final cached = await RssService.instance.getCached(ch.id);
       if (cached.isNotEmpty) snap[ch.id] = cached;
     }
@@ -205,11 +277,11 @@ class FeedProvider extends ChangeNotifier {
       notifyListeners();
     }
 
-    const channels = ChannelData.all;
+    final channels = _eagerChannels();
     final snap = <String, List<Video>>{};
 
     // Staggered parallel: channel[i] waits i×200 ms before its first request.
-    // All 10 run concurrently inside Future.wait — total time ≈ slowest fetch.
+    // All run concurrently inside Future.wait — total time ≈ slowest fetch.
     // Stagger prevents burst; YouTube never sees >1 request per 200 ms.
     await Future.wait(
       List.generate(channels.length, (i) async {
@@ -256,9 +328,12 @@ class FeedProvider extends ChangeNotifier {
   bool isVideoSaved(String id) => _savedVideoIds.contains(id);
 
   Future<void> toggleSaved(Video video) async {
-    _savedVideoIds.contains(video.id)
-        ? _savedVideoIds.remove(video.id)
-        : _savedVideoIds.add(video.id);
+    final wasSaved = _savedVideoIds.contains(video.id);
+    wasSaved ? _savedVideoIds.remove(video.id) : _savedVideoIds.add(video.id);
+    if (!wasSaved) {
+      // Saving (not un-saving) is a stronger signal than just opening.
+      unawaited(EngagementService.instance.recordSave(video));
+    }
     await _persistSaved();
     notifyListeners();
   }

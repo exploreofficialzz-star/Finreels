@@ -9,12 +9,15 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../config/app_config.dart';
+import '../data/resource_category_data.dart';
+import '../screens/my_business_screen.dart';
 import '../screens/paystack_checkout_screen.dart';
 import '../screens/privacy_policy_screen.dart';
 import '../services/ad_service.dart';
 import '../services/consent_service.dart';
 import '../services/iap_service.dart';
 import '../services/notification_service.dart';
+import '../services/user_profile_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
 
@@ -70,6 +73,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
     }
   }
 
+  String _myBusinessSubtitle() {
+    final selected = UserProfileService.instance.selectedCategoryIds;
+    if (selected.isEmpty) {
+      return 'Tell us your skill, business or profession';
+    }
+    final names = selected
+        .map((id) => ResourceCategoryData.byId(id)?.name)
+        .whereType<String>()
+        .toList();
+    if (names.isEmpty) return 'Tell us your skill, business or profession';
+    return names.join(', ');
+  }
+
   @override
   Widget build(BuildContext context) {
     final iap     = context.watch<IapService>();
@@ -118,6 +134,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         const _SectionHeader('Subscription'),
                         _AdsRemovedCard(),
                       ],
+
+                      // ── Personalize ──────────────────────────────────────
+                      const _SectionHeader('Personalize'),
+                      _SettingsTile(
+                        icon: Icons.storefront_rounded,
+                        iconColor: AppTheme.gold,
+                        title: 'My Business',
+                        subtitle: _myBusinessSubtitle(),
+                        trailing: const Icon(Icons.chevron_right_rounded),
+                        onTap: () async {
+                          await Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (_) => const MyBusinessScreen()),
+                          );
+                          if (mounted) setState(() {});
+                        },
+                      ),
 
                       // ── Notifications ───────────────────────────────────
                       const _SectionHeader('Notifications'),

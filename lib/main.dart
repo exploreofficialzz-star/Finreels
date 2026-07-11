@@ -6,15 +6,19 @@ import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
+import 'data/resource_category_data.dart';
 import 'providers/feed_provider.dart';
 import 'screens/main_shell.dart';
+import 'screens/my_business_screen.dart';
 import 'screens/splash_screen.dart';
 import 'services/ad_block_service.dart';
 import 'services/ad_service.dart';
 import 'services/background_service.dart';
 import 'services/connectivity_service.dart';
+import 'services/engagement_service.dart';
 import 'services/iap_service.dart';
 import 'services/notification_service.dart';
+import 'services/user_profile_service.dart';
 import 'theme/app_theme.dart';
 import 'widgets/ad_block_overlay.dart';
 import 'widgets/connectivity_overlay.dart';
@@ -164,6 +168,12 @@ class _SplashGateState extends State<_SplashGate> {
         _safeInit('Notifications',  () => NotificationService.instance.init()),
         _safeInit('Ads',            () => AdService.instance.init()),
         _safeInit('IAP',            () => IapService.instance.init()),
+        // Both of these must finish before FeedProvider() below is
+        // constructed: its session channel order reads the selected
+        // category (and engagement scores) synchronously at construction time.
+        _safeInit('ResourceCategories', () => ResourceCategoryData.load()),
+        _safeInit('UserProfile',        () => UserProfileService.instance.init()),
+        _safeInit('Engagement',         () => EngagementService.instance.init()),
       ]).timeout(const Duration(seconds: 6));
     } on TimeoutException {
       debugPrint('[startup] Service init group exceeded 6s ceiling — '
@@ -226,6 +236,8 @@ class _SplashGateState extends State<_SplashGate> {
           ChangeNotifierProvider.value(value: _feedProvider!),
           ChangeNotifierProvider.value(value: IapService.instance),
           ChangeNotifierProvider.value(value: AdService.instance),
+          ChangeNotifierProvider.value(value: UserProfileService.instance),
+          ChangeNotifierProvider.value(value: EngagementService.instance),
         ],
         child: const ConnectivityOverlay(
           child: AdBlockOverlay(child: _AppRoot()),
@@ -276,5 +288,16 @@ class _AppRootState extends State<_AppRoot> with WidgetsBindingObserver {
   }
 
   @override
-  Widget build(BuildContext context) => const MainShell();
+  Widget build(BuildContext context) {
+    if (!UserProfileService.instance.onboardingComplete) {
+      return MyBusinessScreen(
+        isOnboarding: true,
+        // onboardingComplete flips inside MyBusinessScreen._save() before
+        // this fires, so the rebuild below reliably picks the MainShell
+        // branch instead of looping back into onboarding.
+        onDone: () => setState(() {}),
+      );
+    }
+    return const MainShell();
+  }
 }

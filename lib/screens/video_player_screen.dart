@@ -9,6 +9,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../models/channel.dart';
 import '../models/video.dart';
 import '../services/ad_service.dart';
+import '../services/engagement_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
 import 'channel_videos_screen.dart';
@@ -46,6 +47,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   @override
   void initState() {
     super.initState();
+    // Learns from this open — see EngagementService for the honest scope
+    // (on-device implicit-feedback ranking, not a trained model).
+    unawaited(EngagementService.instance.recordView(widget.video));
     // Fire ad AFTER the push-navigation animation completes so it never
     // causes a black flash during the hero transition.
     WidgetsBinding.instance.addPostFrameCallback((_) {

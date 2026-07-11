@@ -112,6 +112,7 @@ class _BlogFeedScreenState extends State<BlogFeedScreen> {
                         builder: (_) => BlogReaderScreen(
                           url:   article.url,
                           title: article.title,
+                          categoryId: article.categoryId,
                         ),
                       ),
                     );

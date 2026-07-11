@@ -18,6 +18,7 @@ import '../widgets/inline_video_card.dart';
 import '../widgets/no_flash_page_route.dart';
 import '../widgets/shimmer_loader.dart';
 import 'blog_feed_screen.dart';
+import 'discover_screen.dart';
 import 'book_detail_screen.dart';
 import 'shorts_player_screen.dart';
 
@@ -62,6 +63,12 @@ class _AppHeader extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.w800, letterSpacing: -0.5)),
           const Spacer(),
+          IconButton(
+            icon: Icon(Icons.search_rounded, color: AppTheme.textMuted(context)),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const DiscoverScreen()),
+            ),
+          ),
           IconButton(
             icon: Icon(Icons.refresh_rounded, color: AppTheme.textMuted(context)),
             onPressed: () => context.read<FeedProvider>().refresh(force: true),
