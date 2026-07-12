@@ -1,0 +1,20 @@
+{
+  "categoryId": "skill_02_hairdressing_hairstyling",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-11",
+  "channels": [
+    {
+      "id": "UC5_ZJ2QMb-19TLKDl6JuVbg",
+      "name": "Louis Ihuefo",
+      "handle": "@Louisihuefo",
+      "description": "Lagos-based hairstylist and YouTuber — self-described 'No 1 hairstylist and YouTuber in Africa'. Runs paid workshops teaching the hairstyling trade alongside tutorial content.",
+      "accentColor": "0xFFEC4899",
+      "initials": "LI",
+      "focus": "Hairstyling business & workshops",
+      "verifiedOn": "2026-07-11",
+      "verificationMethod": "Cross-corroborated across 4 independent search results (channel page + 3 video pages) all pointing to the same channel ID; self-description and Lagos workshop link confirm topical + regional match."
+    }
+  ],
+  "blogs": [],
+  "books": []
+}

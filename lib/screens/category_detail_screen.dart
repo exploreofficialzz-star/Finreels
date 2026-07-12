@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../data/category_playbook_data.dart';
 import '../data/resource_category_data.dart';
@@ -18,13 +19,14 @@ import 'channel_videos_screen.dart';
 /// The "hub" for one of the 60 categories — reached from Discover, never
 /// from the main feed, so nothing here is fetched until someone actually
 /// taps in. That's deliberate: it's what lets the data model hold all 60
-/// categories' worth of channels/blogs without every launch getting
+/// categories' worth of channels/blogs/books without every launch getting
 /// slower as more get verified (see ChannelData.eagerFor).
 ///
 /// Always shows the playbook (instant — no network, generated from the
-/// bundled JSON). Channels and blogs below it are real only once verified
-/// — see assets/data/verified_resources.json — otherwise this is honest
-/// about "still verifying" rather than showing something fake.
+/// bundled JSON). Channels, blogs and free books below it are real only
+/// once verified — see assets/data/resources/{categoryId}.json —
+/// otherwise this is honest about "still verifying" rather than showing
+/// something fake.
 class CategoryDetailScreen extends StatefulWidget {
   final ResourceCategory category;
   const CategoryDetailScreen({required this.category, super.key});
@@ -35,6 +37,7 @@ class CategoryDetailScreen extends StatefulWidget {
 
 class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
   List<Channel> _channels = [];
+  List<VerifiedBook> _books = [];
   List<BlogArticle> _blogArticles = [];
   bool _loadingBlogs = false;
 
@@ -44,6 +47,9 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
     unawaited(EngagementService.instance.recordCategoryInterest(widget.category.id));
     _channels = ResourceCategoryData.verifiedChannels
         .where((c) => c.resourceCategoryId == widget.category.id)
+        .toList();
+    _books = ResourceCategoryData.verifiedBooks
+        .where((b) => b.categoryId == widget.category.id)
         .toList();
     final hasBlogs = (ResourceCategoryData.verifiedFor(widget.category.id)?['blogs'] as List?)
             ?.isNotEmpty ??
@@ -134,6 +140,12 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
             _EmptyNote(text: 'Still verifying real blogs for this category.')
           else
             ..._blogArticles.take(8).map((a) => _BlogTile(article: a)),
+          const SizedBox(height: 24),
+          _SectionLabel('Free Books'),
+          if (_books.isEmpty)
+            _EmptyNote(text: 'Still verifying free books for this category.')
+          else
+            ..._books.map((b) => _FreeBookTile(book: b)),
         ],
       ),
     );
@@ -279,6 +291,87 @@ class _ChannelTile extends StatelessWidget {
   }
 }
 
+class _FreeBookTile extends StatelessWidget {
+  final VerifiedBook book;
+  const _FreeBookTile({required this.book});
+
+  Future<void> _open(BuildContext context) async {
+    if (book.freeSourceType == 'download') {
+      final uri = Uri.parse(book.freeSourceUrl);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      }
+      return;
+    }
+    if (!context.mounted) return;
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => BlogReaderScreen(
+          url: book.freeSourceUrl,
+          title: book.title,
+          categoryId: book.categoryId,
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: GestureDetector(
+        onTap: () => _open(context),
+        child: Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: AppTheme.surfaceColor(context),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: AppTheme.dividerColor(context), width: 0.5),
+          ),
+          child: Row(
+            children: [
+              Icon(
+                book.freeSourceType == 'download'
+                    ? Icons.download_rounded
+                    : Icons.menu_book_rounded,
+                color: AppTheme.gold,
+                size: 20,
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(book.title,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall
+                            ?.copyWith(fontWeight: FontWeight.w700)),
+                    const SizedBox(height: 2),
+                    Text(
+                      book.freeSourceNote != null
+                          ? '${book.author} · ${book.freeSourceNote}'
+                          : book.author,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall
+                          ?.copyWith(color: AppTheme.textSecondary(context)),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(Icons.chevron_right_rounded, color: AppTheme.textMuted(context)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
 class _BlogTile extends StatelessWidget {
   final BlogArticle article;
   const _BlogTile({required this.article});

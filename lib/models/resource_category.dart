@@ -86,7 +86,43 @@ class TaxReform {
       );
 }
 
-/// One of the 60 categories (20 Skills + 20 Businesses + 20 Professions).
+/// A verified free book/guide for one category — see
+/// assets/data/resources/{categoryId}.json. Deliberately NOT the same
+/// shape as the app's existing bundled/EPUB books (book_insights_data.dart)
+/// — those are FinReels-curated reading with a full in-app reader; these
+/// are pointers to real free resources out on the web (a free chapter, an
+/// OpenStax textbook, an SBA.gov guide, a Project Gutenberg title) opened
+/// the same way a category-tagged blog article opens.
+class VerifiedBook {
+  final String title;
+  final String author;
+  final String freeSourceUrl;
+
+  /// 'web' (opens in the in-app reader, like a blog article) or
+  /// 'download' (a direct PDF/EPUB file — opened externally so the
+  /// device's own viewer/download manager handles it).
+  final String freeSourceType;
+  final String? freeSourceNote;
+  final String? categoryId;
+
+  const VerifiedBook({
+    required this.title,
+    required this.author,
+    required this.freeSourceUrl,
+    this.freeSourceType = 'web',
+    this.freeSourceNote,
+    this.categoryId,
+  });
+
+  factory VerifiedBook.fromJson(Map<String, dynamic> j, {String? categoryId}) => VerifiedBook(
+        title: j['title'] as String,
+        author: j['author'] as String,
+        freeSourceUrl: j['freeSourceUrl'] as String,
+        freeSourceType: j['freeSourceType'] as String? ?? 'web',
+        freeSourceNote: j['freeSourceNote'] as String?,
+        categoryId: categoryId,
+      );
+}
 /// Field population differs by [section] — see the three "shape" groups
 /// below — because the three source documents captured genuinely different
 /// things: skills got open questions, businesses got answered Q&A,

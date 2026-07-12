@@ -1,0 +1,38 @@
+{
+  "categoryId": "skill_01_tailoring_fashion_design",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-11",
+  "channels": [
+    {
+      "id": "UCMt5gaZ26hjIW-XFWoYDAHA",
+      "name": "Kim Dave",
+      "handle": "@KimDave",
+      "description": "Priscillia Okpan — Nigerian fashion designer & content creator. Pattern cutting, Ankara fashion, sewing tutorials and the business side of running a fashion brand.",
+      "accentColor": "0xFFEC4899",
+      "initials": "KD",
+      "focus": "Fashion design & tailoring business",
+      "verifiedOn": "2026-07-11",
+      "verificationMethod": "Fetched youtube.com/@KimDave directly, confirmed canonical channel ID."
+    },
+    {
+      "id": "UCQCL3GrCtBtJK7hnMy0x_cQ",
+      "name": "Ann Usman",
+      "handle": "@annusman",
+      "description": "Fashion design, couture and bridal — pattern cutting, sewing techniques and building a fashion design career.",
+      "accentColor": "0xFFF59E0B",
+      "initials": "AU",
+      "focus": "Fashion design & tailoring business",
+      "verifiedOn": "2026-07-11",
+      "verificationMethod": "Fetched youtube.com/channel/UCQCL3GrCtBtJK7hnMy0x_cQ directly, confirmed canonical channel ID and topical match."
+    }
+  ],
+  "blogs": [
+    {
+      "name": "Entrepreneurs.ng",
+      "url": "https://entrepreneurs.ng/feed/",
+      "verifiedOn": "2026-07-11",
+      "verificationMethod": "Confirmed real article matching directory description; feed URL confirmed via FeedSpot's curated Nigeria Business RSS directory. Raw XML not fetched directly (no outbound network in the build sandbox) — worth one curl check before shipping."
+    }
+  ],
+  "books": []
+}

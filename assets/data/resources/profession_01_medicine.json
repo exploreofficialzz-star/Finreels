@@ -1,0 +1,76 @@
+{
+  "categoryId": "profession_01_medicine",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-12",
+  "channels": [
+    {
+      "id": "UCoOae5nYA7VqaXzerajD0lg",
+      "name": "Ali Abdaal",
+      "handle": "@AliAbdaal",
+      "description": "Ex-NHS doctor turned entrepreneur, 5M+ subscribers. Not business-of-medicine content itself, but the clearest live case study of a doctor building a business on camera.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "AA",
+      "focus": "Doctor-turned-entrepreneur, format reference",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "Confirmed via official site aliabdaal.com and multiple independent search results all pointing to the same channel ID. Main channel, not his separate vlog or Lifestyle Business Academy channels."
+    },
+    {
+      "id": "UCZtlNk4lpEJ9vBer2PqaHXQ",
+      "name": "Dr. Una | EntreMD",
+      "handle": "@DrUna",
+      "description": "Dr. Nneka Unachukwu, MD — Nigerian-trained physician who coaches other physicians on building 7-figure businesses and using YouTube to grow a practice.",
+      "accentColor": "0xFF16A34A",
+      "initials": "DU",
+      "focus": "Physician entrepreneurship coaching",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "Fetched channel page directly; self-description explicitly matches 'business of medicine' framing word for word. Cross-confirmed by entremd.com blog/podcast content referencing the same channel."
+    },
+    {
+      "id": "UCB2EsxSII2-Fvtld6SgrJ6Q",
+      "name": "Dr Ola Brown",
+      "handle": "@DrOlaBrown",
+      "description": "Founder of Flying Doctors Nigeria (West Africa's first air ambulance service) and HealthCap Africa. Now runs #Ecofininsights — finance and economics content from a physician-investor.",
+      "accentColor": "0xFFF59E0B",
+      "initials": "OB",
+      "focus": "Healthcare entrepreneurship & investment",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "Confirmed via her own Medium post referencing 'my youtube channel', cross-checked against her active X/Twitter account (@NaijaFlyingDr) linking to recent videos on the same channel."
+    },
+    {
+      "id": "UCto7aLUgNulcszaErw4FS1g",
+      "name": "The Doctorpreneur Academy",
+      "handle": "@TheDoctorpreneurAcademy",
+      "description": "Community channel for healthcare professionals, associated with Dr. BB Phetla's Doctorpreneur platform (South Africa) — 13+ years private practice plus an MBA, framed explicitly as 'the business of medicine' for African doctors.",
+      "accentColor": "0xFFEC4899",
+      "initials": "DA",
+      "focus": "Business of medicine coaching (South Africa)",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "Channel self-description confirms healthcare-professional business focus, matching the Doctorpreneur/doctorpreneur.co.za branding independently confirmed via podcast interviews (The Dr Coffee Podcast, Medically Inclined). Not 100% confirmed as Dr. Phetla's personally-run channel vs. the wider Doctorpreneur community — flagged for a closer look."
+    }
+  ],
+  "blogs": [
+    {
+      "name": "Nairametrics",
+      "url": "https://nairametrics.com/feed",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "Exact feed URL confirmed via FeedSpot's Nigeria Personal Finance RSS directory. Leading Nigerian business/financial news site; covers healthcare-sector business news as part of its general business coverage rather than a dedicated healthcare-only feed."
+    },
+    {
+      "name": "White Coat Investor",
+      "url": "https://www.whitecoatinvestor.com/feed",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "Exact feed URL confirmed via FeedSpot's Top 100 Investment RSS Feeds directory. The most established physician personal-finance blog (since 2011, Dr. James Dahle) — global, not Nigeria-specific, but directly on-topic and extremely well established."
+    }
+  ],
+  "books": [
+    {
+      "title": "Starting Private Practice",
+      "author": "Pamela Wible, MD",
+      "freeSourceUrl": "https://www.idealmedicalcare.org/starting-private-practice-free-book/",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free download directly from the author's site",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "Confirmed via direct search result: a genuinely free, downloadable guide by a real, credentialed family physician (documented on Wikipedia). Step-by-step guide to launching a private practice, including for professionals without a license to run one independently."
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "categoryId": "skill_03_barbing",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-11",
+  "channels": [],
+  "blogs": [
+    {
+      "name": "The Splice Blog",
+      "url": "https://blog.withsplice.com/feed/",
+      "verifiedOn": "2026-07-11",
+      "verificationMethod": "Splice is a real African salon/spa booking & business-management platform (confirmed via its own Facebook page). Fetched a live article on the blog matching the resource directory's barbing description almost word for word; page metadata confirms WordPress + Elementor, which defaults to a /feed/ RSS endpoint. Raw XML not fetched directly (no outbound network in the build sandbox) — same one-curl check as entrepreneurs.ng before shipping. NOTE: do not confuse with splice.com/blog, an unrelated music-production company."
+    }
+  ],
+  "books": []
+}

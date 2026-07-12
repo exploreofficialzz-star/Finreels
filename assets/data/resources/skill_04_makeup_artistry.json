@@ -1,0 +1,20 @@
+{
+  "categoryId": "skill_04_makeup_artistry",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-11",
+  "channels": [
+    {
+      "id": "UCfEQFjH0J--H3cV8pis62TA",
+      "name": "Damilare Oshodi",
+      "handle": "@DamilareOshodi",
+      "description": "Lagos-based makeup artist and beauty entrepreneur. Covers makeup tutorials plus tips for beginner makeup artists and the business side of the craft.",
+      "accentColor": "0xFFF59E0B",
+      "initials": "DO",
+      "focus": "Makeup artistry business & beginner MUA tips",
+      "verifiedOn": "2026-07-11",
+      "verificationMethod": "Fetched youtube.com/@DamilareOshodi directly, confirmed canonical channel ID. Independently corroborated by a second source (The Beautiful Societies) describing the same channel as 'an educational hub for Nigerian bridal looks'."
+    }
+  ],
+  "blogs": [],
+  "books": []
+}
