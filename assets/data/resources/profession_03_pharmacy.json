@@ -1,0 +1,48 @@
+{
+  "categoryId": "profession_03_pharmacy",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-12",
+  "channels": [
+    {
+      "id": "UCUD4q4OiEJv67rWEqBs02Pw",
+      "name": "Global Pharmacy Entrepreneurs",
+      "handle": "@GlobalPharmacyEntrepreneurs",
+      "description": "Created by Australian pharmacist Allie Xu — 'Pharmacy Entrepreneur TV' interviews pharmacy entrepreneurs from around the world about building a business and life they love.",
+      "accentColor": "0xFF16A34A",
+      "initials": "GP",
+      "focus": "Pharmacy entrepreneurship interviews (global)",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "Cross-corroborated across 5+ independent sources (channel page, podcast interviews, LinkedIn, Apple Podcasts) all describing the same creator and channel ID."
+    },
+    {
+      "id": "UCLCyfJZfj_cTvsCNEkwHD7A",
+      "name": "The Happy PharmD",
+      "handle": "@TheHappyPharmD",
+      "description": "Dr. Alex Barker, PharmD — pharmacist career coaching, including pharmacists who've transitioned into entrepreneurship. Framing leans more 'career transition' than pure business-building, worth noting.",
+      "accentColor": "0xFFEC4899",
+      "initials": "HP",
+      "focus": "Pharmacist career & entrepreneurship coaching",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "Confirmed via channel page plus independent corroboration (LinkedIn, Apple Podcasts, thehappypharmd.com). Real, active, well-established (2,000+ pharmacists coached)."
+    }
+  ],
+  "blogs": [
+    {
+      "name": "Nairametrics",
+      "url": "https://nairametrics.com/feed",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "Same feed already verified for Medicine (profession_01) — the founder's own research lists 'Nairametrics — healthcare desk' as a Pharmacy source too, and Nairametrics' general business/finance coverage genuinely spans PSN news and pharmacist economics, not just medicine."
+    }
+  ],
+  "books": [
+    {
+      "title": "Pharmacy Business Management",
+      "author": "Steven B. Kayne (Editor)",
+      "freeSourceUrl": "https://archive.org/details/pharmacybusiness0000unse",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free to borrow with a free Internet Archive account (Controlled Digital Lending) — no payment required",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "This is the exact #1 book from the founder's own curriculum research — confirmed available for free borrowing via Internet Archive rather than only as a paid title."
+    }
+  ]
+}

@@ -18,9 +18,12 @@ import 'resource_category_data.dart';
 ///
 /// Every word in every chapter traces directly back to the founder's own
 /// three source documents (skills questions, business framework Q&A,
-/// profession curriculum) — nothing here is invented. Where the source
-/// only has open questions (skills) rather than answers, the chapter says
-/// so honestly instead of inventing answers.
+/// profession curriculum) — nothing here is invented. Where a source only
+/// has open questions with no answers behind them (skills, and part of
+/// professions), those questions are deliberately left OUT of the book —
+/// see _skillChapters/_professionChapters — rather than manufactured into
+/// a chapter that reads as filler. Only real, answered content becomes a
+/// chapter.
 class CategoryPlaybookData {
   CategoryPlaybookData._();
 
@@ -138,21 +141,14 @@ class CategoryPlaybookData {
         'turns into income, and where the money actually leaks.';
   }
 
-  static List<BookChapter> _skillChapters(ResourceCategory c) {
-    final questions = c.skillQuestions ?? const [];
-    if (questions.isEmpty) return const [];
-    return [
-      BookChapter(
-        title: 'Questions Worth Answering',
-        body: 'These are the questions that separate someone who is good at '
-            '${c.name.toLowerCase()} from someone who is good at ${c.name.toLowerCase()} '
-            'AND builds real money from it. FinReels doesn\'t have canned answers for '
-            'these yet — they\'re exactly what the Videos, Blogs and Shorts tabs for '
-            'this category are meant to help you work through.',
-        keyPoints: questions,
-      ),
-    ];
-  }
+  /// Skills-doc data is 5 open questions per skill with no answers behind
+  /// them — genuinely useful as a research brief, but not something that
+  /// belongs presented as a "book chapter" (a chapter titled "here are
+  /// some unanswered questions" reads as filler, not content). So skill
+  /// playbooks intentionally don't manufacture a chapter from these; the
+  /// tax chapter below is real content, and that's what carries the
+  /// skill/trade playbooks until real answers exist to show.
+  static List<BookChapter> _skillChapters(ResourceCategory c) => const [];
 
   static List<BookChapter> _businessChapters(ResourceCategory c) {
     final qa = c.businessQA ?? const [];
@@ -169,16 +165,9 @@ class CategoryPlaybookData {
         body: c.realProblem!,
       ));
     }
-    final questions = c.businessQuestions ?? const [];
-    if (questions.isNotEmpty) {
-      chapters.add(BookChapter(
-        title: 'Questions Worth Answering',
-        body: 'FinReels doesn\'t have canned answers for these yet — they\'re '
-            'exactly what the Videos, Blogs and Shorts tabs for this category '
-            'are meant to help you work through.',
-        keyPoints: questions,
-      ));
-    }
+    // Note: businessQuestions (4 open questions per profession) are
+    // intentionally not turned into a chapter here, same reasoning as
+    // skills above — unanswered questions aren't book content.
     if (c.dontKnowFact != null) {
       final modules = c.dontKnowModules ?? [if (c.dontKnowModule != null) c.dontKnowModule!];
       final moduleNames = modules

@@ -1,0 +1,54 @@
+{
+  "categoryId": "profession_02_law",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-12",
+  "channels": [
+    {
+      "id": "UCHzd5RKs21FxILfjOAh1L4Q",
+      "name": "Lex-Praxis | Law Firm in Nigeria",
+      "handle": "@Lex-Praxis",
+      "description": "Nigerian business law firm's channel — legal tips, step-by-step guides, and business-law insights aimed at entrepreneurs and investors, not just other lawyers. Company registration, tax, compliance.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "LP",
+      "focus": "Nigerian business law for entrepreneurs",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "Fetched youtube.com/@Lex-Praxis directly, confirmed canonical channel ID. About section matches curriculum research almost word for word."
+    },
+    {
+      "id": "UCGf-W1jrhhYUDyTWuuzVKjQ",
+      "name": "Clio",
+      "handle": "@goclio",
+      "description": "Legal practice-management software company — content on the business side of running a law firm: revenue, marketing, billing, client management.",
+      "accentColor": "0xFF16A34A",
+      "initials": "CL",
+      "focus": "Law firm business & practice management",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "Confirmed via search: 'The global leader in legal AI technology, www.clio.com' — matches the real, well-known legal software company (150,000+ legal professionals, 100+ bar associations)."
+    }
+  ],
+  "blogs": [
+    {
+      "name": "BarristerNG",
+      "url": "https://barristerng.com/feed",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "Exact feed URL confirmed via FeedSpot's Top 15 Nigerian Law RSS Feeds directory. Nigerian law and politics news blog."
+    },
+    {
+      "name": "Legalnaija",
+      "url": "https://legalnaija.com/blawg/feed/",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "Legalnaija itself independently confirmed real and active (Nigeria's first online legal education platform, 1000+ lawyer directory). FeedSpot's directory confirms it has an indexed RSS feed but showed the blog section URL (legalnaija.com/blawg) rather than a clean /feed suffix — feed path here is the standard WordPress convention, LOWER confidence than BarristerNG's, worth a direct check before shipping."
+    }
+  ],
+  "books": [
+    {
+      "title": "Digital Marketing for Lawyers",
+      "author": "Stephan Futeral",
+      "freeSourceUrl": "https://www.justlegalmarketing.com/marketing-book/",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free download, no purchase required",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "Confirmed via direct search result as a genuinely free book (not a paid title with a 'free chapter' teaser). Global content, not Nigeria-specific — the one Nigeria-specific title the founder's research found (Social Media For Lawyers by Adedunmade Onibokun) is sold via Legalnaija's bookstore, not confirmed free, so not included here."
+    }
+  ]
+}

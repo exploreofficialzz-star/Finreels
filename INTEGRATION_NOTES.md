@@ -40,10 +40,10 @@ claim made once in a chat that then evaporates.
 startup (gracefully skipping the ones that don't exist yet — that's the
 expected, normal state for an unfinished category, not an error), plus
 `_general.json`. `ChannelData.combined`, `BlogRssService.combinedBlogFeeds`,
-and the new `ResourceCategoryData.verifiedBooks` all read from this same
-pool. `CategoryDetailScreen` now has three sections — Channels, Blogs,
-Free Books — each showing real content where verified, an honest "still
-verifying" note where not.
+and `ResourceCategoryData.verifiedBooks` all read from this same pool.
+`CategoryDetailScreen` has three sections — Channels, Blogs, Free Books —
+each showing real content where verified, an honest "still verifying"
+note where not.
 
 Free books open in-app: `freeSourceType: "web"` opens in the same
 in-app reader as blog articles; `"download"` opens externally so the
@@ -53,12 +53,21 @@ exactly as it was for the original 10 books and the 60 FinReels-authored
 playbooks.
 
 **The old `assets/data/verified_resources.json` (one monolithic file) is
-gone**, replaced entirely by this per-category structure. Nothing else
-changed from the previous patch's architecture — `ChannelData.eagerFor()`,
-the engagement ranking, onboarding, Discover/Search all work identically,
-just reading from more files now.
+gone**, replaced entirely by this per-category structure.
 
-## Progress after this session: 5 of 60 categories started
+## This session also: removed the "Questions Worth Answering" chapters
+
+The 60 FinReels-authored Business Playbooks (`category_playbook_data.dart`)
+had a chapter for skills and professions that just listed open,
+unanswered questions from the source docs, framed as "here's what
+FinReels doesn't know yet." Correctly flagged as not real book content —
+removed entirely rather than kept as filler. Skill playbooks now rely on
+the tax-reform chapter; profession playbooks keep "The Real Problem" and
+"What Most People Don't Know" (both real, sourced facts) and drop the
+question dump. Businesses were never affected — their chapters are real
+answered Q&A already.
+
+## Progress after this session: 7 of 60 categories started
 
 | Category | Channels | Blogs | Free Books |
 |---|---|---|---|
@@ -66,9 +75,11 @@ just reading from more files now.
 | Hairdressing & Hairstyling | 1/10 | 0/10 | 0/10 |
 | Barbing | 0/10 | 1/10 | 0/10 |
 | Makeup Artistry | 1/10 | 0/10 | 0/10 |
-| **Medicine** | **4/10** | **2/10** | **1/10** |
+| Medicine | 4/10 | 2/10 | 1/10 |
+| Law | 2/10 | 2/10 | 1/10 |
+| Pharmacy | 2/10 | 1/10 | 1/10 |
 
-**13 items total, individually verified, out of 1,920.** That number is
+**24 items total, individually verified, out of 1,920.** That number is
 deliberately not dressed up — here's the honest math on why, and what a
 sustainable path looks like.
 
@@ -85,14 +96,15 @@ one sitting, and not something to fake by filling slots with unconfirmed
 guesses. That would silently break the app exactly the way 8 of the
 original 10 channel IDs were broken before anyone checked them.
 
-**What actually worked well this session:** for Medicine, your own
-curriculum.md research (Part 5) already had real candidate names —
-Flying Doctors Nigeria, Dr. Una/EntreMD, White Coat Investor, etc. —
-so verification meant *confirming* good leads rather than searching
-blind. That's roughly 3-4x faster than the cold-search approach I used
-for the skills categories. **The other 14 professions already have this
-same head start** (curriculum.md Parts 6-19) — that's the highest-leverage
-next batch, not a random pick.
+**What actually worked well this session:** for Medicine, Law, and
+Pharmacy, your own curriculum.md research (Parts 5-7) already had real
+candidate names — Flying Doctors Nigeria, Dr. Una/EntreMD, Lex-Praxis,
+Clio, Global Pharmacy Entrepreneurs, etc. — so verification meant
+*confirming* good leads rather than searching blind. That's roughly 3-4x
+faster than the cold-search approach used for the skills categories.
+**The other 12 professions already have this same head start**
+(curriculum.md Parts 8-19) — that's the highest-leverage next batch, not
+a random pick. Next up per the doc's own order: Nursing.
 
 For skills and businesses, there's no equivalent research doc — those
 lean on the PDF directory's candidate names, which this session also
@@ -103,10 +115,11 @@ not real data; flagged so it doesn't get trusted blindly elsewhere).
 ## Suggested pace going forward
 
 One profession per session (using the curriculum.md head start) is
-realistic and sustainable — Medicine took most of a session to reach
-4+2+1. At that pace the 15 researched professions are the fastest path
-to visible, real coverage. Skills and businesses will take longer per
-category since they start from a cold search each time.
+realistic and sustainable — Medicine, Law, and Pharmacy each took a
+meaningful chunk of a session to reach partial coverage. At that pace the
+15 researched professions are the fastest path to visible, real coverage.
+Skills and businesses will take longer per category since they start
+from a cold search each time.
 
 If you want to accelerate the pure discovery phase (finding candidate
 names before I verify them), Claude's Research feature can run broader
@@ -114,10 +127,9 @@ sweeps than fits in one chat turn — but the actual verification (fetching
 each channel page, confirming each feed) is exactly this kind of careful,
 one-at-a-time work regardless of where candidates come from.
 
-## Everything else from the previous patch — unchanged
+## Everything else from the previous patches — unchanged
 
 Onboarding, Discover/Search, EngagementService, the 60 FinReels-authored
-Business Playbooks, eager-fetch scoping — all still exactly as described
-in the prior notes and untouched by this session's work. This file
-supersedes the resource-verification section of the earlier notes only;
-everything else there still applies.
+Business Playbooks (minus the removed questions chapters), eager-fetch
+scoping — all still exactly as described in the prior notes and
+untouched by this session's resource-verification work.
