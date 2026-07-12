@@ -1,0 +1,38 @@
+{
+  "categoryId": "profession_06_engineering",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-12",
+  "channels": [
+    {
+      "id": "UCyAZtIT2LbUv7Q840iBXI1A",
+      "name": "Engineering Management Institute",
+      "handle": "@EngineeringManagement",
+      "description": "Anthony Fasano, PE — weekly interviews with engineering executives and leaders on career and business decisions, including starting an engineering business and firm leadership. This is the channel behind the founder's original candidate 'Engineering Career TV', which is one of EMI's shows.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "EM",
+      "focus": "Engineering career & firm leadership",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "Confirmed via the channel's own page plus independent corroboration from GlobalSpec's '16 YouTube channels engineers should be following', which specifically praises it for entrepreneurial-opportunities and starting-an-engineering-business content."
+    }
+  ],
+  "blogs": [
+    {
+      "name": "PSMJ Resources",
+      "url": "https://go.psmj.com/blog/rss.xml",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "PSMJ itself strongly confirmed real and exactly matching the founder's #1 candidate ('the most-cited independent firm-management consultancy for AEC firms') — 50+ years, extensive real content on pricing, M&A, and firm management. Hosted on HubSpot (go.psmj.com); used HubSpot's standard /rss.xml pattern since no direct feed URL was confirmed in search results — LOWER confidence than most entries this session, worth a direct check before shipping."
+    }
+  ],
+  "books": [
+    {
+      "title": "Starting a Small Engineering Consulting Firm",
+      "author": "Simon (Technical University of Munich graduate research)",
+      "freeSourceUrl": "https://www.academia.edu/17499475/Starting_a_Small_Engineering_Consulting_Firm",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free to read/download with a free Academia.edu account",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "All of the founder's original book candidates (Gaskell, Guardia, ASCE, Bachner) confirmed PAID only — no free version found for any of them. This academic business-plan paper covers the same ground (entity structure, marketing, cash flow, balance sheet for a civil engineering consulting firm) and is genuinely free, so used instead rather than including a paid title."
+    }
+  ],
+  "notes": "Matches the founder's own honest finding: no Nigeria/Africa business-of-engineering channel or book exists. COREN (coren.gov.ng) is real but purely regulatory/licensing, not business-strategy content, so not counted as a business blog here."
+}
