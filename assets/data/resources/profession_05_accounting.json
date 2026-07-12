@@ -1,0 +1,59 @@
+{
+  "categoryId": "profession_05_accounting",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-12",
+  "channels": [
+    {
+      "id": "UCOVYQamvkiM8_aCGw6nQ7xg",
+      "name": "Value Pricing Academy",
+      "handle": "@ValuePricingAcademy",
+      "description": "Mark Wickersham, chartered accountant — the leading voice on value pricing for accountants and bookkeepers, aimed at practitioners who undercharge for their work.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "VP",
+      "focus": "Value pricing for accounting/bookkeeping firms",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "Fetched channel page directly, confirmed canonical ID. Matches the founder's #1 candidate exactly."
+    },
+    {
+      "id": "UC3gq--uR2KSrKb5yFLRdvKQ",
+      "name": "Corvee (formerly Andrew Argue, CPA)",
+      "handle": "@corvee",
+      "description": "Andrew Argue, CPA turned entrepreneur, focused on sales and client acquisition for firm owners — the channel has since been rebranded to Corvee (a tax-planning software company he's associated with), but the founder's original content and keywords are still there.",
+      "accentColor": "0xFF16A34A",
+      "initials": "CO",
+      "focus": "Sales & client acquisition for accounting firms",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "Fetched channel page directly. Confirmed the /c/AndrewArgueCPA vanity URL resolves to this channel, and its keyword list still includes 'andrew argue' / 'andrew argue cpa', confirming continuity despite the rebrand."
+    },
+    {
+      "id": "UCbyI83sd_j3FLBiViYAQKHw",
+      "name": "Long for Success, LLC",
+      "handle": "@MichelleLongCPA",
+      "description": "Michelle L. Long, CPA, MBA — QuickBooks expertise paired with business-growth coaching for accountants. 'One of 10 Women Who Inspire a Profession' (Accounting Today).",
+      "accentColor": "0xFFEC4899",
+      "initials": "ML",
+      "focus": "QuickBooks + business growth coaching for accountants",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "Cross-corroborated across channel page, uploads playlist, and personal site (longforsuccess.com) all matching the same channel ID and bio."
+    }
+  ],
+  "blogs": [
+    {
+      "name": "CPA Trendlines",
+      "url": "https://www.cpatrendlines.com/feed",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "Exact feed URL confirmed via FeedSpot's Top 20 Accounting News RSS Feeds directory. Matches the founder's own candidate exactly ('CPA Trendlines — practice-management publications, including August Aquila's pricing work')."
+    }
+  ],
+  "books": [
+    {
+      "title": "Using Value Pricing to Grow Your Practice: Your Guide to Getting the Optimal Price for Accounting Services",
+      "author": "Mark Wickersham",
+      "freeSourceUrl": "https://intuitglobal.intuit.com/delivery/cms/prod/sites/default/accountant.intuit.ca/cloud-accounting/pdf/QB_Value-Pricing_Grow_Business_eBook.pdf",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free direct PDF, hosted on Intuit's official global CDN, no signup required",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "By the same Mark Wickersham already verified as a channel above — a genuine free eBook, not a teaser for a paid title, hosted by Intuit (QuickBooks) rather than a self-published landing page."
+    }
+  ]
+}

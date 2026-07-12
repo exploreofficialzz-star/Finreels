@@ -67,7 +67,7 @@ the tax-reform chapter; profession playbooks keep "The Real Problem" and
 question dump. Businesses were never affected — their chapters are real
 answered Q&A already.
 
-## Progress after this session: 8 of 60 categories started
+## Progress after this session: 9 of 60 categories started
 
 | Category | Channels | Blogs | Free Books |
 |---|---|---|---|
@@ -79,8 +79,9 @@ answered Q&A already.
 | Law | 2/10 | 2/10 | 1/10 |
 | Pharmacy | 2/10 | 1/10 | 1/10 |
 | Nursing | 0/10 | 1/10 | 1/10 |
+| **Accounting** | **3/10** | **1/10** | **1/10** |
 
-**26 items total, individually verified, out of 1,920.** That number is
+**31 items total, individually verified, out of 1,920.** That number is
 deliberately not dressed up — here's the honest math on why, and what a
 sustainable path looks like.
 
@@ -103,9 +104,9 @@ candidate names — Flying Doctors Nigeria, Dr. Una/EntreMD, Lex-Praxis,
 Clio, Global Pharmacy Entrepreneurs, etc. — so verification meant
 *confirming* good leads rather than searching blind. That's roughly 3-4x
 faster than the cold-search approach used for the skills categories.
-**The other 11 professions already have this same head start**
+**The other 10 professions already have this same head start**
 (curriculum.md Parts 8-19) — that's the highest-leverage next batch, not
-a random pick. Next up per the doc's own order: Accounting.
+a random pick. Next up per the doc's own order: Engineering.
 
 For skills and businesses, there's no equivalent research doc — those
 lean on the PDF directory's candidate names, which this session also
@@ -116,8 +117,8 @@ not real data; flagged so it doesn't get trusted blindly elsewhere).
 ## Suggested pace going forward
 
 One profession per session (using the curriculum.md head start) is
-realistic and sustainable — Medicine, Law, and Pharmacy each took a
-meaningful chunk of a session to reach partial coverage. At that pace the
+realistic and sustainable — each researched profession has taken a
+meaningful chunk of a session to reach partial coverage so far. At that pace the
 15 researched professions are the fastest path to visible, real coverage.
 Skills and businesses will take longer per category since they start
 from a cold search each time.
