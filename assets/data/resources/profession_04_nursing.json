@@ -1,0 +1,26 @@
+{
+  "categoryId": "profession_04_nursing",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-12",
+  "channels": [],
+  "blogs": [
+    {
+      "name": "NurseJournal.org",
+      "url": "https://nursejournal.org/feed/",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "NurseJournal.org independently confirmed real, well-established, editorially-reviewed (About Us page: fact-checked, nursing-professional-reviewed content). Listed as having an RSS feed across two separate FeedSpot directories, but the exact feed path shown was 'nursejournal.org/resources' / 'nursejournal.org/articles' rather than a clean /feed suffix — LOWER confidence than most other entries this session, worth a direct check before shipping."
+    }
+  ],
+  "books": [
+    {
+      "title": "Handbook on Entrepreneurial Practice: Nurses Creating Opportunities",
+      "author": "International Council of Nurses (ICN)",
+      "freeSourceUrl": "https://www.icn.ch/sites/default/files/2023-06/2012_Handbook_entrepreneurial_practice_eng.pdf",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free direct PDF from the International Council of Nurses' own site, no signup required",
+      "verifiedOn": "2026-07-12",
+      "verificationMethod": "Hosted directly on icn.ch, the official global nursing body — confirmed real, free, no paywall or account needed. More institutionally credible than most of the commercial titles the founder's research found (all paid, none Nigeria/Africa-specific)."
+    }
+  ],
+  "notes": "Honest finding, matching the founder's own curriculum research: no Nigeria, Africa, or global 'business of nursing' YouTube channel surfaced this round — the strongest lead ('Homecare Series' on YouTube) could not be traced to an identifiable, verifiable channel. Left at 0 rather than forcing a weak match. Worth a dedicated re-attempt later with different search terms rather than treated as permanently empty."
+}
