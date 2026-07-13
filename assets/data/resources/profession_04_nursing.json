@@ -1,8 +1,20 @@
 {
   "categoryId": "profession_04_nursing",
   "status": "in_progress",
-  "lastUpdated": "2026-07-12",
-  "channels": [],
+  "lastUpdated": "2026-07-13",
+  "channels": [
+    {
+      "id": "UCV1EucdmzWBtBSOKisPYitg",
+      "name": "Nurse Vickie",
+      "handle": "@NurseVickie",
+      "description": "Nurse Vickie — home care business coach and mentor, CEO/Founder of Petra Home Care (Houston, TX). Channel exists specifically to educate home care owners and operators on running the business, not just clinical care.",
+      "accentColor": "0xFF16A34A",
+      "initials": "NV",
+      "focus": "Home care agency business coaching",
+      "verifiedOn": "2026-07-13",
+      "verificationMethod": "Found via a broader search beyond the founder's original candidates (the 'Homecare Series' video lead didn't resolve to an identifiable channel). The search result returned the channel URL directly with its full About-section description, confirming it's real, dedicated, and on-topic — exactly the kind of channel the founder's own research was looking for but hadn't surfaced yet."
+    }
+  ],
   "blogs": [
     {
       "name": "NurseJournal.org",

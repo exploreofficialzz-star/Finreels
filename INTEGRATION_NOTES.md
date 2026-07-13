@@ -67,7 +67,7 @@ the tax-reform chapter; profession playbooks keep "The Real Problem" and
 question dump. Businesses were never affected — their chapters are real
 answered Q&A already.
 
-## Progress after this session: 10 of 60 categories started
+## Progress after this session: 11 of 60 categories started (Nursing updated, not newly added)
 
 | Category | Channels | Blogs | Free Books |
 |---|---|---|---|
@@ -78,13 +78,35 @@ answered Q&A already.
 | Medicine | 4/10 | 2/10 | 1/10 |
 | Law | 2/10 | 2/10 | 1/10 |
 | Pharmacy | 2/10 | 1/10 | 1/10 |
-| Nursing | 0/10 | 1/10 | 1/10 |
+| Nursing | 1/10 | 1/10 | 1/10 |
 | Accounting | 3/10 | 1/10 | 1/10 |
-| **Engineering** | **1/10** | **1/10** | **1/10** |
+| Engineering | 1/10 | 1/10 | 1/10 |
+| **Architecture** | **2/10** | **1/10** | **0/10** |
 
-**34 items total, individually verified, out of 1,920.** That number is
+**41 items total, individually verified, out of 1,920.** That number is
 deliberately not dressed up — here's the honest math on why, and what a
 sustainable path looks like.
+
+
+## Methodology correction mid-session: search beyond the documents, not just within them
+
+Kosisochi flagged that when a research document's named candidates don't
+pan out, the right move is to search more broadly for a real replacement
+— not stop at "not found." Applied immediately:
+- **Nursing channels: 0 → 1.** The founder's own lead ("Homecare Series")
+  didn't resolve to an identifiable channel, but a broader search surfaced
+  Nurse Vickie — a real, dedicated home care business coaching channel.
+- **Barbing channels: still 0**, after two genuinely broader search
+  attempts. One promising lead (a Nigerian YouTuber who'd interviewed a
+  barbershop owner) turned out to be a general travel/lifestyle channel
+  with one relevant video, not a dedicated business-of-barbing channel —
+  correctly not counted just because it technically contains one relevant
+  video. This is what "searched harder and still came up empty" looks
+  like, as distinct from "didn't try."
+
+Applied properly from the start for Architecture: went beyond the
+founder's 4 named channel candidates to independently confirm Eric
+Reinholdt's 30X40 Design Workshop as a second real channel.
 
 ## The honest math on scope
 
@@ -105,9 +127,9 @@ candidate names — Flying Doctors Nigeria, Dr. Una/EntreMD, Lex-Praxis,
 Clio, Global Pharmacy Entrepreneurs, etc. — so verification meant
 *confirming* good leads rather than searching blind. That's roughly 3-4x
 faster than the cold-search approach used for the skills categories.
-**The other 9 professions already have this same head start**
+**The other 8 professions already have this same head start**
 (curriculum.md Parts 8-19) — that's the highest-leverage next batch, not
-a random pick. Next up per the doc's own order: Architecture.
+a random pick. Next up per the doc's own order: Estate Management / Surveying.
 
 For skills and businesses, there's no equivalent research doc — those
 lean on the PDF directory's candidate names, which this session also

@@ -1,0 +1,39 @@
+{
+  "categoryId": "profession_07_architecture",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-13",
+  "channels": [
+    {
+      "id": "UC7xCozKOVFdCZRV7gclrM6A",
+      "name": "Business of Architecture",
+      "handle": "@BusinessofArchitecture",
+      "description": "Enoch Bartlett Sears, AIA — the flagship 'business of practice' show in architecture, 21,000+ subscribers. Guests have included M. Arthur Gensler Jr. and Thom Mayne. Exactly matches the founder's #1 candidate.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "BA",
+      "focus": "Architecture firm business & marketing",
+      "verifiedOn": "2026-07-13",
+      "verificationMethod": "Fetched the channel page directly, confirmed canonical ID and keywords ('business of architecture, enoch sears, architecture firm'). Independently corroborated across 10+ sources (podcast platforms, event listings, industry articles)."
+    },
+    {
+      "id": "UCoc2ZM2cYas4DijNdaEJXUA",
+      "name": "30X40 Design Workshop",
+      "handle": "@30x40designworkshop",
+      "description": "Eric Reinholdt, architect and entrepreneur — a direct case study of the FinReels thesis working: built his practice publicly through YouTube, matching the founder's 'Chris Novelli' candidate type exactly. Also the author of the 'Architect + Entrepreneur' book series.",
+      "accentColor": "0xFF16A34A",
+      "initials": "30",
+      "focus": "Running a small architecture practice, in public",
+      "verifiedOn": "2026-07-13",
+      "verificationMethod": "Found via search, channel URL and self-description directly confirm identity and focus. Same real person also wrote a book candidate from the founder's own list."
+    }
+  ],
+  "blogs": [
+    {
+      "name": "EntreArchitect",
+      "url": "https://entrearchitect.com/feed",
+      "verifiedOn": "2026-07-13",
+      "verificationMethod": "Exact feed URL confirmed via FeedSpot's Top 10 Business Architecture RSS Feeds directory. Matches the founder's exact candidate — Mark R. LePage's platform, running since 2007/relaunched 2012."
+    }
+  ],
+  "books": [],
+  "notes": "Every book candidate from the founder's research (Reinholdt, Gerber/Lemermeyer, Gensler, Abramowitz, Piven, Rubeling, Monteiro) confirmed real but paid-only — no legitimate free version found for any of them. The only 'free' copies found were on piracy/unauthorized document-sharing sites (Scribd, PDFCoffee, dokumen.pub), which were deliberately excluded rather than used — that's not what 'free' means here. Left at 0/10 honestly rather than substitute something weak or use a pirated source."
+}
