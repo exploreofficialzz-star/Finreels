@@ -1,0 +1,28 @@
+{
+  "categoryId": "profession_10_mass_communication_media_pr",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-14",
+  "channels": [
+    {
+      "id": "UCok4NSsI8V0mh3dK5sSjcSA",
+      "name": "Nigerian Women in Public Relations & Comms",
+      "handle": "@NigerianWomeninPR",
+      "description": "A social-impact professional organisation advocating for Nigerian women in PR and communications, providing growth resources and platforming practitioners' results — not an agency selling PR services, but a real resource hub for the professionals themselves.",
+      "accentColor": "0xFFEC4899",
+      "initials": "NW",
+      "focus": "Nigerian PR/comms professional development",
+      "verifiedOn": "2026-07-14",
+      "verificationMethod": "Found via a broader search beyond the founder's original candidates, both of which turned out not to be verifiable YouTube channels (Matt Inglot's 'Working Without Pants' YouTube search returned a different, unrelated Matt Inglot who does DIY/woodworking content; 'The Business of Authority' is confirmed audio-only, no YouTube channel, and the podcast ended in April 2024). Deliberately excluded the ~26 Nigerian PR AGENCY channels found in the same search — those sell PR services to clients, which is a different thing from teaching PR professionals to run their own practice."
+    }
+  ],
+  "blogs": [
+    {
+      "name": "PR Couture",
+      "url": "https://www.prcouture.com/feed",
+      "verifiedOn": "2026-07-14",
+      "verificationMethod": "Exact feed URL confirmed via FeedSpot's Top 100 PR RSS Feeds directory, independently reconfirmed by a second source (Prezly's '15 top PR blogs') praising it specifically for freelance PR, agency-owner, and entry-level advice. Matches the founder's #1 candidate exactly."
+    }
+  ],
+  "books": [],
+  "notes": "Matches the founder's own honest finding: no dedicated 'business of PR/media' channel exists in Nigeria, Africa, or globally, and no confident free-book candidate either. Nigeria search surfaced dozens of PR agencies (companies you'd hire) but confirmed the founder's exact gap shape: no one teaching PR professionals how to build their own practice — except the one professional-development org found here."
+}
