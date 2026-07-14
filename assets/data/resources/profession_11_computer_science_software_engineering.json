@@ -1,0 +1,21 @@
+{
+  "categoryId": "profession_11_computer_science_software_engineering",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-14",
+  "channels": [
+    {
+      "id": "UC36zt_eM_gZQXayw_pAdASg",
+      "name": "Indie Hackers",
+      "handle": "@indiehackers9840",
+      "description": "The official YouTube presence of Indie Hackers, Courtland Allen's community of developers turning code into standalone products and small businesses. Courtland himself appears mostly as a guest on OTHER channels (Y Combinator, egghead.io) rather than hosting his own regularly — this official channel is the more reliable long-term reference.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "IH",
+      "focus": "Developers building products/businesses, not just freelancing",
+      "verifiedOn": "2026-07-14",
+      "verificationMethod": "Confirmed the same channel ID via two independent lookups (direct channel URL and the @indiehackers9840 handle). Lower confidence than most entries this session since no About-section description came through either time — worth a manual spot-check of upload activity before fully trusting it."
+    }
+  ],
+  "blogs": [],
+  "books": [],
+  "notes": "Matches the founder's own honest finding, with more nuance: Nigeria has real, current, well-developed content here (Business Elites Africa, WithinNigeria, Writertain Creatives, Anutio) but it teaches freelancing logistics (which platforms pay in dollars, which payment rails avoid conversion loss) — not the further step of turning that income into a product or agency, which is what this category needs. Business Elites Africa's specific RSS feed could not be confirmed this round (a broader Nigeria-business RSS search surfaced many real adjacent blogs but not this exact one) — worth a direct, narrower search rather than guessing. On books: both candidates (The SaaS Playbook, Company of One) are commercially paid; the only 'free' copies found were on piracy sites (Yumpu, Scribd re-uploads) or were third-party paid summary services (Shortform, Four Minute Books) rather than the actual free book — neither counts, so left at 0 rather than substitute either."
+}
