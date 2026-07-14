@@ -1,0 +1,28 @@
+{
+  "categoryId": "profession_08_estate_management_surveying",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-13",
+  "channels": [
+    {
+      "id": "UCdCqMGq5qXgW-NvgydDJc-w",
+      "name": "Coach Blaine (Real Value Coaching)",
+      "handle": "@CoachBlaine",
+      "description": "Blaine Feyen — appraiser business coach, founder of the Real Value Coaching Academy. One of the only creators anywhere in the specific niche of appraisal/valuation business coaching, not just general real estate.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "CB",
+      "focus": "Appraisal/valuation business coaching (global)",
+      "verifiedOn": "2026-07-13",
+      "verificationMethod": "Confirmed via the coach's own site, FeedSpot's appraiser YouTuber directory, and LinkedIn all matching the same channel ID and bio. Small channel (under 500 subscribers) but genuinely real and the only one this specific."
+    }
+  ],
+  "blogs": [
+    {
+      "name": "McKissock Learning — Appraisal Blog",
+      "url": "https://www.mckissock.com/blog/appraisal/feed/",
+      "verifiedOn": "2026-07-13",
+      "verificationMethod": "McKissock itself strongly confirmed real (30+ years, exclusive USPAP course host for The Appraisal Foundation, an actual regulatory body). Listed with an RSS feed across two FeedSpot directories but without a clean, separately-shown feed URL — used the standard WordPress pattern as a reasonable best guess. LOWER confidence than most entries this session, worth a direct check before shipping."
+    }
+  ],
+  "books": [],
+  "notes": "This matches the founder's own honest finding: the thinnest 'business' category yet, both in channels/blogs and especially books — almost everything findable is technical/exam-prep valuation material, not business-of-practice. Real, valuable Nigeria-specific content exists (EdenBrooks Homes' article on the NIESV/ESVARBON/LASRERA regulatory turf war is genuinely sharp and current) but its RSS feed could not be confirmed this session — worth manually checking edenbrooks.com.ng directly rather than guessing its feed URL. General real estate AGENCY channels (property sales/brokerage) were deliberately excluded even though several are real and Nigerian — that's a different profession (real estate agent) from the specific licensed Estate Surveyor/Valuer category this file covers, and conflating them would misrepresent what's actually verified."
+}

@@ -1,0 +1,28 @@
+{
+  "categoryId": "profession_09_banking_finance",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-13",
+  "channels": [
+    {
+      "id": "UCXc_P8cKMbUvHFyDwAtz--Q",
+      "name": "Michael Kitces",
+      "handle": "@MichaelKitces",
+      "description": "Head of Planning Strategy at Focus Partners Wealth, co-founder of XY Planning Network and AdvicePay, publisher of Nerd's Eye View. Hosts the Financial Advisor Success podcast on this channel — hundreds of detailed interviews with independent advisors on building their practice.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "MK",
+      "focus": "Independent financial advisory practice building",
+      "verifiedOn": "2026-07-13",
+      "verificationMethod": "Fetched the channel page directly, confirmed canonical ID and keywords. Exactly matches the founder's #1 candidate — one of the richest global niches found in this research so far."
+    }
+  ],
+  "blogs": [
+    {
+      "name": "Nerd's Eye View (Kitces.com)",
+      "url": "https://feeds.kitces.com/KitcesNerdsEyeView",
+      "verifiedOn": "2026-07-13",
+      "verificationMethod": "Exact feed URL confirmed directly from Kitces' own blog announcement post about the feed migration, plus independently corroborated across 3 separate FeedSpot directories. The dominant blog in the independent financial advisory space — voted #1 by a Zywave survey of advisor blogs."
+    }
+  ],
+  "books": [],
+  "notes": "Matches the founder's own honest finding: nine professions in a row now with no Nigeria/Africa business-of-practice content — Nigeria's version of this profession is dominated by SEC licensing and institutional firms, no independent-advisor content movement. On books: the founder's 3 candidates (2 Carl Richards titles, the Olsen/Kitces annuities book) are all paid-only; one alternative found ('Guerrilla Marketing For Financial Advisors') only offers 3 free sample chapters, not the complete book, so wasn't counted — a partial teaser isn't the same as a free book."
+}

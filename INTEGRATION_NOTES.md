@@ -67,7 +67,7 @@ the tax-reform chapter; profession playbooks keep "The Real Problem" and
 question dump. Businesses were never affected — their chapters are real
 answered Q&A already.
 
-## Progress after this session: 11 of 60 categories started (Nursing updated, not newly added)
+## Progress after this session: 13 of 60 categories started (Nursing updated, not newly added)
 
 | Category | Channels | Blogs | Free Books |
 |---|---|---|---|
@@ -81,9 +81,11 @@ answered Q&A already.
 | Nursing | 1/10 | 1/10 | 1/10 |
 | Accounting | 3/10 | 1/10 | 1/10 |
 | Engineering | 1/10 | 1/10 | 1/10 |
-| **Architecture** | **2/10** | **1/10** | **0/10** |
+| Architecture | 2/10 | 1/10 | 0/10 |
+| Estate Mgmt / Surveying | 1/10 | 1/10 | 0/10 |
+| **Banking & Finance** | **1/10** | **1/10** | **0/10** |
 
-**41 items total, individually verified, out of 1,920.** That number is
+**45 items total, individually verified, out of 1,920.** That number is
 deliberately not dressed up — here's the honest math on why, and what a
 sustainable path looks like.
 
@@ -127,9 +129,9 @@ candidate names — Flying Doctors Nigeria, Dr. Una/EntreMD, Lex-Praxis,
 Clio, Global Pharmacy Entrepreneurs, etc. — so verification meant
 *confirming* good leads rather than searching blind. That's roughly 3-4x
 faster than the cold-search approach used for the skills categories.
-**The other 8 professions already have this same head start**
+**The other 6 professions already have this same head start**
 (curriculum.md Parts 8-19) — that's the highest-leverage next batch, not
-a random pick. Next up per the doc's own order: Estate Management / Surveying.
+a random pick. Next up per the doc's own order: Mass Communication / Media & PR.
 
 For skills and businesses, there's no equivalent research doc — those
 lean on the PDF directory's candidate names, which this session also
