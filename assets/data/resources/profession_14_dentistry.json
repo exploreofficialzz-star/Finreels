@@ -1,0 +1,16 @@
+{
+  "categoryId": "profession_14_dentistry",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-14",
+  "channels": [],
+  "blogs": [
+    {
+      "name": "BusinessDay Nigeria",
+      "url": "https://businessday.ng/feed",
+      "verifiedOn": "2026-07-14",
+      "verificationMethod": "Same feed already verified for Agriculture (profession_12) — cross-tagged here because BusinessDay is also the exact source of the founder's #2 candidate, the 'Dentist At Your Door' story about Dr. Yemisi Akintonwa's Tony Elumelu-funded mobile dental clinic."
+    }
+  ],
+  "books": [],
+  "notes": "Matches the founder's own honest finding closely. Tried again for ClinikEHR (the founder's #1 candidate, already confirmed real content when researching Pharmacy) — found a page element literally reading 'RSS' on their blog homepage, strong evidence a feed exists, but still could not determine the exact feed URL with the same confidence as the WordPress /feed/ pattern used elsewhere, so left out rather than guess a URL with zero direct evidence. On channels: multiple real Nigerian dental clinics have YouTube presences (SS Dental Clinic, Smiledoctor/Luxe Dental, Schubbs Dental, Breeze Smile) but every one markets the clinic to patients — none teaches dentists how to run the business — so none were counted, matching the same discipline applied to real-estate agency channels and PR agency channels in earlier categories. Books: no dentistry-specific title exists separately from Medicine's already-exhausted, paid-only list."
+}
