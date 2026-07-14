@@ -1,0 +1,44 @@
+{
+  "categoryId": "profession_12_agriculture",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-14",
+  "channels": [
+    {
+      "id": "UCFTyooWNsbzRBtOBYfGbELg",
+      "name": "Nigeria Agribusiness Group (NABG)",
+      "handle": "@nabg_ng",
+      "description": "The umbrella private-sector platform for Nigeria's agribusiness sector — policy commentary and business content across the entire value chain, from smallholder farmers to export markets and food manufacturing.",
+      "accentColor": "0xFF16A34A",
+      "initials": "NG",
+      "focus": "Nigerian agribusiness sector policy & business",
+      "verifiedOn": "2026-07-14",
+      "verificationMethod": "Fetched the channel page directly; About section matches NABG's own website (nabg.ng) and X account (@NABG_ng) word for word — strong cross-platform handle consistency. Matches the founder's #2 candidate exactly. Could not cleanly confirm the founder's #1 candidate ('Agri Channel') this round — the name collides with unrelated Japanese and Italian gardening channels on YouTube, and the real agrichannelng.com's specific channel wasn't pinned down with confidence, so left out rather than guess which result was theirs."
+    }
+  ],
+  "blogs": [
+    {
+      "name": "BusinessDay Nigeria",
+      "url": "https://businessday.ng/feed",
+      "verifiedOn": "2026-07-14",
+      "verificationMethod": "Exact feed URL cross-confirmed across five separate FeedSpot directory pages. Matches the founder's #1 candidate exactly — their agriculture category page shows genuinely current, detailed Nigerian agribusiness coverage (livestock policy, cashew industry, aquaculture import trends)."
+    },
+    {
+      "name": "Afrimash",
+      "url": "https://afrimash.com/feed",
+      "verifiedOn": "2026-07-14",
+      "verificationMethod": "Found via broader search beyond the founder's named candidates. Real Nigerian agricultural marketplace/blog (poultry, fish, agricultural items) with an exact feed URL confirmed via FeedSpot's Nigeria Farming RSS directory."
+    }
+  ],
+  "books": [
+    {
+      "title": "Setting Up A Poultry Farming Business",
+      "author": "Lagos State Employment Trust Fund (LSETF)",
+      "freeSourceUrl": "https://lsetf.ng/sites/default/files/Setting%20up%20a%20Poultry%20Business%20in%20Nigeria_0.pdf",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free direct PDF, hosted on the official Lagos State Employment Trust Fund site, no signup required",
+      "verifiedOn": "2026-07-14",
+      "verificationMethod": "Found via broader search since the founder's own research found no confident free candidate. Hosted directly on lsetf.ng, a real Lagos State Government agency — covers value chain, market analysis, financials, and feed sourcing specifically for the Nigerian market. More institutionally credible than the many 'free ebook' poultry guides found elsewhere, several of which turned out to be paid ($7) products marketed misleadingly as free, or user-uploaded business-plan templates of uncertain origin — both correctly excluded."
+    }
+  ],
+  "notes": "Matches the founder's own honest finding — the first profession where Nigeria's content ecosystem is genuinely rich rather than thin. FinReels' edge here is curation and structure, not filling a void."
+}
