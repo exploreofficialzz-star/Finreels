@@ -1,0 +1,21 @@
+{
+  "categoryId": "profession_15_psychology_counselling",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-14",
+  "channels": [
+    {
+      "id": "UCQikIOuT7ZqLcyUJOEMq1mQ",
+      "name": "Private Practice Skills",
+      "handle": "@privatepracticeskills",
+      "description": "Dr. Marie Fang, licensed clinical psychologist — ~60,000 subscribers teaching therapists exactly what the founder's research said didn't exist: how to start, market, and run a private therapy practice as a business. Weekly videos since 2018.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "PP",
+      "focus": "Business of running a therapy private practice",
+      "verifiedOn": "2026-07-14",
+      "verificationMethod": "Found via a broader search beyond the founder's research, which had explicitly found no confident channel candidate. Extremely well corroborated — 8+ independent sources (her own site, multiple podcast guest interviews, a direct channel fetch) all confirming the same person, channel, and subscriber count. Global, not Nigeria-specific."
+    }
+  ],
+  "blogs": [],
+  "books": [],
+  "notes": "The founder's own research flagged one Nigerian lead as explicitly unverified: Dr. Sonia, a real, credentialed Lagos-based therapist, is credited (via her own bio on TherapyTribe) with authoring a book titled 'Therapy as a Service'. This session confirmed the bio and credentials are real, but found no publisher, ISBN, purchase link, or free-access link for the book itself anywhere — so per the founder's own instruction to 'confirm before citing', it's still not counted. On blogs: no dedicated business-of-therapy blog was confirmed this round, though privatepracticeskills.com (the channel above) has its own blog worth a closer look in a future pass."
+}
