@@ -1,0 +1,28 @@
+{
+  "categoryId": "skill_06_carpentry_furniture_making",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-15",
+  "channels": [
+    {
+      "id": "UC2uUrcnGpeQ9Pfgecc4zqfg",
+      "name": "JP Carpentry Ltd",
+      "handle": "@JPCarpentryLtd",
+      "description": "A working carpenter (fitted furniture specialist) who also sells training courses, including 'Wardrobe Pro', to help other tradespeople build the same skill into a business. UK-based, not Nigeria-specific, but a genuine, dedicated, on-topic channel.",
+      "accentColor": "0xFF16A34A",
+      "initials": "JP",
+      "focus": "Fitted furniture trade + skills training business",
+      "verifiedOn": "2026-07-15",
+      "verificationMethod": "Found via broader search. Channel self-description directly confirms both the craft and the business-of-training angle. Jumoke Dada (founder of Nigerian furniture brand Taeillo, Wikipedia-notable, TechCrunch-covered) was also researched at length — extensively real and well-documented, but appears only as a guest across several different interview shows (Young CEO, Tech Turks, African Business Stories), not as the owner of her own dedicated channel, so wasn't counted as 'her channel'."
+    }
+  ],
+  "blogs": [
+    {
+      "name": "BusinessDay Nigeria",
+      "url": "https://businessday.ng/feed",
+      "verifiedOn": "2026-07-15",
+      "verificationMethod": "Same feed already verified for Agriculture and Dentistry — cross-tagged here because BusinessDay has run specific, real furniture-making business features (e.g. 'The burgeoning business of furniture-making, interior decoration', profiling Lagos-based carpenter/entrepreneur Blessing Ohikhena Sule)."
+    }
+  ],
+  "books": [],
+  "notes": "Genuinely thorough search for a free book came up empty on the business side specifically: plenty of free woodworking/craft-technique ebooks exist (Project Gutenberg, CraftsmanSpace, WoodWorkWeb), but they teach the craft, which the target user already has — not pricing, clients, or running the business, which is what this category needs. The one book found that WAS business-focused ('Start Your Own Woodworking Business' by Norman Pirollo) is a paid $15 ebook bundled with a course. Left at 0/10 rather than count a craft book as if it were business content."
+}

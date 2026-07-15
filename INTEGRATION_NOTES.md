@@ -67,7 +67,7 @@ the tax-reform chapter; profession playbooks keep "The Real Problem" and
 question dump. Businesses were never affected — their chapters are real
 answered Q&A already.
 
-## Progress after this session: 19 of 60 categories started (Nursing updated, not newly added) — all 15 of the founder's researched professions now have at least one real, verified resource
+## Progress after this session: 20 of 60 categories started (Nursing updated, not newly added)
 
 | Category | Channels | Blogs | Free Books |
 |---|---|---|---|
@@ -89,9 +89,10 @@ answered Q&A already.
 | Agriculture | 1/10 | 2/10 | 1/10 |
 | Education | 0/10 | 1/10 | 0/10 |
 | Dentistry | 0/10 | 1/10 | 0/10 |
-| **Psychology / Counselling** | **1/10** | **0/10** | **0/10** |
+| Psychology / Counselling | 1/10 | 0/10 | 0/10 |
+| **Carpentry & Furniture Making** | **1/10** | **1/10** | **0/10** |
 
-**55 items total, individually verified, out of 1,920.** That number is
+**57 items total, individually verified, out of 1,920.** That number is
 deliberately not dressed up — here's the honest math on why, and what a
 sustainable path looks like.
 
@@ -153,8 +154,7 @@ Photography & Videography) are the *same real-world trades* as skills
 Ann Usman are exactly as relevant to "Fashion Design & Tailoring (Trade)"
 as they are to skill_01 — no need to re-research those 5 from scratch
 once their skill counterparts are done; they can share the same verified
-entries. Next up: continuing Skills (skill_05 onward — Welding was
-attempted earlier and came up empty; Carpentry is next untried).
+entries. Next up: skill_07, Plumbing.
 
 For skills and businesses, there's no equivalent research doc — those
 lean on the PDF directory's candidate names, which this session also
