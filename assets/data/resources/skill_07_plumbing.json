@@ -1,0 +1,49 @@
+{
+  "categoryId": "skill_07_plumbing",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-15",
+  "channels": [
+    {
+      "id": "UC0Fh1HN4RvOw2hMk9n5PysA",
+      "name": "Million Dollar Plumber",
+      "handle": "@MillionDollarPlumber",
+      "description": "Richard Behney, who grew two plumbing service companies from kitchen-table startups to profitable, industry-leading brands (and sold both) before starting this channel in 2018. Focused entirely on the business side — pricing, systems, and scale — not repair tutorials.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "MP",
+      "focus": "Plumbing business systems, pricing, scale",
+      "verifiedOn": "2026-07-15",
+      "verificationMethod": "Confirmed via direct channel description plus independent corroboration (ServiceTitan's professional-channel roundup, FieldEdge's 'channels business owners actually learn from' list, which specifically names this as one of the 3 highest-value channels for plumbing business owners)."
+    },
+    {
+      "id": "UCGIMKh92vaL0_Yc0u4GYhHA",
+      "name": "Roger Wakefield Plumbing Education",
+      "handle": "@RogerWakefield",
+      "description": "'The Expert Plumber' — 720K subscribers, ~40 years experience. Blends technical expertise with business insight and leadership perspective, aimed specifically at owners, not just technicians.",
+      "accentColor": "0xFF16A34A",
+      "initials": "RW",
+      "focus": "Plumbing trade + business/leadership perspective",
+      "verifiedOn": "2026-07-15",
+      "verificationMethod": "Confirmed via direct channel fetch plus independent corroboration (FieldEdge names this the #1 channel for plumbing business owners specifically, distinct from its DIY-repair value)."
+    }
+  ],
+  "blogs": [
+    {
+      "name": "Plumbing & Mechanical (PM) Magazine",
+      "url": "https://www.pmmag.com/rss",
+      "verifiedOn": "2026-07-15",
+      "verificationMethod": "Confirmed real, established BNP Media trade publication with an explicit RSS feed page (pmmag.com/rss) listing dozens of topic-specific feeds, including one described specifically as 'advice and tips for managing your business in the plumbing and heating industry' — used the general feed since the exact business sub-feed URL was truncated in search results."
+    }
+  ],
+  "books": [
+    {
+      "title": "Unlock the Full Potential of Your Plumbing Business",
+      "author": "Housecall Pro",
+      "freeSourceUrl": "https://www.housecallpro.com/resources/ebooks/how-to-grow-plumbing-business/",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free ebook, direct from Housecall Pro (a real field-service software company)",
+      "verifiedOn": "2026-07-15",
+      "verificationMethod": "Confirmed genuinely free (not a paid title with a teaser). Covers marketing, customer relationships, operations, money management, and scaling — directly matching what this category needs, not just repair technique."
+    }
+  ],
+  "notes": "Global content only — no Nigeria-specific plumbing business channel, blog, or book was found this round, despite several individual 'plumber shows his work' human-interest videos existing (Edo State piping tours). Worth another attempt in a future pass with different search terms."
+}
