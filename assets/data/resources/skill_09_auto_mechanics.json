@@ -1,0 +1,32 @@
+{
+  "categoryId": "skill_09_auto_mechanics",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-16",
+  "channels": [
+    {
+      "id": "UC_sl971RP3iR1DGWDB-H2yw",
+      "name": "Shop Owner",
+      "handle": "@ShopOwnerMag",
+      "description": "The YouTube presence of Shop Owner Magazine — 'business and technical intelligence for automotive repair shop professionals'. Distinct from the hundreds of repair-technique channels (Scotty Kilmer, ChrisFix, South Main Auto) that dominate this space but teach DIY repair, not running the business.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "SO",
+      "focus": "Auto repair shop business intelligence",
+      "verifiedOn": "2026-07-16",
+      "verificationMethod": "Confirmed real via GaragePlug's magazine roundup, which independently describes Shop Owner Mag as focused on 'business intelligence, brand operations, and brand establishment' — an exact match to the channel's own tagline."
+    },
+    {
+      "id": "UC2QzkqJcUQJHHZkcqD6nRQg",
+      "name": "AutoFix - Auto Shop Coaching",
+      "handle": "@autofix-autoshopcoaching801",
+      "description": "Chris Cotton, 27+ years in the auto repair industry, 17,000+ hours of shop-coaching experience. Genuinely dedicated to shop management — profits & cash flow, KPIs, owner peer groups — not repair tutorials, and $61M+ in documented client ROI.",
+      "accentColor": "0xFF16A34A",
+      "initials": "AF",
+      "focus": "Auto repair shop business coaching",
+      "verifiedOn": "2026-07-16",
+      "verificationMethod": "The vast majority of 'top auto mechanic YouTuber' lists are entirely DIY repair-tutorial channels. Chris Cotton and AutoFix kept surfacing across podcast platforms and LinkedIn as the real business-coaching voice in this space; fetched the channel directly to confirm the exact ID after several searches that only turned up his podcast (The Weekly Blitz) without a clean channel link."
+    }
+  ],
+  "blogs": [],
+  "books": [],
+  "notes": "This category needed real discipline: auto repair is one of YouTube's biggest niches, but almost entirely for DIY repair technique (Scotty Kilmer alone has 6.7M subscribers) — none of that teaches running a shop as a business, so none of it was counted, matching the same standard applied to dental clinics, PR agencies, and real estate agencies elsewhere. Ratchet+Wrench (the definitive US trade magazine for auto repair shop owners) was strongly confirmed as real and on-topic, but no exact RSS feed URL could be confirmed after real effort, so left out rather than guess. On Nigeria: found only comedy/entertainment TikTok content ('Nigerian Mechanic', 'Max the Mechanic') and one genuine but non-channel story (Taiwo Abiri, a real Lagos mechanic who taught himself from YouTube and built a \u20a625M/year business, per Face2Face Africa/BBC coverage) \u2014 a great story, not a channel."
+}

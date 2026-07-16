@@ -67,7 +67,7 @@ the tax-reform chapter; profession playbooks keep "The Real Problem" and
 question dump. Businesses were never affected — their chapters are real
 answered Q&A already.
 
-## Progress after this session: 22 of 60 categories started (Nursing updated, not newly added)
+## Progress after this session: 23 of 60 categories started (Nursing updated, not newly added)
 
 | Category | Channels | Blogs | Free Books |
 |---|---|---|---|
@@ -92,9 +92,10 @@ answered Q&A already.
 | Psychology / Counselling | 1/10 | 0/10 | 0/10 |
 | Carpentry & Furniture Making | 1/10 | 1/10 | 0/10 |
 | Plumbing | 2/10 | 1/10 | 1/10 |
-| **Electrical Installation & Wiring** | **1/10** | **1/10** | **0/10** |
+| Electrical Installation & Wiring | 1/10 | 1/10 | 0/10 |
+| **Auto Mechanics** | **2/10** | **0/10** | **0/10** |
 
-**63 items total, individually verified, out of 1,920.** That number is
+**65 items total, individually verified, out of 1,920.** That number is
 deliberately not dressed up — here's the honest math on why, and what a
 sustainable path looks like.
 
@@ -156,7 +157,14 @@ Photography & Videography) are the *same real-world trades* as skills
 Ann Usman are exactly as relevant to "Fashion Design & Tailoring (Trade)"
 as they are to skill_01 — no need to re-research those 5 from scratch
 once their skill counterparts are done; they can share the same verified
-entries. Next up: skill_09, Auto Mechanics.
+entries. Next up: skill_10, Phone & Electronics Repair.
+
+**Note on Auto Mechanics specifically:** its resource file already existed
+with a different, independently-verified channel (Shop Owner Magazine)
+when this pass reached it — from an earlier attempt at this same category
+whose file write persisted in the working sandbox. Rather than overwrite,
+merged it with this session's own find (AutoFix - Auto Shop Coaching),
+so the category ended up with 2 real channels instead of 1.
 
 For skills and businesses, there's no equivalent research doc — those
 lean on the PDF directory's candidate names, which this session also
