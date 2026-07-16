@@ -67,7 +67,7 @@ the tax-reform chapter; profession playbooks keep "The Real Problem" and
 question dump. Businesses were never affected — their chapters are real
 answered Q&A already.
 
-## Progress after this session: 23 of 60 categories started (Nursing updated, not newly added)
+## Progress after this session: 24 of 60 categories started (Nursing updated, not newly added)
 
 | Category | Channels | Blogs | Free Books |
 |---|---|---|---|
@@ -93,7 +93,8 @@ answered Q&A already.
 | Carpentry & Furniture Making | 1/10 | 1/10 | 0/10 |
 | Plumbing | 2/10 | 1/10 | 1/10 |
 | Electrical Installation & Wiring | 1/10 | 1/10 | 0/10 |
-| **Auto Mechanics** | **2/10** | **0/10** | **0/10** |
+| Auto Mechanics | 2/10 | 0/10 | 0/10 |
+| **Phone & Electronics Repair** | **0/10** | **0/10** | **0/10** |
 
 **65 items total, individually verified, out of 1,920.** That number is
 deliberately not dressed up — here's the honest math on why, and what a
@@ -157,7 +158,7 @@ Photography & Videography) are the *same real-world trades* as skills
 Ann Usman are exactly as relevant to "Fashion Design & Tailoring (Trade)"
 as they are to skill_01 — no need to re-research those 5 from scratch
 once their skill counterparts are done; they can share the same verified
-entries. Next up: skill_10, Phone & Electronics Repair.
+entries. Next up: skill_11, Graphic Design (previously attempted early in this project and came up empty — worth a fresh try with what's been learned since).
 
 **Note on Auto Mechanics specifically:** its resource file already existed
 with a different, independently-verified channel (Shop Owner Magazine)
