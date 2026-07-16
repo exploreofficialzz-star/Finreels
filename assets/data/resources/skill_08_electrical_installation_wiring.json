@@ -1,0 +1,28 @@
+{
+  "categoryId": "skill_08_electrical_installation_wiring",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-15",
+  "channels": [
+    {
+      "id": "UCvzwdmGkt6E4TaCfthyQMrw",
+      "name": "The 360 Electrician",
+      "handle": "@The360Electrician",
+      "description": "Jeff, a Master Electrician and business coach — 'the #1 resource for electricians ready to stop trading time for money and start building a profitable business'. Covers bidding/estimating, operations, hiring, and marketing, not just technical tips.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "36",
+      "focus": "Business of electrical contracting",
+      "verifiedOn": "2026-07-15",
+      "verificationMethod": "Fetched the channel page directly — About section and keyword list ('How to Start an Electrical Business', 'Profitable Electrical Business') are an exact match for this category's purpose. Independently corroborated by ServiceTitan's and tubics' electrician-channel roundups."
+    }
+  ],
+  "blogs": [
+    {
+      "name": "Electrical News",
+      "url": "https://electricalnews.com/feed",
+      "verifiedOn": "2026-07-15",
+      "verificationMethod": "Real trade publication, 30+ years, confirmed with an exact feed URL across two independent FeedSpot directories. Explicitly serves contractors with content to 'maintain and grow their businesses', not just technical news."
+    }
+  ],
+  "books": [],
+  "notes": "Global content only — no Nigeria-specific electrical business channel or blog found this round. On books: every candidate found (Electrical Contracting by Michael Sammaritano, various estimating/exam-prep guides) is paid-only on Amazon or Google Books — no free version located, so left at 0/10 rather than substitute a technical exam-prep book for business content."
+}
