@@ -1,0 +1,21 @@
+{
+  "categoryId": "skill_15_catering_baking",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-16",
+  "channels": [
+    {
+      "id": "UC9VgddRDM-F0LdKvXEhhBGw",
+      "name": "Sussy's Cakes Recipes",
+      "handle": "@sussycakesrecipes",
+      "description": "Sussan Apeh, a Lagos-based, professionally trained cake artist, pastry chef and small chops specialist with a Business Administration degree (Babcock University). Primarily a recipe/technique channel, but runs paid 24/7 online business training alongside it and has at least one video specifically on 'how to start up a catering business at low cost'.",
+      "accentColor": "0xFFEC4899",
+      "initials": "SC",
+      "focus": "Baking/confectionery technique, with a genuine but secondary business thread",
+      "verifiedOn": "2026-07-16",
+      "verificationMethod": "Fetched the channel page directly. Flagged honestly: unlike most channels counted this session, this one's primary content is recipes/technique, not business — included because the business thread is real (credentials, paid training, an explicit business-focused video) and no cleaner Nigeria-specific business-of-catering channel surfaced."
+    }
+  ],
+  "blogs": [],
+  "books": [],
+  "notes": "Real, rich Nigeria-specific business content exists in BLOG form (WithinNigeria's detailed 'Complete Guide to Starting a Catering Business in Nigeria for Owambe Events' is genuinely excellent — equipment costs, logistics, owambe-specific menu economics) but its RSS feed could not be confirmed this round. Worth a direct check of withinnigeria.com before the next pass. Free-book search not yet done this round."
+}
