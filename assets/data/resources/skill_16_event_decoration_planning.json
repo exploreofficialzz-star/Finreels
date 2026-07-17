@@ -17,5 +17,5 @@
   ],
   "blogs": [],
   "books": [],
-  "notes": "Real, rich Nigeria-specific business content exists (ConnectNigeria has multiple detailed 2026 articles: full pricing breakdowns by event type and city, and a specific 'How To Start an Event Planning Business in Nigeria: Registration to First Client' guide) but RSS not checked this round given time already spent on the channel search. Worth checking articles.connectnigeria.com's feed directly in a future pass — it's likely the same source already confirmed real for Barbing's blog research earlier."
+  "notes": "CORRECTION (2026-07-17): the ConnectNigeria article originally flagged here as 'worth checking' should NOT be used. Directly fetching articles.connectnigeria.com while researching a later category (Shoemaking) returned a page full of injected gambling/casino spam content, not the site's real articles — a strong sign the domain has been compromised or expired and repurposed. The specific article that looked good in search snippets may still be real, but the domain itself is not safe to add as a live, fetchable source right now. No entry was added here based on it, and none should be added elsewhere either."
 }

@@ -1,0 +1,16 @@
+{
+  "categoryId": "skill_17_shoemaking_leatherwork",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-17",
+  "channels": [],
+  "blogs": [
+    {
+      "name": "BusinessDay Nigeria",
+      "url": "https://businessday.ng/feed",
+      "verifiedOn": "2026-07-17",
+      "verificationMethod": "Same feed already verified for Agriculture, Dentistry, and Carpentry — cross-tagged here because BusinessDay has run a specific, real feature on Nigeria's leather shoe industry (the Aba Leather Cluster, 70,000+ shoemakers, $800M market, AfCFTA export growth)."
+    }
+  ],
+  "books": [],
+  "notes": "IMPORTANT SAFETY FINDING from this round: articles.connectnigeria.com, which had looked like a strong lead for an earlier category (Event Decoration & Planning) and appeared again in this category's search results, was fetched directly and returned a page full of injected gambling/casino spam content instead of real articles \u2014 a strong sign the domain has been compromised or expired and repurposed. Not used here or anywhere else; the earlier category's notes have been corrected to reflect this. On channels: Aba (Nigeria's shoemaking capital, 70,000-100,000+ shoemakers) has extensive documentary/travel-vlog YouTube coverage of the industry, but no dedicated business-of-shoemaking channel surfaced \u2014 the closest lead, a Nigerian-born shoemaker featured by APT in Frankfurt, is a news feature about him, not his own channel. African Cobblers Resource Centre (a real Aba-based footwear training company) is worth a closer look in a future pass \u2014 no clear YouTube presence found this round, but the training-business angle fits well."
+}
