@@ -1,0 +1,32 @@
+{
+  "categoryId": "skill_14_videography_video_editing",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-16",
+  "channels": [
+    {
+      "id": "UC0rQarbogLMw7JmIxRba_cw",
+      "name": "Videography Academy",
+      "handle": "@VideographyAcademy",
+      "description": "Self-described 'the ultimate resource for busy people that want to learn the techniques AND business of videography'. Keywords directly confirm the business angle: entrepreneur, sales, marketing, video marketing.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "VA",
+      "focus": "Business of videography — sales, marketing, clients",
+      "verifiedOn": "2026-07-16",
+      "verificationMethod": "Fetched the channel page directly; About section and keywords are an exact, explicit match. A separate lead ('Perspective Academy', a real videography-business coaching program found via an ad-style video) could not be traced to its own dedicated channel — the name collides with an unrelated Indian drawing/exam-prep channel — so wasn't counted."
+    },
+    {
+      "id": "UC-b3c7kxa5vU-bnmaROgvog",
+      "name": "The Futur",
+      "handle": "@thefutur",
+      "description": "Chris Do's channel, already verified for Graphic Design and Photography — cross-tagged here for the same reason as Photography: FlashFilm Academy's roundup explicitly names it a top channel for videographers and video production business owners specifically.",
+      "accentColor": "0xFF16A34A",
+      "initials": "TF",
+      "focus": "Cross-discipline creative business education",
+      "verifiedOn": "2026-07-16",
+      "verificationMethod": "Same channel already verified for skill_11/skill_13; cross-tagged based on FlashFilm Academy's explicit recommendation for video production businesses."
+    }
+  ],
+  "blogs": [],
+  "books": [],
+  "notes": "Blog and free-book search not yet done this round."
+}
