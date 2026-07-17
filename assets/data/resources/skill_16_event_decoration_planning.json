@@ -1,0 +1,21 @@
+{
+  "categoryId": "skill_16_event_decoration_planning",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-16",
+  "channels": [
+    {
+      "id": "UCYo2a3nP2o7gXi3nu1_OmwA",
+      "name": "Event Planning Blueprint",
+      "handle": "@eventplanningblueprint",
+      "description": "Melanie Woodward, 15+ years planning events for Honda, HGTV and Fortune 500 companies, managed events with 30,000+ attendees. Channel exists specifically to help people 'start your event planning business today' — client acquisition, pricing, avoiding common business mistakes.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "EP",
+      "focus": "Event planning business — clients, pricing, growth",
+      "verifiedOn": "2026-07-16",
+      "verificationMethod": "Extremely well corroborated across 8+ independent sources (Social Tables' and FeedSpot's event-planner-channel roundups, InEvent interview, LiveAbout bio, a PR Newswire release, and the channel's own About page) all describing the same person, career history, and channel."
+    }
+  ],
+  "blogs": [],
+  "books": [],
+  "notes": "Real, rich Nigeria-specific business content exists (ConnectNigeria has multiple detailed 2026 articles: full pricing breakdowns by event type and city, and a specific 'How To Start an Event Planning Business in Nigeria: Registration to First Client' guide) but RSS not checked this round given time already spent on the channel search. Worth checking articles.connectnigeria.com's feed directly in a future pass — it's likely the same source already confirmed real for Barbing's blog research earlier."
+}
