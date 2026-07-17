@@ -1,0 +1,21 @@
+{
+  "categoryId": "skill_12_web_app_development",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-16",
+  "channels": [
+    {
+      "id": "UCFh7FvnJ_0sVP4V0rZe6AaA",
+      "name": "John Morris",
+      "handle": "@john.morris",
+      "description": "Missouri-based freelance web developer, 15+ years experience, known for work with Michael Hyatt, Lewis Howes and Tim Ferriss. Videos on web design/development plus freelancing and client acquisition — how to turn coding skills into a full-time career, not just how to code.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "JM",
+      "focus": "Freelance web development business & client acquisition",
+      "verifiedOn": "2026-07-16",
+      "verificationMethod": "Extremely well corroborated — 7+ independent sources (Creative Bloq, Millo, TubeOnAI, Medium, LinkedIn, Udemy, DEV Community) all describing the same person, channel, and subscriber count. Fetched the channel directly to confirm the exact ID; keywords list ('upwork', 'freelance', 'wordpress') matches exactly."
+    }
+  ],
+  "blogs": [],
+  "books": [],
+  "notes": "Distinct from Computer Science/Software Engineering (profession_11, which covered turning code into products via Indie Hackers) — this category is specifically about the freelance/agency service-delivery side of the same skill. Blog and free-book search not yet done this round."
+}

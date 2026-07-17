@@ -1,0 +1,32 @@
+{
+  "categoryId": "skill_13_photography",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-16",
+  "channels": [
+    {
+      "id": "UCOPJJLvR-N0hS8V-AWnQ-6w",
+      "name": "Vanessa Joy",
+      "handle": "@VanessaJoy",
+      "description": "20+ year professional wedding photographer, Canon Explorer of Light (an honor given to only 5 photographers in the US), 145,000+ subscribers. Channel exists explicitly for 'photography AND business education' — pricing, sales sessions, post-wedding workflow, client experience — not just technique.",
+      "accentColor": "0xFFEC4899",
+      "initials": "VJ",
+      "focus": "Wedding photography business & client experience",
+      "verifiedOn": "2026-07-16",
+      "verificationMethod": "Extremely well corroborated across 10+ independent sources (her own channel About section, Voyage Austin interview, Animoto case study on her video-driven $20K sales increase, multiple video titles specifically about business topics). One of the strongest finds this session."
+    },
+    {
+      "id": "UC-b3c7kxa5vU-bnmaROgvog",
+      "name": "The Futur",
+      "handle": "@thefutur",
+      "description": "Chris Do's channel, already verified for Graphic Design (skill_11) — cross-tagged here because FlashFilm Academy's roundup of business-of-photography channels specifically names The Futur as valuable for photographers too, not just designers, since it teaches business fundamentals (pricing, positioning, sales) that apply across creative fields.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "TF",
+      "focus": "Cross-discipline creative business education",
+      "verifiedOn": "2026-07-16",
+      "verificationMethod": "Same channel already verified for skill_11; cross-tagged based on an independent source (FlashFilm Academy) explicitly recommending it for photographers/videographers specifically."
+    }
+  ],
+  "blogs": [],
+  "books": [],
+  "notes": "Photography YouTube is dominated by gear reviews and technique tutorials (Peter McKinnon, Thomas Heaton, Tony & Chelsea Northrup) — real, popular, valuable for the craft, but not counted here since none focus on running the business. Blog and free-book search not yet done this round."
+}
