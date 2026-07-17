@@ -67,7 +67,7 @@ the tax-reform chapter; profession playbooks keep "The Real Problem" and
 question dump. Businesses were never affected — their chapters are real
 answered Q&A already.
 
-## Progress after this session: 32 of 60 categories started (Nursing updated, not newly added) — halfway through all 60
+## Progress after this session: 33 of 60 categories started (Nursing updated, not newly added) — halfway through all 60
 
 | Category | Channels | Blogs | Free Books |
 |---|---|---|---|
@@ -102,9 +102,10 @@ answered Q&A already.
 | Catering & Baking | 1/10 | 0/10 | 0/10 |
 | Event Decoration & Planning | 1/10 | 0/10 | 0/10 |
 | Shoemaking & Leatherwork | 0/10 | 1/10 | 0/10 |
-| **POP/Tiling & Interior Decor** | **0/10** | **0/10** | **0/10** |
+| POP/Tiling & Interior Decor | 0/10 | 0/10 | 0/10 |
+| **Solar Installation & Renewable Energy** | **1/10** | **0/10** | **0/10** |
 
-**74 items total, individually verified, out of 1,920.** That number is
+**75 items total, individually verified, out of 1,920.** That number is
 deliberately not dressed up — here's the honest math on why, and what a
 sustainable path looks like.
 
@@ -166,7 +167,7 @@ Photography & Videography) are the *same real-world trades* as skills
 Ann Usman are exactly as relevant to "Fashion Design & Tailoring (Trade)"
 as they are to skill_01 — no need to re-research those 5 from scratch
 once their skill counterparts are done; they can share the same verified
-entries. Next up: skill_19, Solar Installation & Renewable Energy.
+entries. Next up: skill_20, AC & Refrigeration Repair — the last of the 20 skills.
 
 **Safety finding worth flagging clearly:** articles.connectnigeria.com —
 a domain that looked like a strong, real lead across two categories

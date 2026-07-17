@@ -1,0 +1,21 @@
+{
+  "categoryId": "skill_19_solar_installation_renewable_energy",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-17",
+  "channels": [
+    {
+      "id": "UCBnGaOIYP_VPzQsbp1pWHxg",
+      "name": "Solar Surge",
+      "handle": "@SolarSurge",
+      "description": "Joe Ordia, 10+ years solar experience (system design, sales, installation), 800+ completed projects, Class A contractor and electrician's license. The channel's own tagline emphasizes consumer-facing panel/inverter/battery reviews, but it also hosts genuine sales/business training content ('How to Sell Solar', 'How to Start a Solar Business') tied to his separate Solar Surge University training program.",
+      "accentColor": "0xFFF59E0B",
+      "initials": "SS",
+      "focus": "Mixed: consumer solar buying guides + solar sales/business training",
+      "verifiedOn": "2026-07-17",
+      "verificationMethod": "Fetched the channel page directly to confirm the exact ID. Flagged honestly: unlike most channels counted this session, this one's own self-description leans consumer-facing (product reviews) rather than purely business-focused \u2014 included because multiple real, confirmed videos on the same channel specifically teach solar sales and starting a solar business, and the host's business-training credentials (Solar Surge University, hundreds of trained reps) are real."
+    }
+  ],
+  "blogs": [],
+  "books": [],
+  "notes": "Nigeria-specific solar content is entirely companies marketing installation services to homeowners (SolarKobo, HakunaSolar, Solynta Energy, WiSolar, GVE, Beebeejump) \u2014 real, legitimate businesses, but none teaching other installers/technicians how to run a solar business, so none were counted, matching the same standard applied to real estate and PR agencies. This is a genuinely large, fast-growing Nigerian industry given constant power outages \u2014 worth a dedicated future search specifically for Nigerian solar TRAINING academies (several exist for technical certification) that might also cover business setup."
+}
