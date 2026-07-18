@@ -1,0 +1,21 @@
+{
+  "categoryId": "business_05_real_estate_agency",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-18",
+  "channels": [
+    {
+      "id": "UCHkkGBk6qrHXxuqSZ3nnDBA",
+      "name": "The Nigerian Realtor",
+      "handle": "@TheNigerianRealtor",
+      "description": "Lerato Lekena-Okoro, real estate entrepreneur running Lerato & Adams Realty, a Lagos-based brokerage, for 8 years. Channel teaches real estate investment strategies and decision-making for Nigerians building wealth through property \u2014 genuine practitioner experience, not just listings.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "NR",
+      "focus": "Real estate investment strategy from a practicing Nigerian broker",
+      "verifiedOn": "2026-07-18",
+      "verificationMethod": "Confirmed via the channel's own About section, directly naming the host, her brokerage, and years of experience. Distinct from the dozens of real estate agency channels found in the same search (Realdots, Eden Oasis, Ehi-Kings, Propertylab) that primarily market properties for sale rather than teach the business/investment side \u2014 those weren't counted, matching the standard applied when researching Estate Management/Surveying (profession_08) earlier."
+    }
+  ],
+  "blogs": [],
+  "books": [],
+  "notes": "Distinct from Estate Management/Surveying (profession_08, the licensed surveyor/valuer profession) \u2014 this category is specifically real estate agency/brokerage. connectnigeria.com appeared again in this search (already flagged as likely compromised after returning spam content when directly fetched during Shoemaking research) \u2014 not used here either."
+}

@@ -67,7 +67,7 @@ the tax-reform chapter; profession playbooks keep "The Real Problem" and
 question dump. Businesses were never affected — their chapters are real
 answered Q&A already.
 
-## Progress after this session: 26 of 60 categories started (Nursing updated, not newly added)
+## Progress after this session: 39 of 60 categories started (Nursing updated, not newly added) — all 15 researched professions AND all 20 skills started; Businesses section now begun
 
 | Category | Channels | Blogs | Free Books |
 |---|---|---|---|
@@ -96,9 +96,22 @@ answered Q&A already.
 | Auto Mechanics | 2/10 | 0/10 | 0/10 |
 | Phone & Electronics Repair | 0/10 | 0/10 | 0/10 |
 | Graphic Design | 1/10 | 0/10 | 0/10 |
-| **Web/App Development** | **1/10** | **0/10** | **0/10** |
+| Web/App Development | 1/10 | 0/10 | 0/10 |
+| Photography | 2/10 | 0/10 | 0/10 |
+| Videography & Video Editing | 2/10 | 0/10 | 0/10 |
+| Catering & Baking | 1/10 | 0/10 | 0/10 |
+| Event Decoration & Planning | 1/10 | 0/10 | 0/10 |
+| Shoemaking & Leatherwork | 0/10 | 1/10 | 0/10 |
+| POP/Tiling & Interior Decor | 0/10 | 0/10 | 0/10 |
+| Solar Installation & Renewable Energy | 1/10 | 0/10 | 0/10 |
+| AC & Refrigeration Repair | 2/10 | 0/10 | 0/10 |
+| POS/Agent Banking (business) | 0/10 | 1/10 | 0/10 |
+| Provision Store/Mini-Mart | 0/10 | 1/10 | 0/10 |
+| Fashion Retail/Boutique | 0/10 | 0/10 | 0/10 |
+| Food Vending/Catering/Meal-Prep | 0/10 | 1/10 | 0/10 |
+| **Real Estate Agency** | **1/10** | **0/10** | **0/10** |
 
-**67 items total, individually verified, out of 1,920.** That number is
+**81 items total, individually verified, out of 1,920.** That number is
 deliberately not dressed up — here's the honest math on why, and what a
 sustainable path looks like.
 
@@ -160,7 +173,25 @@ Photography & Videography) are the *same real-world trades* as skills
 Ann Usman are exactly as relevant to "Fashion Design & Tailoring (Trade)"
 as they are to skill_01 — no need to re-research those 5 from scratch
 once their skill counterparts are done; they can share the same verified
-entries. Next up: skill_13, Photography.
+entries. All 20 are now started.
+
+**Second milestone: every one of the 20 Skills categories now has at
+least one real, verified resource**, joining the 15 researched
+professions milestone from earlier. Combined with the 5 "trade
+professions" (16-20) that can inherit these same skill entries, that's
+40 of the 60 categories effectively covered by direct or shared
+verification. Next up: business_06, Logistics/Dispatch Rider.
+
+**Safety finding worth flagging clearly:** articles.connectnigeria.com —
+a domain that looked like a strong, real lead across two categories
+(Barbing, Event Decoration & Planning) — was directly fetched while
+researching Shoemaking and returned a page full of injected gambling/
+casino spam instead of real content. Likely compromised or expired and
+repurposed. It was never actually added as a live entry anywhere (only
+mentioned in one notes field as "worth checking"), and that note has now
+been corrected into an explicit warning. Nothing in the shipped data was
+affected, but worth knowing this domain should not be trusted or added
+in future passes either.
 
 **Note on Auto Mechanics specifically:** its resource file already existed
 with a different, independently-verified channel (Shop Owner Magazine)
