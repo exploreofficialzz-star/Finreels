@@ -1,0 +1,16 @@
+{
+  "categoryId": "business_02_provision_store_mini_mart",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-18",
+  "channels": [],
+  "blogs": [
+    {
+      "name": "SwiftPOS Blog",
+      "url": "https://swiftpos.ng/blog/feed/",
+      "verifiedOn": "2026-07-18",
+      "verificationMethod": "SwiftPOS itself confirmed real \u2014 a Nigerian POS/inventory software company with genuinely detailed, current (2026-dated) guides specifically for provision store and mini-mart owners: full startup-cost breakdowns by budget tier, real margin data (8-40% depending on product category), and operational advice beyond just 'is there foot traffic'. Feed URL uses the standard WordPress pattern \u2014 a direct RSS search got confused with 'Swift' the Apple programming language instead of the company, so this wasn't confirmed as cleanly as most entries this session. Worth a direct check before shipping."
+    }
+  ],
+  "books": [],
+  "notes": "Same shape as POS/Agent Banking: no dedicated YouTube channel exists for the business side of running a provision store \u2014 TikTok has extensive shop-tour and 'how much to start' content, but nothing structured as ongoing business education. Content lives in article form across several real Nigerian sources beyond SwiftPOS."
+}
