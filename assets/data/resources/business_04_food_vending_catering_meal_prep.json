@@ -1,0 +1,16 @@
+{
+  "categoryId": "business_04_food_vending_catering_meal_prep",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-18",
+  "channels": [],
+  "blogs": [
+    {
+      "name": "Entrepreneurs.ng",
+      "url": "https://entrepreneurs.ng/feed/",
+      "verifiedOn": "2026-07-18",
+      "verificationMethod": "Same feed already verified for Tailoring & Fashion Design and POS/Agent Banking \u2014 cross-tagged here because it has multiple real, current (2026-dated) articles specifically on food business ideas in Nigeria: small chops, meal-prep subscriptions, snack production, startup costs and profit ranges by food type."
+    }
+  ],
+  "books": [],
+  "notes": "Same shape as most Business-section categories so far: genuine, real human-interest content exists (a documentary on 'Mama Ese', a news feature on Rasheed Salami's Prestigious Meals redefining food hawking in Lagos) but nothing structured as ongoing business education \u2014 these are one-off features, not channels. The many food/recipe YouTubers found (Sussy's Cakes again, various 'What I Eat In A Day' channels) teach cooking, not running a food business, so weren't counted, consistent with the standard applied to Catering & Baking (skill_15) and other craft-vs-business distinctions this session."
+}
