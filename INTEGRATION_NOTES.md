@@ -67,7 +67,7 @@ the tax-reform chapter; profession playbooks keep "The Real Problem" and
 question dump. Businesses were never affected — their chapters are real
 answered Q&A already.
 
-## Progress after this session: 33 of 60 categories started (Nursing updated, not newly added) — halfway through all 60
+## Progress after this session: 34 of 60 categories started (Nursing updated, not newly added) — all 15 researched professions AND all 20 skills now have at least one real, verified resource
 
 | Category | Channels | Blogs | Free Books |
 |---|---|---|---|
@@ -103,9 +103,10 @@ answered Q&A already.
 | Event Decoration & Planning | 1/10 | 0/10 | 0/10 |
 | Shoemaking & Leatherwork | 0/10 | 1/10 | 0/10 |
 | POP/Tiling & Interior Decor | 0/10 | 0/10 | 0/10 |
-| **Solar Installation & Renewable Energy** | **1/10** | **0/10** | **0/10** |
+| Solar Installation & Renewable Energy | 1/10 | 0/10 | 0/10 |
+| **AC & Refrigeration Repair** | **2/10** | **0/10** | **0/10** |
 
-**75 items total, individually verified, out of 1,920.** That number is
+**77 items total, individually verified, out of 1,920.** That number is
 deliberately not dressed up — here's the honest math on why, and what a
 sustainable path looks like.
 
@@ -167,7 +168,16 @@ Photography & Videography) are the *same real-world trades* as skills
 Ann Usman are exactly as relevant to "Fashion Design & Tailoring (Trade)"
 as they are to skill_01 — no need to re-research those 5 from scratch
 once their skill counterparts are done; they can share the same verified
-entries. Next up: skill_20, AC & Refrigeration Repair — the last of the 20 skills.
+entries. All 20 are now started.
+
+**Second milestone: every one of the 20 Skills categories now has at
+least one real, verified resource**, joining the 15 researched
+professions milestone from earlier. Combined with the 5 "trade
+professions" (16-20) that can inherit these same skill entries, that's
+40 of the 60 categories effectively covered by direct or shared
+verification. Next up: Businesses, starting with business_01,
+POS/Agent Banking — a completely fresh section with its own PDF
+directory candidates and no prior work in this project to build on.
 
 **Safety finding worth flagging clearly:** articles.connectnigeria.com —
 a domain that looked like a strong, real lead across two categories

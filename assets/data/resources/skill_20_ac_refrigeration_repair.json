@@ -1,0 +1,32 @@
+{
+  "categoryId": "skill_20_ac_refrigeration_repair",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-17",
+  "channels": [
+    {
+      "id": "UCX9qUeV57Z7gqX1uwp8XOqg",
+      "name": "WW HVAC",
+      "handle": "@WWHVAC",
+      "description": "Walter Washington, HVAC tech and owner of Washington A/C & Heating LLC (Katy, TX), building it into a top HVAC company on camera. Explicitly mixes service calls and troubleshooting with 'business lessons' for techs, contractors, and apprentices.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "WW",
+      "focus": "HVAC business ownership, documented in real time",
+      "verifiedOn": "2026-07-17",
+      "verificationMethod": "Confirmed via SmartService's HVAC-channel roundup ('the repair content is solid, the business content is honest') plus the channel's own About section, both independently describing the same real business-building focus."
+    },
+    {
+      "id": "UCiz21FXLOV65NTgiUfJsxTg",
+      "name": "HVAC GUY",
+      "handle": "@HVACGUY",
+      "description": "A working HVAC technician whose channel explicitly covers 'opening and running as small business' alongside repair instruction.",
+      "accentColor": "0xFF16A34A",
+      "initials": "HG",
+      "focus": "HVAC repair technique + small business operations",
+      "verifiedOn": "2026-07-17",
+      "verificationMethod": "Fetched the channel page directly \u2014 About section explicitly names the business angle."
+    }
+  ],
+  "blogs": [],
+  "books": [],
+  "notes": "This completes all 20 skills categories with at least a first pass. HVAC/AC repair is a genuinely rich global niche for business-adjacent content \u2014 several more good candidates exist (AC Service Tech LLC, Blue Collar Nerd, HVAC Shop Talk) that weren't chased down this round given time. No Nigeria-specific AC/refrigeration business content was searched for this round \u2014 worth a dedicated pass later, especially given how relevant AC/cooling is to the Nigerian market."
+}
