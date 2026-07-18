@@ -1,0 +1,16 @@
+{
+  "categoryId": "business_01_pos_agent_banking",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-18",
+  "channels": [],
+  "blogs": [
+    {
+      "name": "Entrepreneurs.ng",
+      "url": "https://entrepreneurs.ng/feed/",
+      "verifiedOn": "2026-07-18",
+      "verificationMethod": "Same feed already verified for Tailoring & Fashion Design (skill_01) \u2014 cross-tagged here because it has multiple real, specific POS business articles: 'Best POS Agent Banking Platforms in Nigeria', a full 'OPay POS Business' how-to guide, and general POS-business coverage."
+    }
+  ],
+  "books": [],
+  "notes": "First category in the Businesses section \u2014 a completely fresh start with no prior curriculum.md research or skills overlap to build on. Genuine finding: despite POS/agent banking being one of Nigeria's most common small businesses (655M+ transactions/\u20a64.7 trillion in 2020 alone per NIBSS), there is no dedicated YouTube channel teaching the business side \u2014 content is entirely in article form, across many real, legitimate blogs (Sycamore, Legit.ng, dockaysworld.com.ng, ErrandPay, SupplySmart) beyond just Entrepreneurs.ng. This likely reflects that a POS business has a low barrier/complexity (buy a machine, register, start), so there's less demand for extensive tutorial content compared to skilled trades. Sycamore's blog (blog.sycamore.ng, a real fintech company) looked promising but its RSS feed could not be confirmed this round."
+}
