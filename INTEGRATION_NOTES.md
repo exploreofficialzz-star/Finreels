@@ -67,7 +67,7 @@ the tax-reform chapter; profession playbooks keep "The Real Problem" and
 question dump. Businesses were never affected — their chapters are real
 answered Q&A already.
 
-## Progress after this session: 39 of 60 categories started (Nursing updated, not newly added) — all 15 researched professions AND all 20 skills started; Businesses section now begun
+## Progress after this session: 40 of 60 categories started (Nursing updated, not newly added) — two-thirds of all 60 categories now started
 
 | Category | Channels | Blogs | Free Books |
 |---|---|---|---|
@@ -109,9 +109,10 @@ answered Q&A already.
 | Provision Store/Mini-Mart | 0/10 | 1/10 | 0/10 |
 | Fashion Retail/Boutique | 0/10 | 0/10 | 0/10 |
 | Food Vending/Catering/Meal-Prep | 0/10 | 1/10 | 0/10 |
-| **Real Estate Agency** | **1/10** | **0/10** | **0/10** |
+| Real Estate Agency | 1/10 | 0/10 | 0/10 |
+| **Logistics/Dispatch Rider** | **1/10** | **0/10** | **0/10** |
 
-**81 items total, individually verified, out of 1,920.** That number is
+**82 items total, individually verified, out of 1,920.** That number is
 deliberately not dressed up — here's the honest math on why, and what a
 sustainable path looks like.
 
@@ -180,7 +181,7 @@ least one real, verified resource**, joining the 15 researched
 professions milestone from earlier. Combined with the 5 "trade
 professions" (16-20) that can inherit these same skill entries, that's
 40 of the 60 categories effectively covered by direct or shared
-verification. Next up: business_06, Logistics/Dispatch Rider.
+verification. Next up: business_07, Event Planning & Rentals.
 
 **Safety finding worth flagging clearly:** articles.connectnigeria.com —
 a domain that looked like a strong, real lead across two categories

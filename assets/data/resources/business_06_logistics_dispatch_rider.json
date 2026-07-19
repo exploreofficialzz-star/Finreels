@@ -1,0 +1,21 @@
+{
+  "categoryId": "business_06_logistics_dispatch_rider",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-18",
+  "channels": [
+    {
+      "id": "UCdQfbaTlApD14Fuj8D4jLnw",
+      "name": "Kwik Delivery",
+      "handle": "@KwikDelivery",
+      "description": "Official channel of Kwik, an on-demand last-mile delivery platform operating in Lagos and Abuja (Mastercard and Total Nigeria partnerships, first African delivery platform with a WooCommerce plugin). Channel description explicitly aims to 'help you build and grow your eCommerce and logistics business', not just promote the service.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "KW",
+      "focus": "Building an ecommerce/logistics/dispatch business in Nigeria",
+      "verifiedOn": "2026-07-18",
+      "verificationMethod": "Confirmed via the channel's own About section, which directly states its business-education purpose rather than pure service marketing. Cross-checked against Kwik's real operational history in Nigeria (Google Play listing, partnership press releases)."
+    }
+  ],
+  "blogs": [],
+  "books": [],
+  "notes": "Nigeria's dispatch/logistics content is dominated by two things: real, detailed articles on starting a bike delivery business (Kwik's own blog, TrustAm, MOC Accountants) and Jiji/job-board listings for hiring riders \u2014 but no dedicated Nigeria-specific business-of-dispatch YouTube channel beyond Kwik's official one emerged this round. Kwik's own blog (kwik.delivery/blog/) exists but reads mostly as corporate press releases rather than educational content, and no RSS feed was confirmed for it."
+}
