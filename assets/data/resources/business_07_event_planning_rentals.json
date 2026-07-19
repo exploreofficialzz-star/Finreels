@@ -1,0 +1,21 @@
+{
+  "categoryId": "business_07_event_planning_rentals",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-19",
+  "channels": [
+    {
+      "id": "UCYo2a3nP2o7gXi3nu1_OmwA",
+      "name": "Event Planning Blueprint",
+      "handle": "@eventplanningblueprint",
+      "description": "Melanie Woodward's channel, already verified for Event Decoration & Planning (skill_16) \u2014 cross-tagged here since this business category covers event planning as a business directly, even though her content doesn't specifically cover the equipment-rental side.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "EP",
+      "focus": "Event planning business — clients, pricing, growth",
+      "verifiedOn": "2026-07-19",
+      "verificationMethod": "Same channel already verified for skill_16."
+    }
+  ],
+  "blogs": [],
+  "books": [],
+  "notes": "The 'rentals' half of this category (canopy/chairs/tent hire) is, in Nigeria, entirely company-marketing content \u2014 dozens of real rental businesses (Naphtali, Eloquent Displays, SoundsAndMore) with product catalogs, none teaching how to start or run that specific business. One promising lead ('Canopies and chairs rental business in Nigeria; step by step guide on how to start rental business') looked like genuine business education but couldn't be traced to a clear, named channel this round \u2014 worth a direct follow-up."
+}
