@@ -1,0 +1,39 @@
+{
+  "categoryId": "business_08_salon_barbing_beauty_spa",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-19",
+  "channels": [
+    {
+      "id": "UCoU7oC0WD6vDkEC6X7kfg3g",
+      "name": "The Beauty Biz Agency",
+      "handle": "@thebeautybizagency",
+      "description": "Explicitly 'for salon owners, spa owners, beauty business owners and independent stylists' \u2014 salon leadership, pricing for profit, team management, client retention. Self-description directly states: 'most cosmetology programs don't teach the business side of the beauty industry \u2014 that's what we focus on here.'",
+      "accentColor": "0xFFEC4899",
+      "initials": "BB",
+      "focus": "Salon/spa business systems, pricing, team management",
+      "verifiedOn": "2026-07-19",
+      "verificationMethod": "Direct channel URL and full About-section description returned in search results, an exact match to this category's purpose."
+    },
+    {
+      "id": "UCnFzOCx_dheaB5yUjVnzjSw",
+      "name": "The Salon Business",
+      "handle": "@TheSalonBusiness",
+      "description": "Powered by Mangomint (salon/spa software) \u2014 practical marketing ideas for hair salons, nail salons, spas, and barbershops. Free weekly education from John, former Marketing Director at Wella Professionals, O.P.I., and ghd.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "SB",
+      "focus": "Salon/spa marketing and growth",
+      "verifiedOn": "2026-07-19",
+      "verificationMethod": "Direct channel URL and About-section description returned in search results, cross-confirmed by thesalonbusiness.com's own About page describing the same channel and host."
+    }
+  ],
+  "blogs": [
+    {
+      "name": "The Splice Blog",
+      "url": "https://blog.withsplice.com/feed/",
+      "verifiedOn": "2026-07-19",
+      "verificationMethod": "Same feed already verified for Barbing (skill_03) \u2014 cross-tagged here with a second, directly on-topic article confirmed this round: 'How To Run A Successful Spa Business In Nigeria', covering marketing strategy and staff KPI-setting specifically for Nigerian spa owners."
+    }
+  ],
+  "books": [],
+  "notes": "One of the richest finds this session. Also worth a future look: 'Beyond Beauty Podcast', hosted by Layo Ogunbanwo (Splice's own founder) \u2014 real interviews with Nigerian salon/spa founders about burnout, bad hires, scaling, and pricing mistakes. Confirmed real and directly on-topic (BellaNaija, TechCabal) but its own dedicated YouTube presence wasn't checked this round given how strong the two channels above already were."
+}
