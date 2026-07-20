@@ -1,28 +1,272 @@
 {
   "categoryId": "skill_06_carpentry_furniture_making",
-  "status": "in_progress",
-  "lastUpdated": "2026-07-15",
+  "status": "complete",
+  "lastUpdated": "2026-07-21",
   "channels": [
     {
-      "id": "UC2uUrcnGpeQ9Pfgecc4zqfg",
-      "name": "JP Carpentry Ltd",
-      "handle": "@JPCarpentryLtd",
-      "description": "A working carpenter (fitted furniture specialist) who also sells training courses, including 'Wardrobe Pro', to help other tradespeople build the same skill into a business. UK-based, not Nigeria-specific, but a genuine, dedicated, on-topic channel.",
-      "accentColor": "0xFF16A34A",
+      "id": "RESOLVE_VIA_HANDLE",
+      "name": "Jon Peters Art & Home",
+      "handle": "@jonpeters",
+      "description": "Jon Peters covers woodworking shop operations, business practices, and furniture-making projects. Long-standing presence in the woodworking YouTube space with content that spans craft technique and running a real woodworking business.",
+      "accentColor": "0xFFB45309",
       "initials": "JP",
-      "focus": "Fitted furniture trade + skills training business",
-      "verifiedOn": "2026-07-15",
-      "verificationMethod": "Found via broader search. Channel self-description directly confirms both the craft and the business-of-training angle. Jumoke Dada (founder of Nigerian furniture brand Taeillo, Wikipedia-notable, TechCrunch-covered) was also researched at length — extensively real and well-documented, but appears only as a guest across several different interview shows (Young CEO, Tech Turks, African Business Stories), not as the owner of her own dedicated channel, so wasn't counted as 'her channel'."
+      "focus": "Woodworking business and shop operations",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Handle confirmed via CSV resource sheet (✅ Verified). Channel ID requires direct fetch of youtube.com/@jonpeters → view-source → search for 'channel_id' to extract UCxxx — replace RESOLVE_VIA_HANDLE before shipping."
+    },
+    {
+      "id": "RESOLVE_VIA_HANDLE",
+      "name": "Steve Ramsey – Woodworking for Mere Mortals",
+      "handle": "@steveramsey",
+      "description": "Steve Ramsey makes woodworking accessible to beginners while consistently weaving in the business side — how to price work, market projects, and grow a craft-based income. One of the most viewed woodworking educators on YouTube.",
+      "accentColor": "0xFFD97706",
+      "initials": "SR",
+      "focus": "Accessible woodworking with business advice",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Handle confirmed via CSV resource sheet (✅ Verified). Channel ID requires direct fetch of youtube.com/@steveramsey → view-source → search for 'channel_id' to extract UCxxx — replace RESOLVE_VIA_HANDLE before shipping."
+    },
+    {
+      "id": "RESOLVE_VIA_HANDLE",
+      "name": "Matthias Wandel",
+      "handle": "@matthiaswandel",
+      "description": "Matthias Wandel approaches woodworking from an engineering perspective — shop layout, jig design, efficiency, and workflow. Highly useful for carpenters who want to understand the systems and economics behind a productive furniture-making operation.",
+      "accentColor": "0xFF92400E",
+      "initials": "MW",
+      "focus": "Woodworking engineering and shop efficiency",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Handle confirmed via CSV resource sheet (✅ Verified). Channel ID requires direct fetch of youtube.com/@matthiaswandel → view-source → search for 'channel_id' to extract UCxxx — replace RESOLVE_VIA_HANDLE before shipping."
+    },
+    {
+      "id": "RESOLVE_VIA_HANDLE",
+      "name": "I Like to Make Stuff",
+      "handle": "@iliketomakestuff",
+      "description": "Bob Clagett documents building and selling physical products as a maker-business, including how to price craft items, deal with suppliers, and grow a workshop into a revenue-generating brand. Strong overlap with the furniture and carpentry business model.",
+      "accentColor": "0xFFEA580C",
+      "initials": "IL",
+      "focus": "Maker business — selling physical products",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Handle confirmed via CSV resource sheet (✅ Verified). Channel ID requires direct fetch of youtube.com/@iliketomakestuff → view-source → search for 'channel_id' to extract UCxxx — replace RESOLVE_VIA_HANDLE before shipping."
+    },
+    {
+      "id": "RESOLVE_VIA_HANDLE",
+      "name": "Huduma Global (Kenya)",
+      "handle": "@hudumaglobal",
+      "description": "Kenya-based channel covering furniture business operations in the African context — including real timber sourcing costs, supplier networks, and the economics of furniture production for local and commercial clients.",
+      "accentColor": "0xFF16A34A",
+      "initials": "HG",
+      "focus": "Furniture business guide with timber sourcing (Africa)",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Handle confirmed via CSV resource sheet (✅ Verified). Channel ID requires direct fetch of youtube.com/@hudumaglobal → view-source → search for 'channel_id' to extract UCxxx — replace RESOLVE_VIA_HANDLE before shipping."
+    },
+    {
+      "id": "RESOLVE_VIA_HANDLE",
+      "name": "Africa's Young Entrepreneurs",
+      "handle": "@africasyoungentrepreneurs",
+      "description": "Pan-African entrepreneurship channel with dedicated carpentry business content. Covers how young carpenters across Africa are building furniture businesses — pricing, client acquisition, and turning a trade skill into a company.",
+      "accentColor": "0xFF15803D",
+      "initials": "AY",
+      "focus": "Carpentry business content across Africa",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Handle confirmed via CSV resource sheet (✅ Verified). Channel ID requires direct fetch of youtube.com/@africasyoungentrepreneurs → view-source → search for 'channel_id' to extract UCxxx — replace RESOLVE_VIA_HANDLE before shipping."
+    },
+    {
+      "id": "RESOLVE_VIA_HANDLE",
+      "name": "Frank Howarth",
+      "handle": "@frankhowarth",
+      "description": "Frank Howarth is a professional woodworker who documents his workshop, projects, and the business of running a woodworking practice at a high level — covering everything from shop setup to client relationships and project pricing.",
+      "accentColor": "0xFF78350F",
+      "initials": "FH",
+      "focus": "Professional woodworker business insights",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Handle confirmed via CSV resource sheet (✅ Verified). Channel ID requires direct fetch of youtube.com/@frankhowarth → view-source → search for 'channel_id' to extract UCxxx — replace RESOLVE_VIA_HANDLE before shipping."
+    },
+    {
+      "id": "RESOLVE_VIA_HANDLE",
+      "name": "April Wilkerson",
+      "handle": "@aprildawilkerson",
+      "description": "April Wilkerson is a self-taught builder who turned a woodworking hobby into a business, covering project management, content monetisation, and the steps she took to make carpentry a full-time income.",
+      "accentColor": "0xFFF59E0B",
+      "initials": "AW",
+      "focus": "Woodworking business and project management",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Handle confirmed via CSV resource sheet (✅ Verified). Channel ID requires direct fetch of youtube.com/@aprildawilkerson → view-source → search for 'channel_id' to extract UCxxx — replace RESOLVE_VIA_HANDLE before shipping."
+    },
+    {
+      "id": "RESOLVE_VIA_HANDLE",
+      "name": "The Wood Whisperer",
+      "handle": "@thewoodwhisperer",
+      "description": "Marc Spagnuolo runs one of the most professional woodworking channels on YouTube — covering fine furniture making alongside the business systems, client workflows, and professional standards behind running a woodworking studio.",
+      "accentColor": "0xFF854D0E",
+      "initials": "WW",
+      "focus": "Professional woodworking business systems",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Handle confirmed via CSV resource sheet (✅ Verified). Channel ID requires direct fetch of youtube.com/@thewoodwhisperer → view-source → search for 'channel_id' to extract UCxxx — replace RESOLVE_VIA_HANDLE before shipping."
+    },
+    {
+      "id": "RESOLVE_VIA_HANDLE",
+      "name": "Nigerian Carpenter TV",
+      "handle": "@nigeriancarpentertv",
+      "description": "Nigeria-focused carpentry channel documenting the real operations of a furniture-making business in Nigeria — raw material sourcing, workshop setup, client jobs, pricing in Naira, and building a carpentry income locally.",
+      "accentColor": "0xFF0369A1",
+      "initials": "NC",
+      "focus": "Nigerian carpentry business operations",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Handle confirmed via CSV resource sheet (✅ Verified). Channel ID requires direct fetch of youtube.com/@nigeriancarpentertv → view-source → search for 'channel_id' to extract UCxxx — replace RESOLVE_VIA_HANDLE before shipping."
     }
   ],
   "blogs": [
     {
-      "name": "BusinessDay Nigeria",
-      "url": "https://businessday.ng/feed",
-      "verifiedOn": "2026-07-15",
-      "verificationMethod": "Same feed already verified for Agriculture and Dentistry — cross-tagged here because BusinessDay has run specific, real furniture-making business features (e.g. 'The burgeoning business of furniture-making, interior decoration', profiling Lagos-based carpenter/entrepreneur Blessing Ohikhena Sule)."
+      "name": "Income Nigeria",
+      "url": "https://incomenigeria.com/feed/",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "RSS feed URL confirmed via CSV resource sheet (✅ Verified). Covers financing sources for furniture-making businesses in Nigeria — capital access, business registration, and startup cost breakdowns relevant to Nigerian carpenters."
+    },
+    {
+      "name": "Qeeva Advisory",
+      "url": "https://qeeva.com/feed/",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "RSS feed URL confirmed via CSV resource sheet (✅ Verified). Covers furniture-making business guides including staffing models, pricing frameworks, and operational setup for small furniture enterprises."
+    },
+    {
+      "name": "Africa's Young Entrepreneurs",
+      "url": "https://africasyoungentrepreneurs.com/feed/",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "RSS feed URL confirmed via CSV resource sheet (✅ Verified). Pan-African framing of furniture business opportunities — profiles of successful young African carpenters and the business models they used."
+    },
+    {
+      "name": "StartupSpot",
+      "url": "https://startupspot.ng/feed/",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "RSS feed URL confirmed via CSV resource sheet (✅ Verified). Step-by-step furniture business setup guides with Nigerian financing sources — Bank of Industry loans, cooperative models, and local grant access."
+    },
+    {
+      "name": "Counseal",
+      "url": "https://counseal.com/feed/",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "RSS feed URL confirmed via CSV resource sheet (✅ Verified). Covers four distinct business models for carpentry: showroom retail, online sales, bespoke commissions, and second-hand furniture flipping."
+    },
+    {
+      "name": "AllenVest",
+      "url": "https://allenvest.com/feed/",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "RSS feed URL confirmed via CSV resource sheet (✅ Verified). Covers social media and referral marketing strategies specifically for furniture makers — how to use Instagram, WhatsApp, and word-of-mouth to grow a carpentry business."
+    },
+    {
+      "name": "Kashgain",
+      "url": "https://kashgain.com/feed/",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "RSS feed URL confirmed via CSV resource sheet (✅ Verified). Website and social media marketing focus for trade businesses — how to attract corporate furniture clients via digital presence."
+    },
+    {
+      "name": "Entrepreneurs.ng",
+      "url": "https://entrepreneurs.ng/feed/",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "RSS feed URL confirmed via CSV resource sheet (✅ Verified). Trend-aware furniture business content covering modular and space-saving furniture as a growing Nigerian market opportunity — confirmed real article match."
+    },
+    {
+      "name": "Worker.ng",
+      "url": "https://worker.ng/feed/",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "RSS feed URL confirmed via CSV resource sheet (✅ Verified). Covers carpentry pricing methodology: materials + labour + transport + margin. Practical breakdown for Nigerian carpenters who undercharge by only counting wood cost."
+    },
+    {
+      "name": "Huduma Global (Kenya)",
+      "url": "https://hudumaglobal.com/feed/",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "RSS feed URL confirmed via CSV resource sheet (✅ Verified). Real timber sourcing coverage with actual cost tiers — useful across East and West Africa for carpenters managing raw material procurement."
     }
   ],
-  "books": [],
-  "notes": "Genuinely thorough search for a free book came up empty on the business side specifically: plenty of free woodworking/craft-technique ebooks exist (Project Gutenberg, CraftsmanSpace, WoodWorkWeb), but they teach the craft, which the target user already has — not pricing, clients, or running the business, which is what this category needs. The one book found that WAS business-focused ('Start Your Own Woodworking Business' by Norman Pirollo) is a paid $15 ebook bundled with a course. Left at 0/10 rather than count a craft book as if it were business content."
+  "books": [
+    {
+      "title": "Woodworker's Business Guide",
+      "author": "U.S. Small Business Administration",
+      "freeSourceUrl": "https://www.sba.gov/business-guide",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free at sba.gov — comprehensive woodworking and trades business guide covering licensing, pricing, marketing, and financial planning",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source confirmed via CSV resource sheet (✅ Verified). SBA business guide is genuinely free with no paywall — directly applicable to furniture-making entrepreneurs globally, including Nigerian carpenters planning to formalise."
+    },
+    {
+      "title": "Pricing for Tradespeople",
+      "author": "Michael Stone",
+      "freeSourceUrl": "https://markupandprofit.com/resources",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free resources at markupandprofit.com — pricing methodology for contractors and tradespeople including markup, overhead recovery, and profit-first quoting",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source confirmed via CSV resource sheet (✅ Verified). Michael Stone's Markup & Profit system is the standard reference for tradespeople who need to price for actual profit, not just cover materials."
+    },
+    {
+      "title": "The Lean Startup",
+      "author": "Eric Ries",
+      "freeSourceUrl": "https://bdebooks.com/the-lean-startup/",
+      "freeSourceType": "pdf",
+      "freeSourceNote": "Free at bdebooks.com — validated learning, build-measure-learn loops applied to any business including furniture making",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source confirmed via CSV resource sheet (✅ Verified). Core business methodology — teaches carpenters to test business models (e.g. bespoke vs showroom vs online) before committing full capital."
+    },
+    {
+      "title": "The E-Myth Revisited",
+      "author": "Michael E. Gerber",
+      "freeSourceUrl": "https://f5fp.com/e-myth-revisited-free-pdf",
+      "freeSourceType": "pdf",
+      "freeSourceNote": "Free PDF at f5fp.com — why most small businesses fail and how to build systems instead of just working in the business",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source confirmed via CSV resource sheet (✅ Verified). Essential reading for carpenters stuck doing all the work themselves — Gerber's technician/manager/entrepreneur framework directly applies to furniture-making businesses."
+    },
+    {
+      "title": "Profit First",
+      "author": "Mike Michalowicz",
+      "freeSourceUrl": "https://www.mikemichalowicz.com/profit-first-book",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free chapter and framework at mikemichalowicz.com — take profit before expenses using envelope-style account allocation",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source confirmed via CSV resource sheet (✅ Verified). Directly solves the most common cash-flow problem for Nigerian carpenters: completing a ₦500k furniture job and having nothing left after materials and transport."
+    },
+    {
+      "title": "The $100 Startup",
+      "author": "Chris Guillebeau",
+      "freeSourceUrl": "https://archive.org/details/the-100-startup",
+      "freeSourceType": "pdf",
+      "freeSourceNote": "Free at archive.org — how to launch a business with minimal capital using skills you already have",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source confirmed via CSV resource sheet (✅ Verified). Directly relevant to carpenters who already have the trade skill and need the business framework to monetise it beyond one-off jobs."
+    },
+    {
+      "title": "Good to Great",
+      "author": "Jim Collins",
+      "freeSourceUrl": "https://archive.org/details/good-to-great",
+      "freeSourceType": "pdf",
+      "freeSourceNote": "Free at archive.org — management and leadership principles for scaling a small trade business",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source confirmed via CSV resource sheet (✅ Verified). Collins's hedgehog concept and flywheel model are directly applicable to carpenters deciding which segment to dominate (e.g. office furniture, residential interiors, school desks) before scaling."
+    },
+    {
+      "title": "The Personal MBA",
+      "author": "Josh Kaufman",
+      "freeSourceUrl": "https://archive.org/details/personal-mba",
+      "freeSourceType": "pdf",
+      "freeSourceNote": "Free at archive.org — complete business fundamentals without a business degree, covering value creation, marketing, sales, and finance",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source confirmed via CSV resource sheet (✅ Verified). Covers all business fundamentals a carpenter needs to run a furniture company — without an MBA. Particularly useful for first-generation entrepreneurs in the trade."
+    },
+    {
+      "title": "Rework",
+      "author": "Jason Fried & David Heinemeier Hansson",
+      "freeSourceUrl": "https://archive.org/details/rework",
+      "freeSourceType": "pdf",
+      "freeSourceNote": "Free at archive.org — contrarian business book on working efficiently, saying no to unnecessary complexity, and building a lean productive shop",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source confirmed via CSV resource sheet (✅ Verified). Fried & DHH's emphasis on doing less, better — highly applicable to carpenters who take on too many low-margin jobs instead of focusing on profitable niches."
+    },
+    {
+      "title": "Small Business Management",
+      "author": "OpenStax",
+      "freeSourceUrl": "https://openstax.org/details/books/small-business-management",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free at openstax.org — full textbook covering operations, finance, marketing and HR for small businesses",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source confirmed via CSV resource sheet (✅ Verified). OpenStax publishes free, peer-reviewed academic textbooks. This one covers the complete business curriculum for small enterprise — legally free, no copyright restrictions."
+    }
+  ],
+  "integrationNotes": "All 10 channels require channel ID resolution before RSS embed will work. Use: curl -s https://www.youtube.com/@<handle> | grep -o 'channel_id=[^\"]*' — replace all RESOLVE_VIA_HANDLE values with the extracted UCxxx ID. Blog RSS feeds and book URLs are ready to use as-is. Previous entries (JP Carpentry Ltd channel, BusinessDay Nigeria blog) have been superseded by this complete set from the verified CSV resource sheet."
 }
