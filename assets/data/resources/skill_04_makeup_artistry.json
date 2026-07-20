@@ -1,7 +1,7 @@
 {
   "categoryId": "skill_04_makeup_artistry",
   "status": "in_progress",
-  "lastUpdated": "2026-07-11",
+  "lastUpdated": "2026-07-20",
   "channels": [
     {
       "id": "UCfEQFjH0J--H3cV8pis62TA",
@@ -13,8 +13,261 @@
       "focus": "Makeup artistry business & beginner MUA tips",
       "verifiedOn": "2026-07-11",
       "verificationMethod": "Fetched youtube.com/@DamilareOshodi directly, confirmed canonical channel ID. Independently corroborated by a second source (The Beautiful Societies) describing the same channel as 'an educational hub for Nigerian bridal looks'."
+    },
+    {
+      "id": "UC97cZsOCVufvmRXvLusdj2Q",
+      "name": "Bobbi Brown Cosmetics",
+      "handle": "@BobbiBrown",
+      "description": "Official brand channel of the makeup line founded by makeup artist Bobbi Brown in 1991 — full-face beauty tutorials from the brand's pro makeup artists.",
+      "accentColor": "0xFFEC4899",
+      "initials": "BB",
+      "focus": "Building a beauty business from scratch",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Channel ID cross-confirmed via vidIQ analytics and a FeedSpot cosmetics-YouTubers directory listing. Note: Bobbi Brown herself left the Bobbi Brown Cosmetics company in 2016 (per Wikipedia) — this is the brand's official channel, not personally run by her; she now posts beauty content under her own name and Jones Road."
+    },
+    {
+      "id": "UCFghPtzFcmyDiID1ASMA4Dg",
+      "name": "Lisa Eldridge",
+      "handle": "@LisaEldridge",
+      "description": "Professional makeup artist to A-list celebrities, Global Creative Director at Lancôme, and NYT-bestselling author — one of the first professional MUAs to build a YouTube following, since 2010.",
+      "accentColor": "0xFF8B5CF6",
+      "initials": "LE",
+      "focus": "Makeup artist turned brand founder — business journey",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/@LisaEldridge); identity and career details cross-confirmed against Wikipedia and lisaeldridge.com."
+    },
+    {
+      "id": "UCCvoAe__WFYMNAEN-C-CtYA",
+      "name": "Wayne Goss",
+      "handle": "@WayneGoss",
+      "description": "Welsh makeup artist and entrepreneur, one of the 'original' big beauty YouTube channels (since 2008/09) — creator of his own eponymous makeup brush line.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "WG",
+      "focus": "Independent makeup artist building product business",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Channel ID confirmed via direct channel URL in search results (youtube.com/channel/UCCvoAe__WFYMNAEN-C-CtYA); identity cross-confirmed against Wikipedia (makeup artist, brush-line entrepreneur, ~4M subscribers)."
+    },
+    {
+      "id": "UC3YsLnCTHGOt5pxflqYpuVQ",
+      "name": "Muthoni Njoba",
+      "handle": "@MuthoniNjoba",
+      "description": "Nairobi-based Makeup Artist, Mentor & Coach with 16+ years' experience across Africa and internationally — bridal makeup masterclasses and mentoring for aspiring MUAs.",
+      "accentColor": "0xFF10B981",
+      "initials": "MN",
+      "focus": "Kenyan MUA with international fashion-week credentials",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/c/MuthoniNjoba); identity cross-confirmed against her own site muthoninjoba.com and Facebook/LinkedIn profiles."
+    },
+    {
+      "id": "UCRSvEADlY-caz3sfDNwvR1A",
+      "name": "Huda Beauty",
+      "handle": "@Hudabeauty",
+      "description": "Huda Kattan's original beauty blog/tutorial channel, which grew into the billion-dollar Huda Beauty cosmetics brand launched in 2013 with sister Mona Kattan.",
+      "accentColor": "0xFFF97316",
+      "initials": "HB",
+      "focus": "Beauty blogger to billion-dollar brand",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/c/Hudabeauty); identity and brand history cross-confirmed against Wikipedia."
+    },
+    {
+      "id": "UCzJIliq68IHSn-Kwgjeg2AQ",
+      "name": "Jackie Aina",
+      "handle": "@JackieAina",
+      "description": "American beauty YouTuber (since 2009) turned entrepreneur — NAACP YouTuber of the Year, brand partnerships with Anastasia Beverly Hills, e.l.f., Too Faced, and founder of Forvr Mood.",
+      "accentColor": "0xFFEF4444",
+      "initials": "JA",
+      "focus": "Influencer-to-entrepreneur business model",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel URL in search results (youtube.com/channel/UCzJIliq68IHSn-Kwgjeg2AQ); identity cross-confirmed against Wikipedia and jackieaina.com."
+    },
+    {
+      "id": "UCwgl_m6tlSf-Ipo4R7OQVzw",
+      "name": "Pat McGrath",
+      "handle": "@PATMcGRATHREAL",
+      "description": "Widely regarded as the most influential makeup artist in the world — launched her own eponymous luxury brand, PAT McGRATH LABS, in 2015.",
+      "accentColor": "0xFF6366F1",
+      "initials": "PM",
+      "focus": "Building a luxury makeup brand — business insights",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel URL in search results (youtube.com/channel/UCwgl_m6tlSf-Ipo4R7OQVzw); About-section confirms Pat McGrath's identity and PAT McGRATH LABS launch."
+    },
+    {
+      "id": "UCEcT5Ttsnl3kBMqyHmojobQ",
+      "name": "Makeup By Mario",
+      "handle": "@makeupbymario",
+      "description": "Brand channel founded by celebrity makeup artist Mario Dedivanovic (long-time Kim Kardashian MUA, popularized contouring) — launched his eponymous brand in 2020.",
+      "accentColor": "0xFF06B6D4",
+      "initials": "MM",
+      "focus": "Celebrity MUA turned brand founder",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/c/makeupbymario); identity cross-confirmed against Wikipedia (Mario Dedivanovic)."
+    },
+    {
+      "id": "UCuunP8TUxGS5nmgkzXhy0oQ",
+      "name": "Tara Fela-Durotoye",
+      "handle": "@TaraFelaDurotoye",
+      "description": "Nigerian lawyer-turned-beauty-entrepreneur, founder and CEO of House of Tara International — pioneered Nigeria's professional makeup industry, first bridal directory (1999) and first Nigerian beauty academy (2004).",
+      "accentColor": "0xFFA855F7",
+      "initials": "TF",
+      "focus": "Nigerian makeup business, branding & entrepreneurship",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Confirmed official channel ID (youtube.com/channel/UCuunP8TUxGS5nmgkzXhy0oQ) via a direct search result labeled 'Official page of Tara Fela-Durotoye'; identity cross-confirmed against Wikipedia and houseoftara.com.",
+      "notes": "Substituted for the source directory's 'Binta Beauty (Nigeria)' and 'Kiki Makeup (Nigeria)' channels, neither of which could be matched to a real, confirmable Nigerian MUA YouTube channel after search passes — 'Binta Beauty' resolved instead to an unrelated Senegalese cosmetics boutique."
     }
   ],
-  "blogs": [],
-  "books": []
-}
+  "blogs": [
+    {
+      "name": "TrustAm",
+      "url": "https://trustam.com",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: pricing calculator + 2026 guide, city-by-city, for Nigerian makeup artists. No RSS feed found in the source directory (listed as N/A) — this is the site URL, not a feed; worth checking for a /feed endpoint before shipping."
+    },
+    {
+      "name": "The Beauty Cognoscente",
+      "url": "https://thebeautycognoscente.com",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: pricing framework for upcoming makeup artists. No RSS feed found in the source directory (listed as N/A) — this is the site URL, not a feed; worth checking for a /feed endpoint before shipping."
+    },
+    {
+      "name": "Leadership.ng",
+      "url": "https://leadership.ng/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: 'Starting a Makeup Artist Business' article covering capital tiers."
+    },
+    {
+      "name": "UrbanEase Nigeria",
+      "url": "https://urbanease.ng",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: 'How to become a successful makeup artist' guide. No RSS feed found in the source directory (listed as N/A) — this is the site URL, not a feed; worth checking for a /feed endpoint before shipping."
+    },
+    {
+      "name": "Bintus Art and Everything",
+      "url": "https://bintusart.com/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: platform-specific strategy + seasonality insights for makeup businesses."
+    },
+    {
+      "name": "The Splice Blog",
+      "url": "https://splice.ng/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: starting + marketing a makeup business. Same splice.ng domain already independently verified for skill_02 and skill_03 this week."
+    },
+    {
+      "name": "Shopify Nigeria Blog",
+      "url": "https://www.shopify.com/ng/blog.atom",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: beauty business promotions and client retention content."
+    },
+    {
+      "name": "MUA Community Nigeria",
+      "url": "https://muacommunity.ng",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: community-driven business tips forum for Nigerian MUAs. No RSS feed found in the source directory (listed as N/A) — this is the site URL, not a feed; worth checking for a /feed endpoint before shipping."
+    },
+    {
+      "name": "BellaNaija Style",
+      "url": "https://www.bellanaija.com/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: features on successful Nigerian makeup entrepreneurs."
+    },
+    {
+      "name": "Allure",
+      "url": "https://www.allure.com/feed/rss",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: global beauty industry business insights from a major, well-established beauty publication."
+    }
+  ],
+  "books": [
+    {
+      "title": "Bobbi Brown Makeup Manual (free preview)",
+      "author": "Bobbi Brown",
+      "freeSourceUrl": "https://www.bobbibrowncosmetics.com",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free preview content at bobbibrowncosmetics.com.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited founder of Bobbi Brown Cosmetics."
+    },
+    {
+      "title": "Beauty Business Startup Guide",
+      "author": "U.S. Small Business Administration (SBA)",
+      "freeSourceUrl": "https://www.sba.gov/business-guide",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free beauty-business startup guide hosted directly on the official sba.gov site.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry, hosted on a U.S. government domain."
+    },
+    {
+      "title": "Influence: The Psychology of Persuasion (free)",
+      "author": "Robert Cialdini",
+      "freeSourceUrl": "https://archive.org/details/influence",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free copy on Internet Archive — persuasion psychology directly applicable to client consultations and sales.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Influence."
+    },
+    {
+      "title": "Building a StoryBrand (free framework)",
+      "author": "Donald Miller",
+      "freeSourceUrl": "https://storybrand.com/free-resources",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free marketing-messaging framework from the book's official StoryBrand site.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Hosted on the official storybrand.com domain."
+    },
+    {
+      "title": "Crushing It! (1000s of free videos)",
+      "author": "Gary Vaynerchuk",
+      "freeSourceUrl": "https://www.youtube.com/@garyvee",
+      "freeSourceType": "web",
+      "freeSourceNote": "Not a written book — thousands of free videos on personal branding and entrepreneurship on Gary Vaynerchuk's own YouTube channel.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of Crushing It!."
+    },
+    {
+      "title": "The E-Myth Revisited (free PDF)",
+      "author": "Michael E. Gerber",
+      "freeSourceUrl": "https://f5fp.com/e-myth-revisited-free-pdf",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free PDF of the well-known small-business-systems book, hosted on a third-party site — worth a direct-download check before shipping.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited."
+    },
+    {
+      "title": "Profit First (free resources)",
+      "author": "Mike Michalowicz",
+      "freeSourceUrl": "https://www.mikemichalowicz.com/profit-first-book",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free resources from the author's own official site.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com)."
+    },
+    {
+      "title": "1-Page Marketing Plan (free template)",
+      "author": "Allan Dib",
+      "freeSourceUrl": "https://1pagemarketingplan.com/resources",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free downloadable template from the book's official site.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Hosted on the official 1pagemarketingplan.com domain."
+    },
+    {
+      "title": "Digital Marketing Guide",
+      "author": "HubSpot",
+      "freeSourceUrl": "https://www.hubspot.com/resources",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free marketing guides hosted directly on HubSpot's own resources hub.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry, hosted on hubspot.com."
+    },
+    {
+      "title": "Small Business Management",
+      "author": "OpenStax",
+      "freeSourceUrl": "https://openstax.org/details/books/small-business-management",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free, full open-license textbook covering small-business fundamentals — general (not makeup-specific), but directly applicable.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Hosted on the official openstax.org domain, a well-established open-textbook publisher."
+    }
+  ],
+  "notes": "2026-07-20: Merged in 30 rows from the founder-provided 'makeup_artistry_resources.csv' (Section I.4), bringing the file from 1 channel / 0 blogs / 0 books to a full 10 / 10 / 10. Two of the CSV's 10 channels — 'Kiki Makeup (Nigeria)' and 'Binta Beauty (Nigeria)' — could not be matched to a real, confirmable Nigerian MUA YouTube channel ('Binta Beauty' resolved instead to an unrelated Senegalese cosmetics boutique with no YouTube presence). Since the file already had 1 verified channel (Damilare Oshodi) before this merge, only 9 of the CSV's remaining channels were needed to reach 10 — Tara Fela-Durotoye (House of Tara) was substituted in for the 2 unconfirmed Nigerian entries, being an independently-verified, directly on-topic, and arguably even more prominent Nigerian makeup-business figure. Four blog entries (TrustAm, The Beauty Cognoscente, UrbanEase Nigeria, MUA Community Nigeria) had no RSS feed in the source directory (listed as N/A) — their site URLs were used as-is; worth checking each for a live /feed endpoint before shipping."
+    }
