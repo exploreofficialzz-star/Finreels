@@ -1,7 +1,7 @@
 {
   "categoryId": "skill_01_tailoring_fashion_design",
   "status": "in_progress",
-  "lastUpdated": "2026-07-11",
+  "lastUpdated": "2026-07-20",
   "channels": [
     {
       "id": "UCMt5gaZ26hjIW-XFWoYDAHA",
@@ -24,6 +24,39 @@
       "focus": "Fashion design & tailoring business",
       "verifiedOn": "2026-07-11",
       "verificationMethod": "Fetched youtube.com/channel/UCQCL3GrCtBtJK7hnMy0x_cQ directly, confirmed canonical channel ID and topical match."
+    },
+    {
+      "id": "UCjQ_pqco2oMHDLWwPxJKk6w",
+      "name": "Kemafrik",
+      "handle": "@Kemafrik",
+      "description": "Nigerian fashion designer teaching sewing techniques and pattern drafting, with an explicit focus on the business side of fashion design.",
+      "accentColor": "0xFF8B5CF6",
+      "initials": "KM",
+      "focus": "Fashion design & tailoring business",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Channel ID confirmed via FeedSpot's Nigeria Fashion YouTubers directory (direct youtube.com/channel/ link); bio independently matches the CSV's business-focus note. CSV itself only had a truncated placeholder for this ID."
+    },
+    {
+      "id": "UC7sFwsT1_W_UcEzrGyyCZRg",
+      "name": "Stylebyreme",
+      "handle": "@Stylebyreme",
+      "description": "Happy Osereme Okojie — Abuja-based fashion tutor and designer teaching sewing and pattern-making, framed around turning skill into income.",
+      "accentColor": "0xFF10B981",
+      "initials": "SR",
+      "focus": "Fashion design & tailoring business",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Channel ID cross-confirmed via NoxInfluencer's channel analytics page and a direct youtube.com/channel/ result; bio independently matches the CSV's 'turning skill into income' framing. CSV itself only had a truncated placeholder for this ID."
+    },
+    {
+      "id": "UCE99BKvNOqFpbBhIP-17OmQ",
+      "name": "d'ara (Insight With D'ara)",
+      "handle": "@InsightWithDAra",
+      "description": "Nigerian fashion designer with 6+ years training other designers, focused on profitability — sales, pricing, and getting customers who pay well.",
+      "accentColor": "0xFF06B6D4",
+      "initials": "ID",
+      "focus": "Fashion design & tailoring business",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Channel ID confirmed via FeedSpot's Nigeria Fashion YouTubers directory; bio ('over 6 years... help fashion businesses make profits') independently matches the CSV's note almost verbatim. CSV itself only had a truncated placeholder for this ID."
     }
   ],
   "blogs": [
@@ -32,7 +65,144 @@
       "url": "https://entrepreneurs.ng/feed/",
       "verifiedOn": "2026-07-11",
       "verificationMethod": "Confirmed real article matching directory description; feed URL confirmed via FeedSpot's curated Nigeria Business RSS directory. Raw XML not fetched directly (no outbound network in the build sandbox) — worth one curl check before shipping."
+    },
+    {
+      "name": "She Leads Africa",
+      "url": "https://sheleadsafrica.org/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Sourced from user-provided fashion_business_resources.csv (marked ✅ Verified); feed URL taken directly from the CSV, not independently re-fetched this session — same caveat as the entrepreneurs.ng entry above."
+    },
+    {
+      "name": "Forbes Africa",
+      "url": "https://www.forbesafrica.com/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Sourced from user-provided fashion_business_resources.csv (marked ✅ Verified); feed URL taken directly from the CSV, not independently re-fetched this session — same caveat as the entrepreneurs.ng entry above."
+    },
+    {
+      "name": "Fashion Brain Academy",
+      "url": "https://www.fashionbrainacademy.com/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "CSV listed this twice (once as 'Channel/Podcast', once as 'Blog') pointing at the same feed URL both times — merged into one entry here. Sourced from user-provided fashion_business_resources.csv (marked ✅ Verified); feed URL taken directly from the CSV, not independently re-fetched this session — same caveat as the entrepreneurs.ng entry above."
+    },
+    {
+      "name": "EREX Fashion Academy Blog",
+      "url": "https://erexfashionacademy.com/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Sourced from user-provided fashion_business_resources.csv (marked ✅ Verified); feed URL taken directly from the CSV, not independently re-fetched this session — same caveat as the entrepreneurs.ng entry above."
+    },
+    {
+      "name": "On the Bias Design",
+      "url": "https://www.onthebiasdesign.com/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Sourced from user-provided fashion_business_resources.csv (marked ✅ Verified); feed URL taken directly from the CSV, not independently re-fetched this session — same caveat as the entrepreneurs.ng entry above."
+    },
+    {
+      "name": "Huduma Global (Kenya)",
+      "url": "https://www.hudumaglobal.com/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Sourced from user-provided fashion_business_resources.csv (marked ✅ Verified); feed URL taken directly from the CSV, not independently re-fetched this session — same caveat as the entrepreneurs.ng entry above."
+    },
+    {
+      "name": "Delight Tailoring Fashion School",
+      "url": "https://www.delighttailoring.com/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Sourced from user-provided fashion_business_resources.csv (marked ✅ Verified); feed URL taken directly from the CSV, not independently re-fetched this session — same caveat as the entrepreneurs.ng entry above."
+    },
+    {
+      "name": "Shopify Nigeria Blog",
+      "url": "https://www.shopify.com/ng/blog.atom",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Sourced from user-provided fashion_business_resources.csv (marked ✅ Verified); feed URL taken directly from the CSV, not independently re-fetched this session — same caveat as the entrepreneurs.ng entry above."
+    },
+    {
+      "name": "Bintus Art and Everything",
+      "url": "https://bintusart.com/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Sourced from user-provided fashion_business_resources.csv (marked ✅ Verified); feed URL taken directly from the CSV, not independently re-fetched this session — same caveat as the entrepreneurs.ng entry above."
     }
   ],
-  "books": []
+  "books": [
+    {
+      "title": "Fashion Business Guide for Designers",
+      "author": "OpenStax",
+      "freeSourceUrl": "https://openstax.org/details/books/business-fundamentals",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free open textbook covering business fundamentals, applied to fashion.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Sourced from user-provided fashion_business_resources.csv (marked ✅ Verified); feed URL taken directly from the CSV, not independently re-fetched this session — same caveat as the entrepreneurs.ng entry above."
+    },
+    {
+      "title": "The Fashion Student Handbook",
+      "author": "Mary Gehlhar",
+      "freeSourceUrl": "https://www.marygehlhar.com/book",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free chapter downloads.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Sourced from user-provided fashion_business_resources.csv (marked ✅ Verified); feed URL taken directly from the CSV, not independently re-fetched this session — same caveat as the entrepreneurs.ng entry above."
+    },
+    {
+      "title": "Fashion for Profit",
+      "author": "Frances Harder",
+      "freeSourceUrl": "https://www.francesharder.com/resources",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free summary and business tools for fashion designers.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Sourced from user-provided fashion_business_resources.csv (marked ✅ Verified); feed URL taken directly from the CSV, not independently re-fetched this session — same caveat as the entrepreneurs.ng entry above."
+    },
+    {
+      "title": "Freelance Fashion Designer's Guide",
+      "author": null,
+      "freeSourceUrl": "https://www.free-ebooks.net/fashion-designer-guide",
+      "freeSourceType": "download",
+      "freeSourceNote": "Pricing and client management for freelance designers.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Sourced from user-provided fashion_business_resources.csv (marked ✅ Verified); feed URL taken directly from the CSV, not independently re-fetched this session — same caveat as the entrepreneurs.ng entry above."
+    },
+    {
+      "title": "Start Your Own Fashion Business",
+      "author": "U.S. Small Business Administration",
+      "freeSourceUrl": "https://www.sba.gov/business-guide",
+      "freeSourceType": "download",
+      "freeSourceNote": "Complete fashion business startup guide.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Sourced from user-provided fashion_business_resources.csv (marked ✅ Verified); feed URL taken directly from the CSV, not independently re-fetched this session — same caveat as the entrepreneurs.ng entry above."
+    },
+    {
+      "title": "The E-Myth Revisited",
+      "author": "Michael E. Gerber",
+      "freeSourceUrl": "https://www.f5fp.com/e-myth-revisited-free-pdf",
+      "freeSourceType": "download",
+      "freeSourceNote": "Build systems that work without you.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Sourced from user-provided fashion_business_resources.csv (marked ✅ Verified); feed URL taken directly from the CSV, not independently re-fetched this session — same caveat as the entrepreneurs.ng entry above."
+    },
+    {
+      "title": "Profit First",
+      "author": "Mike Michalowicz",
+      "freeSourceUrl": "https://www.mikemichalowicz.com/profit-first-book",
+      "freeSourceType": "download",
+      "freeSourceNote": "A cash-management approach for small business owners.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Sourced from user-provided fashion_business_resources.csv (marked ✅ Verified); feed URL taken directly from the CSV, not independently re-fetched this session — same caveat as the entrepreneurs.ng entry above."
+    },
+    {
+      "title": "Built to Sell",
+      "author": "John Warrillow",
+      "freeSourceUrl": "https://builttosell.com/resources",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free summary and tools.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Sourced from user-provided fashion_business_resources.csv (marked ✅ Verified); feed URL taken directly from the CSV, not independently re-fetched this session — same caveat as the entrepreneurs.ng entry above."
+    },
+    {
+      "title": "Business Basics for Creatives",
+      "author": "HubSpot",
+      "freeSourceUrl": "https://www.hubspot.com/resources/business-basics-creatives",
+      "freeSourceType": "download",
+      "freeSourceNote": "Marketing fundamentals for creative entrepreneurs.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Sourced from user-provided fashion_business_resources.csv (marked ✅ Verified); feed URL taken directly from the CSV, not independently re-fetched this session — same caveat as the entrepreneurs.ng entry above."
+    }
+  ],
+  "notes": "CSV integration (2026-07-20): merged fashion_business_resources.csv (30 rows, all 'Section I.1 - Tailoring & Fashion Design') into the pre-existing 2 channels / 1 blog. Two CSV rows were deliberately excluded rather than integrated — flagging here rather than silently dropping: (1) Connect Nigeria (connectnigeria.com/feed/) — this project's own prior research (INTEGRATION_NOTES.md) found articles.connectnigeria.com returning injected gambling/spam content on direct fetch; the CSV's URL is close enough to that flagged domain that it wasn't trusted here without re-confirming, despite the CSV marking it Verified. (2) 'Splice Blog' at splice.ng — the real, already-verified Splice (used in skill_03 and business_08) is a salon/spa booking platform at blog.withsplice.com, not splice.ng; no independent evidence splice.ng exists or is related, so this looks like a mix-up rather than a real fashion-business blog. Two more CSV rows had no working feed/ID to integrate cleanly and are noted here instead: Vivo Fashion Group / Wandia Gichuru — a real Stanford GSB 'Grit & Growth' podcast episode profiling a Pan-African fashion brand, but no dedicated feed. Seedstars 'Fashion Futures' — a real African incubator for fashion designers with business training, web link only, no feed. Also worth knowing: a free Shopify fashion business-plan TEMPLATE (not a book) is available at shopify.com/business/business-plan-template — left out of the Books list since it isn't a book, but genuinely useful. Channel IDs for Kemafrik, Stylebyreme, and Insight With D'ara were not usable in the CSV (RSS_Feed column had a truncated placeholder, 'channel_id=UC...') and were independently resolved via FeedSpot/NoxInfluencer directory listings, cross-checked against each channel's own bio."
 }
