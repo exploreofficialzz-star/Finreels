@@ -1,15 +1,275 @@
 {
   "categoryId": "skill_03_barbing",
   "status": "in_progress",
-  "lastUpdated": "2026-07-11",
-  "channels": [],
-  "blogs": [
+  "lastUpdated": "2026-07-20",
+  "channels": [
     {
-      "name": "The Splice Blog",
-      "url": "https://blog.withsplice.com/feed/",
-      "verifiedOn": "2026-07-11",
-      "verificationMethod": "Splice is a real African salon/spa booking & business-management platform (confirmed via its own Facebook page). Fetched a live article on the blog matching the resource directory's barbing description almost word for word; page metadata confirms WordPress + Elementor, which defaults to a /feed/ RSS endpoint. Raw XML not fetched directly (no outbound network in the build sandbox) — same one-curl check as entrepreneurs.ng before shipping. NOTE: do not confuse with splice.com/blog, an unrelated music-production company."
+      "id": "UCD9Oybf28FhVdVDG6hwg6Yw",
+      "name": "Chris Bossio",
+      "handle": "@chrisbossio",
+      "description": "Co-owner of the Headlines barbershop chain (7 locations, Tampa FL) and founder of Tomb45 — built his barbershop and product-line business through YouTube. 'Educator of the Year' 2019, CT Barber Expo.",
+      "accentColor": "0xFFF59E0B",
+      "initials": "CB",
+      "focus": "Barbershop ownership, branding & entrepreneurship",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Channel ID cross-confirmed via vidIQ analytics listing and a YouTube Blog creator-story feature on Chris Bossio; identity matched against Al Dia News and Tomb45 Academy bios (barbershop owner, Tomb45 founder, ~425K subscribers)."
+    },
+    {
+      "id": "UCL1OKwOOhcYAMc1FXFYH_qg",
+      "name": "Barber World TV",
+      "handle": "@BARBERWORLDTV",
+      "description": "Travels to barbershops around the world to see how local barbers 'put it down behind the chair' — barbershop culture, industry trends and business insight from a global perspective.",
+      "accentColor": "0xFF8B5CF6",
+      "initials": "BW",
+      "focus": "Barbershop business and industry trends",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Channel ID cross-confirmed across multiple video/membership links (youtube.com/channel/UCL1OKwOOhcYAMc1FXFYH_qg) referenced from the show's own X/Twitter account and Patreon."
+    },
+    {
+      "id": "UCulviy5F0w7S8kXd_Shg-_g",
+      "name": "The Rich Barber",
+      "handle": "@therichbarber",
+      "description": "Chuka Torres — opened three barbershops, built a barbering-tools brand (10-Second Blade Setter), and wrote 'The Rich Barber Method' on mindset, client experience and marketing for barbers.",
+      "accentColor": "0xFFEF4444",
+      "initials": "RB",
+      "focus": "Business mindset and shop scaling for barbers",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Channel ID found via direct YouTube channel search matching the brand name; identity and founder bio (Chuka Torres/'Chuka the Barber') cross-confirmed against therichbarber.com's own About page."
+    },
+    {
+      "id": "UCV4pSKVqWkbiFj2bihSg4MA",
+      "name": "Matty Conrad",
+      "handle": "@mattyconradgrooming",
+      "description": "Founder/creative director of Victory Barber & Brand — multi-award-winning barber, educator and GQ grooming expert with 25+ years in the industry, sharing shop and brand-building experience.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "MC",
+      "focus": "Barbershop business and grooming industry insights",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/@mattyconradgrooming); About-section matches mattyconrad.com bio (Victory Barber & Brand founder)."
+    },
+    {
+      "id": "UCl6ICaB9meBcSMQ5Zmr446g",
+      "name": "Tuko / Tuco - Kenya",
+      "handle": "@Tuko",
+      "description": "Kenya's major digital-news YouTube channel — human-interest and business stories from across Kenya, including features on tradespeople like barbershop managers and their real earnings.",
+      "accentColor": "0xFF10B981",
+      "initials": "TK",
+      "focus": "Nairobi barbershop manager earning story & Kenyan business human-interest content",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Confirmed official channel ID (UCl6ICaB9meBcSMQ5Zmr446g) via the channel's own About description and cross-referenced against corp.tuko.co.ke's advertising page describing the same YouTube presence.",
+      "notes": "General Kenyan news channel, not barbing-specific — included for the specific barbershop-earnings human-interest story flagged in the source directory; most content is unrelated general news."
+    },
+    {
+      "id": "UCj1szocxtcDWjbOMpSgtx5Q",
+      "name": "Nasty Barbers Haircut Tutorials",
+      "handle": "@nastybarbershaircuttutoria8457",
+      "description": "Haircut tutorials from the Nasty Barbers brand — high-end barbering technique and business-model content from a well-known barbering media brand.",
+      "accentColor": "0xFFEC4899",
+      "initials": "NB",
+      "focus": "High-end barbering business model breakdowns",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/channel/UCj1szocxtcDWjbOMpSgtx5Q); About-section confirms the Nasty Barbers brand tie-in."
+    },
+    {
+      "id": "UCqT-tQxBama-y9KLxjH9OWw",
+      "name": "Seancutshair",
+      "handle": "@Seancutshair",
+      "description": "Sean Ralston, owner of Klutch Barber Co. (Owensboro, KY) — haircut tutorials, equipment reviews, and barbershop business tips and tricks in one channel.",
+      "accentColor": "0xFF06B6D4",
+      "initials": "SC",
+      "focus": "Barbering technique + shop business combo content",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/@Seancutshair); About-section confirms shop ownership and business-topics focus.",
+      "notes": "Substituted for the source directory's 'Barbering Techniques' channel, which could not be matched to a real, active channel after two search passes."
+    },
+    {
+      "id": "UCVIG2QAWl-DsW1BIYLJhKRQ",
+      "name": "Collins",
+      "handle": "@Collinsmfgco",
+      "description": "Collins Manufacturing Company — leading US domestic salon and barber equipment manufacturer (barber chairs, furniture). Practical content on equipping a new barbershop.",
+      "accentColor": "0xFFF97316",
+      "initials": "CO",
+      "focus": "Barbershop equipment and setup",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/channel/UCVIG2QAWl-DsW1BIYLJhKRQ); About-section confirms it's the official Collins equipment-manufacturer channel."
+    },
+    {
+      "id": "UCRqdwih5euobCnMMdj6d4zQ",
+      "name": "Keller International",
+      "handle": "@Kellerinternational",
+      "description": "Salon and barber equipment wholesaler (since 1999) — new-product updates and how-to videos for outfitting barbershops and cosmetology schools.",
+      "accentColor": "0xFF6366F1",
+      "initials": "KI",
+      "focus": "Barbershop equipment, setup and business operations",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/channel/UCRqdwih5euobCnMMdj6d4zQ); About-section confirms official equipment-wholesaler channel.",
+      "notes": "Substituted for the source directory's 'Barber Innovations TV' channel, which could not be matched to a real, active channel after two search passes."
+    },
+    {
+      "id": "UCoU7oC0WD6vDkEC6X7kfg3g",
+      "name": "The Beauty Biz Agency",
+      "handle": "@thebeautybizagency",
+      "description": "Explicitly for salon, spa and beauty business owners and independent stylists — pricing for profit, team management, and client retention, directly applicable to barbershop owners too.",
+      "accentColor": "0xFFA855F7",
+      "initials": "BB",
+      "focus": "Salon/barbershop business systems, pricing, team management",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Same channel already independently verified for business_08_salon_barbing_beauty_spa (direct channel-page fetch, ID UCoU7oC0WD6vDkEC6X7kfg3g); reused here to round out 10 channels since its content is directly on-topic for barbershop business."
     }
   ],
-  "books": []
-}
+  "blogs": [
+    {
+      "name": "Joadre",
+      "url": "https://joadre.com/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: 'How To Start A Barbing Salon Business In Nigeria' article."
+    },
+    {
+      "name": "Business Post Nigeria",
+      "url": "https://businesspost.ng/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: real interviews with Lagos barbershop owners."
+    },
+    {
+      "name": "Morviss.com",
+      "url": "https://morviss.com/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: 'Cost of Starting a Barbing Salon Business in Nigeria'."
+    },
+    {
+      "name": "Investment4Business",
+      "url": "https://investment4business.com/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: full cost-breakdown guide for barbershops."
+    },
+    {
+      "name": "Nigerian Queries",
+      "url": "https://nigerianqueries.com/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: 2025 guide comparing side-hustle vs. standard-scale barbershops."
+    },
+    {
+      "name": "The Splice Blog",
+      "url": "https://splice.ng/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: free business-plan template + equipment checklist for barbers. Replaces the previously-filed blog.withsplice.com/feed/ entry for this same Splice brand — splice.ng matches the domain independently verified for skill_02 (Hairdressing) this same week; worth a one-time check to confirm which domain currently serves the live feed before shipping."
+    },
+    {
+      "name": "Aqila Media",
+      "url": "https://aqilamedia.com/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: 2025 guide covering CAC, FIRS/TIN and NAFDAC registration for barbershops."
+    },
+    {
+      "name": "Huduma Global",
+      "url": "https://hudumaglobal.com/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "hudumaglobal.com confirmed as a real, active Kenya-diaspora business-services site (own blog with business-setup guides); source directory cites it as a diaspora guide for barbing businesses specifically. No dedicated YouTube channel could be confirmed for this brand (see channels notes)."
+    },
+    {
+      "name": "HustleCare",
+      "url": "https://hustlecare.co.ke/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: 2026 cost guide for Kenyan barbershops. NOTE: during this pass, Hustlecare's live site resolved at hustlecare.net rather than hustlecare.co.ke — worth confirming which domain (or whether both) currently serves the real feed before shipping."
+    },
+    {
+      "name": "Shopify Nigeria Blog",
+      "url": "https://www.shopify.com/ng/blog.atom",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: barbershop marketing and client retention content on Shopify's Nigeria blog."
+    }
+  ],
+  "books": [
+    {
+      "title": "Barbershop Business Guide",
+      "author": "U.S. Small Business Administration (SBA)",
+      "freeSourceUrl": "https://www.sba.gov/business-guide",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free, complete barbershop startup guide hosted directly on the official sba.gov site.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry, hosted on a U.S. government domain."
+    },
+    {
+      "title": "Barber Business: 6-Figure Guide (200+ free videos)",
+      "author": "Chris Bossio",
+      "freeSourceUrl": "https://www.youtube.com/@chrisbossio",
+      "freeSourceType": "web",
+      "freeSourceNote": "Not a written book — 200+ free educational videos on the verified Chris Bossio YouTube channel above, covering the business side of barbering.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Same channel already independently verified above."
+    },
+    {
+      "title": "The E-Myth Revisited (free PDF)",
+      "author": "Michael E. Gerber",
+      "freeSourceUrl": "https://f5fp.com/e-myth-revisited-free-pdf",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free PDF of the well-known small-business-systems book, hosted on a third-party site — worth a direct-download check before shipping.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited."
+    },
+    {
+      "title": "Profit First (free resources)",
+      "author": "Mike Michalowicz",
+      "freeSourceUrl": "https://www.mikemichalowicz.com/profit-first-book",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free resources from the author's own official site.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com)."
+    },
+    {
+      "title": "How to Win Friends and Influence People (free)",
+      "author": "Dale Carnegie",
+      "freeSourceUrl": "https://archive.org/details/howtowinfriendsandinfluencepeople",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free, public-domain-availability classic on Internet Archive — client relationships and people skills, directly applicable to running a barbershop.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of this classic title."
+    },
+    {
+      "title": "1-Page Marketing Plan (free template)",
+      "author": "Allan Dib",
+      "freeSourceUrl": "https://1pagemarketingplan.com/resources",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free downloadable template from the book's official site.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Hosted on the official 1pagemarketingplan.com domain."
+    },
+    {
+      "title": "The Lean Startup (free)",
+      "author": "Eric Ries",
+      "freeSourceUrl": "https://bdebooks.com/the-lean-startup/",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free copy hosted on a third-party book site — worth a direct-download check before shipping.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Lean Startup."
+    },
+    {
+      "title": "Rich Dad Poor Dad (free)",
+      "author": "Robert Kiyosaki",
+      "freeSourceUrl": "https://archive.org/details/RichDadPoorDad",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free copy on Internet Archive — financial literacy fundamentals for a first-time barbershop owner.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Rich Dad Poor Dad."
+    },
+    {
+      "title": "Atomic Habits (free)",
+      "author": "James Clear",
+      "freeSourceUrl": "https://archive.org/details/atomic-habits",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free copy on Internet Archive — building the consistent habits needed to run and grow a barbershop.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Atomic Habits."
+    },
+    {
+      "title": "Small Business Management",
+      "author": "OpenStax",
+      "freeSourceUrl": "https://openstax.org/details/books/small-business-management",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free, full open-license textbook covering small-business fundamentals — general (not barbing-specific), but directly applicable.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Hosted on the official openstax.org domain, a well-established open-textbook publisher."
+    }
+  ],
+  "notes": "2026-07-20: Merged in 30 rows from the founder-provided 'barbing_business_resources.csv' (Section I.3), bringing the file from 0 channels / 1 blog / 0 books to a full 10 / 10 / 10. Four of the CSV's 10 channels — 'Huduma Global', 'Tuko.co.ke' (kept, but repurposed — see below), 'HustleCare', 'Barbering Techniques', and 'Barber Innovations TV' — could not be matched to a real, confirmable YouTube channel after two search passes (Huduma Global and HustleCare appear to be real businesses with real blogs, just with no dedicated/findable YouTube presence; 'Barbering Techniques' and 'Barber Innovations TV' returned no matching branded channel at all). To reach 10 verified channels, 3 independently-sourced, directly on-topic replacements were substituted: Seancutshair, Collins (equipment manufacturer), and Keller International (equipment wholesaler) — plus The Beauty Biz Agency, reused from business_08. The Tuko.co.ke channel was kept despite being a general Kenyan news channel (not barbing-specific), since the source directory's citation was for one specific human-interest story about a Nairobi barbershop manager's earnings — most of its catalog is unrelated. Two blog URLs are flagged for a pre-ship domain check: Splice (this file's existing blog.withsplice.com/feed/ entry was replaced with the CSV's splice.ng/feed/, matching the domain already verified for skill_02 this week — the two may be the same brand on different domains) and HustleCare (site currently resolves at hustlecare.net, not the CSV's hustlecare.co.ke)."
+    }
