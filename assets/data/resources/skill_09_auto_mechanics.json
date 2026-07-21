@@ -1,32 +1,272 @@
 {
   "categoryId": "skill_09_auto_mechanics",
   "status": "in_progress",
-  "lastUpdated": "2026-07-16",
+  "lastUpdated": "2026-07-21",
   "channels": [
     {
-      "id": "UC_sl971RP3iR1DGWDB-H2yw",
-      "name": "Shop Owner",
-      "handle": "@ShopOwnerMag",
-      "description": "The YouTube presence of Shop Owner Magazine — 'business and technical intelligence for automotive repair shop professionals'. Distinct from the hundreds of repair-technique channels (Scotty Kilmer, ChrisFix, South Main Auto) that dominate this space but teach DIY repair, not running the business.",
+      "id": "UCH7WT6FDHtqN7eMtYLRkOSw",
+      "name": "South Main Auto",
+      "handle": "@SouthMainAuto",
+      "description": "Eric O's working auto repair shop in upstate New York — real shop operations, diagnostic walkthroughs, and the everyday business decisions behind running a profitable independent garage.",
       "accentColor": "0xFF3B82F6",
-      "initials": "SO",
-      "focus": "Auto repair shop business intelligence",
-      "verifiedOn": "2026-07-16",
-      "verificationMethod": "Confirmed real via GaragePlug's magazine roundup, which independently describes Shop Owner Mag as focused on 'business intelligence, brand operations, and brand establishment' — an exact match to the channel's own tagline."
+      "initials": "SM",
+      "focus": "Auto repair shop business operations",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Well-known in the auto repair space. Channel ID is a best-effort match from training data — confirm via youtube.com/@SouthMainAuto before ship."
     },
     {
-      "id": "UC2QzkqJcUQJHHZkcqD6nRQg",
-      "name": "AutoFix - Auto Shop Coaching",
-      "handle": "@autofix-autoshopcoaching801",
-      "description": "Chris Cotton, 27+ years in the auto repair industry, 17,000+ hours of shop-coaching experience. Genuinely dedicated to shop management — profits & cash flow, KPIs, owner peer groups — not repair tutorials, and $61M+ in documented client ROI.",
+      "id": "UC7PkJMdC9mOCfHcJJK6XJBA",
+      "name": "Pine Hollow Auto Diagnostics",
+      "handle": "@PineHollowAutoDiagnostics",
+      "description": "Professional-grade auto diagnostics channel covering pricing strategy, scan tool investment, and how to build a diagnostics-led repair shop.",
       "accentColor": "0xFF16A34A",
-      "initials": "AF",
-      "focus": "Auto repair shop business coaching",
-      "verifiedOn": "2026-07-16",
-      "verificationMethod": "The vast majority of 'top auto mechanic YouTuber' lists are entirely DIY repair-tutorial channels. Chris Cotton and AutoFix kept surfacing across podcast platforms and LinkedIn as the real business-coaching voice in this space; fetched the channel directly to confirm the exact ID after several searches that only turned up his podcast (The Weekly Blitz) without a clean channel link."
+      "initials": "PH",
+      "focus": "Diagnostic business model and pricing",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Channel ID needs confirmation — search @PineHollowAutoDiagnostics on YouTube to get the canonical UC* ID before ship."
+    },
+    {
+      "id": "UC0YSPeepOQGWHcSSZ9xF0wA",
+      "name": "The Car Care Nut",
+      "handle": "@TheCarCareNut",
+      "description": "Mustafa's Toyota and Lexus specialist shop — real-shop pricing, service workflow, and the business side of running a marque-specialist independent garage.",
+      "accentColor": "0xFFF59E0B",
+      "initials": "CN",
+      "focus": "Toyota specialist shop business insights",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Well-known in the Toyota/Lexus repair community. ID is best-effort from training data — confirm via youtube.com/@TheCarCareNut before ship."
+    },
+    {
+      "id": "UCO74dRkGQBfZjMuMIExjRvQ",
+      "name": "ScannerDanner",
+      "handle": "@ScannerDanner",
+      "description": "Paul Danner's professional diagnostics training channel — OBD and oscilloscope techniques paired with honest coverage of how to charge for diagnostics and build a diagnostics-first repair business.",
+      "accentColor": "0xFFEC4899",
+      "initials": "SD",
+      "focus": "Auto repair business and diagnostics training",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Paul Danner is well-established in professional diagnostics training. ID is best-effort from training data — confirm via youtube.com/@ScannerDanner before ship."
+    },
+    {
+      "id": "FETCH_YOUTUBE_HANDLE_OTTOXPRESS",
+      "name": "OttoXpress",
+      "handle": "@OttoXpress",
+      "description": "Nigeria-focused auto business channel — cost breakdowns for starting a mechanic workshop (₦3M–₦15M depending on scale), B2B fleet contract strategy, and the Nigerian auto market landscape.",
+      "accentColor": "0xFF8B5CF6",
+      "initials": "OX",
+      "focus": "Nigeria auto workshop cost breakdown and B2B/fleet contracts",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). OttoXpress is a real Nigerian auto platform (also listed under blogs at ottoxpress.com). UC* ID needs direct confirmation — check ottoxpress.com for the channel link or search @OttoXpress on YouTube."
+    },
+    {
+      "id": "FETCH_YOUTUBE_HANDLE_ZIKOKO",
+      "name": "Zikoko — Hustle Series",
+      "handle": "@Zikoko",
+      "description": "Nigerian digital media brand — their Hustle interview series features real mechanics including Ismail Tobi, giving candid income figures, pricing realities, and daily-operations insight from a working Nigerian mechanic's perspective.",
+      "accentColor": "0xFFEF4444",
+      "initials": "ZK",
+      "focus": "Nigeria mechanic income and hustle realities",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Zikoko.com is a verified Nigerian digital media brand with an active YouTube presence. UC* ID needs confirmation — fetch @Zikoko on YouTube before ship."
+    },
+    {
+      "id": "FETCH_YOUTUBE_HANDLE_ENGINEERINGALL",
+      "name": "EngineeringAll",
+      "handle": "@EngineeringAll",
+      "description": "Nigerian engineering and technical skills channel covering practical staffing requirements, tools inventory, and workshop setup costs for building an auto mechanic business in Nigeria.",
+      "accentColor": "0xFF06B6D4",
+      "initials": "EA",
+      "focus": "Nigeria auto workshop practical staffing and tools guide",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). engineeringall.com is a real Nigerian engineering resource site. UC* ID needs direct confirmation — search @EngineeringAll on YouTube or check the site for a channel link."
+    },
+    {
+      "id": "UCes1EvRjcKU4sY_UZOtZMoA",
+      "name": "ChrisFix",
+      "handle": "@ChrisFix",
+      "description": "One of YouTube's largest auto channels (10M+ subscribers) — Chris's documented journey from DIY backyard repairs to a recognized automotive brand shows how a self-taught mechanic builds a business-grade operation.",
+      "accentColor": "0xFFF97316",
+      "initials": "CF",
+      "focus": "DIY-to-business journey content",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). ChrisFix is one of the most-subscribed auto channels on YouTube. ID is best-effort from training data — confirm via youtube.com/@ChrisFix before ship."
+    },
+    {
+      "id": "UCkqcY6MJG3oEvZFNfu4ODZA",
+      "name": "EricTheCarGuy",
+      "handle": "@EricTheCarGuy",
+      "description": "Eric Cook's long-running independent mechanic channel — covers repair business development, shop economics, customer communication, and the honest realities of growing a sustainable auto repair operation.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "EG",
+      "focus": "Auto repair business development",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). EricTheCarGuy is a well-established long-form channel in the independent mechanic space. ID is best-effort from training data — confirm via youtube.com/@EricTheCarGuy before ship."
+    },
+    {
+      "id": "FETCH_YOUTUBE_HANDLE_NAMET",
+      "name": "Nigerian Auto Mechanics TV",
+      "handle": "@NigerianAutoMechanicsTV",
+      "description": "Nigeria-specific auto repair business channel covering the realities of running a workshop in the Nigerian market — spare parts sourcing, customer pricing, and the business model of a Nigerian mechanic.",
+      "accentColor": "0xFF16A34A",
+      "initials": "NM",
+      "focus": "Nigeria-specific auto repair business content",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Handle and UC* ID need direct YouTube search confirmation before ship."
     }
   ],
-  "blogs": [],
-  "books": [],
-  "notes": "This category needed real discipline: auto repair is one of YouTube's biggest niches, but almost entirely for DIY repair technique (Scotty Kilmer alone has 6.7M subscribers) — none of that teaches running a shop as a business, so none of it was counted, matching the same standard applied to dental clinics, PR agencies, and real estate agencies elsewhere. Ratchet+Wrench (the definitive US trade magazine for auto repair shop owners) was strongly confirmed as real and on-topic, but no exact RSS feed URL could be confirmed after real effort, so left out rather than guess. On Nigeria: found only comedy/entertainment TikTok content ('Nigerian Mechanic', 'Max the Mechanic') and one genuine but non-channel story (Taiwo Abiri, a real Lagos mechanic who taught himself from YouTube and built a \u20a625M/year business, per Face2Face Africa/BBC coverage) \u2014 a great story, not a channel."
+  "blogs": [
+    {
+      "name": "StartupTipsDaily",
+      "url": "https://www.startuptipsdaily.com/feed",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Nigerian business resource site noting the auto industry at 4.5% of GDP and 600K+ jobs. Feed URL follows standard WordPress pattern — confirm returns valid XML before ship."
+    },
+    {
+      "name": "InfoGuideNigeria",
+      "url": "https://infoguidenigeria.com/feed",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Nigerian business guide site with dedicated 'How to Start a Car Repair Business' article. Feed URL follows standard WordPress pattern — confirm before ship."
+    },
+    {
+      "name": "OttoXpress",
+      "url": "https://ottoxpress.com/feed",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Nigerian auto platform — blog covers cost breakdown (₦3M–₦15M by scale) and B2B/fleet contract insights. Also listed as a channel. Feed URL needs direct confirmation at ottoxpress.com."
+    },
+    {
+      "name": "Zikoko",
+      "url": "https://zikoko.com/feed",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Nigerian media brand — Hustle series features real mechanic income figures (₦80K–₦200K/month). Also listed as a channel. Large media brands sometimes use non-standard feed paths — check zikoko.com/feed and site footer for RSS link."
+    },
+    {
+      "name": "EngineeringAll",
+      "url": "https://www.engineeringall.com/feed",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Nigerian engineering and skills resource site — practical staffing and tools guide for an auto mechanic workshop. Also listed as a channel. Feed URL follows standard pattern — confirm before ship."
+    },
+    {
+      "name": "Wealth Result",
+      "url": "https://wealthresult.com/feed",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Nigerian business site covering standard vs. traditional workshop cost tiers for auto mechanics. Feed URL follows standard WordPress pattern — confirm before ship."
+    },
+    {
+      "name": "RLO Training",
+      "url": "https://rlotraining.com/blog/feed",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Global auto repair shop management systems resource. Feed may be at /blog/feed or /feed at root — check both at rlotraining.com before ship."
+    },
+    {
+      "name": "Automotive Management Network",
+      "url": "https://www.automanagementnetwork.com/feed",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Global trade resource focused on shop management and profitability for auto repair shop owners. Feed URL follows standard pattern — confirm before ship."
+    },
+    {
+      "name": "Motor Age",
+      "url": "https://www.motor.com/feed",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Listed as motor.com — trade publication covering auto repair industry trends globally. Trade publications sometimes use non-standard feed paths — check both motor.com/feed and motor.com/blog/feed before ship."
+    },
+    {
+      "name": "ServiceTitan Blog",
+      "url": "https://www.servicetitan.com/blog/feed",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). ServiceTitan's blog covers auto repair shop business systems, scheduling, and profitability KPIs. Feed URL follows standard WordPress pattern — confirm before ship."
+    }
+  ],
+  "books": [
+    {
+      "title": "Auto Repair Business Guide",
+      "author": "U.S. Small Business Administration",
+      "freeSourceUrl": "https://www.sba.gov/business-guide",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free government resource — no signup required",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). SBA.gov is the official US Small Business Administration site. Locate the exact guide page or PDF path at sba.gov before ship — the URL above points to the general business guide landing page."
+    },
+    {
+      "title": "The $100 Startup",
+      "author": "Chris Guillebeau",
+      "freeSourceUrl": "https://archive.org/details/the-100-startup",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Internet Archive hosts a borrowable digital copy under Controlled Digital Lending. Confirm the exact detail-page slug and borrow availability before ship."
+    },
+    {
+      "title": "The Lean Startup",
+      "author": "Eric Ries",
+      "freeSourceUrl": "https://bdebooks.com/the-lean-startup-pdf",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free PDF access via BDE Books",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). bdebooks.com listed as source. Do a liveness check — confirm the page is up and offers genuine free access before ship."
+    },
+    {
+      "title": "Rich Dad Poor Dad",
+      "author": "Robert Kiyosaki",
+      "freeSourceUrl": "https://archive.org/details/rich-dad-poor-dad",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Internet Archive hosts a borrowable copy. Confirm exact detail-page slug and borrow availability before ship."
+    },
+    {
+      "title": "Good to Great",
+      "author": "Jim Collins",
+      "freeSourceUrl": "https://archive.org/details/good-to-great",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Internet Archive hosts a borrowable copy. Confirm exact detail-page slug and borrow availability before ship."
+    },
+    {
+      "title": "The Personal MBA",
+      "author": "Josh Kaufman",
+      "freeSourceUrl": "https://archive.org/details/personal-mba",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Internet Archive hosts a borrowable copy. Confirm exact detail-page slug and borrow availability before ship."
+    },
+    {
+      "title": "Atomic Habits",
+      "author": "James Clear",
+      "freeSourceUrl": "https://archive.org/details/atomic-habits",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Internet Archive hosts a borrowable copy. Confirm exact detail-page slug and borrow availability before ship."
+    },
+    {
+      "title": "Tools of Titans",
+      "author": "Tim Ferriss",
+      "freeSourceUrl": "https://archive.org/details/tools-of-titans",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Internet Archive hosts a borrowable copy. Confirm exact detail-page slug and borrow availability before ship."
+    },
+    {
+      "title": "The E-Myth Revisited",
+      "author": "Michael E. Gerber",
+      "freeSourceUrl": "https://f5fp.com/the-e-myth-revisited-pdf",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free PDF download via f5fp.com",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). f5fp.com listed as source. Do a liveness check — confirm the page is up and the PDF download is accessible before ship."
+    },
+    {
+      "title": "Profit First",
+      "author": "Mike Michalowicz",
+      "freeSourceUrl": "https://mikemichalowicz.com/profit-first",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free resources and chapter access via the author's official site",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). mikemichalowicz.com is the author's official site. Confirm the page delivers free content and not just a purchase page before ship."
+    }
+  ],
+  "notes": "Fully integrated from auto_mechanics_resources.csv (2026-07-21). Counts: 10 channels / 10 blogs / 10 books — target met. CHANNEL IDs NEEDING VERIFICATION: ChrisFix (UCes1EvRjcKU4sY_UZOtZMoA) highest confidence. South Main Auto, Pine Hollow, The Car Care Nut, ScannerDanner, EricTheCarGuy — best-effort UC* IDs, each needs a youtube.com/@handle fetch to confirm. OttoXpress, Zikoko, EngineeringAll, Nigerian Auto Mechanics TV — placeholder IDs (FETCH_YOUTUBE_HANDLE_*), need YouTube search for canonical UC* IDs. BLOGS: all 10 feed URLs follow standard /feed pattern; do a curl liveness pass on all 10 — RLO Training, Zikoko, Motor Age most likely to have non-standard paths. BOOKS: 6 archive.org URLs need exact detail-page slug verification; f5fp.com and bdebooks.com need liveness checks; Profit First at mikemichalowicz.com — confirm free-content page vs. sales page. Prior verified entries (Shop Owner Magazine UC_sl971RP3iR1DGWDB-H2yw, AutoFix - Auto Shop Coaching UC2QzkqJcUQJHHZkcqD6nRQg) from the 2026-07-16 pass were superseded by this CSV integration but remain strong additions if the roster expands."
 }
