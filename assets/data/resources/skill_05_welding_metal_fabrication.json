@@ -1,0 +1,276 @@
+{
+  "categoryId": "skill_05_welding_metal_fabrication",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-20",
+  "channels": [
+    {
+      "id": "UCqq70AnPkj4-UApS_m_6mPw",
+      "name": "Welding Tips and Tricks",
+      "handle": "@weldingtipsandtricks",
+      "description": "Jody Collier's channel — 'Clear Arc Shots & Plain Talk to help you Pass a Test, Fix Stuff, Build Stuff, Get a Raise, Build a Better Life.' One of the largest and longest-running welding channels.",
+      "accentColor": "0xFFF59E0B",
+      "initials": "WT",
+      "focus": "Largest welding channel with business advice",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel URL in search results (youtube.com/channel/UCqq70AnPkj4-UApS_m_6mPw), cross-confirmed across multiple independent listings (PrimeWeld, FeedSpot, madicorp.com top-welding-channels roundups)."
+    },
+    {
+      "id": "UCcxlBLmujrjTVSSUkzZ2Jlg",
+      "name": "The Fabrication Series",
+      "handle": "@TheFabricatorSeries",
+      "description": "Justin Merrill (also founder of Weld Metals Online) — 'What happens when the Engineer picks up the tools?' General metal fabrication, automotive and custom builds.",
+      "accentColor": "0xFF8B5CF6",
+      "initials": "TF",
+      "focus": "Metal fabrication business operations",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel URL in search results (youtube.com/channel/UCcxlBLmujrjTVSSUkzZ2Jlg); identity cross-confirmed via The Fabricator Podcast episode with Justin Merrill discussing the channel and his other business, Weld Metals Online."
+    },
+    {
+      "id": "UCzHotT4VjKdj3EftjcRCcng",
+      "name": "Sensei Institute of Technology (Sensei College)",
+      "handle": "@senseicollege",
+      "description": "TVETA-accredited Kenyan technical college (Nairobi & Nakuru) offering hands-on welding & fabrication training alongside other trades — 8+ years training experience.",
+      "accentColor": "0xFF10B981",
+      "initials": "SC",
+      "focus": "Real welding/fabrication training with business content",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/@senseicollege); institution cross-confirmed via Tuko.co.ke education profile and senseicollege.co.ke."
+    },
+    {
+      "id": "UC3urN_krff__dqN-i_4MkKQ",
+      "name": "Welding and stuff",
+      "handle": "@weldingandstuff",
+      "description": "Certified Welding Inspector (CWI) exam prep, welding processes, and how-to content from an independent creator running weldingandstuff.net.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "WS",
+      "focus": "Welding projects with cost breakdowns",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/c/weldingandstuff). Note: channel keywords also reference general political commentary alongside welding content — core content is CWI/welding-focused."
+    },
+    {
+      "id": "UCTHDVml1xugLuj0oi384tEQ",
+      "name": "metalshaper (Brian)",
+      "handle": "@metalshaperJeep",
+      "description": "Brian's metal shop, specializing in Willys Jeep vehicle restorations — full-body metal fabrication from single panels to entire body tubs.",
+      "accentColor": "0xFF6366F1",
+      "initials": "MS",
+      "focus": "Metal fabrication business and techniques",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/channel/UCTHDVml1xugLuj0oi384tEQ).",
+      "notes": "Source directory attributed the '@metalshaper' handle to metal-shaping pioneer Ron Fournier, but the actual channel at that handle belongs to a different creator (Brian, Willys Jeep restorations) — Ron Fournier passed away in 2017 per a YouTube tribute video and does not appear to have had a personal channel. Included under its real, verified ownership rather than the source directory's (incorrect) attribution."
+    },
+    {
+      "id": "UCyW0Y6JE2nb0h0nDxwxQOAg",
+      "name": "GZ Industrial Supplies Nigeria",
+      "handle": "@gzindustrialsupplies",
+      "description": "Nigeria's online platform for industrial consumables, tools, welding/fabrication equipment and MRO supplies — 100,000+ products from 60+ suppliers, 20+ branches across Nigeria.",
+      "accentColor": "0xFFF97316",
+      "initials": "GZ",
+      "focus": "Welding and fabrication services business guide",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel URL in search results (youtube.com/channel/UCyW0Y6JE2nb0h0nDxwxQOAg); company cross-confirmed via LinkedIn, ZoomInfo and its own site gz-supplies.com."
+    },
+    {
+      "id": "UCM0kHJXSHR1k1wtLuliKmHg",
+      "name": "Weld.com",
+      "handle": "@Welddotcom",
+      "description": "Comprehensive welding education platform — MIG, TIG, Stick and Flux Core methods for all skill levels, plus a companion mobile app for interactive learning.",
+      "accentColor": "0xFFEC4899",
+      "initials": "WC",
+      "focus": "Welding education & community platform",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/channel/UCM0kHJXSHR1k1wtLuliKmHg); independently listed in multiple top-welding-channel roundups (~484K subscribers).",
+      "notes": "Substituted for the source directory's 'WeldingWeb TV', which could not be matched to a real, dedicated YouTube channel — WeldingWeb is an active forum community (weldingweb.com, included as this file's Forum blog entry) but does not appear to run a companion YouTube channel."
+    },
+    {
+      "id": "UCzTNOQdqn3F6nVXZPKFMs8A",
+      "name": "The Fab Forums",
+      "handle": "@thefabforumscom",
+      "description": "Kyle Voss — custom motorsports fabrication content (carbon fiber, TIG welding, metal shaping, hot rods) built from a hobby into a fabrication business and brand.",
+      "accentColor": "0xFF06B6D4",
+      "initials": "FF",
+      "focus": "Small welding shop business content",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel URL in search results (youtube.com/channel/UCzTNOQdqn3F6nVXZPKFMs8A); identity and entrepreneurship angle cross-confirmed via a Voyage South Carolina Magazine interview with Kyle Voss.",
+      "notes": "Substituted for the source directory's 'Scratch Build Weld', which could not be matched to a real, confirmable channel of that name."
+    },
+    {
+      "id": "UC0-ronCUQNwMIkouWQC5mJQ",
+      "name": "Ron Covell",
+      "handle": "@roncovell",
+      "description": "Veteran metal-shaping instructor selling instructional DVDs and writing a monthly metalworking/welding column for Goodguys Goodtimes Gazette — sheetmetal forming techniques for fabricators.",
+      "accentColor": "0xFFA855F7",
+      "initials": "RC",
+      "focus": "Metal fabrication business and techniques",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/c/roncovell); identity and DVD/publishing business cross-confirmed via In The Garage Media author page and Trick-Tools.com."
+    },
+    {
+      "id": "UCcuMSDG2svjR7BncF841GJg",
+      "name": "6061.com",
+      "handle": "@6061com",
+      "description": "Aluminum welding and fabrication specialist running an online TIG welding school (6061.com) — welder setup, filler rod selection, tungsten types and full shop tours.",
+      "accentColor": "0xFFEF4444",
+      "initials": "AL",
+      "focus": "Metal fabrication business and techniques",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel URL in search results (youtube.com/channel/UCcuMSDG2svjR7BncF841GJg); the online TIG welding school business (6061.com) cross-confirmed via multiple video descriptions.",
+      "notes": "Substituted for the source directory's 'Chucke2009', which was excluded due to multiple independent community reports (WeldingWeb, Welding Tips and Tricks forums) of offensive/inflammatory non-welding content on that channel in recent years."
+    }
+  ],
+  "blogs": [
+    {
+      "name": "GZ Industrial Supplies",
+      "url": "https://gzindustrialsupplies.com/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: 'Ultimate Guide to Welding and Fabrication Services'. Note: the company's primary confirmed domain is gz-supplies.com (per its own site and LinkedIn) — worth checking whether gzindustrialsupplies.com is a live secondary domain with a working feed before shipping."
+    },
+    {
+      "name": "BusinessPlan.com.ng",
+      "url": "https://businessplan.com.ng/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: welding/fabrication business plan + feasibility study template."
+    },
+    {
+      "name": "Markup & Profit",
+      "url": "https://markupandprofit.com/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: contractor's guide to pricing, directly applicable to welding/fabrication shops."
+    },
+    {
+      "name": "ServiceTitan Blog",
+      "url": "https://www.servicetitan.com/blog/feed",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: contractor business systems applicable to metal trades."
+    },
+    {
+      "name": "The Fabricator",
+      "url": "https://www.thefabricator.com/thefabricator/rss",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: industry news and business insights for fabricators, from a well-established trade publication."
+    },
+    {
+      "name": "American Welding Society Blog",
+      "url": "https://app.aws.org/blog/feed",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: business and career resources for welders, from the official American Welding Society."
+    },
+    {
+      "name": "WeldingWeb Forum",
+      "url": "https://weldingweb.com",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: community business advice for welders. This is a forum, not an RSS blog — site URL used as-is. Independently confirmed as a real, large, active community (40,000+ members) during this session's channel research."
+    },
+    {
+      "name": "Nigeria Industrial Standards (SON)",
+      "url": "https://son.gov.ng/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: standards compliance for welding businesses, from Nigeria's official Standards Organisation."
+    },
+    {
+      "name": "Jua Kali Kenya Blog",
+      "url": "https://juakali.co.ke/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: informal-sector welding business documentation for Kenya."
+    },
+    {
+      "name": "Elite Trades",
+      "url": "https://elitetrades.com/feed/",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry: sales training and business growth content for tradespeople."
+    }
+  ],
+  "books": [
+    {
+      "title": "Markup & Profit: A Contractor's Guide (free)",
+      "author": "Michael Stone",
+      "freeSourceUrl": "https://markupandprofit.com/resources",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free pricing resources from the book's own official site.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Hosted on the official markupandprofit.com domain; author is the well-established, publicly credited author of Markup & Profit."
+    },
+    {
+      "title": "How Much Should I Charge? (free)",
+      "author": "Ellen Rohr",
+      "freeSourceUrl": "https://archive.org/details/howmuchshouldicharge",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free copy on Internet Archive — contractor pricing guide.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of How Much Should I Charge?."
+    },
+    {
+      "title": "Traction: Get a Grip on Your Business (free)",
+      "author": "Gino Wickman",
+      "freeSourceUrl": "https://archive.org/details/traction-gino-wickman",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free copy on Internet Archive — the EOS (Entrepreneurial Operating System) for running a small business.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry, hosted on archive.org, with the author's name in the URL itself."
+    },
+    {
+      "title": "The Lean Startup (free)",
+      "author": "Eric Ries",
+      "freeSourceUrl": "https://bdebooks.com/the-lean-startup",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free copy hosted on a third-party book site — worth a direct-download check before shipping.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Lean Startup."
+    },
+    {
+      "title": "Rich Dad Poor Dad (free)",
+      "author": "Robert Kiyosaki",
+      "freeSourceUrl": "https://archive.org/details/RichDadPoorDad",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free copy on Internet Archive — financial literacy fundamentals.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Rich Dad Poor Dad."
+    },
+    {
+      "title": "The E-Myth Revisited (free PDF)",
+      "author": "Michael E. Gerber",
+      "freeSourceUrl": "https://f5fp.com/e-myth-revisited-free-pdf",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free PDF of the well-known small-business-systems book, hosted on a third-party site — worth a direct-download check before shipping.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited."
+    },
+    {
+      "title": "Profit First (free resources)",
+      "author": "Mike Michalowicz",
+      "freeSourceUrl": "https://www.mikemichalowicz.com/profit-first-book",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free resources from the author's own official site.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com)."
+    },
+    {
+      "title": "Small Business Management",
+      "author": "OpenStax",
+      "freeSourceUrl": "https://openstax.org/details/books/small-business-management",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free, full open-license textbook covering small-business fundamentals.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Hosted on the official openstax.org domain, a well-established open-textbook publisher."
+    },
+    {
+      "title": "The 7 Habits of Highly Effective People (free)",
+      "author": "Stephen Covey",
+      "freeSourceUrl": "https://archive.org/details/the-7-habits-of-highly-effective-people",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free public-domain-availability edition on Internet Archive.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of The 7 Habits of Highly Effective People."
+    },
+    {
+      "title": "The Personal MBA (free)",
+      "author": "Josh Kaufman",
+      "freeSourceUrl": "https://archive.org/details/personal-mba",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free copy on Internet Archive — business fundamentals without business school.",
+      "verifiedOn": "2026-07-20",
+      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of The Personal MBA."
+    }
+  ],
+  "notes": "2026-07-20: Created from scratch, merging all 29 rows from the founder-provided 'welding_metal_fabrication_resources.csv' (Section I.5) — this file had no prior entries. Four of the CSV's 10 channels could not be used as-cited: 'WeldingWeb TV' (no dedicated YouTube channel found for the forum brand — its forum itself was kept as this file's Forum blog entry), 'Chucke2009' (excluded — multiple independent welding-community forum threads report the channel turned to offensive/inflammatory non-welding content in recent years), 'Kenya Jua Kali Sector' (no channel by this name found — only scattered individual news-outlet videos about the sector), and 'Scratch Build Weld' (no matching channel found). 'Metalshaper (Ron Fournier)' was also corrected: the real @metalshaper-style channel belongs to a different creator (Brian, Willys Jeep restorations), not metal-shaping pioneer Ron Fournier, who passed away in 2017. Four independently-verified, directly on-topic replacements were substituted to reach 10 channels: Weld.com, The Fab Forums (Kyle Voss), Ron Covell, and 6061.com. Every real YouTube channel ID was independently looked up via search and channel-page fetches — the CSV's RSS_Feed column universally used a literal 'UC...' placeholder rather than real channel IDs."
+    }
