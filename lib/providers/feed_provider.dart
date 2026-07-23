@@ -19,15 +19,20 @@ enum FeedState { idle, loading, loaded, error }
 
 class FeedProvider extends ChangeNotifier {
   FeedProvider() {
-    // Books re-sort is cheap (no network) so it's safe to do live: clear
-    // just that tab's cache and let it recompute next access. Channel
-    // order (Videos/Shorts) intentionally stays "next launch only" — see
-    // _buildSessionChannelOrder — since re-sorting those live would mean
-    // touching the round-robin/session-order logic mid-scroll.
+    // Both the book list and the channel priority order (Videos/Shorts)
+    // now react live to a category-selection change — see
+    // _onProfileChanged and _sessionChannelOrder's doc comment for why
+    // that changed from "next launch only".
     UserProfileService.instance.addListener(_onProfileChanged);
   }
 
   void _onProfileChanged() {
+    // Re-priority the channel order for the NEW selection — see
+    // _sessionChannelOrder's doc comment for why this can no longer stay
+    // frozen from launch. This alone only changes ordering; the actual
+    // re-fetch (so a newly-selected category's channels have videos to
+    // rank in the first place) is the refresh() call below.
+    _sessionChannelOrder = _buildSessionChannelOrder();
     _tabCache.remove(FeedTab.books);
     // BlogRssService.combinedBlogFeeds is selection-scoped (general +
     // whatever categories are currently selected — see that file), so a
@@ -66,14 +71,24 @@ class FeedProvider extends ChangeNotifier {
       .toList();
 
   // ── Session channel order ─────────────────────────────────────────────────
-  // Shuffled once at FeedProvider construction (= once per app launch).
-  // Stable within the session so refreshing doesn't reorder the feed.
-  // Different every launch → fresh channel at the top each time the user opens.
-  // Three layers, in priority order:
+  // Built at FeedProvider construction (= app launch), and again whenever
+  // the person's category selection changes (see _onProfileChanged) — not
+  // "next launch only" any more. The scenario that mattered most, by far,
+  // is completing onboarding for the very first time: FeedProvider is
+  // already constructed before onboarding is even shown (main.dart builds
+  // it unconditionally during the splash sequence), so without recomputing
+  // here, a first-time person's just-selected category would never get
+  // boosted to the top for their entire first session — it would only
+  // start appearing prominently on their NEXT app launch. Recomputing on
+  // every selection change (not just reading it once at construction) is
+  // what makes a freshly-selected category behave the same way general
+  // content always has: visible immediately, not "starting next time."
+  // Stable between selection changes so a plain pull-to-refresh doesn't
+  // reorder the feed on its own.
   //   1. Explicit "My Business" selection (UserProfileService) — strongest signal, the person said so directly.
   //   2. Learned engagement (EngagementService) — channels this person actually watches/saves rank higher.
   //   3. Shuffle — anything with no signal yet gets a fair, random shot at the top so discovery still happens.
-  final List<String> _sessionChannelOrder = _buildSessionChannelOrder();
+  List<String> _sessionChannelOrder = _buildSessionChannelOrder();
 
   // ── Eager-fetch scope ─────────────────────────────────────────────────
   // See ChannelData.eagerFor — general channels always fetched, category-

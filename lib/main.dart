@@ -141,47 +141,72 @@ class _SplashGateState extends State<_SplashGate> {
       debugPrint('[startup] Hive init failed (non-fatal): $e');
     }
 
-    // ── Run every independent service init CONCURRENTLY ─────────────────────
-    // Previously these 6 calls ran one after another — total wait time was
-    // the SUM of each (often 2-5+ seconds combined, which is exactly why the
-    // splash used to "stay long"). None of these actually depend on each
-    // other (BackgroundService.init() and registerRssCheck() are the only
-    // pair with a real ordering requirement, so that pair is wrapped
-    // together below). Running them in parallel means the wait time becomes
-    // the MAX of the group instead of the sum — typically under a second.
+    // ── Group A: what FeedProvider's constructor reads synchronously ────────
+    // ResourceCategoryData.load(), UserProfileService.init() and
+    // EngagementService.init() are the three things
+    // _buildSessionChannelOrder() (see feed_provider.dart) reads the
+    // instant FeedProvider() is constructed below — and all three are nothing
+    // but local reads (bundled JSON assets, on-device SharedPreferences), no
+    // network, no external SDK. That combination means they should always
+    // finish quickly AND FeedProvider genuinely cannot be correct without
+    // them, unlike the group below — so this group gets its own short wait,
+    // separate from anything that could plausibly still be running.
     //
-    // Each one is also wrapped in _safeInit so that if a single service
-    // throws (e.g. AdMob/IAP failing on a device with no Play Services, or
-    // a network hiccup during notification-channel setup), it can NEVER
-    // hang the splash screen forever or crash the app — it just logs and
-    // moves on, and the app opens normally without that one feature until
-    // it can be retried later.
-    //
-    // A hard 6-second ceiling on the WHOLE group is the final safety net:
-    // even if every individual safeguard above somehow failed to return
-    // (e.g. a service awaiting a Completer that's never resolved), the
-    // splash will still release after 6 s rather than hanging indefinitely.
+    // Previously all 8 services here shared one Future.wait with a single
+    // 6s ceiling. That meant a slow external SDK (Ads/IAP initializing
+    // against Google Play, a flaky network call during Notifications
+    // setup) could eat the whole ceiling and force a timeout while THESE
+    // three were still mid-load — and FeedProvider() a moment later would
+    // freeze its channel/category state as whatever they'd managed to load
+    // by then, often just "general content, nothing selected yet." Nothing
+    // ever retries that afterward: ResourceCategoryData isn't a
+    // ChangeNotifier, so nothing re-notifies FeedProvider once its load
+    // actually finishes in the background past the ceiling. In practice
+    // that surfaces as exactly "the general channels/blogs/books show up
+    // fine, but my selected category's never does" — for the rest of that
+    // session, only self-correcting on a much later app resume. Isolating
+    // this group is the actual fix for that, not just a tidiness pass.
     try {
       await Future.wait([
-        _safeInit('Connectivity',   () => ConnectivityService.instance.init()),
-        _safeInit('Background',     _initBackgroundServices),
-        _safeInit('Notifications',  () => NotificationService.instance.init()),
-        _safeInit('Ads',            () => AdService.instance.init()),
-        _safeInit('IAP',            () => IapService.instance.init()),
-        // Both of these must finish before FeedProvider() below is
-        // constructed: its session channel order reads the selected
-        // category (and engagement scores) synchronously at construction time.
         _safeInit('ResourceCategories', () => ResourceCategoryData.load()),
         _safeInit('UserProfile',        () => UserProfileService.instance.init()),
         _safeInit('Engagement',         () => EngagementService.instance.init()),
-      ]).timeout(const Duration(seconds: 6));
+      ]).timeout(const Duration(seconds: 8));
     } on TimeoutException {
-      debugPrint('[startup] Service init group exceeded 6s ceiling — '
-          'continuing without waiting further.');
+      debugPrint('[startup] ResourceCategories/UserProfile/Engagement '
+          'exceeded 8s — proceeding anyway; category-specific content may '
+          'be incomplete until the next app resume. Investigate if this '
+          'fires in practice — all three are local-only reads and should '
+          'never realistically approach this ceiling.');
     }
+
+    // ── Group B: everything else — must never block FeedProvider ────────────
+    // Ads/IAP/Notifications/Connectivity can be genuinely slow (external
+    // SDKs, a flaky network call during setup) without that ever being a
+    // reason FeedProvider should wait — so this group is fully
+    // fire-and-forget with its own separate ceiling, run concurrently with
+    // Group A above rather than after it (both start as soon as Hive is
+    // ready), and never gates FeedProvider's construction or the
+    // splash-to-shell transition.
+    unawaited(() async {
+      try {
+        await Future.wait([
+          _safeInit('Connectivity',  () => ConnectivityService.instance.init()),
+          _safeInit('Background',    _initBackgroundServices),
+          _safeInit('Notifications', () => NotificationService.instance.init()),
+          _safeInit('Ads',           () => AdService.instance.init()),
+          _safeInit('IAP',           () => IapService.instance.init()),
+        ]).timeout(const Duration(seconds: 6));
+      } on TimeoutException {
+        debugPrint('[startup] Connectivity/Background/Notifications/Ads/IAP '
+            'exceeded 6s — continuing without waiting further.');
+      }
+    }());
     unawaited(AdBlockService.instance.init());
 
     // Build the feed provider here so it can start fetching immediately.
+    // Group A above is guaranteed to have either finished or hit its own
+    // explicit timeout by this point — Group B is never a factor either way.
     final provider = FeedProvider();
     unawaited(provider.init());
 

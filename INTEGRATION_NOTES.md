@@ -337,3 +337,75 @@ allocation, not scroll-first browsing:**
   package-resolution network access, so none of this could be executed
   here — everything above was hand-traced against the actual source,
   not compiler-verified. Treat that as the one open item, not a detail.
+
+## 2026-07-23 (later same day) — Found the actual reason category content wasn't showing up
+
+Follow-up to the section immediately above. That pass fixed the *filtering*
+(general vs. selected-category scoping) so it was no longer possible for a
+Fashion Designer to see Medicine content. It did NOT fix — because the
+report at the time didn't surface it — a separate, more basic problem:
+**the Home tabs were showing only ever general content, full stop, with the
+selected category's channels/blogs/books never appearing at all.** Four
+screenshots of a real device (Videos/Shorts/Blogs/Books, each showing only
+the general 12-channel/5-feed/10-book library) made this concrete.
+
+**Root cause: a startup race, not a filtering bug.** `main.dart` ran eight
+service inits — `ResourceCategoryData.load()`, `UserProfileService.init()`,
+`EngagementService.init()`, plus Connectivity/Background/Notifications/
+Ads/IAP — in one `Future.wait(...)` under a single 6-second ceiling, then
+constructed `FeedProvider()` immediately after. `FeedProvider`'s
+`_sessionChannelOrder` reads the selected category and the freshly-loaded
+category data *synchronously*, at construction. Ads/IAP in particular
+initialize external SDKs (sometimes touching Google Play services) and can
+legitimately take a few seconds — long enough, on a slower device or cold
+start, to run the whole group past 6 seconds. When that happened,
+`FeedProvider()` got built with whatever partial state
+`ResourceCategoryData`/`UserProfileService` happened to be in at that exact
+moment — sometimes still empty. Nothing ever corrected this afterward:
+`ResourceCategoryData` is a plain static loader, not a `ChangeNotifier`, so
+nothing re-notifies `FeedProvider` once its load actually finishes in the
+background past the ceiling. The result was exactly the reported symptom —
+general content (hardcoded, always available immediately, no async load
+needed) works every time; a selected category's content depends on a load
+that can silently lose a race no one gets told about, for the rest of that
+session.
+
+**The fix, in `main.dart`:** split the old single 8-way group into two.
+Group A — `ResourceCategoryData.load()`, `UserProfileService.init()`,
+`EngagementService.init()` — is exactly the three things
+`_buildSessionChannelOrder()` touches, all three are local-only (bundled
+JSON assets, on-device SharedPreferences, no network/external SDK), and
+`FeedProvider()` now only gets constructed after this group genuinely
+resolves (own 8s ceiling, isolated from anything else). Group B —
+Connectivity/Background/Notifications/Ads/IAP — keeps its own 6s ceiling
+and is fully `unawaited`, run concurrently with Group A, never gating
+`FeedProvider` or the splash-to-shell transition. Slower external SDKs can
+take however long they take without that ever again meaning FeedProvider
+gets built blind.
+
+**Second, smaller fix, in `feed_provider.dart`:** even with Group A
+guaranteed to finish before construction, there's a second, more common
+case worth covering directly — the very first time someone completes
+onboarding. `FeedProvider` is built unconditionally during the splash
+sequence, before onboarding even shows, so the selection at construction
+time for a first-time person is always empty; `_sessionChannelOrder` was a
+`final` field, computed once and never touched again, meaning even a
+perfectly-timed selection made two minutes later (onboarding) wouldn't
+boost that category's channels to the top until the *next* app launch. Made
+it a mutable field and recompute it inside `_onProfileChanged` (which
+already ran `refresh()` on every selection change) — so a freshly-picked
+category is boosted immediately, the same "visible right away" guarantee
+general content already had, not "starting next time you open the app."
+
+**Not covered by an automated test.** Unlike last session's additions
+(`CategorySearch`, `searchKeywords`, `Video`'s verified_book fields — all
+pure logic, no Flutter bindings needed), this fix is inherently about
+async startup timing across real services (SharedPreferences, bundled
+assets, Hive, ad/IAP SDKs) — properly testing it means integration-testing
+`main.dart`'s init sequence with mocked slow services, which is a
+meaningfully bigger lift than a unit test and wasn't attempted here. If
+you want confidence beyond hand-tracing the code: run a real device/
+emulator build, complete onboarding picking a category with a fully
+populated resource file (Tailoring & Fashion Design — skill_01 — is 10/10/10
+today), and confirm its channels/blogs/books show up in Videos, Shorts,
+Blogs, and Books without needing to background-and-resume the app first.
