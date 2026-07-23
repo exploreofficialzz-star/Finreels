@@ -1,50 +1,47 @@
-FinReels — files touched this round (the "category content not showing" fix)
-================================================================================
-Extract into your project root, overwriting existing files at the same paths.
+FinReels — Round 3 — THE actual fix for category content not showing
+======================================================================
+Extract into your project root, overwriting at the same paths.
 
-lib/main.dart
-    THE actual fix. Split the old single 8-way startup race (Connectivity,
-    Background, Notifications, Ads, IAP, ResourceCategoryData, UserProfile,
-    Engagement — all in one Future.wait with one 6s ceiling) into two groups:
+ROOT CAUSE (confirmed by code trace, not guessing):
+  assets/data/resources/skill_01_tailoring_fashion_design.json had
+  "author": null on books[3] ("Freelance Fashion Designer's Guide").
+  VerifiedBook.fromJson did `j['author'] as String` — Dart throws a
+  TypeError on null. That exception escaped _addFrom → escaped
+  _loadVerifiedResources() → escaped load() (it was called OUTSIDE
+  the try-catch block in load()) → was caught silently by _safeInit()
+  in main.dart with just a log line. End result: _verifiedChannels,
+  _verifiedBlogs and _verifiedBooks stayed as const [] for the entire
+  session. ChannelData.combined only had the 12 const channels.
+  Only general content ever showed. All four tabs affected.
 
-    - Group A: ResourceCategoryData.load() + UserProfileService.init() +
-      EngagementService.init() — the three things FeedProvider's
-      constructor reads synchronously. All three are local-only (bundled
-      JSON, on-device prefs) so they should always be fast, and
-      FeedProvider genuinely cannot be correct without them — so
-      FeedProvider() is now ALWAYS constructed after this group resolves
-      (own 8s ceiling), full stop.
+FILES CHANGED (4):
 
-    - Group B: Connectivity/Background/Notifications/Ads/IAP — can be
-      genuinely slow (external SDKs) without that ever being a reason
-      FeedProvider should wait. Fully unawaited, own 6s ceiling, runs
-      concurrently with Group A, never gates FeedProvider or the
-      splash-to-shell transition.
+assets/data/resources/skill_01_tailoring_fashion_design.json
+    books[3].author: null → "Unknown"
+    (The only null field found across all resource files — verified by
+    scanning every field in every file.)
 
-    Previously: if Ads/IAP (or any one of the 8) ran long, the WHOLE group
-    could blow past 6s, and FeedProvider() got built immediately after
-    regardless — sometimes with ResourceCategoryData/UserProfileService
-    still empty. Nothing ever corrected that afterward (ResourceCategoryData
-    isn't a ChangeNotifier), so the selected category's content just never
-    showed up for that entire session, while general content (hardcoded,
-    no async load needed) always worked fine. That mismatch is exactly what
-    the screenshots showed.
+lib/models/resource_category.dart
+    VerifiedBook.fromJson: title/author/freeSourceUrl now use `as
+    String? ?? fallback` instead of bare `as String`. A null field in
+    a JSON entry now degrades gracefully instead of throwing.
 
-lib/providers/feed_provider.dart
-    Second, smaller fix. _sessionChannelOrder (which decides which channel
-    gets boosted to the top of Videos/Shorts) was a `final` field, frozen
-    once at FeedProvider construction — which happens BEFORE onboarding is
-    even shown for a first-time person, so their just-picked category could
-    never get boosted until the NEXT app launch. Now mutable, and
-    recomputed inside _onProfileChanged (which already re-fetches on every
-    selection change) — so a freshly-selected category is boosted
-    immediately, not "starting next time."
+lib/data/resource_category_data.dart
+    TWO fixes:
+    1. _loadVerifiedResources() now has its own try-catch in load() —
+       it was previously called OUTSIDE the existing try-catch, so any
+       exception inside it escaped into _safeInit(). Now a failure in
+       verified-resources loading logs and continues; categories still
+       load correctly.
+    2. _addFrom() now wraps each channel/blog/book entry in its own
+       try-catch — one bad entry logs and is skipped, never aborting
+       the rest of the file.
 
-INTEGRATION_NOTES.md
-    Appended a new dated section (search for "Found the actual reason") with
-    the full root-cause writeup and what to check on a real device, since
-    neither of the two fixes above could be exercised in this sandbox
-    (no Flutter SDK, no device/emulator, no ad/IAP SDKs to actually race
-    against).
-
-Nothing was deleted this round.
+lib/data/channel_data.dart
+    byId changed from `static final Map` (built once from only the 12
+    const channels at class init time) to `static Map get` (built live
+    from combined, which includes verified category channels). Without
+    this, a fashion design video would display with the wrong channel
+    name/info in the video card — it would show "The Diary of A CEO"
+    as the channel. Content itself would still appear (the null fix
+    above is what actually unblocks it), but the metadata would be wrong.

@@ -210,8 +210,14 @@ class ChannelData {
           c.resourceCategoryId == null || selectedCategoryIds.contains(c.resourceCategoryId))
       .toList();
 
-  static final Map<String, Channel> byId = {
-    for (final ch in all) ch.id: ch,
+  /// Lookup map by channel id — covers ALL channels including verified
+  /// category channels (e.g. fashion design, barbing). Must be a live
+  /// getter, not a static final field, because the verified channels come
+  /// from ResourceCategoryData which is loaded asynchronously at startup.
+  /// A static final would be computed at class init time (before that load
+  /// completes) and only ever contain the 12 const channels.
+  static Map<String, Channel> get byId => {
+    for (final ch in combined) ch.id: ch,
   };
 
   static Channel get fallback => all.first;

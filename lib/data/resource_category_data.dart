@@ -78,9 +78,23 @@ class ResourceCategoryData {
     } on Object catch (e) {
       // Never let a bad/missing asset take the app down — the picker and
       // the playbook books just degrade to "not available yet" instead.
-      debugPrint('[ResourceCategoryData] load failed (non-fatal): $e');
+      debugPrint('[ResourceCategoryData] categories load failed (non-fatal): $e');
     }
-    await _loadVerifiedResources();
+
+    // Separate try-catch from the categories load above — a failure here
+    // (bad JSON in a single resource file, a null field, any parse error)
+    // must NEVER leave _verifiedChannels/_verifiedBlogs/_verifiedBooks as
+    // const [] for the whole session. Historically this call was outside the
+    // try-catch above, which meant any exception inside _addFrom (e.g.
+    // `null as String` on a book with a missing author field) propagated
+    // uncaught through load(), was swallowed by _safeInit() in main.dart,
+    // and left all three lists permanently empty — every channel shown was
+    // general-only regardless of what the person had selected.
+    try {
+      await _loadVerifiedResources();
+    } on Object catch (e) {
+      debugPrint('[ResourceCategoryData] verified resources load failed (non-fatal): $e');
+    }
   }
 
   static Future<void> _loadVerifiedResources() async {
@@ -152,29 +166,44 @@ class ResourceCategoryData {
     List<VerifiedBook> books,
   ) {
     for (final c in (map['channels'] as List? ?? [])) {
-      final ch = c as Map<String, dynamic>;
-      channels.add(Channel(
-        id: ch['id'] as String,
-        name: ch['name'] as String,
-        handle: ch['handle'] as String,
-        description: ch['description'] as String? ?? '',
-        accentColor: Color(int.parse((ch['accentColor'] as String? ?? '0xFFF59E0B'))),
-        category: 'Business of Your Skill',
-        focus: ch['focus'] as String? ?? '',
-        initials: ch['initials'] as String? ?? '',
-        resourceCategoryId: categoryId,
-      ));
+      try {
+        final ch = c as Map<String, dynamic>;
+        channels.add(Channel(
+          id: ch['id'] as String,
+          name: ch['name'] as String,
+          handle: ch['handle'] as String,
+          description: ch['description'] as String? ?? '',
+          accentColor: Color(int.parse((ch['accentColor'] as String? ?? '0xFFF59E0B'))),
+          category: 'Business of Your Skill',
+          focus: ch['focus'] as String? ?? '',
+          initials: ch['initials'] as String? ?? '',
+          resourceCategoryId: categoryId,
+        ));
+      } on Object catch (e) {
+        debugPrint('[ResourceCategoryData] skipping bad channel entry '
+            '(categoryId=$categoryId): $e');
+      }
     }
     for (final b in (map['blogs'] as List? ?? [])) {
-      final bl = b as Map<String, dynamic>;
-      blogs.add({
-        'name': bl['name'] as String,
-        'url': bl['url'] as String,
-        if (categoryId != null) 'categoryId': categoryId,
-      });
+      try {
+        final bl = b as Map<String, dynamic>;
+        blogs.add({
+          'name': bl['name'] as String,
+          'url': bl['url'] as String,
+          if (categoryId != null) 'categoryId': categoryId,
+        });
+      } on Object catch (e) {
+        debugPrint('[ResourceCategoryData] skipping bad blog entry '
+            '(categoryId=$categoryId): $e');
+      }
     }
     for (final bk in (map['books'] as List? ?? [])) {
-      books.add(VerifiedBook.fromJson(bk as Map<String, dynamic>, categoryId: categoryId));
+      try {
+        books.add(VerifiedBook.fromJson(bk as Map<String, dynamic>, categoryId: categoryId));
+      } on Object catch (e) {
+        debugPrint('[ResourceCategoryData] skipping bad book entry '
+            '(categoryId=$categoryId): $e');
+      }
     }
   }
 

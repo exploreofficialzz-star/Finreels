@@ -115,9 +115,9 @@ class VerifiedBook {
   });
 
   factory VerifiedBook.fromJson(Map<String, dynamic> j, {String? categoryId}) => VerifiedBook(
-        title: j['title'] as String,
-        author: j['author'] as String,
-        freeSourceUrl: j['freeSourceUrl'] as String,
+        title: j['title'] as String? ?? '',
+        author: j['author'] as String? ?? 'Unknown',
+        freeSourceUrl: j['freeSourceUrl'] as String? ?? '',
         freeSourceType: j['freeSourceType'] as String? ?? 'web',
         freeSourceNote: j['freeSourceNote'] as String?,
         categoryId: categoryId,
