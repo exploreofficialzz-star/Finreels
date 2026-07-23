@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../data/channel_data.dart';
 import '../models/feed_tab.dart';
@@ -18,8 +19,9 @@ import '../widgets/inline_video_card.dart';
 import '../widgets/no_flash_page_route.dart';
 import '../widgets/shimmer_loader.dart';
 import 'blog_feed_screen.dart';
-import 'discover_screen.dart';
+import 'blog_reader_screen.dart';
 import 'book_detail_screen.dart';
+import 'discover_screen.dart';
 import 'shorts_player_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -142,6 +144,10 @@ class _FeedBodyState extends State<_FeedBody> {
   }
 
   void _onTap(Video video) {
+    if (video.channelId == 'verified_book') {
+      unawaited(_openVerifiedBook(video));
+      return;
+    }
     if (video.channelId == 'books') {
       Navigator.push(context,
           MaterialPageRoute(builder: (_) => BookDetailScreen(book: video)));
@@ -149,6 +155,32 @@ class _FeedBodyState extends State<_FeedBody> {
     }
     // Interstitial fires on tap 4, 8, 12 … for videos
     unawaited(AdService.instance.onVideoTapped());
+  }
+
+  /// Mirrors _FreeBookTile._open() in category_detail_screen.dart: a
+  /// 'download' book hands off to whatever the device uses for PDFs/EPUBs
+  /// externally; a 'web' book opens the same in-app reader a blog article
+  /// uses. Never goes through BookDetailScreen — that screen's `_sources`
+  /// map only knows the original 10 hand-picked books.
+  Future<void> _openVerifiedBook(Video book) async {
+    if (book.freeSourceType == 'download') {
+      final uri = Uri.tryParse(book.freeSourceUrl ?? '');
+      if (uri != null && await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      }
+      return;
+    }
+    if (!mounted) return;
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => BlogReaderScreen(
+          url: book.freeSourceUrl ?? '',
+          title: book.title,
+          categoryId: book.sourceCategoryId,
+        ),
+      ),
+    );
   }
 
   @override

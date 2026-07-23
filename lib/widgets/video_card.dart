@@ -172,7 +172,7 @@ class VideoCard extends StatelessWidget {
   }
 
   Widget _buildThumbnailContent(BuildContext context) {
-    final isBook = video.channelId == 'books';
+    final isBook = video.channelId == 'books' || video.channelId == 'verified_book';
 
     return Stack(
       fit: StackFit.expand,

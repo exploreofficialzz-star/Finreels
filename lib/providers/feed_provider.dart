@@ -4,11 +4,13 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../config/app_config.dart';
-import '../data/category_playbook_data.dart';
 import '../data/channel_data.dart';
+import '../data/resource_category_data.dart';
 import '../models/channel.dart';
 import '../models/feed_tab.dart';
+import '../models/resource_category.dart' show VerifiedBook;
 import '../models/video.dart';
+import '../services/blog_rss_service.dart';
 import '../services/engagement_service.dart';
 import '../services/rss_service.dart';
 import '../services/user_profile_service.dart';
@@ -27,6 +29,12 @@ class FeedProvider extends ChangeNotifier {
 
   void _onProfileChanged() {
     _tabCache.remove(FeedTab.books);
+    // BlogRssService.combinedBlogFeeds is selection-scoped (general +
+    // whatever categories are currently selected — see that file), so a
+    // changed selection must drop its 10-minute cache too, or the Blogs tab
+    // could keep showing the previous selection's articles for up to that
+    // long after switching category.
+    BlogRssService.instance.clearCache();
     notifyListeners();
     // Pulls in the newly-selected category's channels right away instead
     // of making the person wait for next app open. Silent = no loading
@@ -109,24 +117,61 @@ class FeedProvider extends ChangeNotifier {
     };
   }
 
-  /// The original 10 hand-picked books plus the 60 generated "Business of
-  /// Your Skill/Business/Profession" playbooks (see CategoryPlaybookData).
-  /// If the person has selected one or more categories (UserProfileService),
-  /// their playbook(s) come first — everyone else sees the original 10
-  /// first, unchanged, followed by the playbooks in category order.
+  /// The original 10 hand-picked classics/playbooks, plus real named books
+  /// pulled from assets/data/resources/{categoryId}.json — general ones
+  /// (categoryId == null) always, and category-specific ones ONLY for
+  /// categories the person actually selected (UserProfileService).
+  ///
+  /// This intentionally does NOT fall back to "show every category's books
+  /// when nothing's selected" the way the old CategoryPlaybookData version
+  /// did — a fashion designer must never see a doctor's books (or any other
+  /// unselected category's) just because they haven't picked one yet.
+  /// Skipping onboarding simply means "general books only" until they do.
+  ///
+  /// Selected-category books come first (the same "your stuff first"
+  /// priority every other tab already gives a selected category), then the
+  /// general library. No CategoryPlaybookData here any more — that generated
+  /// "Business of X" content still exists (see CategoryDetailScreen's own
+  /// "Read the Business Playbook" card, clearly labelled as FinReels
+  /// Research) but it stopped being presented as a Book here, since it was
+  /// close to identical filler for every Skill category and isn't a
+  /// substitute for a real, named book.
   List<Video> get _allBookVideos {
-    final playbooks = CategoryPlaybookData.videos;
     final selected = UserProfileService.instance.selectedCategoryIds;
-    if (selected.isEmpty) {
-      return [..._bookVideos, ...playbooks];
+    final verified = ResourceCategoryData.verifiedBooks.where(
+      (b) => b.categoryId == null || selected.contains(b.categoryId),
+    );
+    final mine = <VerifiedBook>[];
+    final general = <VerifiedBook>[];
+    for (final b in verified) {
+      (b.categoryId == null ? general : mine).add(b);
     }
-    final mine = <Video>[];
-    final rest = <Video>[];
-    for (final v in playbooks) {
-      final categoryId = v.id.replaceFirst('playbook_', '');
-      (selected.contains(categoryId) ? mine : rest).add(v);
-    }
-    return [...mine, ..._bookVideos, ...rest];
+    return [
+      ...mine.map(_videoFromVerifiedBook),
+      ..._bookVideos,
+      ...general.map(_videoFromVerifiedBook),
+    ];
+  }
+
+  static Video _videoFromVerifiedBook(VerifiedBook b) {
+    final slug = '${b.categoryId ?? 'general'}_${b.title}'
+        .toLowerCase()
+        .replaceAll(RegExp(r'[^a-z0-9]+'), '_');
+    final id = 'vbook_$slug';
+    return Video(
+      id: id,
+      title: b.title,
+      description: b.freeSourceNote != null
+          ? '${b.author} · ${b.freeSourceNote}'
+          : b.author,
+      channelId: 'verified_book',
+      channelName: b.author,
+      publishedAt: _epoch,
+      thumbnailUrl: '', // BookCoverImage falls back to a placeholder cover.
+      freeSourceUrl: b.freeSourceUrl,
+      freeSourceType: b.freeSourceType,
+      sourceCategoryId: b.categoryId,
+    );
   }
 
   List<Video> _roundRobin(List<Video> videos) {
@@ -160,7 +205,7 @@ class FeedProvider extends ChangeNotifier {
         t.contains(' lessons') || t.contains(' mistakes');
   }
 
-  bool _isBook(Video v) => v.channelId == 'books';
+  bool _isBook(Video v) => v.channelId == 'books' || v.channelId == 'verified_book';
 
   // ── Books ─────────────────────────────────────────────────────────────────────
 

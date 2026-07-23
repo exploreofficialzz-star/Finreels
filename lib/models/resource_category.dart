@@ -146,6 +146,15 @@ class ResourceCategory {
   final String? dontKnowModule; // primary module code, e.g. 'M6'
   final List<String>? dontKnowModules; // all tagged modules (usually 1, sometimes 2)
 
+  /// Aliases/synonyms this category should match on when someone types what
+  /// they do instead of picking a name off the list — e.g. 'sew', 'ankara',
+  /// 'seamstress' all resolve to Tailoring & Fashion Design. Populated in
+  /// assets/data/resource_categories.json (kept in sync with the
+  /// SEARCH_KEYWORDS dict in parse_curriculum.py so a full regeneration
+  /// never drops them). Always non-null — empty list if a category has none
+  /// yet, never a crash on missing data. See lib/utils/category_search.dart.
+  final List<String> searchKeywords;
+
   const ResourceCategory({
     required this.id,
     required this.section,
@@ -158,6 +167,7 @@ class ResourceCategory {
     this.dontKnowFact,
     this.dontKnowModule,
     this.dontKnowModules,
+    this.searchKeywords = const [],
   });
 
   factory ResourceCategory.fromJson(Map<String, dynamic> j) => ResourceCategory(
@@ -174,6 +184,7 @@ class ResourceCategory {
         dontKnowFact: j['dontKnowFact'] as String?,
         dontKnowModule: j['dontKnowModule'] as String?,
         dontKnowModules: (j['dontKnowModules'] as List?)?.cast<String>(),
+        searchKeywords: (j['searchKeywords'] as List?)?.cast<String>() ?? const [],
       );
 
   /// Short one-line description for list tiles / cards — first skill

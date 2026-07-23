@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:xml/xml.dart';
 
 import '../data/resource_category_data.dart';
+import 'user_profile_service.dart';
 
 /// A single parsed blog article from an RSS/Atom feed.
 class BlogArticle {
@@ -14,7 +15,8 @@ class BlogArticle {
   final String excerpt;
 
   /// Which of the 60 categories this feed is tagged to, if any — see
-  /// verified_resources.json. Null for the 5 general-purpose feeds.
+  /// assets/data/resources/{categoryId}.json, loaded by
+  /// ResourceCategoryData. Null for the 5 general-purpose feeds below.
   final String? categoryId;
 
   const BlogArticle({
@@ -53,13 +55,38 @@ const List<Map<String, String>> kBlogFeeds = [
   },
 ];
 
-/// [kBlogFeeds] above are the 5 general-purpose feeds. This adds every
-/// category-tagged blog verified so far (see
-/// assets/data/verified_resources.json). BlogRssService.fetchAll() reads
-/// this combined list, not the bare constant, so newly-verified blogs
-/// show up automatically.
-List<Map<String, String>> get combinedBlogFeeds =>
-    [...kBlogFeeds, ...ResourceCategoryData.verifiedBlogs];
+/// [kBlogFeeds] (the 5 general-purpose feeds) plus every category-tagged
+/// blog verified so far (see assets/data/resources/{categoryId}.json) for
+/// ONLY the categories the person currently has selected
+/// (UserProfileService) — general feeds are always included since their
+/// categoryId is null.
+///
+/// This is the same "general always, category-specific only if selected"
+/// rule ChannelData.eagerFor already applies to channels, for exactly the
+/// same two reasons:
+///  1. Correctness — without this, a fashion designer's Blogs tab would
+///     include every other started category's blogs too (a barber's, a
+///     doctor's, ...), not just general + their own.
+///  2. Scale — as more of the 60 categories reach their full 10 blogs
+///     each, an unscoped list heads toward ~600 RSS feeds fetched on
+///     every single visit to the Blogs tab, for every person, regardless
+///     of what they actually do. Scoping keeps each person's fetch count
+///     bounded by (5 general + 10 per category they picked), not by how
+///     much of the whole 60-category dataset happens to exist.
+///
+/// Browsing a category from Discover/CategoryDetailScreen — where any of
+/// the 60 must be viewable even if it isn't the person's own selection —
+/// deliberately does NOT go through this. See [fetchForCategory] below,
+/// which mirrors how ChannelVideosScreen fetches one channel directly
+/// instead of going through the same eager-scoped list FeedProvider uses.
+List<Map<String, String>> get combinedBlogFeeds {
+  final selected = UserProfileService.instance.selectedCategoryIds;
+  final scoped = ResourceCategoryData.verifiedBlogs.where((b) {
+    final categoryId = b['categoryId'];
+    return categoryId == null || selected.contains(categoryId);
+  });
+  return [...kBlogFeeds, ...scoped];
+}
 
 class BlogRssService {
   BlogRssService._();
@@ -74,6 +101,11 @@ class BlogRssService {
       _cacheTime != null &&
       DateTime.now().difference(_cacheTime!) < _cacheTtl;
 
+  /// Powers the aggregated, passive Blogs tab — general feeds plus
+  /// whatever categories the person selected (see [combinedBlogFeeds]).
+  /// Cached for 10 minutes; FeedProvider clears that cache the moment the
+  /// person's category selection changes, so switching category never
+  /// shows stale, wrongly-scoped articles for the rest of that window.
   Future<List<BlogArticle>> fetchAll({bool forceRefresh = false}) async {
     if (!forceRefresh && _isCacheFresh) return _cache!;
 
@@ -91,6 +123,33 @@ class BlogRssService {
     _cache = sorted;
     _cacheTime = DateTime.now();
     return sorted;
+  }
+
+  /// Fetches ONE category's own blogs directly — regardless of whether the
+  /// person has that category selected. For CategoryDetailScreen (reached
+  /// from Discover, browsing any of the 60), which must show a category's
+  /// real content even when it isn't the viewer's own selection, exactly
+  /// the same reasoning ChannelVideosScreen already applies by fetching a
+  /// single channel's RSS directly instead of going through the
+  /// selection-scoped aggregate. Not cached beyond the lifetime of the
+  /// call — a category page's blog list is a handful of feeds, cheap
+  /// enough to fetch fresh each visit.
+  Future<List<BlogArticle>> fetchForCategory(String categoryId) async {
+    final feeds = ResourceCategoryData.verifiedBlogs
+        .where((b) => b['categoryId'] == categoryId)
+        .toList();
+    if (feeds.isEmpty) return const [];
+
+    final futures = feeds.map(
+      (feed) => _fetchFeed(
+        url: feed['url']!,
+        sourceName: feed['name']!,
+        categoryId: feed['categoryId'],
+      ),
+    );
+    final results = await Future.wait(futures);
+    final articles = results.expand((l) => l).toList();
+    return compute(_sortArticles, articles);
   }
 
   Future<List<BlogArticle>> _fetchFeed({

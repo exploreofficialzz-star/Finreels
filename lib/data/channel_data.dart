@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import '../models/channel.dart';
 import 'resource_category_data.dart';
 
-/// FinReels — 10 channels, all IDs verified directly from YouTube channel pages.
+/// FinReels — 12 general-purpose channels, all IDs verified directly from
+/// YouTube channel pages.
 ///
-/// Root cause of "only 2 channels showing":
-///   8 out of 10 channel IDs in the original file were WRONG — they did not
-///   correspond to the actual YouTube channels. Wrong IDs return an empty XML
-///   feed (the channel exists but has no videos under that ID), or a 404.
-///   Only Diary of A CEO and School of Hard Knocks had correct IDs.
+/// Root cause of "only 2 channels showing" (a historical bug in the
+/// original, smaller channel list): most of the channel IDs on file were
+/// WRONG — they did not correspond to the actual YouTube channels. Wrong
+/// IDs return an empty XML feed (the channel exists but has no videos under
+/// that ID), or a 404. Only Diary of A CEO and School of Hard Knocks had
+/// correct IDs from the start.
 ///
 /// All IDs below were confirmed by fetching the channel page directly and
 /// reading the Channel ID from the page source / RSS link.
@@ -187,10 +189,10 @@ class ChannelData {
   ];
 
   /// The 12 general-purpose channels above, PLUS every category-tagged
-  /// channel that's been verified so far (see
-  /// assets/data/verified_resources.json, loaded by ResourceCategoryData).
-  /// This is what FeedProvider and everything else should actually read —
-  /// [all] alone only has the original const 12.
+  /// channel that's been verified so far (see the per-category files under
+  /// assets/data/resources/, loaded by ResourceCategoryData). This is what
+  /// FeedProvider and everything else should actually read — [all] alone
+  /// only has the original const 12.
   static List<Channel> get combined => [...all, ...ResourceCategoryData.verifiedChannels];
 
   /// The subset of [combined] that should actually be fetched over the

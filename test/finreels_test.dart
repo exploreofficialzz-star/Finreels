@@ -1,6 +1,8 @@
 import 'package:finreels/config/app_config.dart';
 import 'package:finreels/data/channel_data.dart';
+import 'package:finreels/models/resource_category.dart';
 import 'package:finreels/models/video.dart';
+import 'package:finreels/utils/category_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -148,6 +150,138 @@ void main() {
       expect(white.r, 1.0);
       expect(white.g, 1.0);
       expect(white.b, 1.0);
+    });
+  });
+
+  // ── ResourceCategory.searchKeywords ─────────────────────────────────────────
+  group('ResourceCategory searchKeywords', () {
+    const baseJson = {
+      'id': 'skill_01_tailoring_fashion_design',
+      'section': 'skill',
+      'number': 1,
+      'name': 'Tailoring & Fashion Design',
+    };
+
+    test('parses searchKeywords when present', () {
+      final category = ResourceCategory.fromJson({
+        ...baseJson,
+        'searchKeywords': ['tailor', 'sew', 'ankara'],
+      });
+      expect(category.searchKeywords, ['tailor', 'sew', 'ankara']);
+    });
+
+    test('defaults to an empty list when absent (older/partial data)', () {
+      final category = ResourceCategory.fromJson(baseJson);
+      expect(category.searchKeywords, isEmpty);
+    });
+  });
+
+  // ── CategorySearch ───────────────────────────────────────────────────────────
+  group('CategorySearch', () {
+    const tailoring = ResourceCategory(
+      id: 'skill_01_tailoring_fashion_design',
+      section: ResourceSection.skill,
+      number: 1,
+      name: 'Tailoring & Fashion Design',
+      searchKeywords: ['tailor', 'sew', 'ankara', 'seamstress'],
+    );
+    const medicine = ResourceCategory(
+      id: 'profession_01_medicine',
+      section: ResourceSection.profession,
+      number: 1,
+      name: 'Medicine',
+      searchKeywords: ['doctor', 'physician'],
+    );
+    final categories = [tailoring, medicine];
+
+    test('empty query matches everything', () {
+      expect(CategorySearch.matches(tailoring, ''), isTrue);
+      expect(CategorySearch.matches(medicine, ''), isTrue);
+    });
+
+    test('matches on a substring of the category name', () {
+      expect(CategorySearch.matches(tailoring, 'tailoring'), isTrue);
+      expect(CategorySearch.matches(medicine, 'medicine'), isTrue);
+    });
+
+    test('matches on a keyword the name itself does not contain', () {
+      // "sew" never appears in "Tailoring & Fashion Design" — this only
+      // passes because of searchKeywords, proving the allocation feature
+      // actually adds coverage beyond a plain name match.
+      expect(CategorySearch.matches(tailoring, 'sew'), isTrue);
+      expect(CategorySearch.matches(medicine, 'doctor'), isTrue);
+    });
+
+    test('a keyword from one category does not match another', () {
+      expect(CategorySearch.matches(tailoring, 'doctor'), isFalse);
+      expect(CategorySearch.matches(medicine, 'ankara'), isFalse);
+    });
+
+    test('search() filters a list down to only the matches', () {
+      expect(CategorySearch.search(categories, 'sew'), [tailoring]);
+      expect(CategorySearch.search(categories, 'physician'), [medicine]);
+      expect(CategorySearch.search(categories, 'zzz-no-such-trade'), isEmpty);
+    });
+
+    test('sectionOrder is Profession, then Skill, then Business', () {
+      expect(CategorySearch.sectionOrder, [
+        ResourceSection.profession,
+        ResourceSection.skill,
+        ResourceSection.business,
+      ]);
+    });
+
+    test('othersId never collides with a real category id shape', () {
+      // Real ids all look like 'skill_01_...' / 'business_07_...' /
+      // 'profession_12_...' — 'others' deliberately doesn't match that
+      // pattern, so it can never accidentally be treated as a real,
+      // resource-file-backed category.
+      expect(CategorySearch.othersId, 'others');
+      expect(RegExp(r'^(skill|business|profession)_\d{2}_').hasMatch(CategorySearch.othersId),
+          isFalse);
+    });
+  });
+
+  // ── Video verified_book handling ────────────────────────────────────────────
+  group('Video verified_book support', () {
+    final verifiedBook = Video(
+      id: 'vbook_skill_01_fashion_for_profit',
+      title: 'Fashion for Profit',
+      description: 'Frances Harder',
+      channelId: 'verified_book',
+      channelName: 'Frances Harder',
+      publishedAt: DateTime(2000),
+      thumbnailUrl: '', // no cover source — BookCoverImage shows a placeholder
+      freeSourceUrl: 'https://example.com/fashion-for-profit',
+      freeSourceType: 'web',
+      sourceCategoryId: 'skill_01_tailoring_fashion_design',
+    );
+
+    test('never gets treated as a real YouTube id for its thumbnail', () {
+      expect(verifiedBook.thumbnailHd, ''); // falls back to thumbnailUrl, not a youtube.com URL
+      expect(verifiedBook.thumbnailMq, '');
+    });
+
+    test('round-trips its extra fields through JSON', () {
+      final restored = Video.fromJson(verifiedBook.toJson());
+      expect(restored.freeSourceUrl, verifiedBook.freeSourceUrl);
+      expect(restored.freeSourceType, verifiedBook.freeSourceType);
+      expect(restored.sourceCategoryId, verifiedBook.sourceCategoryId);
+    });
+
+    test('a plain video never carries verified_book fields', () {
+      final plain = Video(
+        id: 'abc123',
+        title: 'Test',
+        description: '',
+        channelId: 'ch1',
+        channelName: 'Test Channel',
+        publishedAt: DateTime.now(),
+        thumbnailUrl: '',
+      );
+      expect(plain.freeSourceUrl, isNull);
+      expect(plain.freeSourceType, isNull);
+      expect(plain.sourceCategoryId, isNull);
     });
   });
 }

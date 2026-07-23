@@ -70,6 +70,211 @@ CANONICAL = {
     ],
 }
 
+# ---------------------------------------------------------------------------
+# 1b. Search keywords/aliases per category, keyed by canonical id — powers
+#     the onboarding/Discover "type what you do" allocation (see
+#     lib/utils/category_search.dart). Lives here (not in a source doc) so
+#     it survives every regeneration of resource_categories.json instead of
+#     being hand-patched onto the output and lost next time this runs.
+#     Keep in sync with assets/data/resource_categories.json if you ever
+#     edit one without the other — this dict is the source of truth.
+# ---------------------------------------------------------------------------
+SEARCH_KEYWORDS = {
+    "skill_01_tailoring_fashion_design": [
+        "tailor", "tailoring", "seamstress", "sewing", "sew", "fashion designer",
+        "fashion design", "ankara", "aso ebi", "pattern cutting", "cloth making",
+        "fabric", "couture", "bespoke clothing", "dressmaking", "dressmaker", "style",
+    ],
+    "skill_02_hairdressing_hairstyling": [
+        "hairdresser", "hairstylist", "hair salon", "braiding", "braider", "weaving",
+        "hair styling", "natural hair", "wig making", "wig maker", "relaxer",
+        "plaiting", "cornrow", "salon", "hair stylist",
+    ],
+    "skill_03_barbing": [
+        "barber", "barbershop", "barbing salon", "haircut", "hair cut", "fade",
+        "clipper", "shaving", "low cut", "hair cutting",
+    ],
+    "skill_04_makeup_artistry": [
+        "makeup artist", "mua", "bridal makeup", "gele", "gele tying", "beauty artist",
+        "cosmetics application", "glam", "face beat", "makeup",
+    ],
+    "skill_05_welding_metal_fabrication": [
+        "welder", "welding", "fabrication", "metal work", "iron bending",
+        "gate making", "burglary proof", "metal fabricator", "iron works",
+        "aluminium works", "grill making",
+    ],
+    "skill_06_carpentry_furniture_making": [
+        "carpenter", "carpentry", "furniture maker", "wood work", "woodwork",
+        "joinery", "cabinet making", "furniture making", "wood worker",
+    ],
+    "skill_07_plumbing": [
+        "plumber", "pipe fitting", "water system", "borehole", "drainage",
+        "plumbing works", "pipe fitter", "water fitting",
+    ],
+    "skill_08_electrical_installation_wiring": [
+        "electrician", "wiring", "electrical installation", "house wiring",
+        "cabling", "power installation", "electrical works",
+    ],
+    "skill_09_auto_mechanics": [
+        "mechanic", "auto repair", "car repair", "vehicle repair", "panel beater",
+        "automobile technician", "engine repair", "auto technician", "car mechanic",
+    ],
+    "skill_10_phone_electronics_repair": [
+        "phone repair", "phone technician", "gsm repair", "electronics repair",
+        "phone engineer", "screen replacement", "phone repairer", "gadget repair",
+    ],
+    "skill_11_graphic_design": [
+        "graphic designer", "logo design", "branding design", "flyer design",
+        "graphics design", "adobe illustrator", "photoshop design", "designer",
+    ],
+    "skill_12_web_app_development": [
+        "web developer", "app developer", "software developer", "programmer",
+        "coding", "website design", "web design", "software engineer", "developer",
+    ],
+    "skill_13_photography": [
+        "photographer", "photo shoot", "wedding photography", "portrait photography",
+        "camera man", "photo studio",
+    ],
+    "skill_14_videography_video_editing": [
+        "videographer", "video editor", "video editing", "cinematography",
+        "film making", "video production", "video shooting",
+    ],
+    "skill_15_catering_baking": [
+        "caterer", "catering", "baker", "baking", "cake making", "cake maker",
+        "small chops", "event catering", "cook", "cooking", "pastry",
+    ],
+    "skill_16_event_decoration_planning": [
+        "event decorator", "event planner", "party decoration", "decor",
+        "event styling", "party planning", "event decoration", "party decorator",
+    ],
+    "skill_17_shoemaking_leatherwork": [
+        "shoemaker", "cobbler", "shoe making", "leather work", "bag making",
+        "sandal making", "shoe maker", "leatherwork",
+    ],
+    "skill_18_pop_tiling_interior_decor": [
+        "pop ceiling", "tiler", "tiling", "interior decorator", "ceiling design",
+        "interior design", "screeding", "pop design", "interior decoration",
+    ],
+    "skill_19_solar_installation_renewable_energy": [
+        "solar installer", "solar panel", "inverter installation", "renewable energy",
+        "solar power", "solar energy", "inverter installer",
+    ],
+    "skill_20_ac_refrigeration_repair": [
+        "ac repair", "air conditioner repair", "fridge repair", "refrigerator technician",
+        "hvac", "cooling repair", "ac technician", "refrigeration",
+    ],
+    "business_01_pos_agent_banking": [
+        "pos agent", "pos business", "agent banking", "mobile money", "bank agent",
+        "pos machine",
+    ],
+    "business_02_provision_store_mini_mart": [
+        "provision store", "mini mart", "supermarket", "retail shop",
+        "convenience store", "provisions", "shop owner",
+    ],
+    "business_03_fashion_retail_boutique": [
+        "boutique", "fashion retail", "clothing store", "clothes shop", "fashion shop",
+        "clothing business",
+    ],
+    "business_04_food_vending_catering_meal_prep": [
+        "food vendor", "food business", "mama put", "meal prep", "food seller",
+        "restaurant business", "food vending",
+    ],
+    "business_05_real_estate_agency": [
+        "real estate agent", "property agent", "land sales", "house agent",
+        "realtor", "property business", "real estate business",
+    ],
+    "business_06_logistics_dispatch_rider": [
+        "dispatch rider", "logistics business", "courier", "delivery service",
+        "bike delivery", "dispatch business", "logistics company",
+    ],
+    "business_07_event_planning_rentals": [
+        "event rental", "chairs and canopy rental", "event planner business",
+        "party rental", "canopy rental", "event equipment rental",
+    ],
+    "business_08_salon_barbing_beauty_spa": [
+        "salon business", "spa business", "beauty parlour", "salon owner",
+        "barbing shop business", "beauty spa",
+    ],
+    "business_09_car_hire_ride_hailing_fleet": [
+        "car hire", "uber business", "bolt business", "ride hailing", "fleet business",
+        "taxi business", "ride share business",
+    ],
+    "business_10_poultry_farming": [
+        "poultry farmer", "chicken farming", "egg business", "poultry business",
+        "chicken business", "poultry farm",
+    ],
+    "business_11_fish_farming": [
+        "fish farmer", "catfish farming", "fishery", "aquaculture", "fish farm",
+        "fish pond business",
+    ],
+    "business_12_laundry_dry_cleaning": [
+        "laundry business", "dry cleaning", "washing service", "laundromat",
+        "dry cleaners", "laundry service",
+    ],
+    "business_13_bakery_confectionery": [
+        "bakery", "confectionery", "bread making business", "pastry business",
+        "bread business", "cake business",
+    ],
+    "business_14_cosmetics_skincare": [
+        "cosmetics business", "skincare business", "beauty products", "cream making",
+        "skincare products", "cosmetics brand",
+    ],
+    "business_15_phone_gadget_sales_repair": [
+        "phone sales", "gadget shop", "phone accessories business", "gadget business",
+        "phone selling",
+    ],
+    "business_16_private_tutorial_online_tutoring": [
+        "tutor", "home lessons", "private lessons", "online tutor", "tutorial center",
+        "tutorial centre", "lesson teacher", "extra lessons",
+    ],
+    "business_17_mini_importation_e_commerce": [
+        "importation business", "online store", "e-commerce", "ecommerce",
+        "dropshipping", "mini importation", "online selling",
+    ],
+    "business_18_cleaning_services": [
+        "cleaning business", "cleaning company", "janitorial services",
+        "home cleaning", "cleaning service",
+    ],
+    "business_19_pure_water_sachet_bottled_water": [
+        "pure water business", "sachet water", "bottled water production",
+        "water factory", "pure water factory",
+    ],
+    "business_20_social_media_digital_marketing_agency": [
+        "smma", "social media manager", "digital marketing agency",
+        "social media agency", "marketing agency",
+    ],
+    "profession_01_medicine": ["doctor", "physician", "medical doctor", "medicine", "medical practice"],
+    "profession_02_law": ["lawyer", "barrister", "solicitor", "legal practice", "attorney", "law firm"],
+    "profession_03_pharmacy": ["pharmacist", "pharmacy", "chemist", "drug store"],
+    "profession_04_nursing": ["nurse", "nursing", "registered nurse"],
+    "profession_05_accounting": ["accountant", "accounting", "bookkeeping", "auditor", "bookkeeper"],
+    "profession_06_engineering": ["engineer", "engineering"],
+    "profession_07_architecture": ["architect", "architecture"],
+    "profession_08_estate_management_surveying": [
+        "estate surveyor", "valuer", "surveying", "estate management", "land surveyor",
+    ],
+    "profession_09_banking_finance": ["banker", "finance professional", "investment banking", "banking"],
+    "profession_10_mass_communication_media_pr": [
+        "journalist", "media professional", "public relations", "broadcaster", "pr",
+        "mass communication",
+    ],
+    "profession_11_computer_science_software_engineering": [
+        "software engineer", "computer scientist", "programmer", "it professional",
+        "computer science",
+    ],
+    "profession_12_agriculture": ["agriculturist", "farmer", "agronomist", "agric", "agriculture"],
+    "profession_13_education": ["teacher", "educator", "lecturer", "teaching", "school teacher"],
+    "profession_14_dentistry": ["dentist", "dental practice", "dentistry"],
+    "profession_15_psychology_counselling": [
+        "psychologist", "counsellor", "counselor", "therapist", "counselling", "counseling",
+    ],
+    "profession_16_fashion_design_tailoring": ["fashion design profession", "tailoring profession"],
+    "profession_17_hairdressing_cosmetology": ["cosmetology", "hairdressing profession"],
+    "profession_18_catering_event_planning": ["catering profession", "event planning profession"],
+    "profession_19_automobile_technology": ["automobile technology", "auto technology profession"],
+    "profession_20_photography_videography": ["photography profession", "videography profession"],
+}
+
 categories = {}
 for section, names in CANONICAL.items():
     for i, name in enumerate(names, start=1):
@@ -86,6 +291,7 @@ for section, names in CANONICAL.items():
             "dontKnowFact": None,
             "dontKnowModule": None,
             "dontKnowModules": None,
+            "searchKeywords": SEARCH_KEYWORDS.get(cid, []),
         }
 
 

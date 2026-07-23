@@ -9,6 +9,19 @@ class Video {
   /// Original RSS link — YouTube Shorts have /shorts/ in this URL.
   final String? originalLink;
 
+  /// The following three fields are only set when channelId ==
+  /// 'verified_book' — a real, named book pulled from a category's
+  /// assets/data/resources/{categoryId}.json (see VerifiedBook in
+  /// resource_category.dart), as opposed to 'books' (the original 10
+  /// hand-picked classics/playbooks with their own EPUB/PDF/insights
+  /// reader). These entries never open BookDetailScreen — home_screen.dart
+  /// routes them to an external launch ('download') or the same in-app web
+  /// reader a blog article uses ('web'). Always null for every other kind
+  /// of Video.
+  final String? freeSourceUrl;
+  final String? freeSourceType; // 'web' or 'download'
+  final String? sourceCategoryId;
+
   const Video({
     required this.id,
     required this.title,
@@ -18,6 +31,9 @@ class Video {
     required this.publishedAt,
     required this.thumbnailUrl,
     this.originalLink,
+    this.freeSourceUrl,
+    this.freeSourceType,
+    this.sourceCategoryId,
   });
 
   /// True if this video is a YouTube Short.
@@ -39,17 +55,22 @@ class Video {
       isShort ? 'https://www.youtube.com/shorts/$id'
                : 'https://www.youtube.com/watch?v=$id';
 
-  /// Books (channelId == 'books') are not real YouTube videos — their `id`
-  /// is a synthetic key like 'book_richest_man', so constructing a
-  /// img.youtube.com URL from it would always 404. Books must use their
-  /// own [thumbnailUrl] (which may be a network cover or a bundled asset
-  /// path) everywhere a thumbnail is requested.
+  /// Books (channelId == 'books' or 'verified_book') are not real YouTube
+  /// videos — their `id` is a synthetic key like 'book_richest_man' or
+  /// 'vbook_...', so constructing an img.youtube.com URL from it would
+  /// always 404. Both kinds of book must use their own [thumbnailUrl]
+  /// (which may be a network cover, a bundled asset path, or — for a
+  /// verified_book with no cover source — empty, which BookCoverImage
+  /// already renders as a graceful placeholder) everywhere a thumbnail is
+  /// requested.
+  bool get _isBookLike => channelId == 'books' || channelId == 'verified_book';
+
   String get thumbnailHd =>
-      channelId == 'books' ? thumbnailUrl
-                            : 'https://img.youtube.com/vi/$id/maxresdefault.jpg';
+      _isBookLike ? thumbnailUrl
+                  : 'https://img.youtube.com/vi/$id/maxresdefault.jpg';
   String get thumbnailMq =>
-      channelId == 'books' ? thumbnailUrl
-                            : 'https://img.youtube.com/vi/$id/mqdefault.jpg';
+      _isBookLike ? thumbnailUrl
+                  : 'https://img.youtube.com/vi/$id/mqdefault.jpg';
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -60,6 +81,9 @@ class Video {
         'publishedAt': publishedAt.toIso8601String(),
         'thumbnailUrl': thumbnailUrl,
         if (originalLink != null) 'originalLink': originalLink,
+        if (freeSourceUrl != null) 'freeSourceUrl': freeSourceUrl,
+        if (freeSourceType != null) 'freeSourceType': freeSourceType,
+        if (sourceCategoryId != null) 'sourceCategoryId': sourceCategoryId,
       };
 
   factory Video.fromJson(Map<String, dynamic> json) => Video(
@@ -71,6 +95,9 @@ class Video {
         publishedAt: DateTime.parse(json['publishedAt'] as String),
         thumbnailUrl: json['thumbnailUrl'] as String,
         originalLink: json['originalLink'] as String?,
+        freeSourceUrl: json['freeSourceUrl'] as String?,
+        freeSourceType: json['freeSourceType'] as String?,
+        sourceCategoryId: json['sourceCategoryId'] as String?,
       );
 
   @override

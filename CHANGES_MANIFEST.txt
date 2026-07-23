@@ -1,0 +1,86 @@
+FinReels — files touched in this session
+==========================================
+Extract this zip into your project root, overwriting existing files at
+the same paths. Folder structure matches the project exactly.
+
+NEW FILE (1)
+------------
+lib/utils/category_search.dart
+    Shared search/allocation logic for onboarding + Discover: keyword
+    matching, section order, the "Others" fallback id.
+
+MODIFIED (15)
+-------------
+assets/data/resource_categories.json
+    Added a searchKeywords array to all 60 categories.
+
+parse_curriculum.py
+    Added the same SEARCH_KEYWORDS dict into the generator itself, so a
+    future full regeneration of resource_categories.json won't wipe the
+    keywords back out.
+
+lib/models/resource_category.dart
+    ResourceCategory now has a searchKeywords field (parsed from JSON,
+    defaults to [] if missing).
+
+lib/screens/my_business_screen.dart
+    Full rewrite: FinReels logo header (was "What's your hustle?"),
+    Profession -> Skill -> Business order, reduced default list (6 per
+    section) with full keyword search, permanent "Others" option.
+
+lib/screens/discover_screen.dart
+    Same section order + keyword search as onboarding, for consistency.
+    (Still browses all 60, unfiltered — that's intentional, unchanged.)
+
+lib/models/video.dart
+    Added freeSourceUrl / freeSourceType / sourceCategoryId (nullable —
+    only set for the new 'verified_book' kind of entry). Thumbnail
+    getters updated so 'verified_book' is treated like 'books'.
+
+lib/providers/feed_provider.dart
+    The actual leak fix: Books tab no longer injects every category's
+    generated playbook. Now shows general books + real VerifiedBook
+    entries scoped to the person's selected categories only. Also clears
+    BlogRssService's cache on category change.
+
+lib/screens/home_screen.dart
+    Books tab now opens a 'verified_book' entry via external
+    launch/in-app web reader instead of the EPUB/PDF book reader.
+
+lib/services/blog_rss_service.dart
+    combinedBlogFeeds is now scoped to general + selected categories
+    (was: every verified category, for everyone — the scale + leak bug).
+    Added fetchForCategory() for Discover/CategoryDetail browsing of any
+    category regardless of the viewer's own selection.
+
+lib/screens/category_detail_screen.dart
+    Blog loading now uses fetchForCategory() instead of fetchAll()+filter,
+    so it still works for a category the viewer hasn't selected.
+
+lib/data/resource_category_data.dart
+    Per-category resource file loading parallelized (was sequential
+    await-in-a-loop, up to 61 reads).
+
+lib/data/channel_data.dart
+    Doc-comment fixes only (said "10 channels", file has always defined
+    12; stale reference to the old verified_resources.json).
+
+lib/widgets/video_card.dart
+    One line — thumbnail-rendering check now also recognizes
+    'verified_book', same as 'books'.
+
+test/finreels_test.dart
+    Added test coverage for CategorySearch, ResourceCategory.searchKeywords,
+    and Video's new verified_book fields.
+
+INTEGRATION_NOTES.md
+    Appended a dated section documenting all of the above for continuity.
+
+DELETE THESE MANUALLY (2) — not included, since a deletion isn't a file
+------------------------------------------------------------------------
+assets/data/verified_resources.json
+    Dead file — replaced by assets/data/resources/*.json, nothing in
+    code read it any more.
+
+finreels_test.dart  (the one at your project ROOT, not under test/)
+    Stray duplicate of test/finreels_test.dart.

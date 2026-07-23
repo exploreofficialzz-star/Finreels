@@ -4,6 +4,7 @@ import '../data/resource_category_data.dart';
 import '../models/resource_category.dart';
 import '../services/user_profile_service.dart';
 import '../theme/app_theme.dart';
+import '../utils/category_search.dart';
 import 'category_detail_screen.dart';
 
 /// Search + browse across all 60 categories. This is the "access
@@ -53,12 +54,15 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
   }
 
   Widget _buildList(BuildContext context) {
-    final sections = [ResourceSection.skill, ResourceSection.business, ResourceSection.profession];
+    // Same Profession -> Skill -> Business order as onboarding (see
+    // CategorySearch.sectionOrder) so the two pickers never disagree on
+    // ordering. Discover browses the full 60 always — no reduced default
+    // list and no "Others" here, since this screen exists specifically to
+    // see everything, not to make a quick onboarding decision.
     final children = <Widget>[];
-    for (final section in sections) {
-      final items = ResourceCategoryData.bySection(section)
-          .where((c) => _query.isEmpty || c.name.toLowerCase().contains(_query))
-          .toList();
+    for (final section in CategorySearch.sectionOrder) {
+      final all = ResourceCategoryData.bySection(section);
+      final items = _query.isEmpty ? all : CategorySearch.search(all, _query);
       if (items.isEmpty) continue;
       children.add(_SectionLabel(section.pluralLabel));
       for (final c in items) {

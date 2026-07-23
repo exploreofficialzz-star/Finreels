@@ -81,7 +81,26 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "tailor",
+        "tailoring",
+        "seamstress",
+        "sewing",
+        "sew",
+        "fashion designer",
+        "fashion design",
+        "ankara",
+        "aso ebi",
+        "pattern cutting",
+        "cloth making",
+        "fabric",
+        "couture",
+        "bespoke clothing",
+        "dressmaking",
+        "dressmaker",
+        "style"
+      ]
     },
     {
       "id": "skill_02_hairdressing_hairstyling",
@@ -100,7 +119,24 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "hairdresser",
+        "hairstylist",
+        "hair salon",
+        "braiding",
+        "braider",
+        "weaving",
+        "hair styling",
+        "natural hair",
+        "wig making",
+        "wig maker",
+        "relaxer",
+        "plaiting",
+        "cornrow",
+        "salon",
+        "hair stylist"
+      ]
     },
     {
       "id": "skill_03_barbing",
@@ -119,7 +155,19 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "barber",
+        "barbershop",
+        "barbing salon",
+        "haircut",
+        "hair cut",
+        "fade",
+        "clipper",
+        "shaving",
+        "low cut",
+        "hair cutting"
+      ]
     },
     {
       "id": "skill_04_makeup_artistry",
@@ -138,7 +186,19 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "makeup artist",
+        "mua",
+        "bridal makeup",
+        "gele",
+        "gele tying",
+        "beauty artist",
+        "cosmetics application",
+        "glam",
+        "face beat",
+        "makeup"
+      ]
     },
     {
       "id": "skill_05_welding_metal_fabrication",
@@ -157,7 +217,20 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "welder",
+        "welding",
+        "fabrication",
+        "metal work",
+        "iron bending",
+        "gate making",
+        "burglary proof",
+        "metal fabricator",
+        "iron works",
+        "aluminium works",
+        "grill making"
+      ]
     },
     {
       "id": "skill_06_carpentry_furniture_making",
@@ -176,7 +249,18 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "carpenter",
+        "carpentry",
+        "furniture maker",
+        "wood work",
+        "woodwork",
+        "joinery",
+        "cabinet making",
+        "furniture making",
+        "wood worker"
+      ]
     },
     {
       "id": "skill_07_plumbing",
@@ -195,7 +279,17 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "plumber",
+        "pipe fitting",
+        "water system",
+        "borehole",
+        "drainage",
+        "plumbing works",
+        "pipe fitter",
+        "water fitting"
+      ]
     },
     {
       "id": "skill_08_electrical_installation_wiring",
@@ -214,7 +308,16 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "electrician",
+        "wiring",
+        "electrical installation",
+        "house wiring",
+        "cabling",
+        "power installation",
+        "electrical works"
+      ]
     },
     {
       "id": "skill_09_auto_mechanics",
@@ -233,7 +336,18 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "mechanic",
+        "auto repair",
+        "car repair",
+        "vehicle repair",
+        "panel beater",
+        "automobile technician",
+        "engine repair",
+        "auto technician",
+        "car mechanic"
+      ]
     },
     {
       "id": "skill_10_phone_electronics_repair",
@@ -252,7 +366,17 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "phone repair",
+        "phone technician",
+        "gsm repair",
+        "electronics repair",
+        "phone engineer",
+        "screen replacement",
+        "phone repairer",
+        "gadget repair"
+      ]
     },
     {
       "id": "skill_11_graphic_design",
@@ -271,7 +395,17 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "graphic designer",
+        "logo design",
+        "branding design",
+        "flyer design",
+        "graphics design",
+        "adobe illustrator",
+        "photoshop design",
+        "designer"
+      ]
     },
     {
       "id": "skill_12_web_app_development",
@@ -290,7 +424,18 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "web developer",
+        "app developer",
+        "software developer",
+        "programmer",
+        "coding",
+        "website design",
+        "web design",
+        "software engineer",
+        "developer"
+      ]
     },
     {
       "id": "skill_13_photography",
@@ -309,7 +454,15 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "photographer",
+        "photo shoot",
+        "wedding photography",
+        "portrait photography",
+        "camera man",
+        "photo studio"
+      ]
     },
     {
       "id": "skill_14_videography_video_editing",
@@ -328,7 +481,16 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "videographer",
+        "video editor",
+        "video editing",
+        "cinematography",
+        "film making",
+        "video production",
+        "video shooting"
+      ]
     },
     {
       "id": "skill_15_catering_baking",
@@ -347,7 +509,20 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "caterer",
+        "catering",
+        "baker",
+        "baking",
+        "cake making",
+        "cake maker",
+        "small chops",
+        "event catering",
+        "cook",
+        "cooking",
+        "pastry"
+      ]
     },
     {
       "id": "skill_16_event_decoration_planning",
@@ -366,7 +541,17 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "event decorator",
+        "event planner",
+        "party decoration",
+        "decor",
+        "event styling",
+        "party planning",
+        "event decoration",
+        "party decorator"
+      ]
     },
     {
       "id": "skill_17_shoemaking_leatherwork",
@@ -385,7 +570,17 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "shoemaker",
+        "cobbler",
+        "shoe making",
+        "leather work",
+        "bag making",
+        "sandal making",
+        "shoe maker",
+        "leatherwork"
+      ]
     },
     {
       "id": "skill_18_pop_tiling_interior_decor",
@@ -404,7 +599,18 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "pop ceiling",
+        "tiler",
+        "tiling",
+        "interior decorator",
+        "ceiling design",
+        "interior design",
+        "screeding",
+        "pop design",
+        "interior decoration"
+      ]
     },
     {
       "id": "skill_19_solar_installation_renewable_energy",
@@ -423,7 +629,16 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "solar installer",
+        "solar panel",
+        "inverter installation",
+        "renewable energy",
+        "solar power",
+        "solar energy",
+        "inverter installer"
+      ]
     },
     {
       "id": "skill_20_ac_refrigeration_repair",
@@ -442,7 +657,17 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "ac repair",
+        "air conditioner repair",
+        "fridge repair",
+        "refrigerator technician",
+        "hvac",
+        "cooling repair",
+        "ac technician",
+        "refrigeration"
+      ]
     },
     {
       "id": "business_01_pos_agent_banking",
@@ -496,7 +721,15 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "pos agent",
+        "pos business",
+        "agent banking",
+        "mobile money",
+        "bank agent",
+        "pos machine"
+      ]
     },
     {
       "id": "business_02_provision_store_mini_mart",
@@ -550,7 +783,16 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "provision store",
+        "mini mart",
+        "supermarket",
+        "retail shop",
+        "convenience store",
+        "provisions",
+        "shop owner"
+      ]
     },
     {
       "id": "business_03_fashion_retail_boutique",
@@ -604,7 +846,15 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "boutique",
+        "fashion retail",
+        "clothing store",
+        "clothes shop",
+        "fashion shop",
+        "clothing business"
+      ]
     },
     {
       "id": "business_04_food_vending_catering_meal_prep",
@@ -658,7 +908,16 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "food vendor",
+        "food business",
+        "mama put",
+        "meal prep",
+        "food seller",
+        "restaurant business",
+        "food vending"
+      ]
     },
     {
       "id": "business_05_real_estate_agency",
@@ -712,7 +971,16 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "real estate agent",
+        "property agent",
+        "land sales",
+        "house agent",
+        "realtor",
+        "property business",
+        "real estate business"
+      ]
     },
     {
       "id": "business_06_logistics_dispatch_rider",
@@ -766,7 +1034,16 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "dispatch rider",
+        "logistics business",
+        "courier",
+        "delivery service",
+        "bike delivery",
+        "dispatch business",
+        "logistics company"
+      ]
     },
     {
       "id": "business_07_event_planning_rentals",
@@ -820,7 +1097,15 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "event rental",
+        "chairs and canopy rental",
+        "event planner business",
+        "party rental",
+        "canopy rental",
+        "event equipment rental"
+      ]
     },
     {
       "id": "business_08_salon_barbing_beauty_spa",
@@ -874,7 +1159,15 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "salon business",
+        "spa business",
+        "beauty parlour",
+        "salon owner",
+        "barbing shop business",
+        "beauty spa"
+      ]
     },
     {
       "id": "business_09_car_hire_ride_hailing_fleet",
@@ -928,7 +1221,16 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "car hire",
+        "uber business",
+        "bolt business",
+        "ride hailing",
+        "fleet business",
+        "taxi business",
+        "ride share business"
+      ]
     },
     {
       "id": "business_10_poultry_farming",
@@ -982,7 +1284,15 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "poultry farmer",
+        "chicken farming",
+        "egg business",
+        "poultry business",
+        "chicken business",
+        "poultry farm"
+      ]
     },
     {
       "id": "business_11_fish_farming",
@@ -1036,7 +1346,15 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "fish farmer",
+        "catfish farming",
+        "fishery",
+        "aquaculture",
+        "fish farm",
+        "fish pond business"
+      ]
     },
     {
       "id": "business_12_laundry_dry_cleaning",
@@ -1090,7 +1408,15 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "laundry business",
+        "dry cleaning",
+        "washing service",
+        "laundromat",
+        "dry cleaners",
+        "laundry service"
+      ]
     },
     {
       "id": "business_13_bakery_confectionery",
@@ -1144,7 +1470,15 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "bakery",
+        "confectionery",
+        "bread making business",
+        "pastry business",
+        "bread business",
+        "cake business"
+      ]
     },
     {
       "id": "business_14_cosmetics_skincare",
@@ -1198,7 +1532,15 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "cosmetics business",
+        "skincare business",
+        "beauty products",
+        "cream making",
+        "skincare products",
+        "cosmetics brand"
+      ]
     },
     {
       "id": "business_15_phone_gadget_sales_repair",
@@ -1252,7 +1594,14 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "phone sales",
+        "gadget shop",
+        "phone accessories business",
+        "gadget business",
+        "phone selling"
+      ]
     },
     {
       "id": "business_16_private_tutorial_online_tutoring",
@@ -1306,7 +1655,17 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "tutor",
+        "home lessons",
+        "private lessons",
+        "online tutor",
+        "tutorial center",
+        "tutorial centre",
+        "lesson teacher",
+        "extra lessons"
+      ]
     },
     {
       "id": "business_17_mini_importation_e_commerce",
@@ -1360,7 +1719,16 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "importation business",
+        "online store",
+        "e-commerce",
+        "ecommerce",
+        "dropshipping",
+        "mini importation",
+        "online selling"
+      ]
     },
     {
       "id": "business_18_cleaning_services",
@@ -1414,7 +1782,14 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "cleaning business",
+        "cleaning company",
+        "janitorial services",
+        "home cleaning",
+        "cleaning service"
+      ]
     },
     {
       "id": "business_19_pure_water_sachet_bottled_water",
@@ -1468,7 +1843,14 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "pure water business",
+        "sachet water",
+        "bottled water production",
+        "water factory",
+        "pure water factory"
+      ]
     },
     {
       "id": "business_20_social_media_digital_marketing_agency",
@@ -1522,7 +1904,14 @@
       "businessQuestions": null,
       "dontKnowFact": null,
       "dontKnowModule": null,
-      "dontKnowModules": null
+      "dontKnowModules": null,
+      "searchKeywords": [
+        "smma",
+        "social media manager",
+        "digital marketing agency",
+        "social media agency",
+        "marketing agency"
+      ]
     },
     {
       "id": "profession_01_medicine",
@@ -1542,6 +1931,13 @@
       "dontKnowModule": "M6",
       "dontKnowModules": [
         "M6"
+      ],
+      "searchKeywords": [
+        "doctor",
+        "physician",
+        "medical doctor",
+        "medicine",
+        "medical practice"
       ]
     },
     {
@@ -1562,6 +1958,14 @@
       "dontKnowModule": "M6",
       "dontKnowModules": [
         "M6"
+      ],
+      "searchKeywords": [
+        "lawyer",
+        "barrister",
+        "solicitor",
+        "legal practice",
+        "attorney",
+        "law firm"
       ]
     },
     {
@@ -1582,6 +1986,12 @@
       "dontKnowModule": "M7",
       "dontKnowModules": [
         "M7"
+      ],
+      "searchKeywords": [
+        "pharmacist",
+        "pharmacy",
+        "chemist",
+        "drug store"
       ]
     },
     {
@@ -1602,6 +2012,11 @@
       "dontKnowModule": "M9",
       "dontKnowModules": [
         "M9"
+      ],
+      "searchKeywords": [
+        "nurse",
+        "nursing",
+        "registered nurse"
       ]
     },
     {
@@ -1622,6 +2037,13 @@
       "dontKnowModule": "M6",
       "dontKnowModules": [
         "M6"
+      ],
+      "searchKeywords": [
+        "accountant",
+        "accounting",
+        "bookkeeping",
+        "auditor",
+        "bookkeeper"
       ]
     },
     {
@@ -1642,6 +2064,10 @@
       "dontKnowModule": "M5",
       "dontKnowModules": [
         "M5"
+      ],
+      "searchKeywords": [
+        "engineer",
+        "engineering"
       ]
     },
     {
@@ -1662,6 +2088,10 @@
       "dontKnowModule": "M1",
       "dontKnowModules": [
         "M1"
+      ],
+      "searchKeywords": [
+        "architect",
+        "architecture"
       ]
     },
     {
@@ -1682,6 +2112,13 @@
       "dontKnowModule": "M4",
       "dontKnowModules": [
         "M4"
+      ],
+      "searchKeywords": [
+        "estate surveyor",
+        "valuer",
+        "surveying",
+        "estate management",
+        "land surveyor"
       ]
     },
     {
@@ -1702,6 +2139,12 @@
       "dontKnowModule": "M10",
       "dontKnowModules": [
         "M10"
+      ],
+      "searchKeywords": [
+        "banker",
+        "finance professional",
+        "investment banking",
+        "banking"
       ]
     },
     {
@@ -1722,6 +2165,14 @@
       "dontKnowModule": "M2",
       "dontKnowModules": [
         "M2"
+      ],
+      "searchKeywords": [
+        "journalist",
+        "media professional",
+        "public relations",
+        "broadcaster",
+        "pr",
+        "mass communication"
       ]
     },
     {
@@ -1742,6 +2193,13 @@
       "dontKnowModule": "M6",
       "dontKnowModules": [
         "M6"
+      ],
+      "searchKeywords": [
+        "software engineer",
+        "computer scientist",
+        "programmer",
+        "it professional",
+        "computer science"
       ]
     },
     {
@@ -1762,6 +2220,13 @@
       "dontKnowModule": "M8",
       "dontKnowModules": [
         "M8"
+      ],
+      "searchKeywords": [
+        "agriculturist",
+        "farmer",
+        "agronomist",
+        "agric",
+        "agriculture"
       ]
     },
     {
@@ -1782,6 +2247,13 @@
       "dontKnowModule": "M6",
       "dontKnowModules": [
         "M6"
+      ],
+      "searchKeywords": [
+        "teacher",
+        "educator",
+        "lecturer",
+        "teaching",
+        "school teacher"
       ]
     },
     {
@@ -1802,6 +2274,11 @@
       "dontKnowModule": "M6",
       "dontKnowModules": [
         "M6"
+      ],
+      "searchKeywords": [
+        "dentist",
+        "dental practice",
+        "dentistry"
       ]
     },
     {
@@ -1822,6 +2299,14 @@
       "dontKnowModule": "M4",
       "dontKnowModules": [
         "M4"
+      ],
+      "searchKeywords": [
+        "psychologist",
+        "counsellor",
+        "counselor",
+        "therapist",
+        "counselling",
+        "counseling"
       ]
     },
     {
@@ -1843,6 +2328,10 @@
       "dontKnowModules": [
         "M1",
         "M6"
+      ],
+      "searchKeywords": [
+        "fashion design profession",
+        "tailoring profession"
       ]
     },
     {
@@ -1863,6 +2352,10 @@
       "dontKnowModule": "M9",
       "dontKnowModules": [
         "M9"
+      ],
+      "searchKeywords": [
+        "cosmetology",
+        "hairdressing profession"
       ]
     },
     {
@@ -1883,6 +2376,10 @@
       "dontKnowModule": "M5",
       "dontKnowModules": [
         "M5"
+      ],
+      "searchKeywords": [
+        "catering profession",
+        "event planning profession"
       ]
     },
     {
@@ -1903,6 +2400,10 @@
       "dontKnowModule": "M5",
       "dontKnowModules": [
         "M5"
+      ],
+      "searchKeywords": [
+        "automobile technology",
+        "auto technology profession"
       ]
     },
     {
@@ -1923,6 +2424,10 @@
       "dontKnowModule": "M10",
       "dontKnowModules": [
         "M10"
+      ],
+      "searchKeywords": [
+        "photography profession",
+        "videography profession"
       ]
     }
   ]

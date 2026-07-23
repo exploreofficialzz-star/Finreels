@@ -4,6 +4,7 @@ import '../data/resource_category_data.dart';
 import '../models/resource_category.dart';
 import '../services/user_profile_service.dart';
 import '../theme/app_theme.dart';
+import '../utils/category_search.dart';
 
 /// Lets the person tell FinReels what they actually do — their trade,
 /// their side business, their profession — from the 60-category research
@@ -14,6 +15,21 @@ import '../theme/app_theme.dart';
 ///
 /// Multi-select on purpose: someone can be a nurse who also does makeup
 /// artistry on the side, and both should get priority.
+///
+/// Two ways to find your category, both always available:
+///  1. Browse — Professions, then Skills & Trades, then Businesses (see
+///     CategorySearch.sectionOrder). Only the first
+///     [CategorySearch.defaultVisiblePerSection] of each show up front so
+///     the first screen isn't a 60-item wall — the rest are one search away.
+///  2. Search — type what you do ("sew", "POS", "fridge repair"...) and it
+///     matches against each category's name AND its curated search
+///     keywords/aliases (see CategorySearch.matches), across all 60, not
+///     just the ones currently visible.
+/// "Others" is always pinned at the end of the list — for a trade that
+/// genuinely isn't one of the 60, or while FinReels doesn't have a keyword
+/// match yet. Picking it is a safe no-op everywhere content is filtered by
+/// category (ChannelData.eagerFor, BlogRssService, FeedProvider's Books
+/// tab): nothing has that id, so it simply resolves to general content.
 ///
 /// Built entirely from existing AppTheme colors/typography/spacing —
 /// no new visual language, just this app's existing look applied to a
@@ -78,6 +94,7 @@ class _MyBusinessScreenState extends State<MyBusinessScreen> {
         backgroundColor: AppTheme.bgColor(context),
         surfaceTintColor: Colors.transparent,
         elevation: 0,
+        centerTitle: false,
         automaticallyImplyLeading: false,
         leading: widget.isOnboarding
             ? null
@@ -86,11 +103,13 @@ class _MyBusinessScreenState extends State<MyBusinessScreen> {
                     color: AppTheme.textColor(context), size: 20),
                 onPressed: () => Navigator.of(context).pop(),
               ),
-        title: Text(widget.isOnboarding ? 'What\'s your hustle?' : 'My Business',
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium
-                ?.copyWith(fontWeight: FontWeight.w800)),
+        title: widget.isOnboarding
+            ? const _OnboardingBrand()
+            : Text('My Business',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleMedium
+                    ?.copyWith(fontWeight: FontWeight.w800)),
       ),
       body: _loading
           ? const Center(child: CircularProgressIndicator(color: AppTheme.gold))
@@ -99,9 +118,9 @@ class _MyBusinessScreenState extends State<MyBusinessScreen> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 4, 20, 16),
                   child: Text(
-                    'Pick your skill, business or profession so FinReels can '
-                    'prioritize content for what you actually do — not just '
-                    'generic advice.',
+                    'Pick your profession, skill or business — or just search '
+                    'for what you do — so FinReels can prioritize content for '
+                    'you instead of generic advice.',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: AppTheme.textSecondary(context)),
                   ),
@@ -121,35 +140,42 @@ class _MyBusinessScreenState extends State<MyBusinessScreen> {
   }
 
   Widget _buildList(BuildContext context) {
-    final sections = [
-      ResourceSection.skill,
-      ResourceSection.business,
-      ResourceSection.profession,
-    ];
-
+    final hasQuery = _query.isNotEmpty;
     final children = <Widget>[];
-    for (final section in sections) {
-      final items = ResourceCategoryData.bySection(section).where((c) {
-        if (_query.isEmpty) return true;
-        return c.name.toLowerCase().contains(_query);
-      }).toList();
+    var matchedAnyRealCategory = false;
+
+    for (final section in CategorySearch.sectionOrder) {
+      final all = ResourceCategoryData.bySection(section);
+      final items = hasQuery
+          ? CategorySearch.search(all, _query)
+          : all.take(CategorySearch.defaultVisiblePerSection).toList();
       if (items.isEmpty) continue;
+      matchedAnyRealCategory = true;
       children.add(_SectionLabel(section.pluralLabel));
       for (final c in items) {
         children.add(_CategoryTile(
-          category: c,
+          name: c.name,
+          description: c.shortDescription,
           selected: _selected.contains(c.id),
           onTap: () => _toggle(c.id),
         ));
       }
     }
 
-    if (children.isEmpty) {
-      return Center(
-        child: Text('No match for "$_query"',
-            style: TextStyle(color: AppTheme.textMuted(context))),
-      );
+    // Every search that comes up empty against the real 60 categories still
+    // gets a productive next step — Others below — instead of a dead end.
+    if (hasQuery && !matchedAnyRealCategory) {
+      children.add(_NoMatchNote(query: _query));
     }
+
+    // Always present, regardless of query — the permanent catch-all.
+    children.add(const _SectionLabel('Others'));
+    children.add(_CategoryTile(
+      name: CategorySearch.othersName,
+      description: CategorySearch.othersDescription,
+      selected: _selected.contains(CategorySearch.othersId),
+      onTap: () => _toggle(CategorySearch.othersId),
+    ));
 
     return ListView(
       padding: const EdgeInsets.only(bottom: 16),
@@ -186,6 +212,36 @@ class _MyBusinessScreenState extends State<MyBusinessScreen> {
   }
 }
 
+/// "FinReels" + the same gold play-button mark used in home_screen.dart's
+/// _AppHeader — same 34x34 size, same corner radius, same icon, same text
+/// style. Deliberately not shared code with home_screen.dart's private
+/// _AppHeader (that one also lays out search/refresh actions that don't
+/// belong in an AppBar title), but every visual value below must stay
+/// identical to it if that header ever changes.
+class _OnboardingBrand extends StatelessWidget {
+  const _OnboardingBrand();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 34,
+          height: 34,
+          decoration: BoxDecoration(
+              color: AppTheme.gold, borderRadius: BorderRadius.circular(9)),
+          child: const Icon(Icons.play_arrow_rounded, color: Colors.white, size: 22),
+        ),
+        const SizedBox(width: 10),
+        Text('FinReels',
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.w800, letterSpacing: -0.5)),
+      ],
+    );
+  }
+}
+
 class _SearchField extends StatelessWidget {
   final ValueChanged<String> onChanged;
   const _SearchField({required this.onChanged});
@@ -202,7 +258,7 @@ class _SearchField extends StatelessWidget {
         onChanged: onChanged,
         style: TextStyle(color: AppTheme.textColor(context)),
         decoration: InputDecoration(
-          hintText: 'Search skills, businesses, professions…',
+          hintText: 'Type what you do — e.g. "tailor", "POS", "solar"…',
           hintStyle: TextStyle(color: AppTheme.textMuted(context)),
           prefixIcon: Icon(Icons.search_rounded, color: AppTheme.textMuted(context)),
           border: InputBorder.none,
@@ -234,13 +290,43 @@ class _SectionLabel extends StatelessWidget {
   }
 }
 
+/// A friendly next step instead of a dead end when a search matches none of
+/// the 60 real categories — Others (always rendered right after this) is
+/// the answer, so this note points straight at it rather than just saying
+/// "no results".
+class _NoMatchNote extends StatelessWidget {
+  final String query;
+  const _NoMatchNote({required this.query});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 4, 20, 4),
+      child: Text(
+        'No exact match for "$query" yet — pick Others below and '
+        "FinReels will keep things general for you.",
+        style: Theme.of(context)
+            .textTheme
+            .bodySmall
+            ?.copyWith(color: AppTheme.textMuted(context), fontStyle: FontStyle.italic),
+      ),
+    );
+  }
+}
+
+/// Renders one selectable row — used for all 60 real categories AND for
+/// the "Others" catch-all, which isn't a [ResourceCategory] at all. Taking
+/// plain strings (rather than a ResourceCategory) is what lets both share
+/// this exact same look with no special-casing.
 class _CategoryTile extends StatelessWidget {
-  final ResourceCategory category;
+  final String name;
+  final String description;
   final bool selected;
   final VoidCallback onTap;
 
   const _CategoryTile({
-    required this.category,
+    required this.name,
+    required this.description,
     required this.selected,
     required this.onTap,
   });
@@ -270,14 +356,14 @@ class _CategoryTile extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(category.name,
+                    Text(name,
                         style: Theme.of(context)
                             .textTheme
                             .titleSmall
                             ?.copyWith(fontWeight: FontWeight.w700)),
                     const SizedBox(height: 2),
                     Text(
-                      category.shortDescription,
+                      description,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(

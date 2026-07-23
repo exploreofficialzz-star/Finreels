@@ -226,7 +226,114 @@ one-at-a-time work regardless of where candidates come from.
 
 ## Everything else from the previous patches — unchanged
 
-Onboarding, Discover/Search, EngagementService, the 60 FinReels-authored
-Business Playbooks (minus the removed questions chapters), eager-fetch
-scoping — all still exactly as described in the prior notes and
-untouched by this session's resource-verification work.
+EngagementService, the 60 FinReels-authored Business Playbooks (minus
+the removed questions chapters, still reachable from
+CategoryDetailScreen), the resource-verification pipeline above — all
+still exactly as described in the prior notes.
+
+Onboarding, Discover/Search, and how the Books/Blogs tabs pull from all
+of this were NOT untouched — see the dated section immediately below,
+which is the first thing to read before touching any of those four
+again.
+
+## 2026-07-23 — Onboarding rebuild, keyword allocation, and a real cross-category content leak fixed
+
+Came in off the back of hands-on testing against a build from this same
+integration (the screenshots showed Tailoring & Fashion Design selected
+during onboarding, then real content in Videos/Shorts, and a Books tab
+mixing a generated playbook with the general library). That testing
+surfaced a genuine bug, not just polish requests — flagged clearly below
+since it's the one worth understanding before changing any of this
+again.
+
+**The bug: Books (and Blogs) were not actually scoped by category.**
+`FeedProvider._allBookVideos` put the selected category's
+CategoryPlaybookData "Business of X" entry first, then the general 10,
+then — unconditionally — *every other category's* playbook too, just
+deprioritized rather than excluded. A Fashion Designer's Books tab really
+did eventually show "Business of Medicine." `BlogRssService.combinedBlogFeeds`
+had the same shape of problem but worse: it always included *every*
+verified category's blogs for *everyone*, regardless of selection —
+correctness aside, at full 60-category coverage (10 blogs × 60) that's
+~600 RSS feeds fetched per person per Blogs-tab visit, which is the kind
+of thing that's fine to miss at 2 categories started and genuinely
+dangerous at "professional, built for a billion users" scale. Channels
+never had this problem — `ChannelData.eagerFor` was already scoping to
+general + selected — so the fix brings Books and Blogs in line with the
+pattern Channels already had right, rather than inventing a new one.
+
+Fixed in `feed_provider.dart` and `blog_rss_service.dart`: both now
+resolve to general-content-only + the person's actual selection, never
+"everything, just reordered." `CategoryPlaybookData` is no longer part
+of the Books tab at all — it's real "Business of X" research, but it's
+generated from the same template for every category in a section (a
+Skill category's playbook is just the tax chapter, near-identical
+wording every time), so presenting it as a "book" next to actually-named
+books with actually-named authors was the wrong frame. It's still fully
+intact and still the first thing shown on CategoryDetailScreen (the
+"Read the Business Playbook" card, clearly labelled "FinReels
+Research") — just not masquerading as a Book anymore. The Books tab now
+shows the original 10 general classics plus real `VerifiedBook` entries
+(title/author/freeSourceUrl) from the person's selected categories' own
+resource files — literally "pull the contents from the fashion design
+json and combine it with the general ones," which is the model this
+should have been all along.
+
+Browsing any category via Discover still works regardless of the
+viewer's own selection — that's `BlogRssService.fetchForCategory` (new)
+and `ResourceCategoryData.verifiedBooks`/`verifiedChannels` filtered
+directly by the category being viewed, neither of which goes through
+the selection-scoped aggregate. Same split FeedProvider already had
+between `eagerFor` (bulk, scoped) and `ChannelVideosScreen` fetching one
+channel directly (unscoped, on demand) — Blogs and Books just didn't
+have their own version of that split until now.
+
+**Onboarding (`my_business_screen.dart`) rebuilt around search-first
+allocation, not scroll-first browsing:**
+- Title is now the same FinReels wordmark + gold play-button mark as the
+  home screen header (was "What's your hustle?").
+- Section order is Profession, then Skill, then Business (was Skill,
+  Business, Profession).
+- Only the first 6 categories per section show before typing anything —
+  `CategorySearch.defaultVisiblePerSection` — down from all 20 per
+  section. The rest are one search away, not gone.
+- Every category now carries a `searchKeywords` list (aliases/synonyms —
+  "sew"/"ankara"/"seamstress" all resolve to Tailoring & Fashion Design,
+  "doctor"/"physician" resolve to Medicine, etc.) — see the
+  `SEARCH_KEYWORDS` dict in `parse_curriculum.py` (source of truth,
+  survives a full regeneration) and `assets/data/resource_categories.json`
+  (the shipped copy) and `lib/utils/category_search.dart` (the matcher —
+  name substring OR any keyword, either direction). Discover uses the
+  exact same matcher and section order now too, so the two pickers can't
+  drift apart again.
+- "Others" is a new, permanent, always-visible entry pinned at the end
+  of the list — not one of the 60, carries no resource file, and is a
+  guaranteed-safe no-op everywhere content gets filtered by category
+  (nothing has that id, so it just resolves to general content). Typing
+  a search that matches none of the 60 shows a note pointing at it
+  instead of a dead "no results" screen.
+
+**Smaller things fixed alongside this:**
+- `ResourceCategoryData._loadVerifiedResources` read every category's
+  resource file one at a time in a sequential `await` loop — up to 61
+  sequential local reads at full coverage. Now `Future.wait`'d in
+  parallel; same deterministic ordering for the combined lists
+  afterward, just not paying for it serially.
+- The old monolithic `assets/data/verified_resources.json` — noted as
+  "gone" in an earlier pass but still physically sitting in
+  `assets/data/` and still bundled into every build via the asset
+  wildcard — has been deleted for real this time. Nothing in code ever
+  read it; only stale doc-comments in `channel_data.dart` and
+  `blog_rss_service.dart` still pointed at it, now corrected.
+- `channel_data.dart`'s header comment said "10 channels" — it's always
+  actually defined 12 (matching the README and the test suite's own
+  `expect(ChannelData.all.length, 12)`). Fixed the comment, not the
+  count.
+- Added a `CategorySearch`/`ResourceCategory.searchKeywords`/
+  `Video` verified_book test group to `test/finreels_test.dart` — all
+  pure-Dart logic, no widget pump or asset loading needed, so worth
+  actually running (`flutter test`) before trusting this note over
+  checking yourself. This session's sandbox has no Flutter SDK and no
+  package-resolution network access, so none of this could be executed
+  here — everything above was hand-traced against the actual source,
+  not compiler-verified. Treat that as the one open item, not a detail.

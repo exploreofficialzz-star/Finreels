@@ -88,20 +88,41 @@ class ResourceCategoryData {
     final blogs = <Map<String, String>>[];
     final books = <VerifiedBook>[];
 
-    // One category at a time, every category id — most of these files
-    // don't exist yet, and that's expected, not an error. Each attempt
-    // is independent so one bad/missing file never takes out the rest.
-    for (final category in _all) {
-      final map = await _tryLoadResourceFile('assets/data/resources/${category.id}.json');
+    // Every category's resource file, PLUS _general.json, read concurrently.
+    // These are independent local asset reads with no ordering dependency
+    // between them, so there's no reason to pay their latency one at a
+    // time in a sequential await loop — that becomes real, user-visible
+    // startup delay as more of the 60 categories get their own file (up to
+    // 61 sequential awaits at full coverage). Future.wait runs them all at
+    // once; total time becomes the slowest single read instead of the sum
+    // of all of them. Each attempt is still fully independent — one
+    // bad/missing file (most of these don't exist yet, and that's
+    // expected, not an error — see _tryLoadResourceFile) never affects any
+    // other, exactly as before.
+    final results = await Future.wait([
+      for (final category in _all)
+        _tryLoadResourceFile('assets/data/resources/${category.id}.json'),
+      _tryLoadResourceFile('assets/data/resources/_general.json'),
+    ]);
+
+    // _addFrom still runs in a fixed, deterministic order — category order,
+    // then general last — regardless of which order the concurrent reads
+    // above actually completed in, so the combined channel/blog/book lists
+    // (and anything that depends on their order) stay stable across runs.
+    for (var i = 0; i < _all.length; i++) {
+      final map = results[i];
       if (map == null) continue;
+      final category = _all[i];
       _resourceFiles[category.id] = map;
       _addFrom(map, category.id, channels, blogs, books);
     }
 
-    // The 40 general/cross-cutting resources — not tied to any category,
-    // so resourceCategoryId stays null and they flow through
-    // ChannelData.eagerFor() as always-on, exactly like the original 12.
-    final general = await _tryLoadResourceFile('assets/data/resources/_general.json');
+    // The general/cross-cutting resources — not tied to any category, so
+    // resourceCategoryId stays null and they flow through
+    // ChannelData.eagerFor() (and the equivalent scoping in
+    // BlogRssService/FeedProvider) as always-on, exactly like the
+    // original 12 channels.
+    final general = results.last;
     if (general != null) {
       _resourceFiles['_general'] = general;
       _addFrom(general, null, channels, blogs, books);

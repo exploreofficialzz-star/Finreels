@@ -59,13 +59,16 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
 
   Future<void> _loadCategoryBlogs() async {
     setState(() => _loadingBlogs = true);
-    // fetchAll() covers every feed, general + all verified categories, and
-    // is cached for 10 min — cheap to call here even if the Blogs tab
-    // already warmed it this session, and correct if it hasn't.
-    final all = await BlogRssService.instance.fetchAll();
+    // Fetches this category's blogs directly, regardless of whether the
+    // person browsing here (from Discover) has it selected as their own —
+    // BlogRssService.fetchAll()/combinedBlogFeeds is scoped to general +
+    // the viewer's own selection, which would otherwise hide this
+    // category's real blogs whenever someone is just browsing, not
+    // personalizing. See fetchForCategory's doc comment.
+    final articles = await BlogRssService.instance.fetchForCategory(widget.category.id);
     if (!mounted) return;
     setState(() {
-      _blogArticles = all.where((a) => a.categoryId == widget.category.id).toList();
+      _blogArticles = articles;
       _loadingBlogs = false;
     });
   }
