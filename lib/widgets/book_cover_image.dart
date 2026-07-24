@@ -29,9 +29,16 @@ class BookCoverImage extends StatelessWidget {
   });
 
   bool get _isAsset => url.startsWith('assets/');
+  bool get _isEmpty => url.trim().isEmpty;
 
   @override
   Widget build(BuildContext context) {
+    if (_isEmpty) {
+      final fb = _fallback(context);
+      return borderRadius != null
+          ? ClipRRect(borderRadius: borderRadius!, child: fb)
+          : fb;
+    }
     final image = _isAsset ? _buildAsset(context) : _buildNetwork(context);
     if (borderRadius == null) return image;
     return ClipRRect(borderRadius: borderRadius!, child: image);

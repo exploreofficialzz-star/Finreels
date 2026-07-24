@@ -99,10 +99,16 @@ class VerifiedBook {
   final String freeSourceUrl;
 
   /// 'web' (opens in the in-app reader, like a blog article) or
-  /// 'download' (a direct PDF/EPUB file — opened externally so the
-  /// device's own viewer/download manager handles it).
+  /// 'download' (a direct PDF/EPUB file — opened in the same in-app reader
+  /// so the experience matches the general books; the WebView handles both).
   final String freeSourceType;
   final String? freeSourceNote;
+
+  /// Direct URL to a cover image — shown in the Books tab card thumbnail
+  /// the same way as the general books' bundled/CDN covers. Can be an
+  /// Open Library ISBN URL, a publisher's own CDN, or any stable image URL.
+  /// Empty string or null → BookCoverImage shows its branded placeholder.
+  final String? coverUrl;
   final String? categoryId;
 
   const VerifiedBook({
@@ -111,6 +117,7 @@ class VerifiedBook {
     required this.freeSourceUrl,
     this.freeSourceType = 'web',
     this.freeSourceNote,
+    this.coverUrl,
     this.categoryId,
   });
 
@@ -120,6 +127,7 @@ class VerifiedBook {
         freeSourceUrl: j['freeSourceUrl'] as String? ?? '',
         freeSourceType: j['freeSourceType'] as String? ?? 'web',
         freeSourceNote: j['freeSourceNote'] as String?,
+        coverUrl: j['coverUrl'] as String?,
         categoryId: categoryId,
       );
 }

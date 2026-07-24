@@ -187,16 +187,39 @@ class BlogRssService {
           final link = _text(item, 'link') ?? _text(item, 'guid') ?? '';
           if (link.isEmpty) return null;
 
-          var thumb = item.findElements('enclosure').firstOrNull
+          // Thumbnail priority:
+          // 1. <enclosure url="..." type="image/..."> — most explicit
+          // 2. <media:content url="..."> — media RSS extension
+          // 3. <media:thumbnail url="..."> — media RSS
+          // 4. First <img src="..."> in <content:encoded> HTML — WordPress
+          //    blogs always put images here even when they omit the above tags
+          // 5. First <img src="..."> in <description> HTML — fallback
+          var thumb = item.findElements('enclosure')
+              .where((e) => (e.getAttribute('type') ?? '').startsWith('image'))
+              .firstOrNull
               ?.getAttribute('url');
+
           if (thumb == null || thumb.isEmpty) {
-            thumb = item.findElements('media:content').firstOrNull
+            thumb = item.findElements('media:content')
+                .where((e) => (e.getAttribute('medium') ?? '').contains('image') ||
+                    (e.getAttribute('type') ?? '').startsWith('image') ||
+                    (e.getAttribute('url') ?? '').contains(RegExp(r'\.(jpg|jpeg|png|webp|gif)', caseSensitive: false)))
+                .firstOrNull
                 ?.getAttribute('url');
           }
-          // Try og:image or media:thumbnail
           if (thumb == null || thumb.isEmpty) {
-            thumb = item.findElements('media:thumbnail').firstOrNull
-                ?.getAttribute('url');
+            thumb = item.findElements('media:thumbnail').firstOrNull?.getAttribute('url');
+          }
+          // WordPress <content:encoded> — the body HTML almost always has
+          // the featured image as the first <img>. Try this before giving up.
+          if (thumb == null || thumb.isEmpty) {
+            final contentEncoded = _text(item, 'content:encoded') ?? '';
+            thumb = _firstImgSrc(contentEncoded);
+          }
+          // Last resort — description may also be HTML
+          if (thumb == null || thumb.isEmpty) {
+            final desc = _text(item, 'description') ?? '';
+            thumb = _firstImgSrc(desc);
           }
 
           final pubStr = _text(item, 'pubDate') ?? '';
@@ -222,6 +245,20 @@ class BlogRssService {
               ?.getAttribute('href') ?? '';
           if (link.isEmpty) return null;
 
+          // Atom feeds rarely carry media extensions but it costs nothing to try
+          var thumb = entry.findElements('media:thumbnail').firstOrNull?.getAttribute('url');
+          if (thumb == null || thumb.isEmpty) {
+            thumb = entry.findElements('media:content')
+                .where((e) => (e.getAttribute('medium') ?? '').contains('image') ||
+                    (e.getAttribute('type') ?? '').startsWith('image'))
+                .firstOrNull
+                ?.getAttribute('url');
+          }
+          if (thumb == null || thumb.isEmpty) {
+            final content = _text(entry, 'content') ?? _text(entry, 'summary') ?? '';
+            thumb = _firstImgSrc(content);
+          }
+
           final updStr =
               _text(entry, 'updated') ?? _text(entry, 'published') ?? '';
           final published = DateTime.tryParse(updStr) ?? DateTime.now();
@@ -230,6 +267,7 @@ class BlogRssService {
             title: _clean(_text(entry, 'title') ?? 'Untitled'),
             url: link,
             sourceName: sourceName,
+            thumbnailUrl: thumb,
             publishedAt: published,
             excerpt: _clean(_text(entry, 'summary') ?? ''),
             categoryId: categoryId,
@@ -240,6 +278,29 @@ class BlogRssService {
       debugPrint('[BlogRssService] Parse error for $sourceName: $e');
     }
     return [];
+  }
+
+  /// Extracts the first image URL from an HTML string.
+  /// Works for WordPress content:encoded, description CDATA, and Atom content.
+  static String? _firstImgSrc(String html) {
+    if (html.isEmpty) return null;
+    // Match both single and double quote variants.
+    final match = RegExp(
+      r'''<img[^>]+src=["']([^"']+)["']''',
+      caseSensitive: false,
+    ).firstMatch(html);
+    if (match != null) {
+      final src = match.group(1) ?? '';
+      // Skip tiny spacer/tracking images (1x1 px, data URIs, etc.)
+      if (src.isNotEmpty &&
+          !src.startsWith('data:') &&
+          !src.contains('1x1') &&
+          !src.contains('pixel') &&
+          !src.contains('tracking')) {
+        return src;
+      }
+    }
+    return null;
   }
 
   static String? _text(XmlElement el, String tag) =>

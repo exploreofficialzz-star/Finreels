@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../data/channel_data.dart';
 import '../models/feed_tab.dart';
@@ -145,7 +144,7 @@ class _FeedBodyState extends State<_FeedBody> {
 
   void _onTap(Video video) {
     if (video.channelId == 'verified_book') {
-      unawaited(_openVerifiedBook(video));
+      _openVerifiedBook(video);
       return;
     }
     if (video.channelId == 'books') {
@@ -153,24 +152,18 @@ class _FeedBodyState extends State<_FeedBody> {
           MaterialPageRoute(builder: (_) => BookDetailScreen(book: video)));
       return;
     }
-    // Interstitial fires on tap 4, 8, 12 … for videos
     unawaited(AdService.instance.onVideoTapped());
   }
 
-  /// Mirrors _FreeBookTile._open() in category_detail_screen.dart: a
-  /// 'download' book hands off to whatever the device uses for PDFs/EPUBs
-  /// externally; a 'web' book opens the same in-app reader a blog article
-  /// uses. Never goes through BookDetailScreen — that screen's `_sources`
-  /// map only knows the original 10 hand-picked books.
-  Future<void> _openVerifiedBook(Video book) async {
-    if (book.freeSourceType == 'download') {
-      final uri = Uri.tryParse(book.freeSourceUrl ?? '');
-      if (uri != null && await canLaunchUrl(uri)) {
-        await launchUrl(uri, mode: LaunchMode.externalApplication);
-      }
-      return;
-    }
-    if (!mounted) return;
+  /// All verified (category-specific) books open inside the app in
+  /// BlogReaderScreen — the same flutter_inappwebview reader used for blog
+  /// articles. freeSourceType is intentionally ignored here: previously
+  /// 'download' launched the URL externally (device browser/file manager),
+  /// which felt inconsistent with general books that always open inside the
+  /// app. The WebView handles both web pages and most PDF/resource download
+  /// pages correctly; the user stays inside FinReels throughout.
+  void _openVerifiedBook(Video book) {
+    if ((book.freeSourceUrl ?? '').isEmpty) return;
     Navigator.push(
       context,
       MaterialPageRoute(

@@ -182,7 +182,9 @@ class FeedProvider extends ChangeNotifier {
       channelId: 'verified_book',
       channelName: b.author,
       publishedAt: _epoch,
-      thumbnailUrl: '', // BookCoverImage falls back to a placeholder cover.
+      // coverUrl from the JSON — Open Library ISBN URL, publisher CDN, etc.
+      // Empty string when not set; BookCoverImage handles that gracefully.
+      thumbnailUrl: b.coverUrl ?? '',
       freeSourceUrl: b.freeSourceUrl,
       freeSourceType: b.freeSourceType,
       sourceCategoryId: b.categoryId,

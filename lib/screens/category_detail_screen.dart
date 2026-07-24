@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../data/category_playbook_data.dart';
 import '../data/resource_category_data.dart';
@@ -298,15 +297,8 @@ class _FreeBookTile extends StatelessWidget {
   final VerifiedBook book;
   const _FreeBookTile({required this.book});
 
-  Future<void> _open(BuildContext context) async {
-    if (book.freeSourceType == 'download') {
-      final uri = Uri.parse(book.freeSourceUrl);
-      if (await canLaunchUrl(uri)) {
-        await launchUrl(uri, mode: LaunchMode.externalApplication);
-      }
-      return;
-    }
-    if (!context.mounted) return;
+  void _open(BuildContext context) {
+    if (book.freeSourceUrl.isEmpty) return;
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) => BlogReaderScreen(
@@ -334,9 +326,7 @@ class _FreeBookTile extends StatelessWidget {
           child: Row(
             children: [
               Icon(
-                book.freeSourceType == 'download'
-                    ? Icons.download_rounded
-                    : Icons.menu_book_rounded,
+                Icons.menu_book_rounded,
                 color: AppTheme.gold,
                 size: 20,
               ),

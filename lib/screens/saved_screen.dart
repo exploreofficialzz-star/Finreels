@@ -12,6 +12,7 @@ import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
 import '../widgets/no_flash_page_route.dart';
 import '../widgets/video_card.dart';
+import 'blog_reader_screen.dart';
 import 'book_detail_screen.dart';
 import 'video_player_screen.dart';
 
@@ -29,6 +30,20 @@ class _SavedScreenState extends State<SavedScreen> {
     _tapCount++;
     if (_tapCount.isEven) unawaited(AdService.instance.showInterstitial());
 
+    if (video.channelId == 'verified_book') {
+      if ((video.freeSourceUrl ?? '').isEmpty) return;
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => BlogReaderScreen(
+            url: video.freeSourceUrl!,
+            title: video.title,
+            categoryId: video.sourceCategoryId,
+          ),
+        ),
+      );
+      return;
+    }
     if (video.channelId == 'books') {
       Navigator.push(context,
           MaterialPageRoute(builder: (_) => BookDetailScreen(book: video)));
