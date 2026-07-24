@@ -184,7 +184,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free resources from the 'Hairdressers Bible' author's own site — international bestselling salon-business book plus free tools.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Author identity (Alan Austin-Smith, founder of The Fantastic Hairdresser) cross-confirmed via his official site bio and Facebook page."
+      "verificationMethod": "Author identity (Alan Austin-Smith, founder of The Fantastic Hairdresser) cross-confirmed via his official site bio and Facebook page.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780956099006-L.jpg"
     },
     {
       "title": "Salon Business Start-Up Guide",
@@ -193,7 +194,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free, complete salon startup guide hosted directly on the official sba.gov site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on a U.S. government domain."
+      "verificationMethod": "Source directory entry, hosted on a U.S. government domain.",
+      "coverUrl": ""
     },
     {
       "title": "Million Dollar Stylist (free chapter)",
@@ -202,7 +204,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free chapter available directly from the author's own site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on the author's own domain."
+      "verificationMethod": "Source directory entry, hosted on the author's own domain.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781939828804-L.jpg"
     },
     {
       "title": "GROW Your Salon Business (podcast)",
@@ -211,7 +214,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free podcast, not a written book — video versions also publish to the verified Grow My Salon Business YouTube channel above.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Same host/site already verified for the channel and blog entries above."
+      "verificationMethod": "Same host/site already verified for the channel and blog entries above.",
+      "coverUrl": ""
     },
     {
       "title": "Hair Salon Marketing Guide",
@@ -220,7 +224,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free guide with templates, hosted directly on HubSpot's own blog.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on hubspot.com."
+      "verificationMethod": "Source directory entry, hosted on hubspot.com.",
+      "coverUrl": ""
     },
     {
       "title": "The E-Myth Revisited (free PDF)",
@@ -229,7 +234,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free PDF of the well-known small-business-systems book, hosted on a third-party site — worth a direct-download check before shipping.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited."
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     },
     {
       "title": "Profit First (free resources)",
@@ -238,7 +244,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free resources from the author's own official site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com)."
+      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735214149-L.jpg"
     },
     {
       "title": "Building a StoryBrand (free framework)",
@@ -247,7 +254,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free marketing-messaging framework from the book's official StoryBrand site, applicable to marketing a salon business.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official storybrand.com domain."
+      "verificationMethod": "Hosted on the official storybrand.com domain.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781400201839-L.jpg"
     },
     {
       "title": "1-Page Marketing Plan (free template)",
@@ -256,7 +264,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free downloadable template from the book's official site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official 1pagemarketingplan.com domain."
+      "verificationMethod": "Hosted on the official 1pagemarketingplan.com domain.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780989711524-L.jpg"
     },
     {
       "title": "Small Business Management",
@@ -265,8 +274,9 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free, full open-license textbook covering small-business fundamentals — general (not salon-specific), but directly applicable.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official openstax.org domain, a well-established open-textbook publisher."
+      "verificationMethod": "Hosted on the official openstax.org domain, a well-established open-textbook publisher.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172418-L.jpg"
     }
   ],
   "notes": "2026-07-20: Merged in 27 rows from the founder-provided 'hairdressing_business_resources.csv' (Section I.2). Five new channels, ten new blogs, and ten new books/guides added on top of the existing Louis Ihuefo entry. Items deliberately left out or flagged rather than integrated as-is: (1) 'Sergey Zverev' — multiple same-named YouTube channels exist (a personal channel, a 'Topic' auto-channel, and others) and the specific '@sergeyzverev' handle from the CSV could not be matched to one with confidence; needs a direct fetch of the actual handle before adding. (2) 'Naija Hair Salon TV' — no channel by this name could be confirmed in this pass; may be inactive, renamed, or a data-entry error in the source CSV. (3) 'Salon Business Boss' channel — only one old testimonial video was found, not a dedicated content channel; the ID in the CSV's RSS template ('channel_id=UC...') was a placeholder, not a real ID, so the channel entry was left out (its blog was still added, since salonbusinessboss.com is confirmed real and active). (4) 'SwiftPesa (Kenya)' and the standalone 'Pesabook (Kenya)' Platform-type rows (fintech tools with no RSS feed, not channels/blogs/books) don't fit this file's three-bucket schema — Pesabook's own blog was added instead; SwiftPesa was omitted entirely. Every 'UC...' string in the source CSV's RSS_Feed column was a literal template placeholder, not a real ID — every real channel ID above was independently looked up via YouTube channel-page fetches or search, not copied from the CSV. Follow-up (same day): brought channels up to 10 (parity with the 10 blogs / 10 books) by adding 4 more independently verified, on-topic channels — The Salon Business and The Beauty Biz Agency (both already verified for business_08, reused here as directly relevant), plus newly verified TheSalonGuy and SalonBiz. 'Sergey Zverev', 'Naija Hair Salon TV', and a standalone 'Salon Business Boss' channel remain excluded — still no confident channel match found for any of the three after a second pass."
-    }
+}

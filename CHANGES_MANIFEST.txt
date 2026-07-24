@@ -1,47 +1,30 @@
-FinReels — Round 3 — THE actual fix for category content not showing
-======================================================================
+FinReels — Round 5 — Cover URLs for all 43 category resource files
+====================================================================
 Extract into your project root, overwriting at the same paths.
 
-ROOT CAUSE (confirmed by code trace, not guessing):
-  assets/data/resources/skill_01_tailoring_fashion_design.json had
-  "author": null on books[3] ("Freelance Fashion Designer's Guide").
-  VerifiedBook.fromJson did `j['author'] as String` — Dart throws a
-  TypeError on null. That exception escaped _addFrom → escaped
-  _loadVerifiedResources() → escaped load() (it was called OUTSIDE
-  the try-catch block in load()) → was caught silently by _safeInit()
-  in main.dart with just a log line. End result: _verifiedChannels,
-  _verifiedBlogs and _verifiedBooks stayed as const [] for the entire
-  session. ChannelData.combined only had the 12 const channels.
-  Only general content ever showed. All four tabs affected.
+WHAT CHANGED
+All 43 files under assets/data/resources/ are included.
+186 books across skills and professions were processed.
 
-FILES CHANGED (4):
+Cover URL results:
+  151/186 (81%) — real cover images from Open Library (ISBN-based,
+                  most reliable), Internet Archive /services/img/,
+                  OpenStax CDN, and publisher CDNs
+  35/186  (19%) — genuinely not books (SBA.gov government guides,
+                  HubSpot certification courses, YouTube channels,
+                  podcasts, online articles) — no book cover exists
+                  for these; they correctly show the gold placeholder
 
-assets/data/resources/skill_01_tailoring_fashion_design.json
-    books[3].author: null → "Unknown"
-    (The only null field found across all resource files — verified by
-    scanning every field in every file.)
+Common books appearing across multiple categories (E-Myth Revisited,
+Profit First, Lean Startup, Atomic Habits, Built to Sell, The $100
+Startup, Good to Great, Personal MBA, Rework, StoryBrand, Traction,
+Rich Dad Poor Dad, How to Win Friends, etc.) all now have Open Library
+ISBN cover URLs. These are the exact same URL format the general books
+already use (Global Grey, archive.org, gutenberg.org).
 
-lib/models/resource_category.dart
-    VerifiedBook.fromJson: title/author/freeSourceUrl now use `as
-    String? ?? fallback` instead of bare `as String`. A null field in
-    a JSON entry now degrades gracefully instead of throwing.
+All null fields across all 43 files cleaned in the same pass
+(only one was found — the author:null bug already fixed in Round 3,
+confirmed zero remaining nulls).
 
-lib/data/resource_category_data.dart
-    TWO fixes:
-    1. _loadVerifiedResources() now has its own try-catch in load() —
-       it was previously called OUTSIDE the existing try-catch, so any
-       exception inside it escaped into _safeInit(). Now a failure in
-       verified-resources loading logs and continues; categories still
-       load correctly.
-    2. _addFrom() now wraps each channel/blog/book entry in its own
-       try-catch — one bad entry logs and is skipped, never aborting
-       the rest of the file.
-
-lib/data/channel_data.dart
-    byId changed from `static final Map` (built once from only the 12
-    const channels at class init time) to `static Map get` (built live
-    from combined, which includes verified category channels). Without
-    this, a fashion design video would display with the wrong channel
-    name/info in the video card — it would show "The Diary of A CEO"
-    as the channel. Content itself would still appear (the null fix
-    above is what actually unblocks it), but the metadata would be wrong.
+NOTHING ELSE CHANGED — this round is resource JSON files only.
+The Dart code changes from Rounds 3 and 4 are already applied.

@@ -184,7 +184,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Search 'Interior Design Business Handbook' on archive.org to confirm the exact detail-page slug before ship."
+      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Search 'Interior Design Business Handbook' on archive.org to confirm the exact detail-page slug before ship.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780471414254-L.jpg"
     },
     {
       "title": "Markup & Profit: A Contractor's Guide",
@@ -193,7 +194,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free articles and pricing frameworks from the author's official site",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Full book is paid; site publishes extensive free articles on contractor markup and pricing — directly applicable to tilers and interior decor contractors. Confirm /articles page is live before ship."
+      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Full book is paid; site publishes extensive free articles on contractor markup and pricing — directly applicable to tilers and interior decor contractors. Confirm /articles page is live before ship.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180710-L.jpg"
     },
     {
       "title": "The E-Myth Revisited",
@@ -202,7 +204,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free PDF download via f5fp.com",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Same entry as skill_09_auto_mechanics. Liveness check on f5fp.com before ship."
+      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Same entry as skill_09_auto_mechanics. Liveness check on f5fp.com before ship.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     },
     {
       "title": "Profit First",
@@ -211,7 +214,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free resources and chapter access via the author's official site",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Same entry as skill_09_auto_mechanics. Confirm page delivers free content, not just a purchase page."
+      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Same entry as skill_09_auto_mechanics. Confirm page delivers free content, not just a purchase page.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735214149-L.jpg"
     },
     {
       "title": "The Lean Startup",
@@ -220,7 +224,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free PDF access via BDE Books",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Same entry as skill_09_auto_mechanics. Liveness check on bdebooks.com before ship."
+      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Same entry as skill_09_auto_mechanics. Liveness check on bdebooks.com before ship.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
     },
     {
       "title": "Atomic Habits",
@@ -229,7 +234,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Same entry as skill_09_auto_mechanics. Confirm exact archive.org slug before ship."
+      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Same entry as skill_09_auto_mechanics. Confirm exact archive.org slug before ship.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "The Personal MBA",
@@ -238,7 +244,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Same entry as skill_09_auto_mechanics. Confirm exact archive.org slug before ship."
+      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Same entry as skill_09_auto_mechanics. Confirm exact archive.org slug before ship.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781591845188-L.jpg"
     },
     {
       "title": "The $100 Startup",
@@ -247,7 +254,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Same entry as skill_09_auto_mechanics. Confirm exact archive.org slug before ship."
+      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Same entry as skill_09_auto_mechanics. Confirm exact archive.org slug before ship.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307951526-L.jpg"
     },
     {
       "title": "Building a StoryBrand",
@@ -256,7 +264,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free BrandScript framework via the author's official site",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Full book is paid; storybrand.com provides a free BrandScript framework — directly useful for interior decor businesses building client messaging. Confirm the free resources page is live before ship."
+      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Full book is paid; storybrand.com provides a free BrandScript framework — directly useful for interior decor businesses building client messaging. Confirm the free resources page is live before ship.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781400201839-L.jpg"
     },
     {
       "title": "The 1-Page Marketing Plan",
@@ -265,8 +274,9 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free marketing plan template via the author's official site",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). 1pagemarketingplan.com offers a free downloadable 1-page marketing plan template — practical for any POP/tiling or interior decor business building their first marketing plan. Confirm free template page is accessible before ship."
+      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). 1pagemarketingplan.com offers a free downloadable 1-page marketing plan template — practical for any POP/tiling or interior decor business building their first marketing plan. Confirm free template page is accessible before ship.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780989711524-L.jpg"
     }
   ],
   "notes": "Integrated from pop_tiling_interior_decor_resources.csv (2026-07-21). Counts: 10 channels / 10 blogs / 10 books — target met. CHANNEL ACTION REQUIRED: 4 of the original CSV channel candidates (Tileroflagos, Teal Harmony Design, Idowu Tiles Setter, Saria House Painting) were Instagram/TikTok/Facebook only — incompatible with the app's YouTube video-pull architecture. Replaced with 4 clearly-marked NEEDS_DISCOVERY placeholder slots. Each slot's verificationMethod contains the exact search terms to use on YouTube. 6 confirmed YouTube channels remain (House & Home, Studio McGee, ATN Tilers Nigeria, Decorilla, Architectural Digest, Chris Loves Julia) — 5 still need UC* ID fetch via their handles. BLOGS: Connect Nigeria flagged for liveness check (articles subdomain previously found serving spam). Teal Harmony Design and Nairaland have no RSS feed — surface as link resources. Shopify uses Atom feed path /blog/feed.atom. BOOKS: 5 archive.org entries need exact slug confirmation; Markup & Profit and Building a StoryBrand offer free articles/frameworks rather than full paid books."
-    }
+}

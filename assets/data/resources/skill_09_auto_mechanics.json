@@ -184,7 +184,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free government resource — no signup required",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). SBA.gov is the official US Small Business Administration site. Locate the exact guide page or PDF path at sba.gov before ship — the URL above points to the general business guide landing page."
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). SBA.gov is the official US Small Business Administration site. Locate the exact guide page or PDF path at sba.gov before ship — the URL above points to the general business guide landing page.",
+      "coverUrl": ""
     },
     {
       "title": "The $100 Startup",
@@ -193,7 +194,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Internet Archive hosts a borrowable digital copy under Controlled Digital Lending. Confirm the exact detail-page slug and borrow availability before ship."
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Internet Archive hosts a borrowable digital copy under Controlled Digital Lending. Confirm the exact detail-page slug and borrow availability before ship.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307951526-L.jpg"
     },
     {
       "title": "The Lean Startup",
@@ -202,7 +204,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free PDF access via BDE Books",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). bdebooks.com listed as source. Do a liveness check — confirm the page is up and offers genuine free access before ship."
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). bdebooks.com listed as source. Do a liveness check — confirm the page is up and offers genuine free access before ship.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
     },
     {
       "title": "Rich Dad Poor Dad",
@@ -211,7 +214,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Internet Archive hosts a borrowable copy. Confirm exact detail-page slug and borrow availability before ship."
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Internet Archive hosts a borrowable copy. Confirm exact detail-page slug and borrow availability before ship.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781612680194-L.jpg"
     },
     {
       "title": "Good to Great",
@@ -220,7 +224,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Internet Archive hosts a borrowable copy. Confirm exact detail-page slug and borrow availability before ship."
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Internet Archive hosts a borrowable copy. Confirm exact detail-page slug and borrow availability before ship.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780066620992-L.jpg"
     },
     {
       "title": "The Personal MBA",
@@ -229,7 +234,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Internet Archive hosts a borrowable copy. Confirm exact detail-page slug and borrow availability before ship."
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Internet Archive hosts a borrowable copy. Confirm exact detail-page slug and borrow availability before ship.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781591845188-L.jpg"
     },
     {
       "title": "Atomic Habits",
@@ -238,7 +244,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Internet Archive hosts a borrowable copy. Confirm exact detail-page slug and borrow availability before ship."
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Internet Archive hosts a borrowable copy. Confirm exact detail-page slug and borrow availability before ship.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Tools of Titans",
@@ -247,7 +254,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Internet Archive hosts a borrowable copy. Confirm exact detail-page slug and borrow availability before ship."
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). Internet Archive hosts a borrowable copy. Confirm exact detail-page slug and borrow availability before ship.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781328683786-L.jpg"
     },
     {
       "title": "The E-Myth Revisited",
@@ -256,7 +264,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free PDF download via f5fp.com",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). f5fp.com listed as source. Do a liveness check — confirm the page is up and the PDF download is accessible before ship."
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). f5fp.com listed as source. Do a liveness check — confirm the page is up and the PDF download is accessible before ship.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     },
     {
       "title": "Profit First",
@@ -265,7 +274,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free resources and chapter access via the author's official site",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). mikemichalowicz.com is the author's official site. Confirm the page delivers free content and not just a purchase page before ship."
+      "verificationMethod": "Source: auto_mechanics_resources.csv (Category I.9). mikemichalowicz.com is the author's official site. Confirm the page delivers free content and not just a purchase page before ship.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735214149-L.jpg"
     }
   ],
   "notes": "Fully integrated from auto_mechanics_resources.csv (2026-07-21). Counts: 10 channels / 10 blogs / 10 books — target met. CHANNEL IDs NEEDING VERIFICATION: ChrisFix (UCes1EvRjcKU4sY_UZOtZMoA) highest confidence. South Main Auto, Pine Hollow, The Car Care Nut, ScannerDanner, EricTheCarGuy — best-effort UC* IDs, each needs a youtube.com/@handle fetch to confirm. OttoXpress, Zikoko, EngineeringAll, Nigerian Auto Mechanics TV — placeholder IDs (FETCH_YOUTUBE_HANDLE_*), need YouTube search for canonical UC* IDs. BLOGS: all 10 feed URLs follow standard /feed pattern; do a curl liveness pass on all 10 — RLO Training, Zikoko, Motor Age most likely to have non-standard paths. BOOKS: 6 archive.org URLs need exact detail-page slug verification; f5fp.com and bdebooks.com need liveness checks; Profit First at mikemichalowicz.com — confirm free-content page vs. sales page. Prior verified entries (Shop Owner Magazine UC_sl971RP3iR1DGWDB-H2yw, AutoFix - Auto Shop Coaching UC2QzkqJcUQJHHZkcqD6nRQg) from the 2026-07-16 pass were superseded by this CSV integration but remain strong additions if the roster expands."

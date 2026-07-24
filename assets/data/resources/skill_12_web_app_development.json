@@ -187,7 +187,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free copy on Internet Archive.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The SaaS Playbook."
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The SaaS Playbook.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9798985997910-L.jpg"
     },
     {
       "title": "Company of One (free)",
@@ -196,7 +197,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free copy on Internet Archive.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of Company of One."
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of Company of One.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781328972354-L.jpg"
     },
     {
       "title": "The Web Dev's Guide to Freelancing (free)",
@@ -205,7 +207,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free copy hosted on a third-party ebook site — worth a direct-download check before shipping.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the credited author of The Web Dev's Guide to Freelancing."
+      "verificationMethod": "Source directory entry; author is the credited author of The Web Dev's Guide to Freelancing.",
+      "coverUrl": ""
     },
     {
       "title": "Going IT Alone (free)",
@@ -214,7 +217,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free copy on Internet Archive.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the credited author of Going IT Alone."
+      "verificationMethod": "Source directory entry; author is the credited author of Going IT Alone.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781430204473-L.jpg"
     },
     {
       "title": "Clean Code (free)",
@@ -223,7 +227,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free copy on Internet Archive — foundational software-craftsmanship reference for developers going professional.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of Clean Code."
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of Clean Code.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780132350884-L.jpg"
     },
     {
       "title": "The E-Myth Revisited (free PDF)",
@@ -232,7 +237,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free PDF of the well-known small-business-systems book, hosted on a third-party site — worth a direct-download check before shipping.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited."
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     },
     {
       "title": "Profit First (free resources)",
@@ -241,7 +247,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free resources from the author's own official site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com)."
+      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735214149-L.jpg"
     },
     {
       "title": "The Lean Startup (free)",
@@ -250,7 +257,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free copy hosted on a third-party book site — worth a direct-download check before shipping.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Lean Startup."
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Lean Startup.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
     },
     {
       "title": "The Personal MBA (free)",
@@ -259,7 +267,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free copy on Internet Archive — business fundamentals without business school.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Personal MBA."
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Personal MBA.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781591845188-L.jpg"
     },
     {
       "title": "Deep Work (free)",
@@ -268,8 +277,9 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free copy on Internet Archive — focus and productivity for developers doing deep technical work.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of Deep Work."
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of Deep Work.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781455586691-L.jpg"
     }
   ],
   "notes": "Distinct from Computer Science/Software Engineering (profession_11, which covered turning code into products via Indie Hackers) — this category is specifically about the freelance/agency service-delivery side of the same skill. 2026-07-20: Merged in the founder-provided 'web_app_development_resources.csv' (Section I.12), bringing the file from 1 channel / 0 blogs / 0 books to a full 10 / 10 / 10. This CSV (unlike prior ones in this project) did not include per-item RSS/channel-ID URLs, only top-level domains — every real YouTube channel ID was independently looked up via search and channel-page fetches, and blog RSS paths were inferred using each site's standard CMS convention (flagged individually where uncertain). Three of the CSV's 10 channels could not be matched to a real YouTube channel: SoniBaze (real, active company and blog, but no confirmed YouTube presence), FreelanceMaster.ng (real, active company and blog, but no confirmed YouTube presence), and DevCareer Africa (real, well-documented nonprofit with 30,000+ community members, but its 'channels' are internal Slack community channels, not YouTube). Two independently-verified, directly on-topic replacements were substituted to reach 10 channels: freeCodeCamp.org and Programming with Mosh (Mosh Hamedani). The SoniBaze blog URL was also corrected from the source directory's sonibaze.com to the company's real, currently-active domain, sonibaze.ng."
-    }
+}
