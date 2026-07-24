@@ -1,0 +1,274 @@
+{
+  "categoryId": "business_19_pure_water_sachet_bottled_water",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-24",
+  "channels": [
+    {
+      "id": "UChd1LNlWAXVHzzHgWpfo5wA",
+      "name": "NAFDAC NIGERIA",
+      "handle": "@NAFDACNIGERIA",
+      "description": "The National Agency for Food and Drug Administration and Control — Nigeria's federal regulator for packaged water, food, drugs and cosmetics, established 1993.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "NF",
+      "focus": "Regulatory compliance and registration for water businesses",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/@NAFDACNIGERIA); agency cross-confirmed via Wikipedia."
+    },
+    {
+      "id": "UCtSUi-VTktXgU0Hjyo3-2SA",
+      "name": "SMEDAN",
+      "handle": "@SMEDANgov",
+      "description": "The apex SME development agency of Nigeria — guidance, funding, and training programmes for MSMEs including manufacturing businesses like water production.",
+      "accentColor": "0xFF8B5CF6",
+      "initials": "SM",
+      "focus": "Government support, grants, and MSME training for manufacturing",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct search-result metadata (channel/UCtSUi-VTktXgU0Hjyo3-2SA); agency cross-confirmed via Wikipedia."
+    },
+    {
+      "id": "UC1GBKv15keKOgHbEBEMeo9w",
+      "name": "NairametricsTV",
+      "handle": "@NairametricsTV",
+      "description": "Nairametrics' dedicated YouTube channel (launched Jan 2025) — financial analysis, business strategy and corporate trends for Nigeria's economy, including FMCG and water sector coverage.",
+      "accentColor": "0xFF10B981",
+      "initials": "NM",
+      "focus": "Financial analysis of the Nigerian FMCG and water sector",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/@NairametricsTV); launch and parent company cross-confirmed via Wikipedia."
+    },
+    {
+      "id": "UCfnyOJc7kgjZyxmvEafMQGQ",
+      "name": "TechCabal",
+      "handle": "@Techcabal",
+      "description": "Captures the players, human impact and business of tech in Africa — reporting, data and events on how tech is changing the continent, including manufacturing/FMCG tech.",
+      "accentColor": "0xFFF59E0B",
+      "initials": "TC",
+      "focus": "African manufacturing and FMCG tech ecosystem coverage",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/user/techcabal)."
+    },
+    {
+      "id": "UCsVZWCV-LutMa89JgR8-KGw",
+      "name": "BusinessDay NG",
+      "handle": "@BusinessDayNG",
+      "description": "Nigeria's business news and video destination — market news, stocks, business analysis and sector coverage including manufacturing and FMCG.",
+      "accentColor": "0xFFEC4899",
+      "initials": "BD",
+      "focus": "Nigerian manufacturing and FMCG sector news",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed official channel ID (UCsVZWCV-LutMa89JgR8-KGw) via Wikidata record for BusinessDay NG."
+    },
+    {
+      "id": "UC9T6ECutY4EPwJnGlbw4BzA",
+      "name": "Techpoint Africa",
+      "handle": "@TechpointAfrica",
+      "description": "Digital media company (founded 2015) that amplifies the best innovations out of Africa through publications, data and events — covers manufacturing/FMCG tech startups.",
+      "accentColor": "0xFF6366F1",
+      "initials": "TP",
+      "focus": "African FMCG and manufacturing tech ecosystem",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct search-result metadata (channel/UC9T6ECutY4EPwJnGlbw4BzA)."
+    },
+    {
+      "id": "UCKVsdeoHExltrWMuK0hOWmg",
+      "name": "KTN News Kenya",
+      "handle": "@ktnnews_kenya",
+      "description": "Kenya's fastest-growing news channel (Standard Group), covering business, documentaries and investigative series — including features on setting up water purification and bottling plants in Kenya.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "KT",
+      "focus": "African water purification and bottling business tech",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via Wikipedia and vidIQ cross-reference (channel/UCKVsdeoHExltrWMuK0hOWmg).",
+      "notes": "General Kenyan news channel, not water-specific — included for its specific water-purification-and-bottling-business coverage; most content is unrelated general news."
+    },
+    {
+      "id": "UCaAx1xeTgF3rs4rBPDq6-Kw",
+      "name": "HubSpot",
+      "handle": "@HubSpot",
+      "description": "CRM platform helping companies work together across marketing, sales and customer service — product tutorials and business-growth content applicable to any small manufacturing/FMCG business.",
+      "accentColor": "0xFFF97316",
+      "initials": "HS",
+      "focus": "Business marketing and growth systems for manufacturers",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct search-result metadata (channel/UCaAx1xeTgF3rs4rBPDq6-Kw)."
+    },
+    {
+      "id": "UCSoIxtP6J6oNo_d1njSluxw",
+      "name": "Alibaba.com Buyer Central",
+      "handle": "@AlibabaBuyerCentral",
+      "description": "Official B2B sourcing channel — tutorials on sourcing packaging machines, bottling equipment and raw materials from 240+ countries, directly relevant to setting up water production.",
+      "accentColor": "0xFFA855F7",
+      "initials": "AL",
+      "focus": "Sourcing sachet/bottling machinery and packaging materials",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct search-result metadata (channel/UCSoIxtP6J6oNo_d1njSluxw)."
+    },
+    {
+      "id": "UC7geKfz2-IH0rsgRBtHTm0g",
+      "name": "Learn With Shopify",
+      "handle": "@learnwithshopify",
+      "description": "Official Shopify YouTube channel — business ideas, marketing, finance and operations content applicable to a water/FMCG production business selling direct-to-consumer.",
+      "accentColor": "0xFF06B6D4",
+      "initials": "LS",
+      "focus": "Small manufacturing business marketing and operations",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/c/learnwithshopify).",
+      "notes": "Substituted for the source directory's 'Rite Water Solutions', 'Water Treatment Africa', 'Pure Water Business Nigeria', 'Sachet Water Machine Tech', 'Agric TV Nigeria' and 'Connect Nigeria' channels — none could be matched to a real, dedicated, confirmable YouTube channel this pass (Rite Water Solutions is a real India-based company, not Nigeria-focused as implied, with no confirmed channel)."
+    }
+  ],
+  "blogs": [
+    {
+      "name": "NAFDAC Guidelines",
+      "url": "https://nafdac.gov.ng/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry: free PDFs on water registration and compliance in Nigeria, from the official regulator."
+    },
+    {
+      "name": "Connect Nigeria",
+      "url": "https://www.connectnigeria.com/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry: how to start a pure water business in Nigeria. Confirmed real, active site across multiple prior categories this project."
+    },
+    {
+      "name": "Entrepreneurs.ng",
+      "url": "https://entrepreneurs.ng/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry: sachet water business guide, capital and margins. Confirmed real, active site across multiple prior categories this project."
+    },
+    {
+      "name": "StartupTipsDaily",
+      "url": "https://startuptipsdaily.com/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry: pure water business ideas and profitability data. Confirmed real, active site across multiple prior categories this project."
+    },
+    {
+      "name": "Splice Blog",
+      "url": "https://splice.ng/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory listed the domain as splice.com.ng — corrected to splice.ng, the domain independently verified for skill_02 and skill_03 earlier this project."
+    },
+    {
+      "name": "BusinessDay",
+      "url": "https://businessday.ng/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry: Nigerian manufacturing and FMCG sector news. Pairs with the BusinessDay NG channel above."
+    },
+    {
+      "name": "SME Guide",
+      "url": "https://smeguide.com/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry: water business registration and NAFDAC setup guides."
+    },
+    {
+      "name": "Nairametrics",
+      "url": "https://nairametrics.com/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry: FMCG and water sector financial analysis. Pairs with the NairametricsTV channel above."
+    },
+    {
+      "name": "Water Online",
+      "url": "https://www.wateronline.com/rss",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry: global water treatment and bottling industry news, from a major, well-established water-industry trade publication."
+    },
+    {
+      "name": "Techpoint Africa",
+      "url": "https://techpoint.africa/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry: African FMCG and manufacturing tech ecosystem. Pairs with the Techpoint Africa channel above."
+    }
+  ],
+  "books": [
+    {
+      "title": "The E-Myth Revisited (free PDF)",
+      "author": "Michael E. Gerber",
+      "freeSourceUrl": "https://f5fp.com/e-myth-revisited-free-pdf",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free PDF of the well-known small-business-systems book, hosted on a third-party site — worth a direct-download check before shipping.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited."
+    },
+    {
+      "title": "Profit First (free resources)",
+      "author": "Mike Michalowicz",
+      "freeSourceUrl": "https://www.mikemichalowicz.com/profit-first-book",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free resources from the author's own official site.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com)."
+    },
+    {
+      "title": "The Lean Startup (free)",
+      "author": "Eric Ries",
+      "freeSourceUrl": "https://bdebooks.com/the-lean-startup",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free copy hosted on a third-party book site — worth a direct-download check before shipping.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Lean Startup."
+    },
+    {
+      "title": "Atomic Habits (free)",
+      "author": "James Clear",
+      "freeSourceUrl": "https://archive.org/details/atomic-habits",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free copy on Internet Archive — building consistent production and quality-control habits.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Atomic Habits."
+    },
+    {
+      "title": "Small Business Management",
+      "author": "OpenStax / Rice University",
+      "freeSourceUrl": "https://openstax.org/details/books/small-business-management",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free, full open-license textbook covering small-business fundamentals.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Hosted on the official openstax.org domain."
+    },
+    {
+      "title": "Entrepreneurship",
+      "author": "OpenStax / Rice University",
+      "freeSourceUrl": "https://openstax.org/details/books/entrepreneurship",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free, full open-license textbook on starting and running a business.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Hosted on the official openstax.org domain."
+    },
+    {
+      "title": "Digital Marketing for Small Business (free eBook)",
+      "author": "HubSpot Academy",
+      "freeSourceUrl": "https://www.hubspot.com",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free eBook hosted on HubSpot's own site.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry, hosted on hubspot.com."
+    },
+    {
+      "title": "Starting a Business Guide",
+      "author": "SBA.gov",
+      "freeSourceUrl": "https://www.sba.gov/business-guide",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free, complete startup guide hosted directly on the official sba.gov site.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry, hosted on a U.S. government domain."
+    },
+    {
+      "title": "Inbound Marketing Certification (free course)",
+      "author": "HubSpot Academy",
+      "freeSourceUrl": "https://academy.hubspot.com",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free certification course, not a written book — hosted on HubSpot's own academy site.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry, hosted on academy.hubspot.com."
+    },
+    {
+      "title": "Principles of Management",
+      "author": "OpenStax / Rice University",
+      "freeSourceUrl": "https://openstax.org/details/books/principles-management",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free, full open-license textbook on management fundamentals.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Hosted on the official openstax.org domain."
+    }
+  ],
+  "notes": "2026-07-24: Created from scratch, merging all 30 rows from the founder-provided 'pure_water_sachet_bottled_resources.csv' (Section II.39). Six of the CSV's 10 channels could not be matched to a real, confirmable YouTube channel: Rite Water Solutions (real India-based company, not Nigeria-focused, no confirmed channel), Water Treatment Africa, Pure Water Business Nigeria, Sachet Water Machine Tech (no dedicated branded channel found — only scattered individual creator videos on the topic), Agric TV Nigeria, and Connect Nigeria as a channel (its blog is real and was kept). Six independently-verified, directly on-topic replacements were substituted to reach 10 channels: Techpoint Africa, KTN News Kenya, HubSpot, Alibaba.com Buyer Central, Learn With Shopify, plus BusinessDay NG (Wikidata-confirmed channel ID) and NairametricsTV (a real, dedicated channel launched Jan 2025) for the two source-directory citations that otherwise had no separate confirmable channel presence."
+}

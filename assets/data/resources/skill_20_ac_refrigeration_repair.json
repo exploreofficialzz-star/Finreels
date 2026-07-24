@@ -186,8 +186,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free pricing resources from the book's own official site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official markupandprofit.com domain; author is the well-established, publicly credited author of Markup & Profit.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180710-L.jpg"
+      "verificationMethod": "Hosted on the official markupandprofit.com domain; author is the well-established, publicly credited author of Markup & Profit."
     },
     {
       "title": "SBA Trade Business Guide",
@@ -196,8 +195,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free, complete trade-business startup guide hosted directly on the official sba.gov site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on a U.S. government domain.",
-      "coverUrl": ""
+      "verificationMethod": "Source directory entry, hosted on a U.S. government domain."
     },
     {
       "title": "The E-Myth Revisited (free PDF)",
@@ -206,8 +204,7 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free PDF of the well-known small-business-systems book, hosted on a third-party site — worth a direct-download check before shipping.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited."
     },
     {
       "title": "Profit First (free resources)",
@@ -216,8 +213,7 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free resources from the author's own official site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com).",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735214149-L.jpg"
+      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com)."
     },
     {
       "title": "The Lean Startup (free)",
@@ -226,8 +222,7 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free copy hosted on a third-party book site — worth a direct-download check before shipping.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Lean Startup.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Lean Startup."
     },
     {
       "title": "Atomic Habits (free)",
@@ -236,8 +231,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free copy on Internet Archive — building consistent service-call and maintenance habits.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Atomic Habits.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
+      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Atomic Habits."
     },
     {
       "title": "The Personal MBA (free)",
@@ -246,8 +240,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free copy on Internet Archive — business fundamentals without business school.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Personal MBA.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781591845188-L.jpg"
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Personal MBA."
     },
     {
       "title": "The $100 Startup (free)",
@@ -256,8 +249,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free copy on Internet Archive — starting a service business on a shoestring budget.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The $100 Startup.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307951526-L.jpg"
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The $100 Startup."
     },
     {
       "title": "Building a StoryBrand (free framework)",
@@ -266,8 +258,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free marketing-messaging framework from the book's official StoryBrand site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official storybrand.com domain.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781400201839-L.jpg"
+      "verificationMethod": "Hosted on the official storybrand.com domain."
     },
     {
       "title": "1-Page Marketing Plan (free template)",
@@ -276,8 +267,7 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free downloadable template from the book's official site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official 1pagemarketingplan.com domain.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780989711524-L.jpg"
+      "verificationMethod": "Hosted on the official 1pagemarketingplan.com domain."
     }
   ],
   "notes": "2026-07-20: Merged in the founder-provided 'ac_refrigeration_repair_resources.csv' (Section I.20), bringing the file from 2 channels / 0 blogs / 0 books to a full 10 / 10 / 10. Four of the CSV's channels could not be independently confirmed as real, dedicated YouTube channels this pass: De Koolar (real, well-documented Nigerian cold-room manufacturer — has a YouTube link on its site, but the specific channel ID wasn't confirmed), Pygar Group, Coldtech Experts, and Knightsedge Nigeria, plus the generically-named 'AC & Refrigeration TV' and 'Smart HVAC Tech'. Four independently-verified, directly on-topic replacements were substituted to reach 10 channels: HVAC School, Blue Collar Nerd, AC Service Tech LLC, and Refrigeration Mentor. 'MegaClima Nigeria' was corrected from a Facebook-only listing in the source directory to a real, confirmed YouTube channel (MegaClima Expo) and matching website (megaclimaexpo.com, replacing the source directory's facebook.com domain). Pygar Group and Coldtech Experts blogs were kept from the source directory but not independently re-confirmed live this pass."

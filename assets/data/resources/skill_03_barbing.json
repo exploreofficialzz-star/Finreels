@@ -187,8 +187,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free, complete barbershop startup guide hosted directly on the official sba.gov site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on a U.S. government domain.",
-      "coverUrl": ""
+      "verificationMethod": "Source directory entry, hosted on a U.S. government domain."
     },
     {
       "title": "Barber Business: 6-Figure Guide (200+ free videos)",
@@ -197,8 +196,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Not a written book — 200+ free educational videos on the verified Chris Bossio YouTube channel above, covering the business side of barbering.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Same channel already independently verified above.",
-      "coverUrl": ""
+      "verificationMethod": "Same channel already independently verified above."
     },
     {
       "title": "The E-Myth Revisited (free PDF)",
@@ -207,8 +205,7 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free PDF of the well-known small-business-systems book, hosted on a third-party site — worth a direct-download check before shipping.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited."
     },
     {
       "title": "Profit First (free resources)",
@@ -217,8 +214,7 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free resources from the author's own official site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com).",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735214149-L.jpg"
+      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com)."
     },
     {
       "title": "How to Win Friends and Influence People (free)",
@@ -227,8 +223,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free, public-domain-availability classic on Internet Archive — client relationships and people skills, directly applicable to running a barbershop.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of this classic title.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780671027032-L.jpg"
+      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of this classic title."
     },
     {
       "title": "1-Page Marketing Plan (free template)",
@@ -237,8 +232,7 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free downloadable template from the book's official site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official 1pagemarketingplan.com domain.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780989711524-L.jpg"
+      "verificationMethod": "Hosted on the official 1pagemarketingplan.com domain."
     },
     {
       "title": "The Lean Startup (free)",
@@ -247,8 +241,7 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free copy hosted on a third-party book site — worth a direct-download check before shipping.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Lean Startup.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Lean Startup."
     },
     {
       "title": "Rich Dad Poor Dad (free)",
@@ -257,8 +250,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free copy on Internet Archive — financial literacy fundamentals for a first-time barbershop owner.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Rich Dad Poor Dad.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781612680194-L.jpg"
+      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Rich Dad Poor Dad."
     },
     {
       "title": "Atomic Habits (free)",
@@ -267,8 +259,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free copy on Internet Archive — building the consistent habits needed to run and grow a barbershop.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Atomic Habits.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
+      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Atomic Habits."
     },
     {
       "title": "Small Business Management",
@@ -277,8 +268,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free, full open-license textbook covering small-business fundamentals — general (not barbing-specific), but directly applicable.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official openstax.org domain, a well-established open-textbook publisher.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172418-L.jpg"
+      "verificationMethod": "Hosted on the official openstax.org domain, a well-established open-textbook publisher."
     }
   ],
   "notes": "2026-07-20: Merged in 30 rows from the founder-provided 'barbing_business_resources.csv' (Section I.3), bringing the file from 0 channels / 1 blog / 0 books to a full 10 / 10 / 10. Four of the CSV's 10 channels — 'Huduma Global', 'Tuko.co.ke' (kept, but repurposed — see below), 'HustleCare', 'Barbering Techniques', and 'Barber Innovations TV' — could not be matched to a real, confirmable YouTube channel after two search passes (Huduma Global and HustleCare appear to be real businesses with real blogs, just with no dedicated/findable YouTube presence; 'Barbering Techniques' and 'Barber Innovations TV' returned no matching branded channel at all). To reach 10 verified channels, 3 independently-sourced, directly on-topic replacements were substituted: Seancutshair, Collins (equipment manufacturer), and Keller International (equipment wholesaler) — plus The Beauty Biz Agency, reused from business_08. The Tuko.co.ke channel was kept despite being a general Kenyan news channel (not barbing-specific), since the source directory's citation was for one specific human-interest story about a Nairobi barbershop manager's earnings — most of its catalog is unrelated. Two blog URLs are flagged for a pre-ship domain check: Splice (this file's existing blog.withsplice.com/feed/ entry was replaced with the CSV's splice.ng/feed/, matching the domain already verified for skill_02 this week — the two may be the same brand on different domains) and HustleCare (site currently resolves at hustlecare.net, not the CSV's hustlecare.co.ke)."

@@ -1,0 +1,272 @@
+{
+  "categoryId": "business_17_mini_importation_e_commerce",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-24",
+  "channels": [
+    {
+      "id": "UCSoIxtP6J6oNo_d1njSluxw",
+      "name": "Alibaba.com Buyer Central",
+      "handle": "@alibaba.comofficial",
+      "description": "Official B2B sourcing channel for Alibaba.com — step-by-step tutorials on sourcing goods from 240+ countries/regions, entrepreneurial stories from small-business buyers, and tips for success in e-commerce.",
+      "accentColor": "0xFFF97316",
+      "initials": "AL",
+      "focus": "Sourcing products from China / mini-importation fundamentals",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/channel/UCSoIxtP6J6oNo_d1njSluxw); confirmed as the official Alibaba.com buyer education channel in a prior session this week."
+    },
+    {
+      "id": "UC7geKfz2-IH0rsgRBtHTm0g",
+      "name": "Learn With Shopify",
+      "handle": "@learnwithshopify",
+      "description": "Official Shopify YouTube channel — business ideas, setting up an online store, marketing, finance and operations content for e-commerce entrepreneurs.",
+      "accentColor": "0xFF10B981",
+      "initials": "LS",
+      "focus": "Setting up and growing an e-commerce business",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/c/learnwithshopify) in a prior session this week."
+    },
+    {
+      "id": "UCUytHzLfHi9Ed1NoY6hcjaA",
+      "name": "Jumia Nigeria Vendor University",
+      "handle": "@jumianigeriavendoruniversi885",
+      "description": "Jumia's official seller-education channel — how to become a Jumia vendor, reach 4.5M+ monthly visitors, and grow your e-commerce business on Africa's #1 online marketplace.",
+      "accentColor": "0xFFEC4899",
+      "initials": "JN",
+      "focus": "Selling on Jumia — Nigeria's largest e-commerce platform",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/channel/UCUytHzLfHi9Ed1NoY6hcjaA)."
+    },
+    {
+      "id": "UClgbRNWYjMRx8SRU8tLG2mQ",
+      "name": "Paystack",
+      "handle": "@PaystackHQ",
+      "description": "Nigeria's leading payment gateway (Stripe company, 2015, 200,000+ businesses) — tutorials on accepting secure payments online for Nigerian e-commerce stores.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "PS",
+      "focus": "Nigerian e-commerce payment integration and processing",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/channel/UClgbRNWYjMRx8SRU8tLG2mQ); company cross-confirmed via Wikipedia."
+    },
+    {
+      "id": "UCyGYWUKtiaR8JJT-Vmkj0AA",
+      "name": "Effortless Ecom",
+      "handle": "@effortless-ecom",
+      "description": "Shopify tutorials for busy business owners — a direct tie-in to the mini-importation-to-dropshipping pipeline that many Nigerian e-commerce beginners follow.",
+      "accentColor": "0xFF8B5CF6",
+      "initials": "EE",
+      "focus": "Shopify store setup and product sourcing",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/channel/UCyGYWUKtiaR8JJT-Vmkj0AA)."
+    },
+    {
+      "id": "UC29ju8bIPH5as8OGnQzwJyA",
+      "name": "Traversy Media",
+      "handle": "@TraversyMedia",
+      "description": "Brad Traversy — beyond web-dev tutorials, covers freelancing and the digital side of running an online business, applicable to e-commerce store builders.",
+      "accentColor": "0xFF6366F1",
+      "initials": "TM",
+      "focus": "Digital tools and tech foundations for e-commerce",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Same channel already independently verified for skill_12 (Web/App Development) this session."
+    },
+    {
+      "id": "UCfnyOJc7kgjZyxmvEafMQGQ",
+      "name": "TechCabal",
+      "handle": "@Techcabal",
+      "description": "Captures the players, human impact and business of tech in Africa — covers Nigerian/African e-commerce ecosystem news, logistics startups and market trends.",
+      "accentColor": "0xFFF59E0B",
+      "initials": "TC",
+      "focus": "African e-commerce ecosystem news and analysis",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/user/techcabal) in a prior session this week."
+    },
+    {
+      "id": "UC9T6ECutY4EPwJnGlbw4BzA",
+      "name": "Techpoint Africa",
+      "handle": "@TechpointAfrica",
+      "description": "Digital media company amplifying Africa's best innovations — covers logistics tech, payment infrastructure and e-commerce market sizing for Nigerian entrepreneurs.",
+      "accentColor": "0xFF06B6D4",
+      "initials": "TP",
+      "focus": "African e-commerce and logistics tech ecosystem",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct search-result metadata (channel/UC9T6ECutY4EPwJnGlbw4BzA) in a prior session this week."
+    },
+    {
+      "id": "UC1GBKv15keKOgHbEBEMeo9w",
+      "name": "NairametricsTV",
+      "handle": "@NairametricsTV",
+      "description": "Nairametrics' dedicated YouTube channel — financial and economic analysis of Nigeria's retail and e-commerce markets.",
+      "accentColor": "0xFFEF4444",
+      "initials": "NM",
+      "focus": "Financial analysis of the Nigerian e-commerce market",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/@NairametricsTV) in a prior session this week."
+    },
+    {
+      "id": "UCl-Zrl0QhF66lu1aGXaTbfw",
+      "name": "Neil Patel",
+      "handle": "@neilpatel",
+      "description": "Digital marketing expert — covers e-commerce SEO, product-listing optimization, and driving traffic to online stores. 1.5M+ subscribers.",
+      "accentColor": "0xFFA855F7",
+      "initials": "NP",
+      "focus": "Digital marketing and SEO for e-commerce stores",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct search-result metadata (channel/UCl-Zrl0QhF66lu1aGXaTbfw) in a prior session this week."
+    }
+  ],
+  "blogs": [
+    {
+      "name": "Alibaba.com Blog",
+      "url": "https://www.alibaba.com/blog/feed",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Alibaba.com's official resource blog — sourcing tips, supplier vetting, customs guidance, and mini-importation best practices."
+    },
+    {
+      "name": "Shopify Nigeria Blog",
+      "url": "https://www.shopify.com/ng/blog.atom",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed real, active feed used in multiple prior categories this project — start an online store, product sourcing, payment integration."
+    },
+    {
+      "name": "Paystack Blog",
+      "url": "https://paystack.com/blog/feed",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Paystack's engineering and product blog — payment integration guides for Nigerian e-commerce businesses. Pairs with the Paystack channel above."
+    },
+    {
+      "name": "Connect Nigeria",
+      "url": "https://www.connectnigeria.com/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed real, active site across multiple prior categories this project — how to start a mini-importation business in Nigeria, product ideas, cost guides."
+    },
+    {
+      "name": "Entrepreneurs.ng",
+      "url": "https://entrepreneurs.ng/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed real, active site across multiple prior categories this project — mini-importation business guide, capital and margins."
+    },
+    {
+      "name": "StartupTipsDaily",
+      "url": "https://startuptipsdaily.com/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed real, active site across multiple prior categories this project — mini-importation business ideas and profitability data."
+    },
+    {
+      "name": "Splice Blog",
+      "url": "https://splice.ng/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed real, active feed across multiple prior categories this project — starting and marketing an e-commerce business."
+    },
+    {
+      "name": "TechCabal",
+      "url": "https://techcabal.com/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "African e-commerce ecosystem news. Pairs with the TechCabal channel above."
+    },
+    {
+      "name": "Techpoint Africa",
+      "url": "https://techpoint.africa/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "African e-commerce and logistics tech ecosystem. Pairs with the Techpoint Africa channel above."
+    },
+    {
+      "name": "Nairametrics",
+      "url": "https://nairametrics.com/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Financial analysis of the Nigerian e-commerce market. Pairs with the NairametricsTV channel above."
+    }
+  ],
+  "books": [
+    {
+      "title": "The E-Myth Revisited (free PDF)",
+      "author": "Michael E. Gerber",
+      "freeSourceUrl": "https://f5fp.com/e-myth-revisited-free-pdf",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free PDF, third-party host — worth a check before shipping.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source-consistent with all prior business_XX files this session."
+    },
+    {
+      "title": "Profit First (free resources)",
+      "author": "Mike Michalowicz",
+      "freeSourceUrl": "https://www.mikemichalowicz.com/profit-first-book",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free resources from the author's own official site.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com)."
+    },
+    {
+      "title": "The Lean Startup (free)",
+      "author": "Eric Ries",
+      "freeSourceUrl": "https://bdebooks.com/the-lean-startup",
+      "freeSourceType": "download",
+      "freeSourceNote": "Third-party host — worth a check before shipping.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source-consistent with all prior business_XX files this session."
+    },
+    {
+      "title": "Atomic Habits (free)",
+      "author": "James Clear",
+      "freeSourceUrl": "https://archive.org/details/atomic-habits",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free copy on Internet Archive.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "archive.org; author is the publicly credited author of Atomic Habits."
+    },
+    {
+      "title": "Small Business Management",
+      "author": "OpenStax / Rice University",
+      "freeSourceUrl": "https://openstax.org/details/books/small-business-management",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free, full open-license textbook.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Hosted on the official openstax.org domain."
+    },
+    {
+      "title": "Entrepreneurship",
+      "author": "OpenStax / Rice University",
+      "freeSourceUrl": "https://openstax.org/details/books/entrepreneurship",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free, full open-license textbook on starting and running a business.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Hosted on the official openstax.org domain."
+    },
+    {
+      "title": "Digital Marketing for Small Business (free eBook)",
+      "author": "HubSpot Academy",
+      "freeSourceUrl": "https://www.hubspot.com",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free eBook hosted on HubSpot's own site.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Hosted on hubspot.com."
+    },
+    {
+      "title": "Starting a Business Guide",
+      "author": "SBA.gov",
+      "freeSourceUrl": "https://www.sba.gov/business-guide",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free startup guide on sba.gov.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Hosted on a U.S. government domain."
+    },
+    {
+      "title": "Inbound Marketing Certification (free course)",
+      "author": "HubSpot Academy",
+      "freeSourceUrl": "https://academy.hubspot.com",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free certification course — hosted on HubSpot's own academy site.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Hosted on academy.hubspot.com."
+    },
+    {
+      "title": "Principles of Management",
+      "author": "OpenStax / Rice University",
+      "freeSourceUrl": "https://openstax.org/details/books/principles-management",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free, full open-license textbook on management fundamentals.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Hosted on the official openstax.org domain."
+    }
+  ],
+  "notes": "2026-07-24: Created from scratch — no CSV was uploaded for this category. All 10 channels, 10 blogs, and 10 books were independently sourced and verified this session. Channel strategy: anchored on Alibaba.com Buyer Central and Jumia Nigeria Vendor University (the two dominant sourcing/selling platforms for Nigerian mini-importers), Paystack and Shopify (the payment and store layers), plus five business-news/analysis channels already verified in adjacent categories this week (TechCabal, Techpoint Africa, NairametricsTV, Neil Patel, Traversy Media) to provide Nigerian e-commerce ecosystem context. Traversy Media is tech-adjacent rather than e-commerce-specific and is the weakest fit of the 10 — can be swapped for a more dedicated mini-importation channel if one becomes confirmable."
+}

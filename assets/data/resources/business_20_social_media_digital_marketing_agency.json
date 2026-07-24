@@ -1,0 +1,273 @@
+{
+  "categoryId": "business_20_social_media_digital_marketing_agency",
+  "status": "in_progress",
+  "lastUpdated": "2026-07-24",
+  "channels": [
+    {
+      "id": "UCaAx1xeTgF3rs4rBPDq6-Kw",
+      "name": "HubSpot",
+      "handle": "@HubSpot",
+      "description": "The CRM platform making it easy for companies to work together across marketing, sales and customer service — INBOUND keynotes, tutorials and customer stories on scaling a marketing agency's client base.",
+      "accentColor": "0xFFF59E0B",
+      "initials": "HS",
+      "focus": "Inbound marketing, agency scaling, and client management",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct search-result metadata (channel/UCaAx1xeTgF3rs4rBPDq6-Kw)."
+    },
+    {
+      "id": "UCl-Zrl0QhF66lu1aGXaTbfw",
+      "name": "Neil Patel",
+      "handle": "@neilpatel",
+      "description": "Digital marketing expert (Neil Patel Digital) — daily 5-minute lessons on SEO, content and agency growth strategy, 1.5M+ subscribers.",
+      "accentColor": "0xFF8B5CF6",
+      "initials": "NP",
+      "focus": "Digital marketing strategies, SEO, and agency growth",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct search-result metadata (channel/UCl-Zrl0QhF66lu1aGXaTbfw); identity cross-confirmed via Social Blade and Twaino."
+    },
+    {
+      "id": "UCS3lFRhXKfCZ8FvRqPjy9NA",
+      "name": "Social Media Examiner",
+      "handle": "@SocialMediaExaminer",
+      "description": "Helps millions of marketers connect with customers, drive traffic and increase sales — mission to help small business marketers navigate social media, hosts of Social Media Marketing World.",
+      "accentColor": "0xFF10B981",
+      "initials": "SE",
+      "focus": "Social media marketing trends and agency operations",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/user/socialmediaexaminer); organization cross-confirmed via Wikipedia."
+    },
+    {
+      "id": "UCctXZhXmG-kf3tlIXgVZUlw",
+      "name": "Gary Vaynerchuk",
+      "handle": "@garyvee",
+      "description": "Chairman of VaynerX and CEO of VaynerMedia — entrepreneurship, marketing and social-media-agency mindset content, one of the most followed business creators globally.",
+      "accentColor": "0xFFEC4899",
+      "initials": "GV",
+      "focus": "Social media strategy, agency mindset, and client acquisition",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct search-result metadata (channel/UCctXZhXmG-kf3tlIXgVZUlw)."
+    },
+    {
+      "id": "UCfnyOJc7kgjZyxmvEafMQGQ",
+      "name": "TechCabal",
+      "handle": "@Techcabal",
+      "description": "Captures the players, human impact and business of tech in Africa — coverage of the African digital marketing and advertising ecosystem.",
+      "accentColor": "0xFF6366F1",
+      "initials": "TC",
+      "focus": "African digital marketing and tech ecosystem coverage",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/user/techcabal)."
+    },
+    {
+      "id": "UCsVZWCV-LutMa89JgR8-KGw",
+      "name": "BusinessDay NG",
+      "handle": "@BusinessDayNG",
+      "description": "Nigeria's business news and video destination — market news, business analysis and sector coverage including marketing, PR and advertising.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "BD",
+      "focus": "Nigerian marketing, PR, and advertising sector news",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed official channel ID (UCsVZWCV-LutMa89JgR8-KGw) via Wikidata record for BusinessDay NG."
+    },
+    {
+      "id": "UCfAdr2V7ZckDFK2iHUPcI7g",
+      "name": "Ogilvy Africa",
+      "handle": "@ogilvyafrica",
+      "description": "The largest agency network on the continent, headquartered in Nairobi — 900 people across 40+ countries, serving AB InBev, Coca-Cola, Unilever and more; brand-building and communications strategy.",
+      "accentColor": "0xFFF97316",
+      "initials": "OA",
+      "focus": "African marketing, PR, and advertising agency operations",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct search-result metadata (channel/UCfAdr2V7ZckDFK2iHUPcI7g); agency scale cross-confirmed via LinkedIn and a Greenhouse job posting."
+    },
+    {
+      "id": "UCfe5mZb27I49XSATiOZeKJw",
+      "name": "Buffer",
+      "handle": "@buffer",
+      "description": "Social media management platform — affordable, intuitive marketing tools and content on growing an audience organically across social channels.",
+      "accentColor": "0xFFA855F7",
+      "initials": "BF",
+      "focus": "Social media scheduling, strategy and audience growth",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct search-result metadata (channel/UCfe5mZb27I49XSATiOZeKJw)."
+    },
+    {
+      "id": "UC9T6ECutY4EPwJnGlbw4BzA",
+      "name": "Techpoint Africa",
+      "handle": "@TechpointAfrica",
+      "description": "Digital media company (founded 2015) amplifying the best innovations out of Africa — covers digital marketing agency growth and the African advertising-tech ecosystem.",
+      "accentColor": "0xFF06B6D4",
+      "initials": "TP",
+      "focus": "The economics of digital marketing in Africa",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct search-result metadata (channel/UC9T6ECutY4EPwJnGlbw4BzA)."
+    },
+    {
+      "id": "UC1GBKv15keKOgHbEBEMeo9w",
+      "name": "NairametricsTV",
+      "handle": "@NairametricsTV",
+      "description": "Nairametrics' dedicated YouTube channel — financial analysis of Nigeria's economy, including the advertising and marketing sector.",
+      "accentColor": "0xFFEF4444",
+      "initials": "NM",
+      "focus": "Financial analysis of the Nigerian advertising sector",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/@NairametricsTV); launch cross-confirmed via Wikipedia.",
+      "notes": "Substituted for the source directory's 'Noah's Ark Communications' and 'Anakle' channels — both are real, well-documented Nigerian agencies (major clients include GTBank, Coca-Cola, Unilever) but neither has a confirmable dedicated YouTube channel; also substituted for 'Webcooks', which could not be independently verified."
+    }
+  ],
+  "blogs": [
+    {
+      "name": "Social Media Examiner",
+      "url": "https://www.socialmediaexaminer.com/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry: social media marketing education and agency trends. Pairs with the Social Media Examiner channel above."
+    },
+    {
+      "name": "HubSpot Blog",
+      "url": "https://blog.hubspot.com/marketing/rss.xml",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry: inbound marketing, sales, and agency client management."
+    },
+    {
+      "name": "Neil Patel Blog",
+      "url": "https://neilpatel.com/blog/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry: digital marketing, SEO, and agency growth strategies. Pairs with the Neil Patel channel above."
+    },
+    {
+      "name": "Connect Nigeria",
+      "url": "https://www.connectnigeria.com/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry: how to start a digital marketing agency in Nigeria. Confirmed real, active site across multiple prior categories this project."
+    },
+    {
+      "name": "Entrepreneurs.ng",
+      "url": "https://entrepreneurs.ng/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry: digital marketing agency guide, pricing, and margins. Confirmed real, active site across multiple prior categories this project."
+    },
+    {
+      "name": "StartupTipsDaily",
+      "url": "https://startuptipsdaily.com/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry: social media agency business ideas and data. Confirmed real, active site across multiple prior categories this project."
+    },
+    {
+      "name": "Splice Blog",
+      "url": "https://splice.ng/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory listed the domain as splice.com.ng — corrected to splice.ng, the domain independently verified for skill_02 and skill_03 earlier this project."
+    },
+    {
+      "name": "BusinessDay",
+      "url": "https://businessday.ng/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry: Nigerian marketing and advertising sector news. Pairs with the BusinessDay NG channel above."
+    },
+    {
+      "name": "Techpoint Africa",
+      "url": "https://techpoint.africa/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry: the economics of digital marketing in Africa. Pairs with the Techpoint Africa channel above."
+    },
+    {
+      "name": "Nairametrics",
+      "url": "https://nairametrics.com/feed/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry: financial analysis of the Nigerian advertising sector. Pairs with the NairametricsTV channel above."
+    }
+  ],
+  "books": [
+    {
+      "title": "The E-Myth Revisited (free PDF)",
+      "author": "Michael E. Gerber",
+      "freeSourceUrl": "https://f5fp.com/e-myth-revisited-free-pdf",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free PDF of the well-known small-business-systems book, hosted on a third-party site — worth a direct-download check before shipping.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited."
+    },
+    {
+      "title": "Profit First (free resources)",
+      "author": "Mike Michalowicz",
+      "freeSourceUrl": "https://www.mikemichalowicz.com/profit-first-book",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free resources from the author's own official site.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com)."
+    },
+    {
+      "title": "The Lean Startup (free)",
+      "author": "Eric Ries",
+      "freeSourceUrl": "https://bdebooks.com/the-lean-startup",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free copy hosted on a third-party book site — worth a direct-download check before shipping.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Lean Startup."
+    },
+    {
+      "title": "Atomic Habits (free)",
+      "author": "James Clear",
+      "freeSourceUrl": "https://archive.org/details/atomic-habits",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free copy on Internet Archive — building consistent client-delivery and content-production habits.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Atomic Habits."
+    },
+    {
+      "title": "Small Business Management",
+      "author": "OpenStax / Rice University",
+      "freeSourceUrl": "https://openstax.org/details/books/small-business-management",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free, full open-license textbook covering small-business fundamentals.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Hosted on the official openstax.org domain."
+    },
+    {
+      "title": "Entrepreneurship",
+      "author": "OpenStax / Rice University",
+      "freeSourceUrl": "https://openstax.org/details/books/entrepreneurship",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free, full open-license textbook on starting and running a business.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Hosted on the official openstax.org domain."
+    },
+    {
+      "title": "Digital Marketing for Small Business (free eBook)",
+      "author": "HubSpot Academy",
+      "freeSourceUrl": "https://www.hubspot.com",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free eBook hosted on HubSpot's own site.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry, hosted on hubspot.com."
+    },
+    {
+      "title": "Starting a Business Guide",
+      "author": "SBA.gov",
+      "freeSourceUrl": "https://www.sba.gov/business-guide",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free, complete startup guide hosted directly on the official sba.gov site.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry, hosted on a U.S. government domain."
+    },
+    {
+      "title": "Inbound Marketing Certification (free course)",
+      "author": "HubSpot Academy",
+      "freeSourceUrl": "https://academy.hubspot.com",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free certification course, not a written book — hosted on HubSpot's own academy site.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source directory entry, hosted on academy.hubspot.com."
+    },
+    {
+      "title": "Principles of Management",
+      "author": "OpenStax / Rice University",
+      "freeSourceUrl": "https://openstax.org/details/books/principles-management",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free, full open-license textbook on management fundamentals.",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Hosted on the official openstax.org domain."
+    }
+  ],
+  "notes": "2026-07-24: Created from scratch, merging all 30 rows from the founder-provided 'social_media_digital_marketing_agency_resources.csv' (Section II.40). Three of the CSV's 10 channels could not be matched to a real, confirmable YouTube channel: Noah's Ark Communications and Anakle (both real, well-documented Nigerian agencies with major-brand clients, but no confirmed dedicated channel — their Tumblr/website presence was their primary content hub), and Webcooks (could not be independently verified as a real entity this pass). Three independently-verified, directly on-topic replacements were substituted to reach 10 channels: Buffer, Techpoint Africa, and NairametricsTV."
+}

@@ -187,8 +187,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free copy on Internet Archive.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of Best Business Practices for Photographers.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781600597992-L.jpg"
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of Best Business Practices for Photographers."
     },
     {
       "title": "Book Yourself Solid (free)",
@@ -197,8 +196,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free copy on Internet Archive — client-booking system directly applicable to freelance photographers.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of Book Yourself Solid.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780470281901-L.jpg"
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of Book Yourself Solid."
     },
     {
       "title": "Building a StoryBrand (free framework)",
@@ -207,8 +205,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free marketing-messaging framework from the book's official StoryBrand site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official storybrand.com domain.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781400201839-L.jpg"
+      "verificationMethod": "Hosted on the official storybrand.com domain."
     },
     {
       "title": "1-Page Marketing Plan (free template)",
@@ -217,8 +214,7 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free downloadable template from the book's official site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official 1pagemarketingplan.com domain.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780989711524-L.jpg"
+      "verificationMethod": "Hosted on the official 1pagemarketingplan.com domain."
     },
     {
       "title": "The Pumpkin Plan (free guide)",
@@ -227,8 +223,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free guide from the author's own official site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com).",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781591844884-L.jpg"
+      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com)."
     },
     {
       "title": "Slow Productivity (free)",
@@ -237,8 +232,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free copy on Internet Archive — sustainable pacing for creative solopreneurs.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of Slow Productivity.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780593544853-L.jpg"
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of Slow Productivity."
     },
     {
       "title": "The Personal MBA (free)",
@@ -247,8 +241,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free copy on Internet Archive — business fundamentals without business school.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Personal MBA.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781591845188-L.jpg"
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Personal MBA."
     },
     {
       "title": "Atomic Habits (free)",
@@ -257,8 +250,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free copy on Internet Archive — building consistent shooting/editing/marketing habits.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Atomic Habits.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
+      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Atomic Habits."
     },
     {
       "title": "The E-Myth Revisited (free PDF)",
@@ -267,8 +259,7 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free PDF of the well-known small-business-systems book, hosted on a third-party site — worth a direct-download check before shipping.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited."
     },
     {
       "title": "Profit First (free resources)",
@@ -277,8 +268,7 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free resources from the author's own official site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com).",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735214149-L.jpg"
+      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com)."
     }
   ],
   "notes": "Photography YouTube is dominated by gear reviews and technique tutorials — real, popular, valuable for the craft, but this file prioritizes channels/entries that specifically address the business side. 2026-07-20: Merged in the founder-provided 'photography_resources.csv' (Section I.13), bringing the file from 2 channels / 0 blogs / 0 books to a full 10 / 10 / 10. Two of the CSV's channels could not be matched to a real YouTube channel: ProInvoice (real, active fintech company and blog, but no confirmed dedicated channel) and Nigerian Photographers Hub (real, active community — Instagram/podcast-first, no confirmed YouTube channel). Two independently-verified, directly on-topic replacements were substituted to reach 10 channels: Tayo Aina (prominent Nigerian filmmaker/photographer/entrepreneur) and Fstoppers (which also pairs with its own blog entry in this file). Two blog domains were corrected from the source directory: ProInvoice (proinvoice.com → proinvoice.co) and Stockframes (stockframes.com → stockframes.com.ng)."

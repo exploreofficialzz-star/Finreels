@@ -185,8 +185,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free preview content at bobbibrowncosmetics.com.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited founder of Bobbi Brown Cosmetics.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780446581356-L.jpg"
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited founder of Bobbi Brown Cosmetics."
     },
     {
       "title": "Beauty Business Startup Guide",
@@ -195,8 +194,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free beauty-business startup guide hosted directly on the official sba.gov site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on a U.S. government domain.",
-      "coverUrl": ""
+      "verificationMethod": "Source directory entry, hosted on a U.S. government domain."
     },
     {
       "title": "Influence: The Psychology of Persuasion (free)",
@@ -205,8 +203,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free copy on Internet Archive — persuasion psychology directly applicable to client consultations and sales.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Influence.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780062937650-L.jpg"
+      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Influence."
     },
     {
       "title": "Building a StoryBrand (free framework)",
@@ -215,8 +212,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free marketing-messaging framework from the book's official StoryBrand site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official storybrand.com domain.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781400201839-L.jpg"
+      "verificationMethod": "Hosted on the official storybrand.com domain."
     },
     {
       "title": "Crushing It! (1000s of free videos)",
@@ -225,8 +221,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Not a written book — thousands of free videos on personal branding and entrepreneurship on Gary Vaynerchuk's own YouTube channel.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of Crushing It!.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780062674678-L.jpg"
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of Crushing It!."
     },
     {
       "title": "The E-Myth Revisited (free PDF)",
@@ -235,8 +230,7 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free PDF of the well-known small-business-systems book, hosted on a third-party site — worth a direct-download check before shipping.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited."
     },
     {
       "title": "Profit First (free resources)",
@@ -245,8 +239,7 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free resources from the author's own official site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com).",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735214149-L.jpg"
+      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com)."
     },
     {
       "title": "1-Page Marketing Plan (free template)",
@@ -255,8 +248,7 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free downloadable template from the book's official site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official 1pagemarketingplan.com domain.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780989711524-L.jpg"
+      "verificationMethod": "Hosted on the official 1pagemarketingplan.com domain."
     },
     {
       "title": "Digital Marketing Guide",
@@ -265,8 +257,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free marketing guides hosted directly on HubSpot's own resources hub.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on hubspot.com.",
-      "coverUrl": ""
+      "verificationMethod": "Source directory entry, hosted on hubspot.com."
     },
     {
       "title": "Small Business Management",
@@ -275,8 +266,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free, full open-license textbook covering small-business fundamentals — general (not makeup-specific), but directly applicable.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official openstax.org domain, a well-established open-textbook publisher.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172418-L.jpg"
+      "verificationMethod": "Hosted on the official openstax.org domain, a well-established open-textbook publisher."
     }
   ],
   "notes": "2026-07-20: Merged in 30 rows from the founder-provided 'makeup_artistry_resources.csv' (Section I.4), bringing the file from 1 channel / 0 blogs / 0 books to a full 10 / 10 / 10. Two of the CSV's 10 channels — 'Kiki Makeup (Nigeria)' and 'Binta Beauty (Nigeria)' — could not be matched to a real, confirmable Nigerian MUA YouTube channel ('Binta Beauty' resolved instead to an unrelated Senegalese cosmetics boutique with no YouTube presence). Since the file already had 1 verified channel (Damilare Oshodi) before this merge, only 9 of the CSV's remaining channels were needed to reach 10 — Tara Fela-Durotoye (House of Tara) was substituted in for the 2 unconfirmed Nigerian entries, being an independently-verified, directly on-topic, and arguably even more prominent Nigerian makeup-business figure. Four blog entries (TrustAm, The Beauty Cognoscente, UrbanEase Nigeria, MUA Community Nigeria) had no RSS feed in the source directory (listed as N/A) — their site URLs were used as-is; worth checking each for a live /feed endpoint before shipping."

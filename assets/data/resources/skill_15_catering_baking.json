@@ -185,8 +185,7 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free PDF of the well-known small-business-systems book, hosted on a third-party site — worth a direct-download check before shipping.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited."
     },
     {
       "title": "Profit First (free resources)",
@@ -195,8 +194,7 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free resources from the author's own official site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com).",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735214149-L.jpg"
+      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com)."
     },
     {
       "title": "The Lean Startup (free)",
@@ -205,8 +203,7 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free copy hosted on a third-party book site — worth a direct-download check before shipping.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Lean Startup.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Lean Startup."
     },
     {
       "title": "Atomic Habits (free)",
@@ -215,8 +212,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free copy on Internet Archive — building consistent baking/catering production habits.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Atomic Habits.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
+      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Atomic Habits."
     },
     {
       "title": "Small Business Management",
@@ -225,8 +221,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free, full open-license textbook covering small-business fundamentals.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official openstax.org domain, a well-established open-textbook publisher.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172418-L.jpg"
+      "verificationMethod": "Hosted on the official openstax.org domain, a well-established open-textbook publisher."
     },
     {
       "title": "Entrepreneurship",
@@ -235,8 +230,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free, full open-license textbook on starting and running a business.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official openstax.org domain.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172531-L.jpg"
+      "verificationMethod": "Hosted on the official openstax.org domain."
     },
     {
       "title": "Digital Marketing for Small Business (free eBook)",
@@ -245,8 +239,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free eBook hosted on HubSpot's own site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on hubspot.com.",
-      "coverUrl": ""
+      "verificationMethod": "Source directory entry, hosted on hubspot.com."
     },
     {
       "title": "Starting a Business Guide",
@@ -255,8 +248,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free, complete startup guide hosted directly on the official sba.gov site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on a U.S. government domain.",
-      "coverUrl": ""
+      "verificationMethod": "Source directory entry, hosted on a U.S. government domain."
     },
     {
       "title": "Inbound Marketing Certification (free course)",
@@ -265,8 +257,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free certification course, not a written book — hosted on HubSpot's own academy site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on academy.hubspot.com.",
-      "coverUrl": ""
+      "verificationMethod": "Source directory entry, hosted on academy.hubspot.com."
     },
     {
       "title": "Principles of Management",
@@ -275,8 +266,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free, full open-license textbook on management fundamentals.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official openstax.org domain.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172296-L.jpg"
+      "verificationMethod": "Hosted on the official openstax.org domain."
     }
   ],
   "notes": "2026-07-20: The founder-provided 'catering_baking_resources.csv' contained only real data for its 10 books — all 10 channels and all 10 blogs were unresolved placeholders ('Business Channel 1'–'10', 'generic.com'), unlike every other CSV processed this project. Channels and blogs for this category were therefore independently sourced and verified from scratch rather than merged from the CSV. Real, rich Nigeria-specific business content exists in blog form (WithinNigeria's 'Complete Guide to Starting a Catering Business in Nigeria for Owambe Events') — confirmed and added this pass. Two channels (Sussy's Cakes Recipes, Diary of a Kitchen Lover) are primarily recipe/technique content with a real but secondary business thread, flagged individually rather than presented as pure business channels."
