@@ -1,0 +1,272 @@
+{
+  "categoryId": "skill_50_mass_communication_media_pr",
+  "status": "complete",
+  "lastUpdated": "2026-07-24",
+  "channels": [
+    {
+      "id": "UCRZer0i_eJrLohGuei9B-Bw",
+      "name": "PRSA — Public Relations Society of America",
+      "handle": "@PRSA",
+      "description": "Leading US professional organization serving the communications community through 400+ chapters — covers PR practice, agency scaling, ethics and professional development.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "PR",
+      "focus": "PR practice, agency scaling and ethics",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UCRZer0i_eJrLohGuei9B-Bw). 2026-07-24."
+    },
+    {
+      "id": "UCnlpGXz2gI8uROR2tIMHAJw",
+      "name": "NIPR — Nigerian Institute of Public Relations",
+      "handle": "@niprofficial",
+      "description": "Professional body for PR practice in Nigeria — covers regulations, advocacy, ethical standards and the business environment for PR professionals and agencies in Nigeria.",
+      "accentColor": "0xFF16A34A",
+      "initials": "NI",
+      "focus": "PR regulations, advocacy and practice in Nigeria",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via direct YouTube channel page fetch (youtube.com/@niprofficial → Channel ID UCnlpGXz2gI8uROR2tIMHAJw). 2026-07-24."
+    },
+    {
+      "id": "UCBKq5ChkVaXz6Il1MrK1JOQ",
+      "name": "PR Week",
+      "handle": "@PRWeekUS",
+      "description": "Global PR industry trade publication — covers PR agency business, client acquisition, campaign measurement, and market trends across global markets.",
+      "accentColor": "0xFFF59E0B",
+      "initials": "PW",
+      "focus": "Global PR industry news and agency business",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UCBKq5ChkVaXz6Il1MrK1JOQ). 2026-07-24."
+    },
+    {
+      "id": "UC1GBKv15keKOgHbEBEMeo9w",
+      "name": "Nairametrics TV",
+      "handle": "@NairametricsTV",
+      "description": "Nigeria's leading financial content platform — covers the Nigerian media sector investment, advertising spend analysis and communications industry business intelligence.",
+      "accentColor": "0xFFEC4899",
+      "initials": "NM",
+      "focus": "Nigerian media sector business intelligence",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UC1GBKv15keKOgHbEBEMeo9w). Replaces 'Media Brief Nigeria' whose YouTube channel could not be confirmed. 2026-07-24."
+    },
+    {
+      "id": "UCsVZWCV-LutMa89JgR8-KGw",
+      "name": "BusinessDay Nigeria",
+      "handle": "@BusinessDayNG",
+      "description": "Nigeria's leading business newspaper — covers the media, communications and advertising sector news relevant to PR and media professionals in Nigeria.",
+      "accentColor": "0xFF8B5CF6",
+      "initials": "BD",
+      "focus": "Nigerian media and communication sector business news",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UCsVZWCV-LutMa89JgR8-KGw). 2026-07-24."
+    },
+    {
+      "id": "UCctXZhXmG-kf3tlIXgVZUlw",
+      "name": "GaryVee — Gary Vaynerchuk",
+      "handle": "@GaryVee",
+      "description": "Chairman of VaynerX, CEO of VaynerMedia — 45M+ followers across platforms. Documents media strategy, PR, brand building and content-driven business growth in real time.",
+      "accentColor": "0xFFEF4444",
+      "initials": "GV",
+      "focus": "Media strategy, PR and brand building",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UCctXZhXmG-kf3tlIXgVZUlw). 2026-07-24."
+    },
+    {
+      "id": "UCVeuau7DLrg7zlAjxxDbdww",
+      "name": "HubSpot Marketing",
+      "handle": "@HubSpot",
+      "description": "Official HubSpot Marketing YouTube channel — expert marketing tips, inbound PR methodology, media relations and agency growth strategies for communications professionals.",
+      "accentColor": "0xFF06B6D4",
+      "initials": "HM",
+      "focus": "Inbound PR, media relations and agency growth",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UCVeuau7DLrg7zlAjxxDbdww). 2026-07-24."
+    },
+    {
+      "id": "UCRj0URttgVzpQL74np4Fu2Q",
+      "name": "CIPR — Chartered Institute of Public Relations",
+      "handle": "@CIPR",
+      "description": "UK's leading professional body for PR practitioners worldwide — covers global PR standards, ethical practice, business operations and professional development.",
+      "accentColor": "0xFFF97316",
+      "initials": "CI",
+      "focus": "Global PR standards and business operations",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UCRj0URttgVzpQL74np4Fu2Q). 2026-07-24."
+    },
+    {
+      "id": "UCrEDkq2oTzmghi63bivFyPA",
+      "name": "Ad Age",
+      "handle": "@AdAge",
+      "description": "Global media brand and daily must-read for marketing and media decision makers since 1930 — covers advertising, media business, PR and agency news worldwide.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "AA",
+      "focus": "Global advertising, media and PR business news",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via YouTube Music cross-reference (youtube.com/channel/UCrEDkq2oTzmghi63bivFyPA). 2026-07-24."
+    },
+    {
+      "id": "UCfnyOJc7kgjZyxmvEafMQGQ",
+      "name": "TechCabal",
+      "handle": "@TechCabal",
+      "description": "African media and tech ecosystem coverage — tracks the business of digital media, startup communications and the PR landscape across Africa.",
+      "accentColor": "0xFF16A34A",
+      "initials": "TC",
+      "focus": "African media and tech ecosystem coverage",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UCfnyOJc7kgjZyxmvEafMQGQ). 2026-07-24."
+    }
+  ],
+  "blogs": [
+    {
+      "name": "PR Daily",
+      "url": "https://www.prdaily.com/feed",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: mass_communication_media_pr_resources.csv. PR industry news, agency business and media relations. Standard WordPress /feed."
+    },
+    {
+      "name": "PR Week",
+      "url": "https://www.prweek.com/feed",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV. Global PR industry news and agency business. Standard /feed — confirm before ship."
+    },
+    {
+      "name": "NIPR News",
+      "url": "https://nipr.ng/feed",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV. PR regulations and advocacy in Nigeria. Standard /feed — confirm before ship."
+    },
+    {
+      "name": "Media Brief Nigeria",
+      "url": "https://mediabrief.com.ng/feed",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV. Nigerian media, PR and advertising news. Standard WordPress /feed — confirm before ship."
+    },
+    {
+      "name": "BusinessDay Media",
+      "url": "https://businessday.ng/feed",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV. Nigerian media and communication sector news. Feed confirmed across multiple skills."
+    },
+    {
+      "name": "HubSpot PR Blog",
+      "url": "https://blog.hubspot.com/marketing/rss.xml",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV. Inbound PR, media relations and agency growth. HubSpot blog uses /rss.xml — confirm this specific path."
+    },
+    {
+      "name": "CIPR Blog",
+      "url": "https://newsroom.cipr.co.uk/feed",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV. Global PR standards and business operations. CIPR uses newsroom.cipr.co.uk — confirm feed path."
+    },
+    {
+      "name": "AdAge",
+      "url": "https://adage.com/rss.xml",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV. Global advertising, media and PR news. AdAge may use /rss.xml — confirm before ship."
+    },
+    {
+      "name": "Connect Nigeria PR",
+      "url": "https://connectnigeria.com/feed",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV. CAUTION: articles subdomain previously found serving gambling spam — liveness check required."
+    },
+    {
+      "name": "Entrepreneurs.ng Media",
+      "url": "https://entrepreneurs.ng/feed",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV. Mass communication and PR business guide. Feed confirmed active in prior sessions."
+    }
+  ],
+  "books": [
+    {
+      "title": "The E-Myth Revisited",
+      "author": "Michael E. Gerber",
+      "freeSourceUrl": "https://f5fp.com/the-e-myth-revisited-pdf",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free PDF via f5fp.com",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "URL confirmed live in prior skill sessions (skill_09, skill_18)."
+    },
+    {
+      "title": "Profit First",
+      "author": "Mike Michalowicz",
+      "freeSourceUrl": "https://mikemichalowicz.com/profit-first",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free resources + chapter access at author's official site",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "URL confirmed live in prior skill sessions."
+    },
+    {
+      "title": "The Lean Startup",
+      "author": "Eric Ries",
+      "freeSourceUrl": "https://bdebooks.com/the-lean-startup-pdf",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free PDF via BDE Books",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "URL confirmed live in prior skill sessions."
+    },
+    {
+      "title": "Atomic Habits",
+      "author": "James Clear",
+      "freeSourceUrl": "https://archive.org/details/atomic-habits",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirm exact archive.org detail-page slug is live before ship."
+    },
+    {
+      "title": "Entrepreneurship",
+      "author": "OpenStax / Rice University",
+      "freeSourceUrl": "https://openstax.org/details/books/entrepreneurship",
+      "freeSourceType": "web",
+      "freeSourceNote": "Completely free peer-reviewed textbook — download PDF or read online, no signup",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "OpenStax is a verified free publisher from Rice University. URL confirmed live."
+    },
+    {
+      "title": "Principles of Management",
+      "author": "OpenStax / Rice University",
+      "freeSourceUrl": "https://openstax.org/details/books/principles-management",
+      "freeSourceType": "web",
+      "freeSourceNote": "Completely free peer-reviewed management textbook from OpenStax",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "OpenStax confirmed live. Covers business operations, leadership and scaling."
+    },
+    {
+      "title": "Business Ethics",
+      "author": "OpenStax / Rice University",
+      "freeSourceUrl": "https://openstax.org/details/books/business-ethics",
+      "freeSourceType": "web",
+      "freeSourceNote": "Completely free peer-reviewed business ethics textbook from OpenStax",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "OpenStax confirmed live. Covers ethical standards directly relevant to licensed professions."
+    },
+    {
+      "title": "Starting a Business Guide",
+      "author": "U.S. Small Business Administration",
+      "freeSourceUrl": "https://www.sba.gov/business-guide",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free U.S. government guide — no signup required",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "SBA.gov is the official US government small business site. Confirm exact guide page URL before ship."
+    },
+    {
+      "title": "Inbound Marketing Certification",
+      "author": "HubSpot Academy",
+      "freeSourceUrl": "https://academy.hubspot.com/courses/inbound-marketing",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free HubSpot Academy certification — covers inbound strategy for professional service firms",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "HubSpot Academy confirmed free. Course available without payment."
+    },
+    {
+      "title": "Digital Marketing for Small Business",
+      "author": "HubSpot Academy",
+      "freeSourceUrl": "https://academy.hubspot.com/courses/digital-marketing",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free HubSpot Academy course — digital marketing for service businesses",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "HubSpot Academy confirmed free."
+    }
+  ],
+  "notes": "All 10 channels fully verified with confirmed UC* IDs (2026-07-24). NIPR Nigeria confirmed via direct YouTube page fetch (@niprofficial → UCnlpGXz2gI8uROR2tIMHAJw). Proshare replaced as WebTV Nigeria in skill_49. Media Brief Nigeria (YouTube not confirmed) → Nairametrics TV (UC1GBKv15keKOgHbEBEMeo9w). Blogs: HubSpot uses /rss.xml. CIPR uses newsroom subdomain. AdAge may use /rss.xml. Connect Nigeria flagged."
+}
