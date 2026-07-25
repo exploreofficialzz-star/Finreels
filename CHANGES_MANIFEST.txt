@@ -1,30 +1,60 @@
-FinReels — Round 5 — Cover URLs for all 43 category resource files
-====================================================================
+FinReels — Round 6 — Video performance, date ordering, and content search
+==========================================================================
 Extract into your project root, overwriting at the same paths.
 
-WHAT CHANGED
-All 43 files under assets/data/resources/ are included.
-186 books across skills and professions were processed.
+NEW FILE
+--------
+lib/screens/content_search_screen.dart  (780 lines)
+    Full in-app content search with the 2-column results layout from
+    the design brief:
+      LEFT  column — Shorts (9:16 portrait cards, tap → ShortsPlayerScreen)
+      RIGHT column — Videos, Blogs, Books (16:9 cards, tap → correct screen)
+    
+    Search sources: all loaded videos/shorts + all books + blog articles
+    from the cached RSS feeds (same scope as the Blogs tab, no extra
+    network call if already cached).
+    
+    Matching: each query word is tested against title (×2 score), description
+    (×1), and source/channel name (×0.5). Results scoring > 0 are included,
+    sorted by score desc then by date desc within the same score.
+    
+    Debounced: waits 300ms after the user stops typing before running the
+    search, so the screen never flickers while they're mid-word.
+    
+    Type badges: Video (blue), Short (purple), Blog (green), Book (amber)
+    — same visual language as the reference screenshot.
 
-Cover URL results:
-  151/186 (81%) — real cover images from Open Library (ISBN-based,
-                  most reliable), Internet Archive /services/img/,
-                  OpenStax CDN, and publisher CDNs
-  35/186  (19%) — genuinely not books (SBA.gov government guides,
-                  HubSpot certification courses, YouTube channels,
-                  podcasts, online articles) — no book cover exists
-                  for these; they correctly show the gold placeholder
+MODIFIED (3)
+------------
+lib/screens/home_screen.dart
+    1. Search icon now opens ContentSearchScreen (in-app content search)
+       instead of DiscoverScreen (category browser). DiscoverScreen is still
+       reachable from its own navigation path.
+    2. Added cacheExtent: 350 to the Videos tab ListView.builder — limits
+       how far beyond the viewport Flutter renders cards. Without this bound,
+       Flutter eagerly builds cards well off-screen, pre-warming WebViews for
+       content the user may never reach and generating VisibilityDetector
+       callbacks for every scroll frame. 350 ≈ one card height below the
+       fold: enough for smooth scrolling without unbounded WebView creation.
 
-Common books appearing across multiple categories (E-Myth Revisited,
-Profit First, Lean Startup, Atomic Habits, Built to Sell, The $100
-Startup, Good to Great, Personal MBA, Rework, StoryBrand, Traction,
-Rich Dad Poor Dad, How to Win Friends, etc.) all now have Open Library
-ISBN cover URLs. These are the exact same URL format the general books
-already use (Global Grey, archive.org, gutenberg.org).
+lib/providers/feed_provider.dart
+    _compute() for Videos and Shorts tabs now calls _dateMixed() instead of
+    _roundRobin(). _roundRobin interleaved by channel-slot (newest from
+    channel A, newest from channel B, channel C...) without caring about the
+    actual upload dates across channels. _dateMixed():
+      1. Sorts all videos globally by publishedAt descending (newest first)
+      2. Gives category-channel videos a 3-day effective-date boost so the
+         content the user explicitly selected surfaces above equally-old
+         general content — without hiding genuinely newer general content
+      3. Applies a diversity pass: no more than 2 consecutive videos from
+         the same channel (excess videos are appended at the end)
+    _roundRobin is kept (still used by the Blogs tab, which doesn't need
+    date ordering since blog articles from BlogRssService are already sorted
+    by their own publish date via _sortArticles).
+    Added allFeedVideos and allBooksForSearch getters for ContentSearchScreen.
 
-All null fields across all 43 files cleaned in the same pass
-(only one was found — the author:null bug already fixed in Round 3,
-confirmed zero remaining nulls).
-
-NOTHING ELSE CHANGED — this round is resource JSON files only.
-The Dart code changes from Rounds 3 and 4 are already applied.
+lib/widgets/inline_video_card.dart
+    _onTap() now calls seekTo(Duration.zero) before play() on every tap,
+    including the pre-warmed path. Guarantees the video always starts from
+    the very beginning regardless of any position the iframe may have
+    accumulated during pre-warm initialisation.

@@ -115,6 +115,15 @@ class FeedProvider extends ChangeNotifier {
   List<Channel> get channels => ChannelData.combined;
   List<Video> getVideosFor(String channelId) => _videosByChannel[channelId] ?? [];
 
+  /// All currently-loaded videos and shorts (excluding books) — used by
+  /// ContentSearchScreen for in-app full-text search. Returns a flat list;
+  /// the search screen filters by type (isShort, channelId, etc.) itself.
+  List<Video> get allFeedVideos =>
+      _videosByChannel.values.expand((v) => v).toList();
+
+  /// All books currently in the Books tab — used by ContentSearchScreen.
+  List<Video> get allBooksForSearch => _allBookVideos;
+
   // ── Per-tab cached list ───────────────────────────────────────────────────────
 
   List<Video> get feedVideos => _tabCache[_activeTab] ??= _compute(_activeTab);
@@ -122,14 +131,62 @@ class FeedProvider extends ChangeNotifier {
   List<Video> _compute(FeedTab tab) {
     final all = _videosByChannel.values.expand((v) => v).toList();
     return switch (tab) {
+      // Videos and Shorts: date-mixed (newest first globally, category
+      // channels softly boosted, no more than 2 consecutive same-channel).
+      // Replaces the old round-robin which interleaved by channel-slot rather
+      // than by actual upload date, causing older content from some channels
+      // to appear above newer content from others.
       FeedTab.videos =>
-        _roundRobin(all.where((v) => !v.isShort && !_isBook(v)).toList()),
+        _dateMixed(all.where((v) => !v.isShort && !_isBook(v)).toList()),
       FeedTab.shorts =>
-        _roundRobin(all.where((v) => v.isShort && !_isBook(v)).toList()),
+        _dateMixed(all.where((v) => v.isShort  && !_isBook(v)).toList()),
       FeedTab.blogs  =>
         _roundRobin(all.where((v) => _isBlog(v) && !_isBook(v)).toList()),
       FeedTab.books  => List.unmodifiable(_allBookVideos),
     };
+  }
+
+  /// Date-first feed ordering with soft category boost and channel diversity.
+  ///
+  /// Three rules in priority order:
+  /// 1. Globally newest first — a video uploaded today from any channel
+  ///    always ranks above one uploaded last week, regardless of channel.
+  /// 2. Category channels get a 3-day effective-date boost so the content
+  ///    the user explicitly asked for surfaces above equally-old general
+  ///    content. The 3-day value is small enough not to override genuinely
+  ///    newer general content.
+  /// 3. No more than 2 consecutive from the same channel — deferred videos
+  ///    that would break this rule are appended at the end of the list,
+  ///    so the top of the feed is never monopolised by one prolific channel.
+  List<Video> _dateMixed(List<Video> videos) {
+    if (videos.isEmpty) return const [];
+    final selected = UserProfileService.instance.selectedCategoryIds;
+
+    final withDate = videos.map((v) {
+      final ch = ChannelData.combined.where((c) => c.id == v.channelId).firstOrNull;
+      final isCat = ch?.resourceCategoryId != null &&
+          selected.contains(ch!.resourceCategoryId);
+      return (video: v, date: isCat
+          ? v.publishedAt.add(const Duration(days: 3))
+          : v.publishedAt);
+    }).toList()
+      ..sort((a, b) => b.date.compareTo(a.date));
+
+    // Diversity pass — no channel appearing more than twice consecutively.
+    final out      = <Video>[];
+    final deferred = <Video>[];
+    String? prev1, prev2;
+    for (final rec in withDate) {
+      final id = rec.video.channelId;
+      if (id == prev1 && id == prev2) {
+        deferred.add(rec.video);
+      } else {
+        out.add(rec.video);
+        prev2 = prev1;
+        prev1 = id;
+      }
+    }
+    return List.unmodifiable([...out, ...deferred]);
   }
 
   /// The original 10 hand-picked classics/playbooks, plus real named books

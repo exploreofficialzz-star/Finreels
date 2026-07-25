@@ -211,16 +211,18 @@ class _InlineVideoCardState extends State<InlineVideoCard>
 
   void _onTap() {
     if (_controller == null) {
-      // No pre-warm happened yet (e.g. user tapped within the first
-      // instant the card appeared, faster than the visibility callback
-      // could fire) — fall back to creating on-demand. The reveal-delay
-      // in _markReady still protects against any flash in this case.
+      // No pre-warm yet — create on-demand with autoPlay:true.
+      // _markReady() will play when the iframe signals ready.
       _createController(autoPlay: true);
     } else if (!_expanded) {
-      // Pre-warmed already — the WebView has likely already finished its
-      // own initialisation while the user was still scrolling/browsing,
-      // so this should reveal close to instantly.
-      _controller!.play();
+      // Pre-warmed. Always seek to the beginning before playing, so the
+      // video starts at 0:00 regardless of any position the pre-warm phase
+      // might have introduced (e.g. the iframe briefly advanced during
+      // initialisation or the user re-taps after reaching end-of-video
+      // and the overlay was dismissed without replay).
+      _controller!
+        ..seekTo(Duration.zero)
+        ..play();
     }
     if (mounted) setState(() { _expanded = true; _ended = false; });
     updateKeepAlive();

@@ -20,6 +20,7 @@ import '../widgets/shimmer_loader.dart';
 import 'blog_feed_screen.dart';
 import 'blog_reader_screen.dart';
 import 'book_detail_screen.dart';
+import 'content_search_screen.dart';
 import 'discover_screen.dart';
 import 'shorts_player_screen.dart';
 
@@ -67,7 +68,7 @@ class _AppHeader extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.search_rounded, color: AppTheme.textMuted(context)),
             onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute(builder: (_) => const DiscoverScreen()),
+              MaterialPageRoute(builder: (_) => const ContentSearchScreen()),
             ),
           ),
           IconButton(
@@ -213,6 +214,13 @@ class _FeedBodyState extends State<_FeedBody> {
       onRefresh: () => provider.refresh(force: true),
       child: ListView.builder(
         physics: const ClampingScrollPhysics(),
+        // Bound how far beyond the viewport Flutter builds items.
+        // Without this Flutter eagerly renders cards well off-screen,
+        // triggering VisibilityDetector callbacks and pre-warming WebViews
+        // for cards the user may never reach — causing scroll jank on
+        // lower-end devices. 350 ≈ 1 card height below the fold: enough
+        // for smooth scrolling without building the whole list at once.
+        cacheExtent: 350,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 120),
         itemCount: videos.length,
         itemBuilder: (context, i) {
