@@ -1,0 +1,1058 @@
+{
+  "categoryId": "_general",
+  "status": "verified",
+  "lastUpdated": "2026-07-25",
+  "channels": [
+    {
+      "id": "UCQXg8BIj8E7G9JA7nUM3f8Q",
+      "name": "Dayo Adetiloye Business Hub",
+      "handle": "@DayoAdetiloye",
+      "description": "Nigerian business coach — practical entrepreneurship education covering business plans, MSME funding, CAC registration and how to grow a sustainable business in Nigeria.",
+      "accentColor": "0xFFD97706",
+      "initials": "DA",
+      "focus": "Entrepreneurship",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by direct YouTube page fetch (youtube.com/@DayoAdetiloye)."
+    },
+    {
+      "id": "UCwRPAU9cS3eviZXpnNICWEQ",
+      "name": "JP Iwuoha — Smallstarter Africa",
+      "handle": "@jp_iwuoha",
+      "description": "JP Iwuoha's pan-African entrepreneurship platform — business strategy, Africa-specific case studies and practical guides for building profitable businesses on the continent.",
+      "accentColor": "0xFF4F46E5",
+      "initials": "SA",
+      "focus": "Strategy",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by fetching youtube.com/c/Smallstarter. CSV handle @Smallstarter rebranded to @jp_iwuoha — same channel, same ID."
+    },
+    {
+      "id": "UCViMtEKJwprTvdFm-lgqZOg",
+      "name": "Insightpreneur",
+      "handle": "@Insightpreneur",
+      "description": "Nigerian entrepreneurship platform — podcasts and video content on business mindset, financial growth and building profitable ventures in the Nigerian market.",
+      "accentColor": "0xFF7C3AED",
+      "initials": "IN",
+      "focus": "Mindset",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by direct YouTube page fetch (youtube.com/@Insightpreneur)."
+    },
+    {
+      "id": "UCNoJsMk3CtkBwWAD71meCxQ",
+      "name": "Naijapreneur",
+      "handle": "@Naija.preneur",
+      "description": "Nigerian business media platform — podcasts and content on entrepreneurship, SME development and financial growth for Made-in-Nigeria entrepreneurs.",
+      "accentColor": "0xFF7C3AED",
+      "initials": "NJP",
+      "focus": "Mindset",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by fetching youtube.com/@naija.preneur. CSV handle @Naijapreneur (404) corrected to @Naija.preneur."
+    },
+    {
+      "id": "",
+      "name": "Valu.ng",
+      "handle": "@ValuNG",
+      "description": "Nigerian business valuation and entrepreneurship education — covers how to value a business, financial fundamentals and building investor-ready companies in Nigeria.",
+      "accentColor": "0xFF059669",
+      "initials": "VN",
+      "focus": "Finance",
+      "verifiedOn": null,
+      "verificationMethod": "CSV handle @ValuNG returns 404. No YouTube channel found for Valu.ng after exhaustive search. The brand's online presence is primarily their website. RECOMMENDATION: Remove from channels until a YouTube presence is confirmed via valu.ng directly."
+    },
+    {
+      "id": "UCtSUi-VTktXgU0Hjyo3-2SA",
+      "name": "SMEDAN Nigeria",
+      "handle": "@SMEDANNigeria",
+      "description": "Official channel of Nigeria's Small and Medium Enterprises Development Agency — business training, grant opportunities, CAC guidance and government MSME support programmes.",
+      "accentColor": "0xFF64748B",
+      "initials": "SN",
+      "focus": "Government",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID UCtSUi-VTktXgU0Hjyo3-2SA confirmed from YouTube search result titled 'SMEDAN'. Channel uses old /channel/ URL format without a confirmed @handle. CSV handle @SMEDANNigeria returns 404 — verify actual @handle by visiting the channel page."
+    },
+    {
+      "id": "UCsVZWCV-LutMa89JgR8-KGw",
+      "name": "BusinessDay Nigeria",
+      "handle": "@BDTV-NG",
+      "description": "Nigeria's leading business newspaper video channel — breaking business news, economic analysis, market updates and interviews with top Nigerian business leaders.",
+      "accentColor": "0xFF475569",
+      "initials": "BD",
+      "focus": "News",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by fetching youtube.com/@BDTV-NG. CRITICAL CORRECTION: CSV handle @BusinessDayTV (404) is a South African channel — NOT the Nigerian BusinessDay. Correct Nigerian handle is @BDTV-NG."
+    },
+    {
+      "id": "UC1GBKv15keKOgHbEBEMeo9w",
+      "name": "Nairametrics TV",
+      "handle": "@NairametricsTV",
+      "description": "Nigeria's authoritative financial and business news video channel — market analysis, economic reports, sector coverage and financial literacy content for Nigerian investors and business owners.",
+      "accentColor": "0xFF059669",
+      "initials": "NM",
+      "focus": "Finance",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by fetching youtube.com/@NairametricsTV. CSV handle @Nairametrics (404) corrected to @NairametricsTV — Nairametrics launched their dedicated YouTube channel in Jan 2025."
+    },
+    {
+      "id": "UC9T6ECutY4EPwJnGlbw4BzA",
+      "name": "Techpoint Africa",
+      "handle": "@TechpointAfrica",
+      "description": "Africa's leading tech and startup ecosystem coverage — startup news, founder interviews, funding announcements and technology trends shaping business across the continent.",
+      "accentColor": "0xFF0891B2",
+      "initials": "TA",
+      "focus": "Tech",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by direct YouTube page fetch (youtube.com/@TechpointAfrica)."
+    },
+    {
+      "id": "",
+      "name": "Disrupt Africa",
+      "handle": "@DisruptAfrica",
+      "description": "Pan-African startup news, funding rounds and entrepreneurship — covers innovation ecosystems, VC activity and the entrepreneurs building Africa's next wave of companies.",
+      "accentColor": "0xFF2DD4BF",
+      "initials": "DI",
+      "focus": "Startup",
+      "verifiedOn": null,
+      "verificationMethod": "CSV handle @DisruptAfrica returns 404. Confirmed: Disrupt Africa has no standalone YouTube channel — they operate as a blog (disrupt-africa.com) and podcast (Soundcloud/Spotify only). RECOMMENDATION: Remove from channels; already included in blogs list."
+    },
+    {
+      "id": "UCbhADZ0qpHjXpbApNEjzvgw",
+      "name": "Africa's Young Entrepreneurs",
+      "handle": "@africasy0ungentrepreneurs",
+      "description": "Pan-African entrepreneurship organisation — founder stories, practical business education and a network connecting Africa's next generation of entrepreneurs.",
+      "accentColor": "0xFFD97706",
+      "initials": "AY",
+      "focus": "Entrepreneurship",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by fetching youtube.com/channel/UCbhADZ0qpHjXpbApNEjzvgw. CSV handle @AfricasYoungEntrepreneurs (404) corrected to @africasy0ungentrepreneurs (note: zero '0' not letter 'O' in 'y0ung')."
+    },
+    {
+      "id": "UCctXZhXmG-kf3tlIXgVZUlw",
+      "name": "Gary Vaynerchuk",
+      "handle": "@garyvee",
+      "description": "Serial entrepreneur and CEO of VaynerMedia — business strategy, social media marketing, brand building and the mindset behind building multi-million-dollar companies.",
+      "accentColor": "0xFF2563EB",
+      "initials": "GV",
+      "focus": "Marketing",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by direct YouTube page fetch (youtube.com/@garyvee)."
+    },
+    {
+      "id": "UCl-Zrl0QhF66lu1aGXaTbfw",
+      "name": "Neil Patel",
+      "handle": "@NeilPatel",
+      "description": "World's leading digital marketer — SEO, content marketing, business growth strategy and how to drive traffic and sales for any business, from startup to scale.",
+      "accentColor": "0xFF2563EB",
+      "initials": "NP",
+      "focus": "Marketing",
+      "verifiedOn": "2026-07-18",
+      "verificationMethod": "ID previously confirmed in FinReels channel_data.dart. NOTE: Neil Patel also exists in ChannelData.all — may produce duplicate feed entries. Deduplicate at app layer."
+    },
+    {
+      "id": "UCP_hbxsBuAf7TD1-r3da49Q",
+      "name": "Seth Godin",
+      "handle": "@sethgodin",
+      "description": "Marketing philosopher and entrepreneur — permission marketing, building tribes and the ideas that have shaped modern marketing and business thinking globally.",
+      "accentColor": "0xFF2563EB",
+      "initials": "SG",
+      "focus": "Marketing",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by fetching youtube.com/user/sethgodin. CSV handle @ThisIsSethsBlog (404) corrected to @sethgodin."
+    },
+    {
+      "id": "UCaAx1xeTgF3rs4rBPDq6-Kw",
+      "name": "HubSpot",
+      "handle": "@HubSpot",
+      "description": "HubSpot's main channel — inbound marketing, sales enablement, CRM strategy and customer service education for businesses at every stage of growth.",
+      "accentColor": "0xFFFF7A59",
+      "initials": "HS",
+      "focus": "Marketing",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by direct YouTube page fetch (youtube.com/@HubSpot). NOTE: FinReels channel_data.dart includes @HubSpotMarketing — @HubSpot is the main channel. Confirm both are needed before shipping."
+    },
+    {
+      "id": "UCznv7Vf9nBdJYvBagFdAHWw",
+      "name": "Tim Ferriss",
+      "handle": "@TimFerriss",
+      "description": "Author of The 4-Hour Work Week — lifestyle design, business optimisation, interviews with world-class performers and systems for working less while achieving more.",
+      "accentColor": "0xFF8B5CF6",
+      "initials": "TF",
+      "focus": "Productivity",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by direct YouTube page fetch (youtube.com/@TimFerriss)."
+    },
+    {
+      "id": "UCoOae5nYA7VqaXzerajD0lg",
+      "name": "Ali Abdaal",
+      "handle": "@aliabdaal",
+      "description": "Doctor turned creator and entrepreneur — evidence-based productivity, building a YouTube-driven business, passive income strategies and the science of doing work you enjoy.",
+      "accentColor": "0xFF8B5CF6",
+      "initials": "AA",
+      "focus": "Productivity",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by direct YouTube page fetch (youtube.com/@aliabdaal)."
+    },
+    {
+      "id": "UCJLMboBYME_CLEfwsduI0wQ",
+      "name": "Tony Robbins",
+      "handle": "@TonyRobbinsLive",
+      "description": "Peak performance coach — business strategy, wealth mindset, personal development and the psychology behind building extraordinary businesses and a fulfilling life.",
+      "accentColor": "0xFF7C3AED",
+      "initials": "TR",
+      "focus": "Mindset",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by fetching youtube.com/channel/UCJLMboBYME_CLEfwsduI0wQ. CSV handle @TonyRobbins (404) corrected to @TonyRobbinsLive."
+    },
+    {
+      "id": "UCdlNK1xcy-Sn8liq7feNxWw",
+      "name": "Grant Cardone",
+      "handle": "@GrantCardone",
+      "description": "Sales trainer and real estate investor — 10X mindset, sales mastery, business scaling and the relentless work ethic required to build multiple income streams.",
+      "accentColor": "0xFFEA580C",
+      "initials": "GC",
+      "focus": "Sales",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by direct YouTube page fetch (youtube.com/@GrantCardone)."
+    },
+    {
+      "id": "UCIHdDJ0tjn_3j-FS7s_X1kQ",
+      "name": "Valuetainment",
+      "handle": "@Valuetainment",
+      "description": "Patrick Bet-David's business channel — entrepreneurship case studies, strategy breakdowns, founder interviews and the mindset and tactics behind building empires.",
+      "accentColor": "0xFF4F46E5",
+      "initials": "VT",
+      "focus": "Strategy",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by direct YouTube page fetch (youtube.com/@Valuetainment)."
+    },
+    {
+      "id": "UCn-hX1cX2CrQdyDh-qik1ZA",
+      "name": "How I Built This",
+      "handle": "@HowIBuiltThis",
+      "description": "Guy Raz's NPR podcast series — founder interviews on how the world's best-known brands were built from scratch, covering the struggles and turning points behind iconic businesses.",
+      "accentColor": "0xFFCA8A04",
+      "initials": "GR",
+      "focus": "Stories",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by direct YouTube page fetch (youtube.com/@HowIBuiltThis)."
+    },
+    {
+      "id": "UCIv38OrggTu3vNkCAo96-CQ",
+      "name": "Shopify",
+      "handle": "@Shopify",
+      "description": "Shopify's official channel — e-commerce business education, how to start and scale an online store, entrepreneur success stories and practical product business guides.",
+      "accentColor": "0xFF0284C7",
+      "initials": "SH",
+      "focus": "E-commerce",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by direct YouTube page fetch (youtube.com/@Shopify)."
+    },
+    {
+      "id": "UC7ZddA__ewP3AtDefjl_tWg",
+      "name": "Ramit Sethi",
+      "handle": "@RamitSethi",
+      "description": "Personal finance and business psychology — pricing strategy, money systems, online business building and the psychological barriers that keep people from earning what they deserve.",
+      "accentColor": "0xFF059669",
+      "initials": "RS",
+      "focus": "Finance",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by direct YouTube page fetch (youtube.com/@RamitSethi)."
+    },
+    {
+      "id": "UC-b3c7kxa5vU-bnmaROgvog",
+      "name": "The Futur",
+      "handle": "@thefutur",
+      "description": "Chris Do's platform for creative entrepreneurs — pricing services, positioning a creative business, sales conversations for creatives and turning skill into a profitable practice.",
+      "accentColor": "0xFF9333EA",
+      "initials": "TFH",
+      "focus": "Pricing",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by fetching youtube.com/@thefutur. CSV handle @TheFuturHQ (404) corrected to @thefutur."
+    },
+    {
+      "id": "UCXc_P8cKMbUvHFyDwAtz--Q",
+      "name": "Michael Kitces",
+      "handle": "@MichaelKitces",
+      "description": "Financial advisor practice management — pricing, client acquisition, business systems and how to build a sustainable, profitable professional practice.",
+      "accentColor": "0xFF0F766E",
+      "initials": "MK",
+      "focus": "Practice Mgmt",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by direct YouTube page fetch (youtube.com/@MichaelKitces)."
+    },
+    {
+      "id": "UC7xCozKOVFdCZRV7gclrM6A",
+      "name": "Business of Architecture",
+      "handle": "@BusinessofArchitecture",
+      "description": "Enoch Sears' practice management education applicable across all professions — pricing services, getting clients, contracts and running a professional practice as a real business.",
+      "accentColor": "0xFF0F766E",
+      "initials": "BA",
+      "focus": "Practice",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by direct YouTube page fetch (youtube.com/@BusinessofArchitecture)."
+    },
+    {
+      "id": "UCQuLmwdlNzJXtnBKl5rpnRg",
+      "name": "Mike Michalowicz",
+      "handle": "@MikeMichalowiczOfficial",
+      "description": "Author of Profit First, The Pumpkin Plan and Fix This Next — cash flow systems, making a business permanently profitable and operational clarity for small business owners.",
+      "accentColor": "0xFF059669",
+      "initials": "MM",
+      "focus": "Finance",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by fetching youtube.com/c/MikeMichalowiczOfficial. CSV handle @MikeMichalowicz (404) corrected to @MikeMichalowiczOfficial."
+    },
+    {
+      "id": "UCghGOFhJxMQl28jYD6NNKrw",
+      "name": "Entrepreneurs.ng",
+      "handle": "@EntrepreneursNg",
+      "description": "Nigeria's entrepreneurship hub — practical guides for starting and growing businesses in Nigeria, covering registration, funding, marketing and real stories from Nigerian entrepreneurs.",
+      "accentColor": "0xFFD97706",
+      "initials": "EN",
+      "focus": "Entrepreneurship",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by direct YouTube page fetch (youtube.com/@EntrepreneursNG). YouTube stores as @EntrepreneursNg."
+    },
+    {
+      "id": "UCwSEKXMVMzeDLEti4XA5rJg",
+      "name": "Connect Nigeria",
+      "handle": "@ConnectNigeria",
+      "description": "Nigerian business and lifestyle platform — directory content and guides for navigating the Nigerian business landscape across multiple industries.",
+      "accentColor": "0xFF6366F1",
+      "initials": "CN",
+      "focus": "Directory",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by direct YouTube page fetch (youtube.com/@ConnectNigeria). Caution: articles.connectnigeria.com (subdomain) returned gambling spam in a prior session — the main channel appears clean but verify."
+    },
+    {
+      "id": "",
+      "name": "SME Digest Nigeria",
+      "handle": "@SMEDigest",
+      "description": "Nigerian small business management content — practical material covering marketing, customer relations and the day-to-day operational challenges facing Nigerian SME owners.",
+      "accentColor": "0xFFDC2626",
+      "initials": "SD",
+      "focus": "SME Focus",
+      "verifiedOn": null,
+      "verificationMethod": "CSV handle @SMEDigest returns 404. Confirmed: SME Digest Nigeria has no standalone YouTube channel — they operate primarily as a blog/newsletter (smedigest.ng) and on Twitter/X (@SME_Digest). RECOMMENDATION: Remove from channels; already included in blogs list."
+    },
+    {
+      "id": "",
+      "name": "Kippa Africa",
+      "handle": "@KippaAfrica",
+      "description": "African SME finance app — bookkeeping, debt tracking and financial education for small business owners.",
+      "accentColor": "0xFF15803D",
+      "initials": "KA",
+      "focus": "Tools",
+      "verifiedOn": null,
+      "verificationMethod": "CSV handle @KippaAfrica returns 404. IMPORTANT: Kippa's bookkeeping app went offline in January 2024 and the company pivoted to edtech. The app is effectively defunct. No YouTube channel confirmed. RECOMMENDATION: Remove both channel and blog entries; Kippa Africa is no longer an active SME tools provider."
+    },
+    {
+      "id": "UCKeFGEk3I60qN2XqFMKvp7A",
+      "name": "Bumpa",
+      "handle": "@getbumpa",
+      "description": "Nigeria's retail and social-commerce management app — helps Nigerian businesses manage orders, track sales and build their brand across Instagram, WhatsApp and physical stores.",
+      "accentColor": "0xFF15803D",
+      "initials": "BN",
+      "focus": "Tools",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by fetching youtube.com/channel/UCKeFGEk3I60qN2XqFMKvp7A. CSV handle @BumpaApp (404) corrected to @getbumpa."
+    },
+    {
+      "id": "UCB5asCefuEYQKVVyyAn-l5g",
+      "name": "Wale Marketer",
+      "handle": "@WaleMarketer",
+      "description": "Nigerian digital marketing freelancer based in Lagos — pricing guides, social media marketing and branding content for Nigerian small business owners across multiple trades.",
+      "accentColor": "0xFF9333EA",
+      "initials": "WM",
+      "focus": "Pricing",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by direct YouTube page fetch (youtube.com/@WaleMarketer)."
+    },
+    {
+      "id": "",
+      "name": "Bintus Art and Everything",
+      "handle": "@BintusArtandEverything",
+      "description": "Nigerian digital marketing agency — business setup guides, branding and what it takes to start skill-based businesses in Nigeria across multiple trades.",
+      "accentColor": "0xFFB45309",
+      "initials": "BT",
+      "focus": "Multi-Trade",
+      "verifiedOn": null,
+      "verificationMethod": "CSV handle @BintusArtandEverything returns 404. Confirmed: Bintus Art and Everything is a digital marketing agency operating primarily via blog and Medium — no YouTube channel found. RECOMMENDATION: Remove from channels; already included in blogs list."
+    },
+    {
+      "id": "UCgwFAX01m1tT0XyqU19WGtw",
+      "name": "ServiceTitan",
+      "handle": "@ServiceTitan",
+      "description": "Trade business management platform — education on running a professional trades business covering pricing, scheduling, customer experience and scaling a service company.",
+      "accentColor": "0xFF1D4ED8",
+      "initials": "ST",
+      "focus": "Trades",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by direct YouTube page fetch (youtube.com/@ServiceTitan)."
+    },
+    {
+      "id": "UCJuKXh3mKH4lQR7WZo446QQ",
+      "name": "Markup & Profit",
+      "handle": "@MarkupAndProfit",
+      "description": "Michael C. Stone's contractor pricing and business management resources — how to calculate real markup, charge profitable prices and run a contracting business that makes money.",
+      "accentColor": "0xFF9333EA",
+      "initials": "MP",
+      "focus": "Pricing",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by direct YouTube page fetch (youtube.com/@MarkupandProfit). YouTube stores as @MarkupAndProfit."
+    },
+    {
+      "id": "UCFDbjGkGmL6rdvccHyfK-Wg",
+      "name": "ITF Nigeria",
+      "handle": "@ITFNigeria",
+      "description": "Nigeria's Industrial Training Fund — vocational training, apprenticeship programmes, trade skills development and government support for skills acquisition across the country.",
+      "accentColor": "0xFF64748B",
+      "initials": "IT",
+      "focus": "Government",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by direct YouTube page fetch (youtube.com/@ITFNigeria)."
+    },
+    {
+      "id": "UCTMwZmHH1VNLA2viHKwbvoA",
+      "name": "Nic Haralambous",
+      "handle": "@nharalambous",
+      "description": "South African serial entrepreneur and product builder — business mindset, practical systems for doing meaningful work, lessons from multiple business exits and 20+ years building companies.",
+      "accentColor": "0xFF7C3AED",
+      "initials": "NH",
+      "focus": "Mindset",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by fetching youtube.com/c/nicharrybiz. CSV handle @NicHaralambous (404) corrected to @nharalambous."
+    },
+    {
+      "id": "UCg6RiS5WcNHz1bXDlerho_Q",
+      "name": "Built in Africa",
+      "handle": "@BuiltInAfrica",
+      "description": "African startup profiles and founder interviews — real stories from the businesses and people behind Africa's most innovative companies and the ecosystem they are building.",
+      "accentColor": "0xFF2DD4BF",
+      "initials": "BI",
+      "focus": "Startup",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by direct YouTube page fetch (youtube.com/@BuiltInAfrica)."
+    },
+    {
+      "id": "UCpUkYQk0KKneOLClC5VUmWg",
+      "name": "Radio 702 — The Money Show",
+      "handle": "@radio702",
+      "description": "Radio 702's official YouTube channel — home of The Money Show, South Africa's leading business radio programme covering markets, economics and major business stories.",
+      "accentColor": "0xFF059669",
+      "initials": "MS",
+      "focus": "Finance",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "ID confirmed by fetching youtube.com/@radio702. CSV listed @TheMoneyShow (404) — The Money Show has no standalone channel; clips are published on Radio 702's channel. IMPORTANT: Bruce Whitfield left The Money Show in June 2024; the show is now hosted by Stephen Grootes."
+    }
+  ],
+  "blogs": [
+    {
+      "name": "Profitable Venture",
+      "url": "https://profitableventure.com/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "Experts.ng",
+      "url": "https://experts.ng/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "SME Digest",
+      "url": "https://smedigest.ng/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "The Total Entrepreneurs",
+      "url": "https://thetotalentrepreneurs.com/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "Insight.ng",
+      "url": "https://insight.ng/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "Mecer Consulting",
+      "url": "https://mecerconsulting.com/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "Klakpad Blog",
+      "url": "https://klakpad.com/blog/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "Venture Africa",
+      "url": "https://ventureafrica.com/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "Entrepreneurs.ng",
+      "url": "https://entrepreneurs.ng/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "Feed URL consistent with /feed/ pattern used in confirmed skill JSON files."
+    },
+    {
+      "name": "Connect Nigeria",
+      "url": "https://connectnigeria.com/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern. Caution: articles.connectnigeria.com (subdomain) returned gambling spam in a prior session — verify this main domain feed."
+    },
+    {
+      "name": "StartupTipsDaily",
+      "url": "https://startuptipsdaily.com/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "BusinessDay Nigeria",
+      "url": "https://businessday.ng/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "Nairametrics",
+      "url": "https://nairametrics.com/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "Techpoint Africa",
+      "url": "https://techpoint.africa/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "Disrupt Africa",
+      "url": "https://disrupt-africa.com/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "SMEDAN",
+      "url": "https://smedan.gov.ng/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "Government site — may not have standard RSS. If this URL 404s, remove entry."
+    },
+    {
+      "name": "HubSpot Blog",
+      "url": "https://blog.hubspot.com/marketing/rss.xml",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "RSS URL confirmed from HubSpot documentation and multiple third-party sources: blog.hubspot.com/marketing/rss.xml is the confirmed marketing blog RSS feed. Previous URL (rss.xml) corrected."
+    },
+    {
+      "name": "Buffer Blog",
+      "url": "https://buffer.com/library/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "Shopify Blog",
+      "url": "https://www.shopify.com/blogs/news.atom",
+      "verifiedOn": "2026-07-25",
+      "verificationMethod": "Shopify uses Atom format (.atom) not /feed/ for their blog RSS. URL pattern confirmed from Shopify documentation: domain/blogs/blogname.atom. Shopify's company blog slug is 'news'. Previous URL (blog/news/rss) corrected."
+    },
+    {
+      "name": "Neil Patel Blog",
+      "url": "https://neilpatel.com/blog/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "Content Marketing Institute",
+      "url": "https://contentmarketinginstitute.com/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "Social Media Examiner",
+      "url": "https://www.socialmediaexaminer.com/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "QuickBooks Blog",
+      "url": "https://quickbooks.intuit.com/r/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "Intuit/QuickBooks may not use standard /feed/ — confirm this URL returns XML before shipping."
+    },
+    {
+      "name": "Wave Accounting Blog",
+      "url": "https://www.waveapps.com/blog/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "Wave uses a custom blog platform — confirm URL returns XML before shipping."
+    },
+    {
+      "name": "FreshBooks Blog",
+      "url": "https://www.freshbooks.com/blog/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "Smallstarter Africa",
+      "url": "https://smallstarter.com/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "Africa's Young Entrepreneurs",
+      "url": "https://africasyoungentrepreneurs.com/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "Bellanaija",
+      "url": "https://www.bellanaija.com/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "Zikoko",
+      "url": "https://zikoko.com/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "Proshare Nigeria",
+      "url": "https://proshareng.com/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern. Financial news sites sometimes use custom feed paths — confirm."
+    },
+    {
+      "name": "Splice Blog",
+      "url": "https://splice.com.ng/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "Bintus Art and Everything",
+      "url": "https://bintusartandeverything.com/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "WaleMarketer",
+      "url": "https://walemarketer.com/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "VisCorner",
+      "url": "https://viscorner.com/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "Kippa Africa Blog",
+      "url": "https://kippa.africa/blog/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "IMPORTANT: Kippa's bookkeeping app went offline Jan 2024; company pivoted to edtech. Blog may be inactive. Confirm before shipping — if blog is inactive, remove this entry."
+    },
+    {
+      "name": "Prospa Nigeria",
+      "url": "https://prospa.ng/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "Prospa is a fintech company — blog may not follow /feed/ pattern. Confirm URL returns XML before shipping."
+    },
+    {
+      "name": "Markup & Profit",
+      "url": "https://markupandprofit.com/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "ServiceTitan Blog",
+      "url": "https://www.servicetitan.com/blog/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "Enterprise software blog — may use non-standard feed path. Confirm URL returns XML before shipping."
+    },
+    {
+      "name": "Elite Trades",
+      "url": "https://elitetrad.es/feed/",
+      "verifiedOn": null,
+      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+    },
+    {
+      "name": "McKinsey Africa",
+      "url": "https://www.mckinsey.com/rss/latest.rss",
+      "verifiedOn": null,
+      "verificationMethod": "McKinsey's general RSS feed — covers ALL McKinsey content, not Africa-specific. Confirm feed is active and consider whether a more targeted Africa/MEA feed exists at mckinsey.com."
+    }
+  ],
+  "books": [
+    {
+      "title": "The E-Myth Revisited",
+      "author": "Michael E. Gerber",
+      "freeSourceUrl": "https://f5fp.com/the-e-myth-revisited/",
+      "freeSourceType": "download",
+      "freeSourceNote": "Third-party PDF hosting. The definitive guide to building a business as a system, not a job.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Third-party host — confirm file is live."
+    },
+    {
+      "title": "Profit First",
+      "author": "Mike Michalowicz",
+      "freeSourceUrl": "https://mikemichalowicz.com/profit-first/",
+      "freeSourceType": "web",
+      "freeSourceNote": "Official author site — free chapter and resources for the Profit First cash management system.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet."
+    },
+    {
+      "title": "The Lean Startup",
+      "author": "Eric Ries",
+      "freeSourceUrl": "https://bdebooks.com/books/the-lean-startup/",
+      "freeSourceType": "download",
+      "freeSourceNote": "Third-party PDF hosting. The validated learning framework for building products faster with less waste.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Third-party host — confirm file is live."
+    },
+    {
+      "title": "Rich Dad Poor Dad",
+      "author": "Robert Kiyosaki",
+      "freeSourceUrl": "https://archive.org/details/RichDadPoorDad",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. Foundational book on assets vs liabilities and how the wealthy think about money.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org — borrowing may require a free account."
+    },
+    {
+      "title": "The Personal MBA",
+      "author": "Josh Kaufman",
+      "freeSourceUrl": "https://archive.org/details/ThePersonalMBA",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. A self-taught MBA covering every major business skill.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "Atomic Habits",
+      "author": "James Clear",
+      "freeSourceUrl": "https://archive.org/details/AtomicHabits",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. The systems-based approach to building consistent business disciplines.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "Good to Great",
+      "author": "Jim Collins",
+      "freeSourceUrl": "https://archive.org/details/GoodToGreat",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. Collins' research on what separates great, enduring companies from merely good ones.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "Building a StoryBrand",
+      "author": "Donald Miller",
+      "freeSourceUrl": "https://storybrand.com/resources/",
+      "freeSourceType": "web",
+      "freeSourceNote": "Official StoryBrand site — free worksheets and summaries of the 7-part brand messaging framework.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet."
+    },
+    {
+      "title": "1-Page Marketing Plan",
+      "author": "Allan Dib",
+      "freeSourceUrl": "https://1pagemarketingplan.com/",
+      "freeSourceType": "web",
+      "freeSourceNote": "Official book site — free marketing plan template and resources.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet."
+    },
+    {
+      "title": "The $100 Startup",
+      "author": "Chris Guillebeau",
+      "freeSourceUrl": "https://archive.org/details/The100Startup",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. Real stories of profitable businesses built for under $100.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "Zero to One",
+      "author": "Peter Thiel",
+      "freeSourceUrl": "https://archive.org/details/ZeroToOne",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. Thiel's contrarian thinking on building startups that create genuine monopolies.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "The Hard Thing About Hard Things",
+      "author": "Ben Horowitz",
+      "freeSourceUrl": "https://archive.org/details/TheHardThingAboutHardThings",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. Brutally honest lessons on building and running a company through every crisis.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "How to Win Friends and Influence People",
+      "author": "Dale Carnegie",
+      "freeSourceUrl": "https://www.gutenberg.org/files/1147/1147-h/1147-h.htm",
+      "freeSourceType": "web",
+      "freeSourceNote": "Available via Project Gutenberg. Verify Gutenberg ID 1147 maps to the Carnegie title before shipping.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Gutenberg ID should be confirmed independently."
+    },
+    {
+      "title": "Deep Work",
+      "author": "Cal Newport",
+      "freeSourceUrl": "https://archive.org/details/DeepWork",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. Framework for focused, distraction-free work that produces the most valuable output.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "The 4-Hour Work Week",
+      "author": "Tim Ferriss",
+      "freeSourceUrl": "https://archive.org/details/The4HourWorkweek",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. The lifestyle design and business automation playbook.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "Traction",
+      "author": "Gino Wickman",
+      "freeSourceUrl": "https://archive.org/details/Traction",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. The Entrepreneurial Operating System (EOS) for getting a business organised and scaling it.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "Crushing It!",
+      "author": "Gary Vaynerchuk",
+      "freeSourceUrl": "https://www.youtube.com/@garyvee",
+      "freeSourceType": "web",
+      "freeSourceNote": "Linked to Gary Vee's YouTube channel — the book's core concepts on personal branding are covered extensively in his free video content.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Links to YouTube channel, not a free book copy."
+    },
+    {
+      "title": "Influence: The Psychology of Persuasion",
+      "author": "Robert Cialdini",
+      "freeSourceUrl": "https://archive.org/details/Influence",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. The six principles of persuasion — essential for anyone in sales or marketing.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "How Much Should I Charge?",
+      "author": "Ellen Rohr",
+      "freeSourceUrl": "https://archive.org/details/HowMuchShouldICharge",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. Practical guide to calculating a real hourly rate and setting prices that produce profit.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "Markup & Profit",
+      "author": "Michael C. Stone",
+      "freeSourceUrl": "https://markupandprofit.com/",
+      "freeSourceType": "web",
+      "freeSourceNote": "Official Markup & Profit site — free articles, calculators and resources on contractor pricing.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet."
+    },
+    {
+      "title": "Built to Sell",
+      "author": "John Warrillow",
+      "freeSourceUrl": "https://builttosell.com/",
+      "freeSourceType": "web",
+      "freeSourceNote": "Official Built to Sell site — free resources and podcast on creating a business that can run without you.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet."
+    },
+    {
+      "title": "The Pumpkin Plan",
+      "author": "Mike Michalowicz",
+      "freeSourceUrl": "https://mikemichalowicz.com/the-pumpkin-plan/",
+      "freeSourceType": "web",
+      "freeSourceNote": "Official author site — free chapter and resources on focusing on best clients to grow an extraordinary business.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet."
+    },
+    {
+      "title": "Book Yourself Solid",
+      "author": "Michael Port",
+      "freeSourceUrl": "https://archive.org/details/BookYourselfSolid",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. The complete client-acquisition system for service professionals.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "Contagious: Why Things Catch On",
+      "author": "Jonah Berger",
+      "freeSourceUrl": "https://archive.org/details/Contagious",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. The STEPPS framework for making products and businesses spread through word of mouth.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "Think and Grow Rich",
+      "author": "Napoleon Hill",
+      "freeSourceUrl": "https://www.gutenberg.org/files/39056/39056-h/39056-h.htm",
+      "freeSourceType": "web",
+      "freeSourceNote": "Available freely via Project Gutenberg — public domain (1937). Classic success philosophy on mindset, desire and persistence.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Gutenberg ID 39056 — confirm maps to Think and Grow Rich."
+    },
+    {
+      "title": "The 7 Habits of Highly Effective People",
+      "author": "Stephen R. Covey",
+      "freeSourceUrl": "https://archive.org/details/7HabitsOfHighlyEffectivePeople",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. Covey's principles-centred approach to personal and professional effectiveness.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "Mindset: The New Psychology of Success",
+      "author": "Carol S. Dweck",
+      "freeSourceUrl": "https://archive.org/details/Mindset",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. Dweck's research on fixed vs. growth mindsets — foundational psychology for entrepreneurial resilience.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "Grit: The Power of Passion and Perseverance",
+      "author": "Angela Duckworth",
+      "freeSourceUrl": "https://archive.org/details/Grit",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. Why passion and persistence predict success more than raw talent.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "Do. Fail. Learn. Repeat.",
+      "author": "Nic Haralambous",
+      "freeSourceUrl": "https://archive.org/details/DoFailLearnRepeat",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. South African entrepreneur on real lessons from multiple business failures across Africa.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org — confirm availability; less widely distributed title."
+    },
+    {
+      "title": "Shoe Dog",
+      "author": "Phil Knight",
+      "freeSourceUrl": "https://archive.org/details/ShoeDog",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. Phil Knight's memoir on building Nike from zero — one of the most honest founder stories ever written.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "The Intelligent Investor",
+      "author": "Benjamin Graham",
+      "freeSourceUrl": "https://archive.org/details/TheIntelligentInvestor",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. Warren Buffett's favourite book — foundational text on value investing for business owners.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "Tools of Titans",
+      "author": "Tim Ferriss",
+      "freeSourceUrl": "https://archive.org/details/ToolsOfTitans",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. Ferriss distils tactics and habits of 200+ world-class performers.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "Rework",
+      "author": "Jason Fried & David Heinemeier Hansson",
+      "freeSourceUrl": "https://archive.org/details/Rework",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. Basecamp founders on a simpler, leaner way to build a business.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "Company of One",
+      "author": "Paul Jarvis",
+      "freeSourceUrl": "https://archive.org/details/CompanyOfOne",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. The case for staying intentionally small and building a profitable solo business.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "The Innovator's Dilemma",
+      "author": "Clayton M. Christensen",
+      "freeSourceUrl": "https://archive.org/details/TheInnovatorsDilemma",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. Christensen's landmark research on how disruptive innovation upends established markets.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "Essentialism: The Disciplined Pursuit of Less",
+      "author": "Greg McKeown",
+      "freeSourceUrl": "https://archive.org/details/Essentialism",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. The discipline of focusing only on what is absolutely essential.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "Never Split the Difference",
+      "author": "Chris Voss",
+      "freeSourceUrl": "https://archive.org/details/NeverSplitTheDifference",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. FBI negotiator's tactics applied to business — how to get what you want.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "Blue Ocean Strategy",
+      "author": "W. Chan Kim & Renée Mauborgne",
+      "freeSourceUrl": "https://www.blueoceanstrategy.com/",
+      "freeSourceType": "web",
+      "freeSourceNote": "Official Blue Ocean Strategy site — free tools, case studies and frameworks for creating uncontested market space.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet."
+    },
+    {
+      "title": "The Art of Possibility",
+      "author": "Rosamund Stone Zander & Benjamin Zander",
+      "freeSourceUrl": "https://archive.org/details/TheArtOfPossibility",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. Transforming practices for leadership, relationship and creativity.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    },
+    {
+      "title": "The Slight Edge",
+      "author": "Jeff Olson",
+      "freeSourceUrl": "https://archive.org/details/TheSlightEdge",
+      "freeSourceType": "download",
+      "freeSourceNote": "Available via Internet Archive. Philosophy of small daily actions that compound into dramatic business results.",
+      "verifiedOn": null,
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+    }
+  ],
+  "actionRequired": [
+    "CHANNELS — 5 entries with empty IDs are confirmed as having NO YouTube channel. Recommended action per entry is in verificationMethod. Short summary: Valu.ng (no channel found), Disrupt Africa (remove — blog only), SME Digest Nigeria (remove — blog only), Kippa Africa (remove — defunct since Jan 2024), Bintus Art and Everything (remove — blog only). The Money Show was resolved: now points to Radio 702 (@radio702, UCpUkYQk0KKneOLClC5VUmWg).",
+    "CHANNEL DUPLICATE — Neil Patel (UCl-Zrl0QhF66lu1aGXaTbfw) already exists in ChannelData.all. Deduplicate at app layer or remove from this file.",
+    "BLOG RSS — HubSpot corrected to blog.hubspot.com/marketing/rss.xml. Shopify corrected to shopify.com/blogs/news.atom. The following blogs need a live curl test before shipping (non-WordPress or uncertain): SMEDAN (gov site may have no RSS), QuickBooks, Wave Accounting, Kippa Africa (app defunct — remove?), Prospa Nigeria, ServiceTitan, McKinsey Africa.",
+    "BOOKS — All archive.org entries require borrowing a free Internet Archive account. Confirm availability. The 'How to Win Friends' Gutenberg ID (1147) and 'Think and Grow Rich' ID (39056) should be independently verified.",
+    "BRUCE WHITFIELD — Left The Money Show in June 2024. Show now hosted by Stephen Grootes on Radio 702. Update any app copy that references Whitfield by name."
+  ]
+    }
