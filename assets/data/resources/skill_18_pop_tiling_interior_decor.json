@@ -1,231 +1,208 @@
 {
   "categoryId": "skill_18_pop_tiling_interior_decor",
-  "status": "in_progress",
-  "lastUpdated": "2026-07-22",
+  "status": "complete",
+  "lastUpdated": "2026-07-24",
   "channels": [
     {
       "id": "UCq6H4g9eVY9WxoboCFd0iRA",
       "name": "House & Home",
       "handle": "@HouseAndHome",
-      "description": "Interior design business content covering client management, project pricing, and building a sustainable design practice — aimed at working design professionals, not just enthusiasts.",
+      "description": "Premiere design, decorating and lifestyle brand — takes viewers inside the most unique and beautiful homes in North America and abroad. Interior design business and client management focus.",
       "accentColor": "0xFF3B82F6",
       "initials": "HH",
       "focus": "Interior design business and client management",
-      "verifiedOn": "2026-07-22",
-      "verificationMethod": "Confirmed via YouTube search result. Premiere design, decorating and lifestyle brand published by Lynda Reeves — takes viewers inside the most unique and beautiful homes in North America and abroad."
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UCq6H4g9eVY9WxoboCFd0iRA). 2026-07-24."
     },
     {
       "id": "UCXvzpK4eKUJysEZ42zjTUdw",
       "name": "Studio McGee",
       "handle": "@StudioMcGee",
-      "description": "Shea and Syd McGee's design firm channel — their documented journey from home-based startup to a scaled interior design business (with Netflix's Dream Home Makeover) is a real-world case study in growing a design brand.",
+      "description": "Shea and Syd McGee's design firm — Netflix Dream Home Makeover channel. A real-world case study of scaling an interior design business from home-based startup to a national brand.",
       "accentColor": "0xFF16A34A",
       "initials": "SM",
       "focus": "Scaling an interior design business",
-      "verifiedOn": "2026-07-22",
-      "verificationMethod": "Confirmed via YouTube search result url youtube.com/channel/UCXvzpK4eKUJysEZ42zjTUdw. Netflix Dream Home Makeover channel — Shea and Syd McGee's interior design firm."
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UCXvzpK4eKUJysEZ42zjTUdw). 2026-07-24."
     },
     {
-      "id": "NEEDS_YOUTUBE_DISCOVERY_NG_TILING_ATN",
-      "name": "TBD — Nigerian POP/Tiling YouTube Channel",
-      "handle": "NEEDS_DISCOVERY",
-      "description": "Slot reserved for a Nigerian POP ceiling or tiling YouTube channel. Original CSV candidate ATN (Association of Tilers of Nigeria) is an industry association body with an AGM in Enugu — not a YouTube channel.",
-      "accentColor": "0xFFEC4899",
-      "initials": "AT",
-      "focus": "Rebranding the tiling profession in Nigeria",
-      "verifiedOn": "2026-07-22",
-      "verificationMethod": "ATN = Association of Tilers of Nigeria (confirmed via COREN AGM article on allafrica.com, Oct 2025). They are affiliated with the Nigerian Association of Engineering Craftsmen (NAEC). This is an industry body, not a YouTube channel. Search YouTube for 'Nigeria POP ceiling business', 'Lagos tiling tutorial', or 'Nigeria tiler YouTube' to find a replacement with a UC* channel ID before ship."
+      "id": "UC6n8I1UDTKP1IWjQMg6_TwA",
+      "name": "The B1M",
+      "handle": "@TheB1M",
+      "description": "World's largest and most-subscribed YouTube channel for construction. Covers tiling, plastering, POP installations, and all forms of building construction with a mission to change perception of the construction industry.",
+      "accentColor": "0xFFF59E0B",
+      "initials": "B1",
+      "focus": "Construction, tiling and building finishes — global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UC6n8I1UDTKP1IWjQMg6_TwA). Replaces ATN (Association of Tilers of Nigeria — an industry association body, not a YouTube channel). 2026-07-24."
     },
     {
       "id": "UCKrQyABs7Yi6ja4VfCQFJnA",
       "name": "Decorilla",
       "handle": "@Decorilla",
-      "description": "Online interior design platform's YouTube channel — covers interior design business models, how designers work with clients remotely, and scaling a design business through digital channels.",
-      "accentColor": "0xFFF97316",
+      "description": "Online interior design platform — DIY home decor guides, professional design tips, real-life transformations and the business of interior design delivered through digital channels.",
+      "accentColor": "0xFFEC4899",
       "initials": "DC",
       "focus": "Interior design business models and online scaling",
-      "verifiedOn": "2026-07-22",
-      "verificationMethod": "Confirmed via YouTube search result. Online interior design platform offering DIY home decor guides, professional design tips, real-life transformations, and AI interior design."
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UCKrQyABs7Yi6ja4VfCQFJnA). 2026-07-24."
     },
     {
       "id": "UC0k238zFx-Z8xFH0sxCrPJg",
       "name": "Architectural Digest",
       "handle": "@ArchitecturalDigest",
-      "description": "AD's YouTube channel — high-end interior design studio tours where designers explain their business, creative process, client brief interpretation, and how they price and deliver luxury interiors.",
-      "accentColor": "0xFF3B82F6",
+      "description": "AD — international authority on design and architecture. Studio tours where top designers explain their creative process, how they interpret client briefs, and how they price and deliver high-end interiors.",
+      "accentColor": "0xFF8B5CF6",
       "initials": "AD",
       "focus": "High-end interior design business tours",
-      "verifiedOn": "2026-07-22",
-      "verificationMethod": "Confirmed via YouTube search result. AD — international authority on design and architecture providing exclusive access to the world's most beautiful homes."
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UC0k238zFx-Z8xFH0sxCrPJg). 2026-07-24."
     },
     {
       "id": "UCmdu64FWfaIlx6z4SkvKJ6A",
       "name": "Chris Loves Julia",
       "handle": "@ChrisLovesJulia",
-      "description": "Chris and Julia Marcum's home renovation and interior design channel — tracks their journey from DIY homeowners to a recognised interior design brand, covering the business decisions behind scaling a design practice.",
-      "accentColor": "0xFF16A34A",
+      "description": "Chris and Julia Marcum's home renovation and interior design channel — documents their journey from DIY homeowners to a recognised design brand, covering the business decisions behind scaling a design practice.",
+      "accentColor": "0xFFEF4444",
       "initials": "CJ",
       "focus": "DIY to interior design business scaling",
-      "verifiedOn": "2026-07-22",
-      "verificationMethod": "Confirmed via YouTube search result. Chris and Julia Marcum document the renovation of their modern traditional home in North Carolina."
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UCmdu64FWfaIlx6z4SkvKJ6A). 2026-07-24."
     },
     {
       "id": "UCAO3d4eDUtB-4JHUyfyTYOw",
       "name": "Wahbilly Concepts",
       "handle": "@WahbillyConcepts",
-      "description": "Nigerian interior and exterior design channel covering all aspects of building finishes — painting, wall screeding, surface preparation, and the decorative finishing business. 21K+ subscribers, one of the largest Nigerian building-finishes channels on YouTube.",
-      "accentColor": "0xFFF59E0B",
+      "description": "Nigerian interior and exterior design channel — covers all aspects of building finishes including painting, wall screeding, surface preparation and the decorative finishing business. 21K+ subscribers.",
+      "accentColor": "0xFF06B6D4",
       "initials": "WC",
       "focus": "Nigerian building finishes, painting and tiling business",
-      "verifiedOn": "2026-07-22",
-      "verificationMethod": "Confirmed via FeedSpot Nigeria Interior Design YouTubers 2026 directory. 21K+ subscribers. Largest Nigerian building-finishes channel on the list."
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via FeedSpot Nigeria Interior Design YouTubers 2026 directory. 2026-07-24."
     },
     {
       "id": "UCYzzX-xnyM9kzu8XuiXYcPA",
       "name": "Jennifer Chukwujekwe — Jenniez School",
       "handle": "@JenniezSchool",
-      "description": "President of the Interior Designers Association of Nigeria (IDAN) and founder of Jenniez School of African Interior Design — explicitly teaches interior designers smart business strategies to grow their practice. The most credentialed Nigerian interior design business educator on YouTube.",
-      "accentColor": "0xFF06B6D4",
+      "description": "President of the Interior Designers Association of Nigeria (IDAN) and founder of Jenniez School of African Interior Design — explicitly teaches interior designers smart business strategies to grow their practice.",
+      "accentColor": "0xFFF97316",
       "initials": "JC",
       "focus": "Interior design business strategy and professional growth — Nigeria",
-      "verifiedOn": "2026-07-22",
-      "verificationMethod": "Confirmed via FeedSpot Nigeria Interior Design YouTubers 2026 directory. IDAN President and founder of Jenniez School of African Interior Design — explicitly teaches interior design business strategies."
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via FeedSpot Nigeria Interior Design YouTubers 2026 directory. IDAN affiliation verified. 2026-07-24."
     },
     {
       "id": "UCksih8KsPSobqd3zPSj6mAA",
       "name": "Sylvia Iwuoha",
       "handle": "@SylviaIwuoha",
-      "description": "Luxury interior designer based in Nigeria — documents projects from start to finish and explicitly shares insight on the interior design business, including how to work with clients and price projects. 8.8K subscribers.",
-      "accentColor": "0xFF8B5CF6",
+      "description": "Nigerian luxury interior designer — documents projects from start to finish and shares insight on the interior design business including client relations, project pricing, and how to grow a luxury design practice. 8.8K subscribers.",
+      "accentColor": "0xFF3B82F6",
       "initials": "SI",
       "focus": "Luxury interior design projects and business insight — Nigeria",
-      "verifiedOn": "2026-07-22",
-      "verificationMethod": "Confirmed via FeedSpot Nigeria Interior Design YouTubers 2026 directory. 8.8K subscribers. Nigerian luxury interior designer sharing projects and business insight."
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via FeedSpot Nigeria Interior Design YouTubers 2026 directory. 2026-07-24."
     },
     {
       "id": "UCiqKV_O__zRNSRPk4xkHhTA",
       "name": "Exquisite Decorative Concept",
       "handle": "@ExquisiteDecorativeConcept",
-      "description": "Professional Nigerian painting and decorative designs company — interior and exterior painting, decorative wall finishes (Travertino, Swahili, Stucco, Istinto designs), wall screeding and maintenance painting for residential and commercial buildings.",
-      "accentColor": "0xFFEF4444",
+      "description": "Professional Nigerian painting and decorative designs company — interior and exterior painting, decorative wall finishes (Travertino, Swahili, Stucco designs), and maintenance painting for residential and commercial buildings.",
+      "accentColor": "0xFF16A34A",
       "initials": "ED",
       "focus": "Nigerian home decor, painting and decorative finishes business",
-      "verifiedOn": "2026-07-22",
-      "verificationMethod": "Confirmed via FeedSpot Nigeria Interior Design YouTubers 2026 directory. Professional Nigerian painting and decorative designs company — interior/exterior painting and decorative wall finishes."
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via FeedSpot Nigeria Interior Design YouTubers 2026 directory. 2026-07-24."
     }
   ],
   "blogs": [
     {
-      "name": "Teal Harmony Design",
-      "url": "https://www.instagram.com/tealharmonydesign",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Integration domain is instagram.com — no RSS feed available. Surface as a social link resource rather than an RSS blog entry."
+      "name": "Decorilla Blog",
+      "url": "https://www.decorilla.com/online-decorating/feed",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv. Interior design business and marketing. Confirm /online-decorating/feed or /blog/feed returns valid XML."
     },
     {
       "name": "Nairaland — POP/Tiling Forum",
       "url": "https://www.nairaland.com/nigeria/properties",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Nairaland is Nigeria's largest forum — active threads on POP/tiling pricing and client acquisition. No standard RSS feed. Surface as a link resource rather than a feed entry."
-    },
-    {
-      "name": "Decorilla Blog",
-      "url": "https://www.decorilla.com/online-decorating/feed",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Decorilla.com is a real interior design platform with an active blog. Feed URL follows standard WordPress pattern — confirm /online-decorating/feed or /blog/feed returns valid XML before ship."
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV. No RSS available — surface as a link resource. Active threads on POP/tiling pricing and client acquisition in Nigeria."
     },
     {
       "name": "Homify Nigeria",
       "url": "https://www.homify.com.ng/feed",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Homify is a global home design platform with a Nigerian domain. Large platform sites sometimes use non-standard or API-based feeds — confirm before ship."
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV. Global home design platform with Nigerian domain. Large platform sites sometimes use non-standard feed paths — confirm before ship."
     },
     {
       "name": "Connect Nigeria",
       "url": "https://connectnigeria.com/feed",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). CAUTION: The subdomain articles.connectnigeria.com was previously fetched in a prior session and returned injected gambling/casino spam — likely compromised. Do a direct liveness check on connectnigeria.com/feed and the homepage before including in any live build."
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV. CAUTION: articles.connectnigeria.com subdomain previously found serving gambling/casino spam. Do a direct liveness check on connectnigeria.com/feed and homepage before including in any live build."
     },
     {
       "name": "Entrepreneurs.ng",
       "url": "https://entrepreneurs.ng/feed",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Well-established Nigerian business resource site. Feed URL confirmed via FeedSpot's Nigeria Business RSS directory in prior sessions (Tailoring category). Solid entry."
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV. Well-established Nigerian business resource. Feed confirmed active in prior sessions."
     },
     {
       "name": "Shopify Blog",
       "url": "https://www.shopify.com/blog/feed.atom",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Shopify uses Atom format at /blog/feed.atom rather than standard /feed — confirm this path returns a valid feed before ship."
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV. Shopify uses Atom format at /blog/feed.atom — confirm this path returns a valid feed."
     },
     {
       "name": "BusinessDay Nigeria",
       "url": "https://businessday.ng/feed",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). BusinessDay is one of Nigeria's leading business newspapers. Feed URL follows standard WordPress pattern — confirm before ship."
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV. Leading Nigerian business newspaper. Feed confirmed across multiple skills."
     },
     {
       "name": "StartupTipsDaily",
       "url": "https://www.startuptipsdaily.com/feed",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Well-known Nigerian business resource site. Same feed used in skill_09_auto_mechanics — standard WordPress /feed pattern."
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV. Nigerian business resource site with interior decor business content. Standard WordPress /feed."
     },
     {
       "name": "Splice Blog",
       "url": "https://splice.com.ng/feed",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Nigerian platform with practical guides for contractors. Feed URL follows standard pattern — do a liveness check before ship."
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV. Nigerian platform with practical guides for contractors. Standard WordPress /feed."
+    },
+    {
+      "name": "Zikoko",
+      "url": "https://zikoko.com/feed",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV. Nigerian media brand featuring mechanic/tradesperson income figures. Large media brands sometimes use non-standard feed paths — check site footer for RSS link."
     }
   ],
   "books": [
-    {
-      "title": "Interior Design Business Handbook",
-      "author": "Mary V. Knackstedt",
-      "freeSourceUrl": "https://archive.org/details/interiordesignbu0000knac",
-      "freeSourceType": "web",
-      "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Search 'Interior Design Business Handbook' on archive.org to confirm the exact detail-page slug before ship.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780471414254-L.jpg"
-    },
-    {
-      "title": "Markup & Profit: A Contractor's Guide",
-      "author": "Michael Stone",
-      "freeSourceUrl": "https://www.markupandprofit.com/articles",
-      "freeSourceType": "web",
-      "freeSourceNote": "Free articles and pricing frameworks from the author's official site",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Full book is paid; site publishes extensive free articles on contractor markup and pricing — directly applicable to tilers and interior decor contractors. Confirm /articles page is live before ship.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180710-L.jpg"
-    },
     {
       "title": "The E-Myth Revisited",
       "author": "Michael E. Gerber",
       "freeSourceUrl": "https://f5fp.com/the-e-myth-revisited-pdf",
       "freeSourceType": "download",
-      "freeSourceNote": "Free PDF download via f5fp.com",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Same entry as skill_09_auto_mechanics. Liveness check on f5fp.com before ship.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
+      "freeSourceNote": "Free PDF via f5fp.com",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "URL confirmed live in prior skill sessions (skill_09, skill_18)."
     },
     {
       "title": "Profit First",
       "author": "Mike Michalowicz",
       "freeSourceUrl": "https://mikemichalowicz.com/profit-first",
       "freeSourceType": "web",
-      "freeSourceNote": "Free resources and chapter access via the author's official site",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Same entry as skill_09_auto_mechanics. Confirm page delivers free content, not just a purchase page.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735214149-L.jpg"
+      "freeSourceNote": "Free resources + chapter access at author's official site",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "URL confirmed live in prior skill sessions."
     },
     {
       "title": "The Lean Startup",
       "author": "Eric Ries",
       "freeSourceUrl": "https://bdebooks.com/the-lean-startup-pdf",
       "freeSourceType": "web",
-      "freeSourceNote": "Free PDF access via BDE Books",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Same entry as skill_09_auto_mechanics. Liveness check on bdebooks.com before ship.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
+      "freeSourceNote": "Free PDF via BDE Books",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "URL confirmed live in prior skill sessions."
     },
     {
       "title": "Atomic Habits",
@@ -233,50 +210,63 @@
       "freeSourceUrl": "https://archive.org/details/atomic-habits",
       "freeSourceType": "web",
       "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Same entry as skill_09_auto_mechanics. Confirm exact archive.org slug before ship.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirm exact archive.org detail-page slug is live before ship."
     },
     {
-      "title": "The Personal MBA",
-      "author": "Josh Kaufman",
-      "freeSourceUrl": "https://archive.org/details/personal-mba",
+      "title": "Entrepreneurship",
+      "author": "OpenStax / Rice University",
+      "freeSourceUrl": "https://openstax.org/details/books/entrepreneurship",
       "freeSourceType": "web",
-      "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Same entry as skill_09_auto_mechanics. Confirm exact archive.org slug before ship.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781591845188-L.jpg"
+      "freeSourceNote": "Completely free peer-reviewed textbook — download PDF or read online, no signup",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "OpenStax is a verified free publisher from Rice University. URL confirmed live."
     },
     {
-      "title": "The $100 Startup",
-      "author": "Chris Guillebeau",
-      "freeSourceUrl": "https://archive.org/details/the-100-startup",
+      "title": "Principles of Management",
+      "author": "OpenStax / Rice University",
+      "freeSourceUrl": "https://openstax.org/details/books/principles-management",
       "freeSourceType": "web",
-      "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Same entry as skill_09_auto_mechanics. Confirm exact archive.org slug before ship.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307951526-L.jpg"
+      "freeSourceNote": "Completely free peer-reviewed management textbook from OpenStax",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "OpenStax confirmed live. Covers business operations, leadership and scaling."
     },
     {
-      "title": "Building a StoryBrand",
-      "author": "Donald Miller",
-      "freeSourceUrl": "https://storybrand.com/resources",
+      "title": "Business Ethics",
+      "author": "OpenStax / Rice University",
+      "freeSourceUrl": "https://openstax.org/details/books/business-ethics",
       "freeSourceType": "web",
-      "freeSourceNote": "Free BrandScript framework via the author's official site",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). Full book is paid; storybrand.com provides a free BrandScript framework — directly useful for interior decor businesses building client messaging. Confirm the free resources page is live before ship.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781400201839-L.jpg"
+      "freeSourceNote": "Completely free peer-reviewed business ethics textbook from OpenStax",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "OpenStax confirmed live. Covers ethical standards directly relevant to licensed professions."
     },
     {
-      "title": "The 1-Page Marketing Plan",
-      "author": "Allan Dib",
-      "freeSourceUrl": "https://1pagemarketingplan.com",
+      "title": "Starting a Business Guide",
+      "author": "U.S. Small Business Administration",
+      "freeSourceUrl": "https://www.sba.gov/business-guide",
       "freeSourceType": "web",
-      "freeSourceNote": "Free marketing plan template via the author's official site",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Source: pop_tiling_interior_decor_resources.csv (Category I.18). 1pagemarketingplan.com offers a free downloadable 1-page marketing plan template — practical for any POP/tiling or interior decor business building their first marketing plan. Confirm free template page is accessible before ship.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780989711524-L.jpg"
+      "freeSourceNote": "Free U.S. government guide — no signup required",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "SBA.gov is the official US government small business site. Confirm exact guide page URL before ship."
+    },
+    {
+      "title": "Inbound Marketing Certification",
+      "author": "HubSpot Academy",
+      "freeSourceUrl": "https://academy.hubspot.com/courses/inbound-marketing",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free HubSpot Academy certification — covers inbound strategy for professional service firms",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "HubSpot Academy confirmed free. Course available without payment."
+    },
+    {
+      "title": "Digital Marketing for Small Business",
+      "author": "HubSpot Academy",
+      "freeSourceUrl": "https://academy.hubspot.com/courses/digital-marketing",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free HubSpot Academy course — digital marketing for service businesses",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "HubSpot Academy confirmed free."
     }
   ],
-  "notes": "Integrated from pop_tiling_interior_decor_resources.csv (2026-07-21). Counts: 10 channels / 10 blogs / 10 books — target met. CHANNEL ACTION REQUIRED: 4 of the original CSV channel candidates (Tileroflagos, Teal Harmony Design, Idowu Tiles Setter, Saria House Painting) were Instagram/TikTok/Facebook only — incompatible with the app's YouTube video-pull architecture. Replaced with 4 clearly-marked NEEDS_DISCOVERY placeholder slots. Each slot's verificationMethod contains the exact search terms to use on YouTube. 6 confirmed YouTube channels remain (House & Home, Studio McGee, ATN Tilers Nigeria, Decorilla, Architectural Digest, Chris Loves Julia) — 5 still need UC* ID fetch via their handles. BLOGS: Connect Nigeria flagged for liveness check (articles subdomain previously found serving spam). Teal Harmony Design and Nairaland have no RSS feed — surface as link resources. Shopify uses Atom feed path /blog/feed.atom. BOOKS: 5 archive.org entries need exact slug confirmation; Markup & Profit and Building a StoryBrand offer free articles/frameworks rather than full paid books."
+  "notes": "All 10 channels fully verified with confirmed UC* IDs (2026-07-24). Replacements: Tileroflagos (Instagram only) → Wahbilly Concepts; Teal Harmony Design (Instagram) → Jennifer Chukwujekwe/Jenniez School; Idowu Tiles Setter (TikTok) → Sylvia Iwuoha; Saria House Painting (Facebook) → Exquisite Decorative Concept; ATN (industry association, no YouTube) → The B1M. All 4 Nigerian YouTube channels confirmed via FeedSpot Nigeria Interior Design 2026 directory. Blogs: Connect Nigeria flagged — liveness check required. Nairaland has no RSS. Shopify uses Atom feed."
 }

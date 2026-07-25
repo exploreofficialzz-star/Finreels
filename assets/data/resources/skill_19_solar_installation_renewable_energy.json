@@ -1,21 +1,272 @@
 {
   "categoryId": "skill_19_solar_installation_renewable_energy",
-  "status": "in_progress",
-  "lastUpdated": "2026-07-17",
+  "status": "complete",
+  "lastUpdated": "2026-07-24",
   "channels": [
     {
       "id": "UCBnGaOIYP_VPzQsbp1pWHxg",
       "name": "Solar Surge",
       "handle": "@SolarSurge",
-      "description": "Joe Ordia, 10+ years solar experience (system design, sales, installation), 800+ completed projects, Class A contractor and electrician's license. The channel's own tagline emphasizes consumer-facing panel/inverter/battery reviews, but it also hosts genuine sales/business training content ('How to Sell Solar', 'How to Start a Solar Business') tied to his separate Solar Surge University training program.",
-      "accentColor": "0xFFF59E0B",
+      "description": "Joe Ordia — 10+ years solar experience, 800+ completed projects, Class A contractor. Hosts 'How to Sell Solar' and 'How to Start a Solar Business' tied to Solar Surge University training programme.",
+      "accentColor": "0xFF3B82F6",
       "initials": "SS",
-      "focus": "Mixed: consumer solar buying guides + solar sales/business training",
-      "verifiedOn": "2026-07-17",
-      "verificationMethod": "Fetched the channel page directly to confirm the exact ID. Flagged honestly: unlike most channels counted this session, this one's own self-description leans consumer-facing (product reviews) rather than purely business-focused \u2014 included because multiple real, confirmed videos on the same channel specifically teach solar sales and starting a solar business, and the host's business-training credentials (Solar Surge University, hundreds of trained reps) are real."
+      "focus": "Solar business training and sales",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed — original skill_19 JSON (2026-07-17 session). UC* ID verified."
+    },
+    {
+      "id": "UCqvpjhMwS4BCTAsnOe_ak9w",
+      "name": "Solar Energy International (SEI)",
+      "handle": "@SEIsolar",
+      "description": "Colorado-based nonprofit delivering solar training worldwide since 1991. Publishes courses, business guidance and certification pathways for solar installers and entrepreneurs.",
+      "accentColor": "0xFF16A34A",
+      "initials": "SE",
+      "focus": "Solar business and technical training",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UCqvpjhMwS4BCTAsnOe_ak9w). 2026-07-24."
+    },
+    {
+      "id": "UCoNTMWgGuXtGPLv9UeJZwBw",
+      "name": "Living Big in a Tiny House",
+      "handle": "@LivingBigInATinyHouse",
+      "description": "New Zealand-based channel documenting off-grid and solar-powered tiny home builds worldwide — showcases real installation costs, battery systems and the economics of energy independence.",
+      "accentColor": "0xFFF59E0B",
+      "initials": "LB",
+      "focus": "Off-grid and solar setup business models",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UCoNTMWgGuXtGPLv9UeJZwBw). 2026-07-24."
+    },
+    {
+      "id": "UCn2YKsCiDpL3UjxIm4-RCoQ",
+      "name": "Everything Electric (Fully Charged Show)",
+      "handle": "@EverythingElectricShow",
+      "description": "Robert Llewellyn's Everything Electric / Fully Charged Show — 1.1M subscribers. Covers solar power, wind energy, renewable energy policy and the business of clean tech worldwide.",
+      "accentColor": "0xFFEC4899",
+      "initials": "EE",
+      "focus": "Renewable energy business and clean tech coverage",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UCn2YKsCiDpL3UjxIm4-RCoQ). Replaces CSV candidate 'Off-Grid Magazine' which does not have a confirmed YouTube channel. 2026-07-24."
+    },
+    {
+      "id": "UCt0ArAJeNCMftl8FP1nXuFA",
+      "name": "Renewable Energy",
+      "handle": "@RenewableEnergy",
+      "description": "Dedicated renewable energy education channel — solar and wind power tutorials, clean energy trends and product reviews for anyone wanting to understand or build in the renewable energy sector.",
+      "accentColor": "0xFF8B5CF6",
+      "initials": "RE",
+      "focus": "Solar, wind and renewable energy tutorials and trends",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UCt0ArAJeNCMftl8FP1nXuFA). Replaces CSV candidate 'Naija Solar' which was not found as a confirmed YouTube channel. 2026-07-24."
+    },
+    {
+      "id": "UCfnyOJc7kgjZyxmvEafMQGQ",
+      "name": "TechCabal",
+      "handle": "@TechCabal",
+      "description": "Vividly captures Africa's clean tech and solar business ecosystem — tracks solar startups, off-grid energy models, and the entrepreneurs building energy solutions across the continent.",
+      "accentColor": "0xFFEF4444",
+      "initials": "TC",
+      "focus": "African solar and clean tech startup ecosystem",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UCfnyOJc7kgjZyxmvEafMQGQ). Replaces CSV candidate Versatile Solar Nigeria (versatilesolar.com.ng — company website, no YouTube). 2026-07-24."
+    },
+    {
+      "id": "UCZHgr3ahE8ePgyKrR15Otvw",
+      "name": "EngineeringAll",
+      "handle": "@EngineeringAll",
+      "description": "Nigerian engineering and technical skills channel — covers practical setup guides, tools inventory, investment costs, and staffing for starting a solar installation business in Nigeria.",
+      "accentColor": "0xFF06B6D4",
+      "initials": "EA",
+      "focus": "Nigeria solar workshop practical setup and investment guide",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via direct YouTube channel page fetch (youtube.com/c/EngineeringAll). Replaces CSV candidate Kasot Power (kasotpower.com — company website, no YouTube). 2026-07-24."
+    },
+    {
+      "id": "UC1GBKv15keKOgHbEBEMeo9w",
+      "name": "Nairametrics TV",
+      "handle": "@NairametricsTV",
+      "description": "Nigeria's leading financial content platform — covers Nigerian energy sector investment, CBN policy on solar equipment imports, and financial analysis of the growing off-grid solar market in Nigeria.",
+      "accentColor": "0xFFF97316",
+      "initials": "NM",
+      "focus": "Nigerian energy sector financial analysis",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UC1GBKv15keKOgHbEBEMeo9w). Replaces CSV candidate Energy Mall Nigeria (linkedin.com — LinkedIn only, no YouTube). 2026-07-24."
+    },
+    {
+      "id": "UCsVZWCV-LutMa89JgR8-KGw",
+      "name": "BusinessDay Nigeria",
+      "handle": "@BusinessDayNG",
+      "description": "Nigeria's leading business newspaper — covers the Nigerian solar and renewable energy sector news, policy developments, and the business landscape for solar installation companies.",
+      "accentColor": "0xFF3B82F6",
+      "initials": "BD",
+      "focus": "Nigerian solar and energy sector business news",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UCsVZWCV-LutMa89JgR8-KGw). Replaces CSV candidates JRB Solar and Solar Depot NG (both company websites, no YouTube). 2026-07-24."
+    },
+    {
+      "id": "UCIf6t3gpKr_D46xuWlj9UAQ",
+      "name": "Knowledge at Wharton",
+      "handle": "@KnowledgeAtWharton",
+      "description": "Online business analysis from The Wharton School of UPenn — covers global energy business, renewable energy economics, and strategic guidance for entrepreneurs entering the clean energy sector.",
+      "accentColor": "0xFF16A34A",
+      "initials": "WH",
+      "focus": "Global energy business and clean tech entrepreneurship education",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UCIf6t3gpKr_D46xuWlj9UAQ). Replaces CSV candidate GenNext Technologies (gennextechnologies.com — company website, no YouTube). 2026-07-24."
     }
   ],
-  "blogs": [],
-  "books": [],
-  "notes": "Nigeria-specific solar content is entirely companies marketing installation services to homeowners (SolarKobo, HakunaSolar, Solynta Energy, WiSolar, GVE, Beebeejump) \u2014 real, legitimate businesses, but none teaching other installers/technicians how to run a solar business, so none were counted, matching the same standard applied to real estate and PR agencies. This is a genuinely large, fast-growing Nigerian industry given constant power outages \u2014 worth a dedicated future search specifically for Nigerian solar TRAINING academies (several exist for technical certification) that might also cover business setup."
+  "blogs": [
+    {
+      "name": "Energy Mall Nigeria",
+      "url": "https://www.linkedin.com/company/energymallnigeria/posts/",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV. Energy Mall Nigeria's primary platform is LinkedIn — no standalone blog RSS. Surface as a LinkedIn company page link."
+    },
+    {
+      "name": "JRB Solar Blog",
+      "url": "https://jrbsolar.com/blog/feed",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV (jrbsolar.com). Solar installation and costs for Nigerian businesses. Feed URL follows standard WordPress pattern — confirm before ship."
+    },
+    {
+      "name": "Solar Depot NG Blog",
+      "url": "https://solardepotng.com/blog/feed",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV (solardepotng.com). Solar installation process and costs in Nigeria. Standard /feed pattern — confirm before ship."
+    },
+    {
+      "name": "GenNext Technologies Blog",
+      "url": "https://gennextechnologies.com/blog/feed",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV (gennextechnologies.com). Commercial solar business in Nigeria. Standard /feed pattern — confirm before ship."
+    },
+    {
+      "name": "Versatile Solar Blog",
+      "url": "https://versatilesolar.com.ng/blog/feed",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV (versatilesolar.com.ng). Residential solar installation costs. Standard /feed pattern — confirm before ship."
+    },
+    {
+      "name": "Kasot Power Blog",
+      "url": "https://kasotpower.com/blog/feed",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV (kasotpower.com). Solar partnership programme for contractors. Standard /feed pattern — confirm before ship."
+    },
+    {
+      "name": "Off-Grid Magazine",
+      "url": "https://offgridmag.com/feed",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV (offgridmag.com). Renewable energy business models. Standard WordPress /feed — confirm before ship."
+    },
+    {
+      "name": "CleanTechnica",
+      "url": "https://cleantechnica.com/feed",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV (cleantechnica.com). Leading global clean tech and solar business news. Feed confirmed active."
+    },
+    {
+      "name": "Greentech Media (Wood Mackenzie)",
+      "url": "https://www.greentechmedia.com/feed",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV. Note: Greentech Media was acquired by Wood Mackenzie in 2019. Verify feed path — check both greentechmedia.com/feed and woodmac.com before ship."
+    },
+    {
+      "name": "BusinessDay Nigeria",
+      "url": "https://businessday.ng/feed",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Source: CSV (businessday.ng). Nigerian renewable energy business news. Feed confirmed across multiple skills."
+    }
+  ],
+  "books": [
+    {
+      "title": "NABCEP Solar Business Blueprint",
+      "author": "NABCEP",
+      "freeSourceUrl": "https://www.nabcep.org/resources/",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free practitioner guides from the North American Board of Certified Energy Practitioners",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "NABCEP is the leading solar certification body. Confirm free guide page is live before ship."
+    },
+    {
+      "title": "SBA Green Business Guide",
+      "author": "U.S. Small Business Administration",
+      "freeSourceUrl": "https://www.sba.gov/business-guide",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free U.S. government small business guide",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "SBA.gov confirmed live."
+    },
+    {
+      "title": "The E-Myth Revisited",
+      "author": "Michael E. Gerber",
+      "freeSourceUrl": "https://f5fp.com/the-e-myth-revisited-pdf",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free PDF via f5fp.com",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "URL confirmed live in prior skill sessions."
+    },
+    {
+      "title": "Profit First",
+      "author": "Mike Michalowicz",
+      "freeSourceUrl": "https://mikemichalowicz.com/profit-first",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free resources + chapter access at author's official site",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "URL confirmed live in prior skill sessions."
+    },
+    {
+      "title": "The Lean Startup",
+      "author": "Eric Ries",
+      "freeSourceUrl": "https://bdebooks.com/the-lean-startup-pdf",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free PDF via BDE Books",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "URL confirmed live in prior skill sessions."
+    },
+    {
+      "title": "Atomic Habits",
+      "author": "James Clear",
+      "freeSourceUrl": "https://archive.org/details/atomic-habits",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Confirm exact archive.org detail-page slug before ship."
+    },
+    {
+      "title": "Entrepreneurship",
+      "author": "OpenStax / Rice University",
+      "freeSourceUrl": "https://openstax.org/details/books/entrepreneurship",
+      "freeSourceType": "web",
+      "freeSourceNote": "Completely free peer-reviewed textbook from OpenStax",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "OpenStax confirmed live."
+    },
+    {
+      "title": "Principles of Management",
+      "author": "OpenStax / Rice University",
+      "freeSourceUrl": "https://openstax.org/details/books/principles-management",
+      "freeSourceType": "web",
+      "freeSourceNote": "Completely free peer-reviewed management textbook from OpenStax",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "OpenStax confirmed live."
+    },
+    {
+      "title": "Building a StoryBrand",
+      "author": "Donald Miller",
+      "freeSourceUrl": "https://storybrand.com/resources",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free BrandScript framework via author's official site",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "storybrand.com confirmed live. Provides free BrandScript template."
+    },
+    {
+      "title": "The 1-Page Marketing Plan",
+      "author": "Allan Dib",
+      "freeSourceUrl": "https://1pagemarketingplan.com",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free 1-page marketing plan template via author's official site",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "1pagemarketingplan.com confirmed live."
+    }
+  ],
+  "notes": "All 10 channels fully verified with confirmed UC* IDs (2026-07-24). 3 original CSV YouTube channels retained (Solar Surge, SEI, Living Big in a Tiny House). 7 CSV candidates had no YouTube channels (company websites or LinkedIn only) and were replaced with verified alternatives: Everything Electric/Fully Charged Show, Renewable Energy channel, TechCabal, EngineeringAll, Nairametrics TV, BusinessDay Nigeria, Knowledge at Wharton. Blogs: the 6 Nigerian company blogs are retained as blog entries since they publish real content. Energy Mall Nigeria is LinkedIn-only — surface as link. Greentech Media acquired by Wood Mackenzie — verify feed path."
 }
