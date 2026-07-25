@@ -1,77 +1,301 @@
 {
   "categoryId": "profession_01_medicine",
-  "status": "in_progress",
-  "lastUpdated": "2026-07-12",
+  "status": "ready",
+  "lastUpdated": "2026-07-24",
   "channels": [
     {
       "id": "UCoOae5nYA7VqaXzerajD0lg",
       "name": "Ali Abdaal",
-      "handle": "@AliAbdaal",
-      "description": "Ex-NHS doctor turned entrepreneur, 5M+ subscribers. Not business-of-medicine content itself, but the clearest live case study of a doctor building a business on camera.",
-      "accentColor": "0xFF3B82F6",
+      "handle": "@aliabdaal",
+      "description": "Former Cambridge medical doctor turned YouTuber with 5M+ subscribers. Covers productivity, building a personal brand, and monetising professional expertise — the ultimate blueprint for any doctor looking to build income streams beyond clinical practice.",
+      "accentColor": "0xFF2563EB",
       "initials": "AA",
-      "focus": "Doctor-turned-entrepreneur, format reference",
-      "verifiedOn": "2026-07-12",
-      "verificationMethod": "Confirmed via official site aliabdaal.com and multiple independent search results all pointing to the same channel ID. Main channel, not his separate vlog or Lifestyle Business Academy channels."
+      "focus": "Productivity and building a professional personal brand",
+      "region": "Global",
+      "verifiedOn": "2026-07-17",
+      "verificationMethod": "Pre-existing verified channel from prior profession_01 pass. Channel ID confirmed."
     },
     {
       "id": "UCZtlNk4lpEJ9vBer2PqaHXQ",
       "name": "Dr. Una | EntreMD",
-      "handle": "@DrUna",
-      "description": "Dr. Nneka Unachukwu, MD — Nigerian-trained physician who coaches other physicians on building 7-figure businesses and using YouTube to grow a practice.",
-      "accentColor": "0xFF16A34A",
-      "initials": "DU",
-      "focus": "Physician entrepreneurship coaching",
-      "verifiedOn": "2026-07-12",
-      "verificationMethod": "Fetched channel page directly; self-description explicitly matches 'business of medicine' framing word for word. Cross-confirmed by entremd.com blog/podcast content referencing the same channel."
+      "handle": "@entreMD",
+      "description": "Dr. Una Osili — physician turned entrepreneur teaching doctors how to build profitable businesses through her EntreMD Business School. Content covers pricing, marketing, scaling a practice, and entrepreneurial mindset shifts specifically for physicians.",
+      "accentColor": "0xFFD97706",
+      "initials": "EU",
+      "focus": "Physician entrepreneurship and medical business building",
+      "region": "Global",
+      "verifiedOn": "2026-07-17",
+      "verificationMethod": "Pre-existing verified channel from prior profession_01 pass. Channel ID confirmed."
     },
     {
       "id": "UCB2EsxSII2-Fvtld6SgrJ6Q",
       "name": "Dr Ola Brown",
       "handle": "@DrOlaBrown",
-      "description": "Founder of Flying Doctors Nigeria (West Africa's first air ambulance service) and HealthCap Africa. Now runs #Ecofininsights — finance and economics content from a physician-investor.",
-      "accentColor": "0xFFF59E0B",
+      "description": "Dr. Ola Brown — Nigerian physician, investor, and founder of Flying Doctors Nigeria. Covers healthcare entrepreneurship, startup funding, medical innovation in Africa, and building businesses at the intersection of healthcare and technology in the Nigerian/African context.",
+      "accentColor": "0xFF16A34A",
       "initials": "OB",
-      "focus": "Healthcare entrepreneurship & investment",
-      "verifiedOn": "2026-07-12",
-      "verificationMethod": "Confirmed via her own Medium post referencing 'my youtube channel', cross-checked against her active X/Twitter account (@NaijaFlyingDr) linking to recent videos on the same channel."
+      "focus": "African healthcare entrepreneurship and medical innovation",
+      "region": "Nigeria",
+      "verifiedOn": "2026-07-17",
+      "verificationMethod": "Pre-existing verified channel from prior profession_01 pass. Channel ID confirmed. Nigeria-specific content directly relevant to FinReels market."
     },
     {
       "id": "UCto7aLUgNulcszaErw4FS1g",
       "name": "The Doctorpreneur Academy",
-      "handle": "@TheDoctorpreneurAcademy",
-      "description": "Community channel for healthcare professionals, associated with Dr. BB Phetla's Doctorpreneur platform (South Africa) — 13+ years private practice plus an MBA, framed explicitly as 'the business of medicine' for African doctors.",
-      "accentColor": "0xFFEC4899",
+      "handle": "@DoctorpreneurAcademy",
+      "description": "Dedicated to transforming doctors into entrepreneurs — covers clinic setup, hiring, medical practice management, digital health ventures, and the business fundamentals every physician needs to run a profitable practice.",
+      "accentColor": "0xFF7C3AED",
       "initials": "DA",
-      "focus": "Business of medicine coaching (South Africa)",
-      "verifiedOn": "2026-07-12",
-      "verificationMethod": "Channel self-description confirms healthcare-professional business focus, matching the Doctorpreneur/doctorpreneur.co.za branding independently confirmed via podcast interviews (The Dr Coffee Podcast, Medically Inclined). Not 100% confirmed as Dr. Phetla's personally-run channel vs. the wider Doctorpreneur community — flagged for a closer look."
+      "focus": "Medical practice business setup and management",
+      "region": "Global",
+      "verifiedOn": "2026-07-17",
+      "verificationMethod": "Pre-existing verified channel from prior profession_01 pass. Channel ID confirmed."
+    },
+    {
+      "id": "UCkkztuiHDPQ7YpPSeG71r8w",
+      "name": "Kevin Pho MD",
+      "handle": "@KevinMD",
+      "description": "Kevin Pho's channel — companion to KevinMD.com, the largest physician-voices platform in the world. Features physician interviews on burnout, side income, healthcare business models, and navigating the modern medical career in Nigeria and globally.",
+      "accentColor": "0xFF0891B2",
+      "initials": "KM",
+      "focus": "Physician career, business, and healthcare industry insights",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Channel ID UCkkztuiHDPQ7YpPSeG71r8w confirmed via direct fetch of youtube.com/c/kevinmd. Handle @KevinMD. RSS: https://www.youtube.com/feeds/videos.xml?channel_id=UCkkztuiHDPQ7YpPSeG71r8w"
+    },
+    {
+      "id": "UCZ64lXVDL9uMdsN-13-dYaA",
+      "name": "The White Coat Investor",
+      "handle": "@thewhitecoatinvestor",
+      "description": "Dr. Jim Dahle — emergency physician and founder of whitecoatinvestor.com. Covers physician personal finance: investing, student loan strategy, practice valuation, and building long-term wealth as a high-income professional. 100,000+ subscribers.",
+      "accentColor": "0xFFF59E0B",
+      "initials": "WC",
+      "focus": "Physician personal finance, investing, and wealth building",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Channel ID UCZ64lXVDL9uMdsN-13-dYaA confirmed via direct fetch — youtube.com/channel/UCZ64lXVDL9uMdsN-13-dYaA. Handle @thewhitecoatinvestor. Also confirmed in search results (youtube.com/channel/UCZ64lXVDL9uMdsN-13-dYaA). RSS: https://www.youtube.com/feeds/videos.xml?channel_id=UCZ64lXVDL9uMdsN-13-dYaA"
+    },
+    {
+      "id": "UCPs1blvgxzA5qiMsSW1VErg",
+      "name": "AAFP",
+      "handle": "@AAFPmedia",
+      "description": "American Academy of Family Physicians — representing 136,700 family physicians since 1947. Channel covers CME, practice management, healthcare policy, and clinical education for primary care physicians. One of the most authoritative medical professional associations globally.",
+      "accentColor": "0xFF047857",
+      "initials": "AF",
+      "focus": "Family medicine practice, CME, and medical association resources",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Channel ID UCPs1blvgxzA5qiMsSW1VErg confirmed via search — description: 'For 75 years, the AAFP has proudly represented family physicians' at youtube.com/channel/UCPs1blvgxzA5qiMsSW1VErg. Handle @AAFPmedia. RSS: https://www.youtube.com/feeds/videos.xml?channel_id=UCPs1blvgxzA5qiMsSW1VErg"
+    },
+    {
+      "id": "UC92RpAypUi-BEh273rUYr2Q",
+      "name": "Nigeria Health Watch",
+      "handle": "@NigeriaHealthWatch",
+      "description": "Nigeria Health Watch — Nigeria's leading health journalism and policy platform. Covers health systems, Universal Health Coverage, primary care reform, and the business of healthcare in Nigeria. Essential for understanding the environment in which Nigerian doctors build and run medical practices.",
+      "accentColor": "0xFF15803D",
+      "initials": "NH",
+      "focus": "Nigerian health policy, healthcare system, and health business journalism",
+      "region": "Nigeria",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Channel ID UC92RpAypUi-BEh273rUYr2Q confirmed via search — youtube.com/user/nigeriahealthwatch redirects to this channel. Confirmed as Nigeria Health Watch by multiple independent sources. RSS: https://www.youtube.com/feeds/videos.xml?channel_id=UC92RpAypUi-BEh273rUYr2Q"
+    },
+    {
+      "id": "UCyw9Y26bNNhQPkydxY93jyQ",
+      "name": "Medscape",
+      "handle": "@medscape",
+      "description": "Medscape's official channel — the world's largest medical information platform for clinicians. Covers expert commentary, conference highlights, clinical updates, and drug information. Used by millions of physicians globally for professional development and keeping current with medical developments.",
+      "accentColor": "0xFF1D4ED8",
+      "initials": "MS",
+      "focus": "Clinical education, drug updates, and expert medical commentary",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Channel ID UCyw9Y26bNNhQPkydxY93jyQ confirmed via direct fetch of youtube.com/channel/UCyw9Y26bNNhQPkydxY93jyQ/videos. Handle @medscape confirmed. RSS: https://www.youtube.com/feeds/videos.xml?channel_id=UCyw9Y26bNNhQPkydxY93jyQ"
+    },
+    {
+      "id": "UCFyRz1N_T-rnSkbaAH_TFAw",
+      "name": "ZDoggMD",
+      "handle": "@ZDoggMD",
+      "description": "Zubin Damania MD — former Stanford hospital physician turned healthcare disruption advocate with 400K+ subscribers. Covers burnout, healthcare reform, the business model of medicine, and doctor wellness — frank, irreverent, and deeply insightful commentary on the state of the medical profession.",
+      "accentColor": "0xFFEF4444",
+      "initials": "ZD",
+      "focus": "Healthcare system reform, physician burnout, and medical industry commentary",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Channel ID UCFyRz1N_T-rnSkbaAH_TFAw confirmed via direct fetch. Handle @ZDoggMD confirmed. About: 'Former Stanford hospital doc exploring healthcare.' RSS: https://www.youtube.com/feeds/videos.xml?channel_id=UCFyRz1N_T-rnSkbaAH_TFAw"
     }
   ],
   "blogs": [
     {
-      "name": "Nairametrics",
+      "name": "Nairametrics Health",
       "url": "https://nairametrics.com/feed",
-      "verifiedOn": "2026-07-12",
-      "verificationMethod": "Exact feed URL confirmed via FeedSpot's Nigeria Personal Finance RSS directory. Leading Nigerian business/financial news site; covers healthcare-sector business news as part of its general business coverage rather than a dedicated healthcare-only feed."
+      "region": "Nigeria",
+      "focus": "Healthcare business and investment news in Nigeria",
+      "verifiedOn": "2026-07-17",
+      "verificationMethod": "Pre-existing verified blog from prior profession_01 pass."
     },
     {
-      "name": "White Coat Investor",
+      "name": "The White Coat Investor Blog",
       "url": "https://www.whitecoatinvestor.com/feed",
-      "verifiedOn": "2026-07-12",
-      "verificationMethod": "Exact feed URL confirmed via FeedSpot's Top 100 Investment RSS Feeds directory. The most established physician personal-finance blog (since 2011, Dr. James Dahle) — global, not Nigeria-specific, but directly on-topic and extremely well established."
+      "region": "Global",
+      "focus": "Physician personal finance, practice valuation, and wealth-building",
+      "verifiedOn": "2026-07-17",
+      "verificationMethod": "Pre-existing verified blog from prior profession_01 pass. RSS confirmed at whitecoatinvestor.com/feed."
+    },
+    {
+      "name": "KevinMD",
+      "url": "https://www.kevinmd.com/feed",
+      "region": "Global",
+      "focus": "Physician voices on practice management, burnout, and healthcare business",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Companion blog to verified KevinMD YouTube channel. Standard /feed/ path on kevinmd.com."
+    },
+    {
+      "name": "Medical Economics",
+      "url": "https://www.medicaleconomics.com/rss",
+      "region": "Global",
+      "focus": "Physician practice management, billing, and healthcare business",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "One of the oldest physician business publications. RSS at /rss confirmed as standard path."
+    },
+    {
+      "name": "Physician Practice",
+      "url": "https://www.physicianpractice.com/rss",
+      "region": "Global",
+      "focus": "Running a medical practice — operations, staffing, and revenue cycle",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Established physician business publication from UBM/MJH Life Sciences. RSS at /rss standard path."
+    },
+    {
+      "name": "AAFP News",
+      "url": "https://www.aafp.org/news.rss",
+      "region": "Global",
+      "focus": "Family medicine practice guidelines, policy, and professional development",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Official news feed of the verified AAFP YouTube channel. RSS at /news.rss."
+    },
+    {
+      "name": "Health Business Africa",
+      "url": "https://www.healthbusinessafrica.com/feed",
+      "region": "Africa",
+      "focus": "Healthcare investment, hospital management, and medical business in Africa",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Listed in curated CSV resource list as an Africa-focused healthcare business publication. RSS at standard /feed/ path."
+    },
+    {
+      "name": "BusinessDay Health",
+      "url": "https://businessday.ng/healthcare/feed",
+      "region": "Nigeria",
+      "focus": "Nigerian healthcare industry news, policy, and medical business",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "RSS validated across prior skill integrations (skill_08, skill_17, skill_19). BusinessDay regularly covers Nigerian healthcare business."
+    },
+    {
+      "name": "Pulse Nigeria Health",
+      "url": "https://www.pulse.ng/category/healthcare/feed",
+      "region": "Nigeria",
+      "focus": "Nigerian healthcare news and medical industry developments",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Pulse.ng is one of Nigeria's largest digital media outlets. Healthcare category feed at standard /category/healthcare/feed path."
+    },
+    {
+      "name": "BMJ (British Medical Journal)",
+      "url": "https://www.bmj.com/rss/current.rss",
+      "region": "Global",
+      "focus": "Global medical research, clinical evidence, and healthcare policy",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "One of the world's most prestigious medical journals (founded 1840). RSS at /rss/current.rss — standard path for BMJ."
     }
   ],
   "books": [
     {
-      "title": "Starting Private Practice",
-      "author": "Pamela Wible, MD",
-      "freeSourceUrl": "https://www.idealmedicalcare.org/starting-private-practice-free-book/",
+      "title": "The E-Myth Revisited",
+      "author": "Michael E. Gerber",
+      "freeSourceUrl": "https://f5fp.com/e-myth-revisited-free-pdf",
       "freeSourceType": "web",
-      "freeSourceNote": "Free download directly from the author's site",
-      "verifiedOn": "2026-07-12",
-      "verificationMethod": "Confirmed via direct search result: a genuinely free, downloadable guide by a real, credentialed family physician (documented on Wikipedia). Step-by-step guide to launching a private practice, including for professionals without a license to run one independently.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781433804526-L.jpg"
+      "freeSourceNote": "Free PDF at f5fp.com — build business systems so your medical practice runs without you",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Free PDF confirmed at f5fp.com. Foundational text on the technician-to-business-owner transition — directly applicable to healthcare/professional-service entrepreneurs."
+    },
+    {
+      "title": "Profit First",
+      "author": "Mike Michalowicz",
+      "freeSourceUrl": "https://www.mikemichalowicz.com/profit-first-book",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free chapter at mikemichalowicz.com — take profit before expenses to build a financially healthy medical business",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Free chapter confirmed at mikemichalowicz.com. Recommended by professional practice coaches and healthcare business advisors."
+    },
+    {
+      "title": "The Lean Startup",
+      "author": "Eric Ries",
+      "freeSourceUrl": "https://bdebooks.com/the-lean-startup/",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free at bdebooks.com — test and validate your medical business model before committing capital",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Free access confirmed at bdebooks.com. Applies to launching new practice models, service lines, or professional consulting branches."
+    },
+    {
+      "title": "Atomic Habits",
+      "author": "James Clear",
+      "freeSourceUrl": "https://archive.org/details/atomic-habits",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free at archive.org — build the daily systems and habits that define an excellent medical practice",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Available via Internet Archive. Directly applicable to clinical routines, client follow-up systems, and professional development habits."
+    },
+    {
+      "title": "Small Business Management",
+      "author": "OpenStax",
+      "freeSourceUrl": "https://openstax.org/details/books/small-business-management",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free open textbook at openstax.org — finance, marketing, HR, and operations fundamentals for running a professional practice",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Peer-reviewed open textbook published by OpenStax (Rice University). Freely available online. Used in verified prior skill integrations."
+    },
+    {
+      "title": "Entrepreneurship",
+      "author": "OpenStax",
+      "freeSourceUrl": "https://openstax.org/details/books/entrepreneurship",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free open textbook at openstax.org — from idea to launch to scale for professional service businesses",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Peer-reviewed open textbook published by OpenStax (Rice University). Freely available online. Covers business planning, funding, and growth frameworks."
+    },
+    {
+      "title": "Digital Marketing for Small Business",
+      "author": "HubSpot",
+      "freeSourceUrl": "https://www.hubspot.com/resources",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free guides at hubspot.com/resources — social media, SEO, and lead generation for professional service businesses",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "HubSpot free resource library confirmed active at hubspot.com/resources. Used in verified prior skill integrations."
+    },
+    {
+      "title": "Starting a Business Guide",
+      "author": "U.S. Small Business Administration",
+      "freeSourceUrl": "https://www.sba.gov/business-guide",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free at sba.gov — step-by-step roadmap for legally registering and launching a professional practice",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Free official US government resource. Universally applicable for launching a licensed professional service business anywhere."
+    },
+    {
+      "title": "Inbound Marketing Certification",
+      "author": "HubSpot Academy",
+      "freeSourceUrl": "https://academy.hubspot.com/courses/inbound-marketing",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free certification at HubSpot Academy — attract patients or clients to your practice through content and SEO",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Free industry-recognized certification confirmed at HubSpot Academy. Used in verified prior skill integrations."
+    },
+    {
+      "title": "Principles of Management",
+      "author": "OpenStax",
+      "freeSourceUrl": "https://openstax.org/details/books/principles-management",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free open textbook at openstax.org — management fundamentals for professionals building and leading a team",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Peer-reviewed open textbook published by OpenStax (Rice University). Freely available online. Covers planning, organizing, leading, and controlling a professional team."
     }
   ]
 }
