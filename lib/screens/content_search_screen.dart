@@ -181,9 +181,8 @@ class _ContentSearchScreenState extends State<ContentSearchScreen> {
       context,
       NoFlashPageRoute(
         builder: (_) => ShortsPlayerScreen(
-          shorts:        shorts,
-          initialIndex:  index,
-          autoPlayFirst: true,
+          shorts:       shorts,
+          initialIndex: index,
         ),
       ),
     );
@@ -289,13 +288,12 @@ class _ContentSearchScreenState extends State<ContentSearchScreen> {
                 color: AppTheme.textMuted(context)),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
           child: Row(
             children: [
-              // Column headers
               Expanded(child: _ColHeader('Shorts', Icons.play_circle_outline_rounded)),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Expanded(child: _ColHeader('Videos • Blogs • Books', Icons.grid_view_rounded)),
             ],
           ),
@@ -615,10 +613,7 @@ class _ContentCard extends StatelessWidget {
     if (item.kind == _ResultKind.book) {
       return AspectRatio(
         aspectRatio: 16 / 9,
-        child: BookCoverImage(
-          url: item.video!.thumbnailUrl,
-          fit: BoxFit.cover,
-        ),
+        child: BookCoverImage(url: item.video!.thumbnailUrl),
       );
     }
     final url = item.video?.thumbnailMq ?? item.article?.thumbnailUrl ?? '';

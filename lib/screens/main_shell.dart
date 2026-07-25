@@ -100,7 +100,7 @@ class _MainShellState extends State<MainShell> {
 
     // Switch to Feed tab then push the video player
     setState(() => _index = 0);
-    Navigator.of(context).push(
+    await Navigator.of(context).push(
       NoFlashPageRoute(
         builder: (_) => VideoPlayerScreen(video: video!, channel: channel),
       ),

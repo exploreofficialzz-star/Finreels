@@ -84,7 +84,6 @@ class _PaystackCheckoutScreenState extends State<PaystackCheckoutScreen> {
             baseUrl: WebUri(PaystackService.baseUrl),
           ),
           initialSettings: InAppWebViewSettings(
-            javaScriptEnabled: true,
             allowsInlineMediaPlayback: true,
             useShouldOverrideUrlLoading: true,
           ),

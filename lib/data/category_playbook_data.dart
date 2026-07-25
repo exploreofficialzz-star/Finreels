@@ -80,7 +80,7 @@ class CategoryPlaybookData {
     return null;
   }
 
-  static final DateTime _epoch = DateTime(2026, 1, 1);
+  static final DateTime _epoch = DateTime(2026);
 
   static Video _buildVideo(ResourceCategory c) => Video(
         id: playbookId(c.id),

@@ -181,7 +181,7 @@ class VideoCard extends StatelessWidget {
           // Books: use the asset/network-aware cover widget. No fake
           // YouTube thumbnail URL — video.thumbnailHd already resolves
           // to the book's real cover via the Video model fix.
-          BookCoverImage(url: video.thumbnailHd, fit: BoxFit.cover)
+          BookCoverImage(url: video.thumbnailHd)
         else
           CachedNetworkImage(
             imageUrl: video.thumbnailHd,

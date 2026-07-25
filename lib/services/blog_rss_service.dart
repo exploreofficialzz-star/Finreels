@@ -286,7 +286,7 @@ class BlogRssService {
     if (html.isEmpty) return null;
     // Match both single and double quote variants.
     final match = RegExp(
-      r'''<img[^>]+src=["']([^"']+)["']''',
+      '''<img[^>]+src=["']([^"']+)["']''',
       caseSensitive: false,
     ).firstMatch(html);
     if (match != null) {

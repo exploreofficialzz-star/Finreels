@@ -106,6 +106,14 @@ configurations.all {
     resolutionStrategy {
         force 'androidx.work:work-runtime:2.8.1'
         force 'androidx.work:work-runtime-ktx:2.8.1'
+        // ── Google Play Billing Library 8.0.0 ───────────────────────────────
+        // Google Play requires billing library ≥8.0.0 from Aug 31, 2026.
+        // in_app_purchase's transitive dependency resolves to an older version;
+        // forcing here overrides it without waiting for the plugin to publish
+        // its own update. Billing 8 maintains backward compatibility for the
+        // core purchase APIs that in_app_purchase uses.
+        force 'com.android.billingclient:billing:8.0.0'
+        force 'com.android.billingclient:billing-ktx:8.0.0'
     }
 }
 

@@ -21,7 +21,6 @@ import 'blog_feed_screen.dart';
 import 'blog_reader_screen.dart';
 import 'book_detail_screen.dart';
 import 'content_search_screen.dart';
-import 'discover_screen.dart';
 import 'shorts_player_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -300,8 +299,7 @@ class _ShortsTab extends StatelessWidget {
                   NoFlashPageRoute(
                     builder: (_) => ShortsPlayerScreen(
                         shorts: shorts,
-                        initialIndex: i,
-                        autoPlayFirst: true),
+                        initialIndex: i),
                   ),
                 );
               },

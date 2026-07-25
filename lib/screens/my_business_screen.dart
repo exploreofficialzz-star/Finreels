@@ -248,7 +248,7 @@ class _SearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return DecoratedBox(
       decoration: BoxDecoration(
         color: AppTheme.surfaceColor(context),
         borderRadius: BorderRadius.circular(12),

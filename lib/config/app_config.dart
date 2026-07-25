@@ -72,7 +72,7 @@ class AppConfig {
     }
     return Platform.isAndroid
         ? 'ca-app-pub-2492078126313994/7947671149'
-        : null; // TODO: create iOS App Open unit and paste its ID here
+        : null; // TODO(dev): create iOS App Open unit and paste its ID here
   }
 
   // ── In-App Purchase Product IDs ──────────────────────────────────────────────

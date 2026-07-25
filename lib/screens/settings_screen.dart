@@ -226,8 +226,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           subtitle: 'Manage your ad consent choices',
                           trailing: const Icon(Icons.chevron_right_rounded,
                               size: 20),
-                          onTap: () =>
-                              ConsentService.instance.showPrivacyOptionsForm(),
+                          onTap: ConsentService.instance.showPrivacyOptionsForm,
                         ),
                       _SettingsTile(
                         icon: Icons.description_rounded,
@@ -381,7 +380,7 @@ class _RemoveAdsSection extends StatelessWidget {
         ),
         actions: [
           TextButton(
-            onPressed: () => Navigator.of(dCtx).pop(null),
+            onPressed: () => Navigator.of(dCtx).pop(),
             child: const Text('Cancel',
                 style: TextStyle(color: AppTheme.gold)),
           ),

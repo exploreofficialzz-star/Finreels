@@ -228,7 +228,7 @@ class FeedProvider extends ChangeNotifier {
   static Video _videoFromVerifiedBook(VerifiedBook b) {
     final slug = '${b.categoryId ?? 'general'}_${b.title}'
         .toLowerCase()
-        .replaceAll(RegExp(r'[^a-z0-9]+'), '_');
+        .replaceAll(RegExp('[^a-z0-9]+'), '_');
     final id = 'vbook_$slug';
     return Video(
       id: id,

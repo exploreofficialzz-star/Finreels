@@ -74,7 +74,7 @@ class _LabelledBannerAdState extends State<LabelledBannerAd> {
     if (!mounted) return;
     final size = adaptiveSize ?? AdSize.banner; // graceful fallback
 
-    _ad?.dispose();
+    await _ad?.dispose();
     _ad = BannerAd(
       adUnitId: AppConfig.bannerAdUnitId,
       size:     size,
@@ -90,13 +90,14 @@ class _LabelledBannerAdState extends State<LabelledBannerAd> {
           if (_retryCount < _maxRetries) {
             _retryCount++;
             final delay = Duration(seconds: 15 * _retryCount);
-            Future.delayed(delay, () {
+            unawaited(Future.delayed(delay, () {
               if (mounted) unawaited(_load(width));
-            });
+            }));
           }
         },
       ),
-    )..load();
+    );
+    unawaited(_ad!.load());
   }
 
   @override
@@ -190,7 +191,7 @@ class _StickyBannerBarState extends State<StickyBannerBar> {
     if (!mounted) return;
     final size = adaptiveSize ?? AdSize.banner;
 
-    _ad?.dispose();
+    await _ad?.dispose();
     _ad     = null;
     _loaded = false;
 
@@ -209,13 +210,14 @@ class _StickyBannerBarState extends State<StickyBannerBar> {
           if (_retryCount < _maxRetries) {
             _retryCount++;
             final delay = Duration(seconds: 15 * _retryCount);
-            Future.delayed(delay, () {
+            unawaited(Future.delayed(delay, () {
               if (mounted) unawaited(_load(width));
-            });
+            }));
           }
         },
       ),
-    )..load();
+    );
+    unawaited(_ad!.load());
   }
 
   @override

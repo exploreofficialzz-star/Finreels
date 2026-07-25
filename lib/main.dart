@@ -68,7 +68,7 @@ void main() {
     // this is what lets the Scaffold's own background colour paint all
     // the way to the physical top of the screen instead of leaving a
     // visibly different strip behind the time/signal/battery icons.
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
     // runApp immediately — splash is shown on the very first frame.
     runApp(const FinReelsApp());
@@ -168,9 +168,9 @@ class _SplashGateState extends State<_SplashGate> {
     // this group is the actual fix for that, not just a tidiness pass.
     try {
       await Future.wait([
-        _safeInit('ResourceCategories', () => ResourceCategoryData.load()),
-        _safeInit('UserProfile',        () => UserProfileService.instance.init()),
-        _safeInit('Engagement',         () => EngagementService.instance.init()),
+        _safeInit('ResourceCategories', ResourceCategoryData.load),
+        _safeInit('UserProfile',        UserProfileService.instance.init),
+        _safeInit('Engagement',         EngagementService.instance.init),
       ]).timeout(const Duration(seconds: 8));
     } on TimeoutException {
       debugPrint('[startup] ResourceCategories/UserProfile/Engagement '
@@ -191,11 +191,11 @@ class _SplashGateState extends State<_SplashGate> {
     unawaited(() async {
       try {
         await Future.wait([
-          _safeInit('Connectivity',  () => ConnectivityService.instance.init()),
+          _safeInit('Connectivity',  ConnectivityService.instance.init),
           _safeInit('Background',    _initBackgroundServices),
-          _safeInit('Notifications', () => NotificationService.instance.init()),
-          _safeInit('Ads',           () => AdService.instance.init()),
-          _safeInit('IAP',           () => IapService.instance.init()),
+          _safeInit('Notifications', NotificationService.instance.init),
+          _safeInit('Ads',           AdService.instance.init),
+          _safeInit('IAP',           IapService.instance.init),
         ]).timeout(const Duration(seconds: 6));
       } on TimeoutException {
         debugPrint('[startup] Connectivity/Background/Notifications/Ads/IAP '

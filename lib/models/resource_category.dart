@@ -6,6 +6,7 @@
 /// Data is loaded once at startup from `assets/data/resource_categories.json`
 /// by [ResourceCategoryData] (see `lib/data/resource_category_data.dart`).
 /// This file only defines the shapes.
+library;
 
 enum ResourceSection { skill, business, profession }
 
