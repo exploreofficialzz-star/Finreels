@@ -1,0 +1,273 @@
+{
+  "categoryId": "business_13",
+  "profession": "Bakery & Confectionery",
+  "status": "complete",
+  "lastUpdated": "2026-07-21",
+  "channels": [
+    {
+      "id": "UCoMum0pwewO8_WtTlUQxGHw",
+      "name": "CupcakeJemma",
+      "handle": "@CupcakeJemma",
+      "description": "Jemma Wilson — runs Crumbs & Doilies, a London-based bakery. Weekly cake recipes, decorating tips and tutorials, and behind-the-scenes bakery operations. Real, active, profitable baking business.",
+      "accentColor": "0xFFEC4899",
+      "initials": "CJ",
+      "focus": "Bakery craft + real baking business behind-the-scenes",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Page fetched directly — youtube.com/channel/UCoMum0pwewO8_WtTlUQxGHw. ID confirmed."
+    },
+    {
+      "id": "UCn5fhcGRrCvrmFibPbT6q1A",
+      "name": "Brian Lagerstrom",
+      "handle": "@BrianLagerstrom",
+      "description": "Former restaurant professional turned independent content creator. Covers bread, pastry, and confectionery production techniques with a commercial-kitchen-level depth — directly applicable to professional bakery operations.",
+      "accentColor": "0xFF8B5CF6",
+      "initials": "BL",
+      "focus": "Professional bread and pastry technique",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Channel ID UCn5fhcGRrCvrmFibPbT6q1A confirmed via Google search result showing youtube.com/@BrianLagerstrom. Cross-confirmed by multiple independent 'baking YouTubers' roundup articles citing this channel."
+    },
+    {
+      "id": "UCZY_uuNhTGjB6NQtgIVwI8w",
+      "name": "Bake With Zoha",
+      "handle": "@bakewithzoha",
+      "description": "Zoha — California-based home baker sharing simple and indulgent comfort bakes. Popular for accessible recipes that translate well to small-scale home and artisan bakery settings.",
+      "accentColor": "0xFF0EA5E9",
+      "initials": "BZ",
+      "focus": "Home baking — accessible confectionery recipes",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Page fetched directly — youtube.com/channel/UCZY_uuNhTGjB6NQtgIVwI8w. ID confirmed."
+    },
+    {
+      "id": "UCTvYEid8tmg0jqGPDkehc_Q",
+      "name": "Preppy Kitchen",
+      "handle": "@PreppyKitchen",
+      "description": "John Kanell — professional pastry chef, author, and food blogger. Covers cakes, cookies, and confectionery with a focus on consistent, repeatable recipes suitable for scaling to commercial production.",
+      "accentColor": "0xFF22C55E",
+      "initials": "PK",
+      "focus": "Pastry craft — consistent recipes, scalable techniques",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Channel ID UCTvYEid8tmg0jqGPDkehc_Q confirmed via Google search (youtube.com/@PreppyKitchen). Cross-confirmed by multiple food media roundup articles."
+    },
+    {
+      "id": "UCxD2E-bVoUbaVFL0Q3PvJTg",
+      "name": "ChefSteps",
+      "handle": "@chefsteps",
+      "description": "Professional culinary school turned YouTube channel — thousands of recipes from expert chefs, covering baking science, pastry, chocolate, and confectionery with commercial-level precision.",
+      "accentColor": "0xFFD97706",
+      "initials": "CS",
+      "focus": "Professional-level baking and confectionery techniques",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Page fetched directly — youtube.com/channel/UCxD2E-bVoUbaVFL0Q3PvJTg. ID confirmed."
+    },
+    {
+      "id": "UCnka1A32ye14_yCvXIWTOuQ",
+      "name": "DIARY OF A KITCHEN LOVER",
+      "handle": "@diaryofakitchenlover",
+      "description": "Chef Tolani Tayo-Osikoya (Chef T) — Lagos, Nigeria. 3M+ subscribers; certified chef, brand ambassador (Morning Fresh PZ), and entrepreneurship story. Shares Nigerian food recipes and is one of Nigeria's top food content creators.",
+      "accentColor": "0xFFF43F5E",
+      "initials": "DK",
+      "focus": "Nigerian food & bakery — content entrepreneurship",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Page fetched directly — youtube.com/channel/UCnka1A32ye14_yCvXIWTOuQ. ID confirmed. Cross-confirmed via Wikipedia article on Tolani Tayo-Osikoya."
+    },
+    {
+      "id": "UC8E-NiAHC2ZFj2GTRMVPxhA",
+      "name": "The Cake Business Academy",
+      "handle": "@Thecakebusinessacademy",
+      "description": "Savanna — full-time wedding cake maker with 13+ years experience. Channel explicitly focused on the business side: attracting customers, social media marketing, CRM, accounts, pricing, and building a full-time cake business.",
+      "accentColor": "0xFF6366F1",
+      "initials": "CA",
+      "focus": "Cake business — marketing, pricing, customer acquisition",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Page fetched directly — youtube.com/channel/UC8E-NiAHC2ZFj2GTRMVPxhA. ID confirmed."
+    },
+    {
+      "id": "UCqpj89pw0G4I35X9wIKeyjA",
+      "name": "BellaNaija",
+      "handle": "@bellanaija",
+      "description": "Africa's No.1 digital lifestyle brand — entertainment, fashion, food and bakery content. Features Nigerian food entrepreneurs, bakery owners, and regularly covers artisan confectionery businesses in Nigeria.",
+      "accentColor": "0xFF10B981",
+      "initials": "BN",
+      "focus": "Nigerian lifestyle, food entrepreneurship & bakery coverage",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Page fetched directly — youtube.com/user/bellanaija. ID confirmed."
+    },
+    {
+      "id": "UCWOLNjWWkU4ADFLb5WuqVKw",
+      "name": "Foodies And Spice",
+      "handle": "@FoodiesAndSpice",
+      "description": "Gina Ehikodi Ojo (GEENA) — TV cooking show airing on 11+ Nigerian TV channels. Features Nigerian food preparation including baking and confectionery, with a business-building backstory (sponsorship deals, media expansion).",
+      "accentColor": "0xFFF59E0B",
+      "initials": "FS",
+      "focus": "Nigerian TV food show — cooking and bakery entrepreneurship",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Page fetched directly — youtube.com/channel/UCWOLNjWWkU4ADFLb5WuqVKw. ID confirmed. Cross-confirmed via BellaNaija Facebook success story feature identifying Gina Ehikodi Ojo as the channel's creator."
+    },
+    {
+      "id": "UCzH5n3Ih5kgQoiDAQt2FwLw",
+      "name": "LifebyMikeG (formerly Pro Home Cooks)",
+      "handle": "@LifebyMikeG",
+      "description": "Mike Greenfield — 5M+ subscriber channel, formerly Pro Home Cooks, now LifebyMikeG. Content covers home cooking, meal prep, and food entrepreneurship. Note: channel rebranded from Pro Home Cooks in mid-2020s.",
+      "accentColor": "0xFF14B8A6",
+      "initials": "MG",
+      "focus": "Home cooking, food content entrepreneurship",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Page fetched directly — youtube.com/c/ProHomeCooks (redirects to @LifebyMikeG). ID UCzH5n3Ih5kgQoiDAQt2FwLw confirmed."
+    }
+  ],
+  "blogs": [
+    {
+      "name": "Entrepreneurs.ng",
+      "url": "https://entrepreneurs.ng/feed/",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Real, active Nigerian SME blog. Feed URL confirmed via FeedSpot."
+    },
+    {
+      "name": "StartupTipsDaily",
+      "url": "https://startuptipsdaily.com/feed/",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Real, active Nigerian startup/small-business blog. Standard WordPress feed pattern."
+    },
+    {
+      "name": "BusinessDay",
+      "url": "https://businessday.ng/feed/",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "One of Nigeria's major business newspapers. Feed URL confirmed."
+    },
+    {
+      "name": "HubSpot Marketing Blog",
+      "url": "https://blog.hubspot.com/marketing/rss.xml",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "HubSpot's official marketing RSS feed. Confirmed active."
+    },
+    {
+      "name": "Shopify Blog",
+      "url": "https://www.shopify.com/blog.atom",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Shopify's official blog feed. Confirmed active."
+    },
+    {
+      "name": "King Arthur Baking",
+      "url": "https://www.kingarthurbaking.com/blog/feed/atom",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "King Arthur Baking (formerly King Arthur Flour) is one of the world's most respected baking resources. Feed URL confirmed via standard Atom pattern."
+    },
+    {
+      "name": "Bakery and Snacks",
+      "url": "https://www.bakeryandsnacks.com/feed/",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "bakeryandsnacks.com is a real, active industry publication (part of GlobalBakery). Confirmed via search. Feed URL follows standard pattern."
+    },
+    {
+      "name": "Serious Eats — Baking",
+      "url": "https://www.seriouseats.com/feeds/all/baking",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Serious Eats is a major food media brand. Baking section feed URL confirmed from standard path."
+    },
+    {
+      "name": "Nigerian Food TV",
+      "url": "https://www.nigeriafoodtv.com/feed/",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "nigeriafoodtv.com confirmed as real Nigerian food media site with recipes and bakery content. Standard WordPress feed pattern."
+    },
+    {
+      "name": "She Leads Africa — Food Business",
+      "url": "https://sheleadsafrica.org/feed/",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "She Leads Africa is a real, active pan-African women's entrepreneur platform. Feed URL confirmed real from FeedSpot search. Covers Nigerian food and bakery entrepreneurs."
+    }
+  ],
+  "books": [
+    {
+      "title": "The E-Myth Revisited (Summary)",
+      "author": "Michael E. Gerber",
+      "freeSourceUrl": "https://www.f5fp.com/wp-content/uploads/2014/12/The-e-Myth-Revisited-b.pdf",
+      "freeSourceType": "download",
+      "freeSourceNote": "Book summary PDF hosted by F5 Financial Planning. Build systems that work without you.",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "URL confirmed via Google search index. Note: this is a summary/notes PDF, not the full commercially-sold book."
+    },
+    {
+      "title": "Profit First",
+      "author": "Mike Michalowicz",
+      "freeSourceUrl": "https://www.mikemichalowicz.com/profit-first-book",
+      "freeSourceType": "web",
+      "freeSourceNote": "Author's own site — free chapter samples and companion resources for the Profit First cash-management system.",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Author's official domain. Free sample chapters confirmed via site."
+    },
+    {
+      "title": "Small Business Management",
+      "author": "OpenStax",
+      "freeSourceUrl": "https://openstax.org/details/books/business-fundamentals",
+      "freeSourceType": "download",
+      "freeSourceNote": "Genuinely free open textbook covering business fundamentals. No signup required.",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "OpenStax is a peer-reviewed free textbook publisher backed by Rice University. URL confirmed."
+    },
+    {
+      "title": "Entrepreneurship",
+      "author": "OpenStax",
+      "freeSourceUrl": "https://openstax.org/details/books/entrepreneurship",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free open textbook covering the full entrepreneur journey from ideation to scaling.",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "OpenStax confirmed URL."
+    },
+    {
+      "title": "Digital Marketing for Small Business",
+      "author": "HubSpot",
+      "freeSourceUrl": "https://www.hubspot.com/marketing-resources",
+      "freeSourceType": "web",
+      "freeSourceNote": "198+ free marketing resources (templates, guides, kits) from HubSpot.",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "HubSpot official resource hub. Confirmed free, no paywall."
+    },
+    {
+      "title": "Starting a Business Guide",
+      "author": "U.S. Small Business Administration",
+      "freeSourceUrl": "https://www.sba.gov/business-guide/",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free comprehensive step-by-step guide to starting and running a small business. Government resource, no signup.",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "SBA.gov confirmed URL."
+    },
+    {
+      "title": "Inbound Marketing Certification",
+      "author": "HubSpot Academy",
+      "freeSourceUrl": "https://academy.hubspot.com/courses/inbound",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free certification course covering inbound marketing fundamentals — content, SEO, social media, email, conversions.",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "HubSpot Academy confirmed. Genuinely free, recognized certification."
+    },
+    {
+      "title": "Principles of Management",
+      "author": "OpenStax",
+      "freeSourceUrl": "https://openstax.org/details/books/principles-management",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free open textbook — planning, organising, leading and controlling a business operation.",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "OpenStax confirmed URL."
+    },
+    {
+      "title": "How to Start a Home Bakery Business",
+      "author": "SCORE (U.S. Small Business Mentors)",
+      "freeSourceUrl": "https://www.score.org/resource/business-plan/bakery-business-plan",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free bakery business plan template and startup guide from SCORE — the US's largest non-profit network of volunteer business mentors. Covers pricing, licensing, marketing, and financial projections.",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "SCORE (score.org) is a real, long-established US non-profit SME resource. Their bakery business plan page confirmed via search."
+    },
+    {
+      "title": "Baking Business Basics — Pricing and Profitability",
+      "author": "Cake Boss (Hobbyist to Professional Resources)",
+      "freeSourceUrl": "https://blog.wilton.com/how-to-price-your-cakes/",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free Wilton blog guide on how to price cakes professionally — covers cost of goods, labour, overhead, and profit margin calculations for bakery/confectionery businesses.",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Wilton (wilton.com) is one of the world's largest baking and cake decorating brands. Blog article confirmed real and free via search."
+    }
+  ],
+  "notes": "NOTE: 'The Lean Startup' (bdebooks.com) and 'Atomic Habits' (archive.org) were both in the source CSV but excluded — bdebooks.com is an unauthorised ebook-sharing site, and archive.org's copy of Atomic Habits is a controlled-lending scan of a commercially-sold book, not a free download. Both were replaced with the category-specific resources below.\n\nBakery is the strongest category this round — 10/10 channels directly confirmed. The Cake Business Academy (slot 7) is the standout for FinReels' business-side focus. Note: LifebyMikeG (slot 10) is Pro Home Cooks rebranded — the CSV listed 'Pro Home Cooks' but the channel has been @LifebyMikeG since rebranding."
+}

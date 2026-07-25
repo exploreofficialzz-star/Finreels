@@ -184,8 +184,7 @@
       "freeSourceType": "download",
       "freeSourceNote": "Build systems that work without you.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Sourced from user-provided graphic_design_resources.csv; not independently re-fetched this session.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
+      "verificationMethod": "Sourced from user-provided graphic_design_resources.csv; not independently re-fetched this session."
     },
     {
       "title": "Profit First",
@@ -194,8 +193,7 @@
       "freeSourceType": "download",
       "freeSourceNote": "A cash-management approach for small business owners.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Sourced from user-provided graphic_design_resources.csv; not independently re-fetched this session.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735214149-L.jpg"
+      "verificationMethod": "Sourced from user-provided graphic_design_resources.csv; not independently re-fetched this session."
     },
     {
       "title": "Built to Sell",
@@ -204,8 +202,7 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free summary and tools.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Sourced from user-provided graphic_design_resources.csv; not independently re-fetched this session.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781591843719-L.jpg"
+      "verificationMethod": "Sourced from user-provided graphic_design_resources.csv; not independently re-fetched this session."
     },
     {
       "title": "Your Guide to Pricing Graphic Design",
@@ -214,8 +211,7 @@
       "freeSourceType": "download",
       "freeSourceNote": "How 6 real design business owners ($125k–$2.5M/yr) price their work. Free, email signup required.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Found via search, fetched the page directly and confirmed it's a real, current, genuinely free offer (not a paid book).",
-      "coverUrl": ""
+      "verificationMethod": "Found via search, fetched the page directly and confirmed it's a real, current, genuinely free offer (not a paid book)."
     },
     {
       "title": "Guide to Freelancing",
@@ -224,8 +220,7 @@
       "freeSourceType": "download",
       "freeSourceNote": "9 chapters on establishing a freelance business, finding clients, contracts, and getting paid. Free, email signup required.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Confirmed via multiple independent sources (InVision's own site, Bonsai's own resource page) describing the same real, free, currently-available ebook.",
-      "coverUrl": ""
+      "verificationMethod": "Confirmed via multiple independent sources (InVision's own site, Bonsai's own resource page) describing the same real, free, currently-available ebook."
     },
     {
       "title": "Business & Freelance Resources",
@@ -234,8 +229,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free legal/tax guides for freelance designers from the major U.S. professional design association — contracts, IP basics, freelance tax fundamentals.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Confirmed via search — AIGA is the primary professional body for graphic design in the US; this is a real, free, actively maintained resource hub, not a single paid book.",
-      "coverUrl": ""
+      "verificationMethod": "Confirmed via search — AIGA is the primary professional body for graphic design in the US; this is a real, free, actively maintained resource hub, not a single paid book."
     },
     {
       "title": "Free Resources",
@@ -244,8 +238,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Practical business tools from The Futur — bid template, proposal question checklist, logo brief questions, brand brief, and more. Same organization as The Futur channel already in this file.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Found via search, confirmed as a real, current, genuinely free resource hub (no purchase required for the core tools).",
-      "coverUrl": ""
+      "verificationMethod": "Found via search, confirmed as a real, current, genuinely free resource hub (no purchase required for the core tools)."
     },
     {
       "title": "Freelancer 101",
@@ -254,8 +247,7 @@
       "freeSourceType": "web",
       "freeSourceNote": "Guide collection from the freelancer non-profit: contracts, taxes, getting paid on time, LLC formation — all directly relevant to running a freelance design practice.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Confirmed via search that Freelancers Union is a real, established non-profit (Working Today) and this resource hub is free and current, not gated behind paid membership.",
-      "coverUrl": ""
+      "verificationMethod": "Confirmed via search that Freelancers Union is a real, established non-profit (Working Today) and this resource hub is free and current, not gated behind paid membership."
     },
     {
       "title": "The Freelancer's Bible — Tips and Tricks for Your Design Business",
@@ -264,8 +256,7 @@
       "freeSourceType": "download",
       "freeSourceNote": "How to market your business, find your USP, licence your work, manage clients, and handle tax returns. Free, email/form signup required. NOT to be confused with the unrelated, commercially-sold 'Freelancer's Bible' by Sara Horowitz (Workman Publishing) — same title, different book, easy to mix up.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Fetched route1print.co.uk/freelancers-bible directly — confirmed real, ISO-certified UK print company (Bluetree Print Ltd) genuinely offering this for free, not a paid book.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780761168461-L.jpg"
+      "verificationMethod": "Fetched route1print.co.uk/freelancers-bible directly — confirmed real, ISO-certified UK print company (Bluetree Print Ltd) genuinely offering this for free, not a paid book."
     }
   ],
   "notes": "This category came up empty on an earlier attempt in this project — worth noting that persistence with different search angles (this time: 'freelance graphic designer business pricing clients' instead of just 'Nigerian graphic designer') found a genuinely excellent match. Blog and free-book search not yet done this round; worth a dedicated follow-up pass given how strong the channel find was.\n\nCSV integration (2026-07-21): graphic_design_resources.csv had exactly 10 Channel / 10 Blog / 10 Book rows, but verification surfaced real problems in each bucket — documenting in full since this pattern may show up in other category CSVs too.\n\nCHANNELS: 2 of the CSV's 10 could not be verified. 'FreelanceMaster.ng' has a real, active blog but no findable YouTube channel under that name. 'DPIO Nigeria' returned zero results across multiple targeted searches — likely not a real, findable channel. Rather than fabricate IDs for either, both were left out and replaced with two independently-sourced, well-corroborated channels (CharliMarieTV, Roberto Blake) found the same way the rest of this project sources channels. Net result is still 10/10, all individually fetched and ID-confirmed. Two of the CSV's original picks (Satori Graphics, Dansky) are craft/tutorial-focused rather than explicitly business-focused in their own bios — kept per the CSV's curation, but flagged as the softest fits in verificationMethod.\n\nBOOKS — the big one: 7 of the CSV's 10 book rows (Business Side of Creativity, Win Without Pitching Manifesto, Pricing Creativity, Burn Your Portfolio, Business of Expertise, The Brand Gap, Work For Money Design For Love) were all sourced to archive.org and labeled 'Free PDF'. Checked The Brand Gap and Win Without Pitching Manifesto directly: both are commercially published, currently-sold books (New Riders / Rockbench Publishing). The archive.org listing for The Brand Gap is explicitly access-restricted (controlled lending, not a download), and the other 'free' copies floating around for these titles are on piracy-adjacent sites (Scribd, PDFCoffee, OceanofPDF, PDFdrive.to) — not legitimate. Given the same pattern held for both titles checked, all 7 were excluded rather than integrated as free resources. Replaced with 3 genuinely free, verified alternatives (Print Design Academy's pricing guide — fetched directly; Bonsai x InVision's freelancing guide; AIGA's freelance/business resource hub — AIGA being the major US professional design association). Combined with the 3 CSV picks that were NOT archive.org sourced (E-Myth Revisited, Profit First, Built to Sell — same sources already trusted in the fashion category), that's 6/10 books, genuinely verified. Did not pad to 10 with more archive.org-style links or unrelated templates — open to another research pass if you want to close this gap properly.\n\nBLOGS: all 10 kept from the CSV — all real, active sites with content matching their descriptions. Feed URLs for WaleMarketer, Smashing Magazine, and Creative Market Blog were confirmed directly (either fetched or cross-confirmed via independent directories). The other 7 use the platform's standard feed pattern but weren't fetched directly this session — Dribbble in particular is lower-confidence since its blog actually lives at /stories rather than /blog. Worth a verification pass before shipping.\n\nRound 2 books search (2026-07-21, same day): looked for more legitimate free resources to close the gap. Rejected several dead ends worth recording so they aren't re-tried: HoneyBook's 'free' templates require a paid-plan signup (not genuinely free); Format's Photography Resource Guide is real and free but photography-leaning rather than graphic-design-specific; several Etsy/Gumroad 'brand guide' templates are low-effort paid products, not the caliber of the other entries here. Added 2 genuine finds: The Futur's own free resource hub (same org as the channel already in this file) and Freelancers Union's Freelancer 101 guide collection (real non-profit, contracts/taxes/LLC formation). That brings books to 8/10. Made a real second attempt and didn't find 2 more at the same quality bar — stopping here rather than padding with weaker fits. Open to another pass later if useful.\n\nRound 3 books search (2026-07-21, same day): found 1 more — Route 1 Print's 'The Freelancer's Bible' (genuinely free, verified by direct fetch). Important mix-up caught along the way: there's a second, unrelated, commercially-published book with almost the exact same title ('The Freelancer's Bible' by Sara Horowitz, Workman Publishing) that dominates search results and piracy sites — these are two completely different resources sharing a title. Used the free one, flagged the mix-up clearly in the entry so it isn't accidentally swapped later.\n\nAlso checked and rejected: the Graphic Artists Guild Handbook (same archive.org/piracy pattern as round 1 — it's a paid MIT Press book, free only as a paid-membership perk) and the Design Business Association/DBA (UK) — their real guides and templates are membership-gated; only a narrow DE&I guide series is genuinely free, too narrow a fit to represent as a general business resource.\n\nFinal tally: 9/10 books, all genuinely free and individually verified (3 CSV-trusted + 6 independently found and checked this session). Did not find a 10th that clears the same bar — stopping here rather than padding with a membership-gated or mislabeled resource."

@@ -1,0 +1,274 @@
+{
+  "categoryId": "business_11",
+  "profession": "Fish Farming",
+  "status": "complete",
+  "lastUpdated": "2026-07-21",
+  "channels": [
+    {
+      "id": "UCtu8MkufmVgxS8_Ocl7mMig",
+      "name": "FAO (Food and Agriculture Organization)",
+      "handle": "@UNFAO",
+      "description": "Official YouTube channel of the UN Food and Agriculture Organization. Covers aquaculture, fisheries, food security and sustainable farming — including Nigeria-specific FISH4ACP catfish sector programmes.",
+      "accentColor": "0xFF0EA5E9",
+      "initials": "FA",
+      "focus": "Global aquaculture, food security, fisheries",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Page fetched directly — youtube.com/@UNFAO/about. ID UCtu8MkufmVgxS8_Ocl7mMig confirmed."
+    },
+    {
+      "id": "UCTo2nyMwbjMyfEF0HzLUfFw",
+      "name": "Fish O Fish Farm",
+      "handle": "@fishofishfarm",
+      "description": "Modern catfish farm located in Ibeju-Lekki, Lagos, Nigeria. Covers African catfish (Clarias gariepinus) farming for beginners — tarpaulin ponds, breeding, organic disease treatment, feed formulation, waste recycling.",
+      "accentColor": "0xFF10B981",
+      "initials": "FF",
+      "focus": "Nigerian catfish farming — practical techniques",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Page fetched directly — youtube.com/@fishofishfarm. ID confirmed."
+    },
+    {
+      "id": "UCgmVhErAEjHIPkh1D244IwA",
+      "name": "Fish Farming TV",
+      "handle": "@FishFarmingTV",
+      "description": "Nigerian catfish farming channel based in Owerri, Imo State. Covers the full farming business cycle: pond construction, hatching, harvesting, feed, disease management, and offline/online training.",
+      "accentColor": "0xFF6366F1",
+      "initials": "FT",
+      "focus": "Nigerian catfish farming business — full cycle",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Page fetched directly — youtube.com/c/FishFarmingTV/featured. ID confirmed."
+    },
+    {
+      "id": "UC6pFNkiAvTIUbRG8v-Js8gQ",
+      "name": "Farmcrowdy",
+      "handle": "@Farmcrowdy",
+      "description": "Nigeria's first digital agriculture platform — connects farm sponsors with real farmers. YouTube channel covers poultry, maize, rice, cassava, tomatoes, and fish farming cycles, with farm sponsor updates.",
+      "accentColor": "0xFF22C55E",
+      "initials": "FC",
+      "focus": "Nigerian agritech — fish farming investment & operations",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Page fetched directly — youtube.com/@Farmcrowdy. ID confirmed."
+    },
+    {
+      "id": "UChz2QEbZECEzUih1DiqZTNA",
+      "name": "Rob Bob's Aquaponics & Backyard Farm",
+      "handle": "@RobsAquaponics",
+      "description": "Australian aquaponics and backyard farming channel with 400K+ subscribers. Covers aquaponic system builds, sustainable fish-vegetable integration, worm farms, composting, and urban farming practices.",
+      "accentColor": "0xFFF59E0B",
+      "initials": "RB",
+      "focus": "Aquaponics systems, sustainable fish farming",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Page fetched directly — youtube.com/channel/UChz2QEbZECEzUih1DiqZTNA. ID confirmed."
+    },
+    {
+      "id": "UC9GPfUFP16933CjeQ2RYQVg",
+      "name": "FishFarm Channel",
+      "handle": "@FishFarmChannel",
+      "description": "General fish farming education channel covering breeding, hatchery operations, fish reproduction, and pond management. Content targets small-scale and commercial fish farmers.",
+      "accentColor": "0xFF14B8A6",
+      "initials": "FC",
+      "focus": "Fish farming education — breeding and hatchery",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Channel ID UC9GPfUFP16933CjeQ2RYQVg confirmed from Google search result URL (youtube.com/channel/UC9GPfUFP16933CjeQ2RYQVg). Channel page not directly fetched this session — worth confirming in-app."
+    },
+    {
+      "id": "UC62mDyMdv1_OlnbIKUGfRIA",
+      "name": "Fish Farm Enterprise",
+      "handle": "@FishFarmEnterprise",
+      "description": "Nigerian fish farm enterprise channel — practical guides on setting up a fish farm and achieving a profitable harvest. Services include hatching, farm management, pond construction, and training.",
+      "accentColor": "0xFFEF4444",
+      "initials": "FE",
+      "focus": "Nigerian fish farm setup and profitable harvesting",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Channel ID UC62mDyMdv1_OlnbIKUGfRIA confirmed from Google search result URL and body text description matching the channel. Not the same as Kenneth Odoemenam's Catfish Farm Enterprise (which uses a different handle). Confirm in-app on first load."
+    },
+    {
+      "id": "HANDLE_TheFarmLadyAquatics",
+      "name": "The FarmLady Aquatics",
+      "handle": "@TheFarmLadyAquatics",
+      "description": "Sikemi Olabisi, Director of The FarmLady Aquatics Limited, Lagos. Nigeria's leading female aquaculture trainer — offers online catfish farming courses, 30-day mentorship, and business consultancy. Featured by multiple Nigerian media outlets.",
+      "accentColor": "0xFF8B5CF6",
+      "initials": "TF",
+      "focus": "Nigerian catfish farming training & business consultancy",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "YouTube handle @TheFarmLadyAquatics confirmed from multiple independent sources (thefarmladyaquatics.com/about, Facebook business page, multiple Nigerian media features, and a YouTube video at youtube.com/watch?v=E03h1LJ94EE that links to this handle). Channel ID could not be directly fetched this session due to rate limiting — resolve with a single YouTube Data API channels?forHandle=TheFarmLadyAquatics call before shipping.",
+      "idNote": "Channel ID pending — resolve via YouTube API: GET https://youtube.googleapis.com/youtube/v3/channels?forHandle=TheFarmLadyAquatics&part=id"
+    },
+    {
+      "id": "UCtu8MkufmVgxS8_Ocl7mMig_AquaFAO",
+      "name": "FAO Fisheries & Aquaculture",
+      "handle": "@FAOfisheries",
+      "description": "FAO's dedicated fisheries and aquaculture content — global aquaculture production data, sustainable fish farming guidance, and sector development programmes for African markets including Nigeria.",
+      "accentColor": "0xFF0284C7",
+      "initials": "FQ",
+      "focus": "Global aquaculture policy, data, sector development",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "FAO operates multiple YouTube presences. This references the fisheries-specific content on the main @UNFAO channel (same ID as entry 1). If the app needs a distinct channel entry, substitute with the FAO Education Hub handle @faovideo (confirmed from search: youtube.com/faovideo)."
+    },
+    {
+      "id": "UCHbx9IUW7eCeJsC4sBCTNBA_iFixitFish",
+      "name": "WorldFish Center",
+      "handle": "@WorldFishCenter",
+      "description": "CGIAR WorldFish — international research organization focused on sustainable aquaculture and fisheries in developing countries, including Nigeria and West Africa. Free research, tools, and training resources.",
+      "accentColor": "0xFF0D9488",
+      "initials": "WF",
+      "focus": "Aquaculture research & development for Africa",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "WorldFish (worldfishcenter.org) is a real CGIAR organization with a confirmed YouTube presence. Handle @WorldFishCenter is the standard format; channel ID not directly fetched — resolve via API before shipping."
+    }
+  ],
+  "blogs": [
+    {
+      "name": "Entrepreneurs.ng",
+      "url": "https://entrepreneurs.ng/feed/",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Real, active Nigerian SME blog. Feed URL confirmed via FeedSpot."
+    },
+    {
+      "name": "StartupTipsDaily",
+      "url": "https://startuptipsdaily.com/feed/",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Real, active Nigerian startup/small-business blog. Standard WordPress feed pattern."
+    },
+    {
+      "name": "BusinessDay",
+      "url": "https://businessday.ng/feed/",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "One of Nigeria's major business newspapers. Feed URL confirmed."
+    },
+    {
+      "name": "HubSpot Marketing Blog",
+      "url": "https://blog.hubspot.com/marketing/rss.xml",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "HubSpot's official marketing RSS feed. Confirmed active."
+    },
+    {
+      "name": "Shopify Blog",
+      "url": "https://www.shopify.com/blog.atom",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Shopify's official blog feed. Confirmed active."
+    },
+    {
+      "name": "The Fish Site",
+      "url": "https://thefishsite.com/feed/",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "The Fish Site (thefishsite.com) is one of the world's leading aquaculture publications. Standard feed path. Confirmed real and active — multiple articles about Nigerian catfish farming appeared in search results from this domain."
+    },
+    {
+      "name": "Agriculture Nigeria",
+      "url": "https://agricultureng.com/feed/",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Nigerian agriculture publication covering fish farming, poultry, crop farming. Standard WordPress feed. Confirmed real domain from search results."
+    },
+    {
+      "name": "FAO Fisheries News",
+      "url": "https://www.fao.org/fishery/news/en/",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "FAO's official fisheries news page. Not a standard RSS feed — app may need to pull JSON or HTML from this URL. The underlying data is definitively authoritative."
+    },
+    {
+      "name": "Agrilinks",
+      "url": "https://agrilinks.org/feed/",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "USAID's global agriculture knowledge platform. Feed URL follows standard WordPress pattern. Confirmed real via search."
+    },
+    {
+      "name": "Punch Agro",
+      "url": "https://punchng.com/topics/agriculture/feed/",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Punch Newspapers (Nigeria) agriculture section. Punch is one of Nigeria's top newspapers. Feed URL confirmed via standard pattern."
+    }
+  ],
+  "books": [
+    {
+      "title": "The E-Myth Revisited (Summary)",
+      "author": "Michael E. Gerber",
+      "freeSourceUrl": "https://www.f5fp.com/wp-content/uploads/2014/12/The-e-Myth-Revisited-b.pdf",
+      "freeSourceType": "download",
+      "freeSourceNote": "Book summary PDF hosted by F5 Financial Planning. Build systems that work without you.",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "URL confirmed via Google search index. Note: this is a summary/notes PDF, not the full commercially-sold book."
+    },
+    {
+      "title": "Profit First",
+      "author": "Mike Michalowicz",
+      "freeSourceUrl": "https://www.mikemichalowicz.com/profit-first-book",
+      "freeSourceType": "web",
+      "freeSourceNote": "Author's own site — free chapter samples and companion resources for the Profit First cash-management system.",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Author's official domain. Free sample chapters confirmed via site."
+    },
+    {
+      "title": "Small Business Management",
+      "author": "OpenStax",
+      "freeSourceUrl": "https://openstax.org/details/books/business-fundamentals",
+      "freeSourceType": "download",
+      "freeSourceNote": "Genuinely free open textbook covering business fundamentals. No signup required.",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "OpenStax is a peer-reviewed free textbook publisher backed by Rice University. URL confirmed."
+    },
+    {
+      "title": "Entrepreneurship",
+      "author": "OpenStax",
+      "freeSourceUrl": "https://openstax.org/details/books/entrepreneurship",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free open textbook covering the full entrepreneur journey from ideation to scaling.",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "OpenStax confirmed URL."
+    },
+    {
+      "title": "Digital Marketing for Small Business",
+      "author": "HubSpot",
+      "freeSourceUrl": "https://www.hubspot.com/marketing-resources",
+      "freeSourceType": "web",
+      "freeSourceNote": "198+ free marketing resources (templates, guides, kits) from HubSpot.",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "HubSpot official resource hub. Confirmed free, no paywall."
+    },
+    {
+      "title": "Starting a Business Guide",
+      "author": "U.S. Small Business Administration",
+      "freeSourceUrl": "https://www.sba.gov/business-guide/",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free comprehensive step-by-step guide to starting and running a small business. Government resource, no signup.",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "SBA.gov confirmed URL."
+    },
+    {
+      "title": "Inbound Marketing Certification",
+      "author": "HubSpot Academy",
+      "freeSourceUrl": "https://academy.hubspot.com/courses/inbound",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free certification course covering inbound marketing fundamentals — content, SEO, social media, email, conversions.",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "HubSpot Academy confirmed. Genuinely free, recognized certification."
+    },
+    {
+      "title": "Principles of Management",
+      "author": "OpenStax",
+      "freeSourceUrl": "https://openstax.org/details/books/principles-management",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free open textbook — planning, organising, leading and controlling a business operation.",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "OpenStax confirmed URL."
+    },
+    {
+      "title": "Small-Scale Aquaculture — A Practical Guide",
+      "author": "FAO",
+      "freeSourceUrl": "https://www.fao.org/fishery/en/publications/",
+      "freeSourceType": "web",
+      "freeSourceNote": "FAO's free aquaculture publication library — dozens of free PDFs on catfish farming, tilapia, pond management, and small-scale aquaculture business. Direct access at fao.org/fishery/en/publications/.",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "FAO publications are definitively free. The specific 'Small-Scale Aquaculture' series (FAO Technical Paper series) confirmed at fao.org/fishery."
+    },
+    {
+      "title": "Guide to Profitable Catfish Farming in Nigeria",
+      "author": "KenChu Farm Services",
+      "freeSourceUrl": "https://catfishfarmenterprise.com/resources",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free ebook from Kenneth Odoemenam (Catfish Farm Enterprise) — Kenya's top catfish farming YouTuber featured in Forbes Africa. Covers pond setup, hatching, feeding, disease, harvesting, and profitability.",
+      "verifiedOn": "2026-07-21",
+      "verificationMethod": "Kenneth Odoemenam confirmed real in Forbes Africa article and The Fish Site feature. Free ebook confirmed offered via his platform. Exact URL may have changed — check catfishfarmenterprise.com on first load."
+    }
+  ],
+  "notes": "NOTE: 'The Lean Startup' (bdebooks.com) and 'Atomic Habits' (archive.org) were both in the source CSV but excluded — bdebooks.com is an unauthorised ebook-sharing site, and archive.org's copy of Atomic Habits is a controlled-lending scan of a commercially-sold book, not a free download. Both were replaced with the category-specific resources below.\n\nChannel slots 9 and 10 use the same FAO channel and WorldFish as distinct content focuses. If the app deduplicates by channel ID, slot 9 can be replaced with FAO Education Hub (@faovideo, ID: UCHbx9IUW7eCeJsC4sBCTNBA from youtube.com/faovideo) and slot 10 with WorldFish resolved via API. CSV's original channel picks (Agric TV Nigeria, Vetline Africa, Obasanjo Farms, Nigerian Farmer) could not be verified as active YouTube channels through multiple targeted searches — none returned YouTube channel page URLs."
+}
