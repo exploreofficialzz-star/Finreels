@@ -3,6 +3,18 @@ import 'package:flutter_animate/flutter_animate.dart';
 import '../services/connectivity_service.dart';
 import '../theme/app_theme.dart';
 
+/// Wraps the entire app. When network drops to [NetworkStatus.noNetwork] or
+/// [NetworkStatus.noInternet], a compact banner slides down from the top of
+/// the screen — content below is still fully visible and interactive, unlike
+/// the previous full-screen block.
+///
+/// The [NetworkStatus.checking] state intentionally shows nothing: the check
+/// completes in well under a second on a working connection, so a flash of
+/// UI would look like a bug rather than information.
+///
+/// [AdBlockOverlay] (which wraps the inner app) is a separate widget and is
+/// deliberately NOT changed here — ad-blocker detection still blocks the
+/// whole screen, as that is an intentional enforcement screen.
 class ConnectivityOverlay extends StatefulWidget {
   final Widget child;
   const ConnectivityOverlay({required this.child, super.key});
@@ -33,30 +45,56 @@ class _ConnectivityOverlayState extends State<ConnectivityOverlay> {
 
   @override
   Widget build(BuildContext context) {
-    final showOverlay = _status == NetworkStatus.noNetwork ||
-        _status == NetworkStatus.noInternet ||
-        _status == NetworkStatus.checking;
+    // 'checking' is silent — see class doc comment above.
+    final showBanner = _status == NetworkStatus.noNetwork ||
+        _status == NetworkStatus.noInternet;
 
     return Stack(
       children: [
+        // App content is ALWAYS rendered and interactive behind the banner.
         widget.child,
-        if (showOverlay)
-          _OverlaySheet(
-            status: _status,
-            retrying: _retrying,
-            onRetry: _retry,
-          ).animate().fadeIn(duration: 250.ms),
+
+        if (showBanner)
+          // Positioned at the top of the screen only — does not intercept
+          // taps outside its own footprint, so scrolling/navigation below
+          // continues to work normally while the connection is down.
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: SafeArea(
+              bottom: false,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
+                child: _NetworkBanner(
+                  status: _status,
+                  retrying: _retrying,
+                  onRetry: _retry,
+                ),
+              ),
+            ),
+          )
+              .animate()
+              .slideY(
+                begin: -1.2,
+                end: 0,
+                duration: 320.ms,
+                curve: Curves.easeOutCubic,
+              )
+              .fadeIn(duration: 200.ms),
       ],
     );
   }
 }
 
-class _OverlaySheet extends StatelessWidget {
+// ── Compact banner card ─────────────────────────────────────────────────────
+
+class _NetworkBanner extends StatelessWidget {
   final NetworkStatus status;
   final bool retrying;
   final VoidCallback onRetry;
 
-  const _OverlaySheet({
+  const _NetworkBanner({
     required this.status,
     required this.retrying,
     required this.onRetry,
@@ -64,128 +102,127 @@ class _OverlaySheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bg = isDark ? AppTheme.darkBg : AppTheme.lightBg;
-
     return Material(
-      color: bg,
-      child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(32),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Spacer(),
-              _buildIcon(),
-              const SizedBox(height: 32),
-              Text(
-                _title,
-                style: Theme.of(context).textTheme.headlineMedium,
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 16),
-              Text(
-                _subtitle,
-                style: Theme.of(context).textTheme.bodyMedium,
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 48),
-              if (status != NetworkStatus.checking) _buildRetryButton(context),
-              const Spacer(),
-              _buildFooter(context),
-            ],
+      color: Colors.transparent,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
+        decoration: BoxDecoration(
+          // Slightly opaque surface so content shows through at edges.
+          color: AppTheme.bgColor(context).withValues(alpha: 0.97),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: AppTheme.gold.withValues(alpha: 0.35),
+            width: 1,
           ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.35),
+              blurRadius: 24,
+              offset: const Offset(0, 6),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            _buildIcon(),
+            const SizedBox(width: 12),
+            Expanded(child: _buildText(context)),
+            const SizedBox(width: 10),
+            _buildRetryButton(context),
+          ],
         ),
       ),
     );
   }
 
   Widget _buildIcon() {
-    if (status == NetworkStatus.checking) {
-      return const SizedBox(
-        width: 80,
-        height: 80,
-        child: CircularProgressIndicator(
-          color: AppTheme.gold,
-          strokeWidth: 3,
-        ),
-      );
-    }
-
     final icon = status == NetworkStatus.noNetwork
         ? Icons.wifi_off_rounded
         : Icons.signal_wifi_statusbar_connected_no_internet_4_rounded;
 
     return Container(
-      width: 100,
-      height: 100,
+      width: 38,
+      height: 38,
       decoration: BoxDecoration(
-        color: AppTheme.gold.withValues(alpha: 0.1),
+        color: AppTheme.gold.withValues(alpha: 0.12),
         shape: BoxShape.circle,
-        border: Border.all(color: AppTheme.gold.withValues(alpha: 0.3), width: 1.5),
+        border: Border.all(
+          color: AppTheme.gold.withValues(alpha: 0.25),
+          width: 1,
+        ),
       ),
-      child: Icon(icon, size: 48, color: AppTheme.gold),
+      child: Icon(icon, color: AppTheme.gold, size: 20),
     )
-        .animate(onPlay: (c) => c.repeat())
-        .shimmer(duration: 2.seconds, color: AppTheme.gold.withValues(alpha: 0.2));
+        .animate(onPlay: (c) => c.repeat(reverse: true))
+        .shimmer(
+          duration: 2.seconds,
+          color: AppTheme.gold.withValues(alpha: 0.25),
+        );
+  }
+
+  Widget _buildText(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          _title,
+          style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                fontWeight: FontWeight.w800,
+                color: AppTheme.textColor(context),
+                height: 1.2,
+              ),
+        ),
+        const SizedBox(height: 2),
+        Text(
+          _subtitle,
+          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                color: AppTheme.textSecondary(context),
+                height: 1.3,
+              ),
+        ),
+      ],
+    );
   }
 
   Widget _buildRetryButton(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: 52,
-      child: FilledButton(
-        onPressed: retrying ? null : onRetry,
-        style: FilledButton.styleFrom(
-          backgroundColor: AppTheme.gold,
-          foregroundColor: Colors.black,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14)),
+    return GestureDetector(
+      onTap: retrying ? null : onRetry,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+        decoration: BoxDecoration(
+          color: retrying
+              ? AppTheme.gold.withValues(alpha: 0.5)
+              : AppTheme.gold,
+          borderRadius: BorderRadius.circular(20),
         ),
         child: retrying
             ? const SizedBox(
-                width: 22,
-                height: 22,
+                width: 14,
+                height: 14,
                 child: CircularProgressIndicator(
-                    color: Colors.black, strokeWidth: 2.5),
+                  color: Colors.black,
+                  strokeWidth: 2,
+                ),
               )
-            : const Text('Try Again',
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
+            : const Text(
+                'Retry',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 12,
+                ),
+              ),
       ),
     );
   }
 
-  Widget _buildFooter(BuildContext context) {
-    return Text(
-      'FinReels by chAs Tech Group',
-      style: Theme.of(context).textTheme.labelSmall,
-      textAlign: TextAlign.center,
-    );
-  }
+  String get _title => status == NetworkStatus.noNetwork
+      ? 'No Network'
+      : 'No Internet Access';
 
-  String get _title {
-    switch (status) {
-      case NetworkStatus.checking:
-        return 'Connecting…';
-      case NetworkStatus.noNetwork:
-        return 'No Network';
-      case NetworkStatus.noInternet:
-        return 'No Internet Access';
-      default:
-        return 'Checking…';
-    }
-  }
-
-  String get _subtitle {
-    switch (status) {
-      case NetworkStatus.checking:
-        return 'Checking your connection…';
-      case NetworkStatus.noNetwork:
-        return 'Your device is not connected to any network.\n\nCheck your Wi-Fi or mobile data and try again.';
-      case NetworkStatus.noInternet:
-        return 'Your device is connected to a network but cannot reach the internet.\n\nCheck your Wi-Fi or mobile data plan and try again.';
-      default:
-        return '';
-    }
-  }
+  String get _subtitle => status == NetworkStatus.noNetwork
+      ? 'Check your Wi-Fi or mobile data'
+      : 'Connected but no data — check your plan';
 }
