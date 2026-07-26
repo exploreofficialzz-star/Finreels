@@ -105,72 +105,141 @@ class _ContentSearchScreenState extends State<ContentSearchScreen> {
   }
 
   // ── Scoring ─────────────────────────────────────────────────────────────
+  //
+  // Multi-pass matching so a tailor searching "cloth business profit" finds
+  // "Fashion for Profit" (title match), channels about textiles (description),
+  // and Entrepreneur articles (source). Order of pass priority:
+  //   1. Exact full-query match in title     → 5.0 pts
+  //   2. Any query word in title             → 2.0 pts each
+  //   3. Any query word in description       → 1.0 pts each
+  //   4. Any query word in source/channel    → 0.5 pts each
+  //   5. Stem of query word (strip -ing/-er/-ed/-s) also checked at 0.5×
 
-  static double _score(String query, String title, String desc, String source) {
-    double s = 0;
-    final tl = title.toLowerCase();
-    final dl = desc.toLowerCase();
-    final sl = source.toLowerCase();
-    for (final word in query.toLowerCase().split(RegExp(r'\s+'))) {
-      if (word.length < 2) continue;
+  static double _score(String rawQuery, String title, String desc, String source) {
+    final q    = rawQuery.toLowerCase().trim();
+    final tl   = title.toLowerCase();
+    final dl   = desc.toLowerCase();
+    final sl   = source.toLowerCase();
+    double s   = 0;
+
+    // Pass 1: full-phrase match in title (highest signal — user typed a title)
+    if (q.length >= 3 && tl.contains(q)) s += 5.0;
+
+    final words = q.split(RegExp(r'\s+')).where((w) => w.length >= 2).toList();
+
+    for (final word in words) {
+      // Pass 2–4: individual word match
       if (tl.contains(word)) s += 2.0;
       if (dl.contains(word)) s += 1.0;
       if (sl.contains(word)) s += 0.5;
+
+      // Pass 5: stem match (strip common suffixes) — helps "pricing" match
+      // "price", "sewing" match "sew", "tailoring" match "tailor", etc.
+      for (final stem in _stems(word)) {
+        if (stem.length < 3) continue;
+        if (tl.contains(stem) && !tl.contains(word)) s += 1.0;
+        if (dl.contains(stem) && !dl.contains(word)) s += 0.5;
+      }
     }
     return s;
+  }
+
+  /// Returns a small set of common stems for [word] so searching "sewing"
+  /// also matches documents that only contain "sew", "pricing" matches
+  /// "price", etc. This is intentionally minimal — not a full stemmer, just
+  /// the most useful suffixes for the FinReels topic domain.
+  static List<String> _stems(String word) {
+    if (word.length < 4) return [];
+    return [
+      if (word.endsWith('ing')) word.substring(0, word.length - 3),
+      if (word.endsWith('ing')) '${word.substring(0, word.length - 3)}e',
+      if (word.endsWith('tion')) word.substring(0, word.length - 4),
+      if (word.endsWith('ness')) word.substring(0, word.length - 4),
+      if (word.endsWith('ment')) word.substring(0, word.length - 4),
+      if (word.endsWith('er')) word.substring(0, word.length - 2),
+      if (word.endsWith('ors')) word.substring(0, word.length - 3),
+      if (word.endsWith('ers')) word.substring(0, word.length - 3),
+      if (word.endsWith('ed')) word.substring(0, word.length - 2),
+      if (word.endsWith('ly')) word.substring(0, word.length - 2),
+      if (word.endsWith('al')) word.substring(0, word.length - 2),
+      if (word.endsWith('ies')) '${word.substring(0, word.length - 3)}y',
+      if (word.endsWith('s') && !word.endsWith('ss')) word.substring(0, word.length - 1),
+    ];
   }
 
   // ── Search ──────────────────────────────────────────────────────────────
 
   Future<void> _search(String q) async {
+    if (!mounted) return;
     setState(() { _query = q; _loading = true; });
 
     final provider = context.read<FeedProvider>();
 
-    // ── Videos and Shorts from the active feed ─────────────────────────
-    final allVids = provider.allFeedVideos;
-    final left  = <_SearchItem>[];
-    final right = <_SearchItem>[];
+    // ── Phase 1: in-memory results (videos + books) — INSTANT ─────────────
+    // These are already loaded in FeedProvider; no network needed.
+    final allVids  = provider.allFeedVideos;
+    final newLeft  = <_SearchItem>[];
+    final newRight = <_SearchItem>[];
 
     for (final v in allVids) {
       final ch    = ChannelData.byId[v.channelId] ?? ChannelData.fallback;
       final score = _score(q, v.title, v.description, ch.name);
       if (score <= 0) continue;
       if (v.isShort) {
-        left.add(_SearchItem.short(v, score));
+        newLeft.add(_SearchItem.short(v, score));
       } else {
-        right.add(_SearchItem.video(v, score));
+        newRight.add(_SearchItem.video(v, score));
       }
     }
 
-    // ── Books ──────────────────────────────────────────────────────────
     for (final b in provider.allBooksForSearch) {
       final score = _score(q, b.title, b.description, b.channelName);
-      if (score > 0) right.add(_SearchItem.book(b, score));
+      if (score > 0) newRight.add(_SearchItem.book(b, score));
     }
 
-    // ── Blog articles (from cached RSS feeds) ──────────────────────────
-    // Use the cache if warm; trigger a fresh fetch otherwise — the
-    // search screen is user-initiated so a brief loading state is fine.
-    try {
-      final articles = await BlogRssService.instance.fetchAll();
-      for (final a in articles) {
-        final score = _score(q, a.title, a.excerpt, a.sourceName);
-        if (score > 0) right.add(_SearchItem.blog(a, score));
-      }
-    } on Exception catch (e) {
-      debugPrint('[ContentSearch] blog fetch error: $e');
-    }
-
-    // Sort each column: score desc, then date desc within same score
+    // Sort and show immediately — the user sees results right away even
+    // before the blog network fetch completes.
     int cmp(_SearchItem a, _SearchItem b) {
       final sc = b.score.compareTo(a.score);
       return sc != 0 ? sc : b.date.compareTo(a.date);
     }
-    left.sort(cmp);
-    right.sort(cmp);
+    newLeft.sort(cmp);
+    newRight.sort(cmp);
 
-    if (mounted) setState(() { _left = left; _right = right; _loading = false; });
+    if (!mounted) return;
+    setState(() {
+      _left    = newLeft;
+      _right   = newRight;
+      _loading = false; // ← un-blocks the UI immediately
+    });
+
+    // ── Phase 2: blogs — from cached RSS feeds (network if not cached) ─────
+    // Capped at 5 seconds so a slow or offline blog feed never prevents the
+    // user from seeing their video/book results. Blogs are appended to the
+    // right column; if the fetch fails or times out we keep what we have.
+    try {
+      final articles = await BlogRssService.instance
+          .fetchAll()
+          .timeout(const Duration(seconds: 5));
+
+      final blogItems = <_SearchItem>[];
+      for (final a in articles) {
+        final score = _score(q, a.title, a.excerpt, a.sourceName);
+        if (score > 0) blogItems.add(_SearchItem.blog(a, score));
+      }
+      blogItems.sort(cmp);
+
+      if (!mounted) return;
+      // Only update if the query hasn't changed while we were fetching
+      if (_query == q && blogItems.isNotEmpty) {
+        final merged = [..._right, ...blogItems]..sort(cmp);
+        setState(() => _right = merged);
+      }
+    } on TimeoutException {
+      debugPrint('[ContentSearch] blog fetch timed out for query: $q');
+    } on Exception catch (e) {
+      debugPrint('[ContentSearch] blog fetch error: $e');
+    }
   }
 
   // ── Navigation helpers ──────────────────────────────────────────────────

@@ -70,9 +70,34 @@ class _AppHeader extends StatelessWidget {
               MaterialPageRoute(builder: (_) => const ContentSearchScreen()),
             ),
           ),
-          IconButton(
-            icon: Icon(Icons.refresh_rounded, color: AppTheme.textMuted(context)),
-            onPressed: () => context.read<FeedProvider>().refresh(force: true),
+          // Refresh button — watches provider state so it spins while loading
+          // and gives the user clear confirmation that something is happening.
+          Consumer<FeedProvider>(
+            builder: (ctx, provider, _) {
+              final loading = provider.state == FeedState.loading;
+              return IconButton(
+                tooltip: 'Refresh feed',
+                icon: TweenAnimationBuilder<double>(
+                  tween: Tween(begin: 0, end: loading ? 1 : 0),
+                  duration: const Duration(milliseconds: 600),
+                  builder: (_, t, child) => RotationTransition(
+                    turns: AlwaysStoppedAnimation(t),
+                    child: child,
+                  ),
+                  child: Icon(
+                    Icons.refresh_rounded,
+                    color: loading
+                        ? AppTheme.gold
+                        : AppTheme.textMuted(context),
+                  ),
+                ),
+                onPressed: loading
+                    ? null // debounce: ignore taps while already refreshing
+                    : () => unawaited(
+                          ctx.read<FeedProvider>().refresh(force: true),
+                        ),
+              );
+            },
           ),
         ],
       ),

@@ -128,23 +128,15 @@ class _InlineVideoCardState extends State<InlineVideoCard>
   void _markReady() {
     if (!mounted || _playerReady) return;
     setState(() => _playerReady = true);
-    // Only auto-play if the user has actually tapped this card — during
-    // silent pre-warm (before any tap), _isActive should already be false
-    // since the notifier won't point at this video yet, but the explicit
-    // _expanded check makes that guarantee unmistakable rather than
-    // incidental.
     if (_expanded && _isActive) _controller?.play();
 
-    // Grace delay before revealing the player layer. The YouTube IFrame
-    // API's "ready" event does NOT guarantee the underlying native
-    // platform-view (WebView) surface has finished its own initialisation —
-    // that surface can still render a black frame for a short period
-    // afterwards at the OS compositing level, which Flutter-side opacity
-    // alone cannot mask. Waiting a beat here ensures any such black frame
-    // happens while the thumbnail is still the only thing visible.
+    // Fallback grace timer: if PlayerState.playing never fires within 600ms
+    // (e.g. a bad connection where buffering stalls), reveal anyway so the
+    // user sees the buffer spinner instead of a frozen thumbnail.
+    // Primary reveal path is _onControllerUpdate watching PlayerState.playing.
     _revealTimer?.cancel();
-    _revealTimer = Timer(const Duration(milliseconds: 450), () {
-      if (mounted) setState(() => _revealPlayer = true);
+    _revealTimer = Timer(const Duration(milliseconds: 600), () {
+      if (mounted && !_revealPlayer) setState(() => _revealPlayer = true);
     });
   }
 
@@ -153,19 +145,29 @@ class _InlineVideoCardState extends State<InlineVideoCard>
   void _onControllerUpdate() {
     if (!mounted) return;
 
-    // Rate-limit to 15 calls/sec — the listener fires on every WebView tick,
-    // which is far more than needed for ready/pause detection.
+    // Rate-limit to 15 calls/sec — the listener fires on every WebView tick.
     final nowMs = DateTime.now().millisecondsSinceEpoch;
     if (nowMs - _lastCardUpdateMs < 66) return;
     _lastCardUpdateMs = nowMs;
     final v     = _controller!.value;
     final ready = v.isReady;
 
-    // Detect ready state change.
     if (ready != _playerReady) _markReady();
 
-    // Detect playing → paused transition to trigger ad.
     final currentState = v.playerState;
+
+    // PRIMARY reveal trigger: the MOMENT actual playback starts, reveal the
+    // player immediately. This is the correct signal — not "IFrame API ready"
+    // (which fires before the first frame paints), but the actual PlayerState
+    // transitioning to playing. This eliminates the "thumbnail covers playing
+    // video" issue where audio plays but the thumbnail persists during the
+    // grace timer window.
+    if (currentState == PlayerState.playing && !_revealPlayer && _expanded) {
+      _revealTimer?.cancel();
+      setState(() => _revealPlayer = true);
+    }
+
+    // Detect playing → paused transition to trigger ad.
     if (_prevState == PlayerState.playing &&
         currentState == PlayerState.paused) {
       unawaited(AdService.instance.onVideoTapped());
@@ -418,15 +420,24 @@ class _InlineVideoCardState extends State<InlineVideoCard>
             ),
 
             // Layer 1: player — only inserted once the controller exists.
-            // Stays at opacity 0 during silent pre-warm (before any tap) —
-            // _expanded is what gates actual visual reveal, never just
-            // _revealPlayer on its own, so pre-warming is invisible to the
-            // user until they tap.
+            // CRITICAL: wrapped in IgnorePointer when not visible (opacity 0).
+            // AnimatedOpacity at 0.0 does NOT remove the widget from Flutter's
+            // hit-test tree — the WebView inside still intercepts ALL touch
+            // events (including vertical scroll drags) even when completely
+            // invisible. This is why the feed hangs while scrolling past cards
+            // that were pre-warmed: their hidden WebViews consume every scroll
+            // gesture before the ListView can claim it. IgnorePointer fixes
+            // this definitively — when hidden, the entire player layer
+            // receives NO pointer events, so the ListView scrolls freely.
             if (_controller != null)
-              AnimatedOpacity(
-                opacity:  (_expanded && _revealPlayer) ? 1.0 : 0.0,
-                duration: const Duration(milliseconds: 280),
-                child: YoutubePlayerBuilder(
+              IgnorePointer(
+                // Block touch to the WebView whenever it's not visible to the
+                // user. Only allow touch when fully revealed (expanded + ready).
+                ignoring: !(_expanded && _revealPlayer),
+                child: AnimatedOpacity(
+                  opacity:  (_expanded && _revealPlayer) ? 1.0 : 0.0,
+                  duration: const Duration(milliseconds: 200),
+                  child: YoutubePlayerBuilder(
                   onEnterFullScreen: _onEnterFullScreen,
                   onExitFullScreen:  _onExitFullScreen,
                   player: YoutubePlayer(
@@ -446,6 +457,7 @@ class _InlineVideoCardState extends State<InlineVideoCard>
                   builder: (context, player) => player,
                 ),
               ),
+            ),
 
             // Layer 2: spinner — only while the user is actively waiting
             // for the reveal (after tap, before _revealPlayer latches).

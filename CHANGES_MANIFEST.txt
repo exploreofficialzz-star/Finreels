@@ -1,0 +1,121 @@
+FinReels — Round 9 — Refresh, search, video reveal, scroll lag, shorts scroll
+==============================================================================
+Extract into project root, overwriting at the same paths. 4 files.
+
+─────────────────────────────────────────────────────────────────────────────
+lib/screens/home_screen.dart  —  Refresh button now works visibly
+─────────────────────────────────────────────────────────────────────────────
+Root cause: _AppHeader was a StatelessWidget using context.read, so it never
+rebuilt when FeedProvider.state changed. The refresh button correctly called
+refresh(force: true) but showed zero visual feedback — no spin, no colour
+change — so the user assumed nothing happened. The button is now wrapped in
+Consumer<FeedProvider>. When state == FeedState.loading the icon:
+  • Turns gold (distinguishes "refreshing" from "idle")
+  • Rotates once via TweenAnimationBuilder + RotationTransition (360° over 600ms)
+  • Is disabled (onPressed = null) so the user can't double-tap and queue
+    a second refresh while the first is still in flight
+The button re-enables the moment the state returns to loaded/error.
+
+─────────────────────────────────────────────────────────────────────────────
+lib/screens/content_search_screen.dart  —  Search no longer hangs forever
+─────────────────────────────────────────────────────────────────────────────
+Root cause: _search() called BlogRssService.instance.fetchAll() and waited
+for ALL results before setting _loading = false. That fetch triggers network
+requests for every RSS feed (5 general + up to 10 per selected category) with
+no overall timeout. If any feed is slow the spinner never clears — the user
+sees a forever-loading screen even though all their video and book results
+were already in memory and required zero network.
+
+Fix — two-phase search:
+  Phase 1 (instant): Iterate allFeedVideos and allBooksForSearch — both are
+    in-memory lists already populated by FeedProvider. Score, sort, and show
+    them immediately. _loading is set to false here, so the user sees results
+    within milliseconds of typing.
+  Phase 2 (background, max 5 seconds): Fetch blog articles from the RSS
+    cache (or network if cold). Hard-capped at 5 seconds via .timeout().
+    On success, blog results are merged into the right column and the view
+    updates. On timeout or error, whatever was already shown stays — no
+    regression for the user who already has video/book results.
+    If the query changed while blogs were fetching, the stale results are
+    discarded (query guard).
+
+Also: keyword matching is significantly expanded. Previously: exact substring
+of each query word in title/desc/source. Now:
+  • Full-phrase match in title: +5.0 (finding "Fashion for Profit" when you
+    type "fashion profit" — phrase-level signal is stronger)
+  • Per-word matches: title ×2, desc ×1, source ×0.5 (same as before)
+  • Stem matching at 0.5× for common English suffixes: -ing, -tion, -ness,
+    -ment, -er, -ers, -ors, -ed, -ly, -al, -ies, -s. So "sewing" matches
+    "sew", "pricing" matches "price", "tailors" matches "tailor", etc.
+    Stems only applied when the unstemmed word didn't already match (no
+    double-counting).
+
+─────────────────────────────────────────────────────────────────────────────
+lib/widgets/inline_video_card.dart  —  Thumbnail covers video + scroll lag
+─────────────────────────────────────────────────────────────────────────────
+Two separate bugs fixed in the same file.
+
+BUG A — Thumbnail stays visible while video plays:
+Root cause: _markReady() (triggered when the YouTube IFrame API fires its
+"ready" event) started a 450ms timer, after which _revealPlayer latched true
+and the AnimatedOpacity faded in over 280ms. Total potential delay: 730ms.
+During that window, audio plays but the thumbnail is still the only thing
+visible — perceived as "the video is playing under the thumbnail".
+
+Fix: _onControllerUpdate() now watches PlayerState. The moment the value
+transitions to PlayerState.playing, _revealTimer is cancelled and _revealPlayer
+is set to true immediately. This is the correct signal — not "IFrame API
+ready" (which fires before the first video frame is composited), but actual
+playback starting. The 450ms fallback timer is kept but reduced to 600ms
+and only fires if PlayerState.playing never arrives (extreme buffering case),
+ensuring the spinner is shown rather than a frozen thumbnail.
+
+BUG B — Scrolling hangs while any card has a pre-warmed controller:
+Root cause: AnimatedOpacity at opacity: 0 does NOT remove a widget from
+Flutter's hit-test tree. The WebView inside the AnimatedOpacity was accepting
+ALL touch events (including vertical scroll drags) even when completely
+invisible. Every card that had been pre-warmed had a live WebView silently
+intercepting scrolls — the ListView couldn't claim them, causing visible
+judder on any device with more than one pre-warmed card in the viewport.
+
+Fix: IgnorePointer wraps the AnimatedOpacity. When ignoring: true (i.e. when
+the player is not visible — !(_expanded && _revealPlayer) — the entire WebView
+layer is excluded from hit-testing. The ListView gets every scroll event it
+needs. When ignoring: false (player visible, user actively watching), touch
+flows through normally to the WebView and our own GestureDetector overlay.
+
+─────────────────────────────────────────────────────────────────────────────
+lib/screens/shorts_player_screen.dart  —  Shorts swipe now instant
+─────────────────────────────────────────────────────────────────────────────
+Root cause: The YouTube WebView (Android platform view) intercepts ALL touch
+events at the OS level, before Flutter's gesture arena even runs. A PageView
+sharing the screen with a WebView always loses the gesture competition —
+_EasySnapPhysics, lowered drag thresholds, and any ScrollPhysics tuning all
+happen after the WebView has already consumed the event. This is a known
+Flutter platform-view limitation; there is no pure-ScrollPhysics solution.
+
+Fix — outer GestureDetector + NeverScrollableScrollPhysics:
+  • PageView.physics: NeverScrollableScrollPhysics() — the PageView never
+    attempts to claim touch events, so it never fights the WebView.
+  • GestureDetector(behavior: HitTestBehavior.opaque) wraps the entire
+    Scaffold body. In Flutter's hit-test traversal, opaque behaviour means
+    this widget is consulted FIRST — before the WebView's platform handler
+    runs. It claims vertical drag events exclusively.
+  • onVerticalDragStart: saves pageController.offset (pixel position).
+  • onVerticalDragUpdate: calls pageController.jumpTo() on every update —
+    provides the smooth "next short peeking in" finger-following effect.
+  • onVerticalDragEnd: commits via pageController.animateToPage() based on
+    fling velocity (>400 px/s) or drag distance (>30% of page height).
+    Duration: 280ms / easeOutCubic — snappy but not jarring.
+
+The tap-to-play GestureDetector on each _ShortPage keeps onTap only (no
+HitTestBehavior.opaque) so it doesn't conflict with the parent drag handler.
+
+Other _ShortPage improvements:
+  • FittedBox(fit: BoxFit.cover) with a 9:16 SizedBox ensures the player
+    fills the full screen correctly on all aspect ratios (ultrawide, notch
+    devices, tablets).
+  • Progress bar in LinearProgressIndicator driven by controller position.
+  • Loading spinner while buffering, pause icon overlay on pause.
+  • Swipe hint arrow fades after the first page change.
+  • SystemUiMode.immersiveSticky on open, restored to edgeToEdge on pop.
