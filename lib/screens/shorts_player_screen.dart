@@ -51,9 +51,6 @@ class _ShortsPlayerScreenState extends State<ShortsPlayerScreen> {
   late final PageController _pageController;
   int _currentIndex = 0;
 
-  // Drag tracking for programmatic page control
-  double _dragStartOffset = 0;
-
   @override
   void initState() {
     super.initState();
@@ -72,10 +69,7 @@ class _ShortsPlayerScreenState extends State<ShortsPlayerScreen> {
 
   // ── Gesture handlers: claim vertical drag BEFORE the WebView does ─────────
 
-  void _onDragStart(DragStartDetails details) {
-    if (!_pageController.hasClients) return;
-    _dragStartOffset = _pageController.offset;
-  }
+  void _onDragStart(DragStartDetails details) {}
 
   void _onDragUpdate(DragUpdateDetails details) {
     if (!_pageController.hasClients) return;
@@ -90,7 +84,7 @@ class _ShortsPlayerScreenState extends State<ShortsPlayerScreen> {
     final velocity = details.primaryVelocity ?? 0;
     final page     = _pageController.page ?? _currentIndex.toDouble();
 
-    int targetPage = _currentIndex;
+    var targetPage = _currentIndex;
     // Commit to next page: fast fling OR dragged > 30% of page height
     if (velocity < -400 || (velocity >= 0 && (page - _currentIndex) > 0.3)) {
       targetPage = (_currentIndex + 1).clamp(0, widget.shorts.length - 1);

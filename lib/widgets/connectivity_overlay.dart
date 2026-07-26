@@ -112,7 +112,6 @@ class _NetworkBanner extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
             color: AppTheme.gold.withValues(alpha: 0.35),
-            width: 1,
           ),
           boxShadow: [
             BoxShadow(
@@ -148,7 +147,6 @@ class _NetworkBanner extends StatelessWidget {
         shape: BoxShape.circle,
         border: Border.all(
           color: AppTheme.gold.withValues(alpha: 0.25),
-          width: 1,
         ),
       ),
       child: Icon(icon, color: AppTheme.gold, size: 20),

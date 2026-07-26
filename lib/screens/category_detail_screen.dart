@@ -126,26 +126,26 @@ class _CategoryDetailScreenState extends State<CategoryDetailScreen> {
           const SizedBox(height: 24),
           _PlaybookCard(category: c),
           const SizedBox(height: 28),
-          _SectionLabel('Channels'),
+          const _SectionLabel('Channels'),
           if (_channels.isEmpty)
-            _EmptyNote(text: 'Still verifying real channels for this category.')
+            const _EmptyNote(text: 'Still verifying real channels for this category.')
           else
             ..._channels.map((ch) => _ChannelTile(channel: ch)),
           const SizedBox(height: 24),
-          _SectionLabel('Blogs'),
+          const _SectionLabel('Blogs'),
           if (_loadingBlogs)
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 12),
               child: Center(child: CircularProgressIndicator(color: AppTheme.gold)),
             )
           else if (_blogArticles.isEmpty)
-            _EmptyNote(text: 'Still verifying real blogs for this category.')
+            const _EmptyNote(text: 'Still verifying real blogs for this category.')
           else
             ..._blogArticles.take(8).map((a) => _BlogTile(article: a)),
           const SizedBox(height: 24),
-          _SectionLabel('Free Books'),
+          const _SectionLabel('Free Books'),
           if (_books.isEmpty)
-            _EmptyNote(text: 'Still verifying free books for this category.')
+            const _EmptyNote(text: 'Still verifying free books for this category.')
           else
             ..._books.map((b) => _FreeBookTile(book: b)),
         ],
@@ -200,7 +200,7 @@ class _PlaybookCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppTheme.gold.withValues(alpha: 0.10),
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: AppTheme.gold, width: 1),
+          border: Border.all(color: AppTheme.gold),
         ),
         child: Row(
           children: [
@@ -325,7 +325,7 @@ class _FreeBookTile extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Icon(
+              const Icon(
                 Icons.menu_book_rounded,
                 color: AppTheme.gold,
                 size: 20,
