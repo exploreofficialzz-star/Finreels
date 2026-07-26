@@ -1,16 +1,318 @@
 {
   "categoryId": "profession_14_dentistry",
   "status": "in_progress",
-  "lastUpdated": "2026-07-14",
-  "channels": [],
+  "lastUpdated": "2026-07-24",
+  "channels": [
+    {
+      "id": "",
+      "name": "Dentalpreneur",
+      "handle": "@Dentalpreneur",
+      "description": "Dental practice management, scaling, and profitability",
+      "accentColor": "0xFF3B82F6",
+      "initials": "D",
+      "focus": "Dental practice management, scaling, and profitability",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). YouTube channel ID requires manual lookup before the video feed will work."
+    },
+    {
+      "id": "",
+      "name": "Dental Economics",
+      "handle": "@DentalEconomics",
+      "description": "Dental business, practice operations, and industry economics",
+      "accentColor": "0xFF3B82F6",
+      "initials": "DE",
+      "focus": "Dental business, practice operations, and industry economics",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). YouTube channel ID requires manual lookup before the video feed will work."
+    },
+    {
+      "id": "",
+      "name": "Spear Education",
+      "handle": "@SpearEducation",
+      "description": "Dental practice management, case acceptance, and business growth",
+      "accentColor": "0xFF3B82F6",
+      "initials": "SE",
+      "focus": "Dental practice management, case acceptance, and business growth",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). YouTube channel ID requires manual lookup before the video feed will work."
+    },
+    {
+      "id": "",
+      "name": "Dentistry IQ",
+      "handle": "@DentistryIQ",
+      "description": "Dental industry news, practice management, and business trends",
+      "accentColor": "0xFF3B82F6",
+      "initials": "DI",
+      "focus": "Dental industry news, practice management, and business trends",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). YouTube channel ID requires manual lookup before the video feed will work."
+    },
+    {
+      "id": "",
+      "name": "Dental Success Network",
+      "handle": "@DentalSuccessNetwork",
+      "description": "Dental practice marketing, scaling, and business coaching",
+      "accentColor": "0xFF3B82F6",
+      "initials": "DS",
+      "focus": "Dental practice marketing, scaling, and business coaching",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). YouTube channel ID requires manual lookup before the video feed will work."
+    },
+    {
+      "id": "",
+      "name": "FDI World Dental",
+      "handle": "@FDIWorldDental",
+      "description": "Global dental public health, policy, and practice standards",
+      "accentColor": "0xFF3B82F6",
+      "initials": "FW",
+      "focus": "Global dental public health, policy, and practice standards",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). YouTube channel ID requires manual lookup before the video feed will work."
+    },
+    {
+      "id": "",
+      "name": "Nigerian Dental Association",
+      "handle": "@NigerianDentalAssociation",
+      "description": "Dental practice regulations, advocacy, and business in Nigeria",
+      "accentColor": "0xFF3B82F6",
+      "initials": "ND",
+      "focus": "Dental practice regulations, advocacy, and business in Nigeria",
+      "region": "Nigeria",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). YouTube channel ID requires manual lookup before the video feed will work."
+    },
+    {
+      "id": "",
+      "name": "Pulse Nigeria Health",
+      "handle": "@PulseNigeria",
+      "description": "Healthcare business news, including dental practice management",
+      "accentColor": "0xFF3B82F6",
+      "initials": "PN",
+      "focus": "Healthcare business news, including dental practice management",
+      "region": "Nigeria",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). YouTube channel ID requires manual lookup before the video feed will work."
+    },
+    {
+      "id": "",
+      "name": "BusinessDay",
+      "handle": "@BusinessDayNG",
+      "description": "Nigerian healthcare sector news and medical business",
+      "accentColor": "0xFF3B82F6",
+      "initials": "B",
+      "focus": "Nigerian healthcare sector news and medical business",
+      "region": "Nigeria",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). YouTube channel ID requires manual lookup before the video feed will work."
+    },
+    {
+      "id": "",
+      "name": "The Dental Business",
+      "handle": "@TheDentalBusiness",
+      "description": "Independent dental clinic operations and patient retention",
+      "accentColor": "0xFF3B82F6",
+      "initials": "TD",
+      "focus": "Independent dental clinic operations and patient retention",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). YouTube channel ID requires manual lookup before the video feed will work."
+    }
+  ],
   "blogs": [
     {
       "name": "BusinessDay Nigeria",
       "url": "https://businessday.ng/feed",
       "verifiedOn": "2026-07-14",
       "verificationMethod": "Same feed already verified for Agriculture (profession_12) — cross-tagged here because BusinessDay is also the exact source of the founder's #2 candidate, the 'Dentist At Your Door' story about Dr. Yemisi Akintonwa's Tony Elumelu-funded mobile dental clinic."
+    },
+    {
+      "name": "Dental Economics",
+      "url": "https://www.dentaleconomics.com/",
+      "description": "Dental business, practice operations, and industry economics",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). URL is the web homepage; RSS feed URL needs verification before it will appear in the blog reader."
+    },
+    {
+      "name": "Dentistry IQ",
+      "url": "https://www.dentistryiq.com/",
+      "description": "Dental industry news, practice management, and business trends",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). URL is the web homepage; RSS feed URL needs verification before it will appear in the blog reader."
+    },
+    {
+      "name": "Dentalpreneur Blog",
+      "url": "https://www.dentalpreneur.com/blog/",
+      "description": "Dental practice management, scaling, and profitability",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). URL is the web homepage; RSS feed URL needs verification before it will appear in the blog reader."
+    },
+    {
+      "name": "Spear Education Blog",
+      "url": "https://www.speareducation.com/spear-review",
+      "description": "Dental practice management, case acceptance, and business growth",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). URL is the web homepage; RSS feed URL needs verification before it will appear in the blog reader."
+    },
+    {
+      "name": "Nigerian Dental Association News",
+      "url": "https://nigeriadentalassociation.org/",
+      "description": "Dental practice regulations and business in Nigeria",
+      "region": "Nigeria",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). URL is the web homepage; RSS feed URL needs verification before it will appear in the blog reader."
+    },
+    {
+      "name": "ADA Practice Success",
+      "url": "https://success.ada.org/",
+      "description": "American Dental Association practice management and business",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). URL is the web homepage; RSS feed URL needs verification before it will appear in the blog reader."
+    },
+    {
+      "name": "BusinessDay Health",
+      "url": "https://businessday.ng/health/",
+      "description": "Nigerian healthcare sector news and medical business",
+      "region": "Nigeria",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). URL is the web homepage; RSS feed URL needs verification before it will appear in the blog reader."
+    },
+    {
+      "name": "Connect Nigeria Dental",
+      "url": "https://connectnigeria.com/",
+      "description": "Setting up a private dental clinic in Nigeria",
+      "region": "Nigeria",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). URL is the web homepage; RSS feed URL needs verification before it will appear in the blog reader."
+    },
+    {
+      "name": "Entrepreneurs.ng Dental",
+      "url": "https://entrepreneurs.ng/",
+      "description": "Dental practice business guide, capital, and margins",
+      "region": "Nigeria",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). URL is the web homepage; RSS feed URL needs verification before it will appear in the blog reader."
+    },
+    {
+      "name": "Splice Dental Setup",
+      "url": "https://splice.com.ng/",
+      "description": "Dental clinic business plan and setup guides",
+      "region": "Nigeria",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). URL is the web homepage; RSS feed URL needs verification before it will appear in the blog reader."
     }
   ],
-  "books": [],
+  "books": [
+    {
+      "title": "The E-Myth Revisited",
+      "author": "Michael E. Gerber",
+      "freeSourceUrl": "https://f5fp.com/the-e-myth-revisited/",
+      "freeSourceType": "download",
+      "freeSourceNote": "Michael E. Gerber (Free PDF)",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+    },
+    {
+      "title": "Profit First",
+      "author": "Mike Michalowicz",
+      "freeSourceUrl": "https://mikemichalowicz.com/profit-first/",
+      "freeSourceType": "download",
+      "freeSourceNote": "Mike Michalowicz (Free Book)",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+    },
+    {
+      "title": "The Lean Startup",
+      "author": "Eric Ries",
+      "freeSourceUrl": "https://bdebooks.com/books/the-lean-startup/",
+      "freeSourceType": "download",
+      "freeSourceNote": "Eric Ries (Free PDF)",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+    },
+    {
+      "title": "Atomic Habits",
+      "author": "James Clear",
+      "freeSourceUrl": "https://archive.org/details/AtomicHabits",
+      "freeSourceType": "download",
+      "freeSourceNote": "James Clear (Free PDF)",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+    },
+    {
+      "title": "Small Business Management",
+      "author": "OpenStax/Rice University",
+      "freeSourceUrl": "https://openstax.org/subjects/business",
+      "freeSourceType": "web",
+      "freeSourceNote": "OpenStax/Rice University",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+    },
+    {
+      "title": "Entrepreneurship",
+      "author": "OpenStax/Rice University",
+      "freeSourceUrl": "https://openstax.org/subjects/business",
+      "freeSourceType": "web",
+      "freeSourceNote": "OpenStax/Rice University",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+    },
+    {
+      "title": "Digital Marketing for Small Business",
+      "author": "HubSpot Academy",
+      "freeSourceUrl": "https://blog.hubspot.com/marketing",
+      "freeSourceType": "web",
+      "freeSourceNote": "HubSpot Academy",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+    },
+    {
+      "title": "Starting a Business Guide",
+      "author": "SBA.gov",
+      "freeSourceUrl": "https://www.sba.gov/business-guide",
+      "freeSourceType": "download",
+      "freeSourceNote": "SBA.gov",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+    },
+    {
+      "title": "Inbound Marketing Certification",
+      "author": "HubSpot Academy",
+      "freeSourceUrl": "https://academy.hubspot.com/courses/inbound-marketing",
+      "freeSourceType": "web",
+      "freeSourceNote": "HubSpot Academy",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+    },
+    {
+      "title": "Principles of Management",
+      "author": "OpenStax/Rice University",
+      "freeSourceUrl": "https://openstax.org/details/books/principles-management",
+      "freeSourceType": "web",
+      "freeSourceNote": "OpenStax/Rice University",
+      "region": "Global",
+      "verifiedOn": "2026-07-24",
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+    }
+  ],
   "notes": "Matches the founder's own honest finding closely. Tried again for ClinikEHR (the founder's #1 candidate, already confirmed real content when researching Pharmacy) — found a page element literally reading 'RSS' on their blog homepage, strong evidence a feed exists, but still could not determine the exact feed URL with the same confidence as the WordPress /feed/ pattern used elsewhere, so left out rather than guess a URL with zero direct evidence. On channels: multiple real Nigerian dental clinics have YouTube presences (SS Dental Clinic, Smiledoctor/Luxe Dental, Schubbs Dental, Breeze Smile) but every one markets the clinic to patients — none teaches dentists how to run the business — so none were counted, matching the same discipline applied to real-estate agency channels and PR agency channels in earlier categories. Books: no dentistry-specific title exists separately from Medicine's already-exhausted, paid-only list."
 }
