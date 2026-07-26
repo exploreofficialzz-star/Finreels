@@ -237,7 +237,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free direct PDF, hosted on the official Lagos State Employment Trust Fund site, no signup required",
       "verifiedOn": "2026-07-14",
-      "verificationMethod": "Found via broader search since the founder's own research found no confident free candidate. Hosted directly on lsetf.ng, a real Lagos State Government agency — covers value chain, market analysis, financials, and feed sourcing specifically for the Nigerian market. More institutionally credible than the many 'free ebook' poultry guides found elsewhere, several of which turned out to be paid ($7) products marketed misleadingly as free, or user-uploaded business-plan templates of uncertain origin — both correctly excluded."
+      "verificationMethod": "Found via broader search since the founder's own research found no confident free candidate. Hosted directly on lsetf.ng, a real Lagos State Government agency — covers value chain, market analysis, financials, and feed sourcing specifically for the Nigerian market. More institutionally credible than the many 'free ebook' poultry guides found elsewhere, several of which turned out to be paid ($7) products marketed misleadingly as free, or user-uploaded business-plan templates of uncertain origin — both correctly excluded.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781456552640-L.jpg"
     },
     {
       "title": "The E-Myth Revisited",
@@ -247,7 +248,8 @@
       "freeSourceNote": "Michael E. Gerber (Free PDF)",
       "region": "Global",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     },
     {
       "title": "Profit First",
@@ -257,7 +259,8 @@
       "freeSourceNote": "Mike Michalowicz (Free Book)",
       "region": "Global",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781635767407-L.jpg"
     },
     {
       "title": "The Lean Startup",
@@ -267,7 +270,8 @@
       "freeSourceNote": "Eric Ries (Free PDF)",
       "region": "Global",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
     },
     {
       "title": "Atomic Habits",
@@ -277,7 +281,8 @@
       "freeSourceNote": "James Clear (Free PDF)",
       "region": "Global",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Small Business Management",
@@ -287,7 +292,8 @@
       "freeSourceNote": "OpenStax/Rice University",
       "region": "Global",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781951693633-L.jpg"
     },
     {
       "title": "Entrepreneurship",
@@ -297,7 +303,8 @@
       "freeSourceNote": "OpenStax/Rice University",
       "region": "Global",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172488-L.jpg"
     },
     {
       "title": "Digital Marketing for Small Business",
@@ -307,7 +314,8 @@
       "freeSourceNote": "HubSpot Academy",
       "region": "Global",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724).",
+      "coverUrl": "https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/hubspotlogo-web-color.png"
     },
     {
       "title": "Starting a Business Guide",
@@ -317,7 +325,8 @@
       "freeSourceNote": "SBA.gov",
       "region": "Global",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724).",
+      "coverUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/US-SmallBusinessAdmin-Logo.svg/330px-US-SmallBusinessAdmin-Logo.svg.png"
     },
     {
       "title": "Inbound Marketing Certification",
@@ -327,7 +336,8 @@
       "freeSourceNote": "HubSpot Academy",
       "region": "Global",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724).",
+      "coverUrl": "https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/hubspotlogo-web-color.png"
     },
     {
       "title": "Principles of Management",
@@ -337,7 +347,8 @@
       "freeSourceNote": "OpenStax/Rice University",
       "region": "Global",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
     }
   ],
   "notes": "Matches the founder's own honest finding — the first profession where Nigeria's content ecosystem is genuinely rich rather than thin. FinReels' edge here is curation and structure, not filling a void."

@@ -184,7 +184,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free PDF via f5fp.com",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "URL confirmed live in prior skill sessions (skill_09, skill_18)."
+      "verificationMethod": "URL confirmed live in prior skill sessions (skill_09, skill_18).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     },
     {
       "title": "Profit First",
@@ -193,7 +194,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free resources + chapter access at author's official site",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "URL confirmed live in prior skill sessions."
+      "verificationMethod": "URL confirmed live in prior skill sessions.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781635767407-L.jpg"
     },
     {
       "title": "The Lean Startup",
@@ -202,7 +204,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free PDF via BDE Books",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "URL confirmed live in prior skill sessions."
+      "verificationMethod": "URL confirmed live in prior skill sessions.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
     },
     {
       "title": "Atomic Habits",
@@ -211,7 +214,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Confirm exact archive.org detail-page slug is live before ship."
+      "verificationMethod": "Confirm exact archive.org detail-page slug is live before ship.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Entrepreneurship",
@@ -220,7 +224,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Completely free peer-reviewed textbook — download PDF or read online, no signup",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "OpenStax is a verified free publisher from Rice University. URL confirmed live."
+      "verificationMethod": "OpenStax is a verified free publisher from Rice University. URL confirmed live.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172488-L.jpg"
     },
     {
       "title": "Principles of Management",
@@ -229,7 +234,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Completely free peer-reviewed management textbook from OpenStax",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "OpenStax confirmed live. Covers business operations, leadership and scaling."
+      "verificationMethod": "OpenStax confirmed live. Covers business operations, leadership and scaling.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
     },
     {
       "title": "Business Ethics",
@@ -238,7 +244,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Completely free peer-reviewed business ethics textbook from OpenStax",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "OpenStax confirmed live. Covers ethical standards directly relevant to licensed professions."
+      "verificationMethod": "OpenStax confirmed live. Covers ethical standards directly relevant to licensed professions.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172174-L.jpg"
     },
     {
       "title": "Starting a Business Guide",
@@ -247,7 +254,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free U.S. government guide — no signup required",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "SBA.gov is the official US government small business site. Confirm exact guide page URL before ship."
+      "verificationMethod": "SBA.gov is the official US government small business site. Confirm exact guide page URL before ship.",
+      "coverUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/US-SmallBusinessAdmin-Logo.svg/330px-US-SmallBusinessAdmin-Logo.svg.png"
     },
     {
       "title": "Inbound Marketing Certification",
@@ -256,7 +264,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free HubSpot Academy certification — covers inbound strategy for professional service firms",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "HubSpot Academy confirmed free. Course available without payment."
+      "verificationMethod": "HubSpot Academy confirmed free. Course available without payment.",
+      "coverUrl": "https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/hubspotlogo-web-color.png"
     },
     {
       "title": "Digital Marketing for Small Business",
@@ -265,7 +274,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free HubSpot Academy course — digital marketing for service businesses",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "HubSpot Academy confirmed free."
+      "verificationMethod": "HubSpot Academy confirmed free.",
+      "coverUrl": "https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/hubspotlogo-web-color.png"
     }
   ],
   "notes": "All 10 channels fully verified with confirmed UC* IDs (2026-07-24). NIPR Nigeria confirmed via direct YouTube page fetch (@niprofficial → UCnlpGXz2gI8uROR2tIMHAJw). Proshare replaced as WebTV Nigeria in skill_49. Media Brief Nigeria (YouTube not confirmed) → Nairametrics TV (UC1GBKv15keKOgHbEBEMeo9w). Blogs: HubSpot uses /rss.xml. CIPR uses newsroom subdomain. AdAge may use /rss.xml. Connect Nigeria flagged."

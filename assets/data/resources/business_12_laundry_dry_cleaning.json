@@ -185,7 +185,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Book summary PDF hosted by F5 Financial Planning. Build systems that work without you.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "URL confirmed via Google search index. Note: this is a summary/notes PDF, not the full commercially-sold book."
+      "verificationMethod": "URL confirmed via Google search index. Note: this is a summary/notes PDF, not the full commercially-sold book.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     },
     {
       "title": "Profit First",
@@ -194,7 +195,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Author's own site — free chapter samples and companion resources for the Profit First cash-management system.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Author's official domain. Free sample chapters confirmed via site."
+      "verificationMethod": "Author's official domain. Free sample chapters confirmed via site.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781635767407-L.jpg"
     },
     {
       "title": "Small Business Management",
@@ -203,7 +205,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Genuinely free open textbook covering business fundamentals. No signup required.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "OpenStax is a peer-reviewed free textbook publisher backed by Rice University. URL confirmed."
+      "verificationMethod": "OpenStax is a peer-reviewed free textbook publisher backed by Rice University. URL confirmed.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781951693633-L.jpg"
     },
     {
       "title": "Entrepreneurship",
@@ -212,7 +215,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free open textbook covering the full entrepreneur journey from ideation to scaling.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "OpenStax confirmed URL."
+      "verificationMethod": "OpenStax confirmed URL.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172488-L.jpg"
     },
     {
       "title": "Digital Marketing for Small Business",
@@ -221,7 +225,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "198+ free marketing resources (templates, guides, kits) from HubSpot.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "HubSpot official resource hub. Confirmed free, no paywall."
+      "verificationMethod": "HubSpot official resource hub. Confirmed free, no paywall.",
+      "coverUrl": "https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/hubspotlogo-web-color.png"
     },
     {
       "title": "Starting a Business Guide",
@@ -230,7 +235,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free comprehensive step-by-step guide to starting and running a small business. Government resource, no signup.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "SBA.gov confirmed URL."
+      "verificationMethod": "SBA.gov confirmed URL.",
+      "coverUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/US-SmallBusinessAdmin-Logo.svg/330px-US-SmallBusinessAdmin-Logo.svg.png"
     },
     {
       "title": "Inbound Marketing Certification",
@@ -239,7 +245,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free certification course covering inbound marketing fundamentals — content, SEO, social media, email, conversions.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "HubSpot Academy confirmed. Genuinely free, recognized certification."
+      "verificationMethod": "HubSpot Academy confirmed. Genuinely free, recognized certification.",
+      "coverUrl": "https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/hubspotlogo-web-color.png"
     },
     {
       "title": "Principles of Management",
@@ -248,7 +255,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free open textbook — planning, organising, leading and controlling a business operation.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "OpenStax confirmed URL."
+      "verificationMethod": "OpenStax confirmed URL.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
     },
     {
       "title": "The Laundromat Millionaire (Book)",
@@ -257,7 +265,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Summary page and free chapter of the book 'Laundromat Millionaire'. Full book is commercially sold — free resources including templates and worksheets available on the author's site.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Dave Menz is confirmed real (Laundromat Millionaire channel fetched). Free resources on his site confirmed from laundromatmillionaire.com site description."
+      "verificationMethod": "Dave Menz is confirmed real (Laundromat Millionaire channel fetched). Free resources on his site confirmed from laundromatmillionaire.com site description.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781544532486-L.jpg"
     },
     {
       "title": "How to Start a Profitable Laundry Business in Nigeria",
@@ -266,7 +275,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free, comprehensive Nigerian-context guide to starting a laundry and dry cleaning business — capital requirements, equipment, pricing, registration, and profitability.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "URL confirmed via Google search result (oasdom.com). Article appeared in search and is confirmed as a real, free, detailed Nigerian SME guide."
+      "verificationMethod": "URL confirmed via Google search result (oasdom.com). Article appeared in search and is confirmed as a real, free, detailed Nigerian SME guide.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780071497404-L.jpg"
     }
   ],
   "notes": "NOTE: 'The Lean Startup' (bdebooks.com) and 'Atomic Habits' (archive.org) were both in the source CSV but excluded — bdebooks.com is an unauthorised ebook-sharing site, and archive.org's copy of Atomic Habits is a controlled-lending scan of a commercially-sold book, not a free download. Both were replaced with the category-specific resources below.\n\nLaundry is genuinely the hardest category in this batch for YouTube channels: the CSV's Nigerian-specific picks (Clean Toks, Nigerian Laundry Association, Multi-Metals, Dexterous Cleaners, and trade publications like Laundry World and Drycleaning Journal) could not be verified as active YouTube channels. Connect Nigeria and Splice Blog were listed as channels in the CSV — both are blogs/platforms, not YouTube channels, and both are excluded (Connect Nigeria per this project's own prior security flag; Splice Blog is a salon booking platform). The 10 channels above replace all 10 original picks with independently verified laundromat/laundry business channels, being honest about which IDs were directly fetched vs. search/handle confirmed."

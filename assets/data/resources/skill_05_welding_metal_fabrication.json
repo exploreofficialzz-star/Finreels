@@ -188,7 +188,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free pricing resources from the book's own official site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official markupandprofit.com domain; author is the well-established, publicly credited author of Markup & Profit."
+      "verificationMethod": "Hosted on the official markupandprofit.com domain; author is the well-established, publicly credited author of Markup & Profit.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180864-L.jpg"
     },
     {
       "title": "How Much Should I Charge? (free)",
@@ -197,7 +198,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free copy on Internet Archive — contractor pricing guide.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of How Much Should I Charge?."
+      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of How Much Should I Charge?.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781456522100-L.jpg"
     },
     {
       "title": "Traction: Get a Grip on Your Business (free)",
@@ -206,7 +208,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free copy on Internet Archive — the EOS (Entrepreneurial Operating System) for running a small business.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on archive.org, with the author's name in the URL itself."
+      "verificationMethod": "Source directory entry, hosted on archive.org, with the author's name in the URL itself.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781936661831-L.jpg"
     },
     {
       "title": "The Lean Startup (free)",
@@ -215,7 +218,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free copy hosted on a third-party book site — worth a direct-download check before shipping.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Lean Startup."
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Lean Startup.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
     },
     {
       "title": "Rich Dad Poor Dad (free)",
@@ -224,7 +228,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free copy on Internet Archive — financial literacy fundamentals.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Rich Dad Poor Dad."
+      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Rich Dad Poor Dad.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781612680194-L.jpg"
     },
     {
       "title": "The E-Myth Revisited (free PDF)",
@@ -233,7 +238,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free PDF of the well-known small-business-systems book, hosted on a third-party site — worth a direct-download check before shipping.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited."
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     },
     {
       "title": "Profit First (free resources)",
@@ -242,7 +248,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free resources from the author's own official site.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com)."
+      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781635767407-L.jpg"
     },
     {
       "title": "Small Business Management",
@@ -251,7 +258,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free, full open-license textbook covering small-business fundamentals.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official openstax.org domain, a well-established open-textbook publisher."
+      "verificationMethod": "Hosted on the official openstax.org domain, a well-established open-textbook publisher.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781951693633-L.jpg"
     },
     {
       "title": "The 7 Habits of Highly Effective People (free)",
@@ -260,7 +268,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free public-domain-availability edition on Internet Archive.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of The 7 Habits of Highly Effective People."
+      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of The 7 Habits of Highly Effective People.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781982137274-L.jpg"
     },
     {
       "title": "The Personal MBA (free)",
@@ -269,7 +278,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free copy on Internet Archive — business fundamentals without business school.",
       "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of The Personal MBA."
+      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of The Personal MBA.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781591845188-L.jpg"
     }
   ],
   "notes": "2026-07-20: Created from scratch, merging all 29 rows from the founder-provided 'welding_metal_fabrication_resources.csv' (Section I.5) — this file had no prior entries. Four of the CSV's 10 channels could not be used as-cited: 'WeldingWeb TV' (no dedicated YouTube channel found for the forum brand — its forum itself was kept as this file's Forum blog entry), 'Chucke2009' (excluded — multiple independent welding-community forum threads report the channel turned to offensive/inflammatory non-welding content in recent years), 'Kenya Jua Kali Sector' (no channel by this name found — only scattered individual news-outlet videos about the sector), and 'Scratch Build Weld' (no matching channel found). 'Metalshaper (Ron Fournier)' was also corrected: the real @metalshaper-style channel belongs to a different creator (Brian, Willys Jeep restorations), not metal-shaping pioneer Ron Fournier, who passed away in 2017. Four independently-verified, directly on-topic replacements were substituted to reach 10 channels: Weld.com, The Fab Forums (Kyle Voss), Ron Covell, and 6061.com. Every real YouTube channel ID was independently looked up via search and channel-page fetches — the CSV's RSS_Feed column universally used a literal 'UC...' placeholder rather than real channel IDs."

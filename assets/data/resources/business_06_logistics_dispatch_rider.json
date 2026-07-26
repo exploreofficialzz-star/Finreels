@@ -184,7 +184,8 @@
       "freeSourceType": "PDF",
       "freeSourceNote": "Free book summary PDF via F5 Financial -- condensed notes on the Technician/Manager/Entrepreneur framework.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Reused from prior verified skill_10/skill_20 files. URL confirmed live. NOTE: this is a summary/notes document, not the full book."
+      "verificationMethod": "Reused from prior verified skill_10/skill_20 files. URL confirmed live. NOTE: this is a summary/notes document, not the full book.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     },
     {
       "title": "Profit First",
@@ -193,7 +194,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Genuinely free full copy of the book, offered courtesy of Relay (Profit First's official banking platform partner) -- no archive.org account/borrow required.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Reused from prior verified skill_20 file. CSV lists domain as mikemichalowicz.com, but the actual free-book offer lives at profitfirstbook.com (same author's ecosystem)."
+      "verificationMethod": "Reused from prior verified skill_20 file. CSV lists domain as mikemichalowicz.com, but the actual free-book offer lives at profitfirstbook.com (same author's ecosystem).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781635767407-L.jpg"
     },
     {
       "title": "The Lean Startup",
@@ -202,7 +204,8 @@
       "freeSourceType": "PDF",
       "freeSourceNote": "Free PDF via BDeBooks -- validated learning and MVP framework.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Reused from prior verified skill_10/skill_20 files. Live status not re-verified this round -- recommend a periodic spot-check."
+      "verificationMethod": "Reused from prior verified skill_10/skill_20 files. Live status not re-verified this round -- recommend a periodic spot-check.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
     },
     {
       "title": "Atomic Habits",
@@ -211,7 +214,8 @@
       "freeSourceType": "PDF",
       "freeSourceNote": "Free direct download via Internet Archive's opensource collection -- no account required.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Reused from prior verified skill_10/skill_20 files (opensource collection, 5.5M+ views, direct EPUB/PDF download, no login)."
+      "verificationMethod": "Reused from prior verified skill_10/skill_20 files (opensource collection, 5.5M+ views, direct EPUB/PDF download, no login).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Small Business Management",
@@ -220,7 +224,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free, Creative Commons-licensed open textbook. No account required.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "SOURCE CORRECTED: the CSV lists this as 'OpenStax/Rice University', but OpenStax has never published a title called 'Small Business Management' -- their actual 6-book business series is Introduction to Business, Business Ethics, Principles of Management, Entrepreneurship, Principles of Accounting, and Organizational Behavior (confirmed via Rice University's own 2018 announcement). Substituted the genuinely free, real University of Kansas open textbook of this exact title. Small-business content within the OpenStax ecosystem lives inside Principles of Management, Ch. 7."
+      "verificationMethod": "SOURCE CORRECTED: the CSV lists this as 'OpenStax/Rice University', but OpenStax has never published a title called 'Small Business Management' -- their actual 6-book business series is Introduction to Business, Business Ethics, Principles of Management, Entrepreneurship, Principles of Accounting, and Organizational Behavior (confirmed via Rice University's own 2018 announcement). Substituted the genuinely free, real University of Kansas open textbook of this exact title. Small-business content within the OpenStax ecosystem lives inside Principles of Management, Ch. 7.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781951693633-L.jpg"
     },
     {
       "title": "Entrepreneurship",
@@ -229,7 +234,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free, peer-reviewed OpenStax textbook. No account required.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Confirmed live via openstax.org and cross-referenced against Rice University's official announcement of the OpenStax business textbook series."
+      "verificationMethod": "Confirmed live via openstax.org and cross-referenced against Rice University's official announcement of the OpenStax business textbook series.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172488-L.jpg"
     },
     {
       "title": "Digital Marketing for Small Business",
@@ -238,7 +244,8 @@
       "freeSourceType": "Course",
       "freeSourceNote": "Free HubSpot Academy certification course. No cost to enroll or complete.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Confirmed live. NOTE: official course title is 'Digital Marketing Certification Course' (the CSV's 'for Small Business' framing is close but not the literal title)."
+      "verificationMethod": "Confirmed live. NOTE: official course title is 'Digital Marketing Certification Course' (the CSV's 'for Small Business' framing is close but not the literal title).",
+      "coverUrl": "https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/hubspotlogo-web-color.png"
     },
     {
       "title": "Starting a Business Guide",
@@ -247,7 +254,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free via SBA.gov -- official U.S. Small Business Administration business planning framework. No account required.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Reused from prior verified skill_10/skill_20 files. SBA.gov confirmed as a free, public, no-login resource."
+      "verificationMethod": "Reused from prior verified skill_10/skill_20 files. SBA.gov confirmed as a free, public, no-login resource.",
+      "coverUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/US-SmallBusinessAdmin-Logo.svg/330px-US-SmallBusinessAdmin-Logo.svg.png"
     },
     {
       "title": "Inbound Marketing Certification",
@@ -256,7 +264,8 @@
       "freeSourceType": "Course",
       "freeSourceNote": "Free HubSpot Academy certification course. No cost to enroll or complete.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Confirmed live via direct fetch of the course URL and HubSpot's own resources page listing it among free courses."
+      "verificationMethod": "Confirmed live via direct fetch of the course URL and HubSpot's own resources page listing it among free courses.",
+      "coverUrl": "https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/hubspotlogo-web-color.png"
     },
     {
       "title": "Principles of Management",
@@ -265,7 +274,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free, peer-reviewed OpenStax textbook. No account required.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Confirmed live via openstax.org, authored by David S. Bright and Anastasia H. Cortes. Chapter 7 covers small-business management directly."
+      "verificationMethod": "Confirmed live via openstax.org, authored by David S. Bright and Anastasia H. Cortes. Chapter 7 covers small-business management directly.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
     }
   ],
   "notes": "Fully rebuilt 2026-07-24: every channel is now a real, named, independently confirmed entity -- no UNCONFIRMED placeholders remain. Sendy Africa was replaced because it ceased operations in 2023; Uber Freight, Max.ng, Dispatch Rider Nigeria, and Logistics Business Magazine's literal channel names did not resolve to a findable YouTube channel and were replaced with FreightWaves, Techpoint Africa, The Rideshare Guy, and TechCabal respectively -- all independently confirmed live. Lori Systems is real and extremely well-documented (funding, operations, scale all confirmed across 5 independent sources) but no dedicated YouTube channel was found for it -- flagged honestly in its own entry rather than silently swapped, since the underlying business is highly relevant to this category."

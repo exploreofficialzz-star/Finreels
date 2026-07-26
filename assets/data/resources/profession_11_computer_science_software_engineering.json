@@ -226,7 +226,8 @@
       "freeSourceNote": "Michael E. Gerber (Free PDF)",
       "region": "Global",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     },
     {
       "title": "Profit First",
@@ -236,7 +237,8 @@
       "freeSourceNote": "Mike Michalowicz (Free Book)",
       "region": "Global",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781635767407-L.jpg"
     },
     {
       "title": "The Lean Startup",
@@ -246,7 +248,8 @@
       "freeSourceNote": "Eric Ries (Free PDF)",
       "region": "Global",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
     },
     {
       "title": "Atomic Habits",
@@ -256,7 +259,8 @@
       "freeSourceNote": "James Clear (Free PDF)",
       "region": "Global",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Small Business Management",
@@ -266,7 +270,8 @@
       "freeSourceNote": "OpenStax/Rice University",
       "region": "Global",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781951693633-L.jpg"
     },
     {
       "title": "Entrepreneurship",
@@ -276,7 +281,8 @@
       "freeSourceNote": "OpenStax/Rice University",
       "region": "Global",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172488-L.jpg"
     },
     {
       "title": "Digital Marketing for Small Business",
@@ -286,7 +292,8 @@
       "freeSourceNote": "HubSpot Academy",
       "region": "Global",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724).",
+      "coverUrl": "https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/hubspotlogo-web-color.png"
     },
     {
       "title": "Starting a Business Guide",
@@ -296,7 +303,8 @@
       "freeSourceNote": "SBA.gov",
       "region": "Global",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724).",
+      "coverUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/US-SmallBusinessAdmin-Logo.svg/330px-US-SmallBusinessAdmin-Logo.svg.png"
     },
     {
       "title": "Inbound Marketing Certification",
@@ -306,7 +314,8 @@
       "freeSourceNote": "HubSpot Academy",
       "region": "Global",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724).",
+      "coverUrl": "https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/hubspotlogo-web-color.png"
     },
     {
       "title": "Principles of Management",
@@ -316,7 +325,8 @@
       "freeSourceNote": "OpenStax/Rice University",
       "region": "Global",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724)."
+      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
     }
   ],
   "notes": "Matches the founder's own honest finding, with more nuance: Nigeria has real, current, well-developed content here (Business Elites Africa, WithinNigeria, Writertain Creatives, Anutio) but it teaches freelancing logistics (which platforms pay in dollars, which payment rails avoid conversion loss) — not the further step of turning that income into a product or agency, which is what this category needs. Business Elites Africa's specific RSS feed could not be confirmed this round (a broader Nigeria-business RSS search surfaced many real adjacent blogs but not this exact one) — worth a direct, narrower search rather than guessing. On books: both candidates (The SaaS Playbook, Company of One) are commercially paid; the only 'free' copies found were on piracy sites (Yumpu, Scribd re-uploads) or were third-party paid summary services (Shortform, Four Minute Books) rather than the actual free book — neither counts, so left at 0 rather than substitute either."

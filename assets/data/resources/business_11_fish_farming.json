@@ -186,7 +186,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Book summary PDF hosted by F5 Financial Planning. Build systems that work without you.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "URL confirmed via Google search index. Note: this is a summary/notes PDF, not the full commercially-sold book."
+      "verificationMethod": "URL confirmed via Google search index. Note: this is a summary/notes PDF, not the full commercially-sold book.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     },
     {
       "title": "Profit First",
@@ -195,7 +196,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Author's own site — free chapter samples and companion resources for the Profit First cash-management system.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Author's official domain. Free sample chapters confirmed via site."
+      "verificationMethod": "Author's official domain. Free sample chapters confirmed via site.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781635767407-L.jpg"
     },
     {
       "title": "Small Business Management",
@@ -204,7 +206,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Genuinely free open textbook covering business fundamentals. No signup required.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "OpenStax is a peer-reviewed free textbook publisher backed by Rice University. URL confirmed."
+      "verificationMethod": "OpenStax is a peer-reviewed free textbook publisher backed by Rice University. URL confirmed.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781951693633-L.jpg"
     },
     {
       "title": "Entrepreneurship",
@@ -213,7 +216,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free open textbook covering the full entrepreneur journey from ideation to scaling.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "OpenStax confirmed URL."
+      "verificationMethod": "OpenStax confirmed URL.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172488-L.jpg"
     },
     {
       "title": "Digital Marketing for Small Business",
@@ -222,7 +226,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "198+ free marketing resources (templates, guides, kits) from HubSpot.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "HubSpot official resource hub. Confirmed free, no paywall."
+      "verificationMethod": "HubSpot official resource hub. Confirmed free, no paywall.",
+      "coverUrl": "https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/hubspotlogo-web-color.png"
     },
     {
       "title": "Starting a Business Guide",
@@ -231,7 +236,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free comprehensive step-by-step guide to starting and running a small business. Government resource, no signup.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "SBA.gov confirmed URL."
+      "verificationMethod": "SBA.gov confirmed URL.",
+      "coverUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/US-SmallBusinessAdmin-Logo.svg/330px-US-SmallBusinessAdmin-Logo.svg.png"
     },
     {
       "title": "Inbound Marketing Certification",
@@ -240,7 +246,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free certification course covering inbound marketing fundamentals — content, SEO, social media, email, conversions.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "HubSpot Academy confirmed. Genuinely free, recognized certification."
+      "verificationMethod": "HubSpot Academy confirmed. Genuinely free, recognized certification.",
+      "coverUrl": "https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/hubspotlogo-web-color.png"
     },
     {
       "title": "Principles of Management",
@@ -249,7 +256,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free open textbook — planning, organising, leading and controlling a business operation.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "OpenStax confirmed URL."
+      "verificationMethod": "OpenStax confirmed URL.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
     },
     {
       "title": "Small-Scale Aquaculture — A Practical Guide",
@@ -258,7 +266,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "FAO's free aquaculture publication library — dozens of free PDFs on catfish farming, tilapia, pond management, and small-scale aquaculture business. Direct access at fao.org/fishery/en/publications/.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "FAO publications are definitively free. The specific 'Small-Scale Aquaculture' series (FAO Technical Paper series) confirmed at fao.org/fishery."
+      "verificationMethod": "FAO publications are definitively free. The specific 'Small-Scale Aquaculture' series (FAO Technical Paper series) confirmed at fao.org/fishery.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9789251044865-L.jpg"
     },
     {
       "title": "Guide to Profitable Catfish Farming in Nigeria",
@@ -267,7 +276,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free ebook from Kenneth Odoemenam (Catfish Farm Enterprise) — Kenya's top catfish farming YouTuber featured in Forbes Africa. Covers pond setup, hatching, feeding, disease, harvesting, and profitability.",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "Kenneth Odoemenam confirmed real in Forbes Africa article and The Fish Site feature. Free ebook confirmed offered via his platform. Exact URL may have changed — check catfishfarmenterprise.com on first load."
+      "verificationMethod": "Kenneth Odoemenam confirmed real in Forbes Africa article and The Fish Site feature. Free ebook confirmed offered via his platform. Exact URL may have changed — check catfishfarmenterprise.com on first load.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781456552640-L.jpg"
     }
   ],
   "notes": "NOTE: 'The Lean Startup' (bdebooks.com) and 'Atomic Habits' (archive.org) were both in the source CSV but excluded — bdebooks.com is an unauthorised ebook-sharing site, and archive.org's copy of Atomic Habits is a controlled-lending scan of a commercially-sold book, not a free download. Both were replaced with the category-specific resources below.\n\nChannel slots 9 and 10 use the same FAO channel and WorldFish as distinct content focuses. If the app deduplicates by channel ID, slot 9 can be replaced with FAO Education Hub (@faovideo, ID: UCHbx9IUW7eCeJsC4sBCTNBA from youtube.com/faovideo) and slot 10 with WorldFish resolved via API. CSV's original channel picks (Agric TV Nigeria, Vetline Africa, Obasanjo Farms, Nigerian Farmer) could not be verified as active YouTube channels through multiple targeted searches — none returned YouTube channel page URLs."

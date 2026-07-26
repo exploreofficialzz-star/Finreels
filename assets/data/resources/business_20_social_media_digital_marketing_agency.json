@@ -185,7 +185,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free PDF of the well-known small-business-systems book, hosted on a third-party site — worth a direct-download check before shipping.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited."
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     },
     {
       "title": "Profit First (free resources)",
@@ -194,7 +195,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free resources from the author's own official site.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com)."
+      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781635767407-L.jpg"
     },
     {
       "title": "The Lean Startup (free)",
@@ -203,7 +205,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free copy hosted on a third-party book site — worth a direct-download check before shipping.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Lean Startup."
+      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Lean Startup.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
     },
     {
       "title": "Atomic Habits (free)",
@@ -212,7 +215,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free copy on Internet Archive — building consistent client-delivery and content-production habits.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Atomic Habits."
+      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Atomic Habits.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Small Business Management",
@@ -221,7 +225,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free, full open-license textbook covering small-business fundamentals.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Hosted on the official openstax.org domain."
+      "verificationMethod": "Hosted on the official openstax.org domain.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781951693633-L.jpg"
     },
     {
       "title": "Entrepreneurship",
@@ -230,7 +235,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free, full open-license textbook on starting and running a business.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Hosted on the official openstax.org domain."
+      "verificationMethod": "Hosted on the official openstax.org domain.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172488-L.jpg"
     },
     {
       "title": "Digital Marketing for Small Business (free eBook)",
@@ -239,7 +245,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free eBook hosted on HubSpot's own site.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Source directory entry, hosted on hubspot.com."
+      "verificationMethod": "Source directory entry, hosted on hubspot.com.",
+      "coverUrl": "https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/hubspotlogo-web-color.png"
     },
     {
       "title": "Starting a Business Guide",
@@ -248,7 +255,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free, complete startup guide hosted directly on the official sba.gov site.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Source directory entry, hosted on a U.S. government domain."
+      "verificationMethod": "Source directory entry, hosted on a U.S. government domain.",
+      "coverUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/US-SmallBusinessAdmin-Logo.svg/330px-US-SmallBusinessAdmin-Logo.svg.png"
     },
     {
       "title": "Inbound Marketing Certification (free course)",
@@ -257,7 +265,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free certification course, not a written book — hosted on HubSpot's own academy site.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Source directory entry, hosted on academy.hubspot.com."
+      "verificationMethod": "Source directory entry, hosted on academy.hubspot.com.",
+      "coverUrl": "https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/hubspotlogo-web-color.png"
     },
     {
       "title": "Principles of Management",
@@ -266,7 +275,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free, full open-license textbook on management fundamentals.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Hosted on the official openstax.org domain."
+      "verificationMethod": "Hosted on the official openstax.org domain.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
     }
   ],
   "notes": "2026-07-24: Created from scratch, merging all 30 rows from the founder-provided 'social_media_digital_marketing_agency_resources.csv' (Section II.40). Three of the CSV's 10 channels could not be matched to a real, confirmable YouTube channel: Noah's Ark Communications and Anakle (both real, well-documented Nigerian agencies with major-brand clients, but no confirmed dedicated channel — their Tumblr/website presence was their primary content hub), and Webcooks (could not be independently verified as a real entity this pass). Three independently-verified, directly on-topic replacements were substituted to reach 10 channels: Buffer, Techpoint Africa, and NairametricsTV."

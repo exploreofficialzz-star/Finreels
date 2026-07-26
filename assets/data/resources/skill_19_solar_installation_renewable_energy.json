@@ -214,7 +214,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free guides at nabcep.org/resources — the industry-standard certification body's guidance on starting and running a solar business",
       "verifiedOn": "2026-07-22",
-      "verificationMethod": "NABCEP (North American Board of Certified Energy Practitioners) is the gold-standard solar certification body. Listed in curated CSV resource list as a free resource for starting a solar business."
+      "verificationMethod": "NABCEP (North American Board of Certified Energy Practitioners) is the gold-standard solar certification body. Listed in curated CSV resource list as a free resource for starting a solar business.",
+      "coverUrl": "https://www.nabcep.org/wp-content/uploads/2023/01/NABCEP_Logo_Hres_Blue.jpg"
     },
     {
       "title": "SBA Green Business Guide",
@@ -223,7 +224,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free official startup guide at sba.gov — business registration, licensing, and compliance for green/renewable energy businesses",
       "verifiedOn": "2026-07-22",
-      "verificationMethod": "Listed in curated CSV resource list. Free US government resource — universally applicable best practices for legally launching a solar installation business."
+      "verificationMethod": "Listed in curated CSV resource list. Free US government resource — universally applicable best practices for legally launching a solar installation business.",
+      "coverUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/US-SmallBusinessAdmin-Logo.svg/330px-US-SmallBusinessAdmin-Logo.svg.png"
     },
     {
       "title": "The E-Myth Revisited",
@@ -232,7 +234,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free PDF at f5fp.com — build systems so your solar installation business runs without you",
       "verifiedOn": "2026-07-22",
-      "verificationMethod": "Listed in curated CSV resource list as free. Same foundational text used across skill_08 and skill_17 — the technician-to-business-owner trap applies directly to solar installers scaling beyond themselves."
+      "verificationMethod": "Listed in curated CSV resource list as free. Same foundational text used across skill_08 and skill_17 — the technician-to-business-owner trap applies directly to solar installers scaling beyond themselves.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     },
     {
       "title": "Profit First",
@@ -241,7 +244,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free chapter at mikemichalowicz.com — take profit first before expenses to build a financially healthy solar contracting business",
       "verifiedOn": "2026-07-22",
-      "verificationMethod": "Listed in curated CSV resource list. Especially relevant to solar given high materials/equipment costs eating into margins if not managed proactively."
+      "verificationMethod": "Listed in curated CSV resource list. Especially relevant to solar given high materials/equipment costs eating into margins if not managed proactively.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781635767407-L.jpg"
     },
     {
       "title": "The Lean Startup",
@@ -250,7 +254,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free at bdebooks.com — validate demand before committing capital to inventory and installation crews",
       "verifiedOn": "2026-07-22",
-      "verificationMethod": "Listed in curated CSV resource list as free. Applies to solar entrepreneurs testing residential vs. commercial models or new financing structures before scaling."
+      "verificationMethod": "Listed in curated CSV resource list as free. Applies to solar entrepreneurs testing residential vs. commercial models or new financing structures before scaling.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
     },
     {
       "title": "Atomic Habits",
@@ -259,7 +264,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free at archive.org — build the safety, quality-control, and client-follow-up habits that define a professional solar business",
       "verifiedOn": "2026-07-22",
-      "verificationMethod": "Listed in curated CSV resource list. Available via Internet Archive. Directly relevant to the safety-critical, precision-dependent nature of solar installation work."
+      "verificationMethod": "Listed in curated CSV resource list. Available via Internet Archive. Directly relevant to the safety-critical, precision-dependent nature of solar installation work.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "The Personal MBA",
@@ -268,7 +274,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free at archive.org — a complete self-taught business education for solar technicians without formal business training",
       "verifiedOn": "2026-07-22",
-      "verificationMethod": "Listed in curated CSV resource list as free. Available via Internet Archive. Covers marketing, sales, and finance fundamentals every solar installer-turned-business-owner needs."
+      "verificationMethod": "Listed in curated CSV resource list as free. Available via Internet Archive. Covers marketing, sales, and finance fundamentals every solar installer-turned-business-owner needs.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781591845188-L.jpg"
     },
     {
       "title": "The $100 Startup",
@@ -277,7 +284,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free at archive.org — launch a solar installation micro-business with minimal starting capital",
       "verifiedOn": "2026-07-22",
-      "verificationMethod": "Listed in curated CSV resource list as free. Available via Internet Archive. Relevant for Nigerian solar technicians starting with basic tools and a mobile phone before scaling to a full installation crew."
+      "verificationMethod": "Listed in curated CSV resource list as free. Available via Internet Archive. Relevant for Nigerian solar technicians starting with basic tools and a mobile phone before scaling to a full installation crew.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307951526-L.jpg"
     },
     {
       "title": "Building a StoryBrand",
@@ -286,7 +294,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free framework at storybrand.com — clarify your solar business message so customers understand why to choose you over cheaper, unreliable installers",
       "verifiedOn": "2026-07-22",
-      "verificationMethod": "Listed in curated CSV resource list. Especially valuable in solar given widespread customer distrust from unreliable installers — clear messaging on quality and reliability commands premium pricing."
+      "verificationMethod": "Listed in curated CSV resource list. Especially valuable in solar given widespread customer distrust from unreliable installers — clear messaging on quality and reliability commands premium pricing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781400201839-L.jpg"
     },
     {
       "title": "1-Page Marketing Plan",
@@ -295,7 +304,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free template at 1pagemarketingplan.com — build a complete marketing plan for your solar business on one page",
       "verifiedOn": "2026-07-22",
-      "verificationMethod": "Listed in curated CSV resource list. A simple, actionable marketing plan format ideal for a solar installer focused on getting first customers rather than complex strategy documents."
+      "verificationMethod": "Listed in curated CSV resource list. A simple, actionable marketing plan format ideal for a solar installer focused on getting first customers rather than complex strategy documents.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781619613348-L.jpg"
     }
   ],
   "notes": "Integrated from solar_installation_renewable_energy_resources.csv on 2026-07-22, building on the prior in_progress pass (which had verified only Solar Surge). ALL 10 channel IDs now fully resolved via live web fetches — no pending items. CSV AUDIT: 6 of 10 CSV-listed channels had non-YouTube URLs (Versatile Solar Nigeria, Kasot Power, Energy Mall Nigeria, JRB Solar, Solar Depot NG were company websites/LinkedIn; Naija Solar could not be verified as an active YouTube channel). These were replaced with 6 confirmed YouTube channels while preserving GenNext/Gennex Technologies (found on YouTube as @gennextechnologies9533) and Off-Grid Magazine's slot (replaced with Everything Electric/Fully Charged Show, a stronger verified renewable energy business channel). Nigeria/Africa representation: Solar Energy Africa + Gennex Technologies (channels), plus 6 of 10 blogs are Nigeria-specific (Energy Mall, JRB Solar, Solar Depot NG, GenNext, Versatile Solar, Kasot Power, BusinessDay). BLOG SAFETY NOTE: Energy Mall Nigeria's CSV entry was a LinkedIn URL, not a blog — the /feed/ URL is a best-guess construction from the company domain and MUST be validated live before production release, or replaced with their LinkedIn company page if no blog exists. All other blog RSS feeds use standard /feed/ paths. Books carried forward the proven 10-book business fundamentals set used across skill_08 and skill_17, replacing generic CSV descriptions with the verified specific author/title/free-source combinations."

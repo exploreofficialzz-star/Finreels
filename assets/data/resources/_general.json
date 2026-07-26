@@ -694,7 +694,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Third-party PDF hosting. The definitive guide to building a business as a system, not a job.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Third-party host — confirm file is live."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Third-party host — confirm file is live.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     },
     {
       "title": "Profit First",
@@ -703,7 +704,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Official author site — free chapter and resources for the Profit First cash management system.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781635767407-L.jpg"
     },
     {
       "title": "The Lean Startup",
@@ -712,7 +714,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Third-party PDF hosting. The validated learning framework for building products faster with less waste.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Third-party host — confirm file is live."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Third-party host — confirm file is live.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
     },
     {
       "title": "Rich Dad Poor Dad",
@@ -721,7 +724,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. Foundational book on assets vs liabilities and how the wealthy think about money.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org — borrowing may require a free account."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org — borrowing may require a free account.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781612680194-L.jpg"
     },
     {
       "title": "The Personal MBA",
@@ -730,7 +734,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. A self-taught MBA covering every major business skill.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781591845188-L.jpg"
     },
     {
       "title": "Atomic Habits",
@@ -739,7 +744,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. The systems-based approach to building consistent business disciplines.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Good to Great",
@@ -748,7 +754,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. Collins' research on what separates great, enduring companies from merely good ones.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780066620992-L.jpg"
     },
     {
       "title": "Building a StoryBrand",
@@ -757,7 +764,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Official StoryBrand site — free worksheets and summaries of the 7-part brand messaging framework.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781400201839-L.jpg"
     },
     {
       "title": "1-Page Marketing Plan",
@@ -766,7 +774,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Official book site — free marketing plan template and resources.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781619613348-L.jpg"
     },
     {
       "title": "The $100 Startup",
@@ -775,7 +784,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. Real stories of profitable businesses built for under $100.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307951526-L.jpg"
     },
     {
       "title": "Zero to One",
@@ -784,7 +794,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. Thiel's contrarian thinking on building startups that create genuine monopolies.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780804139021-L.jpg"
     },
     {
       "title": "The Hard Thing About Hard Things",
@@ -793,7 +804,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. Brutally honest lessons on building and running a company through every crisis.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780062273208-L.jpg"
     },
     {
       "title": "How to Win Friends and Influence People",
@@ -802,7 +814,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Available via Project Gutenberg. Verify Gutenberg ID 1147 maps to the Carnegie title before shipping.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Gutenberg ID should be confirmed independently."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Gutenberg ID should be confirmed independently.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780671027032-L.jpg"
     },
     {
       "title": "Deep Work",
@@ -811,7 +824,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. Framework for focused, distraction-free work that produces the most valuable output.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781455586691-L.jpg"
     },
     {
       "title": "The 4-Hour Work Week",
@@ -820,7 +834,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. The lifestyle design and business automation playbook.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307465351-L.jpg"
     },
     {
       "title": "Traction",
@@ -829,7 +844,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. The Entrepreneurial Operating System (EOS) for getting a business organised and scaling it.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781936661831-L.jpg"
     },
     {
       "title": "Crushing It!",
@@ -838,7 +854,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Linked to Gary Vee's YouTube channel — the book's core concepts on personal branding are covered extensively in his free video content.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Links to YouTube channel, not a free book copy."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Links to YouTube channel, not a free book copy.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780062674678-L.jpg"
     },
     {
       "title": "Influence: The Psychology of Persuasion",
@@ -847,7 +864,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. The six principles of persuasion — essential for anyone in sales or marketing.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780061241895-L.jpg"
     },
     {
       "title": "How Much Should I Charge?",
@@ -856,7 +874,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. Practical guide to calculating a real hourly rate and setting prices that produce profit.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781456522100-L.jpg"
     },
     {
       "title": "Markup & Profit",
@@ -865,7 +884,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Official Markup & Profit site — free articles, calculators and resources on contractor pricing.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180864-L.jpg"
     },
     {
       "title": "Built to Sell",
@@ -874,7 +894,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Official Built to Sell site — free resources and podcast on creating a business that can run without you.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781591845829-L.jpg"
     },
     {
       "title": "The Pumpkin Plan",
@@ -883,7 +904,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Official author site — free chapter and resources on focusing on best clients to grow an extraordinary business.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781591844884-L.jpg"
     },
     {
       "title": "Book Yourself Solid",
@@ -892,7 +914,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. The complete client-acquisition system for service professionals.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780470503317-L.jpg"
     },
     {
       "title": "Contagious: Why Things Catch On",
@@ -901,7 +924,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. The STEPPS framework for making products and businesses spread through word of mouth.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781451686579-L.jpg"
     },
     {
       "title": "Think and Grow Rich",
@@ -910,7 +934,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Available freely via Project Gutenberg — public domain (1937). Classic success philosophy on mindset, desire and persistence.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Gutenberg ID 39056 — confirm maps to Think and Grow Rich."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Gutenberg ID 39056 — confirm maps to Think and Grow Rich.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781585424337-L.jpg"
     },
     {
       "title": "The 7 Habits of Highly Effective People",
@@ -919,7 +944,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. Covey's principles-centred approach to personal and professional effectiveness.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781982137274-L.jpg"
     },
     {
       "title": "Mindset: The New Psychology of Success",
@@ -928,7 +954,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. Dweck's research on fixed vs. growth mindsets — foundational psychology for entrepreneurial resilience.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780345472328-L.jpg"
     },
     {
       "title": "Grit: The Power of Passion and Perseverance",
@@ -937,7 +964,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. Why passion and persistence predict success more than raw talent.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781501111105-L.jpg"
     },
     {
       "title": "Do. Fail. Learn. Repeat.",
@@ -946,7 +974,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. South African entrepreneur on real lessons from multiple business failures across Africa.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org — confirm availability; less widely distributed title."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org — confirm availability; less widely distributed title.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781868428281-L.jpg"
     },
     {
       "title": "Shoe Dog",
@@ -955,7 +984,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. Phil Knight's memoir on building Nike from zero — one of the most honest founder stories ever written.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781501135927-L.jpg"
     },
     {
       "title": "The Intelligent Investor",
@@ -964,7 +994,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. Warren Buffett's favourite book — foundational text on value investing for business owners.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780060555665-L.jpg"
     },
     {
       "title": "Tools of Titans",
@@ -973,7 +1004,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. Ferriss distils tactics and habits of 200+ world-class performers.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780544804845-L.jpg"
     },
     {
       "title": "Rework",
@@ -982,7 +1014,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. Basecamp founders on a simpler, leaner way to build a business.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307463746-L.jpg"
     },
     {
       "title": "Company of One",
@@ -991,7 +1024,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. The case for staying intentionally small and building a profitable solo business.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781328972354-L.jpg"
     },
     {
       "title": "The Innovator's Dilemma",
@@ -1000,7 +1034,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. Christensen's landmark research on how disruptive innovation upends established markets.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780062060235-L.jpg"
     },
     {
       "title": "Essentialism: The Disciplined Pursuit of Less",
@@ -1009,7 +1044,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. The discipline of focusing only on what is absolutely essential.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780804137386-L.jpg"
     },
     {
       "title": "Never Split the Difference",
@@ -1018,7 +1054,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. FBI negotiator's tactics applied to business — how to get what you want.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780062407801-L.jpg"
     },
     {
       "title": "Blue Ocean Strategy",
@@ -1027,7 +1064,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Official Blue Ocean Strategy site — free tools, case studies and frameworks for creating uncontested market space.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781591396192-L.jpg"
     },
     {
       "title": "The Art of Possibility",
@@ -1036,7 +1074,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. Transforming practices for leadership, relationship and creativity.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780142001110-L.jpg"
     },
     {
       "title": "The Slight Edge",
@@ -1045,7 +1084,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Available via Internet Archive. Philosophy of small daily actions that compound into dramatic business results.",
       "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing."
+      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Archive.org borrowing.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781626342934-L.jpg"
     }
   ],
   "actionRequired": [
@@ -1055,4 +1095,4 @@
     "BOOKS — All archive.org entries require borrowing a free Internet Archive account. Confirm availability. The 'How to Win Friends' Gutenberg ID (1147) and 'Think and Grow Rich' ID (39056) should be independently verified.",
     "BRUCE WHITFIELD — Left The Money Show in June 2024. Show now hosted by Stephen Grootes on Radio 702. Update any app copy that references Whitfield by name."
   ]
-    }
+}

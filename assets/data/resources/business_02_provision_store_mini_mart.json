@@ -184,7 +184,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free preview at Google Books — technician/manager/entrepreneur framework essential for anyone moving from solo operator to business owner",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "URL CORRECTED from CSV (f5fp.com — third-party site for a copyrighted book). Google Books preview is legitimate. Full book recommended for purchase."
+      "verificationMethod": "URL CORRECTED from CSV (f5fp.com — third-party site for a copyrighted book). Google Books preview is legitimate. Full book recommended for purchase.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     },
     {
       "title": "Profit First",
@@ -193,7 +194,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free chapter and framework at mikemichalowicz.com — take profit before expenses using envelope-style account allocation",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Official author site — free chapter available. No URL correction needed."
+      "verificationMethod": "Official author site — free chapter available. No URL correction needed.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781635767407-L.jpg"
     },
     {
       "title": "The Lean Startup",
@@ -202,7 +204,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free methodology overview at theleanstartup.com — build-measure-learn frameworks from the official author site",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "URL CORRECTED from CSV (bdebooks.com — third-party site for a copyrighted book). Replaced with official author site."
+      "verificationMethod": "URL CORRECTED from CSV (bdebooks.com — third-party site for a copyrighted book). Replaced with official author site.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
     },
     {
       "title": "Atomic Habits",
@@ -211,7 +214,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free chapters, frameworks, and habit tools at jamesclear.com — the official author site with the core 1% improvement system",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "URL CORRECTED from CSV (archive.org). Official author site preferred and provides more free content."
+      "verificationMethod": "URL CORRECTED from CSV (archive.org). Official author site preferred and provides more free content.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Small Business Management",
@@ -220,7 +224,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free peer-reviewed textbook — operations, finance, marketing and HR for small businesses. No paywall, no DRM.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "OpenStax — permanently free, peer-reviewed academic textbook. No URL correction needed."
+      "verificationMethod": "OpenStax — permanently free, peer-reviewed academic textbook. No URL correction needed.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781951693633-L.jpg"
     },
     {
       "title": "Entrepreneurship",
@@ -229,7 +234,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free complete entrepreneurship coursebook — ideation, business model design, funding, and growth",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "OpenStax — permanently free, peer-reviewed. No URL correction needed."
+      "verificationMethod": "OpenStax — permanently free, peer-reviewed. No URL correction needed.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172488-L.jpg"
     },
     {
       "title": "HubSpot Marketing Resources",
@@ -238,7 +244,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free at hubspot.com/resources — 198+ free marketing guides, templates, and ebooks. No paywall.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "HubSpot — genuinely free with no paywall. No URL correction needed."
+      "verificationMethod": "HubSpot — genuinely free with no paywall. No URL correction needed.",
+      "coverUrl": "https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/hubspotlogo-web-color.png"
     },
     {
       "title": "Starting a Business Guide",
@@ -247,7 +254,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free official startup guide at sba.gov — business structure, licensing, financing, and operations fundamentals",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "SBA.gov — U.S. government, permanently free. No URL correction needed."
+      "verificationMethod": "SBA.gov — U.S. government, permanently free. No URL correction needed.",
+      "coverUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/US-SmallBusinessAdmin-Logo.svg/330px-US-SmallBusinessAdmin-Logo.svg.png"
     },
     {
       "title": "Inbound Marketing Certification",
@@ -256,7 +264,8 @@
       "freeSourceType": "course",
       "freeSourceNote": "Free certification course at HubSpot Academy — complete inbound marketing curriculum with official certification on completion",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "HubSpot Academy — free with official certification. No URL correction needed."
+      "verificationMethod": "HubSpot Academy — free with official certification. No URL correction needed.",
+      "coverUrl": "https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/hubspotlogo-web-color.png"
     },
     {
       "title": "Principles of Management",
@@ -265,7 +274,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free peer-reviewed textbook — POLC framework: planning, organising, leading, and controlling a business",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "OpenStax — permanently free, peer-reviewed. No URL correction needed."
+      "verificationMethod": "OpenStax — permanently free, peer-reviewed. No URL correction needed.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
     }
   ],
   "integrationNotes": "3/10 channels confirmed with UCxxx IDs (BusinessDay TV, Learn With Shopify, NairametricsTV). 7 RESOLVE channels require handle verification. Real companies (TradeDepot, Kippa Africa, Bumpa, MAX.ng) likely have YouTube channels — verify before deploying. Unknown channels (RetailBusinessAfrica, FMCGAfrica, RetailOwner) — if absent at those handles, replace with verified Nigerian retail/FMCG channels. Key corrections: Shopify Retail → Learn With Shopify; BusinessDay → @BDTV-NG; Nairametrics → @NairametricsTV. TradeDepot blog: verify .co vs .com domain."

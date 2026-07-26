@@ -184,7 +184,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free PDF, third-party host — worth a check before shipping.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Source-consistent with all prior business_XX files this session."
+      "verificationMethod": "Source-consistent with all prior business_XX files this session.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     },
     {
       "title": "Profit First (free resources)",
@@ -193,7 +194,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Free resources from the author's own official site.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com)."
+      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781635767407-L.jpg"
     },
     {
       "title": "The Lean Startup (free)",
@@ -202,7 +204,8 @@
       "freeSourceType": "download",
       "freeSourceNote": "Third-party host — worth a check before shipping.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Source-consistent with all prior business_XX files this session."
+      "verificationMethod": "Source-consistent with all prior business_XX files this session.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
     },
     {
       "title": "Atomic Habits (free)",
@@ -211,7 +214,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free copy on Internet Archive.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "archive.org; author is the publicly credited author of Atomic Habits."
+      "verificationMethod": "archive.org; author is the publicly credited author of Atomic Habits.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Small Business Management",
@@ -220,7 +224,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free, full open-license textbook.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Hosted on the official openstax.org domain."
+      "verificationMethod": "Hosted on the official openstax.org domain.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781951693633-L.jpg"
     },
     {
       "title": "Entrepreneurship",
@@ -229,7 +234,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free, full open-license textbook on starting and running a business.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Hosted on the official openstax.org domain."
+      "verificationMethod": "Hosted on the official openstax.org domain.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172488-L.jpg"
     },
     {
       "title": "Digital Marketing for Small Business (free eBook)",
@@ -238,7 +244,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free eBook hosted on HubSpot's own site.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Hosted on hubspot.com."
+      "verificationMethod": "Hosted on hubspot.com.",
+      "coverUrl": "https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/hubspotlogo-web-color.png"
     },
     {
       "title": "Starting a Business Guide",
@@ -247,7 +254,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free startup guide on sba.gov.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Hosted on a U.S. government domain."
+      "verificationMethod": "Hosted on a U.S. government domain.",
+      "coverUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/US-SmallBusinessAdmin-Logo.svg/330px-US-SmallBusinessAdmin-Logo.svg.png"
     },
     {
       "title": "Inbound Marketing Certification (free course)",
@@ -256,7 +264,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free certification course — hosted on HubSpot's own academy site.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Hosted on academy.hubspot.com."
+      "verificationMethod": "Hosted on academy.hubspot.com.",
+      "coverUrl": "https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/hubspotlogo-web-color.png"
     },
     {
       "title": "Principles of Management",
@@ -265,7 +274,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free, full open-license textbook on management fundamentals.",
       "verifiedOn": "2026-07-24",
-      "verificationMethod": "Hosted on the official openstax.org domain."
+      "verificationMethod": "Hosted on the official openstax.org domain.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
     }
   ],
   "notes": "2026-07-24: Created from scratch — no CSV was uploaded for this category. All 10 channels, 10 blogs, and 10 books were independently sourced and verified this session. Channel strategy: anchored on Alibaba.com Buyer Central and Jumia Nigeria Vendor University (the two dominant sourcing/selling platforms for Nigerian mini-importers), Paystack and Shopify (the payment and store layers), plus five business-news/analysis channels already verified in adjacent categories this week (TechCabal, Techpoint Africa, NairametricsTV, Neil Patel, Traversy Media) to provide Nigerian e-commerce ecosystem context. Traversy Media is tech-adjacent rather than e-commerce-specific and is the weakest fit of the 10 — can be swapped for a more dedicated mini-importation channel if one becomes confirmable."

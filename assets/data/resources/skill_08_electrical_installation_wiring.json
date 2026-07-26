@@ -214,7 +214,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free PDF at f5fp.com — build business systems so your electrical business runs without you",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "From CSV resource list. Foundational business book written for tradespeople — the E-Myth principle was literally built around electricians and plumbers."
+      "verificationMethod": "From CSV resource list. Foundational business book written for tradespeople — the E-Myth principle was literally built around electricians and plumbers.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     },
     {
       "title": "Profit First",
@@ -223,7 +224,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free chapter and resources at mikemichalowicz.com — take profit first before expenses",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "From CSV resource list. Top financial management framework recommended by Smart Service, NECA, and contractor business publications for tradespeople."
+      "verificationMethod": "From CSV resource list. Top financial management framework recommended by Smart Service, NECA, and contractor business publications for tradespeople.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781635767407-L.jpg"
     },
     {
       "title": "The Lean Startup",
@@ -232,7 +234,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free at bdebooks.com — apply lean methodology to launching and scaling an electrical contracting business",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "From CSV resource list as free. Relevant for electricians testing new service lines (solar, EV charging, smart home) with minimal risk."
+      "verificationMethod": "From CSV resource list as free. Relevant for electricians testing new service lines (solar, EV charging, smart home) with minimal risk.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
     },
     {
       "title": "Atomic Habits",
@@ -241,7 +244,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free at archive.org — build daily habits that compound into a professional electrical contracting business",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "From CSV resource list. Available via Internet Archive. Relevant for building consistent follow-up, quality control, and crew management habits."
+      "verificationMethod": "From CSV resource list. Available via Internet Archive. Relevant for building consistent follow-up, quality control, and crew management habits.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Small Business Management",
@@ -250,7 +254,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free open textbook at openstax.org — finance, marketing, HR, and operations for small business owners",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "From CSV resource list. Peer-reviewed OpenStax textbook (Rice University) covering all business management foundations for electrical contractors."
+      "verificationMethod": "From CSV resource list. Peer-reviewed OpenStax textbook (Rice University) covering all business management foundations for electrical contractors.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781951693633-L.jpg"
     },
     {
       "title": "Entrepreneurship",
@@ -259,7 +264,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free open textbook at openstax.org — from business idea to launch to scaling",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "From CSV resource list. Peer-reviewed OpenStax textbook covering business planning, funding, legal structures, and growth frameworks."
+      "verificationMethod": "From CSV resource list. Peer-reviewed OpenStax textbook covering business planning, funding, legal structures, and growth frameworks.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172488-L.jpg"
     },
     {
       "title": "Digital Marketing for Small Business",
@@ -268,7 +274,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free marketing guides at hubspot.com/resources — social media, SEO, email, and lead generation for local service businesses",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "From CSV resource list. HubSpot free resource library — practical digital marketing guides for local service businesses like electrical contractors."
+      "verificationMethod": "From CSV resource list. HubSpot free resource library — practical digital marketing guides for local service businesses like electrical contractors.",
+      "coverUrl": "https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/hubspotlogo-web-color.png"
     },
     {
       "title": "Starting a Business Guide",
@@ -277,7 +284,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free at sba.gov — step-by-step roadmap for registering, funding, and legally launching a business",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "From CSV resource list. Free government resource covering registration, licensing, funding, and compliance — internationally applicable for launching an electrical business professionally."
+      "verificationMethod": "From CSV resource list. Free government resource covering registration, licensing, funding, and compliance — internationally applicable for launching an electrical business professionally.",
+      "coverUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/US-SmallBusinessAdmin-Logo.svg/330px-US-SmallBusinessAdmin-Logo.svg.png"
     },
     {
       "title": "Inbound Marketing Certification",
@@ -286,7 +294,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free certification at HubSpot Academy — attract customers through content and SEO instead of cold-calling",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "From CSV resource list. Industry-recognized free certification teaching electricians to attract and convert leads through content, SEO, and relationship-building."
+      "verificationMethod": "From CSV resource list. Industry-recognized free certification teaching electricians to attract and convert leads through content, SEO, and relationship-building.",
+      "coverUrl": "https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/hubspotlogo-web-color.png"
     },
     {
       "title": "Principles of Management",
@@ -295,7 +304,8 @@
       "freeSourceType": "web",
       "freeSourceNote": "Free open textbook at openstax.org — management fundamentals for electricians building and leading a crew",
       "verifiedOn": "2026-07-21",
-      "verificationMethod": "From CSV resource list. Peer-reviewed OpenStax textbook covering planning, organizing, leading, and controlling — directly applicable to managing crews and client relationships as the business scales."
+      "verificationMethod": "From CSV resource list. Peer-reviewed OpenStax textbook covering planning, organizing, leading, and controlling — directly applicable to managing crews and client relationships as the business scales.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
     }
   ],
   "notes": "Integrated from electrical_installation_wiring_resources.csv on 2026-07-21. ALL 10 channel IDs fully resolved via live web fetches — no pending items. Channel handle corrections from CSV: @mikeholt→@MikeHoltNEC, @propelakenya→@Swisscontact (PropelA content in Swisscontact playlist), @theelectricalshow→@FixRadio (show lives on Fix Radio channel), @eca→@ECALive. Channel swap: @nigerianelectricalengineers from CSV replaced with The Engineering Mindset (@theengineeringmindset, UCk0fGHsCEzGig-rSzkfCjMw) — CSV handle had no verifiable YouTube presence externally. Nigeria/Africa content: PropelA (Africa channel + blog), InfoGuideNigeria (Nigeria blog), StartupTipsDaily (Nigeria blog), PropelA Blog (Africa blog). All blog RSS URLs use standard /feed/ or source-confirmed paths — validate live before production release. All book free-source URLs active at time of entry — re-check before release."
