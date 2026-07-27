@@ -141,7 +141,10 @@ class RssService {
   // ── Retry ─────────────────────────────────────────────────────────────────────
 
   Future<List<Video>> _fetchWithRetry(String channelId) async {
-    const delays = [0, 1500, 5000];
+    // Three attempts: immediate, 600ms, 2000ms.
+    // Faster than the old [0, 1500, 5000] schedule — YouTube's RSS is rarely
+    // slow enough to need more than a 600ms pause before the second try.
+    const delays = [0, 600, 2000];
     for (var i = 0; i < delays.length; i++) {
       if (delays[i] > 0) {
         await Future<void>.delayed(Duration(milliseconds: delays[i]));
@@ -172,7 +175,7 @@ class RssService {
           'Accept':
               'application/atom+xml,application/xml,text/xml;q=0.9,*/*;q=0.8',
           'Accept-Language': 'en-US,en;q=0.9',
-        }).timeout(const Duration(seconds: 20));
+        }).timeout(const Duration(seconds: 10));
 
         if (res.statusCode == 429) return null; // rate-limited — retry
         if (res.statusCode != 200) {

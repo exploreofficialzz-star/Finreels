@@ -66,30 +66,54 @@ class ContentSearchScreen extends StatefulWidget {
 }
 
 class _ContentSearchScreenState extends State<ContentSearchScreen> {
-  final _ctrl       = TextEditingController();
-  Timer?  _debounce;
-  String  _query    = '';
-  bool    _loading  = false;
+  final _ctrl = TextEditingController();
+  Timer? _debounce;
+  String _query = '';
+  bool _loading = false;
+  bool _fetchingBlogs = false; // Phase 2 in-progress indicator
 
-  // Separated by kind for the 2-column layout:
-  //   _left  → Shorts
-  //   _right → Videos + Blogs + Books (mixed, sorted by score+date)
   List<_SearchItem> _left  = [];
   List<_SearchItem> _right = [];
+
+  // Listen to feed provider so we re-run the search automatically when
+  // FeedProvider finishes loading — fixes the "no results" empty screen
+  // when the user types before the feed has populated on first launch.
+  late final FeedProvider _feedProvider;
+  FeedState _lastFeedState = FeedState.idle;
 
   @override
   void initState() {
     super.initState();
     _ctrl.addListener(_onInput);
+    _feedProvider = context.read<FeedProvider>();
+    _lastFeedState = _feedProvider.state;
+    _feedProvider.addListener(_onFeedChanged);
   }
 
   @override
   void dispose() {
     _debounce?.cancel();
+    _feedProvider.removeListener(_onFeedChanged);
     _ctrl
       ..removeListener(_onInput)
       ..dispose();
     super.dispose();
+  }
+
+  /// Re-trigger search automatically when the feed transitions from loading
+  /// to loaded while the user already has a query typed. Without this, a
+  /// user who opens the search screen immediately after launch (before
+  /// FeedProvider has fetched any videos) types a query, sees "no results"
+  /// from an empty in-memory list, and never gets video/short results even
+  /// after the feed finishes loading.
+  void _onFeedChanged() {
+    final newState = _feedProvider.state;
+    if (_lastFeedState == FeedState.loading &&
+        newState == FeedState.loaded &&
+        _query.isNotEmpty) {
+      _search(_query);
+    }
+    _lastFeedState = newState;
   }
 
   void _onInput() {
@@ -171,13 +195,10 @@ class _ContentSearchScreenState extends State<ContentSearchScreen> {
 
   Future<void> _search(String q) async {
     if (!mounted) return;
-    setState(() { _query = q; _loading = true; });
+    setState(() { _query = q; _loading = true; _fetchingBlogs = false; });
 
-    final provider = context.read<FeedProvider>();
-
-    // ── Phase 1: in-memory results (videos + books) — INSTANT ─────────────
-    // These are already loaded in FeedProvider; no network needed.
-    final allVids  = provider.allFeedVideos;
+    // ── Phase 1: in-memory (INSTANT) ──────────────────────────────────────
+    final allVids  = _feedProvider.allFeedVideos;
     final newLeft  = <_SearchItem>[];
     final newRight = <_SearchItem>[];
 
@@ -192,13 +213,11 @@ class _ContentSearchScreenState extends State<ContentSearchScreen> {
       }
     }
 
-    for (final b in provider.allBooksForSearch) {
+    for (final b in _feedProvider.allBooksForSearch) {
       final score = _score(q, b.title, b.description, b.channelName);
       if (score > 0) newRight.add(_SearchItem.book(b, score));
     }
 
-    // Sort and show immediately — the user sees results right away even
-    // before the blog network fetch completes.
     int cmp(_SearchItem a, _SearchItem b) {
       final sc = b.score.compareTo(a.score);
       return sc != 0 ? sc : b.date.compareTo(a.date);
@@ -207,16 +226,15 @@ class _ContentSearchScreenState extends State<ContentSearchScreen> {
     newRight.sort(cmp);
 
     if (!mounted) return;
+    // Show video/book results immediately — never wait for blogs.
     setState(() {
-      _left    = newLeft;
-      _right   = newRight;
-      _loading = false; // ← un-blocks the UI immediately
+      _left         = newLeft;
+      _right        = newRight;
+      _loading      = false;
+      _fetchingBlogs = true; // Phase 2 starting
     });
 
-    // ── Phase 2: blogs — from cached RSS feeds (network if not cached) ─────
-    // Capped at 5 seconds so a slow or offline blog feed never prevents the
-    // user from seeing their video/book results. Blogs are appended to the
-    // right column; if the fetch fails or times out we keep what we have.
+    // ── Phase 2: blogs (background, 5-second cap) ─────────────────────────
     try {
       final articles = await BlogRssService.instance
           .fetchAll()
@@ -229,16 +247,19 @@ class _ContentSearchScreenState extends State<ContentSearchScreen> {
       }
       blogItems.sort(cmp);
 
-      if (!mounted) return;
-      // Only update if the query hasn't changed while we were fetching
-      if (_query == q && blogItems.isNotEmpty) {
+      if (!mounted || _query != q) return;
+      if (blogItems.isNotEmpty) {
         final merged = [..._right, ...blogItems]..sort(cmp);
-        setState(() => _right = merged);
+        setState(() { _right = merged; _fetchingBlogs = false; });
+      } else {
+        setState(() => _fetchingBlogs = false);
       }
     } on TimeoutException {
-      debugPrint('[ContentSearch] blog fetch timed out for query: $q');
+      debugPrint('[ContentSearch] blog fetch timed out for: $q');
+      if (mounted) setState(() => _fetchingBlogs = false);
     } on Exception catch (e) {
       debugPrint('[ContentSearch] blog fetch error: $e');
+      if (mounted) setState(() => _fetchingBlogs = false);
     }
   }
 
@@ -327,34 +348,65 @@ class _ContentSearchScreenState extends State<ContentSearchScreen> {
   }
 
   Widget _buildBody() {
-    // ── Empty state ────────────────────────────────────────────────────
-    if (_query.isEmpty) {
-      return _EmptyPrompt();
-    }
+    if (_query.isEmpty) return _EmptyPrompt();
 
-    // ── Loading ────────────────────────────────────────────────────────
     if (_loading) {
       return const Center(
         child: CircularProgressIndicator(color: AppTheme.gold, strokeWidth: 2.5),
       );
     }
 
-    // ── No results ─────────────────────────────────────────────────────
-    if (_left.isEmpty && _right.isEmpty) {
-      return _NoResults(query: _query);
+    final feedLoading = _feedProvider.state == FeedState.loading ||
+        _feedProvider.state == FeedState.idle;
+
+    // If in-memory results are empty AND the feed is still loading, show a
+    // loading state rather than "no results" — results will appear as soon
+    // as FeedProvider finishes (_onFeedChanged triggers a re-search).
+    if (_left.isEmpty && _right.isEmpty && feedLoading) {
+      return Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const CircularProgressIndicator(color: AppTheme.gold, strokeWidth: 2.5),
+            const SizedBox(height: 16),
+            Text('Loading your content…',
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: AppTheme.textMuted(context))),
+          ],
+        ),
+      );
     }
 
-    // ── Results ────────────────────────────────────────────────────────
+    if (_left.isEmpty && _right.isEmpty) {
+      return _NoResults(query: _query, stillFetchingBlogs: _fetchingBlogs);
+    }
+
     final count = _left.length > _right.length ? _left.length : _right.length;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
-          child: Text(
-            '${_left.length + _right.length} results for "$_query"',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: AppTheme.textMuted(context)),
+          padding: const EdgeInsets.fromLTRB(16, 4, 16, 4),
+          child: Row(
+            children: [
+              Text(
+                '${_left.length + _right.length} results for "$_query"',
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: AppTheme.textMuted(context)),
+              ),
+              if (_fetchingBlogs) ...[
+                const SizedBox(width: 8),
+                const SizedBox(
+                  width: 10, height: 10,
+                  child: CircularProgressIndicator(
+                      color: AppTheme.gold, strokeWidth: 1.5),
+                ),
+                const SizedBox(width: 4),
+                Text('searching blogs…',
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: AppTheme.textMuted(context))),
+              ],
+            ],
           ),
         ),
         const Padding(
@@ -811,7 +863,8 @@ class _EmptyPrompt extends StatelessWidget {
 
 class _NoResults extends StatelessWidget {
   final String query;
-  const _NoResults({required this.query});
+  final bool stillFetchingBlogs;
+  const _NoResults({required this.query, this.stillFetchingBlogs = false});
 
   @override
   Widget build(BuildContext context) {
@@ -824,18 +877,30 @@ class _NoResults extends StatelessWidget {
             Icon(Icons.search_off_rounded,
                 size: 56, color: AppTheme.textMuted(context)),
             const SizedBox(height: 16),
-            Text('No results for "$query"',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w700)),
-            const SizedBox(height: 8),
             Text(
-              'Try shorter or different keywords — for example '
-              '"pricing", "solar", or "tailoring".',
+              stillFetchingBlogs
+                  ? 'No videos found for "$query"'
+                  : 'No results for "$query"',
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: AppTheme.textMuted(context), height: 1.6),
-            ),
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w700)),
+            const SizedBox(height: 8),
+            if (stillFetchingBlogs) ...[
+              const SizedBox(height: 4),
+              const CircularProgressIndicator(
+                  color: AppTheme.gold, strokeWidth: 2),
+              const SizedBox(height: 10),
+              Text('Still searching blogs…',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: AppTheme.textMuted(context))),
+            ] else
+              Text(
+                'Try shorter or different keywords — for example '
+                '"pricing", "solar", or "tailoring".',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: AppTheme.textMuted(context), height: 1.6),
+              ),
           ],
         ),
       ),

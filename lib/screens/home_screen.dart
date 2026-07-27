@@ -21,6 +21,7 @@ import 'blog_feed_screen.dart';
 import 'blog_reader_screen.dart';
 import 'book_detail_screen.dart';
 import 'content_search_screen.dart';
+import 'notifications_screen.dart';
 import 'shorts_player_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -70,34 +71,13 @@ class _AppHeader extends StatelessWidget {
               MaterialPageRoute(builder: (_) => const ContentSearchScreen()),
             ),
           ),
-          // Refresh button — watches provider state so it spins while loading
-          // and gives the user clear confirmation that something is happening.
-          Consumer<FeedProvider>(
-            builder: (ctx, provider, _) {
-              final loading = provider.state == FeedState.loading;
-              return IconButton(
-                tooltip: 'Refresh feed',
-                icon: TweenAnimationBuilder<double>(
-                  tween: Tween(begin: 0, end: loading ? 1 : 0),
-                  duration: const Duration(milliseconds: 600),
-                  builder: (_, t, child) => RotationTransition(
-                    turns: AlwaysStoppedAnimation(t),
-                    child: child,
-                  ),
-                  child: Icon(
-                    Icons.refresh_rounded,
-                    color: loading
-                        ? AppTheme.gold
-                        : AppTheme.textMuted(context),
-                  ),
-                ),
-                onPressed: loading
-                    ? null // debounce: ignore taps while already refreshing
-                    : () => unawaited(
-                          ctx.read<FeedProvider>().refresh(force: true),
-                        ),
-              );
-            },
+          IconButton(
+            icon: Icon(Icons.notifications_outlined,
+                color: AppTheme.textMuted(context)),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                  builder: (_) => const NotificationsScreen()),
+            ),
           ),
         ],
       ),

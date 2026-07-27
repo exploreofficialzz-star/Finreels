@@ -399,16 +399,17 @@ class FeedProvider extends ChangeNotifier {
     final channels = _eagerChannels();
     final snap = <String, List<Video>>{};
 
-    // Staggered parallel: channel[i] waits i×200 ms before its first request.
+    // Staggered parallel: channel[i] waits i×50 ms before its first request.
     // All run concurrently inside Future.wait — total time ≈ slowest fetch.
-    // Stagger prevents burst; YouTube never sees >1 request per 200 ms.
+    // 50 ms stagger is enough separation to avoid hammering YouTube;
+    // 200 ms (the old value) added 2.2 s of unnecessary overhead for 12 channels.
     await Future.wait(
       List.generate(channels.length, (i) async {
         final ch = channels[i];
         snap[ch.id] = await RssService.instance.fetchVideos(
           ch.id,
           forceRefresh: force,
-          staggerMs:    i * 200,
+          staggerMs:    i * 50,
         );
       }),
     );

@@ -13,15 +13,24 @@ class AdBlockOverlay extends StatefulWidget {
 }
 
 class _AdBlockOverlayState extends State<AdBlockOverlay> {
-  AdBlockStatus _adStatus = AdBlockStatus.checking;
+  AdBlockStatus _adStatus  = AdBlockStatus.checking;
+  NetworkStatus  _netStatus = NetworkStatus.checking;
   bool _rechecking = false;
 
   @override
   void initState() {
     super.initState();
-    _adStatus = AdBlockService.instance.current;
+    _adStatus  = AdBlockService.instance.current;
+    _netStatus = ConnectivityService.instance.current;
     AdBlockService.instance.statusStream.listen((s) {
       if (mounted) setState(() => _adStatus = s);
+    });
+    // Belt-and-suspenders: rebuild whenever network state changes so the
+    // overlay can NEVER show while the device is offline, even if there's
+    // a race between the connectivity stream emitting and AdBlockService
+    // resetting its own status.
+    ConnectivityService.instance.statusStream.listen((s) {
+      if (mounted) setState(() => _netStatus = s);
     });
   }
 
@@ -36,9 +45,14 @@ class _AdBlockOverlayState extends State<AdBlockOverlay> {
 
   @override
   Widget build(BuildContext context) {
-    // Only block when explicitly detected — not during 'checking' to avoid
-    // flashing the overlay on a slow network
-    final blocked = _adStatus == AdBlockStatus.blocked;
+    // Two-layer guard:
+    // 1. AdBlockService only emits blocked after confirming neutral internet.
+    // 2. We ALSO check netStatus here to cover any race between the
+    //    connectivity stream and the adblock stream — if the device just
+    //    went offline, we suppress the overlay immediately rather than
+    //    waiting for AdBlockService to emit 'checking'.
+    final blocked = _adStatus  == AdBlockStatus.blocked &&
+                    _netStatus == NetworkStatus.online;
 
     return Stack(
       children: [
