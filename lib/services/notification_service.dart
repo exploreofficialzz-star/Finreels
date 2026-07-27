@@ -118,8 +118,13 @@ class NotificationService {
     // just the general set + whatever this person actually selected.
     await ResourceCategoryData.load();
     await UserProfileService.instance.init();
-    final channelsToCheck =
-        ChannelData.eagerFor(UserProfileService.instance.selectedCategoryIds);
+    // Deduplicate by channel ID — eagerFor() operates on the fixed deduped
+    // combined list, but this guard prevents duplicate background RSS fetches
+    // even if the channel list grows or the combined dedup is bypassed.
+    final _seenNotifIds = <String>{};
+    final channelsToCheck = ChannelData.eagerFor(
+      UserProfileService.instance.selectedCategoryIds,
+    ).where((c) => c.id.isNotEmpty && _seenNotifIds.add(c.id)).toList();
 
     for (final channel in channelsToCheck) {
       try {

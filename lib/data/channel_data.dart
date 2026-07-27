@@ -193,7 +193,25 @@ class ChannelData {
   /// assets/data/resources/, loaded by ResourceCategoryData). This is what
   /// FeedProvider and everything else should actually read — [all] alone
   /// only has the original const 12.
-  static List<Channel> get combined => [...all, ...ResourceCategoryData.verifiedChannels];
+  /// Combined list of all channels, deduplicated by channel ID.
+  ///
+  /// Without dedup, the same channel ID (e.g. BusinessDay Nigeria) appears up
+  /// to 15× across _general.json + 14 category files, producing 655 Channel
+  /// objects for only 458 unique IDs. This causes _sessionChannelOrder to
+  /// carry duplicate IDs, makes _roundRobin emit the same video 15× per round,
+  /// and fires up to 15 identical RSS fetches in refresh().
+  ///
+  /// First-wins priority: hardcoded 12 → category-specific verified channels
+  /// → _general.json channels. A channel that is both category-specific and
+  /// general keeps its category resourceCategoryId so _dateMixed can apply
+  /// the 3-day boost when that category is selected.
+  static List<Channel> get combined {
+    final seen = <String>{};
+    return [
+      for (final ch in [...all, ...ResourceCategoryData.verifiedChannels])
+        if (ch.id.isNotEmpty && seen.add(ch.id)) ch,
+    ];
+  }
 
   /// The subset of [combined] that should actually be fetched over the
   /// network for a person who has [selectedCategoryIds] selected as their

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:collection';
 
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -97,7 +98,13 @@ class FeedProvider extends ChangeNotifier {
       ChannelData.eagerFor(UserProfileService.instance.selectedCategoryIds);
 
   static List<String> _buildSessionChannelOrder() {
-    final shuffled = _eagerChannels().map((c) => c.id).toList()..shuffle();
+    // Deduplicate channel IDs before shuffling — without this, a channel that
+    // appears 15× in _eagerChannels() would appear 15× here, and _roundRobin
+    // would then emit 15 copies of the same blog/video per round-robin pass.
+    final uniqueIds = LinkedHashSet<String>.from(
+      _eagerChannels().map((c) => c.id).where((id) => id.isNotEmpty),
+    );
+    final shuffled = uniqueIds.toList()..shuffle();
     final ranked = EngagementService.instance.sortByEngagement(shuffled);
     final selected = UserProfileService.instance.selectedCategoryIds;
     if (selected.isEmpty) return ranked;
@@ -129,7 +136,16 @@ class FeedProvider extends ChangeNotifier {
   List<Video> get feedVideos => _tabCache[_activeTab] ??= _compute(_activeTab);
 
   List<Video> _compute(FeedTab tab) {
-    final all = _videosByChannel.values.expand((v) => v).toList();
+    final raw = _videosByChannel.values.expand((v) => v).toList();
+
+    // Deduplicate by YouTube video ID before any tab filtering.
+    // Two different channel IDs can return the same video ID when a creator
+    // cross-posts a Short to a second channel or a clip channel re-uploads
+    // original content. Without this the same short appears once per channel
+    // bucket it was stored in, causing the "same short three times" symptom.
+    final seen = <String>{};
+    final all  = [for (final v in raw) if (seen.add(v.id)) v];
+
     return switch (tab) {
       // Videos and Shorts: date-mixed (newest first globally, category
       // channels softly boosted, no more than 2 consecutive same-channel).
@@ -255,8 +271,15 @@ class FeedProvider extends ChangeNotifier {
     for (final l in grouped.values) { l.sort((a, b) => b.publishedAt.compareTo(a.publishedAt)); }
     // Use the session channel order (shuffled once at launch, stable during session).
     // Filter to only channels that have content of this type, preserving session order.
-    final keys = _sessionChannelOrder.where(grouped.containsKey).toList()
-        ..addAll(grouped.keys.where((k) => !_sessionChannelOrder.contains(k)));
+    // Deduplicate keys — _sessionChannelOrder is already deduped at build time,
+    // but this guard ensures correctness even if a stale cached order has dupes.
+    final keysSeen = <String>{};
+    final keys = <String>[
+      for (final id in _sessionChannelOrder)
+        if (grouped.containsKey(id) && keysSeen.add(id)) id,
+      for (final id in grouped.keys)
+        if (!_sessionChannelOrder.contains(id) && keysSeen.add(id)) id,
+    ];
     final maxLen = grouped.values.map((l) => l.length).fold(0, (a, b) => a > b ? a : b);
     final result = <Video>[];
     for (var i = 0; i < maxLen; i++) {
@@ -396,7 +419,25 @@ class FeedProvider extends ChangeNotifier {
       notifyListeners();
     }
 
-    final channels = _eagerChannels();
+    // Deduplicate channels by ID before fetching — a channel listed in both
+    // _general.json (null categoryId) and a selected category's JSON can appear
+    // multiple times in _eagerChannels(). Prefer the category-specific version
+    // so _dateMixed's 3-day boost fires correctly, and skip empty IDs entirely.
+    final seenChannelIds = <String>{};
+    final channels = <Channel>[];
+    for (final ch in _eagerChannels()) {
+      if (ch.id.isEmpty) continue;
+      if (seenChannelIds.add(ch.id)) {
+        channels.add(ch);
+      } else if (ch.resourceCategoryId != null) {
+        // Upgrade null-category entry to category-specific so boost fires.
+        final idx = channels.indexWhere((c) => c.id == ch.id);
+        if (idx >= 0 && channels[idx].resourceCategoryId == null) {
+          channels[idx] = ch;
+        }
+      }
+    }
+
     final snap = <String, List<Video>>{};
 
     // Staggered parallel: channel[i] waits i×50 ms before its first request.

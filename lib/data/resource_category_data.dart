@@ -168,8 +168,17 @@ class ResourceCategoryData {
     for (final c in (map['channels'] as List? ?? [])) {
       try {
         final ch = c as Map<String, dynamic>;
+        // Skip entries whose YouTube channel ID is missing or blank — an empty
+        // id collapses all such channels onto the '' key in _videosByChannel,
+        // mixes their videos together, and fires an unfetchable RSS URL.
+        final rawId = (ch['id'] as String? ?? '').trim();
+        if (rawId.isEmpty) {
+          debugPrint('[ResourceCategoryData] skipping channel with empty id: '
+              '"${ch['name']}" (categoryId=$categoryId)');
+          continue;
+        }
         channels.add(Channel(
-          id: ch['id'] as String,
+          id: rawId,
           name: ch['name'] as String,
           handle: ch['handle'] as String,
           description: ch['description'] as String? ?? '',
