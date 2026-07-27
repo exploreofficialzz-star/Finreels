@@ -55,11 +55,13 @@ class _SearchItem {
 ///   LEFT  column — Shorts (9:16 portrait cards, tap → ShortsPlayerScreen)
 ///   RIGHT column — Videos, Blogs, Books (tap → appropriate detail screen)
 ///
-/// Matching: word-boundary keyword search. Each query word is tested against
-/// title (weight ×2), description/excerpt (×1), channel/source name (×0.5).
-/// Results scoring > 0 are shown, sorted descending by score then by date.
+/// IMPORTANT: This screen is pushed as a route, so its BuildContext is NOT
+/// under the MultiProvider that wraps the app shell. FeedProvider is therefore
+/// passed as a constructor parameter (read at the push site, which IS inside
+/// MultiProvider) rather than via context.read() in initState().
 class ContentSearchScreen extends StatefulWidget {
-  const ContentSearchScreen({super.key});
+  final FeedProvider feedProvider;
+  const ContentSearchScreen({required this.feedProvider, super.key});
 
   @override
   State<ContentSearchScreen> createState() => _ContentSearchScreenState();
@@ -70,44 +72,38 @@ class _ContentSearchScreenState extends State<ContentSearchScreen> {
   Timer? _debounce;
   String _query = '';
   bool _loading = false;
-  bool _fetchingBlogs = false; // Phase 2 in-progress indicator
+  bool _fetchingBlogs = false;
 
   List<_SearchItem> _left  = [];
   List<_SearchItem> _right = [];
 
-  // Listen to feed provider so we re-run the search automatically when
-  // FeedProvider finishes loading — fixes the "no results" empty screen
-  // when the user types before the feed has populated on first launch.
-  late final FeedProvider _feedProvider;
+  // Shorthand — widget.feedProvider passed from the push site (inside
+  // MultiProvider) so context.read() is never needed inside this State.
+  FeedProvider get _fp => widget.feedProvider;
   FeedState _lastFeedState = FeedState.idle;
 
   @override
   void initState() {
     super.initState();
     _ctrl.addListener(_onInput);
-    _feedProvider = context.read<FeedProvider>();
-    _lastFeedState = _feedProvider.state;
-    _feedProvider.addListener(_onFeedChanged);
+    _lastFeedState = _fp.state;
+    // Listen to feed so we re-search automatically when it finishes loading
+    // on a cold launch where the user typed before videos were in memory.
+    _fp.addListener(_onFeedChanged);
   }
 
   @override
   void dispose() {
     _debounce?.cancel();
-    _feedProvider.removeListener(_onFeedChanged);
+    _fp.removeListener(_onFeedChanged);
     _ctrl
       ..removeListener(_onInput)
       ..dispose();
     super.dispose();
   }
 
-  /// Re-trigger search automatically when the feed transitions from loading
-  /// to loaded while the user already has a query typed. Without this, a
-  /// user who opens the search screen immediately after launch (before
-  /// FeedProvider has fetched any videos) types a query, sees "no results"
-  /// from an empty in-memory list, and never gets video/short results even
-  /// after the feed finishes loading.
   void _onFeedChanged() {
-    final newState = _feedProvider.state;
+    final newState = _fp.state;
     if (_lastFeedState == FeedState.loading &&
         newState == FeedState.loaded &&
         _query.isNotEmpty) {
@@ -198,7 +194,7 @@ class _ContentSearchScreenState extends State<ContentSearchScreen> {
     setState(() { _query = q; _loading = true; _fetchingBlogs = false; });
 
     // ── Phase 1: in-memory (INSTANT) ──────────────────────────────────────
-    final allVids  = _feedProvider.allFeedVideos;
+    final allVids  = _fp.allFeedVideos;
     final newLeft  = <_SearchItem>[];
     final newRight = <_SearchItem>[];
 
@@ -213,7 +209,7 @@ class _ContentSearchScreenState extends State<ContentSearchScreen> {
       }
     }
 
-    for (final b in _feedProvider.allBooksForSearch) {
+    for (final b in _fp.allBooksForSearch) {
       final score = _score(q, b.title, b.description, b.channelName);
       if (score > 0) newRight.add(_SearchItem.book(b, score));
     }
@@ -356,8 +352,8 @@ class _ContentSearchScreenState extends State<ContentSearchScreen> {
       );
     }
 
-    final feedLoading = _feedProvider.state == FeedState.loading ||
-        _feedProvider.state == FeedState.idle;
+    final feedLoading = _fp.state == FeedState.loading ||
+        _fp.state == FeedState.idle;
 
     // If in-memory results are empty AND the feed is still loading, show a
     // loading state rather than "no results" — results will appear as soon

@@ -67,9 +67,18 @@ class _AppHeader extends StatelessWidget {
           const Spacer(),
           IconButton(
             icon: Icon(Icons.search_rounded, color: AppTheme.textMuted(context)),
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute(builder: (_) => const ContentSearchScreen()),
-            ),
+            onPressed: () {
+              // Read FeedProvider HERE — this context is inside MultiProvider.
+              // ContentSearchScreen is pushed as a route (outside MultiProvider),
+              // so it cannot call context.read itself. Passing it explicitly is
+              // the correct pattern for pushed routes in this architecture.
+              final fp = context.read<FeedProvider>();
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => ContentSearchScreen(feedProvider: fp),
+                ),
+              );
+            },
           ),
           IconButton(
             icon: Icon(Icons.notifications_outlined,
