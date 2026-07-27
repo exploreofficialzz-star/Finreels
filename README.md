@@ -1,50 +1,95 @@
 # FinReels 🎬
-**Financial Literacy Video Hub** — by chAs Tech Group  
-`com.chastech.finreels`
+**Financial Literacy Content Aggregator** — by chAs Technologies LLC  
+`com.chastech.finreels` · Android (Play Store) · Production
 
-FinReels aggregates the best financial literacy and entrepreneurship YouTube
-channels into one clean, ad-supported mobile app for Android and iOS — plus
-a curated Books library of public-domain classics and original masterclass playbooks.
+FinReels curates videos, shorts, blogs, and books from 40+ verified channels and
+700+ free resources into one clean, ad-supported mobile app — organised across a
+60-category taxonomy of skills, businesses, and professions, built for entrepreneurs
+and professionals across Africa.
 
 ---
 
-## Channels (12)
+## Content
 
-| Channel | Category | Focus |
+| Type | Count | Source |
 |---|---|---|
-| The Diary Of A CEO | Entrepreneurship | CEO interviews & success mindset |
-| Alex Hormozi | Sales & Business | Offers, sales & business scaling |
-| Iman Gadzhi | Entrepreneurship | Online business & agency building |
-| Magnates Media | How They Got Rich | Business documentaries & empire stories |
-| My First Million | Entrepreneurship | Business ideas & wealth case studies |
-| HubSpot Marketing | Sales & Marketing | Marketing strategies & business growth |
-| Neil Patel | Sales & Marketing | Digital marketing & SEO |
-| Dan Lok | Sales & Marketing | High ticket sales & closing |
-| Jordan Platten | Sales & Marketing | SMMA & social media marketing |
-| School of Hard Knocks | How They Got Rich | Millionaire interviews & wealth journeys |
-| Vusi Thembekwayo | Entrepreneurship | Leadership, strategy & disruption |
-| Marketing Explained | Sales & Marketing | Digital marketing tutorials & strategies |
+| Channels | 40+ general + category-specific | YouTube RSS (no API key) |
+| Books | 690+ with cover images | Open Library, OpenStax, free sources |
+| Blogs | 690+ | RSS feeds |
+| Categories | 60 (20 Skills · 20 Businesses · 20 Professions) | Curated taxonomy |
+
+### Category Taxonomy
+
+**Skills (20)** — Tailoring & Fashion Design, Hairdressing & Hairstyling, Barbing,
+Makeup Artistry, Welding & Metal Fabrication, Carpentry & Furniture Making,
+Electrical Installation, Plumbing & Pipefitting, Painting & Decorating, Tiling &
+Flooring, AC & Refrigeration Repair, Phone & Electronics Repair, Graphic Design,
+Photography & Videography, Catering & Event Decoration, Baking & Confectionery,
+Laundry & Dry Cleaning, Auto Mechanic & Panel Beating, Solar & Renewable Energy,
+Web & Software Development.
+
+**Businesses (20)** — POS/Agent Banking, Provision Store/Mini-Mart, Fashion Retail/
+Boutique, Poultry Farming, Catfish Farming, Restaurant & Food Service, Logistics &
+Dispatch Riding, Real Estate & Property, Printing & Branding, Waste Management &
+Recycling, Gym & Fitness Centre, Cinema & Entertainment, ICT Services, Cleaning
+Services, Event Planning & Management, Supermarket & FMCG Distribution, Exportation
+& Non-Oil Trade, Agriculture & Agro-Processing, Fuel Station/Petrol Retail,
+Healthcare Retail & Pharmacy.
+
+**Professions (20)** — Medicine, Law, Pharmacy, Nursing, Accounting, Engineering,
+Architecture, Estate Management & Surveying, Banking & Finance, Dentistry, Optometry,
+Physiotherapy, Radiography, Medical Laboratory Science, Environmental Health, Nutrition
+& Dietetics, Human Resources, Information Technology, Education & Teaching, Insurance.
+
+---
+
+## Cross-Cutting Channels (40 — from `_general.json`)
+
+| Channel | Focus |
+|---|---|
+| Dayo Adetiloye Business Hub | Entrepreneurship |
+| JP Iwuoha — Smallstarter Africa | Strategy |
+| Insightpreneur | Mindset |
+| Naijapreneur | Mindset |
+| Valu.ng | Finance |
+| SMEDAN Nigeria | Government |
+| BusinessDay Nigeria | News |
+| Nairametrics TV | Finance |
+| Techpoint Africa | Tech |
+| Disrupt Africa | Startup |
+| Africa's Young Entrepreneurs | Entrepreneurship |
+| Gary Vaynerchuk | Marketing |
+| Neil Patel | Marketing |
+| Seth Godin | Marketing |
+| HubSpot | Marketing |
+| Tim Ferriss | Productivity |
+| Ali Abdaal | Productivity |
+| Tony Robbins | Mindset |
+| Grant Cardone | Sales |
+| Valuetainment | Strategy |
+| How I Built This | Stories |
+| Shopify | E-commerce |
+| Ramit Sethi | Finance |
+| The Futur | Pricing |
+| Michael Kitces | Practice Mgmt |
+| Business of Architecture | Practice |
+| Mike Michalowicz | Finance |
+| Entrepreneurs.ng | Entrepreneurship |
+| Connect Nigeria | Directory |
+| SME Digest Nigeria | SME Focus |
+| Kippa Africa | Tools |
+| Bumpa | Tools |
+| Wale Marketer | Pricing |
+| Bintus Art and Everything | Multi-Trade |
+| ServiceTitan | Trades |
+| Markup & Profit | Pricing |
+| ITF Nigeria | Government |
+| Nic Haralambous | Mindset |
+| Built in Africa | Startup |
+| Radio 702 — The Money Show | Finance |
 
 All channel IDs are verified directly from YouTube channel pages and pull live
 RSS feeds — no API key required.
-
----
-
-## Books Library
-
-### Free Finance Library (8 public-domain classics via EPUB)
-- *The Richest Man in Babylon* — George S. Clason
-- *Think and Grow Rich* — Napoleon Hill *(includes in-app key insights)*
-- *The Science of Getting Rich* — Wallace D. Wattles
-- *The Art of Money Getting* — P. T. Barnum
-- *As a Man Thinketh* — James Allen
-- *Eight Pillars of Prosperity* — James Allen
-- *The Master Key System* — Charles F. Haanel
-- *Extraordinary Popular Delusions* — Charles Mackay
-
-### Masterclass Playbooks (2 original PDFs bundled in the app)
-- *The Five Buckets: Build What They Can Never Take From You*
-- *The Five Buckets: A Field Manual for Unstoppable Success*
 
 ---
 
@@ -56,52 +101,86 @@ RSS feeds — no API key required.
 | **Codebase** | Pure Flutter (Dart) — single codebase for Android + iOS |
 | **Theme** | System-adaptive — pure white light / pure black dark |
 | **AdMob** | Banner + Interstitial + App Open + Unity Ads mediation |
-| **IAP** | 3 ad-free tiers (non-consumable one-time purchases) |
-| **Background** | WorkManager RSS polling + local notifications |
+| **IAP** | 3 ad-free tiers (one-time, non-recurring purchases) |
+| **Payment fallback** | Paystack via local WebView + Inline.js (sideloaded installs) |
+| **Background** | WorkManager RSS polling + local push notifications |
 | **Connectivity** | Multi-endpoint probing — no false positives |
-| **Ad-block detect** | 4 ad-server probes; gates if 2+ fail |
-| **Books** | 8 public-domain EPUBs via `flutter_epub_viewer` + 2 bundled PDFs |
+| **Ad-block detect** | 4 ad-server probes; gates interstitials if 2+ fail |
+| **Category data** | 60 JSON files under `assets/data/resources/` — one per category |
+| **Books** | 690+ entries with cover images (Open Library CDN) across all JSON files |
+| **Personalisation** | `UserProfileService` + `EngagementService` (21-day decay) |
 | **Startup** | Parallel service init (6 s ceiling); instant first frame |
 
 ---
 
-## Quick Start
+## Monetization
 
-```bash
-git clone https://github.com/YOUR_ORG/finreels.git
-cd finreels
-flutter pub get
-flutter run
-```
+| Tier | Product ID | Price |
+|---|---|---|
+| Ads (default) | — | Free; AdMob Finance CPM ~$8–25 |
+| 1-day ad-free | `finreels_no_ads_1day` | $0.99 |
+| 7-day ad-free | `finreels_no_ads_weekly` | $2.99 |
+| 30-day ad-free | `finreels_no_ads_monthly` | $7.99 |
+
+Purchases are **one-time payments** — they do not auto-renew.  
+Play Store installs → Google Play billing.  
+Sideloaded installs → Paystack (local HTML + WebView checkout).
 
 ---
 
-## Before Production Release
+## Project Structure
 
-### 1. AdMob
-Edit `lib/config/app_config.dart` — `kDebugAds` is already `false` and all
-Android production ad unit IDs are live. Create a **separate iOS app** in AdMob
-and update:
-- `ios/Runner/Info.plist` → `GADApplicationIdentifier`
-- `lib/config/app_config.dart` → iOS branches of each `get` (currently mirroring Android IDs)
-
-Also create an **App Open** ad unit and replace the test IDs in `appOpenAdUnitId`
-(see the comment in `app_config.dart`).
-
-### 2. IAP Products
-The app uses **non-consumable one-time purchases** (not subscriptions).
-Create them in **Google Play Console → Monetization → One-time products**
-and **App Store Connect → In-App Purchases → Non-Consumable** with these IDs:
-
-| ID | Price |
-|---|---|
-| `finreels_no_ads_1day` | $0.99 |
-| `finreels_no_ads_weekly` | $2.99 |
-| `finreels_no_ads_monthly` | $8.99 |
-
-### 3. iOS Signing
-Update `scripts/ExportOptions.plist`: replace `YOUR_TEAM_ID` and the
-provisioning profile name with your Apple Developer Team values.
+```
+finreels/
+├── lib/
+│   ├── config/         ← app_config.dart (AdMob IDs, IAP IDs, Paystack key)
+│   ├── data/           ← resource_category_data.dart (loads all 60 JSON files)
+│   │                      book_insights_data.dart
+│   │                      category_playbook_data.dart
+│   ├── models/         ← channel.dart, video.dart, resource_category.dart,
+│   │                      feed_tab.dart
+│   ├── providers/      ← feed_provider.dart (3-layer channel ordering)
+│   ├── screens/        ← splash, home, discover, category_detail,
+│   │                      video_player, shorts_player,
+│   │                      blog_feed, blog_reader,
+│   │                      book_detail, book_detail_screen,
+│   │                      channel_videos, my_business,
+│   │                      settings, privacy_policy,
+│   │                      paystack_checkout
+│   ├── services/       ← ad_service, ad_block_service, rss_service,
+│   │                      blog_rss_service, iap_service,
+│   │                      install_source_service, paystack_service,
+│   │                      notification_service, background_service,
+│   │                      connectivity_service, consent_service,
+│   │                      engagement_service, user_profile_service
+│   ├── theme/          ← app_theme.dart (adaptive light/dark)
+│   ├── widgets/        ← connectivity_overlay, ad_block_overlay,
+│   │                      banner_ad_widget, sticky_banner_bar,
+│   │                      inline_video_card, video_card,
+│   │                      book_cover_image, shimmer_loader
+│   └── main.dart
+├── android/
+│   ├── app/build.gradle        ← AGP 8.6.0, minSdk 23, targetSdk 35
+│   ├── settings.gradle         ← Kotlin 2.3.0
+│   └── app/src/main/
+│       ├── AndroidManifest.xml ← permissions, AdMob app ID, WorkManager
+│       └── kotlin/             ← MainActivity.kt, MainApplication.kt
+├── ios/
+│   └── Runner/Info.plist       ← AdMob ID, ATT usage string, BGTask identifiers
+├── assets/
+│   ├── data/
+│   │   ├── resource_categories.json   ← 60-category taxonomy manifest
+│   │   └── resources/                 ← 66 JSON files (60 categories + _general
+│   │                                      + 5 auxiliary)
+│   ├── icons/          ← app_icon.png + adaptive variants
+│   ├── sounds/         ← notification.wav, ding.wav
+│   └── books/          ← bundled PDF masterclass playbooks + covers
+├── scripts/
+│   └── ExportOptions.plist
+└── .github/workflows/
+    ├── build_android.yml
+    └── build_ios.yml
+```
 
 ---
 
@@ -116,13 +195,13 @@ provisioning profile name with your Apple Developer Team values.
 | `KEYSTORE_KEY_PASSWORD` | key password |
 
 ```bash
-# Generate keystore (run once, store the .jks securely — never commit it)
+# Generate keystore (run once — never commit the .jks)
 keytool -genkey -v -keystore finreels.jks \
   -keyalg RSA -keysize 2048 -validity 10000 \
   -alias finreels -storepass YOUR_PASS -keypass YOUR_PASS \
-  -dname "CN=Chas Tech Group, OU=Mobile, O=ChasTech, L=City, S=State, C=US"
+  -dname "CN=Chas Technologies LLC, OU=Mobile, O=ChasTech, L=City, S=State, C=NG"
 
-base64 finreels.jks | pbcopy   # macOS — paste as KEYSTORE_BASE64
+base64 finreels.jks | pbcopy   # macOS
 base64 finreels.jks | xclip    # Linux
 ```
 
@@ -133,7 +212,7 @@ base64 finreels.jks | xclip    # Linux
 | `IOS_CERTIFICATE_PASSWORD` | p12 export password |
 | `IOS_PROVISION_PROFILE_BASE64` | `base64 FinReels.mobileprovision` |
 | `IOS_KEYCHAIN_PASSWORD` | any random string |
-| `IOS_CODE_SIGN_IDENTITY` | e.g. `iPhone Distribution: Chas Tech Group` |
+| `IOS_CODE_SIGN_IDENTITY` | e.g. `iPhone Distribution: Chas Technologies LLC` |
 | `IOS_PROVISIONING_PROFILE_NAME` | e.g. `FinReels App Store` |
 
 ---
@@ -142,8 +221,8 @@ base64 finreels.jks | xclip    # Linux
 
 ```bash
 # Tag triggers the full signed CI build + GitHub Release
-git tag v1.0.0 -m "Initial release"
-git push origin v1.0.0
+git tag v1.x.x -m "Release notes here"
+git push origin v1.x.x
 ```
 
 - **Android** outputs: `app-arm64-v8a-release.apk`, `app-release.aab`
@@ -151,59 +230,20 @@ git push origin v1.0.0
 
 ---
 
-## Monetization
+## Quick Start (Development)
 
-| Tier | Product ID | Price |
-|---|---|---|
-| Ads (default) | — | Free; AdMob Finance CPM ~$8–25 |
-| 1-day ad-free | `finreels_no_ads_1day` | $0.99 |
-| 7-day ad-free | `finreels_no_ads_weekly` | $2.99 |
-| 30-day ad-free | `finreels_no_ads_monthly` | $8.99 |
-
----
-
-## Project Structure
-
+```bash
+git clone https://github.com/YOUR_ORG/finreels.git
+cd finreels
+flutter pub get
+flutter run
 ```
-finreels/
-├── lib/
-│   ├── config/         ← app_config.dart (all IDs, keys, constants)
-│   ├── data/           ← channel_data.dart (12 channels)
-│   │                      book_insights_data.dart (Think & Grow Rich insights)
-│   ├── models/         ← channel.dart, video.dart, feed_tab.dart
-│   ├── providers/      ← feed_provider.dart (single source of truth)
-│   ├── screens/        ← splash, home, channels (shorts tab), saved, settings,
-│   │                      video_player, shorts_player, blog_feed, blog_reader,
-│   │                      book_detail, channel_videos, privacy_policy
-│   ├── services/       ← ad_service, ad_block_service, rss_service,
-│   │                      iap_service, notification_service,
-│   │                      background_service, connectivity_service,
-│   │                      blog_rss_service
-│   ├── theme/          ← app_theme.dart (adaptive light/dark)
-│   ├── widgets/        ← connectivity_overlay, ad_block_overlay,
-│   │                      banner_ad_widget, inline_video_card, video_card,
-│   │                      book_cover_image, shimmer_loader
-│   └── main.dart
-├── android/
-│   ├── app/build.gradle        ← AGP 8.6.0, minSdk 23, targetSdk 35
-│   ├── settings.gradle         ← Kotlin 2.3.0, AGP 8.6.0
-│   └── app/src/main/
-│       ├── AndroidManifest.xml ← permissions, AdMob ID, WorkManager
-│       └── kotlin/             ← MainActivity.kt, MainApplication.kt
-├── ios/
-│   └── Runner/Info.plist       ← AdMob ID, ATT, BGTask identifiers
-├── assets/
-│   ├── icons/          ← app_icon.png + adaptive variants
-│   ├── sounds/         ← notification.wav, ding.wav
-│   └── books/          ← bundled PDF masterclass playbooks + covers
-├── scripts/
-│   └── ExportOptions.plist
-└── .github/workflows/
-    ├── build_android.yml
-    └── build_ios.yml
-```
+
+> **Note:** AdMob test mode is controlled by `kDebugAds` in `lib/config/app_config.dart`.
+> All production ad unit IDs and IAP product IDs are live on Android.
+> For iOS, create a separate AdMob app and update `app_config.dart` + `Info.plist`.
 
 ---
 
 ## License
-Copyright © 2025 Chas Tech Group. All rights reserved.
+Copyright © 2025–2026 chAs Technologies LLC. All rights reserved.

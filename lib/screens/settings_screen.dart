@@ -769,8 +769,9 @@ class _PromoCard extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             const Text(
-              'Watch all 12 channels without a single interruption. '
-              'No banners, no pop-ups — just pure financial content.',
+              'Go ad-free and explore all of FinReels without interruption — '
+              'videos, shorts, blogs, and 690+ books across 60 business, '
+              'skill, and profession categories. No banners. No pop-ups.',
               style: TextStyle(
                 color: Color(0xFFD4A84B),
                 fontSize: 13,
@@ -784,7 +785,7 @@ class _PromoCard extends StatelessWidget {
                 SizedBox(width: 16),
                 _PromoFeature('No interstitials'),
                 SizedBox(width: 16),
-                _PromoFeature('Cancel anytime'),
+                _PromoFeature('No auto-renewal'),
               ],
             ),
           ],
