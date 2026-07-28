@@ -18,6 +18,7 @@ import 'services/connectivity_service.dart';
 import 'services/engagement_service.dart';
 import 'services/iap_service.dart';
 import 'services/notification_service.dart';
+import 'services/notification_store.dart';
 import 'services/user_profile_service.dart';
 import 'theme/app_theme.dart';
 import 'widgets/ad_block_overlay.dart';
@@ -191,11 +192,14 @@ class _SplashGateState extends State<_SplashGate> {
     unawaited(() async {
       try {
         await Future.wait([
-          _safeInit('Connectivity',  ConnectivityService.instance.init),
-          _safeInit('Background',    _initBackgroundServices),
-          _safeInit('Notifications', NotificationService.instance.init),
-          _safeInit('Ads',           AdService.instance.init),
-          _safeInit('IAP',           IapService.instance.init),
+          _safeInit('Connectivity',       ConnectivityService.instance.init),
+          _safeInit('Background',         _initBackgroundServices),
+          _safeInit('Notifications',      NotificationService.instance.init),
+          // Load persisted notification inbox + unread count so the bell
+          // badge is correct from the very first frame of the shell.
+          _safeInit('NotificationStore',  NotificationStore.instance.init),
+          _safeInit('Ads',                AdService.instance.init),
+          _safeInit('IAP',                IapService.instance.init),
         ]).timeout(const Duration(seconds: 6));
       } on TimeoutException {
         debugPrint('[startup] Connectivity/Background/Notifications/Ads/IAP '
@@ -309,6 +313,12 @@ class _AppRootState extends State<_AppRoot> with WidgetsBindingObserver {
       // if it's been a few minutes since the last one, to avoid hammering
       // the RSS endpoint on rapid app-switching.
       unawaited(context.read<FeedProvider>().refreshOnResume());
+      // Re-read the notification inbox from SharedPreferences so the bell
+      // badge reflects any items the WorkManager background isolate wrote
+      // while the app was suspended. The background task cannot reach the
+      // main isolate's ValueNotifier directly, so we pull the latest count
+      // from disk on every resume — this is the cross-isolate sync point.
+      unawaited(NotificationStore.instance.reload());
     }
   }
 

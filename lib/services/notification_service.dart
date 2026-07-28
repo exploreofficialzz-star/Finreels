@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../config/app_config.dart';
 import '../data/channel_data.dart';
 import '../data/resource_category_data.dart';
+import 'notification_store.dart';
 import 'rss_service.dart';
 import 'user_profile_service.dart';
 
@@ -149,7 +150,9 @@ class NotificationService {
           for (final video in newVideos.take(3)) {
             await _showNotification(
               plugin: plugin,
+              prefs: prefs,
               id: notifId++,
+              channelId: channel.id,
               channelName: channel.name,
               videoTitle: video.title,
               videoId: video.id,
@@ -168,7 +171,9 @@ class NotificationService {
 
   static Future<void> _showNotification({
     required FlutterLocalNotificationsPlugin plugin,
+    required SharedPreferences prefs,
     required int id,
+    required String channelId,
     required String channelName,
     required String videoTitle,
     required String videoId,
@@ -183,18 +188,28 @@ class NotificationService {
       largeIcon: DrawableResourceAndroidBitmap('@mipmap/ic_launcher'),
       styleInformation: BigTextStyleInformation(''),
     );
-    const iosDetails = DarwinNotificationDetails(
-
-    );
+    const iosDetails = DarwinNotificationDetails();
     const details =
         NotificationDetails(android: androidDetails, iOS: iosDetails);
 
+    // Fire the OS notification
     await plugin.show(
       id,
       '🎬 New from $channelName',
       videoTitle,
       details,
       payload: json.encode({'videoId': videoId}),
+    );
+
+    // Persist to the in-app notification inbox so the bell badge and inbox
+    // screen stay in sync. Uses the static helper because this runs in the
+    // WorkManager background isolate — no singleton state available here.
+    await NotificationStore.appendToPrefsStatic(
+      prefs: prefs,
+      channelId: channelId,
+      channelName: channelName,
+      videoTitle: videoTitle,
+      videoId: videoId,
     );
   }
 

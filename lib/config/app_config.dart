@@ -125,6 +125,19 @@ class AppConfig {
   static const String paystackVerifyEndpoint = '';
 
   // ── SharedPreferences Keys ───────────────────────────────────────────────────
+  // ── In-app notification inbox ─────────────────────────────────────────────────
+  /// JSON-encoded list of [NotificationItem] — written by both the background
+  /// WorkManager isolate (via NotificationStore.appendToPrefsStatic) and the
+  /// main isolate.
+  static const String prefInAppNotifications = 'in_app_notifications';
+
+  /// Persisted unread badge count — incremented by the background isolate,
+  /// reset to 0 by the main isolate when the user opens the inbox.
+  static const String prefNotifUnreadCount   = 'notif_unread_count';
+
+  /// Maximum number of notification items kept in the inbox.
+  static const int notifInboxMaxItems = 50;
+
   static const String prefAdsRemoved           = 'ads_removed';
   static const String prefAdsRemovedUntil      = 'ads_removed_until';
   static const String prefLastSeenVideos       = 'last_seen_videos_';

@@ -11,6 +11,7 @@ import '../models/feed_tab.dart';
 import '../models/video.dart';
 import '../providers/feed_provider.dart';
 import '../services/ad_service.dart';
+import '../services/notification_store.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
 import '../widgets/book_cover_image.dart';
@@ -80,13 +81,41 @@ class _AppHeader extends StatelessWidget {
               );
             },
           ),
-          IconButton(
-            icon: Icon(Icons.notifications_outlined,
-                color: AppTheme.textMuted(context)),
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                  builder: (_) => const NotificationsScreen()),
-            ),
+          // Badge-wrapped bell — count driven by NotificationStore.unreadCount.
+          // ValueListenableBuilder rebuilds ONLY this subtree on count changes,
+          // leaving the rest of the header (search icon, logo, tabs) untouched.
+          ValueListenableBuilder<int>(
+            valueListenable: NotificationStore.instance.unreadCount,
+            builder: (context, count, _) {
+              return Badge(
+                isLabelVisible: count > 0,
+                label: Text(
+                  count > 99 ? '99+' : '$count',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                backgroundColor: Colors.red,
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: IconButton(
+                  icon: Icon(
+                    count > 0
+                        ? Icons.notifications_rounded
+                        : Icons.notifications_outlined,
+                    color: count > 0
+                        ? AppTheme.gold
+                        : AppTheme.textMuted(context),
+                  ),
+                  onPressed: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const NotificationsScreen(),
+                    ),
+                  ),
+                ),
+              );
+            },
           ),
         ],
       ),

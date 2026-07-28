@@ -1,24 +1,22 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 import '../data/channel_data.dart';
+import '../models/notification_item.dart';
 import '../services/notification_service.dart';
-import '../services/user_profile_service.dart';
+import '../services/notification_store.dart';
 import '../theme/app_theme.dart';
+import 'notification_settings_screen.dart';
 
-/// Notification preferences screen — reached via the bell icon in the
-/// home screen header.
+/// Facebook-style notification inbox.
 ///
-/// Shows:
-///   • A single toggle: new-video alerts on/off (persisted via
-///     NotificationService.setNotificationsEnabled).
-///   • Which channels the background check will watch (the person's
-///     selected-category channels + the 12 general channels).
-///   • A permission-request button if the OS hasn't granted permission yet.
-///
-/// No push server required — all notifications are local, fired by the
-/// WorkManager background task (see background_service.dart).
+/// Shows a reverse-chronological list of every in-app notification fired
+/// by the background RSS checker.  Opening this screen marks all items as
+/// read and resets the bell badge to zero.  Tapping an item deep-links to
+/// the video by setting [NotificationService.pendingVideoId] and popping
+/// back to [MainShell], which picks it up on the next build.
 class NotificationsScreen extends StatefulWidget {
   const NotificationsScreen({super.key});
 
@@ -27,245 +25,306 @@ class NotificationsScreen extends StatefulWidget {
 }
 
 class _NotificationsScreenState extends State<NotificationsScreen> {
-  bool _enabled      = true;
-  bool _loading      = true;
-  bool _requesting   = false;
+  List<NotificationItem> _items = [];
+  bool _loading = true;
 
   @override
   void initState() {
     super.initState();
-    _load();
+    _loadAndMarkRead();
   }
 
-  Future<void> _load() async {
-    final enabled = await NotificationService.instance.areNotificationsEnabled();
-    if (mounted) setState(() { _enabled = enabled; _loading = false; });
-  }
-
-  Future<void> _toggle(bool value) async {
-    setState(() => _enabled = value);
-    await NotificationService.instance.setNotificationsEnabled(value);
-    if (value && mounted) {
-      // Request OS permission the first time the user enables notifications
-      await _requestPermission();
+  Future<void> _loadAndMarkRead() async {
+    // Always reload from disk — the background isolate may have written new
+    // items since the last in-memory snapshot.
+    await NotificationStore.instance.reload();
+    final items = List<NotificationItem>.from(NotificationStore.instance.items);
+    // Mark everything read & clear the badge AFTER we grab the list so the
+    // UI still shows which items were unread during this session.
+    await NotificationStore.instance.markAllRead();
+    if (mounted) {
+      setState(() {
+        _items = items;
+        _loading = false;
+      });
     }
   }
 
-  Future<void> _requestPermission() async {
-    setState(() => _requesting = true);
-    await NotificationService.instance.requestPermission();
-    if (mounted) setState(() => _requesting = false);
+  Future<void> _clearAll() async {
+    await NotificationStore.instance.clearAll();
+    if (mounted) setState(() => _items = []);
+  }
+
+  void _onItemTap(NotificationItem item) {
+    // Hand the video ID to the deep-link handler in MainShell and step back.
+    NotificationService.pendingVideoId = item.videoId;
+    Navigator.of(context).pop();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.bgColor(context),
-      appBar: AppBar(
-        backgroundColor: AppTheme.bgColor(context),
-        surfaceTintColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_rounded,
-              size: 20, color: AppTheme.textColor(context)),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: Text('Notifications',
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium
-                ?.copyWith(fontWeight: FontWeight.w800)),
-      ),
+      appBar: _buildAppBar(context),
       body: _loading
-          ? const Center(child: CircularProgressIndicator(color: AppTheme.gold))
-          : ListView(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 40),
-              children: [
-                _buildToggleCard(context),
-                const SizedBox(height: 24),
-                if (_enabled) ...[
-                  _buildChannelsSection(context),
-                  const SizedBox(height: 24),
-                ],
-                _buildPermissionCard(context),
-              ],
-            ),
+          ? const Center(
+              child: CircularProgressIndicator(color: AppTheme.gold))
+          : _items.isEmpty
+              ? _EmptyState()
+              : _NotificationList(
+                  items: _items,
+                  onTap: _onItemTap,
+                ),
     );
   }
 
-  // ── Toggle card ──────────────────────────────────────────────────────────────
-
-  Widget _buildToggleCard(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppTheme.surfaceColor(context),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-            color: _enabled
-                ? AppTheme.gold.withValues(alpha: 0.4)
-                : AppTheme.dividerColor(context)),
+  AppBar _buildAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: AppTheme.bgColor(context),
+      surfaceTintColor: Colors.transparent,
+      elevation: 0,
+      leading: IconButton(
+        icon: Icon(Icons.arrow_back_ios_rounded,
+            size: 20, color: AppTheme.textColor(context)),
+        onPressed: () => Navigator.pop(context),
       ),
-      child: Row(
-        children: [
-          Container(
-            width: 44, height: 44,
-            decoration: BoxDecoration(
-              color: _enabled
-                  ? AppTheme.gold.withValues(alpha: 0.12)
-                  : AppTheme.dividerColor(context).withValues(alpha: 0.3),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              _enabled
-                  ? Icons.notifications_active_rounded
-                  : Icons.notifications_off_rounded,
-              color: _enabled ? AppTheme.gold : AppTheme.textMuted(context),
-              size: 22,
-            ),
-          ),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'New video alerts',
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleSmall
-                      ?.copyWith(fontWeight: FontWeight.w700),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  'Get notified when channels you follow upload new videos',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: AppTheme.textSecondary(context)),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 8),
-          Switch(
-            value:    _enabled,
-            onChanged: _toggle,
-            activeColor: AppTheme.gold,
-          ),
-        ],
+      title: Text(
+        'Notifications',
+        style: Theme.of(context)
+            .textTheme
+            .titleMedium
+            ?.copyWith(fontWeight: FontWeight.w800),
       ),
-    );
-  }
-
-  // ── Channels being watched ────────────────────────────────────────────────────
-
-  Widget _buildChannelsSection(BuildContext context) {
-    final selected  = UserProfileService.instance.selectedCategoryIds;
-    final channels  = ChannelData.eagerFor(selected);
-    final count     = channels.length;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Channels you\'ll hear from ($count)',
-          style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                color: AppTheme.gold,
-                letterSpacing: 1.1,
-                fontWeight: FontWeight.w800,
-              ),
-        ),
-        const SizedBox(height: 10),
-        ...channels.take(12).map((ch) => Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: Row(
-                children: [
-                  Container(
-                    width: 8, height: 8,
-                    decoration:
-                        BoxDecoration(color: ch.accentColor, shape: BoxShape.circle),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      ch.name,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodySmall
-                          ?.copyWith(fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                ],
-              ),
-            )),
-        if (count > 12)
-          Padding(
-            padding: const EdgeInsets.only(top: 4),
+      actions: [
+        // Clear-all button — only visible when there's something to clear
+        if (_items.isNotEmpty)
+          TextButton(
+            onPressed: _clearAll,
             child: Text(
-              '+ ${count - 12} more channels',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodySmall
-                  ?.copyWith(color: AppTheme.textMuted(context)),
+              'Clear all',
+              style: TextStyle(
+                color: AppTheme.textMuted(context),
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
+        // Settings gear → notification toggle + OS permission
+        IconButton(
+          icon: Icon(Icons.settings_outlined,
+              color: AppTheme.textMuted(context), size: 22),
+          tooltip: 'Notification settings',
+          onPressed: () => Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => const NotificationSettingsScreen(),
+            ),
+          ),
+        ),
       ],
     );
   }
+}
 
-  // ── OS permission card ────────────────────────────────────────────────────────
+// ── Notification list ──────────────────────────────────────────────────────────
 
-  Widget _buildPermissionCard(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppTheme.surfaceColor(context),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppTheme.dividerColor(context)),
+class _NotificationList extends StatelessWidget {
+  final List<NotificationItem> items;
+  final void Function(NotificationItem) onTap;
+
+  const _NotificationList({required this.items, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      padding: const EdgeInsets.fromLTRB(0, 4, 0, 100),
+      itemCount: items.length,
+      separatorBuilder: (_, __) => Divider(
+        height: 0,
+        thickness: 0.5,
+        color: AppTheme.dividerColor(context),
+        indent: 72,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Device permission',
-            style: Theme.of(context)
-                .textTheme
-                .titleSmall
-                ?.copyWith(fontWeight: FontWeight.w700),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            'FinReels needs notification permission to alert you about new videos. '
-            'Tap below to grant it — you only need to do this once.',
-            style: Theme.of(context)
-                .textTheme
-                .bodySmall
-                ?.copyWith(color: AppTheme.textSecondary(context)),
-          ),
-          const SizedBox(height: 14),
-          SizedBox(
-            width: double.infinity,
-            child: OutlinedButton.icon(
-              onPressed: _requesting ? null : _requestPermission,
-              style: OutlinedButton.styleFrom(
-                foregroundColor: AppTheme.gold,
-                side: BorderSide(color: AppTheme.gold.withValues(alpha: 0.5)),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)),
-                padding: const EdgeInsets.symmetric(vertical: 12),
-              ),
-              icon: _requesting
-                  ? const SizedBox(
-                      width: 16, height: 16,
-                      child: CircularProgressIndicator(
-                          color: AppTheme.gold, strokeWidth: 2))
-                  : const Icon(Icons.notifications_none_rounded, size: 18),
-              label: Text(
-                _requesting ? 'Requesting…' : 'Grant Permission',
-                style: const TextStyle(fontWeight: FontWeight.w700),
+      itemBuilder: (context, i) =>
+          _NotificationTile(item: items[i], onTap: onTap),
+    );
+  }
+}
+
+// ── Single notification tile ───────────────────────────────────────────────────
+
+class _NotificationTile extends StatelessWidget {
+  final NotificationItem item;
+  final void Function(NotificationItem) onTap;
+
+  const _NotificationTile({required this.item, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final isDark    = Theme.of(context).brightness == Brightness.dark;
+    final channel   = ChannelData.byId[item.channelId];
+    final accentColor = channel?.accentColor ?? AppTheme.gold;
+
+    // Unread items get a subtle tinted background — identical to Facebook/Gmail
+    final tileBg = item.isRead
+        ? Colors.transparent
+        : (isDark
+            ? AppTheme.gold.withValues(alpha: 0.06)
+            : AppTheme.gold.withValues(alpha: 0.05));
+
+    return InkWell(
+      onTap: () => onTap(item),
+      child: Container(
+        color: tileBg,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // ── Channel icon ──────────────────────────────────────────────
+            _ChannelAvatar(accentColor: accentColor),
+            const SizedBox(width: 14),
+
+            // ── Text block ────────────────────────────────────────────────
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // "ChannelName posted a new video"
+                  RichText(
+                    text: TextSpan(
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: AppTheme.textColor(context),
+                            height: 1.4,
+                          ),
+                      children: [
+                        TextSpan(
+                          text: item.channelName,
+                          style: const TextStyle(fontWeight: FontWeight.w700),
+                        ),
+                        const TextSpan(text: ' posted a new video'),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 3),
+                  // Video title
+                  Text(
+                    item.videoTitle,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: AppTheme.textSecondary(context),
+                          height: 1.35,
+                        ),
+                  ),
+                  const SizedBox(height: 5),
+                  // Relative timestamp
+                  Text(
+                    timeago.format(item.timestamp),
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                          color: item.isRead
+                              ? AppTheme.textMuted(context)
+                              : AppTheme.gold,
+                          fontWeight: item.isRead
+                              ? FontWeight.w400
+                              : FontWeight.w600,
+                        ),
+                  ),
+                ],
               ),
             ),
-          ),
-        ],
+
+            // ── Unread dot (right side, like Facebook) ────────────────────
+            if (!item.isRead) ...[
+              const SizedBox(width: 10),
+              Container(
+                width: 10,
+                height: 10,
+                margin: const EdgeInsets.only(top: 5),
+                decoration: const BoxDecoration(
+                  color: AppTheme.gold,
+                  shape: BoxShape.circle,
+                ),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ── Channel avatar ─────────────────────────────────────────────────────────────
+
+class _ChannelAvatar extends StatelessWidget {
+  final Color accentColor;
+  const _ChannelAvatar({required this.accentColor});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 46,
+      height: 46,
+      decoration: BoxDecoration(
+        color: accentColor.withValues(alpha: 0.15),
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: accentColor.withValues(alpha: 0.35),
+          width: 1.5,
+        ),
+      ),
+      child: Center(
+        child: Icon(
+          Icons.play_circle_fill_rounded,
+          color: accentColor,
+          size: 24,
+        ),
+      ),
+    );
+  }
+}
+
+// ── Empty state ────────────────────────────────────────────────────────────────
+
+class _EmptyState extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(40),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 80,
+              height: 80,
+              decoration: BoxDecoration(
+                color: AppTheme.surfaceColor(context),
+                shape: BoxShape.circle,
+                border: Border.all(color: AppTheme.dividerColor(context)),
+              ),
+              child: Icon(
+                Icons.notifications_none_rounded,
+                size: 38,
+                color: AppTheme.textMuted(context),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              'All caught up!',
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'New video alerts will appear here when your followed channels post.',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: AppTheme.textSecondary(context),
+                    height: 1.5,
+                  ),
+            ),
+          ],
+        ),
       ),
     );
   }
