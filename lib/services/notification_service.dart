@@ -121,10 +121,10 @@ class NotificationService {
     // Deduplicate by channel ID — eagerFor() operates on the fixed deduped
     // combined list, but this guard prevents duplicate background RSS fetches
     // even if the channel list grows or the combined dedup is bypassed.
-    final _seenNotifIds = <String>{};
+    final seenNotifIds = <String>{};
     final channelsToCheck = ChannelData.eagerFor(
       UserProfileService.instance.selectedCategoryIds,
-    ).where((c) => c.id.isNotEmpty && _seenNotifIds.add(c.id)).toList();
+    ).where((c) => c.id.isNotEmpty && seenNotifIds.add(c.id)).toList();
 
     for (final channel in channelsToCheck) {
       try {

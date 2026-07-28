@@ -324,10 +324,12 @@ class _ShortPageState extends State<_ShortPage> {
     if (!widget.isActive && old.isActive) {
       _controller.pause();
       _pauseIconTimer?.cancel();
-      if (mounted) setState(() {
-        _playing      = false;
-        _showPauseIcon = false;
-      });
+      if (mounted) {
+        setState(() {
+          _playing       = false;
+          _showPauseIcon = false;
+        });
+      }
       return;
     }
 
