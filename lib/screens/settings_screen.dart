@@ -16,7 +16,6 @@ import '../screens/privacy_policy_screen.dart';
 import '../services/ad_service.dart';
 import '../services/consent_service.dart';
 import '../services/iap_service.dart';
-import '../services/notification_service.dart';
 import '../services/user_profile_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
@@ -30,14 +29,12 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   String _version = '';
-  bool _notificationsEnabled = true;
   bool _privacyOptionsRequired = false;
 
   @override
   void initState() {
     super.initState();
     _loadVersion();
-    _loadNotifPref();
     _loadPrivacyOptionsRequirement();
   }
 
@@ -48,12 +45,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
         _version = 'v${info.version.replaceAll('-debug', '')}';
       });
     }
-  }
-
-  Future<void> _loadNotifPref() async {
-    final enabled =
-        await NotificationService.instance.areNotificationsEnabled();
-    if (mounted) setState(() => _notificationsEnabled = enabled);
   }
 
   /// Google UMP policy requires this entry point be shown ONLY for users
@@ -149,21 +140,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 builder: (_) => const MyBusinessScreen()),
                           );
                           if (mounted) setState(() {});
-                        },
-                      ),
-
-                      // ── Notifications ───────────────────────────────────
-                      const _SectionHeader('Notifications'),
-                      _ToggleTile(
-                        icon: Icons.notifications_rounded,
-                        title: 'New Content Alerts',
-                        subtitle:
-                            'Get notified when channels post new videos',
-                        value: _notificationsEnabled,
-                        onChanged: (v) async {
-                          await NotificationService.instance
-                              .setNotificationsEnabled(v);
-                          setState(() => _notificationsEnabled = v);
                         },
                       ),
 

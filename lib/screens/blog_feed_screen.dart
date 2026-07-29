@@ -57,33 +57,85 @@ class _BlogFeedScreenState extends State<BlogFeedScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Shimmer shown only on the very first load (no cached articles yet).
     if (_loading && _articles.isEmpty) return _buildShimmer(context);
 
+    // ── Error state ───────────────────────────────────────────────────────
+    // The RefreshIndicator + CustomScrollView + SliverFillRemaining pattern
+    // is the production-correct way to make a non-scrollable state draggable
+    // so pull-to-refresh still triggers even when there's no list content.
+    // Without this, the error state returns a bare Center() that can't
+    // receive overscroll events and pull-to-refresh silently does nothing.
     if (_error != null && _articles.isEmpty) {
-      return Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(Icons.cloud_off_rounded,
-                size: 52, color: AppTheme.textMuted(context)),
-            const SizedBox(height: 16),
-            Text(_error!, style: Theme.of(context).textTheme.bodyMedium),
-            const SizedBox(height: 20),
-            OutlinedButton.icon(
-              icon: const Icon(Icons.refresh_rounded),
-              label: const Text('Retry'),
-              onPressed: () => _load(force: true),
+      return RefreshIndicator(
+        color: AppTheme.gold,
+        onRefresh: () => _load(force: true),
+        child: CustomScrollView(
+          // AlwaysScrollableScrollPhysics is required: it allows the user to
+          // drag even when the content doesn't overflow the viewport, which
+          // is the case here (single centered error widget).
+          physics: const AlwaysScrollableScrollPhysics(),
+          slivers: [
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(40),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.cloud_off_rounded,
+                          size: 56, color: AppTheme.textMuted(context)),
+                      const SizedBox(height: 16),
+                      Text(
+                        'Could not load articles',
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall
+                            ?.copyWith(fontWeight: FontWeight.w700),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Pull down to try again, or tap Retry below.',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: AppTheme.textMuted(context),
+                              height: 1.5,
+                            ),
+                      ),
+                      const SizedBox(height: 24),
+                      OutlinedButton.icon(
+                        icon: const Icon(Icons.refresh_rounded, size: 18),
+                        label: const Text('Retry',
+                            style: TextStyle(fontWeight: FontWeight.w700)),
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor: AppTheme.gold,
+                          side: BorderSide(
+                              color: AppTheme.gold.withValues(alpha: 0.5)),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12)),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 12),
+                        ),
+                        onPressed: () => _load(force: true),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ],
         ),
       );
     }
 
+    // ── Loaded / refreshing state ─────────────────────────────────────────
     return RefreshIndicator(
       color: AppTheme.gold,
       onRefresh: () => _load(force: true),
       child: ListView.separated(
-        // Fix 3: ClampingScrollPhysics prevents bounce-induced scroll jumps.
+        // ClampingScrollPhysics prevents bounce-induced scroll jumps while
+        // still forwarding overscroll notifications to RefreshIndicator.
         physics: const ClampingScrollPhysics(),
         padding: const EdgeInsets.fromLTRB(16, 12, 16, 120),
         itemCount: _articles.length,
