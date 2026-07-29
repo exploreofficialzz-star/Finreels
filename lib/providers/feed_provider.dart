@@ -153,56 +153,100 @@ class FeedProvider extends ChangeNotifier {
       // than by actual upload date, causing older content from some channels
       // to appear above newer content from others.
       FeedTab.videos =>
-        _dateMixed(all.where((v) => !v.isShort && !_isBook(v)).toList()),
+        _smartMix(all.where((v) => !v.isShort && !_isBook(v)).toList()),
       FeedTab.shorts =>
-        _dateMixed(all.where((v) => v.isShort  && !_isBook(v)).toList()),
+        _smartMix(all.where((v) => v.isShort  && !_isBook(v)).toList()),
       FeedTab.blogs  =>
         _roundRobin(all.where((v) => _isBlog(v) && !_isBook(v)).toList()),
       FeedTab.books  => List.unmodifiable(_allBookVideos),
     };
   }
 
-  /// Date-first feed ordering with soft category boost and channel diversity.
+  /// Feed ordering with explicit 3-to-1 category-vs-general ratio and strict
+  /// no-consecutive-same-source guarantee.
   ///
-  /// Three rules in priority order:
-  /// 1. Globally newest first — a video uploaded today from any channel
-  ///    always ranks above one uploaded last week, regardless of channel.
-  /// 2. Category channels get a 3-day effective-date boost so the content
-  ///    the user explicitly asked for surfaces above equally-old general
-  ///    content. The 3-day value is small enough not to override genuinely
-  ///    newer general content.
-  /// 3. No more than 2 consecutive from the same channel — deferred videos
-  ///    that would break this rule are appended at the end of the list,
-  ///    so the top of the feed is never monopolised by one prolific channel.
-  List<Video> _dateMixed(List<Video> videos) {
+  /// Algorithm (in order):
+  /// 1. Split into two pools: category-tagged channels (user's selection) and
+  ///    general channels.  Each pool is sorted newest-first independently so
+  ///    the freshest content from each tier always surfaces first.
+  /// 2. Weighted interleave at 3:1 — three category items, then one general,
+  ///    then three category, etc.  When a pool is exhausted the other fills
+  ///    the remainder.  If no category is selected (or category pool is empty)
+  ///    the full list is just sorted by date.
+  /// 3. Diversity pass — walk the merged list and, whenever two adjacent items
+  ///    share the same channelId, find the nearest upcoming item from a
+  ///    different channel and rotate it forward.  O(n) average for realistic
+  ///    feeds; gracefully degrades to leaving ties as-is when no alternative
+  ///    exists (e.g. a user subscribed to one channel only).
+  List<Video> _smartMix(List<Video> videos) {
     if (videos.isEmpty) return const [];
-    final selected = UserProfileService.instance.selectedCategoryIds;
 
-    final withDate = videos.map((v) {
-      final ch = ChannelData.combined.where((c) => c.id == v.channelId).firstOrNull;
-      final isCat = ch?.resourceCategoryId != null &&
+    final selected  = UserProfileService.instance.selectedCategoryIds;
+    final channelById = ChannelData.byId; // cache — byId builds a new Map each call
+
+    bool isCategoryChannel(String channelId) {
+      final ch = channelById[channelId];
+      return ch?.resourceCategoryId != null &&
           selected.contains(ch!.resourceCategoryId);
-      return (video: v, date: isCat
-          ? v.publishedAt.add(const Duration(days: 3))
-          : v.publishedAt);
-    }).toList()
-      ..sort((a, b) => b.date.compareTo(a.date));
-
-    // Diversity pass — no channel appearing more than twice consecutively.
-    final out      = <Video>[];
-    final deferred = <Video>[];
-    String? prev1, prev2;
-    for (final rec in withDate) {
-      final id = rec.video.channelId;
-      if (id == prev1 && id == prev2) {
-        deferred.add(rec.video);
-      } else {
-        out.add(rec.video);
-        prev2 = prev1;
-        prev1 = id;
-      }
     }
-    return List.unmodifiable([...out, ...deferred]);
+
+    // ── 1. Split + sort each pool newest first ──────────────────────────────
+    final catPool = <Video>[];
+    final genPool = <Video>[];
+    for (final v in videos) {
+      (isCategoryChannel(v.channelId) ? catPool : genPool).add(v);
+    }
+    catPool.sort((a, b) => b.publishedAt.compareTo(a.publishedAt));
+    genPool.sort((a, b) => b.publishedAt.compareTo(a.publishedAt));
+
+    // Fallback: no selection or no category content → plain date sort
+    if (selected.isEmpty || catPool.isEmpty) {
+      final all = [...genPool, ...catPool]
+        ..sort((a, b) => b.publishedAt.compareTo(a.publishedAt));
+      return List.unmodifiable(_diversify(all));
+    }
+
+    // ── 2. 3:1 weighted interleave ──────────────────────────────────────────
+    // 3 from the category pool, then 1 from the general pool, repeat.
+    // Each pool is consumed in newest-first order so recency is preserved
+    // within each tier.
+    final merged = <Video>[];
+    int ci = 0, gi = 0;
+    while (ci < catPool.length || gi < genPool.length) {
+      for (var slot = 0; slot < 3 && ci < catPool.length; slot++) {
+        merged.add(catPool[ci++]);
+      }
+      if (gi < genPool.length) merged.add(genPool[gi++]);
+    }
+
+    // ── 3. Diversity pass — no two adjacent items from the same channel ─────
+    return List.unmodifiable(_diversify(merged));
+  }
+
+  /// Rearranges [items] so no two adjacent elements share the same [channelId],
+  /// disturbing the order as little as possible.
+  ///
+  /// For each consecutive-same-source pair at index i, we scan ahead for the
+  /// nearest item with a different source and rotate it into position i.  This
+  /// is O(n) on diverse feeds (where a different source is usually 1–2 steps
+  /// ahead) and O(n²) only in degenerate inputs (single-channel feed).
+  List<Video> _diversify(List<Video> items) {
+    if (items.length <= 1) return items;
+    final out = List<Video>.from(items);
+    final n   = out.length;
+    for (var i = 1; i < n; i++) {
+      if (out[i].channelId != out[i - 1].channelId) continue;
+      // Find the nearest upcoming item with a different channelId
+      var j = i + 1;
+      while (j < n && out[j].channelId == out[i - 1].channelId) j++;
+      if (j < n) {
+        // Rotate out[j] into position i, shifting i..j-1 right by 1
+        final swap = out.removeAt(j);
+        out.insert(i, swap);
+      }
+      // If j == n: the entire tail is the same channel — leave as-is
+    }
+    return out;
   }
 
   /// The original 10 hand-picked classics/playbooks, plus real named books
@@ -288,7 +332,10 @@ class FeedProvider extends ChangeNotifier {
         if (i < l.length) result.add(l[i]);
       }
     }
-    return List.unmodifiable(result);
+    // Apply diversity pass so no two consecutive blog articles are from the
+    // same channel (e.g. Seth Godin posting 5 times shouldn't monopolise
+    // consecutive slots in the Blogs search results).
+    return List.unmodifiable(_diversify(result));
   }
 
   // ── Content detection ─────────────────────────────────────────────────────────

@@ -88,6 +88,15 @@ List<Map<String, String>> get combinedBlogFeeds {
   return [...kBlogFeeds, ...scoped];
 }
 
+/// Argument bundle for [BlogRssService._smartMixArticles], which runs inside
+/// a [compute] isolate where [UserProfileService.instance] is not available.
+/// Carrying the selected IDs as plain data is the correct cross-isolate pattern.
+class _SmartMixArgs {
+  final List<BlogArticle> articles;
+  final Set<String> selectedCategoryIds;
+  const _SmartMixArgs({required this.articles, required this.selectedCategoryIds});
+}
+
 class BlogRssService {
   BlogRssService._();
   static final BlogRssService instance = BlogRssService._();
@@ -119,10 +128,14 @@ class BlogRssService {
 
     final results = await Future.wait(futures);
     final articles = results.expand((l) => l).toList();
-    final sorted = await compute(_sortArticles, articles);
-    _cache = sorted;
+    final selected = UserProfileService.instance.selectedCategoryIds;
+    final mixed = await compute(
+      _smartMixArticles,
+      _SmartMixArgs(articles: articles, selectedCategoryIds: selected),
+    );
+    _cache = mixed;
     _cacheTime = DateTime.now();
-    return sorted;
+    return mixed;
   }
 
   /// Fetches ONE category's own blogs directly — regardless of whether the
@@ -321,6 +334,63 @@ class BlogRssService {
 
   static List<BlogArticle> _sortArticles(List<BlogArticle> articles) =>
       articles..sort((a, b) => b.publishedAt.compareTo(a.publishedAt));
+
+  // ── Smart mix: 3-to-1 category vs general, no consecutive same source ───────
+
+  /// Passed to [compute] because isolates can only receive plain data.
+  static List<BlogArticle> _smartMixArticles(_SmartMixArgs args) {
+    final articles   = args.articles;
+    final selectedIds = args.selectedCategoryIds;
+
+    // ── 1. Split into two pools, each sorted newest first ───────────────────
+    final catPool = <BlogArticle>[];
+    final genPool = <BlogArticle>[];
+    for (final a in articles) {
+      final isCat = a.categoryId != null && selectedIds.contains(a.categoryId);
+      (isCat ? catPool : genPool).add(a);
+    }
+    catPool.sort((a, b) => b.publishedAt.compareTo(a.publishedAt));
+    genPool.sort((a, b) => b.publishedAt.compareTo(a.publishedAt));
+
+    // Fallback: no selection or no category articles → plain date sort
+    if (selectedIds.isEmpty || catPool.isEmpty) {
+      final all = [...genPool, ...catPool]
+        ..sort((a, b) => b.publishedAt.compareTo(a.publishedAt));
+      return _diversifyBlogs(all);
+    }
+
+    // ── 2. 3:1 weighted interleave ───────────────────────────────────────────
+    // 3 category articles, then 1 general, then 3 category, etc.
+    final merged = <BlogArticle>[];
+    int ci = 0, gi = 0;
+    while (ci < catPool.length || gi < genPool.length) {
+      for (var slot = 0; slot < 3 && ci < catPool.length; slot++) {
+        merged.add(catPool[ci++]);
+      }
+      if (gi < genPool.length) merged.add(genPool[gi++]);
+    }
+
+    // ── 3. Diversity pass — no two adjacent articles from the same source ────
+    return _diversifyBlogs(merged);
+  }
+
+  /// No two adjacent articles share the same [sourceName].
+  /// Same forward-scan rotation algorithm used by FeedProvider._diversify.
+  static List<BlogArticle> _diversifyBlogs(List<BlogArticle> items) {
+    if (items.length <= 1) return items;
+    final out = List<BlogArticle>.from(items);
+    final n   = out.length;
+    for (var i = 1; i < n; i++) {
+      if (out[i].sourceName != out[i - 1].sourceName) continue;
+      var j = i + 1;
+      while (j < n && out[j].sourceName == out[i - 1].sourceName) j++;
+      if (j < n) {
+        final swap = out.removeAt(j);
+        out.insert(i, swap);
+      }
+    }
+    return out;
+  }
 
   void clearCache() {
     _cache = null;

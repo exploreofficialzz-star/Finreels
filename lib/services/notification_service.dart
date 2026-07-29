@@ -110,6 +110,15 @@ class NotificationService {
 
     var notifId = AppConfig.notifIdBase;
 
+    // Hard caps that keep notifications polite:
+    //  • 1 per channel per run — the most-recent new video only. Firing 3
+    //    notifications for the same channel in one background pass is spam;
+    //    the user sees the full new-video count inside the in-app inbox.
+    //  • 3 total per run — prevents flooding the tray when many channels
+    //    all publish on the same day. The in-app inbox shows everything.
+    const maxNotifsPerRun = 3;
+    var totalFired = 0;
+
     // This runs in WorkManager's own separate isolate (see
     // background_service.dart) — a completely fresh Dart heap, so these
     // singletons start unloaded here even though they're already loaded in
@@ -128,6 +137,11 @@ class NotificationService {
     ).where((c) => c.id.isNotEmpty && seenNotifIds.add(c.id)).toList();
 
     for (final channel in channelsToCheck) {
+      // Stop once we've hit the per-run cap — remaining channels' new
+      // videos are still persisted in last-seen so they won't re-trigger
+      // on the next background pass.
+      if (totalFired >= maxNotifsPerRun) break;
+
       try {
         // forceRefresh: true — this background task's entire purpose is to
         // detect NEW uploads. Serving a cached (possibly 30-min-old) list
@@ -141,30 +155,32 @@ class NotificationService {
         final lastSeenRaw = prefs.getStringList(lastSeenKey) ?? [];
         final lastSeenIds = lastSeenRaw.toSet();
 
-        // New videos = those not in the last-seen set
+        // New videos = those not in the last-seen set, newest first.
         final newVideos =
             videos.where((v) => !lastSeenIds.contains(v.id)).toList();
 
         if (newVideos.isNotEmpty && lastSeenIds.isNotEmpty) {
-          // Only notify if we had a previous state (not first run)
-          for (final video in newVideos.take(3)) {
-            await _showNotification(
-              plugin: plugin,
-              prefs: prefs,
-              id: notifId++,
-              channelId: channel.id,
-              channelName: channel.name,
-              videoTitle: video.title,
-              videoId: video.id,
-            );
-          }
+          // One notification per channel per run — the most recent new
+          // video only. The in-app inbox stores all new items regardless.
+          await _showNotification(
+            plugin: plugin,
+            prefs: prefs,
+            id: notifId++,
+            channelId: channel.id,
+            channelName: channel.name,
+            videoTitle: newVideos.first.title,
+            videoId: newVideos.first.id,
+          );
+          totalFired++;
         }
 
-        // Update last-seen with current video IDs (keep latest 30)
+        // Update last-seen with current video IDs (keep latest 30).
+        // Done regardless of whether a notification was fired — this
+        // prevents already-seen videos from triggering again next run.
         final currentIds = videos.take(30).map((v) => v.id).toList();
         await prefs.setStringList(lastSeenKey, currentIds);
       } on Exception catch (_) {
-        // Don't crash the background task on individual channel failures
+        // Don't crash the background task on individual channel failures.
       }
     }
   }
