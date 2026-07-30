@@ -191,6 +191,7 @@ class _FeedBodyState extends State<_FeedBody> {
       return;
     }
     if (video.channelId == 'books') {
+      unawaited(AdService.instance.onVideoTapped());
       Navigator.push(context,
           MaterialPageRoute(builder: (_) => BookDetailScreen(book: video)));
       return;

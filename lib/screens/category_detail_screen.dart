@@ -6,6 +6,7 @@ import '../data/category_playbook_data.dart';
 import '../data/resource_category_data.dart';
 import '../models/channel.dart';
 import '../models/resource_category.dart';
+import '../services/ad_service.dart';
 import '../services/blog_rss_service.dart';
 import '../services/engagement_service.dart';
 import '../services/user_profile_service.dart';
@@ -192,9 +193,12 @@ class _PlaybookCard extends StatelessWidget {
     final video = CategoryPlaybookData.videos
         .firstWhere((v) => v.id == CategoryPlaybookData.playbookId(category.id));
     return GestureDetector(
-      onTap: () => Navigator.of(context).push(
-        MaterialPageRoute(builder: (_) => BookDetailScreen(book: video)),
-      ),
+      onTap: () {
+        unawaited(AdService.instance.onVideoTapped());
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => BookDetailScreen(book: video)),
+        );
+      },
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(

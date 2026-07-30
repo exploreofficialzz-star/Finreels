@@ -53,11 +53,14 @@ class AdService extends ChangeNotifier {
 
   // ── Counters ──────────────────────────────────────────────────────────────
 
-  /// Video tap counter — fires interstitial on tap 4, 8, 12 …
+  /// Video tap counter — fires interstitial on tap 8, 16, 24 …
   int _videoTapCount = 0;
 
-  /// Blog tap counter — fires interstitial on tap 4, 8, 12 …
+  /// Blog tap counter — fires interstitial on tap 8, 16, 24 …
   int _blogTapCount = 0;
+
+  /// Book open counter — fires interstitial on open 8, 16, 24 …
+  int _bookReadCount = 0;
 
   /// Shorts thumbnail-tap counter — fires interstitial on tap 4, 8, 12 …
   int _shortTapCount = 0;
@@ -349,27 +352,29 @@ class AdService extends ChangeNotifier {
   }
 
   // ── VIDEO TAP TRIGGER ─────────────────────────────────────────────────────
-  /// Fires on tap 4, 8, 12 … in the Videos tab.
+  /// Fires on tap 8, 16, 24 … in the Videos tab.
+  /// Uses [AppConfig.interstitialVideoEvery] — isolated from the shared cycle
+  /// so adjusting video frequency doesn't affect shorts or blog ads.
   Future<void> onVideoTapped() async {
     if (_adsRemoved || !_initialized) return;
     _videoTapCount++;
-    if (_videoTapCount % AppConfig.interstitialCycleLength == 0) {
+    if (_videoTapCount % AppConfig.interstitialVideoEvery == 0) {
       await showInterstitial();
     }
   }
 
   // ── BOOK READ TRIGGER ─────────────────────────────────────────────────────
-  /// Shows an interstitial every time the user opens a book to read.
-  /// Called with [unawaited] so the reader opens immediately. This method
-  /// polls in the background for up to 2 s in case the interstitial is still
-  /// loading (e.g. the previous one just dismissed and a reload is in progress).
+  /// Fires on every 8th book open — same cadence as videos and blogs.
+  /// Polls for up to 2 s in case the ad is still loading from a prior dismiss.
   Future<void> onBookRead() async {
     if (_adsRemoved) return;
+    _bookReadCount++;
+    if (_bookReadCount % AppConfig.interstitialBookEvery != 0) return;
     const maxWaitMs  = 2000;
     const pollMs     = 150;
     var   waited     = 0;
     while (waited < maxWaitMs) {
-      if (_adsRemoved) return; // purchase may have completed mid-poll
+      if (_adsRemoved) return;
       if (_interstitialReady && _interstitialAd != null) {
         await showInterstitial();
         return;
@@ -379,11 +384,12 @@ class AdService extends ChangeNotifier {
     }
     // Interstitial not available after 2 s — proceed silently.
   }
-  /// Fires on tap 4, 8, 12 … in the Blogs tab.
+
+  /// Fires on tap 8, 16, 24 … in the Blogs tab.
   Future<void> onBlogTapped() async {
     if (_adsRemoved || !_initialized) return;
     _blogTapCount++;
-    if (_blogTapCount % AppConfig.interstitialCycleLength == 0) {
+    if (_blogTapCount % AppConfig.interstitialBlogEvery == 0) {
       await showInterstitial();
     }
   }

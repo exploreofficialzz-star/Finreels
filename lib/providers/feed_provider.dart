@@ -211,7 +211,8 @@ class FeedProvider extends ChangeNotifier {
     // Each pool is consumed in newest-first order so recency is preserved
     // within each tier.
     final merged = <Video>[];
-    int ci = 0, gi = 0;
+    var ci = 0;
+    var gi = 0;
     while (ci < catPool.length || gi < genPool.length) {
       for (var slot = 0; slot < 3 && ci < catPool.length; slot++) {
         merged.add(catPool[ci++]);
@@ -238,7 +239,9 @@ class FeedProvider extends ChangeNotifier {
       if (out[i].channelId != out[i - 1].channelId) continue;
       // Find the nearest upcoming item with a different channelId
       var j = i + 1;
-      while (j < n && out[j].channelId == out[i - 1].channelId) j++;
+      while (j < n && out[j].channelId == out[i - 1].channelId) {
+        j++;
+      }
       if (j < n) {
         // Rotate out[j] into position i, shifting i..j-1 right by 1
         final swap = out.removeAt(j);

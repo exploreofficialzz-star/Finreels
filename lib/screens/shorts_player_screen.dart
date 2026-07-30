@@ -324,12 +324,10 @@ class _ShortPageState extends State<_ShortPage> {
     if (!widget.isActive && old.isActive) {
       _controller.pause();
       _pauseIconTimer?.cancel();
-      if (mounted) {
-        setState(() {
-          _playing       = false;
-          _showPauseIcon = false;
-        });
-      }
+      if (mounted) setState(() {
+        _playing      = false;
+        _showPauseIcon = false;
+      });
       return;
     }
 
@@ -412,9 +410,18 @@ class _ShortPageState extends State<_ShortPage> {
             ),
           ),
 
-          // ── Tap-to-play/pause — NOT opaque so the outer drag handler ───
-          // still wins vertical gestures before this tap detector sees them.
+          // ── Tap-to-play/pause ────────────────────────────────────────────
+          // HitTestBehavior.opaque is required: SizedBox.expand() has no
+          // child, so the default deferToChild behaviour returns false from
+          // hitTest() and onTap never fires.  opaque forces the detector to
+          // participate in hit testing regardless of its child's result.
+          //
+          // The outer GestureDetector (vertical drag) and this inner one
+          // (tap) both enter Flutter's gesture arena; the arena
+          // disambiguator hands taps to the inner detector and vertical
+          // drags to the outer one — they never conflict.
           GestureDetector(
+            behavior: HitTestBehavior.opaque,
             onTap: _togglePlay,
             child: const SizedBox.expand(),
           ),

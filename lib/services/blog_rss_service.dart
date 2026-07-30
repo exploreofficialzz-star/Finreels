@@ -362,7 +362,8 @@ class BlogRssService {
     // ── 2. 3:1 weighted interleave ───────────────────────────────────────────
     // 3 category articles, then 1 general, then 3 category, etc.
     final merged = <BlogArticle>[];
-    int ci = 0, gi = 0;
+    var ci = 0;
+    var gi = 0;
     while (ci < catPool.length || gi < genPool.length) {
       for (var slot = 0; slot < 3 && ci < catPool.length; slot++) {
         merged.add(catPool[ci++]);
@@ -383,7 +384,9 @@ class BlogRssService {
     for (var i = 1; i < n; i++) {
       if (out[i].sourceName != out[i - 1].sourceName) continue;
       var j = i + 1;
-      while (j < n && out[j].sourceName == out[i - 1].sourceName) j++;
+      while (j < n && out[j].sourceName == out[i - 1].sourceName) {
+        j++;
+      }
       if (j < n) {
         final swap = out.removeAt(j);
         out.insert(i, swap);

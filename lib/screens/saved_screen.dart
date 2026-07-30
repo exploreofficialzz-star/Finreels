@@ -24,12 +24,7 @@ class SavedScreen extends StatefulWidget {
 }
 
 class _SavedScreenState extends State<SavedScreen> {
-  int _tapCount = 0;
-
   void _openVideo(Video video) {
-    _tapCount++;
-    if (_tapCount.isEven) unawaited(AdService.instance.showInterstitial());
-
     if (video.channelId == 'verified_book') {
       if ((video.freeSourceUrl ?? '').isEmpty) return;
       Navigator.push(
@@ -45,6 +40,7 @@ class _SavedScreenState extends State<SavedScreen> {
       return;
     }
     if (video.channelId == 'books') {
+      unawaited(AdService.instance.onVideoTapped());
       Navigator.push(context,
           MaterialPageRoute(builder: (_) => BookDetailScreen(book: video)));
       return;

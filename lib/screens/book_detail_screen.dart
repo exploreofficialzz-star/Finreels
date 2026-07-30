@@ -111,9 +111,6 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      unawaited(AdService.instance.onContentTapped());
-    });
     if (CategoryPlaybookData.isPlaybookId(widget.book.id)) {
       final categoryId = widget.book.id.replaceFirst('playbook_', '');
       unawaited(EngagementService.instance.recordCategoryInterest(categoryId));

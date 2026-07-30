@@ -167,10 +167,22 @@ class AppConfig {
   ];
 
   // ── Ad Frequency ─────────────────────────────────────────────────────────────
-  // Pattern for regular content: show ad on tap 1, skip 2 & 3, show on 4, repeat.
-  // (Every 1st and 4th tap in a 4-tap cycle.)
-  // interstitialCycleLength = 2 → interstitial fires on tap 2, 4, 6, 8 …
-  // (more aggressive for Videos tab; blogs and shorts use same value)
+  /// Videos tab: interstitial fires on tap 8, 16, 24 …
+  /// Separate from the shared cycle so shorts/blogs can stay at their own cadence.
+  static const int interstitialVideoEvery = 8;
+
+  /// Blog articles: interstitial fires on tap 8, 16, 24 …
+  static const int interstitialBlogEvery = 8;
+
+  /// Books (open from feed, search, saved, or category): every 8 opens.
+  static const int interstitialBookEvery = 8;
+
+  /// Channels page (opening shorts from the channel grid): every 12 taps.
+  /// Less frequent than video/blog since users browse channel lists quickly.
+  static const int interstitialEveryNChannelsPage = 12;
+
+  // Shared cycle for shorts thumbnail-taps and channel switching.
+  // interstitialCycleLength = 2 → fires on tap 2, 4, 6, 8 …
   static const int interstitialCycleLength = 2;
 
   // Shorts: show ad every N pages scrolled.

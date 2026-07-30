@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../config/app_config.dart';
 import '../data/channel_data.dart';
 import '../models/video.dart';
 import '../providers/feed_provider.dart';
@@ -27,8 +28,9 @@ class _ChannelsScreenState extends State<ChannelsScreen> {
 
   void _openShorts(List<Video> shorts, int index) {
     _tapCount++;
-    if (_tapCount.isEven) unawaited(AdService.instance.showInterstitial());
-
+    if (_tapCount % AppConfig.interstitialEveryNChannelsPage == 0) {
+      unawaited(AdService.instance.showInterstitial());
+    }
     Navigator.push(
       context,
       NoFlashPageRoute(

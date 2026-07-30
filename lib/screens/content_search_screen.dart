@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../data/channel_data.dart';
 import '../models/video.dart';
 import '../providers/feed_provider.dart';
+import '../services/ad_service.dart';
 import '../services/blog_rss_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/book_cover_image.dart';
@@ -297,6 +297,7 @@ class _ContentSearchScreenState extends State<ContentSearchScreen> {
         ),
       );
     } else {
+      unawaited(AdService.instance.onVideoTapped());
       Navigator.push(
         context,
         MaterialPageRoute(builder: (_) => BookDetailScreen(book: b)),
