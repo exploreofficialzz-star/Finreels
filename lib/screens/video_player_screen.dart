@@ -39,7 +39,13 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   bool _playing         = false;
   bool _ready           = false;
   bool _fullscreen      = false;
-  bool _hasStartedPlaying = false;  // latches true on first play — never resets
+  bool _hasStartedPlaying = false; // latches true on first play — never resets
+  // The WebView (YoutubePlayer) is intentionally kept OUT of the widget tree
+  // until after the very first frame.  The push-transition animation runs
+  // frame 0 with NO WebView in the tree, so its black initialisation screen
+  // is never visible.  The thumbnail covers frame 0, then the WebView is
+  // inserted from frame 1 while still hidden behind the thumbnail.
+  bool _playerAttached   = false;
   double   _progress = 0;
   Duration _position = Duration.zero;
   Duration _duration = Duration.zero;
@@ -50,12 +56,12 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     // Learns from this open — see EngagementService for the honest scope
     // (on-device implicit-feedback ranking, not a trained model).
     unawaited(EngagementService.instance.recordView(widget.video));
-    // Fire ad AFTER the push-navigation animation completes so it never
-    // causes a black flash during the hero transition.
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      unawaited(AdService.instance.onContentTapped());
-    });
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    // Attach the WebView one frame after the screen opens so the push
+    // transition animation NEVER races against the WebView's black init frame.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) setState(() => _playerAttached = true);
+    });
     _controller = YoutubePlayerController(
       initialVideoId: widget.video.id,
       flags: const YoutubePlayerFlags(
@@ -91,9 +97,10 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         _progress = prog;
         _position = pos;
         _duration = dur;
-        // Once playback starts for the first time, this flag never resets.
-        // This prevents the thumbnail from reappearing during mid-video
-        // buffering pauses.
+        // Latch on first play — never resets so the thumbnail never
+        // reappears during mid-video buffering pauses.  Removed instantly
+        // (no fade, no delay) — by this point the WebView has been in the
+        // tree since frame 1 and has had time to paint its first real frame.
         if (playing) _hasStartedPlaying = true;
       });
     }
@@ -172,59 +179,65 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  // ── [1] YouTube iframe — at the BOTTOM of the stack ─────
-                  // Kept beneath the thumbnail so the WebView's black
-                  // initialisation frame is never visible to the user.
-                  FittedBox(
-                    fit: BoxFit.cover,
-                    child: SizedBox(
-                      width: sw,
-                      height: sw * (9 / 16),
-                      child: YoutubePlayer(
-                        controller: _controller,
-                        onReady: () {
-                          if (!mounted) return;
-                          setState(() => _ready = true);
-                          // Explicitly start playback the moment the
-                          // iframe signals ready — belt-and-suspenders
-                          // alongside the autoPlay flag default.
-                          _controller.play();
-                        },
-                        onEnded: (_) {
-                          if (mounted) setState(() => _ended = true);
-                        },
-                        bufferIndicator: const SizedBox.shrink(),
+                  // ── [1] YouTube iframe — gated on _playerAttached ───────
+                  // Kept out of the tree until frame 1 (see initState) so the
+                  // push-transition animation on frame 0 never shows the
+                  // WebView's black initialisation screen.  The thumbnail [2]
+                  // covers frame 0; from frame 1 the WebView loads silently
+                  // behind it.
+                  if (_playerAttached)
+                    FittedBox(
+                      fit: BoxFit.cover,
+                      child: SizedBox(
+                        width: sw,
+                        height: sw * (9 / 16),
+                        child: YoutubePlayer(
+                          controller: _controller,
+                          onReady: () {
+                            if (!mounted) return;
+                            setState(() => _ready = true);
+                            _controller.play();
+                          },
+                          onEnded: (_) {
+                            if (mounted) setState(() => _ended = true);
+                          },
+                          bufferIndicator: const SizedBox.shrink(),
+                        ),
                       ),
                     ),
-                  ),
 
                   // ── [2] Thumbnail — ABOVE the iframe ────────────────────
-                  // Visible from the instant the screen opens, hiding the
-                  // black WebView init. Removed INSTANTLY (no fade, no
-                  // duration) the exact frame _hasStartedPlaying latches
-                  // true (i.e. the first video frame is actually
-                  // rendering) — a hard cut straight to the playing video,
-                  // never a lingering overlay on top of it. The latch
-                  // means it never reappears during mid-video buffering
-                  // pauses.
+                  // Shown from frame 0 (before the WebView is even in the
+                  // tree) so the user ALWAYS sees content, never a black
+                  // screen during the push transition.
+                  //
+                  // Primary image: thumbnailMq — already in CachedNetworkImage's
+                  // memory cache from the feed scroll, so it renders on frame 0
+                  // with zero network/disk latency.
+                  //
+                  // fadeInDuration: Duration.zero — disable CachedNetworkImage's
+                  // built-in cross-fade so the thumbnail appears INSTANTLY, no
+                  // second gap between placeholder and image.
+                  //
+                  // Removed INSTANTLY (no AnimatedOpacity, no delay) the exact
+                  // moment _hasStartedPlaying latches true — the WebView has
+                  // been in the tree since frame 1 and has fully painted by now.
                   if (!_hasStartedPlaying)
                     CachedNetworkImage(
-                      imageUrl: widget.video.thumbnailHd,
+                      imageUrl: widget.video.thumbnailMq,
                       fit: BoxFit.cover,
-                      memCacheWidth: 800,
-                      memCacheHeight: 450,
-                      errorWidget: (_, __, ___) => CachedNetworkImage(
-                        imageUrl: widget.video.thumbnailMq,
-                        fit: BoxFit.cover,
-                        memCacheWidth: 800,
-                        memCacheHeight: 450,
-                        errorWidget: (_, __, ___) =>
-                            const ColoredBox(color: Colors.black),
-                      ),
+                      fadeInDuration:  Duration.zero,
+                      fadeOutDuration: Duration.zero,
+                      memCacheWidth:   800,
+                      memCacheHeight:  450,
+                      placeholder: (_, __) =>
+                          const ColoredBox(color: Colors.black),
+                      errorWidget: (_, __, ___) =>
+                          const ColoredBox(color: Colors.black),
                     ),
 
-                  // ── [3] Buffering spinner — shown while ready but not yet playing
-                  if (_ready && !_playing && !_ended && !_hasStartedPlaying)
+                  // ── [3] Buffering spinner — shown after player attached, ready, not yet playing
+                  if (_playerAttached && _ready && !_playing && !_ended && !_hasStartedPlaying)
                     const Center(
                       child: CircularProgressIndicator(
                           color: AppTheme.gold, strokeWidth: 3),

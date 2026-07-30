@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -275,6 +276,7 @@ class _ContentSearchScreenState extends State<ContentSearchScreen> {
 
   void _openVideo(Video v) {
     final ch = ChannelData.byId[v.channelId] ?? ChannelData.fallback;
+    unawaited(AdService.instance.onVideoTapped());
     Navigator.push(
       context,
       NoFlashPageRoute(builder: (_) => VideoPlayerScreen(video: v, channel: ch)),

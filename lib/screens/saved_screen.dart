@@ -50,6 +50,7 @@ class _SavedScreenState extends State<SavedScreen> {
       return;
     }
     final channel = ChannelData.byId[video.channelId] ?? ChannelData.fallback;
+    unawaited(AdService.instance.onVideoTapped());
     Navigator.push(
       context,
       NoFlashPageRoute(
