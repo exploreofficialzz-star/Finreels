@@ -1,7 +1,7 @@
 {
   "categoryId": "skill_03_barbing",
   "status": "in_progress",
-  "lastUpdated": "2026-07-20",
+  "lastUpdated": "2026-07-30",
   "channels": [
     {
       "id": "UCD9Oybf28FhVdVDG6hwg6Yw",
@@ -181,13 +181,13 @@
   ],
   "books": [
     {
-      "title": "Barbershop Business Guide",
+      "title": "Barbershop Business Start-Up Guide",
       "author": "U.S. Small Business Administration (SBA)",
       "freeSourceUrl": "https://www.sba.gov/business-guide",
       "freeSourceType": "web",
-      "freeSourceNote": "Free, complete barbershop startup guide hosted directly on the official sba.gov site.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on a U.S. government domain.",
+      "freeSourceNote": "Free, step-by-step small business startup guide from the U.S. Small Business Administration — covers business planning, registration, financing, and operations. Fully applicable to launching a barbershop.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Stable U.S. government domain. URL confirmed working in skill_02 audit (2026-07-30). Kept as-is.",
       "coverUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/US-SmallBusinessAdmin-Logo.svg/330px-US-SmallBusinessAdmin-Logo.svg.png"
     },
     {
@@ -195,91 +195,91 @@
       "author": "Chris Bossio",
       "freeSourceUrl": "https://www.youtube.com/@chrisbossio",
       "freeSourceType": "web",
-      "freeSourceNote": "Not a written book — 200+ free educational videos on the verified Chris Bossio YouTube channel above, covering the business side of barbering.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Same channel already independently verified above.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780062674678-L.jpg"
+      "freeSourceNote": "Over 1,630 free YouTube videos from barber business coach Chris Bossio — covering cuts, client retention, pricing, and building a 6-figure barbershop brand. 425K subscribers, updated regularly.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "YouTube channel @chrisbossio confirmed active via web search — 425K subscribers, 1,630+ videos, last upload Dec 15 2025 (data from vidiq.com, Dec 24 2025). URL kept as-is.",
+      "coverUrl": "https://yt3.googleusercontent.com/ytc/AIdro_mCcgRpL5Bk1RKrgBIIBQBLq3QRpOAME3BNKZiR6w=s176-c-k-c0x00ffffff-no-rj"
     },
     {
-      "title": "The E-Myth Revisited (free PDF)",
+      "title": "The E-Myth Revisited",
       "author": "Michael E. Gerber",
-      "freeSourceUrl": "https://f5fp.com/e-myth-revisited-free-pdf",
-      "freeSourceType": "download",
-      "freeSourceNote": "Free PDF of the well-known small-business-systems book, hosted on a third-party site — worth a direct-download check before shipping.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited.",
+      "freeSourceUrl": "https://archive.org/details/TheEMythRevisitedMichaelE.Gerber",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free to read and download via Internet Archive — why most small businesses fail and how to build repeatable systems. Essential reading for any barbershop owner who wants to stop working IN the chair and start working ON the business.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://f5fp.com/e-myth-revisited-free-pdf loads F5 Financial (wrong page — confirmed broken in skill_01 & skill_02 in-app testing, 2026-07-30). Same fix applied here: Internet Archive copy with free PDF confirmed via web search (direct PDF at ia801708.us.archive.org).",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     },
     {
-      "title": "Profit First (free resources)",
+      "title": "Profit First",
       "author": "Mike Michalowicz",
-      "freeSourceUrl": "https://www.mikemichalowicz.com/profit-first-book",
-      "freeSourceType": "download",
-      "freeSourceNote": "Free resources from the author's own official site.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com).",
+      "freeSourceUrl": "https://archive.org/details/profitfirst0000mich",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free to borrow via Internet Archive — cash-flow system that prioritises profit allocation upfront, keeping small service businesses solvent. Requires a free Internet Archive account to borrow.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://www.mikemichalowicz.com/profit-first-book returned blank/black screen (confirmed broken in skill_01 & skill_02 in-app testing, 2026-07-30). Same fix applied: Internet Archive borrowable copy confirmed via web search.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781635767407-L.jpg"
     },
     {
-      "title": "How to Win Friends and Influence People (free)",
+      "title": "How to Win Friends and Influence People",
       "author": "Dale Carnegie",
-      "freeSourceUrl": "https://archive.org/details/howtowinfriendsandinfluencepeople",
+      "freeSourceUrl": "https://archive.org/details/0390-pdf-carnegie-dale-how-to-win-friends-and-influence-people",
       "freeSourceType": "web",
-      "freeSourceNote": "Free, public-domain-availability classic on Internet Archive — client relationships and people skills, directly applicable to running a barbershop.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of this classic title.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780671027032-L.jpg"
+      "freeSourceNote": "Free PDF on Internet Archive — Dale Carnegie's timeless classic on building rapport, winning clients, and influencing people. Essential for barbers whose repeat business depends on relationship-building.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://archive.org/details/howtowinfriendsandinfluencepeople — identifier not confirmed in search index (2026-07-30). Updated to confirmed-active archive.org copy (identifier: 0390-pdf-carnegie-dale-how-to-win-friends-and-influence-people — confirmed present in archive.org search with 2,647 views, free PDF download available).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781439199190-L.jpg"
     },
     {
-      "title": "1-Page Marketing Plan (free template)",
+      "title": "1-Page Marketing Plan (free canvas template)",
       "author": "Allan Dib",
-      "freeSourceUrl": "https://1pagemarketingplan.com/resources",
-      "freeSourceType": "download",
-      "freeSourceNote": "Free downloadable template from the book's official site.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official 1pagemarketingplan.com domain.",
+      "freeSourceUrl": "https://successwise.com",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free downloadable 1-Page Marketing Plan canvas from Allan Dib's official site — the 9-square template lets you map your entire barbershop marketing strategy on one page. Email opt-in required to download.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://1pagemarketingplan.com/resources — Allan Dib has moved to successwise.com (confirmed by multiple sources: podcast transcripts, Shortform book notes, author bios, 2026-07-30). Same fix applied as skill_02.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781619613348-L.jpg"
     },
     {
-      "title": "The Lean Startup (free)",
+      "title": "The Lean Startup",
       "author": "Eric Ries",
-      "freeSourceUrl": "https://bdebooks.com/the-lean-startup/",
-      "freeSourceType": "download",
-      "freeSourceNote": "Free copy hosted on a third-party book site — worth a direct-download check before shipping.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Lean Startup.",
+      "freeSourceUrl": "https://theleanstartup.com",
+      "freeSourceType": "web",
+      "freeSourceNote": "Official Lean Startup site with free methodology overview, principles, case studies, and resources — a proven framework for building a barbershop business that continuously tests, learns, and grows.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://bdebooks.com/the-lean-startup/ is a piracy/copyright-infringing site — not found in any legitimate search index (2026-07-30). Replaced with the official theleanstartup.com site confirmed active via web search (full methodology and free resources available).",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
     },
     {
-      "title": "Rich Dad Poor Dad (free)",
-      "author": "Robert Kiyosaki",
-      "freeSourceUrl": "https://archive.org/details/RichDadPoorDad",
+      "title": "Rich Dad Poor Dad",
+      "author": "Robert T. Kiyosaki",
+      "freeSourceUrl": "https://archive.org/details/rich-dad-poor-dad-robert-kiyosaki",
       "freeSourceType": "web",
-      "freeSourceNote": "Free copy on Internet Archive — financial literacy fundamentals for a first-time barbershop owner.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Rich Dad Poor Dad.",
+      "freeSourceNote": "Free on Internet Archive — Kiyosaki's foundational guide to financial independence, the difference between assets and liabilities, and how to make money work for you instead of working for money.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://archive.org/details/RichDadPoorDad — identifier not confirmed in archive.org search index (2026-07-30). Updated to confirmed-active copy: archive.org/details/rich-dad-poor-dad-robert-kiyosaki (confirmed present in archive.org search results, uploaded April 2020, still active 2025).",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781612680194-L.jpg"
     },
     {
-      "title": "Atomic Habits (free)",
+      "title": "Atomic Habits",
       "author": "James Clear",
       "freeSourceUrl": "https://archive.org/details/atomic-habits",
       "freeSourceType": "web",
-      "freeSourceNote": "Free copy on Internet Archive — building the consistent habits needed to run and grow a barbershop.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Atomic Habits.",
+      "freeSourceNote": "Free on Internet Archive — James Clear's system for building small daily habits that compound into massive results. Perfect for barbers looking to improve their craft, client habits, and business consistency.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "URL https://archive.org/details/atomic-habits confirmed active via web search — archive.org page description confirmed present in search snippet (2026-07-30). Kept as-is.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
-      "title": "Small Business Management",
+      "title": "Principles of Management",
       "author": "OpenStax",
-      "freeSourceUrl": "https://openstax.org/details/books/small-business-management",
+      "freeSourceUrl": "https://openstax.org/details/books/principles-management",
       "freeSourceType": "web",
-      "freeSourceNote": "Free, full open-license textbook covering small-business fundamentals — general (not barbing-specific), but directly applicable.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official openstax.org domain, a well-established open-textbook publisher.",
+      "freeSourceNote": "Free open-license textbook from OpenStax — covers planning, organising, leading, and controlling a business. Directly applicable to managing staff, finances, and operations in a barbershop.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://openstax.org/details/books/small-business-management is a 404 — OpenStax has no book by that slug (confirmed in skill_02 audit, 2026-07-30). Same fix applied: openstax.org/details/books/principles-management confirmed active (© Apr 23, 2026 OpenStax).",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781951693633-L.jpg"
     }
   ],
-  "notes": "2026-07-20: Merged in 30 rows from the founder-provided 'barbing_business_resources.csv' (Section I.3), bringing the file from 0 channels / 1 blog / 0 books to a full 10 / 10 / 10. Four of the CSV's 10 channels — 'Huduma Global', 'Tuko.co.ke' (kept, but repurposed — see below), 'HustleCare', 'Barbering Techniques', and 'Barber Innovations TV' — could not be matched to a real, confirmable YouTube channel after two search passes (Huduma Global and HustleCare appear to be real businesses with real blogs, just with no dedicated/findable YouTube presence; 'Barbering Techniques' and 'Barber Innovations TV' returned no matching branded channel at all). To reach 10 verified channels, 3 independently-sourced, directly on-topic replacements were substituted: Seancutshair, Collins (equipment manufacturer), and Keller International (equipment wholesaler) — plus The Beauty Biz Agency, reused from business_08. The Tuko.co.ke channel was kept despite being a general Kenyan news channel (not barbing-specific), since the source directory's citation was for one specific human-interest story about a Nairobi barbershop manager's earnings — most of its catalog is unrelated. Two blog URLs are flagged for a pre-ship domain check: Splice (this file's existing blog.withsplice.com/feed/ entry was replaced with the CSV's splice.ng/feed/, matching the domain already verified for skill_02 this week — the two may be the same brand on different domains) and HustleCare (site currently resolves at hustlecare.net, not the CSV's hustlecare.co.ke)."
-}
+  "notes": "2026-07-20: Merged in 30 rows from the founder-provided 'barbing_business_resources.csv' (Section I.3), bringing the file from 0 channels / 1 blog / 0 books to a full 10 / 10 / 10. Four of the CSV's 10 channels — 'Huduma Global', 'Tuko.co.ke' (kept, but repurposed — see below), 'HustleCare', 'Barbering Techniques', and 'Barber Innovations TV' — could not be matched to a real, confirmable YouTube channel after two search passes (Huduma Global and HustleCare appear to be real businesses with real blogs, just with no dedicated/findable YouTube presence; 'Barbering Techniques' and 'Barber Innovations TV' returned no matching branded channel at all). To reach 10 verified channels, 3 independently-sourced, directly on-topic replacements were substituted: Seancutshair, Collins (equipment manufacturer), and Keller International (equipment wholesaler) — plus The Beauty Biz Agency, reused from business_08. The Tuko.co.ke channel was kept despite being a general Kenyan news channel (not barbing-specific), since the source directory's citation was for one specific human-interest story about a Nairobi barbershop manager's earnings — most of its catalog is unrelated. Two blog URLs are flagged for a pre-ship domain check: Splice (this file's existing blog.withsplice.com/feed/ entry was replaced with the CSV's splice.ng/feed/, matching the domain already verified for skill_02 this week — the two may be the same brand on different domains) and HustleCare (site currently resolves at hustlecare.net, not the CSV's hustlecare.co.ke).\n\nBooks audit (2026-07-30): All 10 book URLs audited. 7 of 10 had broken or risky URLs. Fixes: (1) SBA URL kept — confirmed working in skill_02. (2) YouTube @chrisbossio kept — confirmed 425K subs, active Dec 2025. (3) f5fp.com broken → archive.org E-Myth (same fix as skill_01/02). (4) mikemichalowicz.com broken → archive.org Profit First (same fix as skill_01/02). (5) archive.org/howtowinfriendsandinfluencepeople identifier unconfirmed → updated to confirmed archive.org copy with 2,647 views. (6) 1pagemarketingplan.com/resources dead → successwise.com (same fix as skill_02). (7) bdebooks.com is a piracy site not found in legitimate search index → replaced with official theleanstartup.com. (8) archive.org/RichDadPoorDad identifier unconfirmed → updated to confirmed copy. (9) archive.org/atomic-habits confirmed active — kept. (10) openstax small-business-management 404 → principles-management (same fix as skill_02)."
+    }
