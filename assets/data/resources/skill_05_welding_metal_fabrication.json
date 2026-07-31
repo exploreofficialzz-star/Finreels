@@ -1,7 +1,7 @@
 {
   "categoryId": "skill_05_welding_metal_fabrication",
   "status": "in_progress",
-  "lastUpdated": "2026-07-20",
+  "lastUpdated": "2026-07-30",
   "channels": [
     {
       "id": "UCqq70AnPkj4-UApS_m_6mPw",
@@ -182,105 +182,105 @@
   ],
   "books": [
     {
-      "title": "Markup & Profit: A Contractor's Guide (free)",
+      "title": "Markup & Profit: A Contractor's Guide",
       "author": "Michael Stone",
-      "freeSourceUrl": "https://markupandprofit.com/resources",
+      "freeSourceUrl": "https://www.markupandprofit.com/blog/",
       "freeSourceType": "web",
-      "freeSourceNote": "Free pricing resources from the book's own official site.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official markupandprofit.com domain; author is the well-established, publicly credited author of Markup & Profit.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180864-L.jpg"
+      "freeSourceNote": "Free contractor business articles from Michael Stone on markupandprofit.com — covers markup calculation, pricing, overhead, contracts, and running a profitable contracting or fabrication business. No signup required.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://markupandprofit.com/resources — /resources subpage not found in any search index (2026-07-30). Site itself is confirmed active (last indexed May–June 2026). Updated to /blog/ — confirmed present in search results (free articles, estimated 50+ posts on contractor business management).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572182714-L.jpg"
     },
     {
-      "title": "How Much Should I Charge? (free)",
+      "title": "How Much Should I Charge?",
       "author": "Ellen Rohr",
-      "freeSourceUrl": "https://archive.org/details/howmuchshouldicharge",
+      "freeSourceUrl": "https://ellenrohr.com/howmuch/",
       "freeSourceType": "web",
-      "freeSourceNote": "Free copy on Internet Archive — contractor pricing guide.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of How Much Should I Charge?.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781456522100-L.jpg"
+      "freeSourceNote": "Free ebook direct from the author — Ellen Rohr's complete pricing guide for service businesses. Download the full ebook AND a Mini Budget worksheet at no cost. No purchase required, direct download from her official site.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://archive.org/details/howmuchshouldicharge — identifier not confirmed in archive.org search index (2026-07-30). Replaced with the official author page: ellenrohr.com/howmuch/ — confirmed active with FREE full ebook download (search snippet: 'Download the How Much Should I Charge? ebook AND The Mini Budget for FREE!', last indexed Jan 23 2023).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780966571912-L.jpg"
     },
     {
-      "title": "Traction: Get a Grip on Your Business (free)",
+      "title": "Traction: Get a Grip on Your Business (free chapter)",
       "author": "Gino Wickman",
-      "freeSourceUrl": "https://archive.org/details/traction-gino-wickman",
+      "freeSourceUrl": "https://www.eosworldwide.com/traction-book-free-chapter",
       "freeSourceType": "web",
-      "freeSourceNote": "Free copy on Internet Archive — the EOS (Entrepreneurial Operating System) for running a small business.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on archive.org, with the author's name in the URL itself.",
+      "freeSourceNote": "Free first chapter of Traction from the official EOS Worldwide site — covers the Entrepreneurial Operating System framework for gaining clarity, accountability, and control in your business. Direct download, no payment required.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://archive.org/details/traction-gino-wickman — identifier not confirmed in archive.org search index (2026-07-30). Replaced with the official EOS Worldwide free chapter page: eosworldwide.com/traction-book-free-chapter — confirmed active via web search (search snippet: 'Download the first chapter of Traction by Gino Wickman', last indexed April 15 2026).",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781936661831-L.jpg"
     },
     {
-      "title": "The Lean Startup (free)",
+      "title": "The Lean Startup",
       "author": "Eric Ries",
-      "freeSourceUrl": "https://bdebooks.com/the-lean-startup",
-      "freeSourceType": "download",
-      "freeSourceNote": "Free copy hosted on a third-party book site — worth a direct-download check before shipping.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Lean Startup.",
+      "freeSourceUrl": "https://theleanstartup.com",
+      "freeSourceType": "web",
+      "freeSourceNote": "Official Lean Startup site with free methodology overview, principles, case studies, and resources — a proven framework for building any business that continuously tests, learns, and grows without wasted effort.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://bdebooks.com/the-lean-startup is a piracy/copyright-infringing site not found in any legitimate search index (confirmed in skill_03 audit, 2026-07-30). Same fix applied: official theleanstartup.com confirmed active.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
     },
     {
-      "title": "Rich Dad Poor Dad (free)",
-      "author": "Robert Kiyosaki",
-      "freeSourceUrl": "https://archive.org/details/RichDadPoorDad",
+      "title": "Rich Dad Poor Dad",
+      "author": "Robert T. Kiyosaki",
+      "freeSourceUrl": "https://archive.org/details/rich-dad-poor-dad-robert-kiyosaki",
       "freeSourceType": "web",
-      "freeSourceNote": "Free copy on Internet Archive — financial literacy fundamentals.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Rich Dad Poor Dad.",
+      "freeSourceNote": "Free on Internet Archive — Kiyosaki's foundational guide on financial independence, assets vs. liabilities, and making money work for you. Essential mindset reading for welders building a business.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://archive.org/details/RichDadPoorDad — identifier not confirmed in archive.org search index (confirmed in skill_03 audit, 2026-07-30). Same fix applied: archive.org/details/rich-dad-poor-dad-robert-kiyosaki confirmed active (uploaded April 2020, still indexed 2025).",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781612680194-L.jpg"
     },
     {
-      "title": "The E-Myth Revisited (free PDF)",
+      "title": "The E-Myth Revisited",
       "author": "Michael E. Gerber",
-      "freeSourceUrl": "https://f5fp.com/e-myth-revisited-free-pdf",
-      "freeSourceType": "download",
-      "freeSourceNote": "Free PDF of the well-known small-business-systems book, hosted on a third-party site — worth a direct-download check before shipping.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited.",
+      "freeSourceUrl": "https://archive.org/details/TheEMythRevisitedMichaelE.Gerber",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free to read and download via Internet Archive — why most small businesses fail and how to build repeatable systems. Critical for welders and fabricators who want to grow beyond solo work.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://f5fp.com/e-myth-revisited-free-pdf loads F5 Financial (wrong page — confirmed broken in skill_01 through skill_04 in-app testing). Same fix applied across all skills.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     },
     {
-      "title": "Profit First (free resources)",
+      "title": "Profit First",
       "author": "Mike Michalowicz",
-      "freeSourceUrl": "https://www.mikemichalowicz.com/profit-first-book",
-      "freeSourceType": "download",
-      "freeSourceNote": "Free resources from the author's own official site.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com).",
+      "freeSourceUrl": "https://archive.org/details/profitfirst0000mich",
+      "freeSourceType": "web",
+      "freeSourceNote": "Free to borrow via Internet Archive — cash-flow system that puts profit allocation first. Essential for welding businesses managing materials, equipment, and labour costs. Requires a free Internet Archive account.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://www.mikemichalowicz.com/profit-first-book returned blank/black screen (confirmed broken in skill_01 through skill_04 in-app testing). Same fix applied across all skills.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781635767407-L.jpg"
     },
     {
-      "title": "Small Business Management",
+      "title": "Principles of Management",
       "author": "OpenStax",
-      "freeSourceUrl": "https://openstax.org/details/books/small-business-management",
+      "freeSourceUrl": "https://openstax.org/details/books/principles-management",
       "freeSourceType": "web",
-      "freeSourceNote": "Free, full open-license textbook covering small-business fundamentals.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official openstax.org domain, a well-established open-textbook publisher.",
+      "freeSourceNote": "Free open-license textbook from OpenStax — covers planning, organising, leading, and controlling a business. Applicable to managing a welding or metal fabrication shop, subcontractors, and project pipelines.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://openstax.org/details/books/small-business-management is a 404 — OpenStax has no such book (confirmed in skill_02 through skill_04 audits). Same fix applied: openstax.org/details/books/principles-management confirmed active (© Apr 23, 2026).",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781951693633-L.jpg"
     },
     {
-      "title": "The 7 Habits of Highly Effective People (free)",
-      "author": "Stephen Covey",
-      "freeSourceUrl": "https://archive.org/details/the-7-habits-of-highly-effective-people",
+      "title": "The 7 Habits of Highly Effective People",
+      "author": "Stephen R. Covey",
+      "freeSourceUrl": "https://archive.org/details/7habitsofhighlye0000cove_q9q4",
       "freeSourceType": "web",
-      "freeSourceNote": "Free public-domain-availability edition on Internet Archive.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of The 7 Habits of Highly Effective People.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781982137274-L.jpg"
+      "freeSourceNote": "Free to borrow via Internet Archive — Covey's seven-habit framework for personal and professional effectiveness: proactivity, prioritisation, win-win thinking, empathic communication, and renewal. Requires a free Internet Archive account.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://archive.org/details/the-7-habits-of-highly-effective-people — identifier not confirmed in archive.org search index (2026-07-30). Updated to confirmed-active copy: archive.org/details/7habitsofhighlye0000cove_q9q4 — full chapter listing confirmed via web search (xxx, 391 pages, new foreword by Jim Collins, borrowable via Internet Archive).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780743269513-L.jpg"
     },
     {
-      "title": "The Personal MBA (free)",
+      "title": "The Personal MBA",
       "author": "Josh Kaufman",
-      "freeSourceUrl": "https://archive.org/details/personal-mba",
+      "freeSourceUrl": "https://archive.org/details/personalmbaworld0000kauf",
       "freeSourceType": "web",
-      "freeSourceNote": "Free copy on Internet Archive — business fundamentals without business school.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of The Personal MBA.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781591845188-L.jpg"
+      "freeSourceNote": "Free to borrow via Internet Archive — 402-page business education covering entrepreneurship, marketing, sales, operations, finance, and systems design. Everything a welder or fabricator needs to run a professional business. Requires a free Internet Archive account.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://archive.org/details/personal-mba — identifier not confirmed in archive.org search index (2026-07-30). Updated to confirmed-active copy: archive.org/details/personalmbaworld0000kauf — confirmed present with full description (xiv, 402 pages, uploaded January 2020, borrowable via Internet Archive, web search 2026-07-30).",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781591845799-L.jpg"
     }
   ],
-  "notes": "2026-07-20: Created from scratch, merging all 29 rows from the founder-provided 'welding_metal_fabrication_resources.csv' (Section I.5) — this file had no prior entries. Four of the CSV's 10 channels could not be used as-cited: 'WeldingWeb TV' (no dedicated YouTube channel found for the forum brand — its forum itself was kept as this file's Forum blog entry), 'Chucke2009' (excluded — multiple independent welding-community forum threads report the channel turned to offensive/inflammatory non-welding content in recent years), 'Kenya Jua Kali Sector' (no channel by this name found — only scattered individual news-outlet videos about the sector), and 'Scratch Build Weld' (no matching channel found). 'Metalshaper (Ron Fournier)' was also corrected: the real @metalshaper-style channel belongs to a different creator (Brian, Willys Jeep restorations), not metal-shaping pioneer Ron Fournier, who passed away in 2017. Four independently-verified, directly on-topic replacements were substituted to reach 10 channels: Weld.com, The Fab Forums (Kyle Voss), Ron Covell, and 6061.com. Every real YouTube channel ID was independently looked up via search and channel-page fetches — the CSV's RSS_Feed column universally used a literal 'UC...' placeholder rather than real channel IDs."
-}
+  "notes": "2026-07-20: Created from scratch, merging all 29 rows from the founder-provided 'welding_metal_fabrication_resources.csv' (Section I.5) — this file had no prior entries. Four of the CSV's 10 channels could not be used as-cited: 'WeldingWeb TV' (no dedicated YouTube channel found for the forum brand — its forum itself was kept as this file's Forum blog entry), 'Chucke2009' (excluded — multiple independent welding-community forum threads report the channel turned to offensive/inflammatory non-welding content in recent years), 'Kenya Jua Kali Sector' (no channel by this name found — only scattered individual news-outlet videos about the sector), and 'Scratch Build Weld' (no matching channel found). 'Metalshaper (Ron Fournier)' was also corrected: the real @metalshaper-style channel belongs to a different creator (Brian, Willys Jeep restorations), not metal-shaping pioneer Ron Fournier, who passed away in 2017. Four independently-verified, directly on-topic replacements were substituted to reach 10 channels: Weld.com, The Fab Forums (Kyle Voss), Ron Covell, and 6061.com. Every real YouTube channel ID was independently looked up via search and channel-page fetches — the CSV's RSS_Feed column universally used a literal 'UC...' placeholder rather than real channel IDs.\n\nBooks audit (2026-07-30): All 10 book URLs audited. 9 of 10 had broken, unconfirmed, or piracy-site URLs. Fixes: (1) markupandprofit.com/resources subpage not in search index → /blog/ (confirmed active with free articles). (2) archive.org/howmuchshouldicharge unconfirmed → replaced with official author site ellenrohr.com/howmuch/ (FREE full ebook confirmed). (3) archive.org/traction-gino-wickman unconfirmed → eosworldwide.com/traction-book-free-chapter (official free chapter, confirmed April 2026). (4) bdebooks.com piracy site → theleanstartup.com (same fix as skill_03). (5) archive.org/RichDadPoorDad unconfirmed → confirmed copy (same fix as skill_03). (6) f5fp.com broken → archive.org E-Myth (same fix as skill_01–04). (7) mikemichalowicz.com broken → archive.org Profit First (same fix). (8) openstax small-business-management 404 → principles-management (same fix as skill_02–04). (9) archive.org/the-7-habits-of-highly-effective-people unconfirmed → confirmed copy with full chapter listing. (10) archive.org/personal-mba unconfirmed → confirmed copy (402 pages, Jan 2020 upload)."
+    }
