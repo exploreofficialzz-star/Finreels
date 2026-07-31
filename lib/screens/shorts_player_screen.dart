@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -252,14 +253,24 @@ class _ShortPage extends StatefulWidget {
 
 class _ShortPageState extends State<_ShortPage> {
   late YoutubePlayerController _controller;
-  bool   _ready        = false;
-  bool   _playing      = false;
-  bool   _userStarted  = false;
-  double _progress     = 0;
+  bool   _ready          = false;
+  bool   _playing        = false;
+  bool   _userStarted    = false;
+  // Latches true once position > 0 — guarantees a real decoded frame
+  // exists in the WebView before the thumbnail overlay is removed.
+  // Never resets (so pausing doesn't flash the thumbnail again).
+  bool   _hasVideoStarted = false;
+  double _progress       = 0;
 
-  // Pause-icon auto-hide: show the icon briefly, then fade after 700 ms.
-  bool   _showPauseIcon = false;
+  // Tap-feedback icons: show briefly (700 ms) then auto-hide.
+  // _showPauseIcon → shown when user pauses.
+  // _showPlayFeedback → shown when user resumes from pause.
+  // _tapCount → changes on every tap so AnimatedScale restarts (fresh pop-in).
+  bool   _showPauseIcon    = false;
+  bool   _showPlayFeedback = false;
+  int    _tapCount         = 0;
   Timer? _pauseIconTimer;
+  Timer? _playFeedbackTimer;
 
   // Rate-limit controller callbacks to 15 fps — the WebView message channel
   // can fire more frequently than the screen refresh rate.
@@ -304,6 +315,13 @@ class _ShortPageState extends State<_ShortPage> {
         _ready    = ready;
         _playing  = playing;
         _progress = prog;
+        // Position advancing past zero means the WebView has decoded and is
+        // rendering actual video frames — safe to remove the thumbnail overlay.
+        if (playing &&
+            v.position.inMilliseconds > 0 &&
+            !_hasVideoStarted) {
+          _hasVideoStarted = true;
+        }
       });
     }
   }
@@ -349,6 +367,7 @@ class _ShortPageState extends State<_ShortPage> {
   @override
   void dispose() {
     _pauseIconTimer?.cancel();
+    _playFeedbackTimer?.cancel();
     _controller
       ..removeListener(_onUpdate)
       ..dispose();
@@ -359,19 +378,32 @@ class _ShortPageState extends State<_ShortPage> {
 
   void _togglePlay() {
     _userStarted = true;
+    _tapCount++;   // key change restarts AnimatedScale on every tap
     if (_playing) {
       _controller.pause();
-      // Show the pause icon briefly then hide it after 700 ms — same as
-      // TikTok and YouTube Shorts.
+      // Pause: show pause icon briefly (700 ms) — same as TikTok / YT Shorts.
       _pauseIconTimer?.cancel();
-      setState(() => _showPauseIcon = true);
+      _playFeedbackTimer?.cancel();
+      setState(() {
+        _showPauseIcon    = true;
+        _showPlayFeedback = false;
+      });
       _pauseIconTimer = Timer(const Duration(milliseconds: 700), () {
         if (mounted) setState(() => _showPauseIcon = false);
       });
     } else {
       _controller.play();
+      // Resume: show play icon briefly (700 ms) — TikTok shows a play icon on
+      // resume too so the user gets clear feedback that the video is starting.
+      _playFeedbackTimer?.cancel();
       _pauseIconTimer?.cancel();
-      setState(() => _showPauseIcon = false);
+      setState(() {
+        _showPauseIcon    = false;
+        _showPlayFeedback = true;
+      });
+      _playFeedbackTimer = Timer(const Duration(milliseconds: 700), () {
+        if (mounted) setState(() => _showPlayFeedback = false);
+      });
     }
   }
 
@@ -410,6 +442,37 @@ class _ShortPageState extends State<_ShortPage> {
             ),
           ),
 
+          // ── Thumbnail overlay — two-phase black-flash elimination ──────────
+          // Shown from frame 0 until position.inMilliseconds > 0, which is the
+          // earliest reliable signal that the WebView has rendered a real video
+          // frame.  Two problems are addressed by a single overlay:
+          //
+          //  Phase 1 — WebView init: The YouTube WebView renders a black frame
+          //    while the iFrame is loading (before onReady).  Our overlay covers
+          //    this gap entirely since _hasVideoStarted = false on first build.
+          //
+          //  Phase 2 — JS-to-render lag: PlayerState.playing fires from the
+          //    YouTube JS API before the first frame is painted.  Keeping the
+          //    overlay until position > 0 bridges this 1–3 frame gap.
+          //
+          // The GestureDetector below is HitTestBehavior.opaque so taps land
+          // on _togglePlay regardless of this overlay.
+          if (!_hasVideoStarted)
+            Positioned.fill(
+              child: CachedNetworkImage(
+                imageUrl: widget.video.thumbnailMq,
+                fit:      BoxFit.cover,
+                // Instant appearance — no CachedNetworkImage cross-fade that
+                // would leave a gap before the cached image shows.
+                fadeInDuration:  Duration.zero,
+                fadeOutDuration: Duration.zero,
+                // Black placeholder keeps the screen black (same as background)
+                // while the image decodes — no visible gap.
+                placeholder:  (_, __) => const ColoredBox(color: Colors.black),
+                errorWidget: (_, __, ___) => const ColoredBox(color: Colors.black),
+              ),
+            ),
+
           // ── Tap-to-play/pause ────────────────────────────────────────────
           // HitTestBehavior.opaque is required: SizedBox.expand() has no
           // child, so the default deferToChild behaviour returns false from
@@ -433,31 +496,69 @@ class _ShortPageState extends State<_ShortPage> {
                   color: AppTheme.gold, strokeWidth: 2.5),
             ),
 
-          // ── Initial play button (not yet tapped) ─────────────────────────
+          // ── Initial play button — appears with a pop-in scale animation ──
           if (!_userStarted)
             Center(
-              child: Container(
-                width: 64, height: 64,
-                decoration: BoxDecoration(
-                  color: Colors.black.withValues(alpha: 0.55),
-                  shape: BoxShape.circle,
+              child: AnimatedScale(
+                key: const ValueKey('initial_play'),
+                scale: 1.0,
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeOutBack,
+                child: Container(
+                  width: 64, height: 64,
+                  decoration: BoxDecoration(
+                    color: Colors.black.withValues(alpha: 0.55),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(Icons.play_arrow_rounded,
+                      color: Colors.white, size: 38),
                 ),
-                child: const Icon(Icons.play_arrow_rounded,
-                    color: Colors.white, size: 38),
               ),
             ),
 
-          // ── Pause icon (auto-hides after 700 ms) ────────────────────────
+          // ── Tap-feedback icons (auto-hide after 700 ms, same as TikTok) ───
+          // AnimatedScale with ValueKey(_tapCount) restarts the pop-in
+          // animation on every tap so rapid taps each get fresh feedback.
           if (_showPauseIcon)
             Center(
-              child: Container(
-                width: 64, height: 64,
-                decoration: BoxDecoration(
-                  color: Colors.black.withValues(alpha: 0.55),
-                  shape: BoxShape.circle,
+              child: IgnorePointer(
+                child: AnimatedScale(
+                  key: ValueKey(_tapCount),
+                  scale: 1.0,
+                  duration: const Duration(milliseconds: 250),
+                  curve: Curves.easeOutBack,
+                  child: Container(
+                    width: 64, height: 64,
+                    decoration: BoxDecoration(
+                      color: Colors.black.withValues(alpha: 0.55),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(Icons.pause_rounded,
+                        color: Colors.white, size: 38),
+                  ),
                 ),
-                child: const Icon(Icons.pause_rounded,
-                    color: Colors.white, size: 38),
+              ),
+            ),
+
+          // Play feedback — shown when resuming from pause.
+          if (_showPlayFeedback)
+            Center(
+              child: IgnorePointer(
+                child: AnimatedScale(
+                  key: ValueKey(_tapCount + 1000),  // offset avoids collision with pause key
+                  scale: 1.0,
+                  duration: const Duration(milliseconds: 250),
+                  curve: Curves.easeOutBack,
+                  child: Container(
+                    width: 64, height: 64,
+                    decoration: BoxDecoration(
+                      color: Colors.black.withValues(alpha: 0.55),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(Icons.play_arrow_rounded,
+                        color: Colors.white, size: 38),
+                  ),
+                ),
               ),
             ),
 

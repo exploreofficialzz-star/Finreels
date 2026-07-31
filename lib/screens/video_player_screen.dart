@@ -36,10 +36,18 @@ class VideoPlayerScreen extends StatefulWidget {
 class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   late YoutubePlayerController _controller;
   bool _ended           = false;
-  bool _playing         = false;
-  bool _ready           = false;
-  bool _fullscreen      = false;
+  bool _playing          = false;
+  bool _ready            = false;
+  bool _fullscreen       = false;
   bool _hasStartedPlaying = false; // latches true on first play — never resets
+  // Tracks what the USER intends, updated immediately on tap so the play
+  // button disappears the instant they touch it — not 33ms later when the
+  // YouTube JS confirms the state change.
+  bool _intendedPlaying  = false;
+  // Brief tap-feedback animation state (YouTube/TikTok pattern).
+  bool _showCenterIcon   = false;
+  int  _tapCount         = 0;       // incremented each tap to restart animation
+  Timer? _centerIconTimer;
   // The WebView (YoutubePlayer) is intentionally kept OUT of the widget tree
   // until after the very first frame.  The push-transition animation runs
   // frame 0 with NO WebView in the tree, so its black initialisation screen
@@ -97,17 +105,24 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         _progress = prog;
         _position = pos;
         _duration = dur;
-        // Latch on first play — never resets so the thumbnail never
-        // reappears during mid-video buffering pauses.  Removed instantly
-        // (no fade, no delay) — by this point the WebView has been in the
-        // tree since frame 1 and has had time to paint its first real frame.
-        if (playing) _hasStartedPlaying = true;
+        // Latch once the video position has actually advanced past zero.
+        // PlayerState.playing fires from the YouTube JS API as soon as the
+        // player's internal state machine transitions — but the WebView render
+        // surface may not have painted the first frame yet.  position > 0
+        // means the video clock is ticking, which only happens after real
+        // decoded frames are being produced.  This eliminates the 1–3 frame
+        // black gap between PlayerState.playing and the first visible frame.
+        // Never resets so buffering pauses don't re-show the thumbnail.
+        if (playing && pos.inMilliseconds > 0 && !_hasStartedPlaying) {
+          _hasStartedPlaying = true;
+        }
       });
     }
   }
 
   @override
   void dispose() {
+    _centerIconTimer?.cancel();
     _controller
       ..removeListener(_onUpdate)
       ..dispose();
@@ -115,7 +130,21 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   }
 
   void _togglePlay() {
-    _playing ? _controller.pause() : _controller.play();
+    // Determine what action we're taking based on INTENT (not reported state)
+    // so the UI responds the instant the user taps, not after the JS callback.
+    final willPause = _playing || _intendedPlaying;
+    willPause ? _controller.pause() : _controller.play();
+
+    _centerIconTimer?.cancel();
+    setState(() {
+      _intendedPlaying = !willPause;
+      _tapCount++;          // new key forces AnimatedScale to restart each tap
+      _showCenterIcon = true;
+    });
+    // Auto-hide the feedback icon after 1.2 s (same timing as YouTube Shorts).
+    _centerIconTimer = Timer(const Duration(milliseconds: 1200), () {
+      if (mounted) setState(() => _showCenterIcon = false);
+    });
   }
 
   void _replay() {
@@ -367,18 +396,44 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           behavior: HitTestBehavior.opaque,
           child: const SizedBox.expand(),
         ),
-        if (!_playing && _ready)
-          Center(
-            child: IgnorePointer(
-              child: Container(
-                width: 56,
-                height: 56,
-                decoration: BoxDecoration(
-                  color: Colors.black.withValues(alpha: 0.55),
-                  shape: BoxShape.circle,
+        // ── Brief tap-feedback icon (YouTube/TikTok pattern) ─────────────
+        // The icon reflects the ACTION just taken (pause → shows pause icon,
+        // play → shows play icon), auto-hides after 1.2 s.
+        //
+        // ValueKey(_tapCount) restarts AnimatedScale on every tap so repeated
+        // fast taps each get a fresh scale-in animation.
+        //
+        // Only shows after the video has started (_hasStartedPlaying) so it
+        // doesn't appear over the thumbnail during initial loading.
+        if (_showCenterIcon && _hasStartedPlaying)
+          IgnorePointer(
+            child: Center(
+              child: AnimatedOpacity(
+                opacity: _showCenterIcon ? 1.0 : 0.0,
+                duration: const Duration(milliseconds: 180),
+                child: AnimatedScale(
+                  key: ValueKey(_tapCount),
+                  scale: 1.0,
+                  duration: const Duration(milliseconds: 220),
+                  curve: Curves.easeOutBack,
+                  child: Container(
+                    width: 68,
+                    height: 68,
+                    decoration: BoxDecoration(
+                      color: Colors.black.withValues(alpha: 0.55),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      // Icon reflects the action just taken:
+                      // tapped to pause → show pause, tapped to play → show play
+                      _intendedPlaying
+                          ? Icons.play_arrow_rounded
+                          : Icons.pause_rounded,
+                      color: Colors.white,
+                      size: 42,
+                    ),
+                  ),
                 ),
-                child: const Icon(Icons.play_arrow_rounded,
-                    color: Colors.white, size: 34),
               ),
             ),
           ),
