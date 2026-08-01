@@ -124,7 +124,12 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         _ended    = ended;
         _playing  = playing;
         _ready    = ready;
-        if (hasStarted && !_hasStartedPlaying) _hasStartedPlaying = true;
+        if (hasStarted && !_hasStartedPlaying) {
+          _hasStartedPlaying = true;
+          // Cancel any stale tap-bleed icon that was queued while loading.
+          _showCenterIcon = false;
+          _centerIconTimer?.cancel();
+        }
       });
     }
   }
@@ -142,21 +147,24 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   }
 
   void _togglePlay() {
-    // Determine what action we're taking based on INTENT (not reported state)
-    // so the UI responds the instant the user taps, not after the JS callback.
     final willPause = _playing || _intendedPlaying;
     willPause ? _controller.pause() : _controller.play();
 
-    _centerIconTimer?.cancel();
     setState(() {
       _intendedPlaying = !willPause;
-      _tapCount++;          // new key forces AnimatedScale to restart each tap
-      _showCenterIcon = true;
+      _tapCount++;
+      // Guard: only show the center icon if the video has actually started.
+      // This prevents a tap-bleed from the navigation gesture (the finger-up
+      // event that opened this screen) from queuing _showCenterIcon = true
+      // and then making it appear the moment the video starts playing.
+      if (_hasStartedPlaying) _showCenterIcon = true;
     });
-    // Auto-hide the feedback icon after 1.2 s (same timing as YouTube Shorts).
-    _centerIconTimer = Timer(const Duration(milliseconds: 1200), () {
-      if (mounted) setState(() => _showCenterIcon = false);
-    });
+    if (_hasStartedPlaying) {
+      _centerIconTimer?.cancel();
+      _centerIconTimer = Timer(const Duration(milliseconds: 1200), () {
+        if (mounted) setState(() => _showCenterIcon = false);
+      });
+    }
   }
 
   void _replay() {
@@ -428,17 +436,23 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         //
         // Only shows after the video has started (_hasStartedPlaying) so it
         // doesn't appear over the thumbnail during initial loading.
+        // Tap-feedback icon — TweenAnimationBuilder pops in from 50 % scale
+        // on each tap because ValueKey(_tapCount) rebuilds it fresh.
+        // AnimatedScale(scale: 1.0) has no animation on creation; TweenAB
+        // with begin:0.5 always animates from the tween's begin value.
         if (_showCenterIcon && _hasStartedPlaying)
           IgnorePointer(
             child: Center(
               child: AnimatedOpacity(
                 opacity: _showCenterIcon ? 1.0 : 0.0,
-                duration: const Duration(milliseconds: 180),
-                child: AnimatedScale(
+                duration: const Duration(milliseconds: 200),
+                child: TweenAnimationBuilder<double>(
                   key: ValueKey(_tapCount),
-                  scale: 1.0,
-                  duration: const Duration(milliseconds: 220),
+                  tween: Tween(begin: 0.5, end: 1.0),
+                  duration: const Duration(milliseconds: 230),
                   curve: Curves.easeOutBack,
+                  builder: (_, scale, child) =>
+                      Transform.scale(scale: scale, child: child),
                   child: Container(
                     width: 68,
                     height: 68,
@@ -447,8 +461,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
-                      // Icon reflects the action just taken:
-                      // tapped to pause → show pause, tapped to play → show play
                       _intendedPlaying
                           ? Icons.play_arrow_rounded
                           : Icons.pause_rounded,

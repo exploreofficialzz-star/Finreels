@@ -258,7 +258,16 @@ class _ShortPage extends StatefulWidget {
   State<_ShortPage> createState() => _ShortPageState();
 }
 
-class _ShortPageState extends State<_ShortPage> {
+class _ShortPageState extends State<_ShortPage>
+    with AutomaticKeepAliveClientMixin<_ShortPage> {
+
+  // AutomaticKeepAliveClientMixin — wantKeepAlive = true keeps this page's
+  // WebView alive in memory after the user scrolls away.  Without this, every
+  // PageView rebuild disposes the YoutubePlayer WebView and the next scroll
+  // back causes a full reload.  With it, already-visited shorts restart
+  // instantly; the PageView's natural 1-page pre-build handles the next short.
+  @override
+  bool get wantKeepAlive => true;
   late YoutubePlayerController _controller;
   bool   _ready          = false;
   bool   _playing        = false;
@@ -421,6 +430,7 @@ class _ShortPageState extends State<_ShortPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context); // required by AutomaticKeepAliveClientMixin
     final size = MediaQuery.of(context).size;
     return SizedBox(
       width:  size.width,
@@ -512,14 +522,20 @@ class _ShortPageState extends State<_ShortPage> {
           // ── Tap-feedback icons (auto-hide after 700 ms, same as TikTok) ───
           // AnimatedScale with ValueKey(_tapCount) restarts the pop-in
           // animation on every tap so rapid taps each get fresh feedback.
+          // Pause feedback — TweenAnimationBuilder pops in from 50% scale
+          // so the icon feels snappy and deliberate.  ValueKey restarts it
+          // fresh on every tap (AnimatedScale(scale:1.0) has no animation
+          // on creation; TweenAB with begin:0.5 always starts from below).
           if (_showPauseIcon)
             Center(
               child: IgnorePointer(
-                child: AnimatedScale(
+                child: TweenAnimationBuilder<double>(
                   key: ValueKey(_tapCount),
-                  scale: 1.0,
-                  duration: const Duration(milliseconds: 250),
+                  tween: Tween(begin: 0.5, end: 1.0),
+                  duration: const Duration(milliseconds: 230),
                   curve: Curves.easeOutBack,
+                  builder: (_, scale, child) =>
+                      Transform.scale(scale: scale, child: child),
                   child: Container(
                     width: 64, height: 64,
                     decoration: BoxDecoration(
@@ -533,15 +549,18 @@ class _ShortPageState extends State<_ShortPage> {
               ),
             ),
 
-          // Play feedback — shown when resuming from pause.
+          // Play feedback — same pattern, different tap-count offset so
+          // Flutter treats pause and play keys as distinct widget identities.
           if (_showPlayFeedback)
             Center(
               child: IgnorePointer(
-                child: AnimatedScale(
-                  key: ValueKey(_tapCount + 1000),  // offset avoids collision with pause key
-                  scale: 1.0,
-                  duration: const Duration(milliseconds: 250),
+                child: TweenAnimationBuilder<double>(
+                  key: ValueKey(_tapCount + 10000),
+                  tween: Tween(begin: 0.5, end: 1.0),
+                  duration: const Duration(milliseconds: 230),
                   curve: Curves.easeOutBack,
+                  builder: (_, scale, child) =>
+                      Transform.scale(scale: scale, child: child),
                   child: Container(
                     width: 64, height: 64,
                     decoration: BoxDecoration(
