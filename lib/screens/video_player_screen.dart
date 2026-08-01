@@ -40,14 +40,20 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   bool _ready            = false;
   bool _fullscreen       = false;
   bool _hasStartedPlaying = false; // latches true on first play — never resets
-  // Tracks what the USER intends, updated immediately on tap so the play
-  // button disappears the instant they touch it — not 33ms later when the
-  // YouTube JS confirms the state change.
-  bool _intendedPlaying  = false;
-  // Brief tap-feedback animation state (YouTube/TikTok pattern).
+  bool _intendedPlaying  = false;  // updated instantly on tap (no JS lag)
   bool _showCenterIcon   = false;
-  int  _tapCount         = 0;       // incremented each tap to restart animation
+  int  _tapCount         = 0;
   Timer? _centerIconTimer;
+
+  // ── Per-item ValueNotifiers (VeryGoodVentures / diVine pattern) ───────────
+  // Progress, position and duration update 30× per second while playing.
+  // Storing them in ValueNotifiers instead of calling setState means only the
+  // Slider and time Text widgets rebuild on each tick — nothing else.
+  // This eliminates the scroll jank in the description panel beneath the player
+  // caused by 30 full-tree setState rebuilds per second.
+  late final ValueNotifier<double>   _progressNotifier;
+  late final ValueNotifier<Duration> _positionNotifier;
+  late final ValueNotifier<Duration> _durationNotifier;
   // The WebView (YoutubePlayer) is intentionally kept OUT of the widget tree
   // until after the very first frame.  The push-transition animation runs
   // frame 0 with NO WebView in the tree, so its black initialisation screen
@@ -65,6 +71,10 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     // (on-device implicit-feedback ranking, not a trained model).
     unawaited(EngagementService.instance.recordView(widget.video));
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    _progressNotifier = ValueNotifier<double>(0);
+    _positionNotifier = ValueNotifier<Duration>(Duration.zero);
+    _durationNotifier = ValueNotifier<Duration>(Duration.zero);
+
     // Attach the WebView one frame after the screen opens so the push
     // transition animation NEVER races against the WebView's black init frame.
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -87,35 +97,37 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     final nowMs = DateTime.now().millisecondsSinceEpoch;
     if (nowMs - _lastUpdateMs < 33) return;
     _lastUpdateMs = nowMs;
-    final v       = _controller.value;
-    final ended   = v.playerState == PlayerState.ended;
-    final playing = v.playerState == PlayerState.playing;
-    final ready   = v.isReady;
-    final pos     = v.position;
-    final dur     = v.metaData.duration;
+    final cv      = _controller.value;
+    final ended   = cv.playerState == PlayerState.ended;
+    final playing = cv.playerState == PlayerState.playing;
+    final ready   = cv.isReady;
+    final pos     = cv.position;
+    final dur     = cv.metaData.duration;
     final prog    = dur.inMilliseconds > 0
         ? (pos.inMilliseconds / dur.inMilliseconds).clamp(0.0, 1.0)
         : 0.0;
+
+    // Push progress / position / duration via ValueNotifier — no setState.
+    // Only the Slider and time Text (which use ValueListenableBuilder) rebuild
+    // on each tick.  The rest of the screen (description, recommendations,
+    // banner ad) stays completely untouched during playback.  This is the
+    // pattern that eliminates scroll jank in the description panel.
+    _progressNotifier.value = prog;
+    _positionNotifier.value = pos;
+    _durationNotifier.value = dur;
+
+    // Latch once position > 0 — the WebView has actually painted a video frame.
+    final hasStarted = _hasStartedPlaying ||
+        (playing && pos.inMilliseconds > 0);
+
+    // Only call setState for structural changes (rare during normal playback).
     if (ended != _ended || playing != _playing || ready != _ready ||
-        (prog - _progress).abs() > 0.01) {
+        hasStarted != _hasStartedPlaying) {
       setState(() {
         _ended    = ended;
         _playing  = playing;
         _ready    = ready;
-        _progress = prog;
-        _position = pos;
-        _duration = dur;
-        // Latch once the video position has actually advanced past zero.
-        // PlayerState.playing fires from the YouTube JS API as soon as the
-        // player's internal state machine transitions — but the WebView render
-        // surface may not have painted the first frame yet.  position > 0
-        // means the video clock is ticking, which only happens after real
-        // decoded frames are being produced.  This eliminates the 1–3 frame
-        // black gap between PlayerState.playing and the first visible frame.
-        // Never resets so buffering pauses don't re-show the thumbnail.
-        if (playing && pos.inMilliseconds > 0 && !_hasStartedPlaying) {
-          _hasStartedPlaying = true;
-        }
+        if (hasStarted && !_hasStartedPlaying) _hasStartedPlaying = true;
       });
     }
   }
@@ -123,6 +135,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   @override
   void dispose() {
     _centerIconTimer?.cancel();
+    _progressNotifier.dispose();
+    _positionNotifier.dispose();
+    _durationNotifier.dispose();
     _controller
       ..removeListener(_onUpdate)
       ..dispose();
@@ -240,33 +255,41 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                   // tree) so the user ALWAYS sees content, never a black
                   // screen during the push transition.
                   //
-                  // Primary image: thumbnailMq — already in CachedNetworkImage's
-                  // memory cache from the feed scroll, so it renders on frame 0
-                  // with zero network/disk latency.
-                  //
-                  // fadeInDuration: Duration.zero — disable CachedNetworkImage's
-                  // built-in cross-fade so the thumbnail appears INSTANTLY, no
-                  // second gap between placeholder and image.
-                  //
-                  // Removed INSTANTLY (no AnimatedOpacity, no delay) the exact
-                  // moment _hasStartedPlaying latches true — the WebView has
-                  // been in the tree since frame 1 and has fully painted by now.
+                  // Uses thumbnailHd + memCacheWidth 720 / memCacheHeight 405 —
+                  // same URL and dims as the feed card — so the image is already
+                  // in Flutter's memory cache and renders on frame 0 with zero
+                  // disk/network latency.  Disappears the instant
+                  // _hasStartedPlaying latches (position > 0).
+                  // Use thumbnailHd + same memCache dims as the feed card
+                  // (720×405) so the image is already in Flutter's memory cache
+                  // when this screen opens → renders on frame 0, zero latency.
                   if (!_hasStartedPlaying)
                     CachedNetworkImage(
-                      imageUrl: widget.video.thumbnailMq,
-                      fit: BoxFit.cover,
+                      imageUrl:      widget.video.thumbnailHd,
+                      fit:           BoxFit.cover,
                       fadeInDuration:  Duration.zero,
                       fadeOutDuration: Duration.zero,
-                      memCacheWidth:   800,
-                      memCacheHeight:  450,
-                      placeholder: (_, __) =>
-                          const ColoredBox(color: Colors.black),
-                      errorWidget: (_, __, ___) =>
-                          const ColoredBox(color: Colors.black),
+                      memCacheWidth:   720,
+                      memCacheHeight:  405,
+                      // No black placeholder — if the image isn't in the
+                      // memory cache yet, the screen background (already black)
+                      // shows through.  Adding a ColoredBox(black) would just
+                      // be a duplicate layer.
+                      errorWidget: (_, __, ___) => CachedNetworkImage(
+                        imageUrl:      widget.video.thumbnailMq,
+                        fit:           BoxFit.cover,
+                        fadeInDuration:  Duration.zero,
+                        memCacheWidth:   720,
+                        memCacheHeight:  405,
+                      ),
                     ),
 
-                  // ── [3] Buffering spinner — shown after player attached, ready, not yet playing
-                  if (_playerAttached && _ready && !_playing && !_ended && !_hasStartedPlaying)
+                  // ── [3] Rotating spinner — shown until _hasStartedPlaying latches.
+                  // Tied to the SAME flag as the thumbnail so both disappear
+                  // simultaneously the exact frame position > 0 (video frames
+                  // are rendering).  This prevents the "spinner stops, then
+                  // blank, then video" gap caused by the old _playing check.
+                  if (_playerAttached && !_hasStartedPlaying && !_ended)
                     const Center(
                       child: CircularProgressIndicator(
                           color: AppTheme.gold, strokeWidth: 3),
@@ -454,29 +477,45 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  SizedBox(
-                    height: 20,
-                    child: SliderTheme(
-                      data: SliderTheme.of(context).copyWith(
-                        trackHeight: 2,
-                        thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6),
-                        overlayShape: const RoundSliderOverlayShape(overlayRadius: 12),
-                        activeTrackColor: AppTheme.gold,
-                        inactiveTrackColor: Colors.white30,
-                        thumbColor: AppTheme.gold,
-                        overlayColor: AppTheme.gold.withValues(alpha: 0.2),
-                      ),
-                      child: Slider(
-                        value: _progress.clamp(0.0, 1.0),
-                        onChanged: _seekTo,
+                  // ValueListenableBuilder subscribes ONLY to the progress
+                  // notifier — this widget subtree rebuilds 30×/s during
+                  // playback but nothing outside it does.  Scroll in the
+                  // description panel below stays completely jank-free.
+                  ValueListenableBuilder<double>(
+                    valueListenable: _progressNotifier,
+                    builder: (_, prog, __) => SizedBox(
+                      height: 20,
+                      child: SliderTheme(
+                        data: SliderTheme.of(context).copyWith(
+                          trackHeight: 2,
+                          thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6),
+                          overlayShape: const RoundSliderOverlayShape(overlayRadius: 12),
+                          activeTrackColor: AppTheme.gold,
+                          inactiveTrackColor: Colors.white30,
+                          thumbColor: AppTheme.gold,
+                          overlayColor: AppTheme.gold.withValues(alpha: 0.2),
+                        ),
+                        child: Slider(
+                          value: prog.clamp(0.0, 1.0),
+                          onChanged: _seekTo,
+                        ),
                       ),
                     ),
                   ),
                   Row(
                     children: [
-                      Text('${_fmt(_position)} / ${_fmt(_duration)}',
-                          style: const TextStyle(
-                              color: Colors.white70, fontSize: 10)),
+                      // Only this Text rebuilds on position changes.
+                      ValueListenableBuilder<Duration>(
+                        valueListenable: _positionNotifier,
+                        builder: (_, pos, __) => ValueListenableBuilder<Duration>(
+                          valueListenable: _durationNotifier,
+                          builder: (_, dur, __) => Text(
+                            '${_fmt(pos)} / ${_fmt(dur)}',
+                            style: const TextStyle(
+                                color: Colors.white70, fontSize: 10),
+                          ),
+                        ),
+                      ),
                       const Spacer(),
                       GestureDetector(
                         onTap: _toggleFullscreen,
@@ -518,13 +557,13 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         CachedNetworkImage(
           imageUrl: widget.video.thumbnailHd,
           fit: BoxFit.cover,
-          memCacheWidth: 800,
-          memCacheHeight: 450,
+          memCacheWidth: 720,
+          memCacheHeight: 405,
           errorWidget: (_, __, ___) => CachedNetworkImage(
             imageUrl: widget.video.thumbnailMq,
             fit: BoxFit.cover,
-            memCacheWidth: 800,
-            memCacheHeight: 450,
+            memCacheWidth: 720,
+            memCacheHeight: 405,
             errorWidget: (_, __, ___) =>
                 const ColoredBox(color: Colors.black),
           ),

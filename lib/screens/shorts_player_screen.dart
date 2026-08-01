@@ -60,12 +60,14 @@ class _ShortsPlayerScreenState extends State<ShortsPlayerScreen> {
   int  _currentIndex = 0;
   bool _isDragging   = false;
 
-  // Tuning constants — match TikTok / Instagram Reels research.
-  static const double _positionThreshold = 0.20; // 20 % of page height
-  static const double _velocityThreshold = 800.0; // px/s  fast-fling trigger
+  // Tuning constants — tuned lower for TikTok-feel responsiveness.
+  // Research (VeryGoodVentures / diVine): low thresholds feel "light",
+  // high thresholds feel "stiff". These values match TikTok's actual feel.
+  static const double _positionThreshold = 0.10; // 10 % — even a partial drag commits
+  static const double _velocityThreshold = 400.0; // px/s — light fling triggers
   static const double _rubberBandFactor  = 0.25;  // 25 % resistance at edges
-  static const Duration _snapDuration    = Duration(milliseconds: 280);
-  static const Curve    _snapCurve       = Curves.decelerate;
+  static const Duration _snapDuration    = Duration(milliseconds: 250);
+  static const Curve    _snapCurve       = Curves.easeOutCubic;
 
   @override
   void initState() {
@@ -97,8 +99,13 @@ class _ShortsPlayerScreenState extends State<ShortsPlayerScreen> {
   // ── Gesture handlers ────────────────────────────────────────────────────
 
   void _onDragStart(DragStartDetails _) {
-    // Pause the active video the instant the finger moves — same as TikTok.
-    if (!_isDragging) setState(() => _isDragging = true);
+    // Update the flag as a plain field — no setState here.
+    // Calling setState at drag-start triggers a full rebuild before the first
+    // gesture update fires, creating a 1-frame stutter that makes the scroll
+    // feel "sticky" at the beginning of every swipe.
+    // The active video pauses naturally when _isDragging becomes visible to
+    // _ShortPage on the next setState (fired by _onDragEnd / onPageChanged).
+    _isDragging = true;
   }
 
   void _onDragUpdate(DragUpdateDetails details) {
@@ -289,8 +296,11 @@ class _ShortPageState extends State<_ShortPage> {
         enableCaption: false,
       ),
     )..addListener(_onUpdate);
+    // Always treat as user-started — no initial play button shown.
+    // All shorts auto-start when they become active; the spinner covers
+    // loading. The play button only appears after a manual pause.
+    _userStarted = true;
     if (autoPlay) {
-      _userStarted = true;
       unawaited(EngagementService.instance.recordView(widget.video));
     }
   }
@@ -442,34 +452,30 @@ class _ShortPageState extends State<_ShortPage> {
             ),
           ),
 
-          // ── Thumbnail overlay — two-phase black-flash elimination ──────────
-          // Shown from frame 0 until position.inMilliseconds > 0, which is the
-          // earliest reliable signal that the WebView has rendered a real video
-          // frame.  Two problems are addressed by a single overlay:
-          //
-          //  Phase 1 — WebView init: The YouTube WebView renders a black frame
-          //    while the iFrame is loading (before onReady).  Our overlay covers
-          //    this gap entirely since _hasVideoStarted = false on first build.
-          //
-          //  Phase 2 — JS-to-render lag: PlayerState.playing fires from the
-          //    YouTube JS API before the first frame is painted.  Keeping the
-          //    overlay until position > 0 bridges this 1–3 frame gap.
-          //
-          // The GestureDetector below is HitTestBehavior.opaque so taps land
-          // on _togglePlay regardless of this overlay.
+          // ── Thumbnail overlay — shown until first real frame is rendered ────
+          // Uses thumbnailHd + memCacheWidth 720 / memCacheHeight 405 — the
+          // EXACT same URL and dimensions the shorts feed card used to display
+          // this thumbnail, so it is already in Flutter's in-memory image cache
+          // and renders on frame 0 with zero disk/network latency.
+          // The overlay disappears the instant _hasVideoStarted latches
+          // (position > 0), which guarantees an actual decoded frame exists in
+          // the WebView before we remove the cover.
           if (!_hasVideoStarted)
             Positioned.fill(
               child: CachedNetworkImage(
-                imageUrl: widget.video.thumbnailMq,
-                fit:      BoxFit.cover,
-                // Instant appearance — no CachedNetworkImage cross-fade that
-                // would leave a gap before the cached image shows.
+                imageUrl:      widget.video.thumbnailHd,
+                fit:           BoxFit.cover,
                 fadeInDuration:  Duration.zero,
                 fadeOutDuration: Duration.zero,
-                // Black placeholder keeps the screen black (same as background)
-                // while the image decodes — no visible gap.
-                placeholder:  (_, __) => const ColoredBox(color: Colors.black),
-                errorWidget: (_, __, ___) => const ColoredBox(color: Colors.black),
+                memCacheWidth:   720,
+                memCacheHeight:  405,
+                errorWidget: (_, __, ___) => CachedNetworkImage(
+                  imageUrl:      widget.video.thumbnailMq,
+                  fit:           BoxFit.cover,
+                  fadeInDuration:  Duration.zero,
+                  memCacheWidth:   720,
+                  memCacheHeight:  405,
+                ),
               ),
             ),
 
@@ -489,30 +495,15 @@ class _ShortPageState extends State<_ShortPage> {
             child: const SizedBox.expand(),
           ),
 
-          // ── Loading spinner (before first play) ─────────────────────────
-          if (!_ready && _userStarted)
+          // ── Loading spinner — shown while video is buffering/initialising ──
+          // Replaces the old "initial play button". All shorts now auto-start
+          // and show a spinner until _hasVideoStarted latches (position > 0).
+          // The play/pause button only appears after the user manually pauses.
+          if (!_hasVideoStarted)
             const Center(
               child: CircularProgressIndicator(
-                  color: AppTheme.gold, strokeWidth: 2.5),
-            ),
-
-          // ── Initial play button — appears with a pop-in scale animation ──
-          if (!_userStarted)
-            Center(
-              child: AnimatedScale(
-                key: const ValueKey('initial_play'),
-                scale: 1.0,
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeOutBack,
-                child: Container(
-                  width: 64, height: 64,
-                  decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.55),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(Icons.play_arrow_rounded,
-                      color: Colors.white, size: 38),
-                ),
+                color: Colors.white,
+                strokeWidth: 2.5,
               ),
             ),
 
