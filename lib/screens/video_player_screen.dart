@@ -60,9 +60,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   // is never visible.  The thumbnail covers frame 0, then the WebView is
   // inserted from frame 1 while still hidden behind the thumbnail.
   bool _playerAttached   = false;
-  double   _progress = 0;
-  Duration _position = Duration.zero;
-  Duration _duration = Duration.zero;
 
   @override
   void initState() {
@@ -163,15 +160,18 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   }
 
   void _replay() {
-    setState(() { _ended = false; _progress = 0; _hasStartedPlaying = false; });
+    _progressNotifier.value = 0;
+    _positionNotifier.value = Duration.zero;
+    setState(() { _ended = false; _hasStartedPlaying = false; });
     _controller.seekTo(Duration.zero);
     _controller.play();
   }
 
   void _seekTo(double fraction) {
-    if (_duration.inMilliseconds > 0) {
+    final dur = _durationNotifier.value;
+    if (dur.inMilliseconds > 0) {
       _controller.seekTo(Duration(
-          milliseconds: (fraction * _duration.inMilliseconds).round()));
+          milliseconds: (fraction * dur.inMilliseconds).round()));
     }
   }
 
