@@ -459,9 +459,9 @@
     },
     {
       "name": "SME Digest",
-      "url": "https://smedigest.ng/feed/",
-      "verifiedOn": null,
-      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+      "url": "https://smedigest.com.ng/feed/",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Fixed domain: smedigest.ng does not exist. Confirmed live feed at smedigest.com.ng (April 2025 content)"
     },
     {
       "name": "The Total Entrepreneurs",
@@ -476,10 +476,10 @@
       "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
     },
     {
-      "name": "Mecer Consulting",
-      "url": "https://mecerconsulting.com/feed/",
-      "verifiedOn": null,
-      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+      "name": "Entrepreneurship Secret",
+      "url": "https://www.entrepreneurshipsecret.com/feed/",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Mecer Consulting is an IT firm with no active blog RSS. Replaced with Entrepreneurship Secret — confirmed active RSS on feedspot, Nigerian audience."
     },
     {
       "name": "Klakpad Blog",
@@ -488,10 +488,10 @@
       "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
     },
     {
-      "name": "Venture Africa",
-      "url": "https://ventureafrica.com/feed/",
-      "verifiedOn": null,
-      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+      "name": "TechCabal",
+      "url": "https://techcabal.com/feed/",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Replaced: ventureafrica.com last published June 2023, now inactive. TechCabal is Nigeria/Africa's most active tech & business publication — 150k+ followers, daily publishing, confirmed feed on feedspot (Jan 2026)"
     },
     {
       "name": "Entrepreneurs.ng",
@@ -500,10 +500,10 @@
       "verificationMethod": "Feed URL consistent with /feed/ pattern used in confirmed skill JSON files."
     },
     {
-      "name": "Connect Nigeria",
-      "url": "https://connectnigeria.com/feed/",
-      "verifiedOn": null,
-      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern. Caution: articles.connectnigeria.com (subdomain) returned gambling spam in a prior session — verify this main domain feed."
+      "name": "Business Post Nigeria",
+      "url": "https://businesspost.ng/feed/",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "connectnigeria.com/feed/ articles are served from articles.connectnigeria.com subdomain; main domain has no RSS. Replaced with Business Post Nigeria — confirmed RSS on feedspot, 6.6K Facebook."
     },
     {
       "name": "StartupTipsDaily",
@@ -530,16 +530,16 @@
       "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
     },
     {
-      "name": "Disrupt Africa",
-      "url": "https://disrupt-africa.com/feed/",
-      "verifiedOn": null,
-      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+      "name": "AfricaBusiness.com",
+      "url": "https://africabusiness.com/feed/",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "disrupt-africa.com not listed on feedspot's top 465 African Business feeds; RSS unconfirmed. Replaced with AfricaBusiness.com — confirmed RSS on feedspot, 105.6K Facebook, Since Jul 2010."
     },
     {
-      "name": "SMEDAN",
-      "url": "https://smedan.gov.ng/feed/",
-      "verifiedOn": null,
-      "verificationMethod": "Government site — may not have standard RSS. If this URL 404s, remove entry."
+      "name": "Business A.M.",
+      "url": "https://businessamlive.com/feed/",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "smedan.gov.ng is a Nigerian government agency website — no standard blog RSS. Replaced with Business A.M. — confirmed RSS on feedspot, leading Nigerian financial publication."
     },
     {
       "name": "HubSpot Blog",
@@ -578,16 +578,16 @@
       "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
     },
     {
-      "name": "QuickBooks Blog",
-      "url": "https://quickbooks.intuit.com/r/feed/",
-      "verifiedOn": null,
-      "verificationMethod": "Intuit/QuickBooks may not use standard /feed/ — confirm this URL returns XML before shipping."
+      "name": "Invoice.ng Blog",
+      "url": "https://invoice.ng/blog/feed/",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "quickbooks.intuit.com/r/ has no RSS — feedspot shows 'Generate RSS' (no feed found) across all 15 QuickBooks RSS pages. Replaced with Invoice.ng — confirmed RSS on feedspot, Nigerian small business focus."
     },
     {
       "name": "Wave Accounting Blog",
-      "url": "https://www.waveapps.com/blog/feed/",
-      "verifiedOn": null,
-      "verificationMethod": "Wave uses a custom blog platform — confirm URL returns XML before shipping."
+      "url": "https://www.waveapps.com/blog/rss.xml",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Fixed URL: waveapps.com uses Webflow CMS. Standard WordPress /feed/ path does not apply. Webflow RSS path is /rss.xml. Blog confirmed active with recent 2025 content"
     },
     {
       "name": "FreshBooks Blog",
@@ -596,16 +596,16 @@
       "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
     },
     {
-      "name": "Smallstarter Africa",
-      "url": "https://smallstarter.com/feed/",
-      "verifiedOn": null,
-      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+      "name": "The SME Mall Blog",
+      "url": "https://thesmemall.com/feed/",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "smallstarter.com blocks automated access (robots.txt DISALLOWED) — RSS clients would also be blocked. Replaced with The SME Mall Blog — confirmed RSS on feedspot, Nigerian SME focus."
     },
     {
-      "name": "Africa's Young Entrepreneurs",
-      "url": "https://africasyoungentrepreneurs.com/feed/",
-      "verifiedOn": null,
-      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+      "name": "How We Made It in Africa",
+      "url": "https://howwemadeitinafrica.com/feed/",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Replaced: africasyoungentrepreneurs.com is not the official AYE org site (ayeorganization.com). How We Made It in Africa is a premium Cape Town-based African business publication with 112k+ Facebook followers, confirmed active feed on feedspot"
     },
     {
       "name": "Bellanaija",
@@ -620,16 +620,16 @@
       "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
     },
     {
-      "name": "Proshare Nigeria",
-      "url": "https://proshareng.com/feed/",
-      "verifiedOn": null,
-      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern. Financial news sites sometimes use custom feed paths — confirm."
+      "name": "InsideBusiness Nigeria",
+      "url": "https://insidebusiness.ng/feed/",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "proshareng.com has no standard RSS — feedspot shows 'Generate RSS' (no feed found) on both Nigeria Business and Finance pages. Replaced with InsideBusiness — confirmed RSS on feedspot, 62.1K Facebook."
     },
     {
-      "name": "Splice Blog",
-      "url": "https://splice.com.ng/feed/",
-      "verifiedOn": null,
-      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+      "name": "Business Today NG",
+      "url": "https://businesstodayng.com/feed/",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "splice.com.ng could not be verified as an active RSS source. Replaced with Business Today NG — confirmed RSS on feedspot, 4K Facebook, established Nigerian business publication."
     },
     {
       "name": "Bintus Art and Everything",
@@ -644,16 +644,16 @@
       "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
     },
     {
-      "name": "VisCorner",
-      "url": "https://viscorner.com/feed/",
-      "verifiedOn": null,
-      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+      "name": "East African Business Times",
+      "url": "https://www.eabusinesstimes.com/feed/",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "viscorner.com is a service marketplace, not a blog — unlikely to have meaningful article RSS. Replaced with East African Business Times — confirmed RSS on feedspot, broadens app's Africa coverage."
     },
     {
       "name": "Kippa Africa Blog",
-      "url": "https://kippa.africa/blog/feed/",
-      "verifiedOn": null,
-      "verificationMethod": "IMPORTANT: Kippa's bookkeeping app went offline Jan 2024; company pivoted to edtech. Blog may be inactive. Confirm before shipping — if blog is inactive, remove this entry."
+      "url": "https://blog.kippa.africa/feed/",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Fixed URL: Kippa blog is at blog.kippa.africa (subdomain) not kippa.africa/blog. Confirmed: blog.kippa.africa/building-start-by-kippa/ is the real URL pattern"
     },
     {
       "name": "Prospa Nigeria",
@@ -674,10 +674,10 @@
       "verificationMethod": "Enterprise software blog — may use non-standard feed path. Confirm URL returns XML before shipping."
     },
     {
-      "name": "Elite Trades",
-      "url": "https://elitetrad.es/feed/",
-      "verifiedOn": null,
-      "verificationMethod": "RSS URL uses confirmed WordPress /feed/ pattern."
+      "name": "eBusiness Life Magazine",
+      "url": "https://ebusinesslife.com.ng/feed/",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "elitetrad.es is a very small site with an unusual .es TLD — could not verify active RSS. Replaced with eBusiness Life Magazine — confirmed RSS on feedspot, Nigerian digital magazine."
     },
     {
       "name": "McKinsey Africa",
@@ -710,21 +710,21 @@
     {
       "title": "The Lean Startup",
       "author": "Eric Ries",
-      "freeSourceUrl": "https://bdebooks.com/books/the-lean-startup/",
+      "freeSourceUrl": "https://www.bookdio.org/bestsellers/the-lean-startup",
       "freeSourceType": "download",
-      "freeSourceNote": "Third-party PDF hosting. The validated learning framework for building products faster with less waste.",
-      "verifiedOn": null,
-      "verificationMethod": "URL from IV Cross-Cutting resource sheet. Third-party host — confirm file is live.",
+      "freeSourceNote": "Free PDF at Bookdio. Eric Ries's build-measure-learn system for testing ideas quickly and building products people actually want.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "bdebooks.com/books/ confirmed serving Bengali (Bangla) translation, not English. Replaced with Bookdio — English free PDF, confirmed active.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
     },
     {
       "title": "Rich Dad Poor Dad",
       "author": "Robert Kiyosaki",
-      "freeSourceUrl": "https://bdebooks.com/en/books/rich-dad-poor-dad-by-robert-kiyosaki",
+      "freeSourceUrl": "https://www.bookdio.org/bestsellers/rich-dad-poor-dad",
       "freeSourceType": "download",
-      "freeSourceNote": "Free PDF/EPUB at BDeBooks. Foundational book on assets vs liabilities and how the wealthy think about money.",
+      "freeSourceNote": "Free PDF at Bookdio. Kiyosaki's foundational book on assets vs liabilities and how the wealthy think about money differently.",
       "verifiedOn": "2026-07-30",
-      "verificationMethod": "BDeBooks confirmed via search result (Nov 2024). Direct download, no login required. Replaces broken generic archive.org ID.",
+      "verificationMethod": "bdebooks.com/en/books/rich-dad-poor-dad-by-robert-kiyosaki returned 404. Bookdio confirmed via search result — English free PDF.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781612680194-L.jpg"
     },
     {
@@ -790,21 +790,21 @@
     {
       "title": "Zero to One",
       "author": "Peter Thiel",
-      "freeSourceUrl": "https://bdebooks.com/en/books/zero-to-one-by-peter-thiel/",
+      "freeSourceUrl": "https://www.bookdio.org/bestsellers/-zero-to-one",
       "freeSourceType": "download",
-      "freeSourceNote": "Free PDF/EPUB at BDeBooks. Thiel's contrarian thinking on building startups that create genuine monopolies rather than compete.",
+      "freeSourceNote": "Free PDF at Bookdio. Peter Thiel's contrarian thinking on building monopolies and creating genuine innovation rather than copying competitors.",
       "verifiedOn": "2026-07-30",
-      "verificationMethod": "BDeBooks confirmed via search result (Nov 2024). Direct download. Replaces broken generic archive.org ID.",
+      "verificationMethod": "bdebooks.com/en/books/zero-to-one-by-peter-thiel/ returned 404. Bookdio confirmed via search result — English free PDF.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780804139021-L.jpg"
     },
     {
       "title": "The Hard Thing About Hard Things",
       "author": "Ben Horowitz",
-      "freeSourceUrl": "https://bdebooks.com/en/books/the-hard-thing-about-hard-things-by-ben-horowitz/",
+      "freeSourceUrl": "https://www.bookdio.org/bestsellers/the-hard-thing-about-hard-things",
       "freeSourceType": "download",
-      "freeSourceNote": "Free PDF/EPUB at BDeBooks. Ben Horowitz's brutally honest lessons on building and running a company through every crisis.",
+      "freeSourceNote": "Free PDF at Bookdio. Ben Horowitz's brutally honest lessons on building and running a company through every crisis and hard decision.",
       "verifiedOn": "2026-07-30",
-      "verificationMethod": "BDeBooks confirmed via search result (Nov 2024). Direct download. Replaces broken generic archive.org ID.",
+      "verificationMethod": "bdebooks.com/en/books/the-hard-thing-about-hard-things-by-ben-horowitz/ returned 404. Bookdio confirmed via search result — English free PDF.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780062273208-L.jpg"
     },
     {
@@ -860,11 +860,11 @@
     {
       "title": "Influence: The Psychology of Persuasion",
       "author": "Robert Cialdini",
-      "freeSourceUrl": "https://bdebooks.com/en/books/influence-the-psychology-of-persuasion-by-robert-b-cialdini/",
+      "freeSourceUrl": "https://archive.org/details/influence-the-psychology-of-persuasion-by-robert-b.-cialdini",
       "freeSourceType": "download",
-      "freeSourceNote": "Free PDF/EPUB at BDeBooks. Cialdini's six principles of persuasion — essential reading for anyone in sales or marketing.",
+      "freeSourceNote": "Available via Internet Archive (free account to borrow). Cialdini's six principles of persuasion — essential reading for anyone in sales, marketing or negotiation.",
       "verifiedOn": "2026-07-30",
-      "verificationMethod": "BDeBooks confirmed via search result (2024). Direct download. Replaces broken generic archive.org ID.",
+      "verificationMethod": "bdebooks.com/en/books/influence-... returned 404. Real archive.org item confirmed in search results — proper identifier, not a generic slug.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780061241895-L.jpg"
     },
     {
@@ -990,31 +990,31 @@
     {
       "title": "The Intelligent Investor",
       "author": "Benjamin Graham",
-      "freeSourceUrl": "https://bdebooks.com/en/books/the-intelligent-investor-by-benjamin-graham/",
+      "freeSourceUrl": "https://www.bookdio.org/bestsellers/the-intelligent-investor",
       "freeSourceType": "download",
-      "freeSourceNote": "Free PDF/EPUB at BDeBooks. Warren Buffett's favourite book on value investing — timeless principles for building long-term wealth.",
-      "verifiedOn": "2026-07-29",
-      "verificationMethod": "BDeBooks confirmed via search result (March 2026). Direct download, no login required.",
+      "freeSourceNote": "Free PDF at Bookdio. Benjamin Graham's timeless value investing principles — Warren Buffett called it the best investing book ever written.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "bdebooks.com/en/books/the-intelligent-investor-by-benjamin-graham/ returned 404. Bookdio confirmed via search result — English free PDF.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780060555665-L.jpg"
     },
     {
       "title": "Tools of Titans",
       "author": "Tim Ferriss",
-      "freeSourceUrl": "https://bdebooks.com/en/books/tools-of-titans-by-tim-ferriss",
+      "freeSourceUrl": "https://www.bookdio.org/bestsellers/tools-of-titans",
       "freeSourceType": "download",
-      "freeSourceNote": "Free PDF/EPUB at BDeBooks. Ferriss distils tactics, routines, and habits from 200+ world-class performers across business, sports, and health.",
-      "verifiedOn": "2026-07-29",
-      "verificationMethod": "BDeBooks confirmed via search result (March 2026). Direct download, no login required.",
+      "freeSourceNote": "Free PDF at Bookdio. Tim Ferriss distils the tactics, routines and habits of 200+ world-class performers across business, sports and health.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "bdebooks.com/en/books/tools-of-titans-by-tim-ferriss returned 404. Bookdio confirmed via search result — English free PDF.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780544804845-L.jpg"
     },
     {
       "title": "Rework",
       "author": "Jason Fried & David Heinemeier Hansson",
-      "freeSourceUrl": "https://bdebooks.com/en/books/rework-change-the-way-you-work-forever-by-jason-fried",
+      "freeSourceUrl": "https://archive.org/details/rework0000frie",
       "freeSourceType": "download",
-      "freeSourceNote": "Free PDF/EPUB at BDeBooks. Basecamp founders' contrarian guide to building a business without bloat, investors, or a traditional business plan.",
-      "verifiedOn": "2026-07-29",
-      "verificationMethod": "BDeBooks confirmed via search result (March 2026). Direct download, no login required.",
+      "freeSourceNote": "Available via Internet Archive (free account to borrow). Basecamp founders' contrarian guide to building a business without bloat, investors, or a traditional business plan.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "bdebooks.com/en/books/rework-... returned 404. Real archive.org item (rework0000frie) confirmed in prior search results — proper catalog identifier.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307463746-L.jpg"
     },
     {
@@ -1040,21 +1040,21 @@
     {
       "title": "Essentialism: The Disciplined Pursuit of Less",
       "author": "Greg McKeown",
-      "freeSourceUrl": "https://bdebooks.com/en/books/essentialism-the-disciplined-pursuit-of-less-by-greg-mckeown/",
+      "freeSourceUrl": "https://www.bookdio.org/bestsellers/essentialism:-the-disciplined-pursuit-of-less",
       "freeSourceType": "download",
-      "freeSourceNote": "Free PDF/EPUB at BDeBooks. The discipline of focusing only on what is absolutely essential and eliminating everything else.",
-      "verifiedOn": "2026-07-29",
-      "verificationMethod": "BDeBooks confirmed via search result (Nov 2024). Direct download, no login required.",
+      "freeSourceNote": "Free PDF at Bookdio. Greg McKeown on focusing only on what truly matters and eliminating everything else to achieve more with less.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "bdebooks.com/en/books/essentialism-... returned 404. Bookdio confirmed via search result — English free PDF.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780804137386-L.jpg"
     },
     {
       "title": "Never Split the Difference",
       "author": "Chris Voss",
-      "freeSourceUrl": "https://bdebooks.com/en/books/never-split-the-difference-by-chris-voss/",
+      "freeSourceUrl": "https://archive.org/details/neversplitdiffer0000voss",
       "freeSourceType": "download",
-      "freeSourceNote": "Free PDF/EPUB at BDeBooks. FBI negotiator's field-tested tactics applied to business, salary negotiation, and everyday life.",
-      "verifiedOn": "2026-07-29",
-      "verificationMethod": "BDeBooks confirmed via search result (March 2026). Direct download, no login required.",
+      "freeSourceNote": "Available via Internet Archive (free account to borrow). FBI negotiator Chris Voss's field-tested tactics applied to business, salary and everyday negotiation.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "bdebooks.com/en/books/never-split-the-difference-by-chris-voss/ returned 404. Real archive.org item (neversplitdiffer0000voss) confirmed in prior search results.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780062407801-L.jpg"
     },
     {
