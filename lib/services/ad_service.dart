@@ -465,7 +465,7 @@ class AdService extends ChangeNotifier {
     );
 
     try {
-      _interstitialAd!.show();
+      unawaited(_interstitialAd!.show());
     } on Object catch (e) {
       debugPrint('[ads] Interstitial show() threw: $e');
       if (!completer.isCompleted) completer.complete();
