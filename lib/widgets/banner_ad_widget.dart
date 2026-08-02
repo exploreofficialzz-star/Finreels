@@ -35,7 +35,11 @@ import '../services/ad_service.dart';
 /// Each instance creates and owns its own [BannerAd], sized adaptively to
 /// the width available to it.
 class LabelledBannerAd extends StatefulWidget {
-  const LabelledBannerAd({super.key});
+  /// Pass a [fixedSize] (e.g. [AdSize.mediumRectangle] for the 300×250 large
+  /// banner used on the Channels screen) to request a fixed format instead of
+  /// the default anchored-adaptive banner that fills available width.
+  const LabelledBannerAd({super.key, this.fixedSize});
+  final AdSize? fixedSize;
 
   @override
   State<LabelledBannerAd> createState() => _LabelledBannerAdState();
@@ -67,12 +71,17 @@ class _LabelledBannerAdState extends State<LabelledBannerAd> {
 
   Future<void> _load(double width) async {
     if (!mounted) return;
-    final adaptiveSize = await AdSize.getAnchoredAdaptiveBannerAdSize(
-      Orientation.portrait,
-      width.truncate(),
-    );
-    if (!mounted) return;
-    final size = adaptiveSize ?? AdSize.banner; // graceful fallback
+    final AdSize size;
+    if (widget.fixedSize != null) {
+      size = widget.fixedSize!;
+    } else {
+      final adaptive = await AdSize.getAnchoredAdaptiveBannerAdSize(
+        Orientation.portrait,
+        width.truncate(),
+      );
+      if (!mounted) return;
+      size = adaptive ?? AdSize.banner; // graceful fallback
+    }
 
     await _ad?.dispose();
     _ad = BannerAd(

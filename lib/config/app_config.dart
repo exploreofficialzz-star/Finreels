@@ -167,23 +167,27 @@ class AppConfig {
   ];
 
   // ── Ad Frequency ─────────────────────────────────────────────────────────────
-  /// Videos tab: interstitial fires on tap 8, 16, 24 …
-  /// Separate from the shared cycle so shorts/blogs can stay at their own cadence.
-  static const int interstitialVideoEvery = 8;
+  /// Videos tab — fires on video OPEN (tap 4, 8, 12 …).
+  static const int interstitialVideoEvery = 4;
 
-  /// Blog articles: interstitial fires on tap 8, 16, 24 …
-  static const int interstitialBlogEvery = 8;
+  /// Video player — fires on play/pause TAP (tap 6, 12, 18 …).
+  static const int interstitialVideoPlayPauseEvery = 6;
 
-  /// Books (open from feed, search, saved, or category): every 8 opens.
-  static const int interstitialBookEvery = 8;
+  /// Blog articles — fires on article OPEN (tap 4, 8, 12 …).
+  static const int interstitialBlogEvery = 4;
 
-  /// Channels page (opening shorts from the channel grid): every 12 taps.
-  /// Less frequent than video/blog since users browse channel lists quickly.
+  /// Books — fires on BookDetailScreen OPEN (tap 4, 8, 12 …).
+  static const int interstitialBookEvery = 4;
+
+  /// Books / blogs — fires on "Read" / "Continue Reading" tap (6, 12, 18 …).
+  static const int interstitialBookReadEvery = 6;
+
+  /// Channels page grid taps — every 12.
   static const int interstitialEveryNChannelsPage = 12;
 
   // Shared cycle for shorts thumbnail-taps and channel switching.
-  // interstitialCycleLength = 2 → fires on tap 2, 4, 6, 8 …
-  static const int interstitialCycleLength = 2;
+  // interstitialCycleLength = 4 → fires on tap 4, 8, 12 …
+  static const int interstitialCycleLength = 4;
 
   // Shorts: show ad every N pages scrolled.
   static const int interstitialEveryNShorts = 4;

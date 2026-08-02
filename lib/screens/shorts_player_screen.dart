@@ -259,7 +259,8 @@ class _ShortPage extends StatefulWidget {
 }
 
 class _ShortPageState extends State<_ShortPage>
-    with AutomaticKeepAliveClientMixin<_ShortPage> {
+    with AutomaticKeepAliveClientMixin<_ShortPage>,
+         WidgetsBindingObserver {
 
   // AutomaticKeepAliveClientMixin — wantKeepAlive = true keeps this page's
   // WebView alive in memory after the user scrolls away.  Without this, every
@@ -276,6 +277,9 @@ class _ShortPageState extends State<_ShortPage>
   // exists in the WebView before the thumbnail overlay is removed.
   // Never resets (so pausing doesn't flash the thumbnail again).
   bool   _hasVideoStarted = false;
+  // Set to true when the app goes to background (interstitial fires) while
+  // this short is playing, so we can resume it when the app returns.
+  bool   _wasPlayingBeforeAd = false;
   double _progress       = 0;
 
   // Tap-feedback icons: show briefly (700 ms) then auto-hide.
@@ -296,6 +300,7 @@ class _ShortPageState extends State<_ShortPage>
   void initState() {
     super.initState();
     final autoPlay = widget.autoPlayOnActivate && widget.isActive;
+    WidgetsBinding.instance.addObserver(this);
     _controller = YoutubePlayerController(
       initialVideoId: widget.video.id,
       flags: YoutubePlayerFlags(
@@ -311,6 +316,30 @@ class _ShortPageState extends State<_ShortPage>
     _userStarted = true;
     if (autoPlay) {
       unawaited(EngagementService.instance.recordView(widget.video));
+    }
+  }
+
+  // ── Lifecycle — pause/resume around interstitial ads ───────────────────────
+  // When an interstitial fires, Android brings AdMob's Activity to the
+  // foreground → our app transitions to AppLifecycleState.paused.  Without
+  // this handler the YouTube WebView can keep playing audio underneath the ad.
+  // When the ad is dismissed (resumed), we restart the short exactly where it
+  // paused — without showing the play-feedback animation (that's only for
+  // deliberate user taps).
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (!widget.isActive || !mounted) return;
+    switch (state) {
+      case AppLifecycleState.paused:
+        _wasPlayingBeforeAd = _playing;
+        if (_playing) _controller.pause();
+      case AppLifecycleState.resumed:
+        if (_wasPlayingBeforeAd && _ready) {
+          _wasPlayingBeforeAd = false;
+          _controller.play(); // resume silently — no feedback icon
+        }
+      default:
+        break;
     }
   }
 
@@ -387,6 +416,7 @@ class _ShortPageState extends State<_ShortPage>
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _pauseIconTimer?.cancel();
     _playFeedbackTimer?.cancel();
     _controller

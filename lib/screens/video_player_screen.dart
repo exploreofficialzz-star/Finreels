@@ -149,6 +149,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   void _togglePlay() {
     final willPause = _playing || _intendedPlaying;
     willPause ? _controller.pause() : _controller.play();
+    // Fire the play/pause ad counter (every 6 taps → interstitial).
+    unawaited(AdService.instance.onVideoPlayPauseTapped());
 
     setState(() {
       _intendedPlaying = !willPause;
@@ -410,7 +412,12 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 listenable: AdService.instance,
                 builder: (_, __) => AdService.instance.adsRemoved
                     ? const SizedBox.shrink()
-                    : const LabelledBannerAd(),
+                    // SizedBox.expand ensures the banner requests the FULL
+                    // screen width via LayoutBuilder — matching the video width.
+                    : const SizedBox(
+                        width: double.infinity,
+                        child: LabelledBannerAd(),
+                      ),
               ),
           ],
         ),

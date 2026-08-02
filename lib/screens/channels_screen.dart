@@ -73,7 +73,7 @@ class _ChannelsScreenState extends State<ChannelsScreen> {
             listenable: AdService.instance,
             builder: (_, __) => AdService.instance.adsRemoved
                 ? const SizedBox.shrink()
-                : const LabelledBannerAd(),
+                : const LabelledBannerAd(fixedSize: AdSize.mediumRectangle),
           ),
         ],
       ),

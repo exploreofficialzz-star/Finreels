@@ -59,8 +59,11 @@ class AdService extends ChangeNotifier {
   /// Blog tap counter — fires interstitial on tap 8, 16, 24 …
   int _blogTapCount = 0;
 
-  /// Book open counter — fires interstitial on open 8, 16, 24 …
+  /// Book open counter — fires interstitial on open 4, 8, 12 …
   int _bookReadCount = 0;
+
+  /// Video play/pause tap counter — fires interstitial on tap 6, 12, 18 …
+  int _videoPlayPauseCount = 0;
 
   /// Shorts thumbnail-tap counter — fires interstitial on tap 4, 8, 12 …
   int _shortTapCount = 0;
@@ -363,13 +366,24 @@ class AdService extends ChangeNotifier {
     }
   }
 
+  // ── VIDEO PLAY/PAUSE TRIGGER ─────────────────────────────────────────────────
+  /// Fires on every 6th play/pause tap inside the video player.
+  /// Uses its own counter so it never interferes with video-open frequency.
+  Future<void> onVideoPlayPauseTapped() async {
+    if (_adsRemoved || !_initialized) return;
+    _videoPlayPauseCount++;
+    if (_videoPlayPauseCount % AppConfig.interstitialVideoPlayPauseEvery == 0) {
+      await showInterstitial();
+    }
+  }
+
   // ── BOOK READ TRIGGER ─────────────────────────────────────────────────────
   /// Fires on every 8th book open — same cadence as videos and blogs.
   /// Polls for up to 2 s in case the ad is still loading from a prior dismiss.
   Future<void> onBookRead() async {
     if (_adsRemoved) return;
     _bookReadCount++;
-    if (_bookReadCount % AppConfig.interstitialBookEvery != 0) return;
+    if (_bookReadCount % AppConfig.interstitialBookReadEvery != 0) return;
     const maxWaitMs  = 2000;
     const pollMs     = 150;
     var   waited     = 0;
@@ -425,16 +439,45 @@ class AdService extends ChangeNotifier {
 
   Future<void> showInterstitial() async {
     if (_adsRemoved || _interstitialAd == null || !_interstitialReady) return;
+
+    // Use a Completer so this method properly AWAITS the ad being DISMISSED —
+    // not just shown.  This prevents the caller (e.g. onShortScrolled) from
+    // returning while the ad is still playing, which was causing the shorts
+    // player to resume underneath the ad video.
+    final completer = Completer<void>();
+
+    _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+      onAdDismissedFullScreenContent: (ad) {
+        ad.dispose();
+        _interstitialAd    = null;
+        _interstitialReady = false;
+        if (!completer.isCompleted) completer.complete();
+        unawaited(_loadInterstitial());
+      },
+      onAdFailedToShowFullScreenContent: (ad, err) {
+        debugPrint('[ads] Interstitial failed to show: $err');
+        ad.dispose();
+        _interstitialAd    = null;
+        _interstitialReady = false;
+        if (!completer.isCompleted) completer.complete();
+        unawaited(_loadInterstitial());
+      },
+    );
+
     try {
-      await _interstitialAd!.show();
+      _interstitialAd!.show();
     } on Object catch (e) {
-      debugPrint('[ads] Interstitial show() failed, reloading: $e');
+      debugPrint('[ads] Interstitial show() threw: $e');
+      if (!completer.isCompleted) completer.complete();
       unawaited(_interstitialAd?.dispose() ?? Future.value());
-      _interstitialAd = null;
+      _interstitialAd    = null;
+      _interstitialReady = false;
       unawaited(_loadInterstitial());
       return;
     }
+
     _interstitialReady = false;
+    await completer.future; // Block until ad is dismissed
   }
 
   // ── Legacy compat ─────────────────────────────────────────────────────────
