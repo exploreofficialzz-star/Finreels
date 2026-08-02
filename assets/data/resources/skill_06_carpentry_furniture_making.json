@@ -1,7 +1,7 @@
 {
   "categoryId": "skill_06_carpentry_furniture_making",
   "status": "complete",
-  "lastUpdated": "2026-07-21",
+  "lastUpdated": "2026-07-30",
   "channels": [
     {
       "id": "UCOUFSlpGiL9I3jPbt0vcI0A",
@@ -190,11 +190,11 @@
     {
       "title": "Markup & Profit: A Contractor's Guide",
       "author": "Michael Stone",
-      "freeSourceUrl": "https://markupandprofit.com/resources",
+      "freeSourceUrl": "https://www.markupandprofit.com/blog/",
       "freeSourceType": "web",
-      "freeSourceNote": "Free articles and pricing methodology resources at markupandprofit.com — covers markup, overhead recovery, and profit-first quoting for contractors",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "markupandprofit.com is Michael Stone's official site. Free articles and resources available; the full book is paid. Use the /resources section for free content. Note: CSV listed this as 'Pricing for Tradespeople FREE' — the book itself is not free; the site offers free articles and methodology guides.",
+      "freeSourceNote": "Free contractor business articles from Michael Stone — covers markup, pricing, overhead, contracts, and running a profitable trade business. No signup required.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://markupandprofit.com/resources — /resources subpage not found in search index (confirmed in skill_05 audit). Same fix applied: /blog/ confirmed active (site last indexed May–June 2026).",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180864-L.jpg"
     },
     {
@@ -210,73 +210,73 @@
     {
       "title": "The E-Myth Revisited",
       "author": "Michael E. Gerber",
-      "freeSourceUrl": "https://books.google.com/books?id=SHi_fU0AlO0C",
+      "freeSourceUrl": "https://archive.org/details/TheEMythRevisitedMichaelE.Gerber",
       "freeSourceType": "web",
-      "freeSourceNote": "Free preview at Google Books — covers the technician/manager/entrepreneur framework essential for carpenters transitioning to business owners",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "URL CORRECTED: CSV had f5fp.com which is a third-party site of uncertain legitimacy for a copyrighted book. Replaced with Google Books preview (legitimate). Full book should be purchased from publisher.",
+      "freeSourceNote": "Free to read and download via Internet Archive — why most small businesses fail and how to build repeatable systems that work without the owner.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://books.google.com/books?id=SHi_fU0AlO0C is a limited Google Books preview (typically 20–30% of pages only). Replaced with confirmed Internet Archive free PDF — same fix applied across skill_01–05 in-app testing.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     },
     {
       "title": "Profit First",
       "author": "Mike Michalowicz",
-      "freeSourceUrl": "https://www.mikemichalowicz.com/profit-first-book",
+      "freeSourceUrl": "https://archive.org/details/profitfirst0000mich",
       "freeSourceType": "web",
-      "freeSourceNote": "Free chapter and framework overview at mikemichalowicz.com — take profit before expenses using envelope-style account allocation",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "mikemichalowicz.com is the author's official site — free chapter download available. Directly solves cash-flow problems for Nigerian carpenters who complete large jobs and have nothing left after materials.",
+      "freeSourceNote": "Free to borrow via Internet Archive — cash-flow system that prioritises profit allocation upfront. Requires a free Internet Archive account.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://www.mikemichalowicz.com/profit-first-book returned blank/black screen (confirmed broken in skill_01–05 in-app testing). Same fix applied.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781635767407-L.jpg"
     },
     {
       "title": "The $100 Startup",
       "author": "Chris Guillebeau",
-      "freeSourceUrl": "https://archive.org/details/the-100-startup",
+      "freeSourceUrl": "https://www.100startup.com/",
       "freeSourceType": "pdf",
-      "freeSourceNote": "Available at archive.org via Open Library controlled digital lending — how to launch a business with minimal capital using skills you already have",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "archive.org Open Library uses controlled digital lending — legal borrowing system. Directly relevant to carpenters who need the business framework to monetise existing trade skills.",
+      "freeSourceNote": "Free resource library from the official $100 Startup companion site — business plans, launch checklists, and promotion frameworks from Chris Guillebeau's book. Free, no credit card required.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://archive.org/details/the-100-startup — identifier not confirmed in archive.org search index (2026-07-30). Replaced with official companion site 100startup.com — confirmed active (search snippet: 'Get the free resource library... Free. No credit card.').",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307951526-L.jpg"
     },
     {
       "title": "Good to Great",
       "author": "Jim Collins",
-      "freeSourceUrl": "https://archive.org/details/good-to-great",
+      "freeSourceUrl": "https://archive.org/details/goodtogreatwhyso0000coll",
       "freeSourceType": "pdf",
-      "freeSourceNote": "Available at archive.org Open Library — the hedgehog concept and flywheel model for scaling a small trade business",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "archive.org Open Library controlled digital lending. Collins's frameworks apply to carpenters deciding which segment to dominate before scaling.",
+      "freeSourceNote": "Free to borrow via Internet Archive — Jim Collins' research on what separates truly great companies from good ones: Level 5 Leadership, the Hedgehog Concept, and disciplined culture. Requires a free Internet Archive account.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://archive.org/details/good-to-great — identifier not confirmed in archive.org search index (2026-07-30). Updated to confirmed-active copy: goodtogreatwhyso0000coll (xii, 300 pages, uploaded June 2020, confirmed via web search).",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780066620992-L.jpg"
     },
     {
       "title": "The Personal MBA",
       "author": "Josh Kaufman",
-      "freeSourceUrl": "https://archive.org/details/personal-mba",
+      "freeSourceUrl": "https://archive.org/details/personalmbaworld0000kauf",
       "freeSourceType": "pdf",
-      "freeSourceNote": "Available at archive.org Open Library — complete business fundamentals covering value creation, marketing, sales, and finance without a business degree",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "archive.org Open Library controlled digital lending. Covers all business fundamentals a carpenter needs to run a furniture company.",
+      "freeSourceNote": "Free to borrow via Internet Archive — 402-page business education covering entrepreneurship, marketing, sales, operations, and finance. Requires a free Internet Archive account.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://archive.org/details/personal-mba — identifier not confirmed in archive.org search index (confirmed in skill_05 audit). Same fix applied: personalmbaworld0000kauf confirmed (xiv, 402 pages, uploaded January 2020).",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781591845188-L.jpg"
     },
     {
       "title": "Rework",
       "author": "Jason Fried & David Heinemeier Hansson",
-      "freeSourceUrl": "https://archive.org/details/rework",
+      "freeSourceUrl": "https://openlibrary.org/works/OL15168112W/Rework",
       "freeSourceType": "pdf",
-      "freeSourceNote": "Available at archive.org Open Library — lean business philosophy covering efficiency, focus, and building a productive shop without complexity",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "archive.org Open Library controlled digital lending. Fried & DHH's emphasis on doing less better applies directly to carpenters who take too many low-margin jobs.",
+      "freeSourceNote": "Free to borrow via Open Library — the counterintuitive business playbook from the founders of Basecamp: do less, build simpler, ignore the competition. Requires a free Open Library account.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://archive.org/details/rework — identifier not confirmed in archive.org search index (2026-07-30). Replaced with confirmed Open Library page: OL15168112W — confirmed present via web search (full book description, September 2022).",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307463746-L.jpg"
     },
     {
       "title": "Small Business Management",
       "author": "OpenStax",
-      "freeSourceUrl": "https://openstax.org/details/books/small-business-management",
+      "freeSourceUrl": "https://openstax.org/details/books/principles-management",
       "freeSourceType": "web",
-      "freeSourceNote": "Free peer-reviewed textbook at openstax.org — covers operations, finance, marketing and HR for small businesses. No paywall, no DRM.",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "OpenStax publishes legally free, peer-reviewed academic textbooks. Permanently free, no copyright restrictions. Complete business curriculum for small enterprise operators.",
+      "freeSourceNote": "Free open-license textbook from OpenStax — covers planning, organising, leading, and controlling a business. Directly applicable to managing a small business.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://openstax.org/details/books/small-business-management is a 404 — OpenStax has no book by that slug (confirmed broken in skill_02–05 audits). Same fix applied: principles-management confirmed active © Apr 23, 2026.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781951693633-L.jpg"
     }
   ],
-  "integrationNotes": "All 10 channel IDs live-verified via YouTube fetch (2026-07-21). Key corrections from CSV: (1) @jonpeters → @JonPetersArtHome; (2) @africasyoungentrepreneurs → @africasy0ungentrepreneurs (ZERO not letter O — critical); (3) @frankhowarth → @frankmakes; (4) @aprildawilkerson → @AprilWilkerson; (5) @thewoodwhisperer → @woodwhisperer; (6) @hudumaglobal replaced with Make Something (no YouTube channel at that handle); (7) @nigeriancarpentertv replaced with Jay Bates (no YouTube channel found). Blog URLs carried from CSV — run curl -I on each /feed/ before deploying. Book URLs: f5fp.com and bdebooks.com replaced with legitimate alternatives. archive.org links use Open Library controlled digital lending."
+  "integrationNotes": "All 10 channel IDs live-verified via YouTube fetch (2026-07-21). Key corrections from CSV: (1) @jonpeters → @JonPetersArtHome; (2) @africasyoungentrepreneurs → @africasy0ungentrepreneurs (ZERO not letter O — critical); (3) @frankhowarth → @frankmakes; (4) @aprildawilkerson → @AprilWilkerson; (5) @thewoodwhisperer → @woodwhisperer; (6) @hudumaglobal replaced with Make Something (no YouTube channel at that handle); (7) @nigeriancarpentertv replaced with Jay Bates (no YouTube channel found). Blog URLs carried from CSV — run curl -I on each /feed/ before deploying. Book URLs: f5fp.com and bdebooks.com replaced with legitimate alternatives. archive.org links use Open Library controlled digital lending.\n\nBooks audit (2026-07-30): 8 of 10 URLs fixed in this pass (skill_06). 'Markup & Profit: A Contractor's Guide': https://markupandprofit.com/resources... → https://www.markupandprofit.com/blog/ | 'The E-Myth Revisited': https://books.google.com/books?id=SHi_fU0AlO0C... → https://archive.org/details/TheEMythRevisitedMichaelE.Gerber | 'Profit First': https://www.mikemichalowicz.com/profit-first-book... → https://archive.org/details/profitfirst0000mich | 'The $100 Startup': https://archive.org/details/the-100-startup... → https://www.100startup.com/ | 'Good to Great': https://archive.org/details/good-to-great... → https://archive.org/details/goodtogreatwhyso0000coll | 'The Personal MBA': https://archive.org/details/personal-mba... → https://archive.org/details/personalmbaworld0000kauf | 'Rework': https://archive.org/details/rework... → https://openlibrary.org/works/OL15168112W/Rework | 'Small Business Management': https://openstax.org/details/books/small-business-management... → https://openstax.org/details/books/principles-management"
 }

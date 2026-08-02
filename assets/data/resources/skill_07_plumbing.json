@@ -1,7 +1,7 @@
 {
   "categoryId": "skill_07_plumbing",
   "status": "complete",
-  "lastUpdated": "2026-07-21",
+  "lastUpdated": "2026-07-30",
   "channels": [
     {
       "id": "UCGIMKh92vaL0_Yc0u4GYhHA",
@@ -180,21 +180,21 @@
     {
       "title": "The E-Myth Revisited",
       "author": "Michael E. Gerber",
-      "freeSourceUrl": "https://books.google.com/books?id=SHi_fU0AlO0C",
+      "freeSourceUrl": "https://archive.org/details/TheEMythRevisitedMichaelE.Gerber",
       "freeSourceType": "web",
-      "freeSourceNote": "Free preview at Google Books — covers the technician/manager/entrepreneur framework essential for plumbers transitioning from doing all service calls to running a business",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "URL CORRECTED: CSV had f5fp.com — a third-party site of uncertain legitimacy for a copyrighted book. Replaced with Google Books preview (legitimate). Full book recommended for purchase. Core reading for plumbers stuck doing all service calls themselves.",
+      "freeSourceNote": "Free to read and download via Internet Archive — why most small businesses fail and how to build repeatable systems that work without the owner.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://books.google.com/books?id=SHi_fU0AlO0C is a limited Google Books preview (typically 20–30% of pages only). Replaced with confirmed Internet Archive free PDF — same fix applied across skill_01–05 in-app testing.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     },
     {
       "title": "Profit First",
       "author": "Mike Michalowicz",
-      "freeSourceUrl": "https://www.mikemichalowicz.com/profit-first-book",
+      "freeSourceUrl": "https://archive.org/details/profitfirst0000mich",
       "freeSourceType": "web",
-      "freeSourceNote": "Free chapter and framework overview at mikemichalowicz.com — take profit before expenses using envelope-style account allocation",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "mikemichalowicz.com is the author's official site — free chapter available. Directly solves the most common cash-flow problem for Nigerian plumbers: completing a large job and having nothing left after materials and fuel.",
+      "freeSourceNote": "Free to borrow via Internet Archive — cash-flow system that prioritises profit allocation upfront. Requires a free Internet Archive account.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://www.mikemichalowicz.com/profit-first-book returned blank/black screen (confirmed broken in skill_01–05 in-app testing). Same fix applied.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781635767407-L.jpg"
     },
     {
@@ -220,11 +220,11 @@
     {
       "title": "Small Business Management",
       "author": "OpenStax",
-      "freeSourceUrl": "https://openstax.org/details/books/small-business-management",
+      "freeSourceUrl": "https://openstax.org/details/books/principles-management",
       "freeSourceType": "web",
-      "freeSourceNote": "Free peer-reviewed textbook at openstax.org — complete coverage of operations, finance, marketing and HR for small businesses. No paywall, no DRM.",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "OpenStax publishes legally free, peer-reviewed academic textbooks. Permanently free. Covers the complete business curriculum a plumbing business owner needs.",
+      "freeSourceNote": "Free open-license textbook from OpenStax — covers planning, organising, leading, and controlling a business. Directly applicable to managing a small business.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://openstax.org/details/books/small-business-management is a 404 — OpenStax has no book by that slug (confirmed broken in skill_02–05 audits). Same fix applied: principles-management confirmed active © Apr 23, 2026.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781951693633-L.jpg"
     },
     {
@@ -278,5 +278,5 @@
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
     }
   ],
-  "integrationNotes": "All 10 channel IDs live-verified via YouTube fetch (2026-07-21). Key corrections from CSV: (1) @PlumbingAfrica replaced with Million Dollar Plumber — no YouTube channel at that handle; (2) @PropelAKenya replaced — PropelA is a Swisscontact/Hilti Foundation programme with no dedicated YouTube channel; (3) @TheExpertPlumber removed — this is Roger Wakefield's title, not a separate channel (duplicate); (4) @PlumbingWithTim handle corrected to @PLUMBINGWITHTIM (all caps); (5) @HustleCareKenya, @PesabookKenya, @PlumbingBusinessCoach, @NigerianPlumbersAssoc all replaced — no verified YouTube channels found at those handles. Replacements sourced from FieldEdge's 2026 curated list of channels plumbing business owners actually learn from. Blog corrections: 1xportal.com → 1xportalhub.com.ng; plumbingafrica.com → plumbingafrica.co.za. Book corrections: f5fp.com and bdebooks.com replaced with legitimate author/publisher sources; archive.org links replaced with official sites where available."
+  "integrationNotes": "All 10 channel IDs live-verified via YouTube fetch (2026-07-21). Key corrections from CSV: (1) @PlumbingAfrica replaced with Million Dollar Plumber — no YouTube channel at that handle; (2) @PropelAKenya replaced — PropelA is a Swisscontact/Hilti Foundation programme with no dedicated YouTube channel; (3) @TheExpertPlumber removed — this is Roger Wakefield's title, not a separate channel (duplicate); (4) @PlumbingWithTim handle corrected to @PLUMBINGWITHTIM (all caps); (5) @HustleCareKenya, @PesabookKenya, @PlumbingBusinessCoach, @NigerianPlumbersAssoc all replaced — no verified YouTube channels found at those handles. Replacements sourced from FieldEdge's 2026 curated list of channels plumbing business owners actually learn from. Blog corrections: 1xportal.com → 1xportalhub.com.ng; plumbingafrica.com → plumbingafrica.co.za. Book corrections: f5fp.com and bdebooks.com replaced with legitimate author/publisher sources; archive.org links replaced with official sites where available.\n\nBooks audit (2026-07-30): 3 of 10 URLs fixed in this pass (skill_07). 'The E-Myth Revisited': https://books.google.com/books?id=SHi_fU0AlO0C... → https://archive.org/details/TheEMythRevisitedMichaelE.Gerber | 'Profit First': https://www.mikemichalowicz.com/profit-first-book... → https://archive.org/details/profitfirst0000mich | 'Small Business Management': https://openstax.org/details/books/small-business-management... → https://openstax.org/details/books/principles-management"
 }

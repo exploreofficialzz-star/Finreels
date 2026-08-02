@@ -1,7 +1,7 @@
 {
   "categoryId": "skill_10_phone_electronics_repair",
   "status": "complete",
-  "lastUpdated": "2026-07-22",
+  "lastUpdated": "2026-07-30",
   "channels": [
     {
       "id": "UCWFKCr40YwOZQx8FHU_ZqqQ",
@@ -190,11 +190,11 @@
     {
       "title": "iFixit Repair Manuals",
       "author": "iFixit",
-      "freeSourceUrl": "https://www.ifixit.com/Manuals",
+      "freeSourceUrl": "https://www.ifixit.com/Guide",
       "freeSourceType": "web",
-      "freeSourceNote": "Free via iFixit — 25,000+ device repair manuals, no account required, the definitive free repair technical reference.",
-      "verifiedOn": "2026-07-22",
-      "verificationMethod": "ifixit.com/Manuals confirmed as the canonical URL. Fully free, no account required. Confirmed active via iFixit search results throughout verification.",
+      "freeSourceNote": "Thousands of free repair manuals, tutorials, and how-to guides from iFixit — covering phones, tablets, laptops, and all electronics. The world's largest free repair manual library.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://www.ifixit.com/Manuals — /Manuals path not confirmed in search index. Updated to https://www.ifixit.com/Guide — confirmed active via web search (search snippet: 'Repair Manuals for Every Thing — iFixit | Thousands of repair manuals, tutorials, and how-to guides', 2026-07-30).",
       "coverUrl": "https://assets.ifixit.com/static/icons/ifixit/apple-touch-icon.png"
     },
     {
@@ -210,21 +210,21 @@
     {
       "title": "The Lean Startup",
       "author": "Eric Ries",
-      "freeSourceUrl": "https://bdebooks.com/books/the-lean-startup-by-eric-ries-pdf-free-download/",
+      "freeSourceUrl": "https://theleanstartup.com",
       "freeSourceType": "PDF",
-      "freeSourceNote": "Free PDF via BDeBooks — validated learning and MVP framework applicable to iterating a repair business model.",
-      "verifiedOn": "2026-07-22",
-      "verificationMethod": "URL from FinReels research CSV. BDeBooks domain was not independently confirmed live during this verification pass. Check bdebooks.com link is live and returns the correct file before shipping.",
+      "freeSourceNote": "Official Lean Startup site — free methodology overview, principles, case studies, and resources for building a business that continuously tests, learns, and grows.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://bdebooks.com/books/the-lean-startup-by-eric-ries-pdf-free-download/ is a piracy/copyright-infringing site (same domain confirmed piracy in skill_03 audit). Same fix applied.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
     },
     {
       "title": "Rich Dad Poor Dad",
       "author": "Robert Kiyosaki",
-      "freeSourceUrl": "https://archive.org/details/KiyosakiRichDadPoorDad",
+      "freeSourceUrl": "https://archive.org/details/rich-dad-poor-dad-robert-kiyosaki",
       "freeSourceType": "PDF",
-      "freeSourceNote": "Free direct download via Internet Archive opensource collection — no account required.",
-      "verifiedOn": "2026-07-22",
-      "verificationMethod": "URL CORRECTED: Original guess was wrong. Confirmed identifier 'KiyosakiRichDadPoorDad' found in search results — in the 'opensource' collection with MOBI and PDF downloads available, no login required. 723 views, confirmed live.",
+      "freeSourceNote": "Free on Internet Archive — Kiyosaki's foundational guide to financial independence, assets vs. liabilities, and making money work for you.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://archive.org/details/KiyosakiRichDadPoorDad — identifier not confirmed in archive.org search index (2026-07-30). Same fix applied as skill_03: rich-dad-poor-dad-robert-kiyosaki confirmed active (uploaded April 2020, still indexed 2025).",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781612680194-L.jpg"
     },
     {
@@ -240,11 +240,11 @@
     {
       "title": "Atomic Habits",
       "author": "James Clear",
-      "freeSourceUrl": "https://archive.org/details/atomic-habits-pdfdrive",
+      "freeSourceUrl": "https://jamesclear.com/atomic-habits",
       "freeSourceType": "PDF",
-      "freeSourceNote": "Free direct download via Internet Archive opensource collection — no account required.",
-      "verifiedOn": "2026-07-22",
-      "verificationMethod": "Identifier 'atomic-habits-pdfdrive' confirmed in search results — in the 'opensource' collection. 5,500,847 views, 925 favorites, EPUB and PDF directly downloadable, no login required. Highest-traffic freely available version.",
+      "freeSourceNote": "Official Atomic Habits page from James Clear — full book summary, key habits framework, and free resources from the #1 New York Times bestseller. No signup required.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://archive.org/details/atomic-habits-pdfdrive — sourced from PDFDrive (a known piracy site). Replaced with the official author page jamesclear.com/atomic-habits — confirmed active with full summary and resources (web search, 2026-07-30).",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
@@ -270,13 +270,13 @@
     {
       "title": "The E-Myth Revisited",
       "author": "Michael E. Gerber",
-      "freeSourceUrl": "https://www.f5fp.com/wp-content/uploads/2014/12/The-e-Myth-Revisited-b.pdf",
+      "freeSourceUrl": "https://archive.org/details/TheEMythRevisitedMichaelE.Gerber",
       "freeSourceType": "PDF",
-      "freeSourceNote": "Free book summary PDF via F5 Financial — condensed notes covering the Technician/Manager/Entrepreneur framework. The definitive read on why skilled tradespeople who start businesses often fail.",
-      "verifiedOn": "2026-07-22",
-      "verificationMethod": "URL confirmed live and PDF accessible via search results. NOTE: This is a summary/notes document, not the full book. The CSV intentionally selected f5fp.com as the free source. If the full book is required, replace with an alternative source.",
+      "freeSourceNote": "Free to read and download via Internet Archive — why most small businesses fail and how to build repeatable systems that work without the owner.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://www.f5fp.com/wp-content/uploads/2014/12/The-e-Myth-Revisited-b.pdf is a dead direct PDF on the broken f5fp.com domain. Same fix applied as skill_01–05.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     }
   ],
-  "notes": "Verification pass completed 2026-07-22. Counts: 10 channels / 10 blogs / 10 books. REMAINING SHIP-BLOCKERS (2): Channel 6 'Nigerian Phone Repair' and Channel 8 'Kenyan Phone Repair Business' have no confirmed YouTube channel IDs — CSV labels appear to be descriptive, not actual channel names. Manual YouTube search required for both before these two entries can ship. All other items resolved. CONFIRMED CHANNEL IDs (8/10): JerryRigEverything, iFixit, Phone Repair Guru, TronicsFix, Carlcare Service Global, Phone Repair Hub, Go Cell Phone Repair, Electronics Repair School. NAME CORRECTIONS APPLIED (2): 'Mobile Repair Hub' → Phone Repair Hub; 'Tablet & Phone Repair' → Go Cell Phone Repair. URL CORRECTIONS APPLIED: Africa's Young Entrepreneurs corrected from africasyoungentrepreneurs.com to ayeorganization.com with confirmed article URL; ThePointNG, OtuInfo, Bintus, Entrepreneurs.ng all upgraded to specific article URLs; Carlcare upgraded to specific article URL. ARCHIVE.ORG IDs CORRECTED: $100 Startup, Rich Dad Poor Dad, Atomic Habits, 4-Hour Work Week all updated to confirmed identifiers. Rich Dad Poor Dad and Atomic Habits and 4-Hour Work Week are in opensource collections (no-account download). $100 Startup and Personal MBA require a free IA account to borrow. SOFT FLAGS: phonerepairbusinessguide.com and mobilerepairbusiness.com not confirmed live — check before shipping; BusinessDay Nigeria still needs a specific article URL."
+  "notes": "Verification pass completed 2026-07-22. Counts: 10 channels / 10 blogs / 10 books. REMAINING SHIP-BLOCKERS (2): Channel 6 'Nigerian Phone Repair' and Channel 8 'Kenyan Phone Repair Business' have no confirmed YouTube channel IDs — CSV labels appear to be descriptive, not actual channel names. Manual YouTube search required for both before these two entries can ship. All other items resolved. CONFIRMED CHANNEL IDs (8/10): JerryRigEverything, iFixit, Phone Repair Guru, TronicsFix, Carlcare Service Global, Phone Repair Hub, Go Cell Phone Repair, Electronics Repair School. NAME CORRECTIONS APPLIED (2): 'Mobile Repair Hub' → Phone Repair Hub; 'Tablet & Phone Repair' → Go Cell Phone Repair. URL CORRECTIONS APPLIED: Africa's Young Entrepreneurs corrected from africasyoungentrepreneurs.com to ayeorganization.com with confirmed article URL; ThePointNG, OtuInfo, Bintus, Entrepreneurs.ng all upgraded to specific article URLs; Carlcare upgraded to specific article URL. ARCHIVE.ORG IDs CORRECTED: $100 Startup, Rich Dad Poor Dad, Atomic Habits, 4-Hour Work Week all updated to confirmed identifiers. Rich Dad Poor Dad and Atomic Habits and 4-Hour Work Week are in opensource collections (no-account download). $100 Startup and Personal MBA require a free IA account to borrow. SOFT FLAGS: phonerepairbusinessguide.com and mobilerepairbusiness.com not confirmed live — check before shipping; BusinessDay Nigeria still needs a specific article URL.\n\nBooks audit (2026-07-30): 5 of 10 URLs fixed in this pass (skill_10). 'iFixit Repair Manuals': https://www.ifixit.com/Manuals... → https://www.ifixit.com/Guide | 'The Lean Startup': https://bdebooks.com/books/the-lean-startup-by-eric-ries-pdf... → https://theleanstartup.com | 'Rich Dad Poor Dad': https://archive.org/details/KiyosakiRichDadPoorDad... → https://archive.org/details/rich-dad-poor-dad-robert-kiyosaki | 'Atomic Habits': https://archive.org/details/atomic-habits-pdfdrive... → https://jamesclear.com/atomic-habits | 'The E-Myth Revisited': https://www.f5fp.com/wp-content/uploads/2014/12/The-e-Myth-R... → https://archive.org/details/TheEMythRevisitedMichaelE.Gerber"
 }

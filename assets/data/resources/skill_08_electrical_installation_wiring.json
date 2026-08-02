@@ -1,7 +1,7 @@
 {
   "categoryId": "skill_08_electrical_installation_wiring",
   "status": "ready",
-  "lastUpdated": "2026-07-21",
+  "lastUpdated": "2026-07-30",
   "channels": [
     {
       "id": "UC8oJL9T1z3Gqn6drDphZY6g",
@@ -210,31 +210,31 @@
     {
       "title": "The E-Myth Revisited",
       "author": "Michael E. Gerber",
-      "freeSourceUrl": "https://f5fp.com/e-myth-revisited-free-pdf",
+      "freeSourceUrl": "https://archive.org/details/TheEMythRevisitedMichaelE.Gerber",
       "freeSourceType": "web",
-      "freeSourceNote": "Free PDF at f5fp.com — build business systems so your electrical business runs without you",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "From CSV resource list. Foundational business book written for tradespeople — the E-Myth principle was literally built around electricians and plumbers.",
+      "freeSourceNote": "Free to read and download via Internet Archive — why most small businesses fail and how to build repeatable systems that work without the owner.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://f5fp.com/e-myth-revisited-free-pdf loads F5 Financial (wrong page — confirmed broken in skill_01–05 in-app testing). Same fix applied.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     },
     {
       "title": "Profit First",
       "author": "Mike Michalowicz",
-      "freeSourceUrl": "https://www.mikemichalowicz.com/profit-first-book",
+      "freeSourceUrl": "https://archive.org/details/profitfirst0000mich",
       "freeSourceType": "web",
-      "freeSourceNote": "Free chapter and resources at mikemichalowicz.com — take profit first before expenses",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "From CSV resource list. Top financial management framework recommended by Smart Service, NECA, and contractor business publications for tradespeople.",
+      "freeSourceNote": "Free to borrow via Internet Archive — cash-flow system that prioritises profit allocation upfront. Requires a free Internet Archive account.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://www.mikemichalowicz.com/profit-first-book returned blank/black screen (confirmed broken in skill_01–05 in-app testing). Same fix applied.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781635767407-L.jpg"
     },
     {
       "title": "The Lean Startup",
       "author": "Eric Ries",
-      "freeSourceUrl": "https://bdebooks.com/the-lean-startup/",
+      "freeSourceUrl": "https://theleanstartup.com",
       "freeSourceType": "web",
-      "freeSourceNote": "Free at bdebooks.com — apply lean methodology to launching and scaling an electrical contracting business",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "From CSV resource list as free. Relevant for electricians testing new service lines (solar, EV charging, smart home) with minimal risk.",
+      "freeSourceNote": "Official Lean Startup site — free methodology overview, principles, case studies, and resources for building a business that continuously tests, learns, and grows.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://bdebooks.com/the-lean-startup/ is a piracy/copyright-infringing site not found in any legitimate search index (confirmed in skill_03 audit). Same fix applied.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
     },
     {
@@ -250,11 +250,11 @@
     {
       "title": "Small Business Management",
       "author": "OpenStax",
-      "freeSourceUrl": "https://openstax.org/details/books/small-business-management",
+      "freeSourceUrl": "https://openstax.org/details/books/principles-management",
       "freeSourceType": "web",
-      "freeSourceNote": "Free open textbook at openstax.org — finance, marketing, HR, and operations for small business owners",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "From CSV resource list. Peer-reviewed OpenStax textbook (Rice University) covering all business management foundations for electrical contractors.",
+      "freeSourceNote": "Free open-license textbook from OpenStax — covers planning, organising, leading, and controlling a business. Directly applicable to managing a small business.",
+      "verifiedOn": "2026-07-30",
+      "verificationMethod": "Previous URL https://openstax.org/details/books/small-business-management is a 404 — OpenStax has no book by that slug (confirmed broken in skill_02–05 audits). Same fix applied: principles-management confirmed active © Apr 23, 2026.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781951693633-L.jpg"
     },
     {
@@ -308,5 +308,5 @@
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
     }
   ],
-  "notes": "Integrated from electrical_installation_wiring_resources.csv on 2026-07-21. ALL 10 channel IDs fully resolved via live web fetches — no pending items. Channel handle corrections from CSV: @mikeholt→@MikeHoltNEC, @propelakenya→@Swisscontact (PropelA content in Swisscontact playlist), @theelectricalshow→@FixRadio (show lives on Fix Radio channel), @eca→@ECALive. Channel swap: @nigerianelectricalengineers from CSV replaced with The Engineering Mindset (@theengineeringmindset, UCk0fGHsCEzGig-rSzkfCjMw) — CSV handle had no verifiable YouTube presence externally. Nigeria/Africa content: PropelA (Africa channel + blog), InfoGuideNigeria (Nigeria blog), StartupTipsDaily (Nigeria blog), PropelA Blog (Africa blog). All blog RSS URLs use standard /feed/ or source-confirmed paths — validate live before production release. All book free-source URLs active at time of entry — re-check before release."
+  "notes": "Integrated from electrical_installation_wiring_resources.csv on 2026-07-21. ALL 10 channel IDs fully resolved via live web fetches — no pending items. Channel handle corrections from CSV: @mikeholt→@MikeHoltNEC, @propelakenya→@Swisscontact (PropelA content in Swisscontact playlist), @theelectricalshow→@FixRadio (show lives on Fix Radio channel), @eca→@ECALive. Channel swap: @nigerianelectricalengineers from CSV replaced with The Engineering Mindset (@theengineeringmindset, UCk0fGHsCEzGig-rSzkfCjMw) — CSV handle had no verifiable YouTube presence externally. Nigeria/Africa content: PropelA (Africa channel + blog), InfoGuideNigeria (Nigeria blog), StartupTipsDaily (Nigeria blog), PropelA Blog (Africa blog). All blog RSS URLs use standard /feed/ or source-confirmed paths — validate live before production release. All book free-source URLs active at time of entry — re-check before release.\n\nBooks audit (2026-07-30): 4 of 10 URLs fixed in this pass (skill_08). 'The E-Myth Revisited': https://f5fp.com/e-myth-revisited-free-pdf... → https://archive.org/details/TheEMythRevisitedMichaelE.Gerber | 'Profit First': https://www.mikemichalowicz.com/profit-first-book... → https://archive.org/details/profitfirst0000mich | 'The Lean Startup': https://bdebooks.com/the-lean-startup/... → https://theleanstartup.com | 'Small Business Management': https://openstax.org/details/books/small-business-management... → https://openstax.org/details/books/principles-management"
 }
