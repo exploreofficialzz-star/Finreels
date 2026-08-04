@@ -68,6 +68,13 @@ class BookCoverImage extends StatelessWidget {
     final cacheWidth  = width  != null ? (width! * dpr).round()  : 480;
     final cacheHeight = height != null ? (height! * dpr).round() : 640;
 
+    // Shimmer colours adapt to the active theme so they're visible in both
+    // light and dark mode. Dark shimmer on a dark background and light
+    // shimmer on a light background are both near-invisible — invert instead.
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final shimmerBase      = isDark ? const Color(0xFF1E1E1E) : const Color(0xFFE0E0E0);
+    final shimmerHighlight = isDark ? const Color(0xFF2C2C2C) : const Color(0xFFF5F5F5);
+
     return CachedNetworkImage(
       imageUrl: url,
       width: width,
@@ -75,9 +82,13 @@ class BookCoverImage extends StatelessWidget {
       fit: fit,
       memCacheWidth: cacheWidth,
       memCacheHeight: cacheHeight,
+      // Smooth fade-in once the image is ready — avoids the jarring
+      // snap from shimmer to full image on fast connections.
+      fadeInDuration: const Duration(milliseconds: 250),
+      fadeOutDuration: const Duration(milliseconds: 150),
       placeholder: (_, __) => Shimmer.fromColors(
-        baseColor: const Color(0xFF1E1E1E),
-        highlightColor: const Color(0xFF2C2C2C),
+        baseColor: shimmerBase,
+        highlightColor: shimmerHighlight,
         child: SizedBox(
           width: width,
           height: height,
