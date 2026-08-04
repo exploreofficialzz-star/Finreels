@@ -49,6 +49,9 @@ dependencies:
   hive_flutter: ^1.1.0
   # Bundled local PDF books (Five Buckets masterclass playbooks)
   flutter_pdfview: ^1.4.0+1
+  # App-internal file storage — used by PdfDownloadService to cache downloaded
+  # PDFs. No extra Android/iOS permissions needed for the app documents dir.
+  path_provider: ^2.1.4
 
 dev_dependencies:
   flutter_test:

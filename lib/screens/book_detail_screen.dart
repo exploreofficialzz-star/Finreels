@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ import '../data/category_playbook_data.dart';
 import '../models/video.dart';
 import '../services/ad_service.dart';
 import '../services/engagement_service.dart';
+import '../services/pdf_download_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
 import '../widgets/book_cover_image.dart';
@@ -35,9 +37,9 @@ class _BookSource {
       : type = _SourceType.insights, epubUrl = null, assetPath = null;
   const _BookSource.pdfAsset(this.assetPath)
       : type = _SourceType.pdfAsset, epubUrl = null;
-  /// Verified books sourced from category JSON — opened in the in-app
-  /// WebView (BlogReaderScreen) pushed as a new route from the CTA.
-  /// [epubUrl] stores the free source URL for this book type.
+  /// Verified category books — URL is opened via BlogReaderScreen (WebView)
+  /// or, when the URL points directly to a PDF, downloaded to local storage
+  /// and opened with flutter_pdfview.  [epubUrl] stores the source URL.
   const _BookSource.externalUrl(this.epubUrl)
       : type = _SourceType.externalUrl, assetPath = null;
 }
@@ -102,11 +104,19 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   // PDF (bundled asset books)
   int? _lastPdfPage;
 
+  // WebView books — scroll progress (0–100 integer %)
+  int? _lastWebScroll;
+
+  // Downloadable PDF books — download state + cached local path
+  bool   _isDownloading     = false;
+  double _downloadProgress  = 0.0;
+  String? _localPdfPath;
+
   _BookSource get _source {
     final known = _sources[widget.book.id];
     if (known != null) return known;
-    // Verified category books (channelId == 'verified_book') carry their URL
-    // in freeSourceUrl — route them to the in-app WebView rather than insights.
+    // Verified category books carry their free URL in freeSourceUrl.
+    // Route them to the external reader rather than the insights fallback.
     final url = widget.book.freeSourceUrl;
     if (url != null && url.trim().isNotEmpty) {
       return _BookSource.externalUrl(url);
@@ -116,12 +126,20 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
 
   String get _progressKey    => 'epub_cfi_${widget.book.id}';
   String get _pdfProgressKey => 'pdf_page_${widget.book.id}';
+  String get _webScrollKey   => 'webview_scroll_${widget.book.id}';
+
+  /// True when the URL is a direct PDF file that can be downloaded and
+  /// opened natively in flutter_pdfview.
+  bool _isPdfUrl(String url) =>
+      url.toLowerCase().endsWith('.pdf') ||
+      RegExp(r'\.pdf[\?#]').hasMatch(url.toLowerCase());
 
   /// True if the user has made any reading progress on this book,
   /// regardless of which reader type it uses.
   bool get _hasProgress =>
       (_lastCfi != null && _lastCfi!.isNotEmpty) ||
-      (_lastPdfPage != null && _lastPdfPage! > 0);
+      (_lastPdfPage != null && _lastPdfPage! > 0) ||
+      (_lastWebScroll != null && _lastWebScroll! > 0);
 
   @override
   void initState() {
@@ -130,9 +148,150 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
       final categoryId = widget.book.id.replaceFirst('playbook_', '');
       unawaited(EngagementService.instance.recordCategoryInterest(categoryId));
     }
-    _progressBox  = Hive.box<String>('reading_progress');
-    _lastCfi      = _progressBox?.get(_progressKey);
-    _lastPdfPage  = int.tryParse(_progressBox?.get(_pdfProgressKey) ?? '');
+    _progressBox   = Hive.box<String>('reading_progress');
+    _lastCfi       = _progressBox?.get(_progressKey);
+    _lastPdfPage   = int.tryParse(_progressBox?.get(_pdfProgressKey) ?? '');
+    _lastWebScroll = int.tryParse(_progressBox?.get(_webScrollKey) ?? '');
+    // Check if a PDF was previously downloaded for this book so we can
+    // show "Open Downloaded Book" instead of "Download Free Book" immediately.
+    _checkLocalPdf();
+  }
+
+  /// Async check — runs after initState; updates UI once the file lookup
+  /// completes without blocking the initial frame.
+  Future<void> _checkLocalPdf() async {
+    final url = widget.book.freeSourceUrl ?? '';
+    if (!_isPdfUrl(url)) return;
+    final path = await PdfDownloadService.getLocalPath(widget.book.id);
+    if (path != null && mounted) setState(() => _localPdfPath = path);
+  }
+
+  // ── External book handler (async, called from CTA onPressed) ──────────────
+
+  Future<void> _handleExternalBook() async {
+    final url = _source.epubUrl ?? '';
+
+    // ── Case 1: direct PDF URL ────────────────────────────────────────────
+    if (_isPdfUrl(url)) {
+      // Already downloaded → go straight to the reader
+      if (_localPdfPath != null) {
+        unawaited(AdService.instance.onBookRead());
+        setState(() { _showReader = true; _isLoading = true; });
+        return;
+      }
+
+      // Start download with progress UI
+      unawaited(AdService.instance.onBookRead());
+      setState(() { _isDownloading = true; _downloadProgress = 0.0; });
+
+      final path = await PdfDownloadService.downloadPdf(
+        url: url,
+        bookId: widget.book.id,
+        onProgress: (p) {
+          if (mounted) setState(() => _downloadProgress = p);
+        },
+      );
+
+      if (!mounted) return;
+
+      if (path != null) {
+        // Download succeeded → open the PDF reader in-place
+        setState(() {
+          _localPdfPath    = path;
+          _isDownloading   = false;
+          _showReader      = true;
+          _isLoading       = true;
+        });
+      } else {
+        // Download failed → fall back to the in-app WebView
+        setState(() => _isDownloading = false);
+        await Navigator.of(context).push(MaterialPageRoute(
+          builder: (_) => BlogReaderScreen(
+            url: url,
+            title: widget.book.title,
+            categoryId: widget.book.sourceCategoryId,
+            bookId: widget.book.id,
+          ),
+        ));
+        _refreshWebScrollProgress();
+      }
+      return;
+    }
+
+    // ── Case 2: web URL (article, borrow page, author site, etc.) ─────────
+    unawaited(AdService.instance.onBookRead());
+    await Navigator.of(context).push(MaterialPageRoute(
+      builder: (_) => BlogReaderScreen(
+        url: url,
+        title: widget.book.title,
+        categoryId: widget.book.sourceCategoryId,
+        bookId: widget.book.id,
+      ),
+    ));
+    _refreshWebScrollProgress();
+  }
+
+  /// Re-reads the WebView scroll key from Hive so that returning from
+  /// BlogReaderScreen immediately updates the "Continue reading" badge.
+  void _refreshWebScrollProgress() {
+    if (!mounted) return;
+    setState(() {
+      _lastWebScroll =
+          int.tryParse(_progressBox?.get(_webScrollKey) ?? '');
+    });
+  }
+
+  // ── CTA label / icon / caption helpers ────────────────────────────────────
+
+  String get _ctaLabel {
+    if (_source.type != _SourceType.externalUrl) {
+      return _hasProgress ? 'Continue Reading' : 'Read Full Book Free';
+    }
+    // Downloaded PDF — show reading state
+    if (_localPdfPath != null) {
+      return _hasProgress ? 'Continue Reading' : 'Open Downloaded Book';
+    }
+    // Direct PDF that needs downloading
+    if (_isPdfUrl(widget.book.freeSourceUrl ?? '')) {
+      return 'Download Free Book';
+    }
+    // Web / article URL
+    return _hasProgress ? 'Continue Reading' : 'Read Free Online';
+  }
+
+  IconData get _ctaIcon {
+    if (_source.type == _SourceType.externalUrl) {
+      if (_localPdfPath == null &&
+          _isPdfUrl(widget.book.freeSourceUrl ?? '')) {
+        return Icons.download_rounded;
+      }
+    }
+    return Icons.menu_book_rounded;
+  }
+
+  String get _ctaCaption {
+    switch (_source.type) {
+      case _SourceType.pdfAsset:
+        return 'Included free with FinReels — no internet required';
+      case _SourceType.externalUrl:
+        if (_localPdfPath != null) {
+          return 'Saved on this device — no internet required';
+        }
+        if (_isPdfUrl(widget.book.freeSourceUrl ?? '')) {
+          return 'Downloads once, then reads offline — always free';
+        }
+        return 'Opens in built-in reader · stays inside FinReels';
+      case _SourceType.epub:
+        if (widget.book.id.startsWith('book_richest') ||
+            widget.book.id.startsWith('book_as_man') ||
+            widget.book.id.startsWith('book_science') ||
+            widget.book.id.startsWith('book_popular')) {
+          return 'Reads free via Project Gutenberg (public domain)';
+        }
+        return 'Reads free via Global Grey ebooks (public domain)';
+      case _SourceType.insights:
+        return '';
+    }
   }
 
   @override
@@ -240,70 +399,82 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                   const SizedBox(height: 32),
 
                   // Primary CTA
-                  SizedBox(
-                    width: double.infinity,
-                    height: 52,
-                    child: FilledButton.icon(
-                      onPressed: () {
-                        unawaited(AdService.instance.onBookRead());
-                        if (_source.type == _SourceType.externalUrl) {
-                          // Push the in-app WebView as a new route; don't
-                          // toggle _showReader (that's only for EPUB/PDF).
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (_) => BlogReaderScreen(
-                                url: _source.epubUrl!,
-                                title: widget.book.title,
-                                categoryId: widget.book.sourceCategoryId,
-                              ),
+                  // ── CTA — varies by source type & download state ──────────
+                  if (_isDownloading)
+                    // Download progress indicator (only for direct-PDF books)
+                    Center(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            width: 72,
+                            height: 72,
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                CircularProgressIndicator(
+                                  value: _downloadProgress,
+                                  strokeWidth: 5,
+                                  backgroundColor:
+                                      AppTheme.gold.withValues(alpha: 0.18),
+                                  valueColor: const AlwaysStoppedAnimation(
+                                      AppTheme.gold),
+                                ),
+                                Text(
+                                  '${(_downloadProgress * 100).toInt()}%',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 14,
+                                    color: AppTheme.gold,
+                                  ),
+                                ),
+                              ],
                             ),
-                          );
-                          return;
-                        }
-                        setState(() {
-                          _showReader = true;
-                          _isLoading  = true;
-                        });
-                      },
-                      icon: Icon(
-                        _source.type == _SourceType.externalUrl &&
-                                widget.book.freeSourceType == 'download'
-                            ? Icons.download_rounded
-                            : Icons.menu_book_rounded,
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            'Downloading PDF…',
+                            style: TextStyle(
+                                color: AppTheme.textMuted(context),
+                                fontSize: 13),
+                          ),
+                        ],
                       ),
-                      label: Text(
-                        _source.type == _SourceType.externalUrl
-                            ? (widget.book.freeSourceType == 'download'
-                                ? 'Download Free Book'
-                                : 'Read Free Online')
-                            : (_hasProgress
-                                ? 'Continue Reading'
-                                : 'Read Full Book Free'),
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w700, fontSize: 16),
-                      ),
-                      style: FilledButton.styleFrom(
-                        backgroundColor: AppTheme.gold,
-                        foregroundColor: Colors.black,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(14)),
+                    )
+                  else
+                    SizedBox(
+                      width: double.infinity,
+                      height: 52,
+                      child: FilledButton.icon(
+                        onPressed: () {
+                          if (_source.type == _SourceType.externalUrl) {
+                            unawaited(_handleExternalBook());
+                            return;
+                          }
+                          unawaited(AdService.instance.onBookRead());
+                          setState(() {
+                            _showReader = true;
+                            _isLoading  = true;
+                          });
+                        },
+                        icon: Icon(_ctaIcon),
+                        label: Text(
+                          _ctaLabel,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w700, fontSize: 16),
+                        ),
+                        style: FilledButton.styleFrom(
+                          backgroundColor: AppTheme.gold,
+                          foregroundColor: Colors.black,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(14)),
+                        ),
                       ),
                     ),
-                  ),
 
                   const SizedBox(height: 12),
                   Center(
                     child: Text(
-                      _source.type == _SourceType.pdfAsset
-                          ? 'Included free with FinReels — no internet required'
-                          : _source.type == _SourceType.externalUrl
-                              ? 'Opens in built-in reader · stays inside FinReels'
-                              : (widget.book.id.startsWith('book_richest') ||
-                                      widget.book.id.startsWith('book_as_man') ||
-                                      widget.book.id.startsWith('book_science') ||
-                                      widget.book.id.startsWith('book_popular'))
-                                  ? 'Reads free via Project Gutenberg (public domain)'
-                                  : 'Reads free via Global Grey ebooks (public domain)',
+                      _ctaCaption,
                       style: TextStyle(
                           color: AppTheme.textMuted(context), fontSize: 11),
                     ),
@@ -331,6 +502,10 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
     }
     if (_source.type == _SourceType.pdfAsset) {
       return _buildPdfReader(_source.assetPath!);
+    }
+    // Downloaded PDF for verified books with a direct PDF URL
+    if (_localPdfPath != null) {
+      return _buildLocalPdfReader(_localPdfPath!);
     }
     return _buildInsightsReader();
   }
@@ -452,6 +627,87 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                     if (_isLoading)
                       const Center(
                         child: CircularProgressIndicator(color: AppTheme.gold),
+                      ),
+                  ],
+                );
+              },
+            ),
+          ),
+          ListenableBuilder(
+            listenable: AdService.instance,
+            builder: (_, __) => AdService.instance.adsRemoved
+                ? const SizedBox.shrink()
+                : const StickyBannerBar(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // ── Local (downloaded) PDF reader ──────────────────────────────────────────
+
+  Widget _buildLocalPdfReader(String filePath) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.book.title.split('—').first.trim(),
+            maxLines: 1, overflow: TextOverflow.ellipsis),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_rounded),
+          onPressed: () => setState(() {
+            _showReader = false;
+            _isLoading  = true;
+          }),
+        ),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: FutureBuilder<Uint8List>(
+              future: File(filePath).readAsBytes(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(Icons.error_outline,
+                            color: AppTheme.gold, size: 40),
+                        const SizedBox(height: 12),
+                        Text('Could not open the PDF.',
+                            style: TextStyle(
+                                color: AppTheme.textSecondary(context))),
+                      ],
+                    ),
+                  );
+                }
+                if (!snapshot.hasData) {
+                  return const Center(
+                    child: CircularProgressIndicator(color: AppTheme.gold),
+                  );
+                }
+                return Stack(
+                  children: [
+                    PDFView(
+                      pdfData: snapshot.data,
+                      defaultPage: _lastPdfPage ?? 0,
+                      nightMode: Theme.of(context).brightness ==
+                          Brightness.dark,
+                      onRender: (_) {
+                        if (mounted) setState(() => _isLoading = false);
+                      },
+                      onPageChanged: (page, _) {
+                        if (page == null) return;
+                        _lastPdfPage = page;
+                        _progressBox?.put(_pdfProgressKey, page.toString());
+                      },
+                      onError: (_) {
+                        if (mounted) setState(() => _isLoading = false);
+                      },
+                    ),
+                    if (_isLoading)
+                      const Center(
+                        child:
+                            CircularProgressIndicator(color: AppTheme.gold),
                       ),
                   ],
                 );
