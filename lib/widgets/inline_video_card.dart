@@ -54,6 +54,17 @@ import '../theme/app_theme.dart';
 // 4. YOUTUBE BRANDING COVERED
 //    36 px black bar at the bottom of the player.
 //    Flutter replay overlay covers end-screen cards.
+//
+// 5. NATIVE PLAY-BUTTON FLASH (real fix — hideControls:true)
+//    youtube_player_flutter's own TouchShutter/PlayPauseButton overlay is
+//    internal to the YoutubePlayer widget and is not driven by this card's
+//    _revealPlayer state, so it could flash briefly whenever the package's
+//    own control layer hadn't yet settled into PlayerState.playing at the
+//    moment our AnimatedOpacity revealed it — regardless of reveal timing.
+//    Fixed at the source via YoutubePlayerFlags(hideControls: true) in
+//    _createController, which removes that native layer entirely. _onTap
+//    now handles tap-to-pause/resume directly, since the native layer used
+//    to own that gesture.
 // ─────────────────────────────────────────────────────────────────────────────
 
 class InlineVideoCard extends StatefulWidget {
@@ -128,21 +139,16 @@ class _InlineVideoCardState extends State<InlineVideoCard>
   void _markReady() {
     if (!mounted || _playerReady) return;
     setState(() => _playerReady = true);
-    if (_expanded && _isActive) {
-      _controller?.play();
-      // Fallback grace timer: if PlayerState.playing/buffering never fires
-      // within 600ms, reveal anyway so the user sees the buffer spinner
-      // instead of a frozen thumbnail.
-      // ONLY started here when the user is actively waiting (_expanded).
-      // During pre-warm (_expanded = false) we intentionally skip this so
-      // the timer is always relative to the user's tap, not pre-warm time.
-      // For the pre-warmed case (markReady already fired before tap) the
-      // timer is started in _onTap() instead — see below.
-      _revealTimer?.cancel();
-      _revealTimer = Timer(const Duration(milliseconds: 600), () {
-        if (mounted && !_revealPlayer) setState(() => _revealPlayer = true);
-      });
-    }
+    if (_expanded && _isActive) _controller?.play();
+
+    // Fallback grace timer: if PlayerState.playing never fires within 600ms
+    // (e.g. a bad connection where buffering stalls), reveal anyway so the
+    // user sees the buffer spinner instead of a frozen thumbnail.
+    // Primary reveal path is _onControllerUpdate watching PlayerState.playing.
+    _revealTimer?.cancel();
+    _revealTimer = Timer(const Duration(milliseconds: 600), () {
+      if (mounted && !_revealPlayer) setState(() => _revealPlayer = true);
+    });
   }
 
   int _lastCardUpdateMs = 0;
@@ -161,18 +167,13 @@ class _InlineVideoCardState extends State<InlineVideoCard>
 
     final currentState = v.playerState;
 
-    // PRIMARY reveal trigger: reveal the player the moment YouTube is actually
-    // doing something (buffering OR playing). Buffering is included deliberately:
-    // when buffering, the native YouTube player shows a loading spinner — NOT a
-    // play button. Revealing only on PlayerState.playing was too late: if the
-    // 600ms fallback timer fired first (e.g. near-instant tap on a pre-warmed
-    // card), it would expose the player while YouTube was still in its
-    // unstarted/paused state, causing the native ▶️ button to flash briefly
-    // before the video started. Triggering on buffering eliminates that window.
-    if ((currentState == PlayerState.playing ||
-            currentState == PlayerState.buffering) &&
-        !_revealPlayer &&
-        _expanded) {
+    // PRIMARY reveal trigger: the MOMENT actual playback starts, reveal the
+    // player immediately. This is the correct signal — not "IFrame API ready"
+    // (which fires before the first frame paints), but the actual PlayerState
+    // transitioning to playing. This eliminates the "thumbnail covers playing
+    // video" issue where audio plays but the thumbnail persists during the
+    // grace timer window.
+    if (currentState == PlayerState.playing && !_revealPlayer && _expanded) {
       _revealTimer?.cancel();
       setState(() => _revealPlayer = true);
     }
@@ -197,7 +198,29 @@ class _InlineVideoCardState extends State<InlineVideoCard>
       flags: YoutubePlayerFlags(
         autoPlay: autoPlay,
         enableCaption: false,
-        // hideControls = false (default) → all native controls visible.
+        // hideControls: true is the actual fix for the play-button flash.
+        // youtube_player_flutter (v9.x, flutter_inappwebview-based — this
+        // project is pinned to ^9.1.1, pre-dating the v10 youtube_player_
+        // iframe rewrite) renders its OWN native control layer — a
+        // TouchShutter overlay containing a PlayPauseButton — inside the
+        // YoutubePlayer widget below. That layer is entirely internal to
+        // the package and is NOT driven by this card's _revealPlayer /
+        // _playerReady state, so no amount of tuning our own reveal timing
+        // can prevent it from being visible: the moment our AnimatedOpacity
+        // fades the YoutubePlayer widget in, whatever the package's own
+        // control layer happens to be showing (its play button, if
+        // PlayerState hasn't firmly settled into "playing" yet) is exposed
+        // for that window — which is exactly the "spin, then play button,
+        // then video" symptom. hideControls:true removes that native layer
+        // entirely, which is the package's documented pattern for apps
+        // that render their own controls — this card already does, via
+        // the thumbnail/spinner/play-icon/end-overlay layers below, so
+        // nothing else in this file depends on the native layer except the
+        // tap-to-pause/resume gesture, which _onTap now handles directly.
+        // showVideoProgressIndicator (on the YoutubePlayer widget itself,
+        // below) is a separate, independent flag — unaffected by this, so
+        // the gold progress line is unchanged.
+        hideControls: true,
       ),
     )..addListener(_onControllerUpdate);
     if (mounted) setState(() {});
@@ -224,24 +247,28 @@ class _InlineVideoCardState extends State<InlineVideoCard>
   void _onTap() {
     if (_controller == null) {
       // No pre-warm yet — create on-demand with autoPlay:true.
-      // _markReady() will fire once the iframe is ready and will start
-      // the fallback timer from that point (when the user is waiting).
+      // _markReady() will play when the iframe signals ready.
       _createController(autoPlay: true);
     } else if (!_expanded) {
-      // Pre-warmed: _markReady() already fired (so _playerReady = true) but
-      // the fallback timer was intentionally NOT started at that point.
-      // Start it now, from tap time, so the 600ms window is always relative
-      // to what the user experiences — not to when the IFrame became ready.
-      // This prevents the timer from firing while YouTube is still in its
-      // unstarted/paused state (before it has processed our play() command),
-      // which was what caused the native ▶️ button to flash after spinning.
+      // Pre-warmed. Always seek to the beginning before playing, so the
+      // video starts at 0:00 regardless of any position the pre-warm phase
+      // might have introduced (e.g. the iframe briefly advanced during
+      // initialisation or the user re-taps after reaching end-of-video
+      // and the overlay was dismissed without replay).
       _controller!
         ..seekTo(Duration.zero)
         ..play();
-      _revealTimer?.cancel();
-      _revealTimer = Timer(const Duration(milliseconds: 600), () {
-        if (mounted && !_revealPlayer) setState(() => _revealPlayer = true);
-      });
+    } else if (_revealPlayer && !_ended) {
+      // Already expanded, revealed, and not on the end screen: this is a
+      // tap on a video that's already playing or paused. Previously this
+      // was handled by the native TouchShutter/PlayPauseButton (see the
+      // hideControls comment in _createController); now that the native
+      // control layer is gone, this card owns the toggle itself.
+      if (_controller!.value.playerState == PlayerState.playing) {
+        _controller!.pause();
+      } else {
+        _controller!.play();
+      }
     }
     if (mounted) setState(() { _expanded = true; _ended = false; });
     updateKeepAlive();

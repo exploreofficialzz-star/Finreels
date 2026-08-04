@@ -60,6 +60,76 @@ class _ShortsPlayerScreenState extends State<ShortsPlayerScreen> {
   int  _currentIndex = 0;
   bool _isDragging   = false;
 
+  // ── Background prefetch for the next short ────────────────────────────
+  // youtube_player_flutter (v9.x, flutter_inappwebview-based) only starts
+  // actually loading a video once a YoutubePlayer WIDGET backed by its
+  // controller is built and mounted — creating a bare YoutubePlayerController
+  // with no widget behind it does not trigger any loading. Flutter's own
+  // PageView does not pre-build neighbouring pages by default (confirmed via
+  // Flutter's own source/docs: PageView has no cacheExtent of its own unless
+  // allowImplicitScrolling is set, and that flag changes how screen readers'
+  // swipe gestures behave — an accessibility trade-off unrelated to this
+  // request, so it's deliberately not used here).
+  //
+  // So: a single extra YoutubePlayerController + YoutubePlayer is kept
+  // silently playing (muted-by-default via autoPlay:false, same convention
+  // as _ShortPage) for _currentIndex + 1, rendered through Offstage — laid
+  // out and kept fully active exactly like an onstage widget, just not
+  // painted or hit-tested (confirmed via Offstage's own documentation) —
+  // completely separate from PageView.builder's own items, so it can never
+  // collide with whatever PageView itself is building.
+  //
+  // When the user actually swipes to that short, _ShortPage still creates
+  // its OWN controller (unchanged below) rather than adopting this one —
+  // handing off the exact same underlying WebView instance between two
+  // different widget locations is possible in principle (YoutubePlayerBuilder
+  // already does this for fullscreen, per this file's own header comment),
+  // but that mechanism is internal to that specific widget, and reproducing
+  // it here for this different case (moving into a completely different
+  // subtree via a GlobalKey) isn't something I can confirm is safe for this
+  // plugin without testing on a real device — so instead of guessing, this
+  // keeps the two controllers independent. The real gain here is that
+  // Android WebView / iOS WKWebView share their HTTP/DNS/TLS caches across
+  // instances in the same app by default, so by the time _ShortPage creates
+  // its own controller, the video manifest, thumbnail, and YouTube player
+  // JS this prefetch controller already pulled down are warm — meaningfully
+  // faster than today's fully-cold load, combined with the existing
+  // instant in-memory-cached thumbnail overlay covering the gap.
+  int?  _prefetchIndex;
+  YoutubePlayerController? _prefetchController;
+
+  void _syncPrefetch() {
+    final wanted = _currentIndex + 1;
+    if (wanted >= widget.shorts.length) {
+      _disposePrefetch();
+      return;
+    }
+    if (_prefetchIndex == wanted) return; // already correct — nothing to do.
+    _disposePrefetch();
+    _prefetchIndex      = wanted;
+    _prefetchController = YoutubePlayerController(
+      initialVideoId: widget.shorts[wanted].id,
+      flags: const YoutubePlayerFlags(
+        autoPlay:      false, // silent pre-warm only — never heard or seen
+        loop:          true,
+        hideControls:  true,
+        enableCaption: false,
+      ),
+    );
+    // No setState here: initState (the first caller) runs before this
+    // widget's first build, so that build already picks up whatever
+    // _prefetchController ends up being — no extra call needed. The other
+    // caller, onPageChanged, already wraps its own setState around
+    // _currentIndex and this call together (see below), which is what
+    // schedules the rebuild once this method returns.
+  }
+
+  void _disposePrefetch() {
+    _prefetchController?.dispose();
+    _prefetchController = null;
+    _prefetchIndex      = null;
+  }
+
   // Tuning constants — tuned lower for TikTok-feel responsiveness.
   // Research (VeryGoodVentures / diVine): low thresholds feel "light",
   // high thresholds feel "stiff". These values match TikTok's actual feel.
@@ -76,12 +146,14 @@ class _ShortsPlayerScreenState extends State<ShortsPlayerScreen> {
     _pageController = PageController(initialPage: widget.initialIndex);
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    _syncPrefetch();
   }
 
   @override
   void dispose() {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     _pageController.dispose();
+    _disposePrefetch();
     super.dispose();
   }
 
@@ -177,6 +249,7 @@ class _ShortsPlayerScreenState extends State<ShortsPlayerScreen> {
               itemCount: widget.shorts.length,
               onPageChanged: (index) {
                 setState(() => _currentIndex = index);
+                _syncPrefetch();
                 unawaited(AdService.instance.onShortScrolled());
               },
               itemBuilder: (context, index) => _ShortPage(
@@ -224,6 +297,28 @@ class _ShortsPlayerScreenState extends State<ShortsPlayerScreen> {
                           style: TextStyle(
                               color: Colors.white38, fontSize: 11)),
                     ],
+                  ),
+                ),
+              ),
+            // ── Background prefetch (see field docs in State class above) ──
+            // Offstage still builds, mounts, and lays out its child and keeps
+            // it fully active — it just isn't painted or hit-tested (per
+            // Offstage's own documentation) — so the WebView underneath keeps
+            // silently loading/buffering _currentIndex + 1 the whole time the
+            // user is watching _currentIndex. Deliberately a sibling of
+            // PageView here, never inside its itemBuilder, so it can never be
+            // the same widget instance PageView itself is building.
+            if (_prefetchController != null)
+              Offstage(
+                offstage: true,
+                child: SizedBox(
+                  width:  MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  child: YoutubePlayer(
+                    controller:      _prefetchController!,
+                    aspectRatio:     MediaQuery.of(context).size.width /
+                        MediaQuery.of(context).size.height,
+                    bufferIndicator: const SizedBox.shrink(),
                   ),
                 ),
               ),
@@ -430,12 +525,27 @@ class _ShortPageState extends State<_ShortPage>
   void _togglePlay() {
     _userStarted = true;
     _tapCount++;   // key change restarts AnimatedScale on every tap
-    if (_playing) {
+    // Decide from our own _playing flag and flip it HERE, synchronously —
+    // do not wait for _onUpdate (the controller listener) to confirm it.
+    // _onUpdate is rate-limited to 15 fps AND only runs when the WebView's
+    // JS bridge actually reports a change, so on a quick second tap (well
+    // within that window) _playing could still hold the value from BEFORE
+    // the first tap took effect. Branching on it without updating it here
+    // meant two fast taps could both read "playing" (or both read
+    // "paused"), calling pause() twice / play() twice and showing the same
+    // feedback icon twice in a row instead of alternating — the reported
+    // "play/pause button not working properly". _onUpdate will still fire
+    // shortly after and reconcile _playing to the WebView's true state;
+    // since that state should match what we set here, there's nothing
+    // to visibly correct in the normal case.
+    final wasPlaying = _playing;
+    if (wasPlaying) {
       _controller.pause();
       // Pause: show pause icon briefly (700 ms) — same as TikTok / YT Shorts.
       _pauseIconTimer?.cancel();
       _playFeedbackTimer?.cancel();
       setState(() {
+        _playing          = false;
         _showPauseIcon    = true;
         _showPlayFeedback = false;
       });
@@ -449,6 +559,7 @@ class _ShortPageState extends State<_ShortPage>
       _playFeedbackTimer?.cancel();
       _pauseIconTimer?.cancel();
       setState(() {
+        _playing          = true;
         _showPauseIcon    = false;
         _showPlayFeedback = true;
       });
