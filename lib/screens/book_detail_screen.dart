@@ -16,13 +16,14 @@ import '../services/engagement_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
 import '../widgets/book_cover_image.dart';
+import 'blog_reader_screen.dart';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Source routing — Richest Man + 3 others use EPUB; copyrighted books use
 // in-app insights; the two Five Buckets playbooks are bundled PDF assets.
 // ─────────────────────────────────────────────────────────────────────────────
 
-enum _SourceType { epub, insights, pdfAsset }
+enum _SourceType { epub, insights, pdfAsset, externalUrl }
 
 class _BookSource {
   final _SourceType type;
@@ -34,6 +35,11 @@ class _BookSource {
       : type = _SourceType.insights, epubUrl = null, assetPath = null;
   const _BookSource.pdfAsset(this.assetPath)
       : type = _SourceType.pdfAsset, epubUrl = null;
+  /// Verified books sourced from category JSON — opened in the in-app
+  /// WebView (BlogReaderScreen) pushed as a new route from the CTA.
+  /// [epubUrl] stores the free source URL for this book type.
+  const _BookSource.externalUrl(this.epubUrl)
+      : type = _SourceType.externalUrl, assetPath = null;
 }
 
 const Map<String, _BookSource> _sources = {
@@ -96,8 +102,17 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
   // PDF (bundled asset books)
   int? _lastPdfPage;
 
-  _BookSource get _source =>
-      _sources[widget.book.id] ?? const _BookSource.insights();
+  _BookSource get _source {
+    final known = _sources[widget.book.id];
+    if (known != null) return known;
+    // Verified category books (channelId == 'verified_book') carry their URL
+    // in freeSourceUrl — route them to the in-app WebView rather than insights.
+    final url = widget.book.freeSourceUrl;
+    if (url != null && url.trim().isNotEmpty) {
+      return _BookSource.externalUrl(url);
+    }
+    return const _BookSource.insights();
+  }
 
   String get _progressKey    => 'epub_cfi_${widget.book.id}';
   String get _pdfProgressKey => 'pdf_page_${widget.book.id}';
@@ -230,18 +245,40 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                     height: 52,
                     child: FilledButton.icon(
                       onPressed: () {
-                        // Fire interstitial on every book read tap
                         unawaited(AdService.instance.onBookRead());
+                        if (_source.type == _SourceType.externalUrl) {
+                          // Push the in-app WebView as a new route; don't
+                          // toggle _showReader (that's only for EPUB/PDF).
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => BlogReaderScreen(
+                                url: _source.epubUrl!,
+                                title: widget.book.title,
+                                categoryId: widget.book.sourceCategoryId,
+                              ),
+                            ),
+                          );
+                          return;
+                        }
                         setState(() {
                           _showReader = true;
                           _isLoading  = true;
                         });
                       },
-                      icon: const Icon(Icons.menu_book_rounded),
+                      icon: Icon(
+                        _source.type == _SourceType.externalUrl &&
+                                widget.book.freeSourceType == 'download'
+                            ? Icons.download_rounded
+                            : Icons.menu_book_rounded,
+                      ),
                       label: Text(
-                        _hasProgress
-                            ? 'Continue Reading'
-                            : 'Read Full Book Free',
+                        _source.type == _SourceType.externalUrl
+                            ? (widget.book.freeSourceType == 'download'
+                                ? 'Download Free Book'
+                                : 'Read Free Online')
+                            : (_hasProgress
+                                ? 'Continue Reading'
+                                : 'Read Full Book Free'),
                         style: const TextStyle(
                             fontWeight: FontWeight.w700, fontSize: 16),
                       ),
@@ -259,12 +296,14 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                     child: Text(
                       _source.type == _SourceType.pdfAsset
                           ? 'Included free with FinReels — no internet required'
-                          : (widget.book.id.startsWith('book_richest') ||
-                                  widget.book.id.startsWith('book_as_man') ||
-                                  widget.book.id.startsWith('book_science') ||
-                                  widget.book.id.startsWith('book_popular'))
-                              ? 'Reads free via Project Gutenberg (public domain)'
-                              : 'Reads free via Global Grey ebooks (public domain)',
+                          : _source.type == _SourceType.externalUrl
+                              ? 'Opens in built-in reader · stays inside FinReels'
+                              : (widget.book.id.startsWith('book_richest') ||
+                                      widget.book.id.startsWith('book_as_man') ||
+                                      widget.book.id.startsWith('book_science') ||
+                                      widget.book.id.startsWith('book_popular'))
+                                  ? 'Reads free via Project Gutenberg (public domain)'
+                                  : 'Reads free via Global Grey ebooks (public domain)',
                       style: TextStyle(
                           color: AppTheme.textMuted(context), fontSize: 11),
                     ),
