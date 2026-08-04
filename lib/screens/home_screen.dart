@@ -19,7 +19,6 @@ import '../widgets/inline_video_card.dart';
 import '../widgets/no_flash_page_route.dart';
 import '../widgets/shimmer_loader.dart';
 import 'blog_feed_screen.dart';
-import 'blog_reader_screen.dart';
 import 'book_detail_screen.dart';
 import 'content_search_screen.dart';
 import 'notifications_screen.dart';
@@ -199,23 +198,17 @@ class _FeedBodyState extends State<_FeedBody> {
     unawaited(AdService.instance.onVideoTapped());
   }
 
-  /// All verified (category-specific) books open inside the app in
-  /// BlogReaderScreen — the same flutter_inappwebview reader used for blog
-  /// articles. freeSourceType is intentionally ignored here: previously
-  /// 'download' launched the URL externally (device browser/file manager),
-  /// which felt inconsistent with general books that always open inside the
-  /// app. The WebView handles both web pages and most PDF/resource download
-  /// pages correctly; the user stays inside FinReels throughout.
+  /// All verified (category-specific) books now open through BookDetailScreen,
+  /// giving them the same landing page (cover, description, CTA) as the
+  /// general free books. BookDetailScreen detects channelId == 'verified_book'
+  /// via the freeSourceUrl field and routes to BlogReaderScreen internally
+  /// when the user taps the read button.
   void _openVerifiedBook(Video book) {
     if ((book.freeSourceUrl ?? '').isEmpty) return;
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => BlogReaderScreen(
-          url: book.freeSourceUrl ?? '',
-          title: book.title,
-          categoryId: book.sourceCategoryId,
-        ),
+        builder: (_) => BookDetailScreen(book: book),
       ),
     );
   }
