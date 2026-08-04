@@ -6,6 +6,7 @@ import '../data/category_playbook_data.dart';
 import '../data/resource_category_data.dart';
 import '../models/channel.dart';
 import '../models/resource_category.dart';
+import '../models/video.dart';
 import '../services/ad_service.dart';
 import '../services/blog_rss_service.dart';
 import '../services/engagement_service.dart';
@@ -301,15 +302,35 @@ class _FreeBookTile extends StatelessWidget {
   final VerifiedBook book;
   const _FreeBookTile({required this.book});
 
+  /// Converts this [VerifiedBook] to a [Video] using the same slug logic as
+  /// FeedProvider._videoFromVerifiedBook, so the book ID is stable and
+  /// consistent whether opened from the feed or from CategoryDetailScreen.
+  Video _toVideo() {
+    final slug = '${book.categoryId ?? 'general'}_${book.title}'
+        .toLowerCase()
+        .replaceAll(RegExp('[^a-z0-9]+'), '_');
+    return Video(
+      id: 'vbook_$slug',
+      title: book.title,
+      description: book.freeSourceNote != null
+          ? '${book.author} · ${book.freeSourceNote}'
+          : book.author,
+      channelId: 'verified_book',
+      channelName: book.author,
+      publishedAt: DateTime(2000),
+      thumbnailUrl: book.coverUrl ?? '',
+      freeSourceUrl: book.freeSourceUrl,
+      freeSourceType: book.freeSourceType,
+      sourceCategoryId: book.categoryId,
+    );
+  }
+
   void _open(BuildContext context) {
     if (book.freeSourceUrl.isEmpty) return;
+    unawaited(AdService.instance.onVideoTapped());
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (_) => BlogReaderScreen(
-          url: book.freeSourceUrl,
-          title: book.title,
-          categoryId: book.categoryId,
-        ),
+        builder: (_) => BookDetailScreen(book: _toVideo()),
       ),
     );
   }
@@ -320,49 +341,81 @@ class _FreeBookTile extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 10),
       child: GestureDetector(
         onTap: () => _open(context),
-        child: Container(
-          padding: const EdgeInsets.all(12),
+        child: DecoratedBox(
           decoration: BoxDecoration(
             color: AppTheme.surfaceColor(context),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: AppTheme.dividerColor(context), width: 0.5),
           ),
-          child: Row(
-            children: [
-              const Icon(
-                Icons.menu_book_rounded,
-                color: AppTheme.gold,
-                size: 20,
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(book.title,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleSmall
-                            ?.copyWith(fontWeight: FontWeight.w700)),
-                    const SizedBox(height: 2),
-                    Text(
-                      book.freeSourceNote != null
-                          ? '${book.author} · ${book.freeSourceNote}'
-                          : book.author,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodySmall
-                          ?.copyWith(color: AppTheme.textSecondary(context)),
-                    ),
-                  ],
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Row(
+              children: [
+                // Cover — BookCoverImage shows a branded placeholder when
+                // coverUrl is empty, so no special-casing needed here.
+                BookCoverImage(
+                  url: book.coverUrl ?? '',
+                  width: 62,
+                  height: 84,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(11),
+                    bottomLeft: Radius.circular(11),
+                  ),
                 ),
-              ),
-              Icon(Icons.chevron_right_rounded, color: AppTheme.textMuted(context)),
-            ],
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 12, vertical: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // "📚 FREE BOOK" badge — matches Books-tab card style
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 7, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: AppTheme.gold.withValues(alpha: 0.12),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: const Text(
+                            '📚 FREE BOOK',
+                            style: TextStyle(
+                              color: AppTheme.gold,
+                              fontSize: 8,
+                              fontWeight: FontWeight.w800,
+                              letterSpacing: 0.8,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          book.title,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleSmall
+                              ?.copyWith(fontWeight: FontWeight.w700),
+                        ),
+                        const SizedBox(height: 3),
+                        Text(
+                          book.author,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: AppTheme.textSecondary(context)),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: Icon(Icons.chevron_right_rounded,
+                      color: AppTheme.textMuted(context)),
+                ),
+              ],
+            ),
           ),
         ),
       ),
