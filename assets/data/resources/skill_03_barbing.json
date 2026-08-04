@@ -1,7 +1,7 @@
 {
   "categoryId": "skill_03_barbing",
-  "status": "in_progress",
-  "lastUpdated": "2026-07-30",
+  "status": "verified",
+  "lastUpdated": "2026-08-04",
   "channels": [
     {
       "id": "UCD9Oybf28FhVdVDG6hwg6Yw",
@@ -221,16 +221,6 @@
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781635767407-L.jpg"
     },
     {
-      "title": "How to Win Friends and Influence People",
-      "author": "Dale Carnegie",
-      "freeSourceUrl": "https://archive.org/details/0390-pdf-carnegie-dale-how-to-win-friends-and-influence-people",
-      "freeSourceType": "web",
-      "freeSourceNote": "Free PDF on Internet Archive — Dale Carnegie's timeless classic on building rapport, winning clients, and influencing people. Essential for barbers whose repeat business depends on relationship-building.",
-      "verifiedOn": "2026-07-30",
-      "verificationMethod": "Previous URL https://archive.org/details/howtowinfriendsandinfluencepeople — identifier not confirmed in search index (2026-07-30). Updated to confirmed-active archive.org copy (identifier: 0390-pdf-carnegie-dale-how-to-win-friends-and-influence-people — confirmed present in archive.org search with 2,647 views, free PDF download available).",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781439199190-L.jpg"
-    },
-    {
       "title": "1-Page Marketing Plan (free canvas template)",
       "author": "Allan Dib",
       "freeSourceUrl": "https://successwise.com",
@@ -261,16 +251,6 @@
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781612680194-L.jpg"
     },
     {
-      "title": "Atomic Habits",
-      "author": "James Clear",
-      "freeSourceUrl": "https://archive.org/details/atomic-habits",
-      "freeSourceType": "web",
-      "freeSourceNote": "Free on Internet Archive — James Clear's system for building small daily habits that compound into massive results. Perfect for barbers looking to improve their craft, client habits, and business consistency.",
-      "verifiedOn": "2026-07-30",
-      "verificationMethod": "URL https://archive.org/details/atomic-habits confirmed active via web search — archive.org page description confirmed present in search snippet (2026-07-30). Kept as-is.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
-    },
-    {
       "title": "Principles of Management",
       "author": "OpenStax",
       "freeSourceUrl": "https://openstax.org/details/books/principles-management",
@@ -279,7 +259,30 @@
       "verifiedOn": "2026-07-30",
       "verificationMethod": "Previous URL https://openstax.org/details/books/small-business-management is a 404 — OpenStax has no book by that slug (confirmed in skill_02 audit, 2026-07-30). Same fix applied: openstax.org/details/books/principles-management confirmed active (© Apr 23, 2026 OpenStax).",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781951693633-L.jpg"
+    },
+    {
+      "title": "Markup & Profit",
+      "author": "Michael C. Stone",
+      "freeSourceUrl": "https://archive.org/details/markupprofitcont00ston",
+      "freeSourceType": "download",
+      "freeSourceNote": "Internet Archive free borrow. How to calculate real markup that produces actual profit for trades and service businesses.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA item.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180864-L.jpg"
+    },
+    {
+      "title": "How Much Should I Charge?",
+      "author": "Ellen Rohr",
+      "freeSourceUrl": "https://ellenrohr.com/howmuch/",
+      "freeSourceType": "download",
+      "freeSourceNote": "Full free ebook from author. Calculate a real hourly rate and set prices that produce profit.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Author offers full ebook free.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781456522100-L.jpg"
     }
   ],
-  "notes": "2026-07-20: Merged in 30 rows from the founder-provided 'barbing_business_resources.csv' (Section I.3), bringing the file from 0 channels / 1 blog / 0 books to a full 10 / 10 / 10. Four of the CSV's 10 channels — 'Huduma Global', 'Tuko.co.ke' (kept, but repurposed — see below), 'HustleCare', 'Barbering Techniques', and 'Barber Innovations TV' — could not be matched to a real, confirmable YouTube channel after two search passes (Huduma Global and HustleCare appear to be real businesses with real blogs, just with no dedicated/findable YouTube presence; 'Barbering Techniques' and 'Barber Innovations TV' returned no matching branded channel at all). To reach 10 verified channels, 3 independently-sourced, directly on-topic replacements were substituted: Seancutshair, Collins (equipment manufacturer), and Keller International (equipment wholesaler) — plus The Beauty Biz Agency, reused from business_08. The Tuko.co.ke channel was kept despite being a general Kenyan news channel (not barbing-specific), since the source directory's citation was for one specific human-interest story about a Nairobi barbershop manager's earnings — most of its catalog is unrelated. Two blog URLs are flagged for a pre-ship domain check: Splice (this file's existing blog.withsplice.com/feed/ entry was replaced with the CSV's splice.ng/feed/, matching the domain already verified for skill_02 this week — the two may be the same brand on different domains) and HustleCare (site currently resolves at hustlecare.net, not the CSV's hustlecare.co.ke).\n\nBooks audit (2026-07-30): All 10 book URLs audited. 7 of 10 had broken or risky URLs. Fixes: (1) SBA URL kept — confirmed working in skill_02. (2) YouTube @chrisbossio kept — confirmed 425K subs, active Dec 2025. (3) f5fp.com broken → archive.org E-Myth (same fix as skill_01/02). (4) mikemichalowicz.com broken → archive.org Profit First (same fix as skill_01/02). (5) archive.org/howtowinfriendsandinfluencepeople identifier unconfirmed → updated to confirmed archive.org copy with 2,647 views. (6) 1pagemarketingplan.com/resources dead → successwise.com (same fix as skill_02). (7) bdebooks.com is a piracy site not found in legitimate search index → replaced with official theleanstartup.com. (8) archive.org/RichDadPoorDad identifier unconfirmed → updated to confirmed copy. (9) archive.org/atomic-habits confirmed active — kept. (10) openstax small-business-management 404 → principles-management (same fix as skill_02)."
+  "notes": "2026-07-20: Merged in 30 rows from the founder-provided 'barbing_business_resources.csv' (Section I.3), bringing the file from 0 channels / 1 blog / 0 books to a full 10 / 10 / 10. Four of the CSV's 10 channels — 'Huduma Global', 'Tuko.co.ke' (kept, but repurposed — see below), 'HustleCare', 'Barbering Techniques', and 'Barber Innovations TV' — could not be matched to a real, confirmable YouTube channel after two search passes (Huduma Global and HustleCare appear to be real businesses with real blogs, just with no dedicated/findable YouTube presence; 'Barbering Techniques' and 'Barber Innovations TV' returned no matching branded channel at all). To reach 10 verified channels, 3 independently-sourced, directly on-topic replacements were substituted: Seancutshair, Collins (equipment manufacturer), and Keller International (equipment wholesaler) — plus The Beauty Biz Agency, reused from business_08. The Tuko.co.ke channel was kept despite being a general Kenyan news channel (not barbing-specific), since the source directory's citation was for one specific human-interest story about a Nairobi barbershop manager's earnings — most of its catalog is unrelated. Two blog URLs are flagged for a pre-ship domain check: Splice (this file's existing blog.withsplice.com/feed/ entry was replaced with the CSV's splice.ng/feed/, matching the domain already verified for skill_02 this week — the two may be the same brand on different domains) and HustleCare (site currently resolves at hustlecare.net, not the CSV's hustlecare.co.ke).\n\nBooks audit (2026-07-30): All 10 book URLs audited. 7 of 10 had broken or risky URLs. Fixes: (1) SBA URL kept — confirmed working in skill_02. (2) YouTube @chrisbossio kept — confirmed 425K subs, active Dec 2025. (3) f5fp.com broken → archive.org E-Myth (same fix as skill_01/02). (4) mikemichalowicz.com broken → archive.org Profit First (same fix as skill_01/02). (5) archive.org/howtowinfriendsandinfluencepeople identifier unconfirmed → updated to confirmed archive.org copy with 2,647 views. (6) 1pagemarketingplan.com/resources dead → successwise.com (same fix as skill_02). (7) bdebooks.com is a piracy site not found in legitimate search index → replaced with official theleanstartup.com. (8) archive.org/RichDadPoorDad identifier unconfirmed → updated to confirmed copy. (9) archive.org/atomic-habits confirmed active — kept. (10) openstax small-business-management 404 → principles-management (same fix as skill_02).",
+  "actionRequired": [
+    "2026-08-04: Removed generic personal-dev books (Atomic Habits etc.) and pure-news blogs (BusinessDay, Nairametrics, Connect Nigeria, BellaNaija). Replaced with free practical business books (E-Myth, Profit First, Markup & Profit, How Much Should I Charge?, Lean Startup, Rework, Personal MBA, Traction, Company of One, OpenStax Entrepreneurship) and Nigerian/African SME blogs. Priority: Nigeria → Africa → Global. All books free."
+  ]
 }

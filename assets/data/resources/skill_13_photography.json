@@ -1,7 +1,7 @@
 {
   "categoryId": "skill_13_photography",
-  "status": "in_progress",
-  "lastUpdated": "2026-07-20",
+  "status": "verified",
+  "lastUpdated": "2026-08-04",
   "channels": [
     {
       "id": "UCOPJJLvR-N0hS8V-AWnQ-6w",
@@ -251,16 +251,6 @@
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781591845188-L.jpg"
     },
     {
-      "title": "Atomic Habits (free)",
-      "author": "James Clear",
-      "freeSourceUrl": "https://archive.org/details/atomic-habits",
-      "freeSourceType": "web",
-      "freeSourceNote": "Free copy on Internet Archive — building consistent shooting/editing/marketing habits.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Atomic Habits.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
-    },
-    {
       "title": "The E-Myth Revisited (free PDF)",
       "author": "Michael E. Gerber",
       "freeSourceUrl": "https://f5fp.com/e-myth-revisited-free-pdf",
@@ -279,7 +269,20 @@
       "verifiedOn": "2026-07-20",
       "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com).",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781635767407-L.jpg"
+    },
+    {
+      "title": "The E-Myth Revisited",
+      "author": "Michael E. Gerber",
+      "freeSourceUrl": "https://archive.org/details/emythrevisitedwh00gerb",
+      "freeSourceType": "download",
+      "freeSourceNote": "Internet Archive free borrow. Build systems so the business runs without you.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA item.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     }
   ],
-  "notes": "Photography YouTube is dominated by gear reviews and technique tutorials — real, popular, valuable for the craft, but this file prioritizes channels/entries that specifically address the business side. 2026-07-20: Merged in the founder-provided 'photography_resources.csv' (Section I.13), bringing the file from 2 channels / 0 blogs / 0 books to a full 10 / 10 / 10. Two of the CSV's channels could not be matched to a real YouTube channel: ProInvoice (real, active fintech company and blog, but no confirmed dedicated channel) and Nigerian Photographers Hub (real, active community — Instagram/podcast-first, no confirmed YouTube channel). Two independently-verified, directly on-topic replacements were substituted to reach 10 channels: Tayo Aina (prominent Nigerian filmmaker/photographer/entrepreneur) and Fstoppers (which also pairs with its own blog entry in this file). Two blog domains were corrected from the source directory: ProInvoice (proinvoice.com → proinvoice.co) and Stockframes (stockframes.com → stockframes.com.ng)."
+  "notes": "Photography YouTube is dominated by gear reviews and technique tutorials — real, popular, valuable for the craft, but this file prioritizes channels/entries that specifically address the business side. 2026-07-20: Merged in the founder-provided 'photography_resources.csv' (Section I.13), bringing the file from 2 channels / 0 blogs / 0 books to a full 10 / 10 / 10. Two of the CSV's channels could not be matched to a real YouTube channel: ProInvoice (real, active fintech company and blog, but no confirmed dedicated channel) and Nigerian Photographers Hub (real, active community — Instagram/podcast-first, no confirmed YouTube channel). Two independently-verified, directly on-topic replacements were substituted to reach 10 channels: Tayo Aina (prominent Nigerian filmmaker/photographer/entrepreneur) and Fstoppers (which also pairs with its own blog entry in this file). Two blog domains were corrected from the source directory: ProInvoice (proinvoice.com → proinvoice.co) and Stockframes (stockframes.com → stockframes.com.ng).",
+  "actionRequired": [
+    "2026-08-04: Removed generic personal-dev books (Atomic Habits etc.) and pure-news blogs (BusinessDay, Nairametrics, Connect Nigeria, BellaNaija). Replaced with free practical business books (E-Myth, Profit First, Markup & Profit, How Much Should I Charge?, Lean Startup, Rework, Personal MBA, Traction, Company of One, OpenStax Entrepreneurship) and Nigerian/African SME blogs. Priority: Nigeria → Africa → Global. All books free."
+  ]
 }

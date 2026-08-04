@@ -1,7 +1,7 @@
 {
   "categoryId": "profession_05_accounting",
-  "status": "ready",
-  "lastUpdated": "2026-07-24",
+  "status": "verified",
+  "lastUpdated": "2026-08-04",
   "channels": [
     {
       "id": "UCOVYQamvkiM8_aCGw6nQ7xg",
@@ -38,18 +38,6 @@
       "region": "Global",
       "verifiedOn": "2026-07-17",
       "verificationMethod": "Pre-existing verified channel from prior profession_05 pass."
-    },
-    {
-      "id": "UCyrDVJhKXizhyMPDwHhRtKA",
-      "name": "The Accounting Podcast",
-      "handle": "@TheAccountingPodcast",
-      "description": "Blake Oliver and David Leary's channel — the #1 accounting, bookkeeping, and tax podcast in the world. Weekly roundup of accounting industry news, technology, AI in accounting, and analysis of where the profession is headed. Essential for staying current as a modern accountant.",
-      "accentColor": "0xFF7C3AED",
-      "initials": "AP",
-      "focus": "Accounting industry news, technology, AI, and profession analysis",
-      "region": "Global",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Channel ID UCyrDVJhKXizhyMPDwHhRtKA confirmed via direct fetch. Handle @TheAccountingPodcast. About: 'The #1 accounting, bookkeeping, and tax podcast in the world! Blake Oliver and David Leary.' RSS: https://www.youtube.com/feeds/videos.xml?channel_id=UCyrDVJhKXizhyMPDwHhRtKA"
     },
     {
       "id": "UCtYFvS9h6iYkaxUh4fcrxvQ",
@@ -122,6 +110,17 @@
       "region": "Global",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Channel ID UCYJLdSmyKoXCbnd-pklMn5Q confirmed via VidIQ stats page (vidiq.com/youtube-stats/channel/UCYJLdSmyKoXCbnd-pklMn5Q/) and YouTube community URL. Handle @AccountingStuff. Confirmed: James Hearle, Big 4 background, 1M+ subscribers since 2018. RSS: https://www.youtube.com/feeds/videos.xml?channel_id=UCYJLdSmyKoXCbnd-pklMn5Q"
+    },
+    {
+      "id": "UCUyDOdBWhC1MCxEjC46d-zw",
+      "name": "Alex Hormozi",
+      "handle": "@AlexHormozi",
+      "description": "Offer creation, pricing and scaling systems for profitable businesses.",
+      "accentColor": "0xFFEA580C",
+      "initials": "AH",
+      "focus": "Business scaling and offers",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
     }
   ],
   "blogs": [
@@ -174,14 +173,6 @@
       "verificationMethod": "Companion blog to verified Accounting Stuff YouTube channel (James Hearle). RSS at standard /feed/ path on accountingstuff.com."
     },
     {
-      "name": "BusinessDay Financial Industry",
-      "url": "https://businessday.ng/financial-industry/feed",
-      "region": "Nigeria",
-      "focus": "Nigerian accounting, financial services, and professional services business news",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "RSS validated in prior skill integrations. BusinessDay financial industry section covers Nigerian accounting and financial services."
-    },
-    {
       "name": "ICAN Nigeria News",
       "url": "https://ican.org.ng/feed",
       "region": "Nigeria",
@@ -204,6 +195,12 @@
       "focus": "Accounting firm startup guides and bookkeeping business ideas in Nigeria",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "RSS validated in skill_08 and skill_17. Nigerian entrepreneurship blog with accounting profession content."
+    },
+    {
+      "name": "SME Digest",
+      "url": "https://smedigest.com.ng/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Nigerian SME practical content."
     }
   ],
   "books": [
@@ -236,16 +233,6 @@
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Free access confirmed at bdebooks.com. Applies to launching new practice models, service lines, or professional consulting branches.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
-    },
-    {
-      "title": "Atomic Habits",
-      "author": "James Clear",
-      "freeSourceUrl": "https://archive.org/details/atomic-habits",
-      "freeSourceType": "web",
-      "freeSourceNote": "Free at archive.org — build the daily systems and habits that define an excellent accounting practice",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Available via Internet Archive. Directly applicable to clinical routines, client follow-up systems, and professional development habits.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Small Business Management",
@@ -306,6 +293,20 @@
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Peer-reviewed open textbook published by OpenStax (Rice University). Freely available online. Covers planning, organizing, leading, and controlling a professional team.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
+    },
+    {
+      "title": "Markup & Profit",
+      "author": "Michael C. Stone",
+      "freeSourceUrl": "https://archive.org/details/markupprofitcont00ston",
+      "freeSourceType": "download",
+      "freeSourceNote": "Internet Archive free borrow. How to calculate real markup that produces actual profit for trades and service businesses.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA item.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180864-L.jpg"
     }
+  ],
+  "actionRequired": [
+    "2026-08-04: Removed generic personal-dev books (Atomic Habits etc.) and pure-news blogs (BusinessDay, Nairametrics, Connect Nigeria, BellaNaija). Replaced with free practical business books (E-Myth, Profit First, Markup & Profit, How Much Should I Charge?, Lean Startup, Rework, Personal MBA, Traction, Company of One, OpenStax Entrepreneurship) and Nigerian/African SME blogs. Priority: Nigeria → Africa → Global. All books free.",
+    "2026-08-04 full audit: Removed pure-technical tutorials, pure-news and generic personal-dev sources. Kept/replaced with category-specific business operations content (pricing, clients, cash flow, systems, scaling). Books forced free (IA/OpenStax/Bookdio/author free). Priority Nigeria→Africa→Global."
   ]
 }

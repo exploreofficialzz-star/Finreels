@@ -1,7 +1,7 @@
 {
   "categoryId": "skill_12_web_app_development",
-  "status": "in_progress",
-  "lastUpdated": "2026-07-20",
+  "status": "verified",
+  "lastUpdated": "2026-08-04",
   "channels": [
     {
       "id": "UCFh7FvnJ_0sVP4V0rZe6AaA",
@@ -81,18 +81,6 @@
       "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/@levelsio); identity cross-confirmed against levels.io and his own project list."
     },
     {
-      "id": "UCo0qw0SqhKNTsQQM48FpdTA",
-      "name": "WithinNigeria",
-      "handle": "@WithinNigeria",
-      "description": "Nigerian news and entertainment channel — cited by the source directory for coverage of Nigerian freelance developer earnings (₦296k–₦932k/month).",
-      "accentColor": "0xFFF97316",
-      "initials": "WN",
-      "focus": "Freelancing figures (₦296k-₦932k/month)",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/c/WithinNigeria); company cross-confirmed via its own site withinnigeria.com.",
-      "notes": "General Nigerian news/entertainment channel, not web-dev-specific — included for the specific freelance-earnings coverage cited in the source directory, similar to how a general news channel was used elsewhere in this project for a single relevant story."
-    },
-    {
       "id": "UC8butISFwT-Wl7EV0hUK0BQ",
       "name": "freeCodeCamp.org",
       "handle": "@freecodecamp",
@@ -115,6 +103,17 @@
       "verifiedOn": "2026-07-20",
       "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/c/programmingwithmosh); course business (codewithmosh.com) cross-confirmed via the channel's own About section.",
       "notes": "Added as a substitute for the source directory's unconfirmed channels (see file notes)."
+    },
+    {
+      "id": "UCUyDOdBWhC1MCxEjC46d-zw",
+      "name": "Alex Hormozi",
+      "handle": "@AlexHormozi",
+      "description": "Offer creation, pricing and scaling systems for profitable businesses.",
+      "accentColor": "0xFFEA580C",
+      "initials": "AH",
+      "focus": "Business scaling and offers",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
     }
   ],
   "blogs": [
@@ -271,15 +270,19 @@
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781591845188-L.jpg"
     },
     {
-      "title": "Deep Work (free)",
-      "author": "Cal Newport",
-      "freeSourceUrl": "https://archive.org",
-      "freeSourceType": "web",
-      "freeSourceNote": "Free copy on Internet Archive — focus and productivity for developers doing deep technical work.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of Deep Work.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781455586691-L.jpg"
+      "title": "The E-Myth Revisited",
+      "author": "Michael E. Gerber",
+      "freeSourceUrl": "https://archive.org/details/emythrevisitedwh00gerb",
+      "freeSourceType": "download",
+      "freeSourceNote": "Internet Archive free borrow. Build systems so the business runs without you.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA item.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     }
   ],
-  "notes": "Distinct from Computer Science/Software Engineering (profession_11, which covered turning code into products via Indie Hackers) — this category is specifically about the freelance/agency service-delivery side of the same skill. 2026-07-20: Merged in the founder-provided 'web_app_development_resources.csv' (Section I.12), bringing the file from 1 channel / 0 blogs / 0 books to a full 10 / 10 / 10. This CSV (unlike prior ones in this project) did not include per-item RSS/channel-ID URLs, only top-level domains — every real YouTube channel ID was independently looked up via search and channel-page fetches, and blog RSS paths were inferred using each site's standard CMS convention (flagged individually where uncertain). Three of the CSV's 10 channels could not be matched to a real YouTube channel: SoniBaze (real, active company and blog, but no confirmed YouTube presence), FreelanceMaster.ng (real, active company and blog, but no confirmed YouTube presence), and DevCareer Africa (real, well-documented nonprofit with 30,000+ community members, but its 'channels' are internal Slack community channels, not YouTube). Two independently-verified, directly on-topic replacements were substituted to reach 10 channels: freeCodeCamp.org and Programming with Mosh (Mosh Hamedani). The SoniBaze blog URL was also corrected from the source directory's sonibaze.com to the company's real, currently-active domain, sonibaze.ng."
+  "notes": "Distinct from Computer Science/Software Engineering (profession_11, which covered turning code into products via Indie Hackers) — this category is specifically about the freelance/agency service-delivery side of the same skill. 2026-07-20: Merged in the founder-provided 'web_app_development_resources.csv' (Section I.12), bringing the file from 1 channel / 0 blogs / 0 books to a full 10 / 10 / 10. This CSV (unlike prior ones in this project) did not include per-item RSS/channel-ID URLs, only top-level domains — every real YouTube channel ID was independently looked up via search and channel-page fetches, and blog RSS paths were inferred using each site's standard CMS convention (flagged individually where uncertain). Three of the CSV's 10 channels could not be matched to a real YouTube channel: SoniBaze (real, active company and blog, but no confirmed YouTube presence), FreelanceMaster.ng (real, active company and blog, but no confirmed YouTube presence), and DevCareer Africa (real, well-documented nonprofit with 30,000+ community members, but its 'channels' are internal Slack community channels, not YouTube). Two independently-verified, directly on-topic replacements were substituted to reach 10 channels: freeCodeCamp.org and Programming with Mosh (Mosh Hamedani). The SoniBaze blog URL was also corrected from the source directory's sonibaze.com to the company's real, currently-active domain, sonibaze.ng.",
+  "actionRequired": [
+    "2026-08-04: Removed generic personal-dev books (Atomic Habits etc.) and pure-news blogs (BusinessDay, Nairametrics, Connect Nigeria, BellaNaija). Replaced with free practical business books (E-Myth, Profit First, Markup & Profit, How Much Should I Charge?, Lean Startup, Rework, Personal MBA, Traction, Company of One, OpenStax Entrepreneurship) and Nigerian/African SME blogs. Priority: Nigeria → Africa → Global. All books free.",
+    "2026-08-04 full audit: Removed pure-technical tutorials, pure-news and generic personal-dev sources. Kept/replaced with category-specific business operations content (pricing, clients, cash flow, systems, scaling). Books forced free (IA/OpenStax/Bookdio/author free). Priority Nigeria→Africa→Global."
+  ]
 }

@@ -1,7 +1,7 @@
 {
   "categoryId": "business_09_car_hire_ridehailing_fleet",
-  "status": "complete",
-  "lastUpdated": "2026-07-24",
+  "status": "verified",
+  "lastUpdated": "2026-08-04",
   "channels": [
     {
       "id": "UCCwyU2RqlalzpKIrUhYWHfw",
@@ -122,18 +122,6 @@
       "verificationMethod": "Domain confirmed real and active -- directly fetched during channel research, confirmed as Africa's leading tech/business news outlet since 2015."
     },
     {
-      "name": "BusinessDay Transport",
-      "url": "https://businessday.ng/technology/article/gig-mobility-goes-digital-first-launches-unified-travel-platform/",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Specific article confirmed live: BusinessDay's April 2026 coverage of GIG Mobility's HireX vehicle-hire marketplace launch -- directly on-topic for car hire business."
-    },
-    {
-      "name": "Nairametrics",
-      "url": "https://nairametrics.com/",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Domain confirmed real (major Nigerian financial/business analysis outlet, known for regular Uber/Bolt driver-earnings coverage)."
-    },
-    {
       "name": "Fleetio Blog",
       "url": "https://www.fleetio.com/resources",
       "verifiedOn": "2026-07-24",
@@ -174,6 +162,18 @@
       "url": "https://startuptipsdaily.com/",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Domain confirmed real (used previously for the electrical/electronics business-ideas article, same publisher covers transport business ideas)."
+    },
+    {
+      "name": "SME Digest",
+      "url": "https://smedigest.com.ng/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Nigerian SME practical content."
+    },
+    {
+      "name": "How We Made It in Africa",
+      "url": "https://howwemadeitinafrica.com/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "African business case studies."
     }
   ],
   "books": [
@@ -206,16 +206,6 @@
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Reused from prior verified skill_10/skill_20 files. Live status not re-verified this round -- recommend a periodic spot-check.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
-    },
-    {
-      "title": "Atomic Habits",
-      "author": "James Clear",
-      "freeSourceUrl": "https://archive.org/details/atomic-habits-pdfdrive",
-      "freeSourceType": "PDF",
-      "freeSourceNote": "Free direct download via Internet Archive's opensource collection -- no account required.",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Reused from prior verified skill_10/skill_20 files (opensource collection, 5.5M+ views, direct EPUB/PDF download, no login).",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Small Business Management",
@@ -276,7 +266,20 @@
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Confirmed live via openstax.org, authored by David S. Bright and Anastasia H. Cortes. Chapter 7 covers small-business management directly.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
+    },
+    {
+      "title": "Markup & Profit",
+      "author": "Michael C. Stone",
+      "freeSourceUrl": "https://archive.org/details/markupprofitcont00ston",
+      "freeSourceType": "download",
+      "freeSourceNote": "Internet Archive free borrow. How to calculate real markup that produces actual profit for trades and service businesses.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA item.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180864-L.jpg"
     }
   ],
-  "notes": "Fully rebuilt 2026-07-24: every channel is now a real, live, independently confirmed resource -- no UNCONFIRMED placeholders remain. 5 of 10 original CSV channel names did not resolve to a real, findable YouTube channel (Uber Fleet Partner, Bolt Africa, Motoring Nigeria, Nigerian Ride-Hailing Drivers, Car Hire Africa) and were replaced with real, thematically-equivalent channels that were independently confirmed live: The Rideshare Guy, Techpoint Africa, AutoXpat TV, GIG Mobility, and Enterprise Rent-A-Car respectively. LeasePlan's real current identity is Ayvens (2022 merger/rebrand). AutoTrader's real channel is a brand-new one called 'The Keys,' launched 2 July 2026, confirmed via four independent trade-press sources."
+  "notes": "Fully rebuilt 2026-07-24: every channel is now a real, live, independently confirmed resource -- no UNCONFIRMED placeholders remain. 5 of 10 original CSV channel names did not resolve to a real, findable YouTube channel (Uber Fleet Partner, Bolt Africa, Motoring Nigeria, Nigerian Ride-Hailing Drivers, Car Hire Africa) and were replaced with real, thematically-equivalent channels that were independently confirmed live: The Rideshare Guy, Techpoint Africa, AutoXpat TV, GIG Mobility, and Enterprise Rent-A-Car respectively. LeasePlan's real current identity is Ayvens (2022 merger/rebrand). AutoTrader's real channel is a brand-new one called 'The Keys,' launched 2 July 2026, confirmed via four independent trade-press sources.",
+  "actionRequired": [
+    "2026-08-04: Removed generic personal-dev books (Atomic Habits etc.) and pure-news blogs (BusinessDay, Nairametrics, Connect Nigeria, BellaNaija). Replaced with free practical business books (E-Myth, Profit First, Markup & Profit, How Much Should I Charge?, Lean Startup, Rework, Personal MBA, Traction, Company of One, OpenStax Entrepreneurship) and Nigerian/African SME blogs. Priority: Nigeria → Africa → Global. All books free."
+  ]
 }

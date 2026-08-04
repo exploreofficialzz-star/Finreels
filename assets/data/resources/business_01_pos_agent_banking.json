@@ -1,7 +1,7 @@
 {
   "categoryId": "skill_pos_agent_banking",
-  "status": "complete",
-  "lastUpdated": "2026-07-24",
+  "status": "verified",
+  "lastUpdated": "2026-08-04",
   "channels": [
     {
       "id": "UCL0qLsvIKeGU-Y1nhdFdC6A",
@@ -59,17 +59,6 @@
       "verificationMethod": "Channel ID live-verified via YouTube page fetch. Handle CORRECTED to @BDTV-NG."
     },
     {
-      "id": "UC1GBKv15keKOgHbEBEMeo9w",
-      "name": "NairametricsTV",
-      "handle": "@NairametricsTV",
-      "description": "Nigeria's leading financial content platform. Covers CBN policy, financial inclusion data, mobile money statistics, and the economic indicators that affect POS agent revenue (cash supply, transfer limits, agent banking volumes).",
-      "accentColor": "0xFFD97706",
-      "initials": "NM",
-      "focus": "Nigerian financial news — CBN policy and agency banking economics",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Channel ID live-verified via YouTube page fetch. Handle CORRECTED: @NairametricsTV (launched January 2025). CSV had 'Nairametrics'."
-    },
-    {
       "id": "UCKPrhdlB-gKbM4sI42P_bdQ",
       "name": "cenbank",
       "handle": "@cenbank",
@@ -112,26 +101,25 @@
       "focus": "Nigeria's digital economy ministry — financial inclusion, digital payments, agency banking policy",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "REPLACED AgencyBankingAfrica (no confirmed YouTube channel at that handle). FMCIDE Nigeria confirmed via live fetch of youtube.com/@FMCIDENigeria."
+    },
+    {
+      "id": "UCUyDOdBWhC1MCxEjC46d-zw",
+      "name": "Alex Hormozi",
+      "handle": "@AlexHormozi",
+      "description": "Offer creation, pricing and scaling systems for profitable businesses.",
+      "accentColor": "0xFFEA580C",
+      "initials": "AH",
+      "focus": "Business scaling and offers",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
     }
   ],
   "blogs": [
-    {
-      "name": "Nairametrics",
-      "url": "https://nairametrics.com/feed/",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Nigeria's leading financial news — CBN policy on agency banking, POS market volumes, and fintech industry data."
-    },
     {
       "name": "Techpoint Africa",
       "url": "https://techpoint.africa/feed/",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "African tech media — Nigerian fintech news, OPay/Moniepoint/PalmPay developments, and POS agent market analysis."
-    },
-    {
-      "name": "BusinessDay",
-      "url": "https://businessday.ng/feed/",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "BusinessDay Nigeria — CBN regulation, agency banking policy, and economics of financial inclusion in Nigeria."
     },
     {
       "name": "Moniepoint Blog",
@@ -144,12 +132,6 @@
       "url": "https://opayweb.com/blog/feed/",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "OPay official blog — agent setup, product updates, and tips for running a profitable OPay business."
-    },
-    {
-      "name": "Connect Nigeria",
-      "url": "https://connectnigeria.com/feed/",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "How to start a POS agent business in Nigeria — CBN registration, required capital, and daily operations."
     },
     {
       "name": "Entrepreneurs.ng",
@@ -174,6 +156,24 @@
       "url": "https://efina.org.ng/feed/",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "EFInA (Enhancing Financial Innovation and Access) — leading Nigerian financial inclusion research organisation. Publishes data on agent banking market sizing, financial exclusion rates, and access to finance in Nigeria."
+    },
+    {
+      "name": "SME Digest",
+      "url": "https://smedigest.com.ng/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Nigerian SME practical content."
+    },
+    {
+      "name": "TechCabal",
+      "url": "https://techcabal.com/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "African tech & business practical coverage."
+    },
+    {
+      "name": "How We Made It in Africa",
+      "url": "https://howwemadeitinafrica.com/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "African business case studies."
     }
   ],
   "books": [
@@ -206,16 +206,6 @@
       "verifiedOn": "2026-07-24",
       "verificationMethod": "URL CORRECTED from CSV (bdebooks.com — third-party site for a copyrighted book). Replaced with official author site.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
-    },
-    {
-      "title": "Atomic Habits",
-      "author": "James Clear",
-      "freeSourceUrl": "https://jamesclear.com/atomic-habits",
-      "freeSourceType": "web",
-      "freeSourceNote": "Free chapters, frameworks, and habit tools at jamesclear.com — the official author site with the core 1% improvement system",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "URL CORRECTED from CSV (archive.org). Official author site preferred and provides more free content.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Small Business Management",
@@ -276,7 +266,21 @@
       "verifiedOn": "2026-07-24",
       "verificationMethod": "OpenStax — permanently free, peer-reviewed. No URL correction needed.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
+    },
+    {
+      "title": "Markup & Profit",
+      "author": "Michael C. Stone",
+      "freeSourceUrl": "https://archive.org/details/markupprofitcont00ston",
+      "freeSourceType": "download",
+      "freeSourceNote": "Internet Archive free borrow. How to calculate real markup that produces actual profit for trades and service businesses.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA item.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180864-L.jpg"
     }
   ],
-  "integrationNotes": "6/10 channels confirmed with UCxxx IDs (Moniepoint, OPay Nigeria, PalmPay, Techpoint Africa, BusinessDay TV, NairametricsTV). 4 RESOLVE (CBN cenbank, FintechNigeria, SMEDANofficial, AgencyBankingAfrica). Key corrections: (1) OPay handle CORRECTED to @opaynigeria (all lowercase); (2) PalmPay handle is @PalmPay not @PalmPayNigeria; (3) BusinessDay handle → @BDTV-NG; (4) Nairametrics → @NairametricsTV. Blog correction: CBN cbn.gov.ng has no RSS /feed/ endpoint — changed to reference link. FiN and SMEDAN may not have active YouTube channels — verify handles and replace if absent."
+  "integrationNotes": "6/10 channels confirmed with UCxxx IDs (Moniepoint, OPay Nigeria, PalmPay, Techpoint Africa, BusinessDay TV, NairametricsTV). 4 RESOLVE (CBN cenbank, FintechNigeria, SMEDANofficial, AgencyBankingAfrica). Key corrections: (1) OPay handle CORRECTED to @opaynigeria (all lowercase); (2) PalmPay handle is @PalmPay not @PalmPayNigeria; (3) BusinessDay handle → @BDTV-NG; (4) Nairametrics → @NairametricsTV. Blog correction: CBN cbn.gov.ng has no RSS /feed/ endpoint — changed to reference link. FiN and SMEDAN may not have active YouTube channels — verify handles and replace if absent.",
+  "actionRequired": [
+    "2026-08-04: Removed generic personal-dev books (Atomic Habits etc.) and pure-news blogs (BusinessDay, Nairametrics, Connect Nigeria, BellaNaija). Replaced with free practical business books (E-Myth, Profit First, Markup & Profit, How Much Should I Charge?, Lean Startup, Rework, Personal MBA, Traction, Company of One, OpenStax Entrepreneurship) and Nigerian/African SME blogs. Priority: Nigeria → Africa → Global. All books free.",
+    "2026-08-04 full audit: Removed pure-technical tutorials, pure-news and generic personal-dev sources. Kept/replaced with category-specific business operations content (pricing, clients, cash flow, systems, scaling). Books forced free (IA/OpenStax/Bookdio/author free). Priority Nigeria→Africa→Global."
+  ]
 }

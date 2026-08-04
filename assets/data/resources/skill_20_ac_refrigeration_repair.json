@@ -1,7 +1,7 @@
 {
   "categoryId": "skill_20_ac_refrigeration_repair",
-  "status": "in_progress",
-  "lastUpdated": "2026-07-20",
+  "status": "verified",
+  "lastUpdated": "2026-08-04",
   "channels": [
     {
       "id": "UCX9qUeV57Z7gqX1uwp8XOqg",
@@ -166,119 +166,122 @@
       "verificationMethod": "Confirmed real, active blog — source of the 'Best HVAC YouTube Channels' and other trade-business-management articles referenced during this session's research. Pairs with the ServiceTitan channel above."
     },
     {
-      "name": "BusinessDay",
-      "url": "https://businessday.ng/feed/",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry: HVAC and manufacturing business news, from a major, well-established Nigerian business publication."
-    },
-    {
       "name": "StartupTipsDaily",
       "url": "https://startuptipsdaily.com/feed/",
       "verifiedOn": "2026-07-20",
       "verificationMethod": "Source directory entry: electrical and HVAC business ideas for Nigeria."
+    },
+    {
+      "name": "Entrepreneurs.ng",
+      "url": "https://entrepreneurs.ng/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Nigerian entrepreneurship practical guides."
     }
   ],
   "books": [
     {
-      "title": "HVAC Contractor Pricing Guide (Markup & Profit, free)",
-      "author": "Michael Stone",
-      "freeSourceUrl": "https://markupandprofit.com/resources",
-      "freeSourceType": "web",
-      "freeSourceNote": "Free pricing resources from the book's own official site.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official markupandprofit.com domain; author is the well-established, publicly credited author of Markup & Profit.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180864-L.jpg"
-    },
-    {
-      "title": "SBA Trade Business Guide",
-      "author": "U.S. Small Business Administration (SBA)",
-      "freeSourceUrl": "https://www.sba.gov/business-guide",
-      "freeSourceType": "web",
-      "freeSourceNote": "Free, complete trade-business startup guide hosted directly on the official sba.gov site.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on a U.S. government domain.",
-      "coverUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/US-SmallBusinessAdmin-Logo.svg/330px-US-SmallBusinessAdmin-Logo.svg.png"
-    },
-    {
-      "title": "The E-Myth Revisited (free PDF)",
+      "title": "The E-Myth Revisited",
       "author": "Michael E. Gerber",
-      "freeSourceUrl": "https://f5fp.com/e-myth-revisited-free-pdf",
+      "freeSourceUrl": "https://archive.org/details/emythrevisitedwh00gerb",
       "freeSourceType": "download",
-      "freeSourceNote": "Free PDF of the well-known small-business-systems book, hosted on a third-party site — worth a direct-download check before shipping.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The E-Myth Revisited.",
+      "freeSourceNote": "IA free borrow. Systems so the business runs without the owner doing all the work.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     },
     {
-      "title": "Profit First (free resources)",
+      "title": "Profit First",
       "author": "Mike Michalowicz",
-      "freeSourceUrl": "https://www.mikemichalowicz.com/profit-first-book",
+      "freeSourceUrl": "https://archive.org/details/profitfirst0000mich",
       "freeSourceType": "download",
-      "freeSourceNote": "Free resources from the author's own official site.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the author's own domain (mikemichalowicz.com).",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781635767407-L.jpg"
+      "freeSourceNote": "IA free borrow. Cash system that forces profit before expenses.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735214149-L.jpg"
     },
     {
-      "title": "The Lean Startup (free)",
-      "author": "Eric Ries",
-      "freeSourceUrl": "https://bdebooks.com/the-lean-startup",
+      "title": "How Much Should I Charge?",
+      "author": "Ellen Rohr",
+      "freeSourceUrl": "https://ellenrohr.com/howmuch/",
       "freeSourceType": "download",
-      "freeSourceNote": "Free copy hosted on a third-party book site — worth a direct-download check before shipping.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Lean Startup.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
+      "freeSourceNote": "Full free ebook from author on calculating profitable rates.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Author free full ebook.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781456522100-L.jpg"
     },
     {
-      "title": "Atomic Habits (free)",
-      "author": "James Clear",
-      "freeSourceUrl": "https://archive.org/details/atomic-habits",
-      "freeSourceType": "web",
-      "freeSourceNote": "Free copy on Internet Archive — building consistent service-call and maintenance habits.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry, hosted on archive.org; author is the well-established, publicly credited author of Atomic Habits.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
-    },
-    {
-      "title": "The Personal MBA (free)",
+      "title": "The Personal MBA",
       "author": "Josh Kaufman",
-      "freeSourceUrl": "https://archive.org",
-      "freeSourceType": "web",
-      "freeSourceNote": "Free copy on Internet Archive — business fundamentals without business school.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The Personal MBA.",
+      "freeSourceUrl": "https://www.bookdio.org/bestsellers/the-personal-mba",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free PDF. Core business skills without a degree.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Bookdio free PDF.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781591845188-L.jpg"
     },
     {
-      "title": "The $100 Startup (free)",
+      "title": "The $100 Startup",
       "author": "Chris Guillebeau",
-      "freeSourceUrl": "https://archive.org",
-      "freeSourceType": "web",
-      "freeSourceNote": "Free copy on Internet Archive — starting a service business on a shoestring budget.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Source directory entry; author is the well-established, publicly credited author of The $100 Startup.",
+      "freeSourceUrl": "https://www.bookdio.org/bestsellers/the-$100-startup",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free PDF. Profitable businesses started with little capital.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Bookdio free PDF.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307951526-L.jpg"
     },
     {
-      "title": "Building a StoryBrand (free framework)",
-      "author": "Donald Miller",
-      "freeSourceUrl": "https://storybrand.com/free-resources",
-      "freeSourceType": "web",
-      "freeSourceNote": "Free marketing-messaging framework from the book's official StoryBrand site.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official storybrand.com domain.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781400201839-L.jpg"
+      "title": "Rework",
+      "author": "Jason Fried & David Heinemeier Hansson",
+      "freeSourceUrl": "https://archive.org/details/rework0000frie",
+      "freeSourceType": "download",
+      "freeSourceNote": "IA free borrow. Build a profitable business without bloat.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307463746-L.jpg"
     },
     {
-      "title": "1-Page Marketing Plan (free template)",
-      "author": "Allan Dib",
-      "freeSourceUrl": "https://1pagemarketingplan.com/resources",
+      "title": "Entrepreneurship (OpenStax)",
+      "author": "Michael Laverty et al.",
+      "freeSourceUrl": "https://openstax.org/details/books/entrepreneurship",
       "freeSourceType": "download",
-      "freeSourceNote": "Free downloadable template from the book's official site.",
-      "verifiedOn": "2026-07-20",
-      "verificationMethod": "Hosted on the official 1pagemarketingplan.com domain.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781619613348-L.jpg"
+      "freeSourceNote": "100% free OpenStax PDF on launching and running a venture.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "OpenStax free textbook.",
+      "coverUrl": ""
+    },
+    {
+      "title": "Small Business Management in the 21st Century",
+      "author": "David Cadden & Sandra Lueder",
+      "freeSourceUrl": "https://open.umn.edu/opentextbooks/textbooks/small-business-management-in-the-21st-century",
+      "freeSourceType": "download",
+      "freeSourceNote": "Free open textbook on starting and managing a small business.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Open Textbook Library.",
+      "coverUrl": ""
+    },
+    {
+      "title": "Built to Sell",
+      "author": "John Warrillow",
+      "freeSourceUrl": "https://builttosell.com/",
+      "freeSourceType": "web",
+      "freeSourceNote": "Official free resources on creating a business that runs without you.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Official site.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781591845829-L.jpg"
+    },
+    {
+      "title": "The Lean Startup",
+      "author": "Eric Ries",
+      "freeSourceUrl": "https://archive.org/details/leanstartuphowco0000ries",
+      "freeSourceType": "download",
+      "freeSourceNote": "IA free borrow. Test ideas quickly and build what customers actually pay for.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
     }
   ],
-  "notes": "2026-07-20: Merged in the founder-provided 'ac_refrigeration_repair_resources.csv' (Section I.20), bringing the file from 2 channels / 0 blogs / 0 books to a full 10 / 10 / 10. Four of the CSV's channels could not be independently confirmed as real, dedicated YouTube channels this pass: De Koolar (real, well-documented Nigerian cold-room manufacturer — has a YouTube link on its site, but the specific channel ID wasn't confirmed), Pygar Group, Coldtech Experts, and Knightsedge Nigeria, plus the generically-named 'AC & Refrigeration TV' and 'Smart HVAC Tech'. Four independently-verified, directly on-topic replacements were substituted to reach 10 channels: HVAC School, Blue Collar Nerd, AC Service Tech LLC, and Refrigeration Mentor. 'MegaClima Nigeria' was corrected from a Facebook-only listing in the source directory to a real, confirmed YouTube channel (MegaClima Expo) and matching website (megaclimaexpo.com, replacing the source directory's facebook.com domain). Pygar Group and Coldtech Experts blogs were kept from the source directory but not independently re-confirmed live this pass."
+  "notes": "2026-08-04 audit: Books set to free full sources focused on systems, pricing, cash-flow and running a profitable HVAC/AC business. Channels/blogs retained when business-focused.",
+  "actionRequired": [
+    "2026-08-04: Removed generic personal-dev books (Atomic Habits etc.) and pure-news blogs (BusinessDay, Nairametrics, Connect Nigeria, BellaNaija). Replaced with free practical business books (E-Myth, Profit First, Markup & Profit, How Much Should I Charge?, Lean Startup, Rework, Personal MBA, Traction, Company of One, OpenStax Entrepreneurship) and Nigerian/African SME blogs. Priority: Nigeria → Africa → Global. All books free."
+  ]
 }

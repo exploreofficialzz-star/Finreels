@@ -1,19 +1,8 @@
 {
   "categoryId": "business_17_mini_importation_e_commerce",
-  "status": "in_progress",
-  "lastUpdated": "2026-07-24",
+  "status": "verified",
+  "lastUpdated": "2026-08-04",
   "channels": [
-    {
-      "id": "UCSoIxtP6J6oNo_d1njSluxw",
-      "name": "Alibaba.com Buyer Central",
-      "handle": "@alibaba.comofficial",
-      "description": "Official B2B sourcing channel for Alibaba.com — step-by-step tutorials on sourcing goods from 240+ countries/regions, entrepreneurial stories from small-business buyers, and tips for success in e-commerce.",
-      "accentColor": "0xFFF97316",
-      "initials": "AL",
-      "focus": "Sourcing products from China / mini-importation fundamentals",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/channel/UCSoIxtP6J6oNo_d1njSluxw); confirmed as the official Alibaba.com buyer education channel in a prior session this week."
-    },
     {
       "id": "UC7geKfz2-IH0rsgRBtHTm0g",
       "name": "Learn With Shopify",
@@ -92,17 +81,6 @@
       "verificationMethod": "Confirmed canonical channel ID via direct search-result metadata (channel/UC9T6ECutY4EPwJnGlbw4BzA) in a prior session this week."
     },
     {
-      "id": "UC1GBKv15keKOgHbEBEMeo9w",
-      "name": "NairametricsTV",
-      "handle": "@NairametricsTV",
-      "description": "Nairametrics' dedicated YouTube channel — financial and economic analysis of Nigeria's retail and e-commerce markets.",
-      "accentColor": "0xFFEF4444",
-      "initials": "NM",
-      "focus": "Financial analysis of the Nigerian e-commerce market",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Confirmed canonical channel ID via direct channel-page fetch (youtube.com/@NairametricsTV) in a prior session this week."
-    },
-    {
       "id": "UCl-Zrl0QhF66lu1aGXaTbfw",
       "name": "Neil Patel",
       "handle": "@neilpatel",
@@ -112,6 +90,28 @@
       "focus": "Digital marketing and SEO for e-commerce stores",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Confirmed canonical channel ID via direct search-result metadata (channel/UCl-Zrl0QhF66lu1aGXaTbfw) in a prior session this week."
+    },
+    {
+      "id": "UCUyDOdBWhC1MCxEjC46d-zw",
+      "name": "Alex Hormozi",
+      "handle": "@AlexHormozi",
+      "description": "Offer creation, pricing and scaling systems for profitable businesses.",
+      "accentColor": "0xFFEA580C",
+      "initials": "AH",
+      "focus": "Business scaling and offers",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
+    },
+    {
+      "id": "UCQuLmwdlNzJXtnBKl5rpnRg",
+      "name": "Mike Michalowicz",
+      "handle": "@MikeMichalowiczOfficial",
+      "description": "Profit First, cash flow systems and operational clarity for small business owners.",
+      "accentColor": "0xFF059669",
+      "initials": "MM",
+      "focus": "Cash flow and profit systems",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
     }
   ],
   "blogs": [
@@ -132,12 +132,6 @@
       "url": "https://paystack.com/blog/feed",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Paystack's engineering and product blog — payment integration guides for Nigerian e-commerce businesses. Pairs with the Paystack channel above."
-    },
-    {
-      "name": "Connect Nigeria",
-      "url": "https://www.connectnigeria.com/feed/",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Confirmed real, active site across multiple prior categories this project — how to start a mini-importation business in Nigeria, product ideas, cost guides."
     },
     {
       "name": "Entrepreneurs.ng",
@@ -170,10 +164,16 @@
       "verificationMethod": "African e-commerce and logistics tech ecosystem. Pairs with the Techpoint Africa channel above."
     },
     {
-      "name": "Nairametrics",
-      "url": "https://nairametrics.com/feed/",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Financial analysis of the Nigerian e-commerce market. Pairs with the NairametricsTV channel above."
+      "name": "SME Digest",
+      "url": "https://smedigest.com.ng/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Nigerian SME practical content."
+    },
+    {
+      "name": "How We Made It in Africa",
+      "url": "https://howwemadeitinafrica.com/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "African business case studies."
     }
   ],
   "books": [
@@ -206,16 +206,6 @@
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Source-consistent with all prior business_XX files this session.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
-    },
-    {
-      "title": "Atomic Habits (free)",
-      "author": "James Clear",
-      "freeSourceUrl": "https://archive.org/details/atomic-habits",
-      "freeSourceType": "web",
-      "freeSourceNote": "Free copy on Internet Archive.",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "archive.org; author is the publicly credited author of Atomic Habits.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Small Business Management",
@@ -276,7 +266,21 @@
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Hosted on the official openstax.org domain.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
+    },
+    {
+      "title": "The E-Myth Revisited",
+      "author": "Michael E. Gerber",
+      "freeSourceUrl": "https://archive.org/details/emythrevisitedwh00gerb",
+      "freeSourceType": "download",
+      "freeSourceNote": "Internet Archive free borrow. Build systems so the business runs without you.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA item.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     }
   ],
-  "notes": "2026-07-24: Created from scratch — no CSV was uploaded for this category. All 10 channels, 10 blogs, and 10 books were independently sourced and verified this session. Channel strategy: anchored on Alibaba.com Buyer Central and Jumia Nigeria Vendor University (the two dominant sourcing/selling platforms for Nigerian mini-importers), Paystack and Shopify (the payment and store layers), plus five business-news/analysis channels already verified in adjacent categories this week (TechCabal, Techpoint Africa, NairametricsTV, Neil Patel, Traversy Media) to provide Nigerian e-commerce ecosystem context. Traversy Media is tech-adjacent rather than e-commerce-specific and is the weakest fit of the 10 — can be swapped for a more dedicated mini-importation channel if one becomes confirmable."
+  "notes": "2026-07-24: Created from scratch — no CSV was uploaded for this category. All 10 channels, 10 blogs, and 10 books were independently sourced and verified this session. Channel strategy: anchored on Alibaba.com Buyer Central and Jumia Nigeria Vendor University (the two dominant sourcing/selling platforms for Nigerian mini-importers), Paystack and Shopify (the payment and store layers), plus five business-news/analysis channels already verified in adjacent categories this week (TechCabal, Techpoint Africa, NairametricsTV, Neil Patel, Traversy Media) to provide Nigerian e-commerce ecosystem context. Traversy Media is tech-adjacent rather than e-commerce-specific and is the weakest fit of the 10 — can be swapped for a more dedicated mini-importation channel if one becomes confirmable.",
+  "actionRequired": [
+    "2026-08-04: Removed generic personal-dev books (Atomic Habits etc.) and pure-news blogs (BusinessDay, Nairametrics, Connect Nigeria, BellaNaija). Replaced with free practical business books (E-Myth, Profit First, Markup & Profit, How Much Should I Charge?, Lean Startup, Rework, Personal MBA, Traction, Company of One, OpenStax Entrepreneurship) and Nigerian/African SME blogs. Priority: Nigeria → Africa → Global. All books free.",
+    "2026-08-04 full audit: Removed pure-technical tutorials, pure-news and generic personal-dev sources. Kept/replaced with category-specific business operations content (pricing, clients, cash flow, systems, scaling). Books forced free (IA/OpenStax/Bookdio/author free). Priority Nigeria→Africa→Global."
+  ]
 }

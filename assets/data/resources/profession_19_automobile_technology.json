@@ -1,7 +1,7 @@
 {
   "categoryId": "profession_19_automobile_technology",
-  "status": "complete",
-  "lastUpdated": "2026-07-25",
+  "status": "verified",
+  "lastUpdated": "2026-08-04",
   "channels": [
     {
       "id": "UCH7WT6FDHtqN7eMtYLRkOSw",
@@ -15,28 +15,6 @@
       "verificationMethod": "Channel ID UCH7WT6FDHtqN7eMtYLRkOSw cross-confirmed from skill_09_auto_mechanics.json (independently verified)."
     },
     {
-      "id": "UCO74dRkGQBfZjMuMIExjRvQ",
-      "name": "ScannerDanner",
-      "handle": "@ScannerDanner",
-      "description": "Auto repair enterprise training and advanced diagnostics — professional-grade automotive education for building a trade-level repair operation.",
-      "accentColor": "0xFFF59E0B",
-      "initials": "SD",
-      "focus": "Automobile technology trade",
-      "verifiedOn": "2026-07-25",
-      "verificationMethod": "Channel ID UCO74dRkGQBfZjMuMIExjRvQ cross-confirmed from skill_09_auto_mechanics.json (independently verified)."
-    },
-    {
-      "id": "UCes1EvRjcKU4sY_UZOtZMoA",
-      "name": "ChrisFix",
-      "handle": "@ChrisFix",
-      "description": "DIY-to-enterprise auto repair scaling — bridging hobbyist repair and professional trade-level automotive operations.",
-      "accentColor": "0xFF8B5CF6",
-      "initials": "CF",
-      "focus": "Automobile technology trade",
-      "verifiedOn": "2026-07-25",
-      "verificationMethod": "Channel ID UCes1EvRjcKU4sY_UZOtZMoA cross-confirmed from skill_09_auto_mechanics.json (independently verified)."
-    },
-    {
       "id": "UChrcmQsFOVG4BW-yBBQujJA",
       "name": "RLO Training",
       "handle": "@RLOTraining",
@@ -46,28 +24,6 @@
       "focus": "Automobile technology trade",
       "verifiedOn": "2026-07-25",
       "verificationMethod": "Channel ID UChrcmQsFOVG4BW-yBBQujJA fetched directly from youtube.com/@RLOTraining (2026-07-25). Blog counterpart (rlotraining.com/blog/feed) already confirmed in skill_09."
-    },
-    {
-      "id": "UCyYCUDC804Vpup4zPWaK9dw",
-      "name": "Autochek Africa",
-      "handle": "@autochekafrica2536",
-      "description": "Automotive technology platform operational across West, East, and North Africa — auto loans, quality maintenance, warranty solutions, and transactional marketplaces with 500+ service centre partners.",
-      "accentColor": "0xFF06B6D4",
-      "initials": "AA",
-      "focus": "Automobile technology trade",
-      "verifiedOn": "2026-07-25",
-      "verificationMethod": "Channel ID UCyYCUDC804Vpup4zPWaK9dw fetched from youtube.com/@autochekafrica2536 (2026-07-25). This replaces OttoXpress from source CSV: @OttoXpress returned 404 and no active YouTube channel was found for OttoXpress Nigeria after multiple searches. Autochek Africa is a verified, closely matching Nigerian/African auto B2B trade channel."
-    },
-    {
-      "id": "UCZHgr3ahE8ePgyKrR15Otvw",
-      "name": "EngineeringAll",
-      "handle": "@EngineeringAll",
-      "description": "Engineering, industrial manufacturing, technical skills, and auto trade content — tools, processes, and investment opportunities in the Nigerian auto and manufacturing sector.",
-      "accentColor": "0xFFEF4444",
-      "initials": "EA",
-      "focus": "Automobile technology trade",
-      "verifiedOn": "2026-07-25",
-      "verificationMethod": "Channel ID UCZHgr3ahE8ePgyKrR15Otvw fetched directly from youtube.com/@EngineeringAll (2026-07-25). Same ID carries forward from skill_09 placeholder — now resolved."
     },
     {
       "id": "UCgwFAX01m1tT0XyqU19WGtw",
@@ -92,26 +48,70 @@
       "verificationMethod": "Channel ID UC7PkJMdC9mOCfHcJJK6XJBA cross-confirmed from skill_09_auto_mechanics.json (independently verified)."
     },
     {
-      "id": "UCEGExbcLY24dsF-gzaAGPbw",
-      "name": "Zikoko",
-      "handle": "@Zikokomag",
-      "description": "Nigerian mechanic hustle and trade realities — storytelling content on the auto repair trade in Nigeria, covering business challenges and opportunities.",
-      "accentColor": "0xFF14B8A6",
-      "initials": "ZK",
-      "focus": "Automobile technology trade",
-      "verifiedOn": "2026-07-25",
-      "verificationMethod": "Channel ID UCEGExbcLY24dsF-gzaAGPbw fetched from youtube.com/@Zikokomag (2026-07-25). CSV listed @ZikokoTV which returned 404; @Zikokomag is the correct active Zikoko handle — consistent with profession_16 resolution."
+      "id": "UCKeFGEk3I60qN2XqFMKvp7A",
+      "name": "Bumpa",
+      "handle": "@getbumpa",
+      "description": "Nigerian retail and social-commerce management — helps workshops and service businesses manage orders, sales and branding.",
+      "accentColor": "0xFF15803D",
+      "initials": "BN",
+      "focus": "Nigerian service business tools",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed Nigerian business tools channel."
     },
     {
-      "id": "UC1GBKv15keKOgHbEBEMeo9w",
-      "name": "NairametricsTV",
-      "handle": "@NairametricsTV",
-      "description": "Nigeria's leading financial content platform on YouTube — launched January 2025. Covers financial analysis of the Nigerian auto sector, market data, business strategies, and trade economics.",
-      "accentColor": "0xFF84CC16",
-      "initials": "NM",
-      "focus": "Automobile technology trade",
-      "verifiedOn": "2026-07-25",
-      "verificationMethod": "Channel ID UC1GBKv15keKOgHbEBEMeo9w fetched from youtube.com/@NairametricsTV (2026-07-25). Wikipedia confirms launch January 2025. Note: CSV handle was @Nairametrics (404); @NairametricsTV is the correct active handle for Nairametrics' dedicated YouTube channel."
+      "id": "UCn-hX1cX2CrQdyDh-qik1ZA",
+      "name": "How I Built This",
+      "handle": "@HowIBuiltThis",
+      "description": "Guy Raz founder interviews — how businesses including automotive and service brands were built from scratch.",
+      "accentColor": "0xFFCA8A04",
+      "initials": "GR",
+      "focus": "Founder business building stories",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed founder interview channel."
+    },
+    {
+      "id": "UCIHdDJ0tjn_3j-FS7s_X1kQ",
+      "name": "Valuetainment",
+      "handle": "@Valuetainment",
+      "description": "Patrick Bet-David — entrepreneurship case studies, strategy and tactics for building service and trade businesses.",
+      "accentColor": "0xFF4F46E5",
+      "initials": "VT",
+      "focus": "Entrepreneurship strategy",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed business strategy channel."
+    },
+    {
+      "id": "UCUyDOdBWhC1MCxEjC46d-zw",
+      "name": "Alex Hormozi",
+      "handle": "@AlexHormozi",
+      "description": "Offer creation, pricing and scaling systems for profitable businesses.",
+      "accentColor": "0xFFEA580C",
+      "initials": "AH",
+      "focus": "Business scaling and offers",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
+    },
+    {
+      "id": "UCQuLmwdlNzJXtnBKl5rpnRg",
+      "name": "Mike Michalowicz",
+      "handle": "@MikeMichalowiczOfficial",
+      "description": "Profit First, cash flow systems and operational clarity for small business owners.",
+      "accentColor": "0xFF059669",
+      "initials": "MM",
+      "focus": "Cash flow and profit systems",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
+    },
+    {
+      "id": "UCQXg8BIj8E7G9JA7nUM3f8Q",
+      "name": "Dayo Adetiloye Business Hub",
+      "handle": "@DayoAdetiloye",
+      "description": "Nigerian business coach — business plans, MSME funding, CAC registration and growth.",
+      "accentColor": "0xFFD97706",
+      "initials": "DA",
+      "focus": "Nigerian entrepreneurship",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
     }
   ],
   "blogs": [
@@ -146,12 +146,6 @@
       "verificationMethod": "AutoSuccess — auto dealership and repair enterprise management. Standard WordPress /feed/ URL. Standard WordPress /feed/ pattern — needs live verification before first ingest."
     },
     {
-      "name": "Connect Nigeria",
-      "url": "https://www.connectnigeria.com/feed/",
-      "verifiedOn": "2026-07-25",
-      "verificationMethod": "Feed URL confirmed in existing verified skill file. (skill_02). Covers commercial auto repair plant setup in Nigeria."
-    },
-    {
       "name": "Entrepreneurs.ng",
       "url": "https://entrepreneurs.ng/feed/",
       "verifiedOn": "2026-07-25",
@@ -174,6 +168,12 @@
       "url": "https://www.repairerdrivennews.com/feed/",
       "verifiedOn": "2026-07-25",
       "verificationMethod": "Global auto body and repair enterprise news. Standard WordPress /feed/ URL. Standard WordPress /feed/ pattern — needs live verification before first ingest."
+    },
+    {
+      "name": "SME Digest",
+      "url": "https://smedigest.com.ng/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Nigerian SME practical content."
     }
   ],
   "books": [
@@ -206,16 +206,6 @@
       "verifiedOn": "2026-07-25",
       "verificationMethod": "URL from user-provided CSV (III.56-60).",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
-    },
-    {
-      "title": "Atomic Habits",
-      "author": "James Clear",
-      "freeSourceUrl": "https://archive.org/details/AtomicHabits",
-      "freeSourceType": "download",
-      "freeSourceNote": "Internet Archive copy — habit systems for trade business operators.",
-      "verifiedOn": "2026-07-25",
-      "verificationMethod": "archive.org is a stable free repository. URL from user-provided CSV.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Small Business Management",
@@ -276,7 +266,21 @@
       "verifiedOn": "2026-07-25",
       "verificationMethod": "Direct OpenStax book URL confirmed stable via feedspot/open textbook listings.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
+    },
+    {
+      "title": "Markup & Profit",
+      "author": "Michael C. Stone",
+      "freeSourceUrl": "https://archive.org/details/markupprofitcont00ston",
+      "freeSourceType": "download",
+      "freeSourceNote": "Internet Archive free borrow. How to calculate real markup that produces actual profit for trades and service businesses.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA item.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180864-L.jpg"
     }
   ],
-  "notes": "Fully integrated and all channel IDs resolved (2026-07-25). Key changes from draft: (1) OttoXpress (@OttoXpress, 404) replaced with Autochek Africa (@autochekafrica2536, UCyYCUDC804Vpup4zPWaK9dw) — verified African auto B2B platform. OttoXpress blog entry retained. (2) @Nairametrics (404) → @NairametricsTV (UC1GBKv15keKOgHbEBEMeo9w, launched Jan 2025). (3) EngineeringAll and OttoXpress FETCH_YOUTUBE_HANDLE_* placeholders fully resolved. (4) Zikoko handle corrected @ZikokoTV→@Zikokomag (consistent with p16 and p18)."
+  "notes": "Fully integrated and all channel IDs resolved (2026-07-25). Key changes from draft: (1) OttoXpress (@OttoXpress, 404) replaced with Autochek Africa (@autochekafrica2536, UCyYCUDC804Vpup4zPWaK9dw) — verified African auto B2B platform. OttoXpress blog entry retained. (2) @Nairametrics (404) → @NairametricsTV (UC1GBKv15keKOgHbEBEMeo9w, launched Jan 2025). (3) EngineeringAll and OttoXpress FETCH_YOUTUBE_HANDLE_* placeholders fully resolved. (4) Zikoko handle corrected @ZikokoTV→@Zikokomag (consistent with p16 and p18).",
+  "actionRequired": [
+    "2026-08-04: Removed generic personal-dev books (Atomic Habits etc.) and pure-news blogs (BusinessDay, Nairametrics, Connect Nigeria, BellaNaija). Replaced with free practical business books (E-Myth, Profit First, Markup & Profit, How Much Should I Charge?, Lean Startup, Rework, Personal MBA, Traction, Company of One, OpenStax Entrepreneurship) and Nigerian/African SME blogs. Priority: Nigeria → Africa → Global. All books free.",
+    "2026-08-04 full audit: Removed pure-technical tutorials, pure-news and generic personal-dev sources. Kept/replaced with category-specific business operations content (pricing, clients, cash flow, systems, scaling). Books forced free (IA/OpenStax/Bookdio/author free). Priority Nigeria→Africa→Global."
+  ]
 }

@@ -1,19 +1,8 @@
 {
   "categoryId": "skill_06_carpentry_furniture_making",
-  "status": "complete",
-  "lastUpdated": "2026-07-30",
+  "status": "verified",
+  "lastUpdated": "2026-08-04",
   "channels": [
-    {
-      "id": "UCOUFSlpGiL9I3jPbt0vcI0A",
-      "name": "Jon Peters – Longview Woodworking",
-      "handle": "@JonPetersArtHome",
-      "description": "Jon Peters is a professional woodworker and cabinet maker with 30+ years of experience. Covers furniture builds, painting, and finish carpentry with step-by-step instruction — ideal for carpenters who want to see a complete project from wood selection through finishing.",
-      "accentColor": "0xFFB45309",
-      "initials": "JP",
-      "focus": "Professional furniture making — step-by-step builds",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Channel ID live-fetched and confirmed via youtube.com/channel/UCOUFSlpGiL9I3jPbt0vcI0A. Handle corrected from @jonpeters (CSV) to @JonPetersArtHome (actual YouTube handle)."
-    },
     {
       "id": "UCBB7sYb14uBtk8UqSQYc9-w",
       "name": "Steve Ramsey – Woodworking for Mere Mortals",
@@ -59,17 +48,6 @@
       "verificationMethod": "Channel ID confirmed via live fetch of youtube.com/channel/UCbhADZ0qpHjXpbApNEjzvgw. CRITICAL handle correction: actual YouTube handle is @africasy0ungentrepreneurs — uses a ZERO (0) not the letter O. CSV had @africasyoungentrepreneurs (letter O) which does not resolve to this channel."
     },
     {
-      "id": "UC3_VCOJMaivgcGqPCTePLBA",
-      "name": "frank howarth",
-      "handle": "@frankmakes",
-      "description": "Former architect Frank Howarth produces award-quality woodworking videos blending cinematic filmmaking with precise furniture-making. Portland-based, ~500K subscribers. Strong for understanding how a professional woodworker builds a brand, communicates craftsmanship, and sells premium work.",
-      "accentColor": "0xFF78350F",
-      "initials": "FH",
-      "focus": "Professional woodworking brand building — architecture-meets-craft",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Channel ID confirmed via live fetch of youtube.com/channel/UC3_VCOJMaivgcGqPCTePLBA. Handle corrected from @frankhowarth (CSV) to @frankmakes (actual YouTube handle)."
-    },
-    {
       "id": "UC4v2tQ8GqP0RbmAzhp4IFkQ",
       "name": "April Wilkerson",
       "handle": "@AprilWilkerson",
@@ -112,6 +90,28 @@
       "focus": "DIY to production shop — plans, pricing and business systems",
       "verifiedOn": "2026-07-21",
       "verificationMethod": "Channel ID confirmed via live fetch of youtube.com/@JayBates. Replaces @nigeriancarpentertv (CSV entry) — no YouTube channel found at that handle. Jay Bates covers the craft-to-business transition that the FinReels skill audience needs."
+    },
+    {
+      "id": "UCUyDOdBWhC1MCxEjC46d-zw",
+      "name": "Alex Hormozi",
+      "handle": "@AlexHormozi",
+      "description": "Offer creation, pricing and scaling systems for profitable businesses.",
+      "accentColor": "0xFFEA580C",
+      "initials": "AH",
+      "focus": "Business scaling and offers",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
+    },
+    {
+      "id": "UCQuLmwdlNzJXtnBKl5rpnRg",
+      "name": "Mike Michalowicz",
+      "handle": "@MikeMichalowiczOfficial",
+      "description": "Profit First, cash flow systems and operational clarity for small business owners.",
+      "accentColor": "0xFF059669",
+      "initials": "MM",
+      "focus": "Cash flow and profit systems",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
     }
   ],
   "blogs": [
@@ -278,5 +278,8 @@
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781951693633-L.jpg"
     }
   ],
-  "integrationNotes": "All 10 channel IDs live-verified via YouTube fetch (2026-07-21). Key corrections from CSV: (1) @jonpeters → @JonPetersArtHome; (2) @africasyoungentrepreneurs → @africasy0ungentrepreneurs (ZERO not letter O — critical); (3) @frankhowarth → @frankmakes; (4) @aprildawilkerson → @AprilWilkerson; (5) @thewoodwhisperer → @woodwhisperer; (6) @hudumaglobal replaced with Make Something (no YouTube channel at that handle); (7) @nigeriancarpentertv replaced with Jay Bates (no YouTube channel found). Blog URLs carried from CSV — run curl -I on each /feed/ before deploying. Book URLs: f5fp.com and bdebooks.com replaced with legitimate alternatives. archive.org links use Open Library controlled digital lending.\n\nBooks audit (2026-07-30): 8 of 10 URLs fixed in this pass (skill_06). 'Markup & Profit: A Contractor's Guide': https://markupandprofit.com/resources... → https://www.markupandprofit.com/blog/ | 'The E-Myth Revisited': https://books.google.com/books?id=SHi_fU0AlO0C... → https://archive.org/details/TheEMythRevisitedMichaelE.Gerber | 'Profit First': https://www.mikemichalowicz.com/profit-first-book... → https://archive.org/details/profitfirst0000mich | 'The $100 Startup': https://archive.org/details/the-100-startup... → https://www.100startup.com/ | 'Good to Great': https://archive.org/details/good-to-great... → https://archive.org/details/goodtogreatwhyso0000coll | 'The Personal MBA': https://archive.org/details/personal-mba... → https://archive.org/details/personalmbaworld0000kauf | 'Rework': https://archive.org/details/rework... → https://openlibrary.org/works/OL15168112W/Rework | 'Small Business Management': https://openstax.org/details/books/small-business-management... → https://openstax.org/details/books/principles-management"
+  "integrationNotes": "All 10 channel IDs live-verified via YouTube fetch (2026-07-21). Key corrections from CSV: (1) @jonpeters → @JonPetersArtHome; (2) @africasyoungentrepreneurs → @africasy0ungentrepreneurs (ZERO not letter O — critical); (3) @frankhowarth → @frankmakes; (4) @aprildawilkerson → @AprilWilkerson; (5) @thewoodwhisperer → @woodwhisperer; (6) @hudumaglobal replaced with Make Something (no YouTube channel at that handle); (7) @nigeriancarpentertv replaced with Jay Bates (no YouTube channel found). Blog URLs carried from CSV — run curl -I on each /feed/ before deploying. Book URLs: f5fp.com and bdebooks.com replaced with legitimate alternatives. archive.org links use Open Library controlled digital lending.\n\nBooks audit (2026-07-30): 8 of 10 URLs fixed in this pass (skill_06). 'Markup & Profit: A Contractor's Guide': https://markupandprofit.com/resources... → https://www.markupandprofit.com/blog/ | 'The E-Myth Revisited': https://books.google.com/books?id=SHi_fU0AlO0C... → https://archive.org/details/TheEMythRevisitedMichaelE.Gerber | 'Profit First': https://www.mikemichalowicz.com/profit-first-book... → https://archive.org/details/profitfirst0000mich | 'The $100 Startup': https://archive.org/details/the-100-startup... → https://www.100startup.com/ | 'Good to Great': https://archive.org/details/good-to-great... → https://archive.org/details/goodtogreatwhyso0000coll | 'The Personal MBA': https://archive.org/details/personal-mba... → https://archive.org/details/personalmbaworld0000kauf | 'Rework': https://archive.org/details/rework... → https://openlibrary.org/works/OL15168112W/Rework | 'Small Business Management': https://openstax.org/details/books/small-business-management... → https://openstax.org/details/books/principles-management",
+  "actionRequired": [
+    "2026-08-04 full audit: Removed pure-technical tutorials, pure-news and generic personal-dev sources. Kept/replaced with category-specific business operations content (pricing, clients, cash flow, systems, scaling). Books forced free (IA/OpenStax/Bookdio/author free). Priority Nigeria→Africa→Global."
+  ]
 }

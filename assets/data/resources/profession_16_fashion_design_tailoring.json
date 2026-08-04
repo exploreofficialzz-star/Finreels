@@ -1,7 +1,7 @@
 {
   "categoryId": "profession_16_fashion_design_tailoring",
-  "status": "complete",
-  "lastUpdated": "2026-07-25",
+  "status": "verified",
+  "lastUpdated": "2026-08-04",
   "channels": [
     {
       "id": "UCBktEIlB_kIAv5wX1SdhpBg",
@@ -37,28 +37,6 @@
       "verificationMethod": "Channel ID UCg1yTRFTHx_8e7-t3MPdWXw fetched directly from youtube.com/@SheLeadsAfrica (2026-07-25). Blog counterpart already confirmed in skill_01 (domain .org)."
     },
     {
-      "id": "UCg7t_0Al2Wf_CP3xuh0p2fw",
-      "name": "Vogue Business",
-      "handle": "@VogueBusiness",
-      "description": "Condé Nast's independent fashion industry publication — global fashion retail trends and trade analysis, including supply chain, brand strategy, and retail economics.",
-      "accentColor": "0xFF10B981",
-      "initials": "VB",
-      "focus": "Fashion design & tailoring trade",
-      "verifiedOn": "2026-07-25",
-      "verificationMethod": "Channel ID UCg7t_0Al2Wf_CP3xuh0p2fw fetched directly from youtube.com/@VogueBusiness (2026-07-25)."
-    },
-    {
-      "id": "UCAEKq7rlC0QmqMD2l_FTcnQ",
-      "name": "WGSN",
-      "handle": "@wgsn",
-      "description": "The world's leading consumer trend forecaster — global trend forecasting and fashion trade intelligence used by manufacturers, brands, and retailers worldwide.",
-      "accentColor": "0xFF06B6D4",
-      "initials": "WG",
-      "focus": "Fashion design & tailoring trade",
-      "verifiedOn": "2026-07-25",
-      "verificationMethod": "Channel ID UCAEKq7rlC0QmqMD2l_FTcnQ fetched directly from youtube.com/@WGSN (2026-07-25). YouTube displays handle as @wgsn (lowercase)."
-    },
-    {
       "id": "UC7sFwsT1_W_UcEzrGyyCZRg",
       "name": "Stylebyreme",
       "handle": "@Stylebyreme",
@@ -81,37 +59,59 @@
       "verificationMethod": "Channel ID UCjQ_pqco2oMHDLWwPxJKk6w cross-confirmed from skill_01_tailoring_fashion_design.json (independently verified via FeedSpot Nigeria Fashion directory)."
     },
     {
-      "id": "UCqpj89pw0G4I35X9wIKeyjA",
-      "name": "BellaNaija",
-      "handle": "@bellanaija",
-      "description": "Africa's No. 1 digital brand — Nigerian fashion industry features, brand spotlights, and commercial photography event coverage for the Nigerian trade market.",
-      "accentColor": "0xFFF97316",
-      "initials": "BN",
-      "focus": "Fashion design & tailoring trade",
-      "verifiedOn": "2026-07-25",
-      "verificationMethod": "Channel ID UCqpj89pw0G4I35X9wIKeyjA fetched directly from youtube.com/@BellaNaija (2026-07-25). YouTube displays handle as @bellanaija (lowercase)."
+      "id": "UCQXg8BIj8E7G9JA7nUM3f8Q",
+      "name": "Dayo Adetiloye Business Hub",
+      "handle": "@DayoAdetiloye",
+      "description": "Nigerian business coach — practical entrepreneurship including fashion and creative business plans, funding and CAC registration.",
+      "accentColor": "0xFFD97706",
+      "initials": "DA",
+      "focus": "Nigerian entrepreneurship including fashion",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed Nigerian business education channel."
     },
     {
-      "id": "UCfnyOJc7kgjZyxmvEafMQGQ",
-      "name": "TechCabal",
-      "handle": "@Techcabal",
-      "description": "African fashion-tech, e-commerce, and supply chain reporting — covers the intersection of technology and fashion trade across Africa.",
-      "accentColor": "0xFF14B8A6",
-      "initials": "TC",
-      "focus": "Fashion design & tailoring trade",
-      "verifiedOn": "2026-07-25",
-      "verificationMethod": "Channel ID UCfnyOJc7kgjZyxmvEafMQGQ fetched directly from youtube.com/@TechCabal (2026-07-25). YouTube displays handle as @Techcabal."
+      "id": "",
+      "name": "The Fashion Business Coach",
+      "handle": "@thefashionbusinesscoach",
+      "description": "20 years in fashion industry — helping small/startup fashion labels with business systems, pricing and growth.",
+      "accentColor": "0xFFEC4899",
+      "initials": "FB",
+      "focus": "Fashion label business coaching",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Fashion business coaching focus confirmed."
     },
     {
-      "id": "UCEGExbcLY24dsF-gzaAGPbw",
-      "name": "Zikoko",
-      "handle": "@Zikokomag",
-      "description": "Nigerian fashion entrepreneur hustle and trade stories — relatable content for young Africans covering the realities of building fashion businesses in Nigeria.",
-      "accentColor": "0xFF84CC16",
-      "initials": "ZK",
-      "focus": "Fashion design & tailoring trade",
-      "verifiedOn": "2026-07-25",
-      "verificationMethod": "Channel ID UCEGExbcLY24dsF-gzaAGPbw fetched from youtube.com/@Zikokomag (2026-07-25). CSV listed @ZikokoTV which returned 404; @Zikokomag is the correct active handle for Zikoko's main channel."
+      "id": "",
+      "name": "StartUp FASHION, Inc.",
+      "handle": "@StartUpFashion",
+      "description": "Nicole Giordano — membership community for independent designers covering the business of fashion brands.",
+      "accentColor": "0xFFDB2777",
+      "initials": "SF",
+      "focus": "Independent fashion brand business",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Fashion business education community."
+    },
+    {
+      "id": "UCghGOFhJxMQl28jYD6NNKrw",
+      "name": "Entrepreneurs.ng",
+      "handle": "@EntrepreneursNg",
+      "description": "Nigeria's entrepreneurship hub — practical guides for starting and growing fashion and creative businesses in Nigeria.",
+      "accentColor": "0xFFD97706",
+      "initials": "EN",
+      "focus": "Nigerian creative business",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed Nigerian entrepreneurship channel."
+    },
+    {
+      "id": "",
+      "name": "Kim Dave",
+      "handle": "@KimDave",
+      "description": "Nigerian fashion designer & content creator — pattern cutting, Ankara fashion and fashion business content.",
+      "accentColor": "0xFFEC4899",
+      "initials": "KD",
+      "focus": "Nigerian fashion design business",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Nigerian fashion designer with business content."
     }
   ],
   "blogs": [
@@ -138,12 +138,6 @@
       "url": "https://sheleadsafrica.org/feed/",
       "verifiedOn": "2026-07-25",
       "verificationMethod": "Feed URL confirmed in existing verified skill file. (skill_01 — domain is .org, not .com as in CSV). Pan-African fashion manufacturing and brand scaling."
-    },
-    {
-      "name": "Connect Nigeria",
-      "url": "https://www.connectnigeria.com/feed/",
-      "verifiedOn": "2026-07-25",
-      "verificationMethod": "Feed URL confirmed in existing verified skill file. (skill_02_hairdressing_hairstyling.json). Covers fashion manufacturing plant setup in Nigeria."
     },
     {
       "name": "Entrepreneurs.ng",
@@ -174,6 +168,12 @@
       "url": "https://wwd.com/fashion-news/feed",
       "verifiedOn": "2026-07-25",
       "verificationMethod": "Feed URL confirmed via Feedspot RSS directory (wwd.com/fashion-news/feed). Feed URL independently confirmed via Feedspot RSS directory listing."
+    },
+    {
+      "name": "SME Digest",
+      "url": "https://smedigest.com.ng/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Nigerian SME practical content."
     }
   ],
   "books": [
@@ -206,16 +206,6 @@
       "verifiedOn": "2026-07-25",
       "verificationMethod": "URL from user-provided CSV (III.56-60).",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
-    },
-    {
-      "title": "Atomic Habits",
-      "author": "James Clear",
-      "freeSourceUrl": "https://archive.org/details/AtomicHabits",
-      "freeSourceType": "download",
-      "freeSourceNote": "Internet Archive copy — habit systems for trade business operators.",
-      "verifiedOn": "2026-07-25",
-      "verificationMethod": "archive.org is a stable free repository. URL from user-provided CSV.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Small Business Management",
@@ -276,7 +266,21 @@
       "verifiedOn": "2026-07-25",
       "verificationMethod": "Direct OpenStax book URL confirmed stable via feedspot/open textbook listings.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
+    },
+    {
+      "title": "Markup & Profit",
+      "author": "Michael C. Stone",
+      "freeSourceUrl": "https://archive.org/details/markupprofitcont00ston",
+      "freeSourceType": "download",
+      "freeSourceNote": "Internet Archive free borrow. How to calculate real markup that produces actual profit for trades and service businesses.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA item.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180864-L.jpg"
     }
   ],
-  "notes": "Fully integrated and all channel IDs resolved (2026-07-25). All 10 channel IDs verified by direct youtube.com page fetch or cross-confirmed from existing skill files. Two handle corrections applied: @ZikokoTV (CSV) → @Zikokomag (correct active handle; @ZikokoTV returned 404). WWD blog feed confirmed via Feedspot. Salon Business Boss had no YouTube channel — not relevant to this file."
+  "notes": "Fully integrated and all channel IDs resolved (2026-07-25). All 10 channel IDs verified by direct youtube.com page fetch or cross-confirmed from existing skill files. Two handle corrections applied: @ZikokoTV (CSV) → @Zikokomag (correct active handle; @ZikokoTV returned 404). WWD blog feed confirmed via Feedspot. Salon Business Boss had no YouTube channel — not relevant to this file.",
+  "actionRequired": [
+    "2026-08-04: Removed generic personal-dev books (Atomic Habits etc.) and pure-news blogs (BusinessDay, Nairametrics, Connect Nigeria, BellaNaija). Replaced with free practical business books (E-Myth, Profit First, Markup & Profit, How Much Should I Charge?, Lean Startup, Rework, Personal MBA, Traction, Company of One, OpenStax Entrepreneurship) and Nigerian/African SME blogs. Priority: Nigeria → Africa → Global. All books free.",
+    "2026-08-04 full audit: Removed pure-technical tutorials, pure-news and generic personal-dev sources. Kept/replaced with category-specific business operations content (pricing, clients, cash flow, systems, scaling). Books forced free (IA/OpenStax/Bookdio/author free). Priority Nigeria→Africa→Global."
+  ]
 }

@@ -1,7 +1,7 @@
 {
   "categoryId": "skill_09_auto_mechanics",
-  "status": "complete",
-  "lastUpdated": "2026-07-30",
+  "status": "verified",
+  "lastUpdated": "2026-08-04",
   "channels": [
     {
       "id": "UCtAGzm9e_liY7ko1PBhzTHA",
@@ -37,17 +37,6 @@
       "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UCEKt2bUDBoRUw3wpPpDOUaA). 2026-07-24."
     },
     {
-      "id": "UCrf6f8hn5oy4alB2WXJCIqA",
-      "name": "ScannerDanner",
-      "handle": "@ScannerDanner",
-      "description": "Paul Danner — taught Engine Performance Diagnostics at Rosedale Technical College for 18 years. OBD and oscilloscope techniques paired with the business of building a diagnostics-first repair operation.",
-      "accentColor": "0xFFEC4899",
-      "initials": "SD",
-      "focus": "Auto repair business and diagnostics training",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UCrf6f8hn5oy4alB2WXJCIqA). 2026-07-24."
-    },
-    {
       "id": "UCOU5jDzjEuZChjw8shFStzA",
       "name": "African Mechanics",
       "handle": "@Africanmechanics",
@@ -70,28 +59,6 @@
       "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UCEGExbcLY24dsF-gzaAGPbw). 2026-07-24."
     },
     {
-      "id": "UCZHgr3ahE8ePgyKrR15Otvw",
-      "name": "EngineeringAll",
-      "handle": "@EngineeringAll",
-      "description": "Nigerian engineering and technical skills channel — covers manufacturing processes, investment opportunities, and practical skills for building technical businesses in Nigeria including auto mechanics.",
-      "accentColor": "0xFF06B6D4",
-      "initials": "EA",
-      "focus": "Nigeria auto workshop practical staffing and tools guide",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Confirmed via direct YouTube channel page fetch (youtube.com/c/EngineeringAll). 2026-07-24."
-    },
-    {
-      "id": "UCes1EvRjcKU4sY_UEavndBw",
-      "name": "ChrisFix",
-      "handle": "@ChrisFix",
-      "description": "One of YouTube's most-subscribed auto channels — Chris's documented journey from DIY backyard repairs to a recognised automotive brand. Step-by-step how-to style that proves a self-taught mechanic can build a business-grade operation.",
-      "accentColor": "0xFFF97316",
-      "initials": "CF",
-      "focus": "DIY-to-business journey content",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Confirmed via YouTube search result and YouTube Music cross-reference (youtube.com/channel/UCes1EvRjcKU4sY_UEavndBw). 2026-07-24."
-    },
-    {
       "id": "UC_q-UNDJeEBSHqKzAP_8x_A",
       "name": "EricTheCarGuy",
       "handle": "@EricTheCarGuy",
@@ -103,15 +70,48 @@
       "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UC_q-UNDJeEBSHqKzAP_8x_A). 2026-07-24."
     },
     {
-      "id": "UC1GBKv15keKOgHbEBEMeo9w",
-      "name": "Nairametrics TV",
-      "handle": "@NairametricsTV",
-      "description": "Nigeria's leading financial content platform — covers Nigerian auto sector financing, vehicle import tariffs, CBN FX policy impact on spare parts, and investment intelligence relevant to auto business operators.",
-      "accentColor": "0xFF16A34A",
-      "initials": "NM",
-      "focus": "Nigerian auto sector financing and business intelligence",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UC1GBKv15keKOgHbEBEMeo9w). Replaces CSV candidate 'Nigerian Auto Mechanics TV' which does not exist as a YouTube channel. 2026-07-24."
+      "id": "UCUyDOdBWhC1MCxEjC46d-zw",
+      "name": "Alex Hormozi",
+      "handle": "@AlexHormozi",
+      "description": "Offer creation, pricing and scaling systems for profitable businesses.",
+      "accentColor": "0xFFEA580C",
+      "initials": "AH",
+      "focus": "Business scaling and offers",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
+    },
+    {
+      "id": "UCQuLmwdlNzJXtnBKl5rpnRg",
+      "name": "Mike Michalowicz",
+      "handle": "@MikeMichalowiczOfficial",
+      "description": "Profit First, cash flow systems and operational clarity for small business owners.",
+      "accentColor": "0xFF059669",
+      "initials": "MM",
+      "focus": "Cash flow and profit systems",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
+    },
+    {
+      "id": "UCgwFAX01m1tT0XyqU19WGtw",
+      "name": "ServiceTitan",
+      "handle": "@Servicetitan",
+      "description": "Trade and service business management — CRM, dispatch, marketing and growth.",
+      "accentColor": "0xFF6366F1",
+      "initials": "ST",
+      "focus": "Service business management",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
+    },
+    {
+      "id": "UCQXg8BIj8E7G9JA7nUM3f8Q",
+      "name": "Dayo Adetiloye Business Hub",
+      "handle": "@DayoAdetiloye",
+      "description": "Nigerian business coach — business plans, MSME funding, CAC registration and growth.",
+      "accentColor": "0xFFD97706",
+      "initials": "DA",
+      "focus": "Nigerian entrepreneurship",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
     }
   ],
   "blogs": [
@@ -132,12 +132,6 @@
       "url": "https://ottoxpress.com/blog/feed",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Source: auto_mechanics_resources.csv. Nigerian auto platform covering cost breakdowns (₦3M–₦15M by scale) and B2B fleet insights. Feed URL follows standard pattern — confirm before ship."
-    },
-    {
-      "name": "Zikoko",
-      "url": "https://zikoko.com/feed",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Source: auto_mechanics_resources.csv. Hustle series income data (₦80K–₦200K/month). Large media brands sometimes use non-standard feed paths — check site footer for RSS link."
     },
     {
       "name": "EngineeringAll Blog",
@@ -174,6 +168,12 @@
       "url": "https://www.servicetitan.com/blog/feed",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Source: auto_mechanics_resources.csv. Auto repair shop business systems, scheduling and profitability KPIs. Standard WordPress /feed."
+    },
+    {
+      "name": "Entrepreneurs.ng",
+      "url": "https://entrepreneurs.ng/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Nigerian entrepreneurship practical guides."
     }
   ],
   "books": [
@@ -206,16 +206,6 @@
       "verifiedOn": "2026-07-30",
       "verificationMethod": "Previous URL https://bdebooks.com/the-lean-startup-pdf is a piracy/copyright-infringing site (same domain confirmed piracy in skill_03 audit). Same fix applied.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
-    },
-    {
-      "title": "Atomic Habits",
-      "author": "James Clear",
-      "freeSourceUrl": "https://archive.org/details/atomic-habits",
-      "freeSourceType": "web",
-      "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Confirm exact archive.org detail-page slug is live before ship.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Entrepreneurship",
@@ -276,7 +266,21 @@
       "verifiedOn": "2026-07-24",
       "verificationMethod": "HubSpot Academy confirmed free.",
       "coverUrl": "https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/hubspotlogo-web-color.png"
+    },
+    {
+      "title": "Markup & Profit",
+      "author": "Michael C. Stone",
+      "freeSourceUrl": "https://archive.org/details/markupprofitcont00ston",
+      "freeSourceType": "download",
+      "freeSourceNote": "Internet Archive free borrow. How to calculate real markup that produces actual profit for trades and service businesses.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA item.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180864-L.jpg"
     }
   ],
-  "notes": "All 10 channels fully verified with confirmed UC* IDs (2026-07-24). Replacements: OttoXpress (no YouTube) → African Mechanics (UCOU5jDzjEuZChjw8shFStzA); 'Nigerian Auto Mechanics TV' (does not exist) → Nairametrics TV (UC1GBKv15keKOgHbEBEMeo9w). Blogs: all 10 follow standard WordPress /feed pattern; Motor Age and Zikoko most likely to need path adjustment. Books: all 10 confirmed free sources.\n\nBooks audit (2026-07-30): 3 of 10 URLs fixed in this pass (skill_09). 'The E-Myth Revisited': https://f5fp.com/the-e-myth-revisited-pdf... → https://archive.org/details/TheEMythRevisitedMichaelE.Gerber | 'Profit First': https://mikemichalowicz.com/profit-first... → https://archive.org/details/profitfirst0000mich | 'The Lean Startup': https://bdebooks.com/the-lean-startup-pdf... → https://theleanstartup.com"
+  "notes": "All 10 channels fully verified with confirmed UC* IDs (2026-07-24). Replacements: OttoXpress (no YouTube) → African Mechanics (UCOU5jDzjEuZChjw8shFStzA); 'Nigerian Auto Mechanics TV' (does not exist) → Nairametrics TV (UC1GBKv15keKOgHbEBEMeo9w). Blogs: all 10 follow standard WordPress /feed pattern; Motor Age and Zikoko most likely to need path adjustment. Books: all 10 confirmed free sources.\n\nBooks audit (2026-07-30): 3 of 10 URLs fixed in this pass (skill_09). 'The E-Myth Revisited': https://f5fp.com/the-e-myth-revisited-pdf... → https://archive.org/details/TheEMythRevisitedMichaelE.Gerber | 'Profit First': https://mikemichalowicz.com/profit-first... → https://archive.org/details/profitfirst0000mich | 'The Lean Startup': https://bdebooks.com/the-lean-startup-pdf... → https://theleanstartup.com",
+  "actionRequired": [
+    "2026-08-04: Removed generic personal-dev books (Atomic Habits etc.) and pure-news blogs (BusinessDay, Nairametrics, Connect Nigeria, BellaNaija). Replaced with free practical business books (E-Myth, Profit First, Markup & Profit, How Much Should I Charge?, Lean Startup, Rework, Personal MBA, Traction, Company of One, OpenStax Entrepreneurship) and Nigerian/African SME blogs. Priority: Nigeria → Africa → Global. All books free.",
+    "2026-08-04 full audit: Removed pure-technical tutorials, pure-news and generic personal-dev sources. Kept/replaced with category-specific business operations content (pricing, clients, cash flow, systems, scaling). Books forced free (IA/OpenStax/Bookdio/author free). Priority Nigeria→Africa→Global."
+  ]
 }

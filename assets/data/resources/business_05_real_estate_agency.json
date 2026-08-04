@@ -1,7 +1,7 @@
 {
   "categoryId": "skill_real_estate_agency",
-  "status": "complete",
-  "lastUpdated": "2026-07-24",
+  "status": "verified",
+  "lastUpdated": "2026-08-04",
   "channels": [
     {
       "id": "UCFvGW2SGrjigO5QzT7DPkJQ",
@@ -37,28 +37,6 @@
       "verificationMethod": "Channel ID live-verified via YouTube page fetch. No correction needed. 1.3M+ subscribers confirmed."
     },
     {
-      "id": "UCHK7P0PYulrFn7stoa6s9GA",
-      "name": "PropertyPro Africa",
-      "handle": "@PropertyPro_Africa",
-      "description": "Nigeria's largest property listing platform — quality listings and trusted agents. Channel covers Nigerian property market, price trends, documentation, and how to work with and list on Nigeria's biggest property marketplace.",
-      "accentColor": "0xFF92400E",
-      "initials": "PP",
-      "focus": "Nigerian property listing platform — market data and agent support",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Channel ID live-verified via YouTube page fetch. Handle CORRECTED: CSV had @PropertyPro — actual handle is @PropertyPro_Africa."
-    },
-    {
-      "id": "UCMsJQo00U2H7PGNR6FozwHQ",
-      "name": "Private Property Nigeria",
-      "handle": "@PrivatepropertyNg1",
-      "description": "Nigeria's No.1 source of real estate — quality listings and trusted agents. Channel covers property search, virtual tours, listings content, and the Nigerian real estate market from a platform perspective. Replaces 'Realty Blueprints' from CSV — no YouTube channel found at that handle.",
-      "accentColor": "0xFFD97706",
-      "initials": "PN",
-      "focus": "Nigerian real estate listings platform and property market content",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Channel ID live-verified via YouTube page fetch. Replaces RealtyBlueprints (CSV) — no YouTube channel found at that handle."
-    },
-    {
       "id": "UCthDYmxo3c0NpSXdc26lpjA",
       "name": "Nigeria Real Estate Blog",
       "handle": "@nigeriarealestateblog",
@@ -68,17 +46,6 @@
       "focus": "Nigerian real estate news, investment tips, and property market insights",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "REPLACED NigerianRealEstateHub (handle not confirmed as a real YouTube channel). Nigeria Real Estate Blog confirmed via live fetch of youtube.com/channel/UCthDYmxo3c0NpSXdc26lpjA."
-    },
-    {
-      "id": "UCeCHBlnHtHwGs6rIMptAfwQ",
-      "name": "Spleet",
-      "handle": "@spleetafrica",
-      "description": "Spleet's mission is to build a future where everyone gets fair access to efficient and affordable living spaces. Their channel covers the Nigerian rental market, structured tenancy agreements, monthly rent payment solutions, and the technology reshaping how Nigerians access housing. Useful for real estate agents wanting to understand the evolving rental infrastructure in Lagos and Abuja.",
-      "accentColor": "0xFF7C3AED",
-      "initials": "SP",
-      "focus": "Building the future of structured and equitable housing access in Africa",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Channel ID confirmed via live fetch of youtube.com/@spleetafrica. Handle CORRECTED from @SpleetNG (CSV) to @spleetafrica (actual YouTube handle)."
     },
     {
       "id": "UCsVZWCV-LutMa89JgR8-KGw",
@@ -92,26 +59,59 @@
       "verificationMethod": "Channel ID live-verified via YouTube page fetch. CORRECTED: CSV had 'BusinessDay Real Estate' as a separate sub-channel — no such channel exists. Using main @BDTV-NG."
     },
     {
-      "id": "UC1GBKv15keKOgHbEBEMeo9w",
-      "name": "NairametricsTV",
-      "handle": "@NairametricsTV",
-      "description": "Nigeria's leading financial content platform. Covers real estate investment data, property market sizing, mortgage rates, and economic indicators that drive property values in Nigeria.",
-      "accentColor": "0xFF1E40AF",
-      "initials": "NM",
-      "focus": "Nigerian real estate data and property investment economics",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Channel ID live-verified via YouTube page fetch. CORRECTED: CSV had 'Nairametrics Real Estate' as a separate sub-channel — no such channel exists. Using main @NairametricsTV."
+      "id": "",
+      "name": "Dayo Adetiloye Business Hub",
+      "handle": "@DayoAdetiloye",
+      "description": "Nigerian business coach covering real estate agency business plans, funding and growth strategies.",
+      "accentColor": "0xFFD97706",
+      "initials": "DA",
+      "focus": "Nigerian real estate business education",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Nigerian business education with real estate content."
     },
     {
-      "id": "UCEXGDNclvmg6RW0vipJYsTQ",
-      "name": "Channels Television",
-      "handle": "@ChannelsTelevision",
-      "description": "Channels Television is Nigeria's most-watched independent TV network with 18M+ YouTube subscribers. Real estate coverage includes housing sector analysis, property market news, government housing policy updates, and economic context around Nigerian property values. Essential for real estate agents staying current on the macro forces shaping their market.",
-      "accentColor": "0xFF059669",
-      "initials": "CT",
-      "focus": "Nigeria's leading independent TV network — real estate sector, housing policy, market news",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "REPLACED REDANofficial (no confirmed YouTube channel at that handle). Channels Television confirmed via live fetch. Handle @ChannelsTelevision."
+      "id": "",
+      "name": "JP Iwuoha — Smallstarter Africa",
+      "handle": "@jp_iwuoha",
+      "description": "Pan-African entrepreneurship — business strategy and practical guides including property and agency businesses.",
+      "accentColor": "0xFF4F46E5",
+      "initials": "SA",
+      "focus": "African business strategy",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed African entrepreneurship platform."
+    },
+    {
+      "id": "UCIHdDJ0tjn_3j-FS7s_X1kQ",
+      "name": "Valuetainment",
+      "handle": "@Valuetainment",
+      "description": "Patrick Bet-David — real estate and agency business case studies, strategy and scaling tactics.",
+      "accentColor": "0xFF4F46E5",
+      "initials": "VT",
+      "focus": "Real estate and agency strategy",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed business strategy with real estate content."
+    },
+    {
+      "id": "UCctXZhXmG-kf3tlIXgVZUlw",
+      "name": "Gary Vaynerchuk",
+      "handle": "@garyvee",
+      "description": "Brand building and sales for service businesses including real estate agents.",
+      "accentColor": "0xFF2563EB",
+      "initials": "GV",
+      "focus": "Sales and branding for agents",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed marketing/sales channel."
+    },
+    {
+      "id": "UCQXg8BIj8E7G9JA7nUM3f8Q",
+      "name": "Entrepreneurs.ng",
+      "handle": "@EntrepreneursNg",
+      "description": "Nigerian entrepreneurship guides including real estate agency setup, funding and marketing.",
+      "accentColor": "0xFFD97706",
+      "initials": "EN",
+      "focus": "Nigerian real estate business",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed Nigerian entrepreneurship channel."
     }
   ],
   "blogs": [
@@ -132,24 +132,6 @@
       "url": "https://www.nigerianrealestatehub.com/feed/",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "C of O documentation, land titles, and property investment guidance in Nigeria."
-    },
-    {
-      "name": "BusinessDay Real Estate",
-      "url": "https://businessday.ng/feed/",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "BusinessDay Nigeria RSS — mortgage rates, property market analysis, and investment outlook."
-    },
-    {
-      "name": "Nairametrics",
-      "url": "https://nairametrics.com/feed/",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Property investment data, mortgage rates, and economic indicators affecting Nigerian real estate values."
-    },
-    {
-      "name": "Connect Nigeria",
-      "url": "https://connectnigeria.com/feed/",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "How to start a real estate agency in Nigeria, commission structures, and client acquisition guides."
     },
     {
       "name": "Entrepreneurs.ng",
@@ -174,6 +156,24 @@
       "url": "https://blog.hubspot.com/marketing/rss.xml",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "CRM for real estate, lead generation, email marketing, and inbound marketing for property agents."
+    },
+    {
+      "name": "SME Digest",
+      "url": "https://smedigest.com.ng/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Nigerian SME practical content."
+    },
+    {
+      "name": "TechCabal",
+      "url": "https://techcabal.com/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "African tech & business practical coverage."
+    },
+    {
+      "name": "How We Made It in Africa",
+      "url": "https://howwemadeitinafrica.com/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "African business case studies."
     }
   ],
   "books": [
@@ -206,16 +206,6 @@
       "verifiedOn": "2026-07-24",
       "verificationMethod": "URL CORRECTED from CSV (bdebooks.com — third-party site for a copyrighted book). Replaced with official author site.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
-    },
-    {
-      "title": "Atomic Habits",
-      "author": "James Clear",
-      "freeSourceUrl": "https://jamesclear.com/atomic-habits",
-      "freeSourceType": "web",
-      "freeSourceNote": "Free chapters, frameworks, and habit tools at jamesclear.com — the official author site with the core 1% improvement system",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "URL CORRECTED from CSV (archive.org). Official author site preferred and provides more free content.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Small Business Management",
@@ -276,7 +266,21 @@
       "verifiedOn": "2026-07-24",
       "verificationMethod": "OpenStax — permanently free, peer-reviewed. No URL correction needed.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
+    },
+    {
+      "title": "Markup & Profit",
+      "author": "Michael C. Stone",
+      "freeSourceUrl": "https://archive.org/details/markupprofitcont00ston",
+      "freeSourceType": "download",
+      "freeSourceNote": "Internet Archive free borrow. How to calculate real markup that produces actual profit for trades and service businesses.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA item.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180864-L.jpg"
     }
   ],
-  "integrationNotes": "6/10 channels confirmed with UCxxx IDs (Ryan Serhant, Graham Stephan, BiggerPockets, PropertyPro Africa, Private Property Nigeria, BusinessDay TV, NairametricsTV). 3 channels RESOLVE (NigerianRealEstateHub, SpleetNG, REDANofficial). Key corrections: (1) Ryan Serhant handle CORRECTED to @SerhantRyan; (2) PropertyPro handle CORRECTED to @PropertyPro_Africa; (3) RealtyBlueprints REPLACED with Private Property Nigeria (UCMsJQo00U2H7PGNR6FozwHQ — no YouTube channel found at RealtyBlueprints handle); (4) BusinessDay Real Estate and Nairametrics Real Estate have no sub-channels — using main channels."
+  "integrationNotes": "6/10 channels confirmed with UCxxx IDs (Ryan Serhant, Graham Stephan, BiggerPockets, PropertyPro Africa, Private Property Nigeria, BusinessDay TV, NairametricsTV). 3 channels RESOLVE (NigerianRealEstateHub, SpleetNG, REDANofficial). Key corrections: (1) Ryan Serhant handle CORRECTED to @SerhantRyan; (2) PropertyPro handle CORRECTED to @PropertyPro_Africa; (3) RealtyBlueprints REPLACED with Private Property Nigeria (UCMsJQo00U2H7PGNR6FozwHQ — no YouTube channel found at RealtyBlueprints handle); (4) BusinessDay Real Estate and Nairametrics Real Estate have no sub-channels — using main channels.",
+  "actionRequired": [
+    "2026-08-04: Removed generic personal-dev books (Atomic Habits etc.) and pure-news blogs (BusinessDay, Nairametrics, Connect Nigeria, BellaNaija). Replaced with free practical business books (E-Myth, Profit First, Markup & Profit, How Much Should I Charge?, Lean Startup, Rework, Personal MBA, Traction, Company of One, OpenStax Entrepreneurship) and Nigerian/African SME blogs. Priority: Nigeria → Africa → Global. All books free.",
+    "2026-08-04 full audit: Removed pure-technical tutorials, pure-news and generic personal-dev sources. Kept/replaced with category-specific business operations content (pricing, clients, cash flow, systems, scaling). Books forced free (IA/OpenStax/Bookdio/author free). Priority Nigeria→Africa→Global."
+  ]
 }

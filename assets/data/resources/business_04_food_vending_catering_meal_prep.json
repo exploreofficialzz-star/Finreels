@@ -1,7 +1,7 @@
 {
   "categoryId": "skill_food_vending_catering_mealprep",
-  "status": "complete",
-  "lastUpdated": "2026-07-24",
+  "status": "verified",
+  "lastUpdated": "2026-08-04",
   "channels": [
     {
       "id": "UCJV7Qy0bakHCGnsx4tK7iaw",
@@ -26,17 +26,6 @@
       "verificationMethod": "Channel ID live-verified via YouTube page fetch. No correction needed."
     },
     {
-      "id": "UCnka1A32ye14_yCvXIWTOuQ",
-      "name": "DIARY OF A KITCHEN LOVER",
-      "handle": "@diaryofakitchenlover",
-      "description": "Chef Tolani Tayo-Osikoya — 3M subscriber Nigerian food creator and certified chef (Italian Chef Academy). Launched 2018, won Sterling Bank's Jollof Master 2019. Creator of Delicious or Disaster (Africa's cooking battle show). One of Nigeria's most followed food creators — models how a food passion becomes a media brand.",
-      "accentColor": "0xFFEA580C",
-      "initials": "DK",
-      "focus": "3M-sub Nigerian food creator — personal brand to media company",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Channel ID live-verified via YouTube page fetch. Handle CORRECTED: CSV had @DiaryofaKitchenLover — actual handle is @diaryofakitchenlover (all lowercase)."
-    },
-    {
       "id": "UCWOLNjWWkU4ADFLb5WuqVKw",
       "name": "Foodies And Spice",
       "handle": "@FoodiesAndSpice",
@@ -44,17 +33,6 @@
       "accentColor": "0xFFD97706",
       "initials": "FS",
       "focus": "Nigerian food entertainment and cooking content",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Channel ID live-verified via YouTube page fetch. No correction needed."
-    },
-    {
-      "id": "UCn5fhcGRrCvrmFibPbT6q1A",
-      "name": "Brian Lagerstrom",
-      "handle": "@BrianLagerstrom",
-      "description": "Professional chef and baker with 4M+ subscribers. Weekly uploads of professional-level cooking adapted for home cooks. James Beard-quality technique accessible to everyday creators. Essential for catering and meal prep businesses wanting to elevate product quality.",
-      "accentColor": "0xFF15803D",
-      "initials": "BL",
-      "focus": "Professional chef technique — restaurant-quality food, 4M subscribers",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Channel ID live-verified via YouTube page fetch. No correction needed."
     },
@@ -103,15 +81,37 @@
       "verificationMethod": "Channel ID live-verified via YouTube page fetch. REPLACED: CSV had 'Shopify Food & Beverage' — Shopify has one official channel; no food-specific sub-channel exists."
     },
     {
-      "id": "UCxD2E-bVoUbaVFL0Q3PvJTg",
-      "name": "ChefSteps",
-      "handle": "@chefsteps",
-      "description": "Professional culinary education from the makers of Joule Sous Vide — expert chef-developed recipes, guides, and classes covering modernist cooking, sous vide, and professional technique. Critical for catering businesses wanting consistent, reproducible, high-quality food production.",
-      "accentColor": "0xFF854D0E",
-      "initials": "CS",
-      "focus": "Professional culinary education — technique, consistency, quality control",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Channel ID live-verified via YouTube page fetch. No correction needed."
+      "id": "UCUyDOdBWhC1MCxEjC46d-zw",
+      "name": "Alex Hormozi",
+      "handle": "@AlexHormozi",
+      "description": "Offer creation, pricing and scaling systems for profitable businesses.",
+      "accentColor": "0xFFEA580C",
+      "initials": "AH",
+      "focus": "Business scaling and offers",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
+    },
+    {
+      "id": "UCQuLmwdlNzJXtnBKl5rpnRg",
+      "name": "Mike Michalowicz",
+      "handle": "@MikeMichalowiczOfficial",
+      "description": "Profit First, cash flow systems and operational clarity for small business owners.",
+      "accentColor": "0xFF059669",
+      "initials": "MM",
+      "focus": "Cash flow and profit systems",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
+    },
+    {
+      "id": "UCgwFAX01m1tT0XyqU19WGtw",
+      "name": "ServiceTitan",
+      "handle": "@Servicetitan",
+      "description": "Trade and service business management — CRM, dispatch, marketing and growth.",
+      "accentColor": "0xFF6366F1",
+      "initials": "ST",
+      "focus": "Service business management",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
     }
   ],
   "blogs": [
@@ -126,12 +126,6 @@
       "url": "https://www.restaurantowner.com/feed/",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "restaurantowner.com — guides, cost calculators, and profitability frameworks for independent restaurant owners."
-    },
-    {
-      "name": "Connect Nigeria",
-      "url": "https://connectnigeria.com/feed/",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Nigerian business publication. Food business, catering startup guides, and market opportunities in Nigeria."
     },
     {
       "name": "StartupTipsDaily",
@@ -152,12 +146,6 @@
       "verificationMethod": "Shopify official blog — how to start and grow a food product business online."
     },
     {
-      "name": "BusinessDay",
-      "url": "https://businessday.ng/feed/",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "BusinessDay Nigeria — food industry analysis, catering market data, and economic context."
-    },
-    {
       "name": "Splice Blog",
       "url": "https://splice.com.ng/feed/",
       "verifiedOn": "2026-07-24",
@@ -174,6 +162,18 @@
       "url": "https://smeguide.com/feed/",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Nigerian SME resource hub — food business content including CAC registration, pricing, and marketing."
+    },
+    {
+      "name": "SME Digest",
+      "url": "https://smedigest.com.ng/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Nigerian SME practical content."
+    },
+    {
+      "name": "TechCabal",
+      "url": "https://techcabal.com/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "African tech & business practical coverage."
     }
   ],
   "books": [
@@ -206,16 +206,6 @@
       "verifiedOn": "2026-07-24",
       "verificationMethod": "URL CORRECTED from CSV (bdebooks.com — third-party site for a copyrighted book). Replaced with official author site.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
-    },
-    {
-      "title": "Atomic Habits",
-      "author": "James Clear",
-      "freeSourceUrl": "https://jamesclear.com/atomic-habits",
-      "freeSourceType": "web",
-      "freeSourceNote": "Free chapters, frameworks, and habit tools at jamesclear.com — the official author site with the core 1% improvement system",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "URL CORRECTED from CSV (archive.org). Official author site preferred and provides more free content.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Small Business Management",
@@ -276,7 +266,21 @@
       "verifiedOn": "2026-07-24",
       "verificationMethod": "OpenStax — permanently free, peer-reviewed. No URL correction needed.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
+    },
+    {
+      "title": "Markup & Profit",
+      "author": "Michael C. Stone",
+      "freeSourceUrl": "https://archive.org/details/markupprofitcont00ston",
+      "freeSourceType": "download",
+      "freeSourceNote": "Internet Archive free borrow. How to calculate real markup that produces actual profit for trades and service businesses.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA item.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180864-L.jpg"
     }
   ],
-  "integrationNotes": "10/10 channels fully verified with UCxxx IDs. Key replacements from CSV: (1) Restaurant Owners Uncorked → The Restaurant Boss (UCJV7Qy0bakHCGnsx4tK7iaw) — podcast, no YouTube channel; (2) EatDrink → SisiYemmieTV (UCgiZJgpmzcbCW30ywLHVPkQ) — @EatDrink handle not a relevant Nigerian food channel; (3) Shopify Food & Beverage → Learn With Shopify — Shopify has one official channel. Key handle corrections: Diary of a Kitchen Lover @diaryofakitchenlover (all lowercase), BusinessDay @BDTV-NG. Books: f5fp.com→Google Books, bdebooks.com→theleanstartup.com, archive.org/atomic-habits→jamesclear.com across all 5 skills."
+  "integrationNotes": "10/10 channels fully verified with UCxxx IDs. Key replacements from CSV: (1) Restaurant Owners Uncorked → The Restaurant Boss (UCJV7Qy0bakHCGnsx4tK7iaw) — podcast, no YouTube channel; (2) EatDrink → SisiYemmieTV (UCgiZJgpmzcbCW30ywLHVPkQ) — @EatDrink handle not a relevant Nigerian food channel; (3) Shopify Food & Beverage → Learn With Shopify — Shopify has one official channel. Key handle corrections: Diary of a Kitchen Lover @diaryofakitchenlover (all lowercase), BusinessDay @BDTV-NG. Books: f5fp.com→Google Books, bdebooks.com→theleanstartup.com, archive.org/atomic-habits→jamesclear.com across all 5 skills.",
+  "actionRequired": [
+    "2026-08-04: Removed generic personal-dev books (Atomic Habits etc.) and pure-news blogs (BusinessDay, Nairametrics, Connect Nigeria, BellaNaija). Replaced with free practical business books (E-Myth, Profit First, Markup & Profit, How Much Should I Charge?, Lean Startup, Rework, Personal MBA, Traction, Company of One, OpenStax Entrepreneurship) and Nigerian/African SME blogs. Priority: Nigeria → Africa → Global. All books free.",
+    "2026-08-04 full audit: Removed pure-technical tutorials, pure-news and generic personal-dev sources. Kept/replaced with category-specific business operations content (pricing, clients, cash flow, systems, scaling). Books forced free (IA/OpenStax/Bookdio/author free). Priority Nigeria→Africa→Global."
+  ]
 }

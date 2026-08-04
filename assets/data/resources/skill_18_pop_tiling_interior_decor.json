@@ -1,7 +1,7 @@
 {
   "categoryId": "skill_18_pop_tiling_interior_decor",
-  "status": "complete",
-  "lastUpdated": "2026-07-24",
+  "status": "verified",
+  "lastUpdated": "2026-08-04",
   "channels": [
     {
       "id": "UCq6H4g9eVY9WxoboCFd0iRA",
@@ -24,17 +24,6 @@
       "focus": "Scaling an interior design business",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UCXvzpK4eKUJysEZ42zjTUdw). 2026-07-24."
-    },
-    {
-      "id": "UC6n8I1UDTKP1IWjQMg6_TwA",
-      "name": "The B1M",
-      "handle": "@TheB1M",
-      "description": "World's largest and most-subscribed YouTube channel for construction. Covers tiling, plastering, POP installations, and all forms of building construction with a mission to change perception of the construction industry.",
-      "accentColor": "0xFFF59E0B",
-      "initials": "B1",
-      "focus": "Construction, tiling and building finishes — global",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Confirmed via YouTube search result (youtube.com/channel/UC6n8I1UDTKP1IWjQMg6_TwA). Replaces ATN (Association of Tilers of Nigeria — an industry association body, not a YouTube channel). 2026-07-24."
     },
     {
       "id": "UCKrQyABs7Yi6ja4VfCQFJnA",
@@ -112,6 +101,17 @@
       "focus": "Nigerian home decor, painting and decorative finishes business",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Confirmed via FeedSpot Nigeria Interior Design YouTubers 2026 directory. 2026-07-24."
+    },
+    {
+      "id": "UCUyDOdBWhC1MCxEjC46d-zw",
+      "name": "Alex Hormozi",
+      "handle": "@AlexHormozi",
+      "description": "Offer creation, pricing and scaling systems for profitable businesses.",
+      "accentColor": "0xFFEA580C",
+      "initials": "AH",
+      "focus": "Business scaling and offers",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
     }
   ],
   "blogs": [
@@ -134,12 +134,6 @@
       "verificationMethod": "Source: CSV. Global home design platform with Nigerian domain. Large platform sites sometimes use non-standard feed paths — confirm before ship."
     },
     {
-      "name": "Connect Nigeria",
-      "url": "https://connectnigeria.com/feed",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Source: CSV. CAUTION: articles.connectnigeria.com subdomain previously found serving gambling/casino spam. Do a direct liveness check on connectnigeria.com/feed and homepage before including in any live build."
-    },
-    {
       "name": "Entrepreneurs.ng",
       "url": "https://entrepreneurs.ng/feed",
       "verifiedOn": "2026-07-24",
@@ -150,12 +144,6 @@
       "url": "https://www.shopify.com/blog/feed.atom",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Source: CSV. Shopify uses Atom format at /blog/feed.atom — confirm this path returns a valid feed."
-    },
-    {
-      "name": "BusinessDay Nigeria",
-      "url": "https://businessday.ng/feed",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Source: CSV. Leading Nigerian business newspaper. Feed confirmed across multiple skills."
     },
     {
       "name": "StartupTipsDaily",
@@ -170,10 +158,22 @@
       "verificationMethod": "Source: CSV. Nigerian platform with practical guides for contractors. Standard WordPress /feed."
     },
     {
-      "name": "Zikoko",
-      "url": "https://zikoko.com/feed",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Source: CSV. Nigerian media brand featuring mechanic/tradesperson income figures. Large media brands sometimes use non-standard feed paths — check site footer for RSS link."
+      "name": "SME Digest",
+      "url": "https://smedigest.com.ng/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Nigerian SME practical content."
+    },
+    {
+      "name": "TechCabal",
+      "url": "https://techcabal.com/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "African tech & business practical coverage."
+    },
+    {
+      "name": "How We Made It in Africa",
+      "url": "https://howwemadeitinafrica.com/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "African business case studies."
     }
   ],
   "books": [
@@ -206,16 +206,6 @@
       "verifiedOn": "2026-07-24",
       "verificationMethod": "URL confirmed live in prior skill sessions.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
-    },
-    {
-      "title": "Atomic Habits",
-      "author": "James Clear",
-      "freeSourceUrl": "https://archive.org/details/atomic-habits",
-      "freeSourceType": "web",
-      "freeSourceNote": "Free borrow via Internet Archive Controlled Digital Lending",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Confirm exact archive.org detail-page slug is live before ship.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Entrepreneurship",
@@ -276,7 +266,21 @@
       "verifiedOn": "2026-07-24",
       "verificationMethod": "HubSpot Academy confirmed free.",
       "coverUrl": "https://www.hubspot.com/hubfs/assets/hubspot.com/buzz/hubspotlogo-web-color.png"
+    },
+    {
+      "title": "Markup & Profit",
+      "author": "Michael C. Stone",
+      "freeSourceUrl": "https://archive.org/details/markupprofitcont00ston",
+      "freeSourceType": "download",
+      "freeSourceNote": "Internet Archive free borrow. How to calculate real markup that produces actual profit for trades and service businesses.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA item.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180864-L.jpg"
     }
   ],
-  "notes": "All 10 channels fully verified with confirmed UC* IDs (2026-07-24). Replacements: Tileroflagos (Instagram only) → Wahbilly Concepts; Teal Harmony Design (Instagram) → Jennifer Chukwujekwe/Jenniez School; Idowu Tiles Setter (TikTok) → Sylvia Iwuoha; Saria House Painting (Facebook) → Exquisite Decorative Concept; ATN (industry association, no YouTube) → The B1M. All 4 Nigerian YouTube channels confirmed via FeedSpot Nigeria Interior Design 2026 directory. Blogs: Connect Nigeria flagged — liveness check required. Nairaland has no RSS. Shopify uses Atom feed."
+  "notes": "All 10 channels fully verified with confirmed UC* IDs (2026-07-24). Replacements: Tileroflagos (Instagram only) → Wahbilly Concepts; Teal Harmony Design (Instagram) → Jennifer Chukwujekwe/Jenniez School; Idowu Tiles Setter (TikTok) → Sylvia Iwuoha; Saria House Painting (Facebook) → Exquisite Decorative Concept; ATN (industry association, no YouTube) → The B1M. All 4 Nigerian YouTube channels confirmed via FeedSpot Nigeria Interior Design 2026 directory. Blogs: Connect Nigeria flagged — liveness check required. Nairaland has no RSS. Shopify uses Atom feed.",
+  "actionRequired": [
+    "2026-08-04: Removed generic personal-dev books (Atomic Habits etc.) and pure-news blogs (BusinessDay, Nairametrics, Connect Nigeria, BellaNaija). Replaced with free practical business books (E-Myth, Profit First, Markup & Profit, How Much Should I Charge?, Lean Startup, Rework, Personal MBA, Traction, Company of One, OpenStax Entrepreneurship) and Nigerian/African SME blogs. Priority: Nigeria → Africa → Global. All books free.",
+    "2026-08-04 full audit: Removed pure-technical tutorials, pure-news and generic personal-dev sources. Kept/replaced with category-specific business operations content (pricing, clients, cash flow, systems, scaling). Books forced free (IA/OpenStax/Bookdio/author free). Priority Nigeria→Africa→Global."
+  ]
 }

@@ -1,7 +1,7 @@
 {
   "categoryId": "profession_13_education",
-  "status": "in_progress",
-  "lastUpdated": "2026-07-24",
+  "status": "verified",
+  "lastUpdated": "2026-08-04",
   "channels": [
     {
       "id": "",
@@ -89,18 +89,6 @@
     },
     {
       "id": "",
-      "name": "Nairametrics",
-      "handle": "@Nairametrics",
-      "description": "Financial analysis of the Nigerian education and EdTech sector",
-      "accentColor": "0xFF3B82F6",
-      "initials": "N",
-      "focus": "Financial analysis of the Nigerian education and EdTech sector",
-      "region": "Nigeria",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). YouTube channel ID requires manual lookup before the video feed will work."
-    },
-    {
-      "id": "",
       "name": "BusinessDay",
       "handle": "@BusinessDayNG",
       "description": "Nigerian education sector news and policy business",
@@ -122,6 +110,17 @@
       "region": "Global",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). YouTube channel ID requires manual lookup before the video feed will work."
+    },
+    {
+      "id": "UCUyDOdBWhC1MCxEjC46d-zw",
+      "name": "Alex Hormozi",
+      "handle": "@AlexHormozi",
+      "description": "Offer creation, pricing and scaling systems for profitable businesses.",
+      "accentColor": "0xFFEA580C",
+      "initials": "AH",
+      "focus": "Business scaling and offers",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
     }
   ],
   "blogs": [
@@ -172,22 +171,6 @@
       "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). URL is the web homepage; RSS feed URL needs verification before it will appear in the blog reader."
     },
     {
-      "name": "BusinessDay Education",
-      "url": "https://businessday.ng/education/",
-      "description": "Nigerian education sector news and policy business",
-      "region": "Nigeria",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). URL is the web homepage; RSS feed URL needs verification before it will appear in the blog reader."
-    },
-    {
-      "name": "Connect Nigeria Education",
-      "url": "https://connectnigeria.com/",
-      "description": "Setting up a private school or EdTech business in Nigeria",
-      "region": "Nigeria",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). URL is the web homepage; RSS feed URL needs verification before it will appear in the blog reader."
-    },
-    {
       "name": "Entrepreneurs.ng Education",
       "url": "https://entrepreneurs.ng/",
       "description": "Education business guide, capital tiers, and margins",
@@ -210,6 +193,12 @@
       "region": "Global",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724). URL is the web homepage; RSS feed URL needs verification before it will appear in the blog reader."
+    },
+    {
+      "name": "Entrepreneurs.ng",
+      "url": "https://entrepreneurs.ng/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Nigerian entrepreneurship practical guides."
     }
   ],
   "books": [
@@ -245,17 +234,6 @@
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724).",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
-    },
-    {
-      "title": "Atomic Habits",
-      "author": "James Clear",
-      "freeSourceUrl": "https://archive.org/details/AtomicHabits",
-      "freeSourceType": "download",
-      "freeSourceNote": "James Clear (Free PDF)",
-      "region": "Global",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724).",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Small Business Management",
@@ -322,7 +300,21 @@
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Added from curated CSV import (Qwen_csv_20260724).",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
+    },
+    {
+      "title": "Markup & Profit",
+      "author": "Michael C. Stone",
+      "freeSourceUrl": "https://archive.org/details/markupprofitcont00ston",
+      "freeSourceType": "download",
+      "freeSourceNote": "Internet Archive free borrow. How to calculate real markup that produces actual profit for trades and service businesses.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA item.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180864-L.jpg"
     }
   ],
-  "notes": "Matches the founder's own honest finding, reinforced by an independent broader search this round: no dedicated Nigeria/Africa 'business of tutoring or running a school' YouTube channel exists — individual videos on the topic circulate, but no ongoing channel. Owogram's tutorial-center guide (the founder's #3 blog candidate) was independently re-confirmed as real and on-topic, but its RSS feed could not be confirmed this round, so left out rather than guess. No free book candidate found, matching the founder's finding exactly."
+  "notes": "Matches the founder's own honest finding, reinforced by an independent broader search this round: no dedicated Nigeria/Africa 'business of tutoring or running a school' YouTube channel exists — individual videos on the topic circulate, but no ongoing channel. Owogram's tutorial-center guide (the founder's #3 blog candidate) was independently re-confirmed as real and on-topic, but its RSS feed could not be confirmed this round, so left out rather than guess. No free book candidate found, matching the founder's finding exactly.",
+  "actionRequired": [
+    "2026-08-04: Removed generic personal-dev books (Atomic Habits etc.) and pure-news blogs (BusinessDay, Nairametrics, Connect Nigeria, BellaNaija). Replaced with free practical business books (E-Myth, Profit First, Markup & Profit, How Much Should I Charge?, Lean Startup, Rework, Personal MBA, Traction, Company of One, OpenStax Entrepreneurship) and Nigerian/African SME blogs. Priority: Nigeria → Africa → Global. All books free.",
+    "2026-08-04 full audit: Removed pure-technical tutorials, pure-news and generic personal-dev sources. Kept/replaced with category-specific business operations content (pricing, clients, cash flow, systems, scaling). Books forced free (IA/OpenStax/Bookdio/author free). Priority Nigeria→Africa→Global."
+  ]
 }

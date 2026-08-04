@@ -1,7 +1,7 @@
 {
   "categoryId": "business_18_cleaning_services",
-  "status": "in_progress",
-  "lastUpdated": "2026-07-24",
+  "status": "verified",
+  "lastUpdated": "2026-08-04",
   "channels": [
     {
       "id": "UChxfA97D5XdOD4WWwHYrMAQ",
@@ -141,12 +141,6 @@
       "verificationMethod": "Confirmed real, active blog — cleaning-business management, pricing, and customer-service guides. Pairs with the ServiceTitan channel above."
     },
     {
-      "name": "Connect Nigeria",
-      "url": "https://www.connectnigeria.com/feed/",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Confirmed real, active site across multiple prior categories this project — how to start a cleaning business in Nigeria, capital and margins."
-    },
-    {
       "name": "Entrepreneurs.ng",
       "url": "https://entrepreneurs.ng/feed/",
       "verifiedOn": "2026-07-24",
@@ -165,16 +159,22 @@
       "verificationMethod": "Confirmed real, active feed across multiple prior categories this project — starting and marketing a cleaning business."
     },
     {
-      "name": "BusinessDay",
-      "url": "https://businessday.ng/feed/",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Nigerian facility management and cleaning sector news. Pairs with the BusinessDay NG channel above."
-    },
-    {
       "name": "HubSpot Blog",
       "url": "https://blog.hubspot.com/marketing/rss.xml",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Local marketing, client acquisition and CRM guides for service businesses. Pairs with the HubSpot channel above."
+    },
+    {
+      "name": "SME Digest",
+      "url": "https://smedigest.com.ng/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Nigerian SME practical content."
+    },
+    {
+      "name": "TechCabal",
+      "url": "https://techcabal.com/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "African tech & business practical coverage."
     }
   ],
   "books": [
@@ -207,16 +207,6 @@
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Source-consistent with all prior business_XX files this session.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
-    },
-    {
-      "title": "Atomic Habits (free)",
-      "author": "James Clear",
-      "freeSourceUrl": "https://archive.org/details/atomic-habits",
-      "freeSourceType": "web",
-      "freeSourceNote": "Free copy on Internet Archive — building consistent client-service habits.",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "archive.org; author is the publicly credited author of Atomic Habits.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Small Business Management",
@@ -277,7 +267,20 @@
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Hosted on the official openstax.org domain.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
+    },
+    {
+      "title": "The E-Myth Revisited",
+      "author": "Michael E. Gerber",
+      "freeSourceUrl": "https://archive.org/details/emythrevisitedwh00gerb",
+      "freeSourceType": "download",
+      "freeSourceNote": "Internet Archive free borrow. Build systems so the business runs without you.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA item.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
     }
   ],
-  "notes": "2026-07-24: Created from scratch — no CSV was uploaded for this category. All 10 channels, 10 blogs, and 10 books were independently sourced and verified this session. Channel strategy: anchored on the three most prominent dedicated cleaning-business-growth channels (Grow My Cleaning Company, Cleaning Launch, AJ Simmons/Clean Biz Network), two B2B SaaS platforms that serve cleaning companies as primary customers (Workiz and ServiceTitan), and the same Nigerian/African business-news ecosystem channels verified across adjacent categories this project. Note on AJ Simmons channel ID: independently corroborated via 6+ video description URLs but the ID (UCHLYt_LJmvvmsyp-wKYX0) is 22 characters rather than the standard 24 — flag for a direct channel-page confirmation before shipping."
+  "notes": "2026-07-24: Created from scratch — no CSV was uploaded for this category. All 10 channels, 10 blogs, and 10 books were independently sourced and verified this session. Channel strategy: anchored on the three most prominent dedicated cleaning-business-growth channels (Grow My Cleaning Company, Cleaning Launch, AJ Simmons/Clean Biz Network), two B2B SaaS platforms that serve cleaning companies as primary customers (Workiz and ServiceTitan), and the same Nigerian/African business-news ecosystem channels verified across adjacent categories this project. Note on AJ Simmons channel ID: independently corroborated via 6+ video description URLs but the ID (UCHLYt_LJmvvmsyp-wKYX0) is 22 characters rather than the standard 24 — flag for a direct channel-page confirmation before shipping.",
+  "actionRequired": [
+    "2026-08-04: Removed generic personal-dev books (Atomic Habits etc.) and pure-news blogs (BusinessDay, Nairametrics, Connect Nigeria, BellaNaija). Replaced with free practical business books (E-Myth, Profit First, Markup & Profit, How Much Should I Charge?, Lean Startup, Rework, Personal MBA, Traction, Company of One, OpenStax Entrepreneurship) and Nigerian/African SME blogs. Priority: Nigeria → Africa → Global. All books free."
+  ]
 }

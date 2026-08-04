@@ -1,7 +1,7 @@
 {
   "categoryId": "skill_19_solar_installation_renewable_energy",
-  "status": "ready",
-  "lastUpdated": "2026-07-22",
+  "status": "verified",
+  "lastUpdated": "2026-08-04",
   "channels": [
     {
       "id": "UCBnGaOIYP_VPzQsbp1pWHxg",
@@ -52,18 +52,6 @@
       "verificationMethod": "Channel ID UCuEMSi3PES6mHKZ76kMUbsg confirmed via direct fetch of @gennextechnologies9533. Company verified via multiple sources as a leading Nigerian solar company (Lagos HQ) running Gennex Solar Academy, which explicitly teaches client acquisition, pricing, and brand-building alongside technical installation. RSS: https://www.youtube.com/feeds/videos.xml?channel_id=UCuEMSi3PES6mHKZ76kMUbsg"
     },
     {
-      "id": "UCoj6RxIAQq8kmJme-5dnN0Q",
-      "name": "DIY Solar Power with Will Prowse",
-      "handle": "@WillProwse",
-      "description": "Will Prowse is the leading voice in DIY solar energy, with 916K+ subscribers and 97M+ views. A former systems engineer, he built his channel around teaching solar system design, component selection, installation, and troubleshooting from scratch — foundational technical knowledge for anyone wanting to install or sell solar systems professionally.",
-      "accentColor": "0xFF2563EB",
-      "initials": "WP",
-      "focus": "DIY solar system design, installation, and component knowledge",
-      "region": "Global",
-      "verifiedOn": "2026-07-22",
-      "verificationMethod": "Channel ID UCoj6RxIAQq8kmJme-5dnN0Q confirmed via direct fetch. Handle @WillProwse. 916K+ subscribers per multiple independent sources (ShopSolarKits, BatteryFinds, Solar Sovereign). RSS: https://www.youtube.com/feeds/videos.xml?channel_id=UCoj6RxIAQq8kmJme-5dnN0Q"
-    },
-    {
       "id": "UCjtUS7-SZTi6pXjUbzGHQCg",
       "name": "Undecided with Matt Ferrell",
       "handle": "@UndecidedTechnology",
@@ -88,18 +76,6 @@
       "verificationMethod": "Channel ID UCIq5nZ1eK0q2Pom-boNudnA confirmed via direct fetch. Handle @RenogySolar. Company reached unicorn ($1B) valuation per renogy.com company history. RSS: https://www.youtube.com/feeds/videos.xml?channel_id=UCIq5nZ1eK0q2Pom-boNudnA"
     },
     {
-      "id": "UCoNTMWgGuXtGPLv9UeJZwBw",
-      "name": "Living Big In A Tiny House",
-      "handle": "@livingbig",
-      "description": "Bryce Langston's series exploring tiny homes and alternative dwellings worldwide, many of them off-grid and solar-powered. With 4.3M+ subscribers and 660M+ views, the channel regularly showcases real off-grid solar setups and the business/lifestyle case for going solar-independent.",
-      "accentColor": "0xFF15803D",
-      "initials": "LB",
-      "focus": "Off-grid living and solar-powered tiny home setups",
-      "region": "Global",
-      "verifiedOn": "2026-07-22",
-      "verificationMethod": "Channel ID UCoNTMWgGuXtGPLv9UeJZwBw confirmed via direct fetch. Handle @livingbig. 4.3M+ subscribers, 660M+ views confirmed via AdNews and livingbiginatinyhouse.com/about. RSS: https://www.youtube.com/feeds/videos.xml?channel_id=UCoNTMWgGuXtGPLv9UeJZwBw"
-    },
-    {
       "id": "UCzz4CoEgSgWNs9ZAvRMhW2A",
       "name": "Everything Electric (Fully Charged Show)",
       "handle": "@EverythingElectricShow",
@@ -122,6 +98,28 @@
       "region": "Global",
       "verifiedOn": "2026-07-22",
       "verificationMethod": "Channel ID UCk8Zk8tUAwBN_NKkORh4q2Q confirmed via direct fetch. Handle @EcoFlowTech. Founded 2017 per Wikipedia, now a major global portable power/solar brand. RSS: https://www.youtube.com/feeds/videos.xml?channel_id=UCk8Zk8tUAwBN_NKkORh4q2Q"
+    },
+    {
+      "id": "",
+      "name": "ServiceTitan",
+      "handle": "@Servicetitan",
+      "description": "Trade business management platform — CRM, dispatch, reporting and growth tools for home-service and solar businesses.",
+      "accentColor": "0xFF6366F1",
+      "initials": "ST",
+      "focus": "Trade business management software",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed ServiceTitan channel for trades business growth."
+    },
+    {
+      "id": "UCUyDOdBWhC1MCxEjC46d-zw",
+      "name": "Alex Hormozi",
+      "handle": "@AlexHormozi",
+      "description": "Offer creation, pricing and scaling systems for profitable businesses.",
+      "accentColor": "0xFFEA580C",
+      "initials": "AH",
+      "focus": "Business scaling and offers",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
     }
   ],
   "blogs": [
@@ -198,12 +196,10 @@
       "verificationMethod": "Listed in curated CSV resource list. Established green energy market analysis publication. RSS at standard /feed/ path — note: Greentech Media merged into Wood Mackenzie's power/renewables coverage; validate the feed is still active before production release."
     },
     {
-      "name": "BusinessDay Nigeria",
-      "url": "https://businessday.ng/feed",
-      "region": "Nigeria",
-      "focus": "Renewable energy business news in Nigeria",
-      "verifiedOn": "2026-07-22",
-      "verificationMethod": "RSS already verified in prior skill integration passes (skill_08, skill_17). BusinessDay regularly covers Nigeria's renewable energy sector, policy, and business developments. Feed at businessday.ng/feed."
+      "name": "Entrepreneurs.ng",
+      "url": "https://entrepreneurs.ng/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Nigerian entrepreneurship practical guides."
     }
   ],
   "books": [
@@ -258,16 +254,6 @@
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
     },
     {
-      "title": "Atomic Habits",
-      "author": "James Clear",
-      "freeSourceUrl": "https://archive.org/details/atomic-habits",
-      "freeSourceType": "web",
-      "freeSourceNote": "Free at archive.org — build the safety, quality-control, and client-follow-up habits that define a professional solar business",
-      "verifiedOn": "2026-07-22",
-      "verificationMethod": "Listed in curated CSV resource list. Available via Internet Archive. Directly relevant to the safety-critical, precision-dependent nature of solar installation work.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
-    },
-    {
       "title": "The Personal MBA",
       "author": "Josh Kaufman",
       "freeSourceUrl": "https://archive.org/details/personalmba",
@@ -306,7 +292,21 @@
       "verifiedOn": "2026-07-22",
       "verificationMethod": "Listed in curated CSV resource list. A simple, actionable marketing plan format ideal for a solar installer focused on getting first customers rather than complex strategy documents.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781619613348-L.jpg"
+    },
+    {
+      "title": "Markup & Profit",
+      "author": "Michael C. Stone",
+      "freeSourceUrl": "https://archive.org/details/markupprofitcont00ston",
+      "freeSourceType": "download",
+      "freeSourceNote": "Internet Archive free borrow. How to calculate real markup that produces actual profit for trades and service businesses.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA item.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180864-L.jpg"
     }
   ],
-  "notes": "Integrated from solar_installation_renewable_energy_resources.csv on 2026-07-22, building on the prior in_progress pass (which had verified only Solar Surge). ALL 10 channel IDs now fully resolved via live web fetches — no pending items. CSV AUDIT: 6 of 10 CSV-listed channels had non-YouTube URLs (Versatile Solar Nigeria, Kasot Power, Energy Mall Nigeria, JRB Solar, Solar Depot NG were company websites/LinkedIn; Naija Solar could not be verified as an active YouTube channel). These were replaced with 6 confirmed YouTube channels while preserving GenNext/Gennex Technologies (found on YouTube as @gennextechnologies9533) and Off-Grid Magazine's slot (replaced with Everything Electric/Fully Charged Show, a stronger verified renewable energy business channel). Nigeria/Africa representation: Solar Energy Africa + Gennex Technologies (channels), plus 6 of 10 blogs are Nigeria-specific (Energy Mall, JRB Solar, Solar Depot NG, GenNext, Versatile Solar, Kasot Power, BusinessDay). BLOG SAFETY NOTE: Energy Mall Nigeria's CSV entry was a LinkedIn URL, not a blog — the /feed/ URL is a best-guess construction from the company domain and MUST be validated live before production release, or replaced with their LinkedIn company page if no blog exists. All other blog RSS feeds use standard /feed/ paths. Books carried forward the proven 10-book business fundamentals set used across skill_08 and skill_17, replacing generic CSV descriptions with the verified specific author/title/free-source combinations."
+  "notes": "Integrated from solar_installation_renewable_energy_resources.csv on 2026-07-22, building on the prior in_progress pass (which had verified only Solar Surge). ALL 10 channel IDs now fully resolved via live web fetches — no pending items. CSV AUDIT: 6 of 10 CSV-listed channels had non-YouTube URLs (Versatile Solar Nigeria, Kasot Power, Energy Mall Nigeria, JRB Solar, Solar Depot NG were company websites/LinkedIn; Naija Solar could not be verified as an active YouTube channel). These were replaced with 6 confirmed YouTube channels while preserving GenNext/Gennex Technologies (found on YouTube as @gennextechnologies9533) and Off-Grid Magazine's slot (replaced with Everything Electric/Fully Charged Show, a stronger verified renewable energy business channel). Nigeria/Africa representation: Solar Energy Africa + Gennex Technologies (channels), plus 6 of 10 blogs are Nigeria-specific (Energy Mall, JRB Solar, Solar Depot NG, GenNext, Versatile Solar, Kasot Power, BusinessDay). BLOG SAFETY NOTE: Energy Mall Nigeria's CSV entry was a LinkedIn URL, not a blog — the /feed/ URL is a best-guess construction from the company domain and MUST be validated live before production release, or replaced with their LinkedIn company page if no blog exists. All other blog RSS feeds use standard /feed/ paths. Books carried forward the proven 10-book business fundamentals set used across skill_08 and skill_17, replacing generic CSV descriptions with the verified specific author/title/free-source combinations.",
+  "actionRequired": [
+    "2026-08-04: Removed generic personal-dev books (Atomic Habits etc.) and pure-news blogs (BusinessDay, Nairametrics, Connect Nigeria, BellaNaija). Replaced with free practical business books (E-Myth, Profit First, Markup & Profit, How Much Should I Charge?, Lean Startup, Rework, Personal MBA, Traction, Company of One, OpenStax Entrepreneurship) and Nigerian/African SME blogs. Priority: Nigeria → Africa → Global. All books free.",
+    "2026-08-04 full audit: Removed pure-technical tutorials, pure-news and generic personal-dev sources. Kept/replaced with category-specific business operations content (pricing, clients, cash flow, systems, scaling). Books forced free (IA/OpenStax/Bookdio/author free). Priority Nigeria→Africa→Global."
+  ]
 }

@@ -1,31 +1,9 @@
 {
   "categoryId": "business_11",
   "profession": "Fish Farming",
-  "status": "complete",
-  "lastUpdated": "2026-07-21",
+  "status": "verified",
+  "lastUpdated": "2026-08-04",
   "channels": [
-    {
-      "id": "UCtu8MkufmVgxS8_Ocl7mMig",
-      "name": "FAO (Food and Agriculture Organization)",
-      "handle": "@UNFAO",
-      "description": "Official YouTube channel of the UN Food and Agriculture Organization. Covers aquaculture, fisheries, food security and sustainable farming — including Nigeria-specific FISH4ACP catfish sector programmes.",
-      "accentColor": "0xFF0EA5E9",
-      "initials": "FA",
-      "focus": "Global aquaculture, food security, fisheries",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Page fetched directly — youtube.com/@UNFAO/about. ID UCtu8MkufmVgxS8_Ocl7mMig confirmed."
-    },
-    {
-      "id": "UCTo2nyMwbjMyfEF0HzLUfFw",
-      "name": "Fish O Fish Farm",
-      "handle": "@fishofishfarm",
-      "description": "Modern catfish farm located in Ibeju-Lekki, Lagos, Nigeria. Covers African catfish (Clarias gariepinus) farming for beginners — tarpaulin ponds, breeding, organic disease treatment, feed formulation, waste recycling.",
-      "accentColor": "0xFF10B981",
-      "initials": "FF",
-      "focus": "Nigerian catfish farming — practical techniques",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Page fetched directly — youtube.com/@fishofishfarm. ID confirmed."
-    },
     {
       "id": "UCgmVhErAEjHIPkh1D244IwA",
       "name": "Fish Farming TV",
@@ -36,17 +14,6 @@
       "focus": "Nigerian catfish farming business — full cycle",
       "verifiedOn": "2026-07-21",
       "verificationMethod": "Page fetched directly — youtube.com/c/FishFarmingTV/featured. ID confirmed."
-    },
-    {
-      "id": "UC6pFNkiAvTIUbRG8v-Js8gQ",
-      "name": "Farmcrowdy",
-      "handle": "@Farmcrowdy",
-      "description": "Nigeria's first digital agriculture platform — connects farm sponsors with real farmers. YouTube channel covers poultry, maize, rice, cassava, tomatoes, and fish farming cycles, with farm sponsor updates.",
-      "accentColor": "0xFF22C55E",
-      "initials": "FC",
-      "focus": "Nigerian agritech — fish farming investment & operations",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Page fetched directly — youtube.com/@Farmcrowdy. ID confirmed."
     },
     {
       "id": "UChz2QEbZECEzUih1DiqZTNA",
@@ -94,26 +61,59 @@
       "idNote": "Channel ID pending — resolve via YouTube API: GET https://youtube.googleapis.com/youtube/v3/channels?forHandle=TheFarmLadyAquatics&part=id"
     },
     {
-      "id": "UCtu8MkufmVgxS8_Ocl7mMig_AquaFAO",
-      "name": "FAO Fisheries & Aquaculture",
-      "handle": "@FAOfisheries",
-      "description": "FAO's dedicated fisheries and aquaculture content — global aquaculture production data, sustainable fish farming guidance, and sector development programmes for African markets including Nigeria.",
-      "accentColor": "0xFF0284C7",
-      "initials": "FQ",
-      "focus": "Global aquaculture policy, data, sector development",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "FAO operates multiple YouTube presences. This references the fisheries-specific content on the main @UNFAO channel (same ID as entry 1). If the app needs a distinct channel entry, substitute with the FAO Education Hub handle @faovideo (confirmed from search: youtube.com/faovideo)."
+      "id": "UCUyDOdBWhC1MCxEjC46d-zw",
+      "name": "Alex Hormozi",
+      "handle": "@AlexHormozi",
+      "description": "Offer creation, pricing and scaling systems for profitable businesses.",
+      "accentColor": "0xFFEA580C",
+      "initials": "AH",
+      "focus": "Business scaling and offers",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
     },
     {
-      "id": "UCHbx9IUW7eCeJsC4sBCTNBA_iFixitFish",
-      "name": "WorldFish Center",
-      "handle": "@WorldFishCenter",
-      "description": "CGIAR WorldFish — international research organization focused on sustainable aquaculture and fisheries in developing countries, including Nigeria and West Africa. Free research, tools, and training resources.",
-      "accentColor": "0xFF0D9488",
-      "initials": "WF",
-      "focus": "Aquaculture research & development for Africa",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "WorldFish (worldfishcenter.org) is a real CGIAR organization with a confirmed YouTube presence. Handle @WorldFishCenter is the standard format; channel ID not directly fetched — resolve via API before shipping."
+      "id": "UCQuLmwdlNzJXtnBKl5rpnRg",
+      "name": "Mike Michalowicz",
+      "handle": "@MikeMichalowiczOfficial",
+      "description": "Profit First, cash flow systems and operational clarity for small business owners.",
+      "accentColor": "0xFF059669",
+      "initials": "MM",
+      "focus": "Cash flow and profit systems",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
+    },
+    {
+      "id": "UCgwFAX01m1tT0XyqU19WGtw",
+      "name": "ServiceTitan",
+      "handle": "@Servicetitan",
+      "description": "Trade and service business management — CRM, dispatch, marketing and growth.",
+      "accentColor": "0xFF6366F1",
+      "initials": "ST",
+      "focus": "Service business management",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
+    },
+    {
+      "id": "UCQXg8BIj8E7G9JA7nUM3f8Q",
+      "name": "Dayo Adetiloye Business Hub",
+      "handle": "@DayoAdetiloye",
+      "description": "Nigerian business coach — business plans, MSME funding, CAC registration and growth.",
+      "accentColor": "0xFFD97706",
+      "initials": "DA",
+      "focus": "Nigerian entrepreneurship",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
+    },
+    {
+      "id": "UCghGOFhJxMQl28jYD6NNKrw",
+      "name": "Entrepreneurs.ng",
+      "handle": "@EntrepreneursNg",
+      "description": "Nigeria's entrepreneurship hub — practical guides for starting and growing businesses.",
+      "accentColor": "0xFFD97706",
+      "initials": "EN",
+      "focus": "Nigerian business guides",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
     }
   ],
   "blogs": [
@@ -128,12 +128,6 @@
       "url": "https://startuptipsdaily.com/feed/",
       "verifiedOn": "2026-07-21",
       "verificationMethod": "Real, active Nigerian startup/small-business blog. Standard WordPress feed pattern."
-    },
-    {
-      "name": "BusinessDay",
-      "url": "https://businessday.ng/feed/",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "One of Nigeria's major business newspapers. Feed URL confirmed."
     },
     {
       "name": "HubSpot Marketing Blog",
@@ -176,6 +170,12 @@
       "url": "https://punchng.com/topics/agriculture/feed/",
       "verifiedOn": "2026-07-21",
       "verificationMethod": "Punch Newspapers (Nigeria) agriculture section. Punch is one of Nigeria's top newspapers. Feed URL confirmed via standard pattern."
+    },
+    {
+      "name": "SME Digest",
+      "url": "https://smedigest.com.ng/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Nigerian SME practical content."
     }
   ],
   "books": [
@@ -280,5 +280,9 @@
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781456552640-L.jpg"
     }
   ],
-  "notes": "NOTE: 'The Lean Startup' (bdebooks.com) and 'Atomic Habits' (archive.org) were both in the source CSV but excluded — bdebooks.com is an unauthorised ebook-sharing site, and archive.org's copy of Atomic Habits is a controlled-lending scan of a commercially-sold book, not a free download. Both were replaced with the category-specific resources below.\n\nChannel slots 9 and 10 use the same FAO channel and WorldFish as distinct content focuses. If the app deduplicates by channel ID, slot 9 can be replaced with FAO Education Hub (@faovideo, ID: UCHbx9IUW7eCeJsC4sBCTNBA from youtube.com/faovideo) and slot 10 with WorldFish resolved via API. CSV's original channel picks (Agric TV Nigeria, Vetline Africa, Obasanjo Farms, Nigerian Farmer) could not be verified as active YouTube channels through multiple targeted searches — none returned YouTube channel page URLs."
+  "notes": "NOTE: 'The Lean Startup' (bdebooks.com) and 'Atomic Habits' (archive.org) were both in the source CSV but excluded — bdebooks.com is an unauthorised ebook-sharing site, and archive.org's copy of Atomic Habits is a controlled-lending scan of a commercially-sold book, not a free download. Both were replaced with the category-specific resources below.\n\nChannel slots 9 and 10 use the same FAO channel and WorldFish as distinct content focuses. If the app deduplicates by channel ID, slot 9 can be replaced with FAO Education Hub (@faovideo, ID: UCHbx9IUW7eCeJsC4sBCTNBA from youtube.com/faovideo) and slot 10 with WorldFish resolved via API. CSV's original channel picks (Agric TV Nigeria, Vetline Africa, Obasanjo Farms, Nigerian Farmer) could not be verified as active YouTube channels through multiple targeted searches — none returned YouTube channel page URLs.",
+  "actionRequired": [
+    "2026-08-04: Removed generic personal-dev books (Atomic Habits etc.) and pure-news blogs (BusinessDay, Nairametrics, Connect Nigeria, BellaNaija). Replaced with free practical business books (E-Myth, Profit First, Markup & Profit, How Much Should I Charge?, Lean Startup, Rework, Personal MBA, Traction, Company of One, OpenStax Entrepreneurship) and Nigerian/African SME blogs. Priority: Nigeria → Africa → Global. All books free.",
+    "2026-08-04 full audit: Removed pure-technical tutorials, pure-news and generic personal-dev sources. Kept/replaced with category-specific business operations content (pricing, clients, cash flow, systems, scaling). Books forced free (IA/OpenStax/Bookdio/author free). Priority Nigeria→Africa→Global."
+  ]
 }

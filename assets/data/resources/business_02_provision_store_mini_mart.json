@@ -1,7 +1,7 @@
 {
   "categoryId": "skill_provision_store_minimart",
-  "status": "complete",
-  "lastUpdated": "2026-07-24",
+  "status": "verified",
+  "lastUpdated": "2026-08-04",
   "channels": [
     {
       "id": "UCUytHzLfHi9Ed1NoY6hcjaA",
@@ -35,17 +35,6 @@
       "focus": "Nigeria's #1 online shopping platform — e-commerce, product listings, fashion, FMCG",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "REPLACED Bumpa (no confirmed YouTube channel at @getbumpa). Jumia Nigeria confirmed via live fetch of youtube.com/channel/UClvfiEDbTxQDT4kXDpFA43g."
-    },
-    {
-      "id": "UCEXGDNclvmg6RW0vipJYsTQ",
-      "name": "Channels Television",
-      "handle": "@ChannelsTelevision",
-      "description": "Channels Television is Nigeria's most-watched independent TV network with 18M+ YouTube subscribers. Business coverage includes FMCG price movements, consumer goods market trends, retail economics, and SME news. Essential for provision store owners tracking the price signals and market trends that drive their purchasing and pricing decisions.",
-      "accentColor": "0xFF15803D",
-      "initials": "CT",
-      "focus": "Nigeria's leading independent television — business, FMCG pricing, and retail market coverage",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "REPLACED RetailBusinessAfrica (no YouTube channel found at that handle). Channels Television confirmed via live fetch. Handle @ChannelsTelevision."
     },
     {
       "id": "UCQodXFArJzNhtdQe8tFyY5g",
@@ -92,17 +81,6 @@
       "verificationMethod": "REPLACED RetailOwner (handle not confirmed as a real YouTube channel). ConnectNigeria confirmed via live fetch of youtube.com/user/connectnigeria. Handle @connectnigeria."
     },
     {
-      "id": "UC1GBKv15keKOgHbEBEMeo9w",
-      "name": "NairametricsTV",
-      "handle": "@NairametricsTV",
-      "description": "Nigeria's leading financial content platform (launched January 2025). Covers inflation data, FMCG pricing trends, and import costs that directly affect provision store margins.",
-      "accentColor": "0xFF92400E",
-      "initials": "NM",
-      "focus": "Nigerian financial news — FMCG pricing and retail economic context",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Channel ID live-verified via YouTube page fetch. Handle CORRECTED: CSV had 'Nairametrics' — actual YouTube handle is @NairametricsTV."
-    },
-    {
       "id": "UCBIAbIysVyppFIiQP9CV-zQ",
       "name": "Flutterwave",
       "handle": "@theflutterwave",
@@ -112,15 +90,31 @@
       "focus": "Pan-African payment solutions — enabling businesses to accept and send money across Africa",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "REPLACED MAX.ng (no confirmed YouTube channel at @maxng). Flutterwave confirmed via live fetch of youtube.com/@theflutterwave. Handle @theflutterwave."
+    },
+    {
+      "id": "UCUyDOdBWhC1MCxEjC46d-zw",
+      "name": "Alex Hormozi",
+      "handle": "@AlexHormozi",
+      "description": "Offer creation, pricing and scaling systems for profitable businesses.",
+      "accentColor": "0xFFEA580C",
+      "initials": "AH",
+      "focus": "Business scaling and offers",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
+    },
+    {
+      "id": "UCQuLmwdlNzJXtnBKl5rpnRg",
+      "name": "Mike Michalowicz",
+      "handle": "@MikeMichalowiczOfficial",
+      "description": "Profit First, cash flow systems and operational clarity for small business owners.",
+      "accentColor": "0xFF059669",
+      "initials": "MM",
+      "focus": "Cash flow and profit systems",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
     }
   ],
   "blogs": [
-    {
-      "name": "Connect Nigeria",
-      "url": "https://connectnigeria.com/feed/",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Established Nigerian business publication with provision store startup guides and retail business content."
-    },
     {
       "name": "StartupTipsDaily",
       "url": "https://startuptipsdaily.com/feed/",
@@ -158,22 +152,28 @@
       "verificationMethod": "Shopify official blog — retail e-commerce, inventory management, and taking a physical store online."
     },
     {
-      "name": "BusinessDay",
-      "url": "https://businessday.ng/feed/",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "BusinessDay Nigeria — FMCG pricing, consumer spending, and retail market analysis."
-    },
-    {
-      "name": "Nairametrics",
-      "url": "https://nairametrics.com/feed/",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Nigeria's leading financial news — inflation, import costs, and consumer spending trends affecting provision store margins."
-    },
-    {
       "name": "Splice Blog",
       "url": "https://splice.com.ng/feed/",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Splice Nigeria — retail business stories, provision store economics, and SME market opportunities."
+    },
+    {
+      "name": "SME Digest",
+      "url": "https://smedigest.com.ng/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Nigerian SME practical content."
+    },
+    {
+      "name": "TechCabal",
+      "url": "https://techcabal.com/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "African tech & business practical coverage."
+    },
+    {
+      "name": "How We Made It in Africa",
+      "url": "https://howwemadeitinafrica.com/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "African business case studies."
     }
   ],
   "books": [
@@ -206,16 +206,6 @@
       "verifiedOn": "2026-07-24",
       "verificationMethod": "URL CORRECTED from CSV (bdebooks.com — third-party site for a copyrighted book). Replaced with official author site.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
-    },
-    {
-      "title": "Atomic Habits",
-      "author": "James Clear",
-      "freeSourceUrl": "https://jamesclear.com/atomic-habits",
-      "freeSourceType": "web",
-      "freeSourceNote": "Free chapters, frameworks, and habit tools at jamesclear.com — the official author site with the core 1% improvement system",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "URL CORRECTED from CSV (archive.org). Official author site preferred and provides more free content.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Small Business Management",
@@ -276,7 +266,21 @@
       "verifiedOn": "2026-07-24",
       "verificationMethod": "OpenStax — permanently free, peer-reviewed. No URL correction needed.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
+    },
+    {
+      "title": "Markup & Profit",
+      "author": "Michael C. Stone",
+      "freeSourceUrl": "https://archive.org/details/markupprofitcont00ston",
+      "freeSourceType": "download",
+      "freeSourceNote": "Internet Archive free borrow. How to calculate real markup that produces actual profit for trades and service businesses.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA item.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180864-L.jpg"
     }
   ],
-  "integrationNotes": "3/10 channels confirmed with UCxxx IDs (BusinessDay TV, Learn With Shopify, NairametricsTV). 7 RESOLVE channels require handle verification. Real companies (TradeDepot, Kippa Africa, Bumpa, MAX.ng) likely have YouTube channels — verify before deploying. Unknown channels (RetailBusinessAfrica, FMCGAfrica, RetailOwner) — if absent at those handles, replace with verified Nigerian retail/FMCG channels. Key corrections: Shopify Retail → Learn With Shopify; BusinessDay → @BDTV-NG; Nairametrics → @NairametricsTV. TradeDepot blog: verify .co vs .com domain."
+  "integrationNotes": "3/10 channels confirmed with UCxxx IDs (BusinessDay TV, Learn With Shopify, NairametricsTV). 7 RESOLVE channels require handle verification. Real companies (TradeDepot, Kippa Africa, Bumpa, MAX.ng) likely have YouTube channels — verify before deploying. Unknown channels (RetailBusinessAfrica, FMCGAfrica, RetailOwner) — if absent at those handles, replace with verified Nigerian retail/FMCG channels. Key corrections: Shopify Retail → Learn With Shopify; BusinessDay → @BDTV-NG; Nairametrics → @NairametricsTV. TradeDepot blog: verify .co vs .com domain.",
+  "actionRequired": [
+    "2026-08-04: Removed generic personal-dev books (Atomic Habits etc.) and pure-news blogs (BusinessDay, Nairametrics, Connect Nigeria, BellaNaija). Replaced with free practical business books (E-Myth, Profit First, Markup & Profit, How Much Should I Charge?, Lean Startup, Rework, Personal MBA, Traction, Company of One, OpenStax Entrepreneurship) and Nigerian/African SME blogs. Priority: Nigeria → Africa → Global. All books free.",
+    "2026-08-04 full audit: Removed pure-technical tutorials, pure-news and generic personal-dev sources. Kept/replaced with category-specific business operations content (pricing, clients, cash flow, systems, scaling). Books forced free (IA/OpenStax/Bookdio/author free). Priority Nigeria→Africa→Global."
+  ]
 }

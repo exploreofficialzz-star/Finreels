@@ -1,7 +1,7 @@
 {
   "categoryId": "skill_07_plumbing",
-  "status": "complete",
-  "lastUpdated": "2026-07-30",
+  "status": "verified",
+  "lastUpdated": "2026-08-04",
   "channels": [
     {
       "id": "UCGIMKh92vaL0_Yc0u4GYhHA",
@@ -81,17 +81,6 @@
       "verificationMethod": "Channel ID confirmed via live fetch of youtube.com/@plumberparts. Ranked #7 by FieldEdge 2026. 415K subscribers — one of the largest plumbing channels for professionals globally."
     },
     {
-      "id": "UCzr30osBdTmuFUS8IfXtXmg",
-      "name": "Essential Craftsman",
-      "handle": "@essentialcraftsman",
-      "description": "Scott Wadsworth brings 40+ years of building experience across house construction, carpentry, blacksmithing, and trades. Covers the full knowledge base of experienced tradespeople — respect for craft, tool history, safety, and productivity. Valuable for plumbers building the professional credibility that commands premium rates.",
-      "accentColor": "0xFF92400E",
-      "initials": "EC",
-      "focus": "40+ years of trades knowledge — craftsmanship, safety and productivity",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "Channel ID confirmed via live fetch of youtube.com/@essentialcraftsman. Ranked #9 by FieldEdge 2026. Cross-trade content is valuable for plumbing business owners who want to understand how master tradespeople build and sustain premium businesses."
-    },
-    {
       "id": "UCqYmdUjo5w0v1NdN7paCKmA",
       "name": "Chuck Barron",
       "handle": "@ChuckBarron",
@@ -112,6 +101,17 @@
       "focus": "Multi-trade content — plumbing within the construction ecosystem (UK)",
       "verifiedOn": "2026-07-21",
       "verificationMethod": "Channel ID confirmed via live fetch of youtube.com/@SkillBuilder. Ranked #10 by FieldEdge 2026. Covers carpentry, plumbing, and construction as an integrated system — useful for business owners managing multi-trade projects."
+    },
+    {
+      "id": "UCUyDOdBWhC1MCxEjC46d-zw",
+      "name": "Alex Hormozi",
+      "handle": "@AlexHormozi",
+      "description": "Offer creation, pricing and scaling systems for profitable businesses.",
+      "accentColor": "0xFFEA580C",
+      "initials": "AH",
+      "focus": "Business scaling and offers",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
     }
   ],
   "blogs": [
@@ -208,16 +208,6 @@
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
     },
     {
-      "title": "Atomic Habits",
-      "author": "James Clear",
-      "freeSourceUrl": "https://jamesclear.com/atomic-habits",
-      "freeSourceType": "web",
-      "freeSourceNote": "Free resources, excerpts and habits frameworks at jamesclear.com — the official author site with the core 1% improvement system and habit loop content",
-      "verifiedOn": "2026-07-21",
-      "verificationMethod": "URL CORRECTED: CSV had archive.org — using the official author site instead. jamesclear.com offers free articles, the habit scorecard, and key frameworks from the book at no cost. Applies directly to plumbers building daily quoting, follow-up, and invoicing routines.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
-    },
-    {
       "title": "Small Business Management",
       "author": "OpenStax",
       "freeSourceUrl": "https://openstax.org/details/books/principles-management",
@@ -276,7 +266,21 @@
       "verifiedOn": "2026-07-21",
       "verificationMethod": "OpenStax — permanently free, peer-reviewed. POLC framework directly useful for a plumbing business owner managing a team of technicians for the first time.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
+    },
+    {
+      "title": "Markup & Profit",
+      "author": "Michael C. Stone",
+      "freeSourceUrl": "https://archive.org/details/markupprofitcont00ston",
+      "freeSourceType": "download",
+      "freeSourceNote": "Internet Archive free borrow. How to calculate real markup that produces actual profit for trades and service businesses.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA item.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180864-L.jpg"
     }
   ],
-  "integrationNotes": "All 10 channel IDs live-verified via YouTube fetch (2026-07-21). Key corrections from CSV: (1) @PlumbingAfrica replaced with Million Dollar Plumber — no YouTube channel at that handle; (2) @PropelAKenya replaced — PropelA is a Swisscontact/Hilti Foundation programme with no dedicated YouTube channel; (3) @TheExpertPlumber removed — this is Roger Wakefield's title, not a separate channel (duplicate); (4) @PlumbingWithTim handle corrected to @PLUMBINGWITHTIM (all caps); (5) @HustleCareKenya, @PesabookKenya, @PlumbingBusinessCoach, @NigerianPlumbersAssoc all replaced — no verified YouTube channels found at those handles. Replacements sourced from FieldEdge's 2026 curated list of channels plumbing business owners actually learn from. Blog corrections: 1xportal.com → 1xportalhub.com.ng; plumbingafrica.com → plumbingafrica.co.za. Book corrections: f5fp.com and bdebooks.com replaced with legitimate author/publisher sources; archive.org links replaced with official sites where available.\n\nBooks audit (2026-07-30): 3 of 10 URLs fixed in this pass (skill_07). 'The E-Myth Revisited': https://books.google.com/books?id=SHi_fU0AlO0C... → https://archive.org/details/TheEMythRevisitedMichaelE.Gerber | 'Profit First': https://www.mikemichalowicz.com/profit-first-book... → https://archive.org/details/profitfirst0000mich | 'Small Business Management': https://openstax.org/details/books/small-business-management... → https://openstax.org/details/books/principles-management"
+  "integrationNotes": "All 10 channel IDs live-verified via YouTube fetch (2026-07-21). Key corrections from CSV: (1) @PlumbingAfrica replaced with Million Dollar Plumber — no YouTube channel at that handle; (2) @PropelAKenya replaced — PropelA is a Swisscontact/Hilti Foundation programme with no dedicated YouTube channel; (3) @TheExpertPlumber removed — this is Roger Wakefield's title, not a separate channel (duplicate); (4) @PlumbingWithTim handle corrected to @PLUMBINGWITHTIM (all caps); (5) @HustleCareKenya, @PesabookKenya, @PlumbingBusinessCoach, @NigerianPlumbersAssoc all replaced — no verified YouTube channels found at those handles. Replacements sourced from FieldEdge's 2026 curated list of channels plumbing business owners actually learn from. Blog corrections: 1xportal.com → 1xportalhub.com.ng; plumbingafrica.com → plumbingafrica.co.za. Book corrections: f5fp.com and bdebooks.com replaced with legitimate author/publisher sources; archive.org links replaced with official sites where available.\n\nBooks audit (2026-07-30): 3 of 10 URLs fixed in this pass (skill_07). 'The E-Myth Revisited': https://books.google.com/books?id=SHi_fU0AlO0C... → https://archive.org/details/TheEMythRevisitedMichaelE.Gerber | 'Profit First': https://www.mikemichalowicz.com/profit-first-book... → https://archive.org/details/profitfirst0000mich | 'Small Business Management': https://openstax.org/details/books/small-business-management... → https://openstax.org/details/books/principles-management",
+  "actionRequired": [
+    "2026-08-04: Removed generic personal-dev books (Atomic Habits etc.) and pure-news blogs (BusinessDay, Nairametrics, Connect Nigeria, BellaNaija). Replaced with free practical business books (E-Myth, Profit First, Markup & Profit, How Much Should I Charge?, Lean Startup, Rework, Personal MBA, Traction, Company of One, OpenStax Entrepreneurship) and Nigerian/African SME blogs. Priority: Nigeria → Africa → Global. All books free.",
+    "2026-08-04 full audit: Removed pure-technical tutorials, pure-news and generic personal-dev sources. Kept/replaced with category-specific business operations content (pricing, clients, cash flow, systems, scaling). Books forced free (IA/OpenStax/Bookdio/author free). Priority Nigeria→Africa→Global."
+  ]
 }

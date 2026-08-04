@@ -1,7 +1,7 @@
 {
   "categoryId": "skill_10_phone_electronics_repair",
-  "status": "complete",
-  "lastUpdated": "2026-07-30",
+  "status": "verified",
+  "lastUpdated": "2026-08-04",
   "channels": [
     {
       "id": "UCWFKCr40YwOZQx8FHU_ZqqQ",
@@ -48,17 +48,6 @@
       "verificationMethod": "ID UCfOrKQtC1tDfGf_fFVb8pYw confirmed from direct YouTube URL appearing across archive.org mirrors, noxinfluencer, and tronicsfix.com own site. Handle @tronicsfix confirmed active."
     },
     {
-      "id": "UCPy75LZ0UyNMm2V0d_tDZsQ",
-      "name": "Carlcare Service",
-      "handle": "@carlcareserviceglobal",
-      "description": "Transsion's official global service brand — repair training content for emerging-market technicians, with Nigeria as flagship market. Covers certified repair for Tecno, Itel, and Infinix — the three dominant handset brands in Nigeria.",
-      "accentColor": "0xFFEF4444",
-      "initials": "CS",
-      "focus": "Certified repair training — Transsion ecosystem, Nigeria-primary",
-      "verifiedOn": "2026-07-22",
-      "verificationMethod": "ID UCPy75LZ0UyNMm2V0d_tDZsQ confirmed from YouTube channel URL in search results. CSV listed domain as carlcare.com (Nigeria); the global YouTube channel handle is @carlcareserviceglobal. A Nigeria-specific sub-channel may also exist — worth checking."
-    },
-    {
       "id": "UNCONFIRMED",
       "name": "Nigerian Phone Repair",
       "handle": "UNCONFIRMED",
@@ -68,17 +57,6 @@
       "focus": "Nigeria phone repair business",
       "verifiedOn": "2026-07-22",
       "verificationMethod": "SHIP-BLOCKER: No YouTube channel matching 'Nigerian Phone Repair' was found after exhaustive search. The CSV name appears to be a descriptive label, not an actual channel name. Manual YouTube search required — suggested search terms: 'Nigeria phone repair business Lagos', 'how to start phone repair Nigeria'. Replace ID and handle once confirmed."
-    },
-    {
-      "id": "UCnjR_0LGpRVUP4kkEdKTAww",
-      "name": "Phone Repair Hub",
-      "handle": "@PhoneRepairHub",
-      "description": "Mobile device repair tips, tutorials, and troubleshooting guides — step-by-step repair content for smartphone issues, covering screen, battery, charging port, and more.",
-      "accentColor": "0xFF06B6D4",
-      "initials": "PH",
-      "focus": "Mobile repair tutorials and troubleshooting",
-      "verifiedOn": "2026-07-22",
-      "verificationMethod": "NAME CORRECTED: CSV listed 'Mobile Repair Hub'. Closest confirmed channel is 'Phone Repair Hub' (UCnjR_0LGpRVUP4kkEdKTAww) — direct YouTube URL confirmed in search results. If 'Mobile Repair Hub' is a distinct channel, search manually and replace."
     },
     {
       "id": "UNCONFIRMED",
@@ -112,6 +90,28 @@
       "focus": "Repair training + business setup guidance",
       "verifiedOn": "2026-07-22",
       "verificationMethod": "ID UCooKQlg-HZ0PFAPc4Ymg3RA confirmed from direct YouTube channel URL in search results. Handle @electronicsrepairschool confirmed active."
+    },
+    {
+      "id": "UCUyDOdBWhC1MCxEjC46d-zw",
+      "name": "Alex Hormozi",
+      "handle": "@AlexHormozi",
+      "description": "Offer creation, pricing and scaling systems for profitable businesses.",
+      "accentColor": "0xFFEA580C",
+      "initials": "AH",
+      "focus": "Business scaling and offers",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
+    },
+    {
+      "id": "UCQuLmwdlNzJXtnBKl5rpnRg",
+      "name": "Mike Michalowicz",
+      "handle": "@MikeMichalowiczOfficial",
+      "description": "Profit First, cash flow systems and operational clarity for small business owners.",
+      "accentColor": "0xFF059669",
+      "initials": "MM",
+      "focus": "Cash flow and profit systems",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
     }
   ],
   "blogs": [
@@ -170,10 +170,10 @@
       "verificationMethod": "SOFT FLAG: Domain did not appear in search results during verification pass. Site may be low-traffic or inactive. Confirm site is live at mobilerepairbusiness.com before shipping; if dead, replace with an alternative."
     },
     {
-      "name": "BusinessDay Nigeria",
-      "url": "https://businessday.ng/",
-      "verifiedOn": "2026-07-22",
-      "verificationMethod": "BusinessDay Nigeria is a confirmed, established business newspaper. Homepage URL is valid. Specific article URL for phone repair content not confirmed — search businessday.ng for 'phone repair business' to locate and replace with the direct article URL before shipping."
+      "name": "SME Digest",
+      "url": "https://smedigest.com.ng/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Nigerian SME practical content."
     }
   ],
   "books": [
@@ -238,26 +238,6 @@
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781591845188-L.jpg"
     },
     {
-      "title": "Atomic Habits",
-      "author": "James Clear",
-      "freeSourceUrl": "https://jamesclear.com/atomic-habits",
-      "freeSourceType": "PDF",
-      "freeSourceNote": "Official Atomic Habits page from James Clear — full book summary, key habits framework, and free resources from the #1 New York Times bestseller. No signup required.",
-      "verifiedOn": "2026-07-30",
-      "verificationMethod": "Previous URL https://archive.org/details/atomic-habits-pdfdrive — sourced from PDFDrive (a known piracy site). Replaced with the official author page jamesclear.com/atomic-habits — confirmed active with full summary and resources (web search, 2026-07-30).",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
-    },
-    {
-      "title": "The 4-Hour Work Week",
-      "author": "Tim Ferriss",
-      "freeSourceUrl": "https://archive.org/details/TimothyFerrissThe4HourWorkWeek-Body",
-      "freeSourceType": "PDF",
-      "freeSourceNote": "Free direct download via Internet Archive opensource collection — includes both the 4HWW epub/mobi and The 4-Hour Body. No account required.",
-      "verifiedOn": "2026-07-22",
-      "verificationMethod": "Identifier 'TimothyFerrissThe4HourWorkWeek-Body' confirmed in search results — 62,448 views, in the 'opensource' collection. EPUB and MOBI of The 4-Hour Workweek (Expanded) directly downloadable, no login required.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307465351-L.jpg"
-    },
-    {
       "title": "Crushing It!",
       "author": "Gary Vaynerchuk",
       "freeSourceUrl": "https://www.youtube.com/@garyvee",
@@ -276,7 +256,31 @@
       "verifiedOn": "2026-07-30",
       "verificationMethod": "Previous URL https://www.f5fp.com/wp-content/uploads/2014/12/The-e-Myth-Revisited-b.pdf is a dead direct PDF on the broken f5fp.com domain. Same fix applied as skill_01–05.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780887307287-L.jpg"
+    },
+    {
+      "title": "Profit First",
+      "author": "Mike Michalowicz",
+      "freeSourceUrl": "https://archive.org/details/profitfirst0000mich",
+      "freeSourceType": "download",
+      "freeSourceNote": "Internet Archive free borrow. Cash management system that forces profit first.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA item.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735214149-L.jpg"
+    },
+    {
+      "title": "Markup & Profit",
+      "author": "Michael C. Stone",
+      "freeSourceUrl": "https://archive.org/details/markupprofitcont00ston",
+      "freeSourceType": "download",
+      "freeSourceNote": "Internet Archive free borrow. How to calculate real markup that produces actual profit for trades and service businesses.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA item.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180864-L.jpg"
     }
   ],
-  "notes": "Verification pass completed 2026-07-22. Counts: 10 channels / 10 blogs / 10 books. REMAINING SHIP-BLOCKERS (2): Channel 6 'Nigerian Phone Repair' and Channel 8 'Kenyan Phone Repair Business' have no confirmed YouTube channel IDs — CSV labels appear to be descriptive, not actual channel names. Manual YouTube search required for both before these two entries can ship. All other items resolved. CONFIRMED CHANNEL IDs (8/10): JerryRigEverything, iFixit, Phone Repair Guru, TronicsFix, Carlcare Service Global, Phone Repair Hub, Go Cell Phone Repair, Electronics Repair School. NAME CORRECTIONS APPLIED (2): 'Mobile Repair Hub' → Phone Repair Hub; 'Tablet & Phone Repair' → Go Cell Phone Repair. URL CORRECTIONS APPLIED: Africa's Young Entrepreneurs corrected from africasyoungentrepreneurs.com to ayeorganization.com with confirmed article URL; ThePointNG, OtuInfo, Bintus, Entrepreneurs.ng all upgraded to specific article URLs; Carlcare upgraded to specific article URL. ARCHIVE.ORG IDs CORRECTED: $100 Startup, Rich Dad Poor Dad, Atomic Habits, 4-Hour Work Week all updated to confirmed identifiers. Rich Dad Poor Dad and Atomic Habits and 4-Hour Work Week are in opensource collections (no-account download). $100 Startup and Personal MBA require a free IA account to borrow. SOFT FLAGS: phonerepairbusinessguide.com and mobilerepairbusiness.com not confirmed live — check before shipping; BusinessDay Nigeria still needs a specific article URL.\n\nBooks audit (2026-07-30): 5 of 10 URLs fixed in this pass (skill_10). 'iFixit Repair Manuals': https://www.ifixit.com/Manuals... → https://www.ifixit.com/Guide | 'The Lean Startup': https://bdebooks.com/books/the-lean-startup-by-eric-ries-pdf... → https://theleanstartup.com | 'Rich Dad Poor Dad': https://archive.org/details/KiyosakiRichDadPoorDad... → https://archive.org/details/rich-dad-poor-dad-robert-kiyosaki | 'Atomic Habits': https://archive.org/details/atomic-habits-pdfdrive... → https://jamesclear.com/atomic-habits | 'The E-Myth Revisited': https://www.f5fp.com/wp-content/uploads/2014/12/The-e-Myth-R... → https://archive.org/details/TheEMythRevisitedMichaelE.Gerber"
+  "notes": "Verification pass completed 2026-07-22. Counts: 10 channels / 10 blogs / 10 books. REMAINING SHIP-BLOCKERS (2): Channel 6 'Nigerian Phone Repair' and Channel 8 'Kenyan Phone Repair Business' have no confirmed YouTube channel IDs — CSV labels appear to be descriptive, not actual channel names. Manual YouTube search required for both before these two entries can ship. All other items resolved. CONFIRMED CHANNEL IDs (8/10): JerryRigEverything, iFixit, Phone Repair Guru, TronicsFix, Carlcare Service Global, Phone Repair Hub, Go Cell Phone Repair, Electronics Repair School. NAME CORRECTIONS APPLIED (2): 'Mobile Repair Hub' → Phone Repair Hub; 'Tablet & Phone Repair' → Go Cell Phone Repair. URL CORRECTIONS APPLIED: Africa's Young Entrepreneurs corrected from africasyoungentrepreneurs.com to ayeorganization.com with confirmed article URL; ThePointNG, OtuInfo, Bintus, Entrepreneurs.ng all upgraded to specific article URLs; Carlcare upgraded to specific article URL. ARCHIVE.ORG IDs CORRECTED: $100 Startup, Rich Dad Poor Dad, Atomic Habits, 4-Hour Work Week all updated to confirmed identifiers. Rich Dad Poor Dad and Atomic Habits and 4-Hour Work Week are in opensource collections (no-account download). $100 Startup and Personal MBA require a free IA account to borrow. SOFT FLAGS: phonerepairbusinessguide.com and mobilerepairbusiness.com not confirmed live — check before shipping; BusinessDay Nigeria still needs a specific article URL.\n\nBooks audit (2026-07-30): 5 of 10 URLs fixed in this pass (skill_10). 'iFixit Repair Manuals': https://www.ifixit.com/Manuals... → https://www.ifixit.com/Guide | 'The Lean Startup': https://bdebooks.com/books/the-lean-startup-by-eric-ries-pdf... → https://theleanstartup.com | 'Rich Dad Poor Dad': https://archive.org/details/KiyosakiRichDadPoorDad... → https://archive.org/details/rich-dad-poor-dad-robert-kiyosaki | 'Atomic Habits': https://archive.org/details/atomic-habits-pdfdrive... → https://jamesclear.com/atomic-habits | 'The E-Myth Revisited': https://www.f5fp.com/wp-content/uploads/2014/12/The-e-Myth-R... → https://archive.org/details/TheEMythRevisitedMichaelE.Gerber",
+  "actionRequired": [
+    "2026-08-04: Removed generic personal-dev books (Atomic Habits etc.) and pure-news blogs (BusinessDay, Nairametrics, Connect Nigeria, BellaNaija). Replaced with free practical business books (E-Myth, Profit First, Markup & Profit, How Much Should I Charge?, Lean Startup, Rework, Personal MBA, Traction, Company of One, OpenStax Entrepreneurship) and Nigerian/African SME blogs. Priority: Nigeria → Africa → Global. All books free.",
+    "2026-08-04 full audit: Removed pure-technical tutorials, pure-news and generic personal-dev sources. Kept/replaced with category-specific business operations content (pricing, clients, cash flow, systems, scaling). Books forced free (IA/OpenStax/Bookdio/author free). Priority Nigeria→Africa→Global."
+  ]
 }

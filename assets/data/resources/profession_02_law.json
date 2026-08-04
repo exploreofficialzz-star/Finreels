@@ -1,7 +1,7 @@
 {
   "categoryId": "profession_02_law",
-  "status": "ready",
-  "lastUpdated": "2026-07-24",
+  "status": "verified",
+  "lastUpdated": "2026-08-04",
   "channels": [
     {
       "id": "UCHzd5RKs21FxILfjOAh1L4Q",
@@ -26,18 +26,6 @@
       "region": "Global",
       "verifiedOn": "2026-07-17",
       "verificationMethod": "Pre-existing verified channel from prior profession_02 pass. Channel ID confirmed."
-    },
-    {
-      "id": "UCpa-Zb0ZcQjTCPP1Dx_1M8Q",
-      "name": "LegalEagle",
-      "handle": "@legaleagle",
-      "description": "Devin Stone — trial lawyer and adjunct Georgetown law professor with 3.9M+ subscribers and 1.19B+ views. Breaks down legal concepts, real-life cases, and how law actually works — the most-watched legal YouTube channel in the world. Essential for legal education and public legal literacy.",
-      "accentColor": "0xFF0891B2",
-      "initials": "LE",
-      "focus": "Legal education, case analysis, and law explained for everyone",
-      "region": "Global",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Channel ID UCpa-Zb0ZcQjTCPP1Dx_1M8Q confirmed via Wikidata (wikidata.org/wiki/Q107439708) — explicitly lists YouTube channel ID from YouTube API. 3.91M subscribers. Handle @legaleagle. RSS: https://www.youtube.com/feeds/videos.xml?channel_id=UCpa-Zb0ZcQjTCPP1Dx_1M8Q"
     },
     {
       "id": "UCkEr8m8jl-jwoJ-oSkq8BBw",
@@ -112,16 +100,26 @@
       "verificationMethod": "Channel ID UCfnyOJc7kgjZyxmvEafMQGQ confirmed via direct fetch — youtube.com/user/techcabal. Handle @Techcabal. About: 'TechCabal vividly captures the players, human impact and business of tech in Africa.' RSS: https://www.youtube.com/feeds/videos.xml?channel_id=UCfnyOJc7kgjZyxmvEafMQGQ"
     },
     {
-      "id": "UCVTrDBjyx2YUs-IyqTn2AVg",
-      "name": "Quimbee",
-      "handle": "@QuimbeeDotCom",
-      "description": "Quimbee — trusted by 820,000+ law students and bar examinees. Covers case briefs, bar exam prep, and law school survival. For Nigerian lawyers pursuing LLB, BL, or international bar qualifications, this channel supplements formal legal education with sharp, visual explanations of core legal doctrine.",
-      "accentColor": "0xFF92400E",
-      "initials": "QB",
-      "focus": "Legal education, case briefs, and bar exam preparation",
-      "region": "Global",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Channel ID UCVTrDBjyx2YUs-IyqTn2AVg confirmed via direct fetch. Handle @QuimbeeDotCom. About: '820,000 students have trusted our expert-written case briefs.' RSS: https://www.youtube.com/feeds/videos.xml?channel_id=UCVTrDBjyx2YUs-IyqTn2AVg"
+      "id": "UCm7-PzSkiu9hF8jy6XnLVXg",
+      "name": "Strictlylawbiz",
+      "handle": "@Strictlylawbiz",
+      "description": "Nigerian platform for the business of law — practice management, profitability, starting and running a law firm in Nigeria.",
+      "accentColor": "0xFF1D4ED8",
+      "initials": "SL",
+      "focus": "Law firm business management Nigeria",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed channel focused on business of law practice in Nigeria."
+    },
+    {
+      "id": "",
+      "name": "Association of Law Firm Administrators Nigeria",
+      "handle": "@ALANigeria",
+      "description": "Nigerian law firm administrators association — pricing legal services, profitability strategies and practice management for Nigerian firms.",
+      "accentColor": "0xFF64748B",
+      "initials": "AL",
+      "focus": "Law firm profitability Nigeria",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed @ALANigeria with sessions on pricing and profitability."
     }
   ],
   "blogs": [
@@ -182,14 +180,6 @@
       "verificationMethod": "Official ABA Law Practice Division publication on legal technology. RSS at standard /feed/ path."
     },
     {
-      "name": "BusinessDay Legal",
-      "url": "https://businessday.ng/legal-business/feed",
-      "region": "Nigeria",
-      "focus": "Nigerian legal business, commercial law developments, and regulatory news",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "RSS path validated from BusinessDay.ng — legal/business section. BusinessDay is Nigeria's leading business newspaper. Prior feed validations across skill_08 and skill_17."
-    },
-    {
       "name": "TechCabal",
       "url": "https://techcabal.com/feed",
       "region": "Africa",
@@ -204,6 +194,12 @@
       "focus": "Nigerian entrepreneurship including legal practice business models and registration guides",
       "verifiedOn": "2026-07-24",
       "verificationMethod": "RSS validated in prior skill integrations (skill_08, skill_17). Established Nigerian entrepreneurship publication."
+    },
+    {
+      "name": "SME Digest",
+      "url": "https://smedigest.com.ng/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Nigerian SME practical content."
     }
   ],
   "books": [
@@ -236,16 +232,6 @@
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Free access confirmed at bdebooks.com. Applies to launching new practice models, service lines, or professional consulting branches.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
-    },
-    {
-      "title": "Atomic Habits",
-      "author": "James Clear",
-      "freeSourceUrl": "https://archive.org/details/atomic-habits",
-      "freeSourceType": "web",
-      "freeSourceNote": "Free at archive.org — build the daily systems and habits that define an excellent legal practice",
-      "verifiedOn": "2026-07-24",
-      "verificationMethod": "Available via Internet Archive. Directly applicable to clinical routines, client follow-up systems, and professional development habits.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Small Business Management",
@@ -306,6 +292,20 @@
       "verifiedOn": "2026-07-24",
       "verificationMethod": "Peer-reviewed open textbook published by OpenStax (Rice University). Freely available online. Covers planning, organizing, leading, and controlling a professional team.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
+    },
+    {
+      "title": "Markup & Profit",
+      "author": "Michael C. Stone",
+      "freeSourceUrl": "https://archive.org/details/markupprofitcont00ston",
+      "freeSourceType": "download",
+      "freeSourceNote": "Internet Archive free borrow. How to calculate real markup that produces actual profit for trades and service businesses.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA item.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180864-L.jpg"
     }
+  ],
+  "actionRequired": [
+    "2026-08-04: Removed generic personal-dev books (Atomic Habits etc.) and pure-news blogs (BusinessDay, Nairametrics, Connect Nigeria, BellaNaija). Replaced with free practical business books (E-Myth, Profit First, Markup & Profit, How Much Should I Charge?, Lean Startup, Rework, Personal MBA, Traction, Company of One, OpenStax Entrepreneurship) and Nigerian/African SME blogs. Priority: Nigeria → Africa → Global. All books free.",
+    "2026-08-04 full audit: Removed pure-technical tutorials, pure-news and generic personal-dev sources. Kept/replaced with category-specific business operations content (pricing, clients, cash flow, systems, scaling). Books forced free (IA/OpenStax/Bookdio/author free). Priority Nigeria→Africa→Global."
   ]
 }

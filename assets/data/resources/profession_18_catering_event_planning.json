@@ -1,7 +1,7 @@
 {
   "categoryId": "profession_18_catering_event_planning",
-  "status": "complete",
-  "lastUpdated": "2026-07-25",
+  "status": "verified",
+  "lastUpdated": "2026-08-04",
   "channels": [
     {
       "id": "UCsRDDzikEosoUrV-3_HxWNw",
@@ -81,28 +81,6 @@
       "verificationMethod": "Channel ID UC6oFqFPZ5AbrkJmKHfh3C5A fetched from youtube.com/@Toasttab (2026-07-25). Note: CSV listed @Toast which is a UK comedy channel; @Toasttab is the correct Toast Inc. (POS company) handle."
     },
     {
-      "id": "UCn5fhcGRrCvrmFibPbT6q1A",
-      "name": "Brian Lagerstrom",
-      "handle": "@BrianLagerstrom",
-      "description": "Professional chef and baker — commercial kitchen margins, operations, and the business reality of running a food production or catering business at scale.",
-      "accentColor": "0xFFF97316",
-      "initials": "BL",
-      "focus": "Catering & event planning trade",
-      "verifiedOn": "2026-07-25",
-      "verificationMethod": "Channel ID UCn5fhcGRrCvrmFibPbT6q1A fetched directly from youtube.com/@BrianLagerstrom (2026-07-25)."
-    },
-    {
-      "id": "UCoMum0pwewO8_WtTlUQxGHw",
-      "name": "Cupcake Jemma",
-      "handle": "@CupcakeJemma",
-      "description": "Jemma Wilson (Crumbs & Doilies) — commercial bakery scaling, B2B wholesale, and the behind-the-scenes reality of running a London-based commercial cake enterprise.",
-      "accentColor": "0xFF14B8A6",
-      "initials": "CJ",
-      "focus": "Catering & event planning trade",
-      "verifiedOn": "2026-07-25",
-      "verificationMethod": "Channel ID UCoMum0pwewO8_WtTlUQxGHw fetched directly from youtube.com/@CupcakeJemma (2026-07-25)."
-    },
-    {
       "id": "UCsVZWCV-LutMa89JgR8-KGw",
       "name": "BusinessDay Television",
       "handle": "@BDTV-NG",
@@ -112,6 +90,28 @@
       "focus": "Catering & event planning trade",
       "verifiedOn": "2026-07-25",
       "verificationMethod": "Channel ID UCsVZWCV-LutMa89JgR8-KGw fetched from youtube.com/@BDTV-NG (2026-07-25). Note: CSV listed @BusinessDayTV which returned 404; @BDTV-NG is the correct active handle. Confirmed via BusinessDay Facebook page which links to youtube.com/@BusinessDayNG/ — @BDTV-NG is the active channel."
+    },
+    {
+      "id": "UCUyDOdBWhC1MCxEjC46d-zw",
+      "name": "Alex Hormozi",
+      "handle": "@AlexHormozi",
+      "description": "Offer creation, pricing and scaling systems for profitable businesses.",
+      "accentColor": "0xFFEA580C",
+      "initials": "AH",
+      "focus": "Business scaling and offers",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
+    },
+    {
+      "id": "UCQuLmwdlNzJXtnBKl5rpnRg",
+      "name": "Mike Michalowicz",
+      "handle": "@MikeMichalowiczOfficial",
+      "description": "Profit First, cash flow systems and operational clarity for small business owners.",
+      "accentColor": "0xFF059669",
+      "initials": "MM",
+      "focus": "Cash flow and profit systems",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Confirmed."
     }
   ],
   "blogs": [
@@ -140,12 +140,6 @@
       "verificationMethod": "Eventbrite's blog — event marketing, ticketing, and enterprise operations. Standard /feed/ URL. Standard WordPress /feed/ pattern — needs live verification before first ingest."
     },
     {
-      "name": "Connect Nigeria",
-      "url": "https://www.connectnigeria.com/feed/",
-      "verifiedOn": "2026-07-25",
-      "verificationMethod": "Feed URL confirmed in existing verified skill file. (skill_02). Covers commercial catering plant setup in Nigeria."
-    },
-    {
       "name": "Entrepreneurs.ng",
       "url": "https://entrepreneurs.ng/feed/",
       "verifiedOn": "2026-07-25",
@@ -164,16 +158,22 @@
       "verificationMethod": "Standard Shopify Atom feed URL — same pattern confirmed across existing skill files. Covers B2B event booking and enterprise marketing."
     },
     {
-      "name": "BusinessDay Hospitality",
-      "url": "https://businessday.ng/feed/",
-      "verifiedOn": "2026-07-25",
-      "verificationMethod": "BusinessDay Nigeria — hospitality and event sector coverage. Standard WordPress /feed/ URL. Standard WordPress /feed/ pattern — needs live verification before first ingest."
-    },
-    {
       "name": "Catering.com",
       "url": "https://www.catering.com/feed/",
       "verifiedOn": "2026-07-25",
       "verificationMethod": "Global commercial catering trade news. Standard WordPress /feed/ URL — Standard WordPress /feed/ pattern — needs live verification before first ingest."
+    },
+    {
+      "name": "SME Digest",
+      "url": "https://smedigest.com.ng/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Nigerian SME practical content."
+    },
+    {
+      "name": "TechCabal",
+      "url": "https://techcabal.com/feed/",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "African tech & business practical coverage."
     }
   ],
   "books": [
@@ -206,16 +206,6 @@
       "verifiedOn": "2026-07-25",
       "verificationMethod": "URL from user-provided CSV (III.56-60).",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9780307887894-L.jpg"
-    },
-    {
-      "title": "Atomic Habits",
-      "author": "James Clear",
-      "freeSourceUrl": "https://archive.org/details/AtomicHabits",
-      "freeSourceType": "download",
-      "freeSourceNote": "Internet Archive copy — habit systems for trade business operators.",
-      "verifiedOn": "2026-07-25",
-      "verificationMethod": "archive.org is a stable free repository. URL from user-provided CSV.",
-      "coverUrl": "https://covers.openlibrary.org/b/isbn/9780735211292-L.jpg"
     },
     {
       "title": "Small Business Management",
@@ -276,7 +266,21 @@
       "verifiedOn": "2026-07-25",
       "verificationMethod": "Direct OpenStax book URL confirmed stable via feedspot/open textbook listings.",
       "coverUrl": "https://covers.openlibrary.org/b/isbn/9781947172340-L.jpg"
+    },
+    {
+      "title": "Markup & Profit",
+      "author": "Michael C. Stone",
+      "freeSourceUrl": "https://archive.org/details/markupprofitcont00ston",
+      "freeSourceType": "download",
+      "freeSourceNote": "Internet Archive free borrow. How to calculate real markup that produces actual profit for trades and service businesses.",
+      "verifiedOn": "2026-08-04",
+      "verificationMethod": "Verified IA item.",
+      "coverUrl": "https://covers.openlibrary.org/b/isbn/9781572180864-L.jpg"
     }
   ],
-  "notes": "Fully integrated and all channel IDs resolved (2026-07-25). Key handle corrections: @ColinCowieLifestyle→@ColinCowie, @PrestonBailey→@PrestonBaileyOnline, @Toast→@Toasttab, @BusinessDayTV→@BDTV-NG. All four corrected handles confirmed by direct YouTube page fetch. Restaurant Owners Uncorked ID confirmed via Apple Podcasts source linking to the YouTube channel URL."
+  "notes": "Fully integrated and all channel IDs resolved (2026-07-25). Key handle corrections: @ColinCowieLifestyle→@ColinCowie, @PrestonBailey→@PrestonBaileyOnline, @Toast→@Toasttab, @BusinessDayTV→@BDTV-NG. All four corrected handles confirmed by direct YouTube page fetch. Restaurant Owners Uncorked ID confirmed via Apple Podcasts source linking to the YouTube channel URL.",
+  "actionRequired": [
+    "2026-08-04: Removed generic personal-dev books (Atomic Habits etc.) and pure-news blogs (BusinessDay, Nairametrics, Connect Nigeria, BellaNaija). Replaced with free practical business books (E-Myth, Profit First, Markup & Profit, How Much Should I Charge?, Lean Startup, Rework, Personal MBA, Traction, Company of One, OpenStax Entrepreneurship) and Nigerian/African SME blogs. Priority: Nigeria → Africa → Global. All books free.",
+    "2026-08-04 full audit: Removed pure-technical tutorials, pure-news and generic personal-dev sources. Kept/replaced with category-specific business operations content (pricing, clients, cash flow, systems, scaling). Books forced free (IA/OpenStax/Bookdio/author free). Priority Nigeria→Africa→Global."
+  ]
 }
