@@ -19,12 +19,62 @@ import '../services/user_profile_service.dart';
 enum FeedState { idle, loading, loaded, error }
 
 class FeedProvider extends ChangeNotifier {
+  /// Last constructed instance — VideoPlayerScreen is pushed as a route
+  /// outside MultiProvider (sibling of home under MaterialApp's navigator),
+  /// so context.read<FeedProvider>() fails there. Same pattern as
+  /// AdService.instance / EngagementService.instance.
+  static FeedProvider? instance;
+
   FeedProvider() {
+    instance = this;
     // Both the book list and the channel priority order (Videos/Shorts)
     // now react live to a category-selection change — see
     // _onProfileChanged and _sessionChannelOrder's doc comment for why
     // that changed from "next launch only".
     UserProfileService.instance.addListener(_onProfileChanged);
+  }
+
+  /// Suggested long-form videos for the player "See more" row.
+  /// Prefers other channels that share [categoryId]; falls back to the
+  /// general long-form feed. Never returns the current video or shorts/books.
+  List<Video> suggestedFor({
+    required String excludeVideoId,
+    String? excludeChannelId,
+    String? categoryId,
+    int limit = 12,
+  }) {
+    final byId = ChannelData.byId;
+    final pool = allFeedVideos.where((v) {
+      if (v.id == excludeVideoId) return false;
+      if (v.isShort || v.channelId == 'books' || v.channelId == 'verified_book') {
+        return false;
+      }
+      if (categoryId == null) return true;
+      return byId[v.channelId]?.resourceCategoryId == categoryId;
+    }).toList();
+    // Prefer other channels first, then newest.
+    pool.sort((a, b) {
+      final aOther =
+          (excludeChannelId != null && a.channelId == excludeChannelId) ? 1 : 0;
+      final bOther =
+          (excludeChannelId != null && b.channelId == excludeChannelId) ? 1 : 0;
+      if (aOther != bOther) return aOther.compareTo(bOther);
+      return b.publishedAt.compareTo(a.publishedAt);
+    });
+    if (pool.length >= limit) return pool.take(limit).toList(growable: false);
+    // Top up from general long-form if category pool is thin.
+    if (categoryId != null) {
+      final extra = allFeedVideos.where((v) {
+        if (v.id == excludeVideoId) return false;
+        if (v.isShort || v.channelId == 'books' || v.channelId == 'verified_book') {
+          return false;
+        }
+        return !pool.any((p) => p.id == v.id);
+      }).toList()
+        ..sort((a, b) => b.publishedAt.compareTo(a.publishedAt));
+      pool.addAll(extra.take(limit - pool.length));
+    }
+    return pool.take(limit).toList(growable: false);
   }
 
   void _onProfileChanged() {

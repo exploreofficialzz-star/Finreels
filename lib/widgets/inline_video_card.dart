@@ -538,13 +538,50 @@ class _InlineVideoCardState extends State<InlineVideoCard>
                 ),
               ),
 
-            // Layer 4: black bar hides YouTube watermark — once the user
-            // has tapped and the video hasn't ended.
-            if (_expanded && _controller != null && !_ended)
-              const Positioned(
-                bottom: 0, left: 0, right: 0,
-                child: SizedBox(
-                    height: 36, child: ColoredBox(color: Colors.black)),
+            // Layer 4: FinReels watermark covers the YouTube logo
+            // (bottom-right). Replaces the old full-width black bar.
+            if (_expanded && _controller != null && !_ended && _revealPlayer)
+              Positioned(
+                right: 8,
+                bottom: 8,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withValues(alpha: 0.55),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                        color: AppTheme.gold.withValues(alpha: 0.5),
+                        width: 0.8),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(4),
+                        child: Image.asset(
+                          'assets/icons/app_icon.png',
+                          width: 14,
+                          height: 14,
+                          errorBuilder: (_, __, ___) => const Icon(
+                            Icons.play_arrow_rounded,
+                            color: AppTheme.gold,
+                            size: 14,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      const Text(
+                        'FinReels',
+                        style: TextStyle(
+                          color: AppTheme.gold,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
 
             // Layer 5: our end screen hides YouTube's recommendation cards.
