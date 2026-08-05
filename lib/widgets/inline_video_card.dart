@@ -197,6 +197,11 @@ class _InlineVideoCardState extends State<InlineVideoCard>
         !_revealPlayer &&
         _expanded) {
       _revealTimer?.cancel();
+      // Unmute only once a real frame is painting — prevents audio under
+      // the still-visible thumbnail (same pattern as VideoPlayerScreen).
+      try {
+        _controller?.unMute();
+      } catch (_) {}
       setState(() => _revealPlayer = true);
     }
 
@@ -215,33 +220,18 @@ class _InlineVideoCardState extends State<InlineVideoCard>
   /// no pre-warm in progress yet.
   void _createController({required bool autoPlay}) {
     if (_controller != null) return;
+    // Always start muted. Pre-warm must be silent; even on-demand autoPlay
+    // stays muted until _revealPlayer latches (first decoded frame), so the
+    // user never hears audio under the thumbnail — same race fixed in
+    // video_player_screen / shorts_player_screen.
     _controller = YoutubePlayerController(
       initialVideoId: widget.video.id,
       flags: YoutubePlayerFlags(
         autoPlay: autoPlay,
+        mute: true,
         enableCaption: false,
-        // hideControls: true is the actual fix for the play-button flash.
-        // youtube_player_flutter (v9.x, flutter_inappwebview-based — this
-        // project is pinned to ^9.1.1, pre-dating the v10 youtube_player_
-        // iframe rewrite) renders its OWN native control layer — a
-        // TouchShutter overlay containing a PlayPauseButton — inside the
-        // YoutubePlayer widget below. That layer is entirely internal to
-        // the package and is NOT driven by this card's _revealPlayer /
-        // _playerReady state, so no amount of tuning our own reveal timing
-        // can prevent it from being visible: the moment our AnimatedOpacity
-        // fades the YoutubePlayer widget in, whatever the package's own
-        // control layer happens to be showing (its play button, if
-        // PlayerState hasn't firmly settled into "playing" yet) is exposed
-        // for that window — which is exactly the "spin, then play button,
-        // then video" symptom. hideControls:true removes that native layer
-        // entirely, which is the package's documented pattern for apps
-        // that render their own controls — this card already does, via
-        // the thumbnail/spinner/play-icon/end-overlay layers below, so
-        // nothing else in this file depends on the native layer except the
-        // tap-to-pause/resume gesture, which _onTap now handles directly.
-        // showVideoProgressIndicator (on the YoutubePlayer widget itself,
-        // below) is a separate, independent flag — unaffected by this, so
-        // the gold progress line is unchanged.
+        // hideControls: true removes the package's native play-button layer
+        // that otherwise flashes under the thumbnail during init.
         hideControls: true,
       ),
     )..addListener(_onControllerUpdate);
@@ -272,12 +262,10 @@ class _InlineVideoCardState extends State<InlineVideoCard>
       // _markReady() will play when the iframe signals ready.
       _createController(autoPlay: true);
     } else if (!_expanded) {
-      // Pre-warmed. Always seek to the beginning before playing, so the
-      // video starts at 0:00 regardless of any position the pre-warm phase
-      // might have introduced (e.g. the iframe briefly advanced during
-      // initialisation or the user re-taps after reaching end-of-video
-      // and the overlay was dismissed without replay).
+      // Pre-warmed. Seek to 0, stay muted until first frame, then play.
+      // Unmute happens in _onControllerUpdate when position > 0.
       _controller!
+        ..mute()
         ..seekTo(Duration.zero)
         ..play();
     } else if (_revealPlayer && !_ended) {
