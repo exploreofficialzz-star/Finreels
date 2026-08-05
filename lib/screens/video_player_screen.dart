@@ -199,29 +199,61 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     if (_openingLandscape) return;
     _openingLandscape = true;
     final resumeAt = _controller.value.position;
+
+    // Fully tear down the portrait WebView BEFORE opening landscape.
+    // Two youtube_player_flutter controllers for the same videoId on
+    // screen at once leave the landscape instance stuck on the poster
+    // (00:00 / 00:00) — confirmed against device screenshots.
+    _controller.removeListener(_onUpdate);
     _controller.pause();
+    _controller.dispose();
+
     final returned = await Navigator.of(context).push<Duration>(
       NoFlashPageRoute(
         builder: (_) => VideoLandscapeScreen(
           videoId: widget.video.id,
           startAt: resumeAt,
+          thumbnailUrl: widget.video.thumbnailHd,
         ),
       ),
     );
     if (!mounted) return;
-    // Portrait lock is restored by the landscape screen's dispose.
+
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+
     final seekTo = returned ?? resumeAt;
-    if (seekTo > Duration.zero) {
-      _controller.seekTo(seekTo);
-    }
-    _controller.play();
+    // Recreate portrait controller at the returned position.
+    _controller = YoutubePlayerController(
+      initialVideoId: widget.video.id,
+      flags: YoutubePlayerFlags(
+        autoPlay: true,
+        mute: false,
+        hideControls: true,
+        enableCaption: false,
+        startAt: seekTo.inSeconds.clamp(0, 1 << 30),
+      ),
+    )..addListener(_onUpdate);
+
     setState(() {
+      _hasStartedPlaying = true; // skip thumbnail flash — user already watched
       _intendedPlaying = true;
       _playing = true;
+      _ended = false;
+      _playerAttached = true;
       _openingLandscape = false;
     });
+
+    // Seek again after a short delay in case startAt was ignored.
+    if (seekTo > Duration.zero) {
+      Future.delayed(const Duration(milliseconds: 400), () {
+        if (!mounted) return;
+        try {
+          _controller.seekTo(seekTo);
+          _controller.play();
+        } catch (_) {}
+      });
+    }
   }
 
   String _fmt(Duration d) {
@@ -333,11 +365,14 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                             color: AppTheme.gold, strokeWidth: 3),
                       ),
 
-                    // FinReels watermark — covers YouTube logo (bottom-right).
+                    // Solid cover over the YouTube logo region (bottom-right
+                    // of the iframe). Sized from device screenshots so the
+                    // native YouTube mark is fully hidden; FinReels branding
+                    // sits on the cover. Placed above the scrubber gradient.
                     if (_hasStartedPlaying && !_ended)
                       const Positioned(
-                        right: 8,
-                        bottom: 36,
+                        right: 0,
+                        bottom: 44,
                         child: _FinReelsWatermark(),
                       ),
 
@@ -682,36 +717,35 @@ class _FinReelsWatermark extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Opaque block sized to the YouTube logo region in the iframe
+    // (bottom-right). Semi-transparent chips left the YT mark readable.
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-      decoration: BoxDecoration(
-        color: Colors.black.withValues(alpha: 0.55),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-            color: AppTheme.gold.withValues(alpha: 0.5), width: 0.8),
-      ),
+      width: 120,
+      height: 34,
+      alignment: Alignment.center,
+      color: const Color(0xF2000000),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(3),
             child: Image.asset(
               'assets/icons/app_icon.png',
-              width: 15,
-              height: 15,
+              width: 16,
+              height: 16,
               errorBuilder: (_, __, ___) => const Icon(
                 Icons.play_arrow_rounded,
                 color: AppTheme.gold,
-                size: 15,
+                size: 16,
               ),
             ),
           ),
-          const SizedBox(width: 5),
+          const SizedBox(width: 6),
           const Text(
             'FinReels',
             style: TextStyle(
               color: AppTheme.gold,
-              fontSize: 11,
+              fontSize: 12,
               fontWeight: FontWeight.w700,
               letterSpacing: 0.2,
             ),

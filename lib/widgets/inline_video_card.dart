@@ -197,8 +197,7 @@ class _InlineVideoCardState extends State<InlineVideoCard>
         !_revealPlayer &&
         _expanded) {
       _revealTimer?.cancel();
-      // Unmute only once a real frame is painting — prevents audio under
-      // the still-visible thumbnail (same pattern as VideoPlayerScreen).
+      // Ensure sound is on once the frame is painting (covers pre-warm path).
       try {
         _controller?.unMute();
       } catch (_) {}
@@ -218,20 +217,17 @@ class _InlineVideoCardState extends State<InlineVideoCard>
   /// Creates the YouTube controller. [autoPlay] is false during silent
   /// pre-warming (see _onVisibilityChanged) and true for a direct tap with
   /// no pre-warm in progress yet.
-  void _createController({required bool autoPlay}) {
+  void _createController({required bool autoPlay, bool muted = true}) {
     if (_controller != null) return;
-    // Always start muted. Pre-warm must be silent; even on-demand autoPlay
-    // stays muted until _revealPlayer latches (first decoded frame), so the
-    // user never hears audio under the thumbnail — same race fixed in
-    // video_player_screen / shorts_player_screen.
+    // Pre-warm stays muted (no audio while scrolling). User-initiated
+    // playback (autoPlay after tap) starts unmuted so the Videos-tab
+    // feed matches channel-tab sound behaviour.
     _controller = YoutubePlayerController(
       initialVideoId: widget.video.id,
       flags: YoutubePlayerFlags(
         autoPlay: autoPlay,
-        mute: true,
+        mute: muted,
         enableCaption: false,
-        // hideControls: true removes the package's native play-button layer
-        // that otherwise flashes under the thumbnail during init.
         hideControls: true,
       ),
     )..addListener(_onControllerUpdate);
@@ -258,26 +254,27 @@ class _InlineVideoCardState extends State<InlineVideoCard>
 
   void _onTap() {
     if (_controller == null) {
-      // No pre-warm yet — create on-demand with autoPlay:true.
-      // _markReady() will play when the iframe signals ready.
-      _createController(autoPlay: true);
+      // User tapped with no pre-warm — start unmuted with sound.
+      _createController(autoPlay: true, muted: false);
     } else if (!_expanded) {
-      // Pre-warmed. Seek to 0, stay muted until first frame, then play.
-      // Unmute happens in _onControllerUpdate when position > 0.
-      _controller!
-        ..mute()
-        ..seekTo(Duration.zero)
-        ..play();
+      // Pre-warmed (was muted). Unmute + play from the start with sound.
+      try {
+        _controller!
+          ..unMute()
+          ..seekTo(Duration.zero)
+          ..play();
+      } catch (_) {}
     } else if (_revealPlayer && !_ended) {
-      // Already expanded, revealed, and not on the end screen: this is a
-      // tap on a video that's already playing or paused. Previously this
-      // was handled by the native TouchShutter/PlayPauseButton (see the
-      // hideControls comment in _createController); now that the native
-      // control layer is gone, this card owns the toggle itself.
       if (_controller!.value.playerState == PlayerState.playing) {
         _controller!.pause();
       } else {
-        _controller!.play();
+        try {
+          _controller!
+            ..unMute()
+            ..play();
+        } catch (_) {
+          _controller!.play();
+        }
       }
     }
     if (mounted) setState(() { _expanded = true; _ended = false; });
@@ -538,27 +535,23 @@ class _InlineVideoCardState extends State<InlineVideoCard>
                 ),
               ),
 
-            // Layer 4: FinReels watermark covers the YouTube logo
-            // (bottom-right). Replaces the old full-width black bar.
+            // Layer 4: solid cover over the YouTube logo region (bottom-right
+            // of the iframe — measured from screenshots ~100×28 at the
+            // corner). FinReels branding sits on top of that cover.
             if (_expanded && _controller != null && !_ended && _revealPlayer)
               Positioned(
-                right: 8,
-                bottom: 8,
+                right: 0,
+                bottom: 0,
                 child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.55),
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                        color: AppTheme.gold.withValues(alpha: 0.5),
-                        width: 0.8),
-                  ),
+                  width: 112,
+                  height: 32,
+                  alignment: Alignment.center,
+                  color: const Color(0xF2000000),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: BorderRadius.circular(3),
                         child: Image.asset(
                           'assets/icons/app_icon.png',
                           width: 14,
@@ -570,13 +563,14 @@ class _InlineVideoCardState extends State<InlineVideoCard>
                           ),
                         ),
                       ),
-                      const SizedBox(width: 4),
+                      const SizedBox(width: 5),
                       const Text(
                         'FinReels',
                         style: TextStyle(
                           color: AppTheme.gold,
-                          fontSize: 10,
+                          fontSize: 11,
                           fontWeight: FontWeight.w700,
+                          letterSpacing: 0.2,
                         ),
                       ),
                     ],

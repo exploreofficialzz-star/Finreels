@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -8,17 +9,20 @@ import '../theme/app_theme.dart';
 
 /// Dedicated landscape-only player for a single video.
 ///
-/// Pushed from [VideoPlayerScreen] when the user taps fullscreen. Only this
-/// route is locked to landscape — the rest of the app stays portrait.
-/// Returns the playback position (Duration) via [Navigator.pop] so the
-/// portrait player can resume at the same place.
+/// Pushed from [VideoPlayerScreen] after the portrait controller has been
+/// disposed (two simultaneous WebViews for the same videoId leave this
+/// screen stuck on the poster at 00:00). Only this route is locked to
+/// landscape — the rest of the app stays portrait. Returns the playback
+/// position via [Navigator.pop].
 class VideoLandscapeScreen extends StatefulWidget {
   final String videoId;
   final Duration startAt;
+  final String? thumbnailUrl;
 
   const VideoLandscapeScreen({
     required this.videoId,
     this.startAt = Duration.zero,
+    this.thumbnailUrl,
     super.key,
   });
 
@@ -27,8 +31,10 @@ class VideoLandscapeScreen extends StatefulWidget {
 }
 
 class _VideoLandscapeScreenState extends State<VideoLandscapeScreen> {
-  late YoutubePlayerController _controller;
-  bool _playing = true;
+  YoutubePlayerController? _controller;
+  bool _ready = false;
+  bool _playing = false;
+  bool _hasStarted = false;
   bool _showIcon = false;
   int _tapCount = 0;
   Timer? _iconTimer;
@@ -46,24 +52,30 @@ class _VideoLandscapeScreenState extends State<VideoLandscapeScreen> {
     ]);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
-    _controller = YoutubePlayerController(
-      initialVideoId: widget.videoId,
-      flags: YoutubePlayerFlags(
-        autoPlay: true,
-        mute: false,
-        hideControls: true,
-        enableCaption: false,
-        startAt: widget.startAt.inSeconds,
-      ),
-    )..addListener(_onUpdate);
+    // Wait one frame after orientation lock so the WebView mounts into a
+    // settled landscape surface. Creating the controller in the same
+    // frame as the orientation change is a common cause of a stuck poster.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      _controller = YoutubePlayerController(
+        initialVideoId: widget.videoId,
+        flags: const YoutubePlayerFlags(
+          autoPlay: true,
+          mute: false,
+          hideControls: true,
+          enableCaption: false,
+        ),
+      )..addListener(_onUpdate);
+      setState(() {});
+    });
   }
 
   void _onUpdate() {
-    if (!mounted) return;
+    if (!mounted || _controller == null) return;
     final now = DateTime.now().millisecondsSinceEpoch;
     if (now - _lastMs < 33) return;
     _lastMs = now;
-    final v = _controller.value;
+    final v = _controller!.value;
     final dur = v.metaData.duration;
     final pos = v.position;
     _position.value = pos;
@@ -72,7 +84,13 @@ class _VideoLandscapeScreenState extends State<VideoLandscapeScreen> {
         ? (pos.inMilliseconds / dur.inMilliseconds).clamp(0.0, 1.0)
         : 0.0;
     final playing = v.playerState == PlayerState.playing;
-    if (playing != _playing) setState(() => _playing = playing);
+    final justStarted = !_hasStarted && playing && pos.inMilliseconds > 0;
+    if (playing != _playing || justStarted) {
+      setState(() {
+        _playing = playing;
+        if (justStarted) _hasStarted = true;
+      });
+    }
   }
 
   @override
@@ -82,23 +100,24 @@ class _VideoLandscapeScreenState extends State<VideoLandscapeScreen> {
     _position.dispose();
     _duration.dispose();
     _controller
-      ..removeListener(_onUpdate)
+      ?..removeListener(_onUpdate)
       ..dispose();
-    // Restore portrait for the rest of the app.
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     super.dispose();
   }
 
   void _pop() {
-    Navigator.pop(context, _controller.value.position);
+    final pos = _controller?.value.position ?? widget.startAt;
+    Navigator.pop(context, pos);
   }
 
   void _toggle() {
+    if (_controller == null) return;
     if (_playing) {
-      _controller.pause();
+      _controller!.pause();
     } else {
-      _controller.play();
+      _controller!.play();
     }
     setState(() {
       _playing = !_playing;
@@ -119,30 +138,76 @@ class _VideoLandscapeScreenState extends State<VideoLandscapeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Center(
-            child: YoutubePlayer(
-              controller: _controller,
-              onReady: () {
-                if (widget.startAt > Duration.zero) {
-                  _controller.seekTo(widget.startAt);
-                }
-                _controller.play();
-              },
-              bufferIndicator: const SizedBox.shrink(),
+          // Player — wait until controller exists (post-orientation frame).
+          if (_controller != null)
+            Center(
+              child: AspectRatio(
+                aspectRatio: 16 / 9,
+                child: YoutubePlayer(
+                  controller: _controller!,
+                  width: size.width,
+                  onReady: () {
+                    if (!mounted) return;
+                    setState(() => _ready = true);
+                    final start = widget.startAt;
+                    if (start > Duration.zero) {
+                      _controller!.seekTo(start);
+                    }
+                    _controller!
+                      ..unMute()
+                      ..play();
+                    // Second seek after a beat — startAt / first seek can
+                    // be ignored if the stream hasn't buffered yet.
+                    if (start > Duration.zero) {
+                      Future.delayed(const Duration(milliseconds: 350), () {
+                        if (!mounted || _controller == null) return;
+                        try {
+                          _controller!.seekTo(start);
+                          _controller!.play();
+                        } catch (_) {}
+                      });
+                    }
+                  },
+                  bufferIndicator: const SizedBox.shrink(),
+                ),
+              ),
             ),
-          ),
 
-          // FinReels watermark covering the YouTube logo (bottom-right).
-          const Positioned(
-            right: 12,
-            bottom: 48,
-            child: _FinReelsWatermark(),
-          ),
+          // Thumbnail cover until first decoded frame (no black flash).
+          if (!_hasStarted && widget.thumbnailUrl != null)
+            Positioned.fill(
+              child: CachedNetworkImage(
+                imageUrl: widget.thumbnailUrl!,
+                fit: BoxFit.cover,
+                fadeInDuration: Duration.zero,
+                fadeOutDuration: Duration.zero,
+                memCacheWidth: 1280,
+                memCacheHeight: 720,
+              ),
+            ),
+
+          if (!_hasStarted)
+            const Center(
+              child: CircularProgressIndicator(
+                color: AppTheme.gold,
+                strokeWidth: 3,
+              ),
+            ),
+
+          // Solid cover over the YouTube logo region (bottom-right).
+          if (_hasStarted)
+            const Positioned(
+              right: 0,
+              bottom: 52,
+              child: _LandscapeWatermark(),
+            ),
 
           GestureDetector(
             behavior: HitTestBehavior.opaque,
@@ -150,7 +215,7 @@ class _VideoLandscapeScreenState extends State<VideoLandscapeScreen> {
             child: const SizedBox.expand(),
           ),
 
-          if (_showIcon)
+          if (_showIcon && _hasStarted)
             Center(
               child: IgnorePointer(
                 child: TweenAnimationBuilder<double>(
@@ -179,7 +244,7 @@ class _VideoLandscapeScreenState extends State<VideoLandscapeScreen> {
               ),
             ),
 
-          if (!_playing && !_showIcon)
+          if (_hasStarted && !_playing && !_showIcon)
             Center(
               child: IgnorePointer(
                 child: Container(
@@ -195,7 +260,6 @@ class _VideoLandscapeScreenState extends State<VideoLandscapeScreen> {
               ),
             ),
 
-          // Top bar: back + exit fullscreen
           Positioned(
             top: MediaQuery.of(context).padding.top + 4,
             left: 8,
@@ -217,7 +281,6 @@ class _VideoLandscapeScreenState extends State<VideoLandscapeScreen> {
             ),
           ),
 
-          // Bottom progress
           Positioned(
             left: 16,
             right: 16,
@@ -242,8 +305,8 @@ class _VideoLandscapeScreenState extends State<VideoLandscapeScreen> {
                       value: prog.clamp(0.0, 1.0),
                       onChanged: (f) {
                         final dur = _duration.value;
-                        if (dur.inMilliseconds > 0) {
-                          _controller.seekTo(Duration(
+                        if (dur.inMilliseconds > 0 && _controller != null) {
+                          _controller!.seekTo(Duration(
                               milliseconds:
                                   (f * dur.inMilliseconds).round()));
                         }
@@ -274,24 +337,21 @@ class _VideoLandscapeScreenState extends State<VideoLandscapeScreen> {
   }
 }
 
-class _FinReelsWatermark extends StatelessWidget {
-  const _FinReelsWatermark();
+class _LandscapeWatermark extends StatelessWidget {
+  const _LandscapeWatermark();
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: Colors.black.withValues(alpha: 0.55),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-            color: AppTheme.gold.withValues(alpha: 0.45), width: 0.8),
-      ),
+      width: 120,
+      height: 34,
+      alignment: Alignment.center,
+      color: const Color(0xF2000000),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: BorderRadius.circular(3),
             child: Image.asset(
               'assets/icons/app_icon.png',
               width: 16,
@@ -303,12 +363,12 @@ class _FinReelsWatermark extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 5),
+          const SizedBox(width: 6),
           const Text(
             'FinReels',
             style: TextStyle(
               color: AppTheme.gold,
-              fontSize: 11,
+              fontSize: 12,
               fontWeight: FontWeight.w700,
               letterSpacing: 0.2,
             ),
