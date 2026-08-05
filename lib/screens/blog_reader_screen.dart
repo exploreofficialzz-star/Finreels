@@ -53,9 +53,8 @@ class _BlogReaderScreenState extends State<BlogReaderScreen> {
   // ── Scroll-progress tracking (books only) ──────────────────────────────────
   Box<String>?            _progressBox;
   int?                    _savedScrollPercent;
-  bool                    _hasRestored = false;
-  Timer?                  _saveDebounce;
-  InAppWebViewController? _webController;
+  bool   _hasRestored  = false;
+  Timer? _saveDebounce;
 
   String get _scrollKey => 'webview_scroll_${widget.bookId}';
 
@@ -102,7 +101,9 @@ class _BlogReaderScreenState extends State<BlogReaderScreen> {
           double.tryParse(raw?.toString().replaceAll('"', '') ?? '') ?? 0;
       if (scrollHeight > 0) {
         final percent = (y / scrollHeight * 100).clamp(0, 100).toInt();
-        _progressBox?.put(_scrollKey, percent.toString());
+        if (_progressBox != null) {
+          unawaited(_progressBox!.put(_scrollKey, percent.toString()));
+        }
       }
     });
   }
@@ -143,9 +144,9 @@ class _BlogReaderScreenState extends State<BlogReaderScreen> {
         ),
         duration: const Duration(seconds: 2),
         behavior: SnackBarBehavior.floating,
-        backgroundColor: Color(0xFF1E1E1E),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+        backgroundColor: const Color(0xFF1E1E1E),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
       ),
     );
@@ -183,15 +184,12 @@ class _BlogReaderScreenState extends State<BlogReaderScreen> {
                 useShouldOverrideUrlLoading: true,
                 allowsInlineMediaPlayback: true,
               ),
-              onWebViewCreated: (controller) {
-                _webController = controller;
-              },
+              onWebViewCreated: (_) {},
               onLoadStart: (_, __) {
                 if (mounted) setState(() => _loading = true);
               },
               onLoadStop: (controller, __) async {
                 if (mounted) setState(() => _loading = false);
-                _webController = controller;
                 unawaited(_maybeRestoreScroll(controller));
               },
               onProgressChanged: (_, progress) {
@@ -202,9 +200,7 @@ class _BlogReaderScreenState extends State<BlogReaderScreen> {
                   });
                 }
               },
-              onScrollChanged: (controller, x, y) {
-                _onScrollChanged(controller, x, y);
-              },
+              onScrollChanged: _onScrollChanged,
               // Block navigation away from the article's origin domain
               shouldOverrideUrlLoading: (_, action) async {
                 final uri = action.request.url;

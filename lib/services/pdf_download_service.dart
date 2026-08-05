@@ -16,7 +16,7 @@ class PdfDownloadService {
   /// Converts a book ID into a safe filename, e.g.
   /// "vbook_general_the_e_myth_revisited" → "book_pdf_vbook_general_the_e...pdf"
   static String _filename(String bookId) {
-    final slug = bookId.replaceAll(RegExp(r'[^a-z0-9_]'), '_');
+    final slug = bookId.replaceAll(RegExp('[^a-z0-9_]'), '_');
     return 'book_pdf_$slug.pdf';
   }
 
@@ -30,7 +30,7 @@ class PdfDownloadService {
   /// Returns `true` if a PDF for [bookId] has already been downloaded and
   /// the cached file still exists on disk.
   static Future<bool> isDownloaded(String bookId) async {
-    return (await _file(bookId)).exists();
+    return (await _file(bookId)).existsSync();
   }
 
   /// Returns the absolute path to the cached PDF if it exists, otherwise null.
@@ -38,7 +38,7 @@ class PdfDownloadService {
   /// "Download" for books the user has already fetched.
   static Future<String?> getLocalPath(String bookId) async {
     final f = await _file(bookId);
-    return (await f.exists()) ? f.path : null;
+    return f.existsSync() ? f.path : null;
   }
 
   /// Downloads the PDF at [url] to the app's documents directory.
@@ -59,7 +59,7 @@ class PdfDownloadService {
       final file = await _file(bookId);
 
       // ── Serve from cache if already present ────────────────────────────────
-      if (await file.exists()) {
+      if (file.existsSync()) {
         onProgress?.call(1.0);
         return file.path;
       }
@@ -90,7 +90,7 @@ class PdfDownloadService {
       } finally {
         client.close();
       }
-    } catch (_) {
+    } on Object catch (_) {
       return null;
     }
   }
@@ -99,6 +99,6 @@ class PdfDownloadService {
   /// file does not exist.  Useful for a "clear downloads" settings option.
   static Future<void> deleteCached(String bookId) async {
     final f = await _file(bookId);
-    if (await f.exists()) await f.delete();
+    if (f.existsSync()) f.deleteSync();
   }
 }
