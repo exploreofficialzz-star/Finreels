@@ -72,9 +72,10 @@ class _ShortsPlayerScreenState extends State<ShortsPlayerScreen> {
   // request, so it's deliberately not used here).
   //
   // So: a single extra YoutubePlayerController + YoutubePlayer is kept
-  // silently playing (muted-by-default via autoPlay:false, same convention
-  // as _ShortPage) for _currentIndex + 1, rendered through Offstage — laid
-  // out and kept fully active exactly like an onstage widget, just not
+  // actively playing — muted, so nothing is heard — for _currentIndex + 1,
+  // rendered through Offstage (see _syncPrefetch for why actively playing,
+  // not just "cued", is the reliable choice). Offstage lays the child out
+  // and keeps it fully active exactly like an onstage widget, just not
   // painted or hit-tested (confirmed via Offstage's own documentation) —
   // completely separate from PageView.builder's own items, so it can never
   // collide with whatever PageView itself is building.
@@ -88,13 +89,19 @@ class _ShortsPlayerScreenState extends State<ShortsPlayerScreen> {
   // it here for this different case (moving into a completely different
   // subtree via a GlobalKey) isn't something I can confirm is safe for this
   // plugin without testing on a real device — so instead of guessing, this
-  // keeps the two controllers independent. The real gain here is that
-  // Android WebView / iOS WKWebView share their HTTP/DNS/TLS caches across
-  // instances in the same app by default, so by the time _ShortPage creates
-  // its own controller, the video manifest, thumbnail, and YouTube player
-  // JS this prefetch controller already pulled down are warm — meaningfully
-  // faster than today's fully-cold load, combined with the existing
-  // instant in-memory-cached thumbnail overlay covering the gap.
+  // keeps the two controllers independent, and _ShortPage's own controller
+  // re-downloads rather than literally reusing the prefetch controller's
+  // buffered bytes.
+  //
+  // What this DOES reliably guarantee: DNS resolution, TLS session state,
+  // and the YouTube player JS/HTML page for that video are all warm by the
+  // time _ShortPage's own controller starts — Android WebView / iOS
+  // WKWebView share these across instances in the same app by default, and
+  // that alone accounts for a meaningful slice of a cold load. Whether the
+  // actual video segment bytes the prefetch controller already pulled down
+  // also get reused (vs. re-fetched) depends on the CDN's own cache headers
+  // for that content, which I can't guarantee either way — so the honest
+  // claim here is "meaningfully faster," not "zero loading."
   int?  _prefetchIndex;
   YoutubePlayerController? _prefetchController;
 
@@ -110,8 +117,21 @@ class _ShortsPlayerScreenState extends State<ShortsPlayerScreen> {
     _prefetchController = YoutubePlayerController(
       initialVideoId: widget.shorts[wanted].id,
       flags: const YoutubePlayerFlags(
-        autoPlay:      false, // silent pre-warm only — never heard or seen
-        loop:          true,
+        // autoPlay:true + mute:true, not autoPlay:false. A "cued but not
+        // playing" player only reliably guarantees the player shell/thumbnail
+        // are loaded — I could not confirm from YouTube's own documentation
+        // that a cued-but-paused player buffers the actual video stream as
+        // aggressively as an actively playing one, and that buffering is the
+        // slow part this is meant to fix. Actively playing it (muted, so
+        // nothing is heard, and Offstage below so nothing is seen) forces
+        // real buffering — a guaranteed outcome, not an assumption about
+        // internal player behaviour I can't verify. mute:true is required,
+        // not optional: Offstage only skips painting, it does not affect
+        // audio, so an unmuted prefetch would be audible under the current
+        // short's own sound.
+        autoPlay:      true,
+        mute:          true,
+        loop:          false, // don't re-buffer from 0 if left playing a while
         hideControls:  true,
         enableCaption: false,
       ),
@@ -451,20 +471,27 @@ class _ShortPageState extends State<_ShortPage>
     final dur     = v.metaData.duration.inMilliseconds.toDouble();
     final prog    = dur > 0 ? (pos / dur).clamp(0.0, 1.0) : 0.0;
 
+    // Checked on every tick, independently of the change-gated block below.
+    // Position advancing past zero means the WebView has decoded and is
+    // rendering actual video frames — safe to remove the thumbnail overlay.
+    // This used to be evaluated only INSIDE the ready/playing/progress-delta
+    // check below, which meant the exact tick position first crossed zero
+    // could be missed if ready/playing hadn't ALSO just changed and progress
+    // hadn't yet moved by that check's own 0.5% threshold — _hasVideoStarted
+    // would then only catch up once progress happened to drift enough on a
+    // later tick, adding real, avoidable delay before the thumbnail actually
+    // came down.
+    final justStarted = playing && pos > 0 && !_hasVideoStarted;
+
     if (ready != _ready ||
         playing != _playing ||
-        (prog - _progress).abs() > 0.005) {
+        (prog - _progress).abs() > 0.005 ||
+        justStarted) {
       setState(() {
         _ready    = ready;
         _playing  = playing;
         _progress = prog;
-        // Position advancing past zero means the WebView has decoded and is
-        // rendering actual video frames — safe to remove the thumbnail overlay.
-        if (playing &&
-            v.position.inMilliseconds > 0 &&
-            !_hasVideoStarted) {
-          _hasVideoStarted = true;
-        }
+        if (justStarted) _hasVideoStarted = true;
       });
     }
   }

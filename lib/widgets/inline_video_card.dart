@@ -65,6 +65,17 @@ import '../theme/app_theme.dart';
 //    _createController, which removes that native layer entirely. _onTap
 //    now handles tap-to-pause/resume directly, since the native layer used
 //    to own that gesture.
+//
+// 6. THUMBNAIL LINGERS AFTER SPINNER STOPS (real fix — reveal on position,
+//    not state label)
+//    _onControllerUpdate used to reveal Layer 1 as soon as PlayerState hit
+//    "playing". That label can flip before the WebView has actually painted
+//    a real frame, so the spinner would stop right on cue but the video
+//    still wasn't visibly there yet — same static thumbnail, just now with
+//    no spinner over it, until real frames caught up. Fixed by additionally
+//    requiring v.position.inMilliseconds > 0 — proof of real, advancing
+//    playback — before revealing, matching the pattern already proven in
+//    shorts_player_screen.dart's _onUpdate/_hasVideoStarted.
 // ─────────────────────────────────────────────────────────────────────────────
 
 class InlineVideoCard extends StatefulWidget {
@@ -166,14 +177,25 @@ class _InlineVideoCardState extends State<InlineVideoCard>
     if (ready != _playerReady) _markReady();
 
     final currentState = v.playerState;
+    final positionMs    = v.position.inMilliseconds;
 
-    // PRIMARY reveal trigger: the MOMENT actual playback starts, reveal the
-    // player immediately. This is the correct signal — not "IFrame API ready"
-    // (which fires before the first frame paints), but the actual PlayerState
-    // transitioning to playing. This eliminates the "thumbnail covers playing
-    // video" issue where audio plays but the thumbnail persists during the
-    // grace timer window.
-    if (currentState == PlayerState.playing && !_revealPlayer && _expanded) {
+    // PRIMARY reveal trigger: reveal only once the video is ACTUALLY
+    // decoding and painting frames — not merely once PlayerState reports
+    // "playing". PlayerState.playing is a JS-side state label that can flip
+    // before the underlying WebView has actually painted a single real
+    // frame, especially on a slower device or connection — so revealing on
+    // the label alone could make Layer 1 "visible" (opacity animating to 1)
+    // while what's actually behind it is still a static thumbnail (this
+    // app's own, or the package's own — either way, not yet real video):
+    // the spinner stops, but nothing visibly changes for a stretch, which
+    // reads as "the thumbnail is stuck." positionMs advancing past zero is
+    // proof frames are actually being decoded, not just that the player
+    // intends to play — the same, stronger signal already used for exactly
+    // this purpose in shorts_player_screen.dart's _onUpdate/_hasVideoStarted.
+    if (currentState == PlayerState.playing &&
+        positionMs > 0 &&
+        !_revealPlayer &&
+        _expanded) {
       _revealTimer?.cancel();
       setState(() => _revealPlayer = true);
     }
