@@ -520,10 +520,12 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           if (_hasStartedPlaying &&
               !_ended &&
               (_showYtCover || !_playing))
-            // Channel-tab player only — YT logo region (nudge up + left from R17).
+            // Channel player vs landscape — positions independent of video tab.
+            // Channel: left a bit (right: 28, bottom: 18).
+            // Landscape: down + left (right: 28, bottom: 36).
             Positioned(
-              right: 16,
-              bottom: _isLandscape ? 56 : 18,
+              right: 28,
+              bottom: _isLandscape ? 36 : 18,
               child: const _FinReelsWatermark(),
             ),
           if (_ended) _buildEndOverlay(),
