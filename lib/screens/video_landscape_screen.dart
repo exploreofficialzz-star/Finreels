@@ -32,7 +32,6 @@ class VideoLandscapeScreen extends StatefulWidget {
 
 class _VideoLandscapeScreenState extends State<VideoLandscapeScreen> {
   YoutubePlayerController? _controller;
-  bool _ready = false;
   bool _playing = false;
   bool _hasStarted = false;
   bool _showIcon = false;
@@ -155,7 +154,6 @@ class _VideoLandscapeScreenState extends State<VideoLandscapeScreen> {
                   width: size.width,
                   onReady: () {
                     if (!mounted) return;
-                    setState(() => _ready = true);
                     final start = widget.startAt;
                     if (start > Duration.zero) {
                       _controller!.seekTo(start);
