@@ -17,7 +17,6 @@ import '../theme/app_theme.dart';
 import '../widgets/banner_ad_widget.dart';
 import '../widgets/no_flash_page_route.dart';
 import 'channel_videos_screen.dart';
-import 'video_landscape_screen.dart';
 
 /// In-app video player (Round 16 — sound, timed watermark, in-place landscape).
 ///

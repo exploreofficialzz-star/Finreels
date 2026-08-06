@@ -702,3 +702,44 @@ class _InlineVideoCardState extends State<InlineVideoCard>
     );
   }
 }
+
+/// Theme-aware sharp-corner cover for the YouTube logo region (inline feed).
+class _InlineFinReelsWatermark extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final bg = isDark ? const Color(0xF2000000) : const Color(0xF2FFFFFF);
+    final fg = isDark ? AppTheme.gold : const Color(0xFF1A1A1A);
+    return Container(
+      width: 112,
+      height: 30,
+      alignment: Alignment.center,
+      color: bg,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image.asset(
+            'assets/icons/app_icon.png',
+            width: 14,
+            height: 14,
+            errorBuilder: (_, __, ___) => Icon(
+              Icons.play_arrow_rounded,
+              color: fg,
+              size: 14,
+            ),
+          ),
+          const SizedBox(width: 5),
+          Text(
+            'FinReels',
+            style: TextStyle(
+              color: fg,
+              fontSize: 11,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 0.2,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
