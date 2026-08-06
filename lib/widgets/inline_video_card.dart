@@ -107,7 +107,13 @@ class _InlineVideoCardState extends State<InlineVideoCard>
   bool _revealPlayer = false; // true only after onReady + grace delay
   bool _expanded     = false; // true once the user has tapped
   bool _ended        = false;
+  bool _isPlaying    = false; // mirrors PlayerState for watermark timing
+  /// True for ~4s after play starts — matches when YT logo is typically visible.
+  bool _showYtCover  = false;
   Timer? _revealTimer;
+  Timer? _soundRetryTimer;
+  Timer? _ytCoverTimer;
+  int _soundRetryCount = 0;
 
   /// Tracks the previous PlayerState so we can detect playing → paused.
   PlayerState _prevState = PlayerState.unknown;
@@ -128,9 +134,44 @@ class _InlineVideoCardState extends State<InlineVideoCard>
   void dispose() {
     widget.activeVideoNotifier.removeListener(_onActiveChanged);
     _revealTimer?.cancel();
+    _soundRetryTimer?.cancel();
+    _ytCoverTimer?.cancel();
     _controller?.removeListener(_onControllerUpdate);
     _controller?.dispose();
     super.dispose();
+  }
+
+  /// youtube_player_flutter often ignores mute:false / a single unMute()
+  /// until a later play/pause cycle (known package quirk). Force sound on
+  /// with unMute + setVolume and a short retry burst after user expands.
+  void _forceSoundOn() {
+    final c = _controller;
+    if (c == null) return;
+    try {
+      c.unMute();
+      c.setVolume(100);
+    } catch (_) {}
+  }
+
+  void _startSoundRetries() {
+    _soundRetryTimer?.cancel();
+    _soundRetryCount = 0;
+    _forceSoundOn();
+    _soundRetryTimer = Timer.periodic(const Duration(milliseconds: 250), (t) {
+      _soundRetryCount++;
+      _forceSoundOn();
+      if (_soundRetryCount >= 8 || !mounted) t.cancel();
+    });
+  }
+
+  void _armYtCover() {
+    // YouTube logo (controls=0 / hideControls): visible on pause, at start,
+    // and briefly after play begins, then often fades. Mirror that window.
+    _ytCoverTimer?.cancel();
+    if (mounted) setState(() => _showYtCover = true);
+    _ytCoverTimer = Timer(const Duration(seconds: 4), () {
+      if (mounted) setState(() => _showYtCover = false);
+    });
   }
 
   // ── Play / pause coordination ─────────────────────────────────────────────
@@ -197,11 +238,25 @@ class _InlineVideoCardState extends State<InlineVideoCard>
         !_revealPlayer &&
         _expanded) {
       _revealTimer?.cancel();
-      // Ensure sound is on once the frame is painting (covers pre-warm path).
-      try {
-        _controller?.unMute();
-      } catch (_) {}
-      setState(() => _revealPlayer = true);
+      _forceSoundOn();
+      setState(() {
+        _revealPlayer = true;
+        _isPlaying = true;
+      });
+      _armYtCover();
+    }
+
+    final playing = currentState == PlayerState.playing;
+    if (playing != _isPlaying && _revealPlayer) {
+      setState(() => _isPlaying = playing);
+      if (playing) {
+        _armYtCover();
+        _forceSoundOn();
+      } else {
+        // Paused — YT logo reappears; keep our cover visible.
+        _ytCoverTimer?.cancel();
+        if (mounted) setState(() => _showYtCover = true);
+      }
     }
 
     // Detect playing → paused transition to trigger ad.
@@ -256,14 +311,17 @@ class _InlineVideoCardState extends State<InlineVideoCard>
     if (_controller == null) {
       // User tapped with no pre-warm — start unmuted with sound.
       _createController(autoPlay: true, muted: false);
+      _startSoundRetries();
     } else if (!_expanded) {
       // Pre-warmed (was muted). Unmute + play from the start with sound.
       try {
         _controller!
           ..unMute()
+          ..setVolume(100)
           ..seekTo(Duration.zero)
           ..play();
       } catch (_) {}
+      _startSoundRetries();
     } else if (_revealPlayer && !_ended) {
       if (_controller!.value.playerState == PlayerState.playing) {
         _controller!.pause();
@@ -271,10 +329,12 @@ class _InlineVideoCardState extends State<InlineVideoCard>
         try {
           _controller!
             ..unMute()
+            ..setVolume(100)
             ..play();
         } catch (_) {
           _controller!.play();
         }
+        _startSoundRetries();
       }
     }
     if (mounted) setState(() { _expanded = true; _ended = false; });
@@ -535,47 +595,18 @@ class _InlineVideoCardState extends State<InlineVideoCard>
                 ),
               ),
 
-            // Layer 4: solid cover over the YouTube logo region (bottom-right
-            // of the iframe — measured from screenshots ~100×28 at the
-            // corner). FinReels branding sits on top of that cover.
-            if (_expanded && _controller != null && !_ended && _revealPlayer)
+            // Layer 4: FinReels cover only while the YouTube logo is expected
+            // (paused, or first ~4s after play — mirrors controls=0 behaviour).
+            // Theme-aware, sharp corners, positioned slightly above the edge.
+            if (_expanded &&
+                _controller != null &&
+                !_ended &&
+                _revealPlayer &&
+                (_showYtCover || !_isPlaying))
               Positioned(
                 right: 0,
-                bottom: 0,
-                child: Container(
-                  width: 112,
-                  height: 32,
-                  alignment: Alignment.center,
-                  color: const Color(0xF2000000),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(3),
-                        child: Image.asset(
-                          'assets/icons/app_icon.png',
-                          width: 14,
-                          height: 14,
-                          errorBuilder: (_, __, ___) => const Icon(
-                            Icons.play_arrow_rounded,
-                            color: AppTheme.gold,
-                            size: 14,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 5),
-                      const Text(
-                        'FinReels',
-                        style: TextStyle(
-                          color: AppTheme.gold,
-                          fontSize: 11,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 0.2,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                bottom: 10,
+                child: _InlineFinReelsWatermark(),
               ),
 
             // Layer 5: our end screen hides YouTube's recommendation cards.

@@ -19,18 +19,14 @@ import '../widgets/no_flash_page_route.dart';
 import 'channel_videos_screen.dart';
 import 'video_landscape_screen.dart';
 
-/// In-app video player (Round 14 — theme, watermark, sound, landscape, see more).
+/// In-app video player (Round 16 — sound, timed watermark, in-place landscape).
 ///
-/// • Starts with sound (mute:false). Thumbnail stays until first decoded frame
-///   so the WebView never flashes black; audio is allowed immediately.
-/// • No solid black bar covering the bottom of the video — only a slim
-///   gradient behind the scrubber. YouTube branding is covered by a FinReels
-///   watermark chip at the bottom-right.
-/// • Fullscreen opens a dedicated landscape route (does not rotate the whole
-///   app shell). Position is restored on return.
-/// • Content area below the player uses the active theme (light/dark).
-/// • "See more" row shows suggested long-form videos from other channels in
-///   the same category (with general feed fallback).
+/// • Starts with sound; unMute+setVolume retried briefly (package quirk).
+/// • FinReels watermark only while YouTube logo is expected (paused / first
+///   ~4s of play), theme-aware, sharp corners.
+/// • Fullscreen is in-place landscape on the SAME controller so playback
+///   continues without restart (no second WebView).
+/// • "See more" suggested videos from other channels in the category.
 class VideoPlayerScreen extends StatefulWidget {
   final Video video;
   final Channel channel;
@@ -63,7 +59,11 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   late final ValueNotifier<Duration> _durationNotifier;
 
   bool _playerAttached = false;
-  bool _openingLandscape = false;
+  bool _isLandscape = false;
+  final GlobalKey _playerKey = GlobalKey();
+  /// Show FinReels cover while YT logo is expected (pause or first ~4s play).
+  bool _showYtCover = true;
+  Timer? _ytCoverTimer;
 
   @override
   void initState() {
@@ -120,6 +120,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         playing != _playing ||
         ready != _ready ||
         justStarted) {
+      final wasPlaying = _playing;
       setState(() {
         _ended = ended;
         _playing = playing;
@@ -134,19 +135,46 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           _intendedPlaying = false;
         }
       });
+      if (justStarted || (playing && !wasPlaying)) {
+        _forceSoundOn();
+        _armYtCover();
+      } else if (!playing && wasPlaying) {
+        // Paused — YouTube logo reappears; keep cover visible.
+        _ytCoverTimer?.cancel();
+        if (mounted) setState(() => _showYtCover = true);
+      }
     }
   }
 
   @override
   void dispose() {
     _centerIconTimer?.cancel();
+    _ytCoverTimer?.cancel();
     _progressNotifier.dispose();
     _positionNotifier.dispose();
     _durationNotifier.dispose();
     _controller
       ..removeListener(_onUpdate)
       ..dispose();
+    // Always restore portrait when leaving this screen.
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     super.dispose();
+  }
+
+  void _armYtCover() {
+    _ytCoverTimer?.cancel();
+    if (mounted) setState(() => _showYtCover = true);
+    _ytCoverTimer = Timer(const Duration(seconds: 4), () {
+      if (mounted) setState(() => _showYtCover = false);
+    });
+  }
+
+  void _forceSoundOn() {
+    try {
+      _controller.unMute();
+      _controller.setVolume(100);
+    } catch (_) {}
   }
 
   void _togglePlay() {
@@ -195,64 +223,28 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     }
   }
 
-  Future<void> _openLandscape() async {
-    if (_openingLandscape) return;
-    _openingLandscape = true;
-    final resumeAt = _controller.value.position;
-
-    // Fully tear down the portrait WebView BEFORE opening landscape.
-    // Two youtube_player_flutter controllers for the same videoId on
-    // screen at once leave the landscape instance stuck on the poster
-    // (00:00 / 00:00) — confirmed against device screenshots.
-    _controller.removeListener(_onUpdate);
-    _controller.pause();
-    _controller.dispose();
-
-    final returned = await Navigator.of(context).push<Duration>(
-      NoFlashPageRoute(
-        builder: (_) => VideoLandscapeScreen(
-          videoId: widget.video.id,
-          startAt: resumeAt,
-          thumbnailUrl: widget.video.thumbnailHd,
-        ),
-      ),
-    );
-    if (!mounted) return;
-
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-
-    final seekTo = returned ?? resumeAt;
-    // Recreate portrait controller at the returned position.
-    _controller = YoutubePlayerController(
-      initialVideoId: widget.video.id,
-      flags: YoutubePlayerFlags(
-        autoPlay: true,
-        mute: false,
-        hideControls: true,
-        enableCaption: false,
-        startAt: seekTo.inSeconds.clamp(0, 1 << 30),
-      ),
-    )..addListener(_onUpdate);
-
-    setState(() {
-      _hasStartedPlaying = true; // skip thumbnail flash — user already watched
-      _intendedPlaying = true;
-      _playing = true;
-      _ended = false;
-      _playerAttached = true;
-      _openingLandscape = false;
-    });
-
-    // Seek again after a short delay in case startAt was ignored.
-    if (seekTo > Duration.zero) {
-      Future.delayed(const Duration(milliseconds: 400), () {
-        if (!mounted) return;
+  /// In-place landscape: keep the SAME controller so the video continues
+  /// without restarting. Only this screen rotates; the rest of the app stays
+  /// portrait when we leave.
+  Future<void> _toggleLandscape() async {
+    if (_isLandscape) {
+      await SystemChrome.setPreferredOrientations(
+          [DeviceOrientation.portraitUp]);
+      await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+      if (mounted) setState(() => _isLandscape = false);
+    } else {
+      await SystemChrome.setPreferredOrientations(const [
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
+      await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+      if (mounted) setState(() => _isLandscape = true);
+      // Keep playing — never pause/dispose on orientation change.
+      if (_intendedPlaying) {
         try {
-          _controller.seekTo(seekTo);
           _controller.play();
         } catch (_) {}
-      });
+      }
     }
   }
 
@@ -284,17 +276,21 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final sw = MediaQuery.of(context).size.width;
-    final playerH = sw * (9 / 16);
+    final size = MediaQuery.of(context).size;
+    final sw = size.width;
+    final sh = size.height;
+    final playerH = _isLandscape ? sh : sw * (9 / 16);
     final bg = AppTheme.bgColor(context);
     final suggestions = _suggestions();
 
     return Scaffold(
-      backgroundColor: bg,
+      backgroundColor: _isLandscape ? Colors.black : bg,
       body: SafeArea(
         bottom: false,
+        top: !_isLandscape,
         child: Column(
           children: [
+            if (!_isLandscape)
             AppBar(
               backgroundColor: bg,
               elevation: 0,
@@ -309,80 +305,16 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               ],
             ),
 
-            // ── Player (always 16:9, black only inside the video frame) ──
+            // Single player instance (portrait height). Landscape uses Expanded.
+            // Always the same player widget — only height changes on rotate,
+            // so the WebView/controller keeps playing without restart.
             SizedBox(
               width: double.infinity,
               height: playerH,
-              child: ColoredBox(
-                color: Colors.black,
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    if (_playerAttached)
-                      YoutubePlayer(
-                        controller: _controller,
-                        onReady: () {
-                          if (!mounted) return;
-                          setState(() => _ready = true);
-                          // Re-assert play with sound (package quirk).
-                          _controller
-                            ..unMute()
-                            ..play();
-                        },
-                        onEnded: (_) {
-                          if (mounted) {
-                            setState(() {
-                              _ended = true;
-                              _intendedPlaying = false;
-                              _playing = false;
-                            });
-                          }
-                        },
-                        bufferIndicator: const SizedBox.shrink(),
-                      ),
-
-                    // Thumbnail until first frame — zero fade to avoid flash.
-                    if (!_hasStartedPlaying)
-                      CachedNetworkImage(
-                        imageUrl: widget.video.thumbnailHd,
-                        fit: BoxFit.cover,
-                        fadeInDuration: Duration.zero,
-                        fadeOutDuration: Duration.zero,
-                        memCacheWidth: 720,
-                        memCacheHeight: 405,
-                        errorWidget: (_, __, ___) => CachedNetworkImage(
-                          imageUrl: widget.video.thumbnailMq,
-                          fit: BoxFit.cover,
-                          fadeInDuration: Duration.zero,
-                          memCacheWidth: 720,
-                          memCacheHeight: 405,
-                        ),
-                      ),
-
-                    if (_playerAttached && !_hasStartedPlaying && !_ended)
-                      const Center(
-                        child: CircularProgressIndicator(
-                            color: AppTheme.gold, strokeWidth: 3),
-                      ),
-
-                    // Solid cover over the YouTube logo region (bottom-right
-                    // of the iframe). Sized from device screenshots so the
-                    // native YouTube mark is fully hidden; FinReels branding
-                    // sits on the cover. Placed above the scrubber gradient.
-                    if (_hasStartedPlaying && !_ended)
-                      const Positioned(
-                        right: 0,
-                        bottom: 44,
-                        child: _FinReelsWatermark(),
-                      ),
-
-                    if (_ended) _buildEndOverlay(),
-                    if (!_ended) _buildControls(context),
-                  ],
-                ),
-              ),
+              child: _buildPlayerStack(context),
             ),
 
+            if (!_isLandscape) ...[
             // Slim accent under the player (not a black bar).
             Container(height: 2, color: widget.channel.accentColor),
 
@@ -522,8 +454,89 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       child: LabelledBannerAd(),
                     ),
             ),
+            ], // end if (!_isLandscape)
           ],
         ),
+      ),
+    );
+  }
+
+  /// Shared player stack so portrait and landscape use one controller surface.
+  Widget _buildPlayerStack(BuildContext context) {
+    return ColoredBox(
+      key: _playerKey,
+      color: Colors.black,
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          if (_playerAttached)
+            YoutubePlayer(
+              controller: _controller,
+              onReady: () {
+                if (!mounted) return;
+                setState(() => _ready = true);
+                _forceSoundOn();
+                _controller.play();
+                Future.delayed(const Duration(milliseconds: 300), () {
+                  if (mounted) _forceSoundOn();
+                });
+                Future.delayed(const Duration(milliseconds: 800), () {
+                  if (mounted) _forceSoundOn();
+                });
+              },
+              onEnded: (_) {
+                if (mounted) {
+                  setState(() {
+                    _ended = true;
+                    _intendedPlaying = false;
+                    _playing = false;
+                  });
+                }
+              },
+              bufferIndicator: const SizedBox.shrink(),
+            ),
+          if (!_hasStartedPlaying)
+            CachedNetworkImage(
+              imageUrl: widget.video.thumbnailHd,
+              fit: BoxFit.cover,
+              fadeInDuration: Duration.zero,
+              fadeOutDuration: Duration.zero,
+              memCacheWidth: 720,
+              memCacheHeight: 405,
+              errorWidget: (_, __, ___) => CachedNetworkImage(
+                imageUrl: widget.video.thumbnailMq,
+                fit: BoxFit.cover,
+                fadeInDuration: Duration.zero,
+                memCacheWidth: 720,
+                memCacheHeight: 405,
+              ),
+            ),
+          if (_playerAttached && !_hasStartedPlaying && !_ended)
+            const Center(
+              child: CircularProgressIndicator(
+                  color: AppTheme.gold, strokeWidth: 3),
+            ),
+          if (_hasStartedPlaying &&
+              !_ended &&
+              (_showYtCover || !_playing))
+            Positioned(
+              right: 0,
+              bottom: _isLandscape ? 56 : 36,
+              child: const _FinReelsWatermark(),
+            ),
+          if (_ended) _buildEndOverlay(),
+          if (!_ended) _buildControls(context),
+          if (_isLandscape)
+            Positioned(
+              top: 8,
+              left: 8,
+              child: IconButton(
+                icon: const Icon(Icons.fullscreen_exit_rounded,
+                    color: Colors.white, size: 28),
+                onPressed: _toggleLandscape,
+              ),
+            ),
+        ],
       ),
     );
   }
@@ -644,9 +657,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       ),
                       const Spacer(),
                       GestureDetector(
-                        onTap: _openLandscape,
-                        child: const Icon(
-                          Icons.fullscreen_rounded,
+                        onTap: _toggleLandscape,
+                        child: Icon(
+                          _isLandscape ? Icons.fullscreen_exit_rounded : Icons.fullscreen_rounded,
                           color: Colors.white,
                           size: 22,
                         ),
@@ -717,34 +730,33 @@ class _FinReelsWatermark extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Opaque block sized to the YouTube logo region in the iframe
-    // (bottom-right). Semi-transparent chips left the YT mark readable.
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final bg = isDark ? const Color(0xF2000000) : const Color(0xF2FFFFFF);
+    final fg = isDark ? AppTheme.gold : const Color(0xFF1A1A1A);
+    // Sharp corners (no borderRadius). Sized to cover the YT logo region.
     return Container(
       width: 120,
-      height: 34,
+      height: 32,
       alignment: Alignment.center,
-      color: const Color(0xF2000000),
+      color: bg,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(3),
-            child: Image.asset(
-              'assets/icons/app_icon.png',
-              width: 16,
-              height: 16,
-              errorBuilder: (_, __, ___) => const Icon(
-                Icons.play_arrow_rounded,
-                color: AppTheme.gold,
-                size: 16,
-              ),
+          Image.asset(
+            'assets/icons/app_icon.png',
+            width: 15,
+            height: 15,
+            errorBuilder: (_, __, ___) => Icon(
+              Icons.play_arrow_rounded,
+              color: fg,
+              size: 15,
             ),
           ),
           const SizedBox(width: 6),
-          const Text(
+          Text(
             'FinReels',
             style: TextStyle(
-              color: AppTheme.gold,
+              color: fg,
               fontSize: 12,
               fontWeight: FontWeight.w700,
               letterSpacing: 0.2,
