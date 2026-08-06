@@ -623,8 +623,9 @@ class _InlineVideoCardState extends State<InlineVideoCard>
                 !_ended &&
                 _revealPlayer &&
                 (_showYtCover || !_isPlaying))
+              // Video-tab only — exact position confirmed by user (R16).
               Positioned(
-                right: 6,
+                right: 0,
                 bottom: 10,
                 child: _InlineFinReelsWatermark(),
               ),

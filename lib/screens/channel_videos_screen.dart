@@ -74,22 +74,27 @@ class _ChannelVideosScreenState extends State<ChannelVideosScreen>
       body: NestedScrollView(
         headerSliverBuilder: (context, _) => [
           SliverAppBar(
-            expandedHeight: 160,
+            // Enough room for avatar + name + focus line above the tab bar.
+            expandedHeight: 188,
             pinned: true,
             backgroundColor: AppTheme.bgColor(context),
             flexibleSpace: FlexibleSpaceBar(
               background: _ChannelHeader(channel: widget.channel),
             ),
-            bottom: TabBar(
-              controller: _tabController,
-              indicatorColor: AppTheme.gold,
-              labelColor: AppTheme.gold,
-              unselectedLabelColor: AppTheme.textMuted(context),
-              labelStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
-              tabs: [
-                Tab(text: 'Videos (${_loading ? "…" : _videos.length})'),
-                Tab(text: 'Shorts (${_loading ? "…" : _shorts.length})'),
-              ],
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(48),
+              child: TabBar(
+                controller: _tabController,
+                indicatorColor: AppTheme.gold,
+                labelColor: AppTheme.gold,
+                unselectedLabelColor: AppTheme.textMuted(context),
+                labelStyle:
+                    const TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+                tabs: [
+                  Tab(text: 'Videos (${_loading ? "…" : _videos.length})'),
+                  Tab(text: 'Shorts (${_loading ? "…" : _shorts.length})'),
+                ],
+              ),
             ),
           ),
         ],
@@ -150,9 +155,13 @@ class _ChannelHeader extends StatelessWidget {
         ),
       ),
       child: SafeArea(
+        bottom: false,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 48, 16, 8),
+          // Bottom inset clears the pinned TabBar (~48px) so the focus/
+          // description line never paints under "Videos" / "Shorts".
+          padding: const EdgeInsets.fromLTRB(16, 40, 16, 56),
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
                 width: 56, height: 56,
@@ -160,12 +169,15 @@ class _ChannelHeader extends StatelessWidget {
                   color: channel.accentColor.withValues(alpha: 0.2),
                   shape: BoxShape.circle,
                   border: Border.all(
-                      color: channel.accentColor.withValues(alpha: 0.5), width: 2),
+                      color: channel.accentColor.withValues(alpha: 0.5),
+                      width: 2),
                 ),
                 child: Center(
                   child: Text(channel.initials,
-                      style: TextStyle(color: channel.accentColor,
-                          fontWeight: FontWeight.w800, fontSize: 18)),
+                      style: TextStyle(
+                          color: channel.accentColor,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 18)),
                 ),
               ),
               const SizedBox(width: 14),
@@ -174,13 +186,25 @@ class _ChannelHeader extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(channel.name,
-                        style: Theme.of(context).textTheme.titleLarge
-                            ?.copyWith(fontWeight: FontWeight.w800)),
-                    const SizedBox(height: 2),
-                    Text(channel.focus,
-                        style: Theme.of(context).textTheme.bodySmall
-                            ?.copyWith(color: AppTheme.textMuted(context))),
+                    Text(
+                      channel.name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge
+                          ?.copyWith(fontWeight: FontWeight.w800),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      channel.focus,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: AppTheme.textMuted(context),
+                            height: 1.25,
+                          ),
+                    ),
                   ],
                 ),
               ),
