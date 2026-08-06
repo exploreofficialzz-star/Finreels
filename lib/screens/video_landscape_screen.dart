@@ -201,10 +201,10 @@ class _VideoLandscapeScreenState extends State<VideoLandscapeScreen> {
 
           // Solid cover over the YouTube logo region (bottom-right).
           if (_hasStarted)
-            // Landscape — down + left.
+            // Landscape — x4 down + left from R19.
             const Positioned(
-              right: 28,
-              bottom: 36,
+              right: 76,
+              bottom: 8,
               child: _LandscapeWatermark(),
             ),
 

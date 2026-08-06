@@ -520,12 +520,12 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           if (_hasStartedPlaying &&
               !_ended &&
               (_showYtCover || !_playing))
-            // Channel player vs landscape — positions independent of video tab.
-            // Channel: left a bit (right: 28, bottom: 18).
-            // Landscape: down + left (right: 28, bottom: 36).
+            // Channel / landscape — x4 of R19 nudge.
+            // Channel: right 76, bottom 18 (left only).
+            // Landscape: right 76, bottom 8 (down + left).
             Positioned(
-              right: 28,
-              bottom: _isLandscape ? 36 : 18,
+              right: 76,
+              bottom: _isLandscape ? 8 : 18,
               child: const _FinReelsWatermark(),
             ),
           if (_ended) _buildEndOverlay(),
