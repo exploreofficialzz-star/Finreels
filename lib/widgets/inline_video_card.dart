@@ -191,15 +191,29 @@ class _InlineVideoCardState extends State<InlineVideoCard>
   void _markReady() {
     if (!mounted || _playerReady) return;
     setState(() => _playerReady = true);
-    if (_expanded && _isActive) _controller?.play();
+    if (_expanded && _isActive) {
+      try {
+        _controller?.play();
+        _forceSoundOn();
+      } catch (_) {}
+    }
 
-    // Fallback grace timer: if PlayerState.playing never fires within 600ms
-    // (e.g. a bad connection where buffering stalls), reveal anyway so the
-    // user sees the buffer spinner instead of a frozen thumbnail.
-    // Primary reveal path is _onControllerUpdate watching PlayerState.playing.
+    // Do NOT reveal the player layer until frames paint (position > 0).
+    // A short grace that only forces play keeps the spinner + thumbnail up
+    // so we never end up expanded with no play button and a dead surface.
     _revealTimer?.cancel();
-    _revealTimer = Timer(const Duration(milliseconds: 600), () {
-      if (mounted && !_revealPlayer) setState(() => _revealPlayer = true);
+    _revealTimer = Timer(const Duration(milliseconds: 800), () {
+      if (!mounted || _revealPlayer || !_expanded) return;
+      try {
+        _controller?.play();
+        _forceSoundOn();
+      } catch (_) {}
+    });
+    // Last-resort reveal at 2.5s so a stalled stream still becomes interactive
+    // (retry play button is shown whenever expanded && !playing).
+    Timer(const Duration(milliseconds: 2500), () {
+      if (!mounted || _revealPlayer || !_expanded) return;
+      setState(() => _revealPlayer = true);
     });
   }
 
@@ -322,8 +336,12 @@ class _InlineVideoCardState extends State<InlineVideoCard>
           ..play();
       } catch (_) {}
       _startSoundRetries();
-    } else if (_revealPlayer && !_ended) {
-      if (_controller!.value.playerState == PlayerState.playing) {
+    } else if (!_ended) {
+      // Already expanded: toggle if playing, otherwise FORCE retry play.
+      // Critical: when stuck on thumbnail after spinner, _revealPlayer may
+      // still be false — previous code ignored taps in that state.
+      final state = _controller!.value.playerState;
+      if (state == PlayerState.playing && _revealPlayer) {
         _controller!.pause();
       } else {
         try {
@@ -332,7 +350,9 @@ class _InlineVideoCardState extends State<InlineVideoCard>
             ..setVolume(100)
             ..play();
         } catch (_) {
-          _controller!.play();
+          try {
+            _controller!.play();
+          } catch (_) {}
         }
         _startSoundRetries();
       }
@@ -579,10 +599,12 @@ class _InlineVideoCardState extends State<InlineVideoCard>
                     color: AppTheme.gold, strokeWidth: 2.5),
               ),
 
-            // Layer 3: play button — shown whenever the user hasn't tapped
-            // yet, REGARDLESS of whether a controller has been silently
-            // pre-warmed in the background (pre-warm must stay invisible).
-            if (!_expanded)
+            // Layer 3: play button
+            // • Not expanded yet → initial play affordance
+            // • Expanded but not playing (and not ended) → retry play so the
+            //   user is never stuck on a dead thumbnail after a failed start
+            if (!_expanded ||
+                (_expanded && !_ended && !_isPlaying && _controller != null))
               Center(
                 child: Container(
                   width: 54, height: 54,
@@ -595,16 +617,14 @@ class _InlineVideoCardState extends State<InlineVideoCard>
                 ),
               ),
 
-            // Layer 4: FinReels cover only while the YouTube logo is expected
-            // (paused, or first ~4s after play — mirrors controls=0 behaviour).
-            // Theme-aware, sharp corners, positioned slightly above the edge.
+            // Layer 4: FinReels cover (rounded) while YT logo is expected.
             if (_expanded &&
                 _controller != null &&
                 !_ended &&
                 _revealPlayer &&
                 (_showYtCover || !_isPlaying))
               Positioned(
-                right: 0,
+                right: 6,
                 bottom: 10,
                 child: _InlineFinReelsWatermark(),
               ),
@@ -711,10 +731,12 @@ class _InlineFinReelsWatermark extends StatelessWidget {
     final bg = isDark ? const Color(0xF2000000) : const Color(0xF2FFFFFF);
     final fg = isDark ? AppTheme.gold : const Color(0xFF1A1A1A);
     return Container(
-      width: 112,
-      height: 30,
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
       alignment: Alignment.center,
-      color: bg,
+      decoration: BoxDecoration(
+        color: bg,
+        borderRadius: BorderRadius.circular(8),
+      ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

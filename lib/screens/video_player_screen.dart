@@ -515,12 +515,14 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               child: CircularProgressIndicator(
                   color: AppTheme.gold, strokeWidth: 3),
             ),
+          // YouTube logo is at the bottom-right of the iframe surface
+          // (confirmed from device screenshots). Cover that exact region.
           if (_hasStartedPlaying &&
               !_ended &&
               (_showYtCover || !_playing))
             Positioned(
-              right: 0,
-              bottom: _isLandscape ? 56 : 36,
+              right: 4,
+              bottom: _isLandscape ? 48 : 8,
               child: const _FinReelsWatermark(),
             ),
           if (_ended) _buildEndOverlay(),
@@ -732,12 +734,14 @@ class _FinReelsWatermark extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final bg = isDark ? const Color(0xF2000000) : const Color(0xF2FFFFFF);
     final fg = isDark ? AppTheme.gold : const Color(0xFF1A1A1A);
-    // Sharp corners (no borderRadius). Sized to cover the YT logo region.
+    // Sized to fully cover the native YouTube logo at bottom-right.
     return Container(
-      width: 120,
-      height: 32,
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       alignment: Alignment.center,
-      color: bg,
+      decoration: BoxDecoration(
+        color: bg,
+        borderRadius: BorderRadius.circular(8),
+      ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
