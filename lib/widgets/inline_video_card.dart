@@ -626,7 +626,7 @@ class _InlineVideoCardState extends State<InlineVideoCard>
               // Video tab 
               Positioned(
                 right: 27,
-                bottom: 18,
+                bottom: 17,
                 child: _InlineFinReelsWatermark(),
               ),
 
