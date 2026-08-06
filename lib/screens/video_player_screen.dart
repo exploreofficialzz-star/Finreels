@@ -520,12 +520,11 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           if (_hasStartedPlaying &&
               !_ended &&
               (_showYtCover || !_playing))
-            // Channel / landscape — x2 of R19 nudge.
-            // Channel: right 40, bottom 18.
-            // Landscape: right 40, bottom 16.
+            // Channel: left 3x (right: 76, bottom: 18).
+            // Landscape: up + left (right: 56, bottom: 28).
             Positioned(
-              right: 40,
-              bottom: _isLandscape ? 16 : 18,
+              right: _isLandscape ? 56 : 76,
+              bottom: _isLandscape ? 28 : 18,
               child: const _FinReelsWatermark(),
             ),
           if (_ended) _buildEndOverlay(),
