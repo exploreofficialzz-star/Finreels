@@ -623,10 +623,10 @@ class _InlineVideoCardState extends State<InlineVideoCard>
                 !_ended &&
                 _revealPlayer &&
                 (_showYtCover || !_isPlaying))
-              // Video tab — up + left (right: 40, bottom: 22).
+              // Video tab — from R21 + 1.5x up and 1.5x left.
               Positioned(
-                right: 40,
-                bottom: 22,
+                right: 42,
+                bottom: 28,
                 child: _InlineFinReelsWatermark(),
               ),
 

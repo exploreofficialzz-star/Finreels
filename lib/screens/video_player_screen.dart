@@ -520,10 +520,10 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           if (_hasStartedPlaying &&
               !_ended &&
               (_showYtCover || !_playing))
-            // Channel: left 3x (right: 76, bottom: 18).
-            // Landscape: up + left (right: 56, bottom: 28).
+            // Channel: R21 + 1.5x left only (right 58, bottom 18).
+            // Landscape: kept R22 (right 56, bottom 28) — user confirmed good.
             Positioned(
-              right: _isLandscape ? 56 : 76,
+              right: _isLandscape ? 56 : 58,
               bottom: _isLandscape ? 28 : 18,
               child: const _FinReelsWatermark(),
             ),
